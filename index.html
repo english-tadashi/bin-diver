@@ -30,7 +30,9 @@ h1 .blk{display:inline-block;background:var(--ink);color:var(--paper);padding:0 
 .lede{margin:14px 0 0;max-width:48ch;color:var(--muted);font-size:15px}
 
 /* search */
-.search{position:sticky;top:0;z-index:5;background:var(--paper);padding:16px 0 12px;margin-top:14px;border-bottom:2px solid var(--ink)}
+/* 入力エリアは貼り付けない（sticky を外した）。結果と一緒に上へ流し、
+   スマホの縦領域を結果カードに明け渡す。縦スクロールは1本だけ。 */
+.search{background:var(--paper);padding:16px 0 12px;margin-top:14px;border-bottom:2px solid var(--ink)}
 .field{display:flex;gap:10px;flex-wrap:wrap}
 #q{flex:1 1 240px;min-width:0;font-family:"Space Grotesk",sans-serif;font-size:17px;font-weight:500;
   padding:13px 14px;border:2px solid var(--ink);background:var(--surface);color:var(--ink);border-radius:0}
@@ -45,21 +47,27 @@ h1 .blk{display:inline-block;background:var(--ink);color:var(--paper);padding:0 
 .moreBtn{width:100%;cursor:pointer;font-family:"Space Mono",monospace;font-size:13px;letter-spacing:.04em;
   padding:14px;border:2px solid var(--ink);background:var(--surface);color:var(--ink);transition:background .12s,color .12s}
 .moreBtn:hover,.moreBtn:focus{background:var(--ink);color:var(--paper);outline:none}
+/* カードは縦1列。上から English → 日本語(主役) → 機種/型番 → 発売元。
+   店員に見せる1枚なので、日本語タイトルと型番が一番大きい。 */
 .card{background:var(--surface);border:1.5px solid var(--line);border-left:5px solid var(--accent);
-  padding:14px 14px 12px;display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:start}
-.title{grid-column:1/2;font-size:19px;font-weight:600;letter-spacing:-.01em;margin:0}
-.jp{grid-column:1/2;color:var(--muted);font-size:14px;margin:1px 0 0}
-.romaji{grid-column:1/2;color:var(--muted);font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.01em;margin:3px 0 0;opacity:.85}
-.meta{grid-column:1/2;display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:9px}
-.tag{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.04em;background:var(--tag);color:#fff;padding:3px 8px;text-transform:uppercase}
-.year{font-family:"Space Mono",monospace;font-size:12px;color:var(--muted)}
-.tag.pub{background:transparent;color:var(--tag);border:1px solid var(--tag)}
+  padding:14px 14px 12px;display:block}
+.lbl{display:block;font-family:"Space Mono",monospace;font-size:9px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 2px}
+.t-en{font-size:19px;font-weight:600;letter-spacing:-.01em;margin:0}
+.rule{border-top:1px solid var(--line);margin:10px 0}
+.t-ja{font-size:26px;font-weight:700;line-height:1.2;letter-spacing:-.01em;margin:0}
+.romaji{color:var(--muted);font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.01em;margin:5px 0 0;opacity:.85}
+.romaji .lbl{display:inline;margin-right:6px}
+/* 機種＝塗り、型番＝枠。色と形で別物と分かるようにする。 */
+.idrow{display:flex;gap:10px;align-items:stretch;flex-wrap:wrap;margin-top:12px}
+.console{font-family:"Space Mono",monospace;font-size:14px;font-weight:700;letter-spacing:.02em;
+  background:var(--tag);color:#fff;padding:6px 10px;display:flex;flex-direction:column;justify-content:center}
+.console .lbl{color:#fff;opacity:.75;margin:0 0 1px}
+.code{font-family:"Space Mono",monospace;font-size:23px;font-weight:700;letter-spacing:.05em;line-height:1.15;
+  color:var(--ink);background:var(--paper);border:1.5px dashed var(--ink);padding:5px 9px;white-space:nowrap}
+.credit{font-family:"Space Mono",monospace;font-size:11px;color:var(--muted);margin:10px 0 0}
 .buy a.codelink{border-style:dashed;color:var(--muted)}
 .buy a.codelink:hover,.buy a.codelink:focus{background:var(--ink);color:var(--paper)}
-.code{grid-column:2/3;grid-row:1/3;align-self:start;justify-self:end;font-family:"Space Mono",monospace;
-  font-size:24px;font-weight:700;letter-spacing:.05em;line-height:1.15;color:var(--ink);background:var(--paper);border:1.5px dashed var(--ink);
-  padding:6px 9px;white-space:nowrap}
-.code small{display:block;font-weight:400;font-size:9px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
 .buy{grid-column:1/3;display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;border-top:1px solid var(--line);padding-top:11px}
 .buy a{font-family:"Space Mono",monospace;font-size:12px;text-decoration:none;border:1.5px solid var(--ink);
   padding:6px 10px;color:var(--ink);background:transparent;transition:background .12s,color .12s}
@@ -74,8 +82,8 @@ h1 .blk{display:inline-block;background:var(--ink);color:var(--paper);padding:0 
 .state b{display:block;color:var(--ink);font-size:18px;font-weight:600;margin-bottom:6px}
 footer{border-top:2px solid var(--ink);padding:18px 0 40px;font-family:"Space Mono",monospace;font-size:11px;color:var(--muted);line-height:1.6}
 @media (max-width:480px){
-  .card{grid-template-columns:1fr}
-  .code{grid-column:1/2;grid-row:auto;justify-self:start;margin-top:8px}
+  /* 狭い画面では型番が長い行(SLPS-01204;SLPS-01205 等)で溢れるので折り返す */
+  .code{white-space:normal;word-break:break-all}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
@@ -193,10 +201,11 @@ year.innerHTML = '<option value="All">All years</option>' +
 function card(r){
   const [en,jp,pf,code,yr,pubja,puben]=r;
   const hasEn=!!en;
-  const title = hasEn?en:jp;      // English title if present, otherwise the Japanese name
-  const sub   = hasEn?jp:'';      // Japanese name as subtitle only when a heading title exists
+  const title = hasEn?en:jp;      // 検索・ローマ字判定に使う見出し（表示の主役は下の jp）
+  const jpMain = jp||en;          // 日本語タイトル＝店員が読む主役。空の行だけ英題に落ちる
   const codes = code.split(';').map(s=>s.trim()).filter(Boolean);
-  const pubs  = puben.split(';').map(s=>s.trim()).filter(Boolean);   // English publisher name(s) on the tag
+  // 発売元は英語(row[6])を優先し、無ければ日本語(row[5])。どちらも空なら出さない。
+  const pubs  = (puben||pubja).split(';').map(s=>s.trim()).filter(Boolean);
   // Buy-link keywords: sellers list by TITLE, not by product code.
   const kwName = enc(jp||en);        // Japanese name (fallback English) — Suruga-ya / Mercari
   const kwEn   = enc(en||jp);        // English title (fallback Japanese) — eBay
@@ -204,15 +213,20 @@ function card(r){
   const kwBuyee = r[7] ? enc(jp + ' ' + r[7]) : '';   // 日本語タイトル(row[1]) + Buyeeキーワード(row[7])。空なら出さない
   const kwKana = enc(r[8] || jp || en);
   const kwKanaHard = enc((r[8] || jp || en).replace(/・/g, ' '));
-  const tags = [];
-  if(pf) tags.push(`<span class="tag">${esc(pf)}</span>`);
-  for(const p of pubs) tags.push(`<span class="tag pub">${esc(p)}</span>`);
+  const credit = [pubs.join(' \u00b7 '), yr].filter(Boolean).join('  \u00b7  ');
   return `<article class="card">
-    <h2 class="title">${esc(title)}</h2>
-    ${sub?`<p class="jp">${esc(sub)}</p>`:''}
-    ${(r[9] && /[\u3040-\u30ff\u3400-\u9fff]/.test(title))?`<p class="romaji">${esc(r[9])}</p>`:''}
-    <div class="meta">${tags.join('')}${yr?`<span class="year">${esc(yr)}</span>`:''}</div>
-    <div class="code"><small>product code</small>${codes.map(esc).join('<br>')}</div>
+    ${en?`<div><span class="lbl">English</span><h2 class="t-en">${esc(en)}</h2></div>
+    <div class="rule"></div>`:''}
+    <div>
+      <span class="lbl">\u65e5\u672c\u8a9e</span>
+      <p class="t-ja">${esc(jpMain)}</p>
+      ${r[9]?`<p class="romaji"><span class="lbl">Romaji</span>${esc(r[9])}</p>`:''}
+    </div>
+    <div class="idrow">
+      ${pf?`<span class="console"><span class="lbl">Console</span>${esc(pf)}</span>`:''}
+      ${codes.length?`<span class="code"><span class="lbl">Product code</span>${codes.map(esc).join('<br>')}</span>`:''}
+    </div>
+    ${credit?`<p class="credit">${esc(credit)}</p>`:''}
     <div class="buy">
       <span class="buylabel">Buy in Japan</span>
       <a target="_blank" rel="noopener" href="https://www.suruga-ya.jp/search?search_word=${kwKana}">Suruga-ya</a>
@@ -313,8 +327,14 @@ function showByJan(raw){
   }
   current=[]; shown=0; more.innerHTML=''; count.textContent='';
   results.innerHTML='<div class="state"><b>Scanned '+esc(jan||raw)+'</b>'
-    +'Not in the catalog — usually a newer console (PS4 / PS5 / Switch) or a title without a match. '
-    +'Try typing the title instead.</div>';
+    +'The barcode was read, but this exact code isn\'t in the catalog — '
+    +'often a <b>reprint or budget edition</b> with a different barcode, a newer console (PS4 / PS5 / Switch), '
+    +'or a title we don\'t cover yet.<br><br>'
+    +'<b>Try the product code</b> printed on the box or cartridge '
+    +'(e.g. <span style="font-family:monospace">SLPS-</span>, '
+    +'<span style="font-family:monospace">NTR-</span>, '
+    +'<span style="font-family:monospace">SHVC-</span>) in the search above — '
+    +'it often matches even when the barcode doesn\'t.</div>';
   return false;
 }
 
