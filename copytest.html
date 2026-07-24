@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kataban — copy test</title>
+<meta name="robots" content="noindex">
+<style>
+/* 1ファイル完結。外部参照ゼロ(フォントも読み込まない = 電波の悪い店内でも必ず出る)。 */
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#fff;color:#111;line-height:1.5;padding:18px 16px 60px;
+  font-family:system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;font-size:17px}
+.wrap{max-width:620px;margin:0 auto}
+h1{font-size:23px;margin:0 0 4px}
+.sub{color:#555;font-size:14px;margin:0 0 22px}
+
+/* 環境パネル — 実機に開発者ツールが無いので、判断材料は全部ここに文字で出す */
+.env{border:2px solid #111;padding:12px 14px;margin-bottom:26px}
+.env h2{font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 10px;color:#555}
+.env dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:14px}
+.env dt{color:#555;white-space:nowrap}
+.env dd{margin:0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all}
+.yes{color:#0a7a2f;font-weight:700}
+.no{color:#c01c0c;font-weight:700}
+
+.test{border:2px solid #111;padding:16px 14px;margin-bottom:22px}
+.test h2{font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 10px;color:#555}
+/* 値そのもの。落ちた端末では長押し選択が唯一の経路なので user-select:all(一度触れば全体が選べる) */
+.val{font-size:26px;font-weight:700;padding:12px 14px;background:#f2f2ee;border:1px solid #ccc;
+  word-break:break-word;-webkit-user-select:all;user-select:all}
+.val.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.04em}
+button.copy{display:block;width:100%;margin-top:12px;padding:18px;font-size:19px;font-weight:700;
+  letter-spacing:.05em;background:#111;color:#fff;border:2px solid #111;cursor:pointer}
+button.copy:active{background:#444}
+button.copy.done{background:#0a7a2f;border-color:#0a7a2f}
+button.copy.fail{background:#c01c0c;border-color:#c01c0c}
+
+.path{margin-top:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:16px;
+  padding:10px 12px;background:#f2f2ee;border:1px solid #ccc;min-height:44px;word-break:break-all}
+.path b{font-size:18px}
+
+.paste{margin-top:16px;border-top:1px dashed #bbb;padding-top:14px}
+.paste label{display:block;font-size:15px;margin-bottom:2px}
+.paste .en{display:block;font-size:13px;color:#555;margin-bottom:8px}
+.paste input{width:100%;font-size:19px;padding:13px 12px;border:2px solid #111;background:#fff;color:#111}
+.verdict{margin-top:9px;font-size:16px;font-weight:700;min-height:26px}
+
+/* 両方失敗したときだけ出す長押し案内 */
+#hint{display:none;border:3px solid #c01c0c;padding:14px;margin-bottom:22px;font-size:16px}
+#hint.on{display:block}
+#hint b{display:block;font-size:18px;margin-bottom:6px}
+
+#log{border:2px solid #111;padding:12px 14px}
+#log h2{font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 10px;color:#555}
+#log ol{margin:0;padding-left:22px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:13px;word-break:break-all}
+#log li{margin-bottom:5px}
+#log .none{color:#777;font-size:14px;font-family:inherit}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Kataban — copy test</h1>
+<p class="sub">コピーが実機で本当に成功したかを、別アプリを開かずに判定するページ。<br>
+Tests the clipboard path without leaving the browser.</p>
+
+<div id="hint">
+  <b>Couldn’t copy on this device.</b>
+  Press and hold the text itself to select it, then copy.<br>
+  コピーできませんでした。上の文字を<b style="display:inline">長押しして選択</b>してからコピーしてください。
+</div>
+
+<div class="env">
+  <h2>Environment</h2>
+  <dl>
+    <dt>isSecureContext</dt><dd id="e-secure">—</dd>
+    <dt>navigator.clipboard</dt><dd id="e-clip">—</dd>
+    <dt>clipboard.writeText</dt><dd id="e-write">—</dd>
+    <dt>document.execCommand</dt><dd id="e-exec">—</dd>
+    <dt>location.protocol</dt><dd id="e-proto">—</dd>
+    <dt>userAgent</dt><dd id="e-ua">—</dd>
+  </dl>
+</div>
+
+<div class="test" id="t-code">
+  <h2>1 — 型番 / product code</h2>
+  <div class="val mono" id="v-code">SHVC-ACTJ</div>
+  <button class="copy" type="button" data-copy="SHVC-ACTJ" data-for="code">COPY</button>
+  <div class="path" id="p-code">path: <b>(not tested yet)</b></div>
+  <div class="paste">
+    <label for="i-code">ここを長押し → ペースト</label>
+    <span class="en">Press and hold here → Paste</span>
+    <input type="text" id="i-code" autocomplete="off" autocorrect="off" autocapitalize="off"
+           spellcheck="false" placeholder="paste here / ここに貼る">
+    <div class="verdict" id="r-code"></div>
+  </div>
+</div>
+
+<div class="test" id="t-title">
+  <h2>2 — 日本語タイトル / Japanese title</h2>
+  <div class="val" id="v-title">クロノ・トリガー</div>
+  <button class="copy" type="button" data-copy="クロノ・トリガー" data-for="title">COPY</button>
+  <div class="path" id="p-title">path: <b>(not tested yet)</b></div>
+  <div class="paste">
+    <label for="i-title">ここを長押し → ペースト</label>
+    <span class="en">Press and hold here → Paste</span>
+    <input type="text" id="i-title" autocomplete="off" autocorrect="off" autocapitalize="off"
+           spellcheck="false" placeholder="paste here / ここに貼る">
+    <div class="verdict" id="r-title"></div>
+  </div>
+</div>
+
+<div id="log">
+  <h2>Event log</h2>
+  <ol id="log-list"></ol>
+  <p class="none" id="log-none">まだ何も押していません / nothing tapped yet</p>
+</div>
+
+</div>
+
+<script>
+// ============================================================
+// index.html の現行コピー処理をそのまま移植したもの。
+// legacyCopy() は index.html と同一。copyText() は「どの経路を通ったか」を
+// lastPath に記録する代入を足しただけで、制御フローと await の位置は変えていない
+// (await を1つでも増やすと iOS でユーザー操作の文脈が切れて execCommand も死ぬため)。
+// ============================================================
+
+function legacyCopy(text){
+  const ta=document.createElement('textarea');
+  ta.value=text;
+  ta.setAttribute('readonly','');
+  ta.style.cssText='position:fixed;top:0;left:0;width:1px;height:1px;padding:0;border:0;opacity:0';
+  document.body.appendChild(ta);
+  const sel=document.getSelection();
+  const prev=(sel && sel.rangeCount>0) ? sel.getRangeAt(0) : null;
+  let ok=false;
+  try{
+    if(/ipad|iphone|ipod/i.test(navigator.userAgent)){
+      // iOS では textarea.select() が効かない。Range を作って選択する。
+      ta.contentEditable='true'; ta.readOnly=false;
+      const range=document.createRange();
+      range.selectNodeContents(ta);
+      sel.removeAllRanges(); sel.addRange(range);
+      ta.setSelectionRange(0, text.length);
+    } else {
+      ta.select();
+    }
+    ok=document.execCommand('copy');
+  }catch(err){ ok=false; legacyErr=String((err && (err.name+': '+err.message)) || err); }
+  document.body.removeChild(ta);
+  if(prev && sel){ sel.removeAllRanges(); sel.addRange(prev); }
+  return ok;
+}
+
+let lastPath='', writeErr='', legacyErr='';
+
+// true=クリップボードに入った / false=入らなかった。推測しない。
+// navigator.clipboard が無い経路は await を1つも通らないので、iOS のユーザー操作の
+// 文脈を保ったまま legacyCopy に落ちる（await を挟むと iOS で execCommand も死ぬ）。
+async function copyText(text){
+  writeErr=''; legacyErr=''; lastPath='';
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    try{
+      await navigator.clipboard.writeText(text);
+      lastPath='writeText';
+      return true;
+    }catch(err){
+      writeErr=String((err && (err.name+': '+err.message)) || err);
+    }
+  }
+  const ok=legacyCopy(text);
+  lastPath = ok ? 'execCommand' : 'failed';
+  return ok;
+}
+
+// ---- 画面出力 -------------------------------------------------
+// 実機に開発者ツールが無いので、console.log には一切頼らない。全部 DOM に書く。
+const $ = s => document.querySelector(s);
+const VALUES = { code:'SHVC-ACTJ', title:'クロノ・トリガー' };
+
+function yesno(v){ return v ? '<span class="yes">yes</span>' : '<span class="no">no</span>'; }
+
+(function showEnv(){
+  $('#e-secure').innerHTML = yesno(window.isSecureContext) + ' (' + String(window.isSecureContext) + ')';
+  $('#e-clip').innerHTML   = yesno(!!navigator.clipboard);
+  $('#e-write').innerHTML  = yesno(!!(navigator.clipboard && navigator.clipboard.writeText));
+  $('#e-exec').innerHTML   = yesno(typeof document.execCommand === 'function');
+  $('#e-proto').textContent = location.protocol;
+  $('#e-ua').textContent    = navigator.userAgent;   // 生文字列のまま。要約しない。
+})();
+
+let n=0;
+function log(msg){
+  $('#log-none').style.display='none';
+  const li=document.createElement('li');
+  // 時刻は端末のローカル時計。何番目のタップかも出す(連打の見分けがつく)
+  li.textContent = '#' + (++n) + '  ' + new Date().toLocaleTimeString() + '  ' + msg;
+  $('#log-list').appendChild(li);
+}
+
+function report(key, ok){
+  const el = $('#p-'+key);
+  let html = 'path: <b>' + lastPath + '</b>';
+  if(writeErr)  html += '<br>writeText error: ' + writeErr;
+  if(legacyErr) html += '<br>execCommand error: ' + legacyErr;
+  el.innerHTML = html;
+
+  const btn = document.querySelector('[data-for="'+key+'"]');
+  btn.classList.remove('done','fail');
+  btn.classList.add(ok ? 'done' : 'fail');
+  btn.textContent = ok ? 'COPIED ✓' : 'FAILED — hold the text';
+
+  // 両方失敗したときだけ長押し案内を出す(index.html のトーストと同じ文言)
+  if(!ok) $('#hint').classList.add('on');
+
+  log(key + ' → ' + lastPath + (ok ? ' (ok)' : ' (FAILED)')
+      + (writeErr ? ' | writeText: ' + writeErr : '')
+      + (legacyErr ? ' | execCommand: ' + legacyErr : ''));
+}
+
+document.addEventListener('click', e=>{
+  const btn = e.target.closest('[data-copy]');
+  if(!btn) return;
+  const key = btn.dataset.for;
+  copyText(btn.getAttribute('data-copy')).then(ok => report(key, ok));
+});
+
+// ---- 貼り付け照合 ---------------------------------------------
+// 「押したら ✓ が出た」だけでは、クリップボードに入った証明にならない(それが直した穴そのもの)。
+// 実際に貼らせて、期待値と1文字ずつ比べる。これが実機での本当の合否。
+['code','title'].forEach(key=>{
+  const input=$('#i-'+key), out=$('#r-'+key);
+  input.addEventListener('input', ()=>{
+    const got=input.value, want=VALUES[key];
+    if(!got){ out.textContent=''; out.style.color=''; return; }
+    if(got===want){
+      out.textContent='✓ MATCH — 一致しました';
+      out.style.color='#0a7a2f';
+      log(key + ' paste: MATCH');
+    }else{
+      out.textContent='✗ MISMATCH — got: ' + JSON.stringify(got);
+      out.style.color='#c01c0c';
+    }
+  });
+});
+</script>
+</body>
+</html>
