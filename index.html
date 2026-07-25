@@ -361,8 +361,15 @@ h1{font-family:var(--f-pixel);}
    店頭の蛍光灯下では色相が飛ぶので、色だけに載せない。
    新しい生hexは足さない。非選択は --muted(#8b84ab・面で5.7:1)、
    --faint(#6f6790) はAAを割るので使わない。
-   タップ域は 44px 以上。sticky 化は第2段で別途行う（今はまだ流れる）。 */
-#locbar{display:flex;max-width:420px;margin:0 auto 18px;border:1px solid var(--edge-input);border-radius:2px;overflow:hidden}
+   タップ域は 44px 以上（下げない）。
+   ★第2段（2026-07-25）で常設化した。#locbar は .wrap 全幅を覆う「帯」、
+     .locpair が従来の420px枠。帯にしないと広い画面でバーの左右をカードが
+     透けて流れる。margin:0 -18px は .wrap の padding を打ち消して全幅にするため。
+     z-index は 20（#pubList 40 / scanOverlay 50 / clerk 60 / toast 70 より下。
+     店員パネルやスキャナの上にトグルが載ってはいけない）。
+     高さの代償は約61px（44+16+1）。 */
+#locbar{position:sticky;top:0;z-index:20;margin:0 -18px 18px;padding:8px 18px;background:var(--paper);border-bottom:1px solid var(--edge)}
+.locpair{display:flex;max-width:420px;margin:0 auto;border:1px solid var(--edge-input);border-radius:2px;overflow:hidden}
 .locbtn{flex:1;min-height:44px;padding:10px 8px;background:transparent;border:0;color:var(--muted);font:inherit;font-size:13px;cursor:pointer}
 .locbtn+.locbtn{border-left:1px solid var(--edge-input)}
 .locbtn.is-on{background:var(--accent);color:var(--accent-ink);font-weight:700}
@@ -539,9 +546,11 @@ footer a:hover,footer a:focus{color:var(--accent)}
     <p class="lede">Type a game you want. Get its Japanese title, the cartridge code to hunt for on the shelf, and links to buy it.</p>
   </header>
 
-  <div id="locbar" role="group" aria-label="Where are you buying from?">
+  <div id="locbar">
+    <div class="locpair" role="group" aria-label="Where are you buying from?">
     <button type="button" class="locbtn is-on" data-loc="out" aria-pressed="true" onclick="setLoc('out')">I'm outside Japan</button>
     <button type="button" class="locbtn" data-loc="jp" aria-pressed="false" onclick="setLoc('jp')">I'm in Japan</button>
+    </div>
   </div>
 
   <div class="search">
@@ -871,8 +880,8 @@ function setLoc(v){
    位置トグル(LOC)で「3グループの並び順」と「説明文」だけを切り替える。
    ★店のURL・店名・出す/出さない条件は 2026-07-25 以前から一字も変えていない。
    ★駿河屋の af_jump ラップ / category=2 / -JPN 除去は未実装（別作業）。ここで混ぜない。
-   ★強調(class="store primary")は当面 Buyee 固定。IN JAPAN で最初に押すべき店へ
-     移す作業は次段(第1段-c)。この段では一番下の Buyee が塗られたままになる。 */
+   ★強調(primary)の付け替えは実施済み（第1段-c / 2026-07-25）。
+     割り当ては下の clsBuyee / clsCode / clsTitle を見ること。 */
 function buyBlock(k){
   const jp = LOC==='jp';
 
