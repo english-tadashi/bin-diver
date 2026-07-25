@@ -987,8 +987,20 @@ function card(r,idx){
   const kwCode = enc(codes[0]||'');  // first product code only — Suruga-ya "by code" comparison link
   const kwCodeSg = enc((codes[0]||'').replace(/-JPN$/,''));  // 駿河屋アフィリエイト専用: 型番末尾の -JPN を除去
   const kwBuyee = r[7] ? enc(jp + ' ' + r[7]) : '';   // 日本語タイトル(row[1]) + Buyeeキーワード(row[7])。空なら出さない
-  const kwKana = enc(r[8] || jp || en);
-  const kwKanaHard = enc((r[8] || jp || en).replace(/・/g, ' '));
+  // 括弧内が「目録用語」に完全一致するときだけ除去。実測（2026-07-25・末尾括弧139行の全数測定）に基づく。
+  // ★完全一致(Set.has)にする。部分一致の正規表現だと (ゲームボーイ) が「ゲーム」を含んで漏れ除去され、
+  //   機種名を削ってしまうのを実測（[9610]TMNT・[32971]新SDガンダム外伝の2行）。だから Set 完全一致。
+  // ★除去しない: 機種名(プレイステーション/セガサターン/スーパーファミコン/PCエンジン/ニンテンドーDS/PSP/
+  //   ゲームボーイ 等)・メーカー名(任天堂/ヒューマン)・読み仮名(ワン)・ジャンル(パチスロ)・
+  //   箱の正式表記(略)・実タイトル(零 〜月蝕の仮面〜)。これらは Set に無い＝自然に不変。
+  // ★増やすときは必ず生URLで測ってから Set に足す。未知の語は Set に無いので自然に「除去しない」に倒れる。
+  const CAT_PAREN_OK = new Set(["ゲーム", "ビデオゲーム", "リメイク版", "ゲーム イッキ編", "コンピュータゲーム", "ゲームソフト", "STG", "テレビゲーム", "シューティングゲーム", "第1作", "1996年のビデオゲーム"]);
+  const dropCatalogParen = s => {
+    const m = String(s).match(/[（(]\s*([^）)]*?)\s*[）)]\s*$/);
+    return (m && CAT_PAREN_OK.has(m[1])) ? s.slice(0, m.index).trim() : s;
+  };
+  const kwKana = enc(dropCatalogParen(r[8] || jp || en));
+  const kwKanaHard = enc(dropCatalogParen(r[8] || jp || en).replace(/・/g, ' '));
   const credit = [pubs.join(' \u00b7 '), yr].filter(Boolean).join('  \u00b7  ');
   // row[1](日本語名)にかな・カタカナ・漢字が1字も無い＝箱の表記自体がラテン文字。
   const jaLatin = !!jp && !/[぀-ヿ㐀-鿿]/.test(jp);
