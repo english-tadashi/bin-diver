@@ -876,10 +876,24 @@ function setLoc(v){
 function buyBlock(k){
   const jp = LOC==='jp';
 
+  /* ★塗り(primary)は常に1つだけ。5つ塗ると「まずどれを押すか」が伝わらない。
+     蛍光灯下で最初に押す店を1つ示すのが塗りの役目。
+     IN JAPAN: 型番があれば型番の駿河屋、無ければ日本語タイトルの駿河屋。必ず1つ付く。
+     OUTSIDE : Buyee。ただし row[7] が空の 5,099行(母数30,746の16.58%)では塗りゼロ。
+     ★eBayへのフォールバックは意図して却下した（2026-07-25）。
+       row[7] が空なのは「検索キーを持っていない」だけで、Buyeeで買えない証拠ではない。
+       それを根拠に転売価格のeBayを主役にすると、中間業者の上乗せ回避という
+       この道具の目的に反する。誤った塗りより塗りなしのほうがまし（罠#27の形）。
+       枠線(--edge-input)があるので塗りゼロでも壊れて見えない。
+     ★row[7] の空欄5,099行が埋められるかは未測定。埋まればこの分岐はほぼ消える。 */
+  const clsBuyee = jp ? 'store' : 'store primary';
+  const clsCode  = jp ? 'store primary' : 'store';
+  const clsTitle = (jp && k.codes.length===0) ? 'store primary' : 'store';
+
   const gWorld = `<div class="group">
         <div class="group-label"><span class="n">Ships worldwide</span><span class="d">${jp?'for buyers abroad — adds proxy fees':'proxy &amp; international — English, they handle Japanese'}</span></div>
         <div class="stores">
-          ${k.kwBuyee?`<a class="store primary" target="_blank" rel="noopener" href="https://buyee.jp/item/search/query/${k.kwBuyee}?lang=en">Buyee <span class="en">EN</span></a>`:''}
+          ${k.kwBuyee?`<a class="${clsBuyee}" target="_blank" rel="noopener" href="https://buyee.jp/item/search/query/${k.kwBuyee}?lang=en">Buyee <span class="en">EN</span></a>`:''}
           <a class="store" target="_blank" rel="noopener" href="https://www.ebay.com/sch/i.html?_nkw=${k.kwEn}">eBay <span class="en">EN</span></a>
         </div>
       </div>`;
@@ -887,14 +901,14 @@ function buyBlock(k){
   const gCode = k.codes.length?`<div class="group">
         <div class="group-label"><span class="n">By product code</span><span class="d">${jp?'exact match — buy direct, Japanese site':'exact match — Japanese site, needs a proxy'}</span></div>
         <div class="stores">
-          <a class="store" target="_blank" rel="noopener" href="https://www.suruga-ya.jp/search?search_word=${k.kwCode}">Suruga-ya</a>
+          <a class="${clsCode}" target="_blank" rel="noopener" href="https://www.suruga-ya.jp/search?search_word=${k.kwCode}">Suruga-ya</a>
         </div>
       </div>`:'';
 
   const gTitle = `<div class="group">
         <div class="group-label"><span class="n">By Japanese title</span><span class="d">${jp?'domestic listings — buy direct, Japanese site':'domestic listings — usually needs a proxy'}</span></div>
         <div class="stores">
-          <a class="store" target="_blank" rel="noopener" href="https://www.suruga-ya.jp/search?search_word=${k.kwKana}">Suruga-ya</a>
+          <a class="${clsTitle}" target="_blank" rel="noopener" href="https://www.suruga-ya.jp/search?search_word=${k.kwKana}">Suruga-ya</a>
           <a class="store" target="_blank" rel="noopener" href="https://jp.mercari.com/search?keyword=${k.kwName}">Mercari</a>
           <a class="store" target="_blank" rel="noopener" href="https://shopping.bookoff.co.jp/search/keyword/${k.kwKana}">Book-Off</a>
           <a class="store" target="_blank" rel="noopener" href="https://netmall.hardoff.co.jp/cate/00010012/?q=${k.kwKanaHard}&amp;s=7">Hard-Off</a>
