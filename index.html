@@ -575,7 +575,7 @@ footer a:hover,footer a:focus{color:var(--accent)}
 
   <footer>
     Kataban · 37,855 entries from the Agency for Cultural Affairs Media Arts Database. 10,296 carry official product codes; 13,487 have English titles. English titles matched from Wikidata (CC0).
-    <br>Photos &amp; prices via Rakuten affiliate links (PR) &middot; <a href="https://webservice.rakuten.co.jp/" target="_blank" rel="noopener">Supported by Rakuten Developers</a>
+    <br>Some links and product images on this page are affiliate links, and Kataban may earn a commission (PR). &middot; <a href="https://webservice.rakuten.co.jp/" target="_blank" rel="noopener">Supported by Rakuten Developers</a>
   </footer>
 </div>
 
@@ -912,10 +912,11 @@ function setLoc(v,skipSave){
 }
 /* 購入リンクブロック。card() のテンプレート内では変数を作れないので関数に切り出した。
    位置トグル(LOC)で「3グループの並び順」と「説明文」だけを切り替える。
-   ★店のURL・店名・出す/出さない条件は 2026-07-25 以前から一字も変えていない。
-   ★駿河屋の af_jump ラップ / category=2 / -JPN 除去は未実装（別作業）。ここで混ぜない。
+   ★店URLの変更は駿河屋の af_jump ラップのみ（2026-07-25）。他店のURL・店名は不変。
    ★強調(primary)の付け替えは実施済み（第1段-c / 2026-07-25）。
      割り当ては下の clsBuyee / clsCode / clsTitle を見ること。 */
+const SG_AF='https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=';
+const sgAf = w => SG_AF + encodeURIComponent('https://www.suruga-ya.jp/search?category=2&search_word=' + w);
 function buyBlock(k){
   const jp = LOC==='jp';
 
@@ -944,14 +945,14 @@ function buyBlock(k){
   const gCode = k.codes.length?`<div class="group">
         <div class="group-label"><span class="n">By product code</span><span class="d">${jp?'exact match — buy direct, Japanese site':'exact match — Japanese site, needs a proxy'}</span></div>
         <div class="stores">
-          <a class="${clsCode}" target="_blank" rel="noopener" href="https://www.suruga-ya.jp/search?search_word=${k.kwCode}">Suruga-ya</a>
+          <a class="${clsCode}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwCodeSg)}">Suruga-ya</a>
         </div>
       </div>`:'';
 
   const gTitle = `<div class="group">
         <div class="group-label"><span class="n">By Japanese title</span><span class="d">${jp?'domestic listings — buy direct, Japanese site':'domestic listings — usually needs a proxy'}</span></div>
         <div class="stores">
-          <a class="${clsTitle}" target="_blank" rel="noopener" href="https://www.suruga-ya.jp/search?search_word=${k.kwKana}">Suruga-ya</a>
+          <a class="${clsTitle}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwKana)}">Suruga-ya</a>
           <a class="store" target="_blank" rel="noopener" href="https://jp.mercari.com/search?keyword=${k.kwName}">Mercari</a>
           <a class="store" target="_blank" rel="noopener" href="https://shopping.bookoff.co.jp/search/keyword/${k.kwKana}">Book-Off</a>
           <a class="store" target="_blank" rel="noopener" href="https://netmall.hardoff.co.jp/cate/00010012/?q=${k.kwKanaHard}&amp;s=7">Hard-Off</a>
@@ -965,6 +966,8 @@ function buyBlock(k){
         <h3>Buy this game</h3>
         <p>${jp?'Ordered by what you can buy directly in Japan.':'Ordered by how likely you are to receive it abroad.'}</p>
       </div>
+
+      <p class="cap">Some store links are affiliate links (PR).</p>
 
       ${order.filter(Boolean).join('\n\n      ')}
     </div>`;
@@ -982,6 +985,7 @@ function card(r,idx){
   const kwName = enc(jp||en);        // Japanese name (fallback English) — Suruga-ya / Mercari
   const kwEn   = enc(en||jp);        // English title (fallback Japanese) — eBay
   const kwCode = enc(codes[0]||'');  // first product code only — Suruga-ya "by code" comparison link
+  const kwCodeSg = enc((codes[0]||'').replace(/-JPN$/,''));  // 駿河屋アフィリエイト専用: 型番末尾の -JPN を除去
   const kwBuyee = r[7] ? enc(jp + ' ' + r[7]) : '';   // 日本語タイトル(row[1]) + Buyeeキーワード(row[7])。空なら出さない
   const kwKana = enc(r[8] || jp || en);
   const kwKanaHard = enc((r[8] || jp || en).replace(/・/g, ' '));
@@ -1086,7 +1090,7 @@ function card(r,idx){
 
     ${/^\d{13}$/.test(r[10]||'') ? `<div class="rak-slot" data-jan="${r[10]}"></div>` : ''}
 
-    ${r[12]?`<span class="nodisc">No disc &middot; download</span>`:buyBlock({kwBuyee,kwEn,kwCode,kwKana,kwName,kwKanaHard,codes})}
+    ${r[12]?`<span class="nodisc">No disc &middot; download</span>`:buyBlock({kwBuyee,kwEn,kwCode,kwCodeSg,kwKana,kwName,kwKanaHard,codes})}
   </article>`;
 }
 
