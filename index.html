@@ -916,7 +916,8 @@ function setLoc(v,skipSave){
    ★強調(primary)の付け替えは実施済み（第1段-c / 2026-07-25）。
      割り当ては下の clsBuyee / clsCode / clsTitle を見ること。 */
 const SG_AF='https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=';
-const sgAf = w => SG_AF + encodeURIComponent('https://www.suruga-ya.jp/search?category=2&search_word=' + w);
+const SG_UTM='&utm_medium=affiliate&utm_source=gamekataban.com&utm_content=%2F&utm_campaign=afid5357';
+const sgAf = w => SG_AF + encodeURIComponent('https://www.suruga-ya.jp/search?category=2&search_word=' + w + SG_UTM);
 function buyBlock(k){
   const jp = LOC==='jp';
 
