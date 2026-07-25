@@ -362,10 +362,11 @@ h1{font-family:var(--f-pixel);}
    新しい生hexは足さない。非選択は --muted(#8b84ab・面で5.7:1)、
    --faint(#6f6790) はAAを割るので使わない。
    タップ域は 44px 以上（下げない）。
-   ★第2段（2026-07-25）で常設化した。#locbar は .wrap 全幅を覆う「帯」、
-     .locpair が従来の420px枠。帯にしないと広い画面でバーの左右をカードが
-     透けて流れる。★#locbar は .wrap の外（body直下）に置く。.wrap の内側だと max-width:760px に
-     縛られ、広い画面で帯が中央760pxの暗い長方形として浮く（2026-07-25 実測）。
+   ★第2段（2026-07-25）で常設化した。#locbar は body 直下・画面全幅の帯、
+     .locpair が中央420pxの枠。帯にしないと広い画面でバーの左右をカードが
+     透けて流れる。
+     ★.wrap の内側に置くと max-width:760px に縛られ、広い画面で帯が中央760pxの
+       暗い長方形として浮く（実測で確認・2026-07-25）。だから body 直下に置く。
      z-index は 20（#pubList 40 / scanOverlay 50 / clerk 60 / toast 70 より下。
      店員パネルやスキャナの上にトグルが載ってはいけない）。
      高さの代償は約61px（44+16+1）。 */
@@ -868,13 +869,45 @@ function shelfNote(r){
    run() ではなく paint() を呼ぶ。第1段-a の時点では card() が LOC を
    まだ読んでいないため、押しても表示は変わらない（これは想定どおり）。 */
 let LOC='out';
-function setLoc(v){
+
+/* 状態の保持（第3段・2026-07-25）。優先順は URL > localStorage > 既定(out)。
+   ★URL(?loc=jp)  … 共有リンクが状態を運ぶ。「日本にいる人向け」として貼れる。
+   ★localStorage … リロードで戻らない。店頭は電波が悪く再読み込みが起きやすいので、
+     日本にいる人が知らないうちに海外向け表示へ戻されるのを防ぐ。
+   ★どちらも try/catch で囲む。localStorage はプライベートブラウズや一部WebViewで
+     アクセス自体が例外を投げる。囲まないと setLoc() が途中で死んで
+     トグルが押せなくなる（paint() に到達しない）。
+   ★保存値は 'out'/'jp' 以外を捨てる。localStorage は人が書き換えられる。
+   ★期限は設けていない。帰国後も 'jp' を覚えたままになるが、日数の根拠が無い。
+     トグルは常設なので間違いにすぐ気づいて押し直せる。未解決として記録した。 */
+function locRead(){
+  try{
+    const u = new URLSearchParams(location.search).get('loc');
+    if(u==='jp'||u==='out') return u;
+  }catch(e){}
+  try{
+    const s = localStorage.getItem('kataban_loc');
+    if(s==='jp'||s==='out') return s;
+  }catch(e){}
+  return 'out';
+}
+
+function setLoc(v,skipSave){
+  if(v!=='jp'&&v!=='out') return;
   LOC=v;
   document.querySelectorAll('.locbtn').forEach(b=>{
     const on = b.dataset.loc===LOC;
     b.classList.toggle('is-on',on);
     b.setAttribute('aria-pressed',on?'true':'false');
   });
+  if(!skipSave){
+    try{ localStorage.setItem('kataban_loc',LOC); }catch(e){}
+    try{
+      const url = new URL(location.href);
+      url.searchParams.set('loc',LOC);
+      history.replaceState(null,'',url);
+    }catch(e){}
+  }
   paint();
 }
 /* 購入リンクブロック。card() のテンプレート内では変数を作れないので関数に切り出した。
@@ -1280,6 +1313,7 @@ let t; q.addEventListener('input',()=>{clearTimeout(t);t=setTimeout(run,90);});
 plat.addEventListener('change',run);
 year.addEventListener('change',run);
 // pub は hidden input（タイプアヘッドが pubSelect→run() を直接呼ぶ）ので change 監視は不要。
+setLoc(locRead(), true);   // 起動時の状態復元（URL>localStorage>out）。skipSave=保存を書き戻さない
 run();
 
 // ============================================================
