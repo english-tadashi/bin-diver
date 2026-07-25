@@ -348,13 +348,25 @@ h1{font-family:var(--f-pixel);}
    ★機種は全35種が英数字だけと確認済み。それでも保険で JP フォントを後段に残す
      （万一の日本語混入でも tofu にせず日本語で出る）。
    ★RELEASED の年も VT323 の対象だが、PUBLISHER と同じ .spec .v を共有していて
-     CSS だけでは切り分けられない（PUBLISHER は6,248行が日本語）。HTML を触らない
+     CSS だけでは切り分けられない（PUBLISHER には日本語を含む行が残る。件数は BIN_DIVER_NOTES.md 参照）。HTML を触らない
      制約のため RELEASED はここでは当てず現行のまま。下の報告に記載。 */
 .card .spec .v.jp{font-family:'VT323',var(--f-jp); font-size:18px;}
 /* ★VT323 は同じ px でも字面が小さいため、CONSOLE の値(.v.jp)だけ 14→18px に上げて
    PUBLISHER/RELEASED(.v・Space Grotesk 14px)と同じ字高に見せる。size は .v.jp(0,4,0)が
    基底 .card .spec .v(0,3,0)に特異度で勝つので source order に依らず効く。
-   PUBLISHER は .jp が付かない(=6,248行の日本語に VT323 を当てない)ため無関係。 */
+   PUBLISHER は .jp が付かない(=日本語を含む PUBLISHER に VT323 を当てない)ため無関係。 */
+
+/* ★位置トグル（I'm outside Japan / I'm in Japan）。
+   選択の合図を3つ重ねる＝ベタ塗り・文字コントラスト・四角マーカー。
+   店頭の蛍光灯下では色相が飛ぶので、色だけに載せない。
+   新しい生hexは足さない。非選択は --muted(#8b84ab・面で5.7:1)、
+   --faint(#6f6790) はAAを割るので使わない。
+   タップ域は 44px 以上。sticky 化は第2段で別途行う（今はまだ流れる）。 */
+#locbar{display:flex;max-width:420px;margin:0 auto 18px;border:1px solid var(--edge-input);border-radius:2px;overflow:hidden}
+.locbtn{flex:1;min-height:44px;padding:10px 8px;background:transparent;border:0;color:var(--muted);font:inherit;font-size:13px;cursor:pointer}
+.locbtn+.locbtn{border-left:1px solid var(--edge-input)}
+.locbtn.is-on{background:var(--accent);color:var(--accent-ink);font-weight:700}
+.locbtn.is-on::before{content:"";display:inline-block;width:8px;height:8px;background:currentColor;margin-right:8px;vertical-align:middle}
 
 /* states */
 .state{padding:48px 6px;text-align:center;color:var(--muted)}
@@ -526,6 +538,11 @@ footer a:hover,footer a:focus{color:var(--accent)}
     <h1>Kata<span class="blk">ban</span></h1>
     <p class="lede">Type a game you want. Get its Japanese title, the cartridge code to hunt for on the shelf, and links to buy it.</p>
   </header>
+
+  <div id="locbar" role="group" aria-label="Where are you buying from?">
+    <button type="button" class="locbtn is-on" data-loc="out" aria-pressed="true" onclick="setLoc('out')">I'm outside Japan</button>
+    <button type="button" class="locbtn" data-loc="jp" aria-pressed="false" onclick="setLoc('jp')">I'm in Japan</button>
+  </div>
 
   <div class="search">
     <div class="field">
@@ -836,6 +853,20 @@ function shelfNote(r){
     </div>`;
 }
 
+/* 位置トグルの状態。'out'=海外在住（初期） / 'jp'=日本の店頭。
+   変えるのは表示の並び順と説明文だけ。検索結果(current)は変わらないので
+   run() ではなく paint() を呼ぶ。第1段-a の時点では card() が LOC を
+   まだ読んでいないため、押しても表示は変わらない（これは想定どおり）。 */
+let LOC='out';
+function setLoc(v){
+  LOC=v;
+  document.querySelectorAll('.locbtn').forEach(b=>{
+    const on = b.dataset.loc===LOC;
+    b.classList.toggle('is-on',on);
+    b.setAttribute('aria-pressed',on?'true':'false');
+  });
+  paint();
+}
 function card(r,idx){
   const [en,jp,pf,code,yr,pubja,puben]=r;
   const hasEn=!!en;
