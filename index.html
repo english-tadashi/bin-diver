@@ -364,11 +364,12 @@ h1{font-family:var(--f-pixel);}
    タップ域は 44px 以上（下げない）。
    ★第2段（2026-07-25）で常設化した。#locbar は .wrap 全幅を覆う「帯」、
      .locpair が従来の420px枠。帯にしないと広い画面でバーの左右をカードが
-     透けて流れる。margin:0 -18px は .wrap の padding を打ち消して全幅にするため。
+     透けて流れる。★#locbar は .wrap の外（body直下）に置く。.wrap の内側だと max-width:760px に
+     縛られ、広い画面で帯が中央760pxの暗い長方形として浮く（2026-07-25 実測）。
      z-index は 20（#pubList 40 / scanOverlay 50 / clerk 60 / toast 70 より下。
      店員パネルやスキャナの上にトグルが載ってはいけない）。
      高さの代償は約61px（44+16+1）。 */
-#locbar{position:sticky;top:0;z-index:20;margin:0 -18px 18px;padding:8px 18px;background:var(--paper);border-bottom:1px solid var(--edge)}
+#locbar{position:sticky;top:0;z-index:20;padding:8px 18px;background:var(--paper);border-bottom:1px solid var(--edge)}
 .locpair{display:flex;max-width:420px;margin:0 auto;border:1px solid var(--edge-input);border-radius:2px;overflow:hidden}
 .locbtn{flex:1;min-height:44px;padding:10px 8px;background:transparent;border:0;color:var(--muted);font:inherit;font-size:13px;cursor:pointer}
 .locbtn+.locbtn{border-left:1px solid var(--edge-input)}
@@ -539,19 +540,19 @@ footer a:hover,footer a:focus{color:var(--accent)}
 </style>
 </head>
 <body>
+<div id="locbar">
+  <div class="locpair" role="group" aria-label="Where are you buying from?">
+    <button type="button" class="locbtn is-on" data-loc="out" aria-pressed="true" onclick="setLoc('out')">I'm outside Japan</button>
+    <button type="button" class="locbtn" data-loc="jp" aria-pressed="false" onclick="setLoc('jp')">I'm in Japan</button>
+  </div>
+</div>
+
 <div class="wrap">
   <header>
     <p class="kicker">JDM retro game finder</p>
     <h1>Kata<span class="blk">ban</span></h1>
     <p class="lede">Type a game you want. Get its Japanese title, the cartridge code to hunt for on the shelf, and links to buy it.</p>
   </header>
-
-  <div id="locbar">
-    <div class="locpair" role="group" aria-label="Where are you buying from?">
-    <button type="button" class="locbtn is-on" data-loc="out" aria-pressed="true" onclick="setLoc('out')">I'm outside Japan</button>
-    <button type="button" class="locbtn" data-loc="jp" aria-pressed="false" onclick="setLoc('jp')">I'm in Japan</button>
-    </div>
-  </div>
 
   <div class="search">
     <div class="field">
