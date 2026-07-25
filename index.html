@@ -867,6 +867,52 @@ function setLoc(v){
   });
   paint();
 }
+/* 購入リンクブロック。card() のテンプレート内では変数を作れないので関数に切り出した。
+   位置トグル(LOC)で「3グループの並び順」と「説明文」だけを切り替える。
+   ★店のURL・店名・出す/出さない条件は 2026-07-25 以前から一字も変えていない。
+   ★駿河屋の af_jump ラップ / category=2 / -JPN 除去は未実装（別作業）。ここで混ぜない。
+   ★強調(class="store primary")は当面 Buyee 固定。IN JAPAN で最初に押すべき店へ
+     移す作業は次段(第1段-c)。この段では一番下の Buyee が塗られたままになる。 */
+function buyBlock(k){
+  const jp = LOC==='jp';
+
+  const gWorld = `<div class="group">
+        <div class="group-label"><span class="n">Ships worldwide</span><span class="d">${jp?'for buyers abroad — adds proxy fees':'proxy &amp; international — English, they handle Japanese'}</span></div>
+        <div class="stores">
+          ${k.kwBuyee?`<a class="store primary" target="_blank" rel="noopener" href="https://buyee.jp/item/search/query/${k.kwBuyee}?lang=en">Buyee <span class="en">EN</span></a>`:''}
+          <a class="store" target="_blank" rel="noopener" href="https://www.ebay.com/sch/i.html?_nkw=${k.kwEn}">eBay <span class="en">EN</span></a>
+        </div>
+      </div>`;
+
+  const gCode = k.codes.length?`<div class="group">
+        <div class="group-label"><span class="n">By product code</span><span class="d">${jp?'exact match — buy direct, Japanese site':'exact match — Japanese site, needs a proxy'}</span></div>
+        <div class="stores">
+          <a class="store" target="_blank" rel="noopener" href="https://www.suruga-ya.jp/search?search_word=${k.kwCode}">Suruga-ya</a>
+        </div>
+      </div>`:'';
+
+  const gTitle = `<div class="group">
+        <div class="group-label"><span class="n">By Japanese title</span><span class="d">${jp?'domestic listings — buy direct, Japanese site':'domestic listings — usually needs a proxy'}</span></div>
+        <div class="stores">
+          <a class="store" target="_blank" rel="noopener" href="https://www.suruga-ya.jp/search?search_word=${k.kwKana}">Suruga-ya</a>
+          <a class="store" target="_blank" rel="noopener" href="https://jp.mercari.com/search?keyword=${k.kwName}">Mercari</a>
+          <a class="store" target="_blank" rel="noopener" href="https://shopping.bookoff.co.jp/search/keyword/${k.kwKana}">Book-Off</a>
+          <a class="store" target="_blank" rel="noopener" href="https://netmall.hardoff.co.jp/cate/00010012/?q=${k.kwKanaHard}&amp;s=7">Hard-Off</a>
+        </div>
+      </div>`;
+
+  const order = jp ? [gCode, gTitle, gWorld] : [gWorld, gCode, gTitle];
+
+  return `<div>
+      <div class="buy-head">
+        <h3>Buy this game</h3>
+        <p>${jp?'Ordered by what you can buy directly in Japan.':'Ordered by how likely you are to receive it abroad.'}</p>
+      </div>
+
+      ${order.filter(Boolean).join('\n\n      ')}
+    </div>`;
+}
+
 function card(r,idx){
   const [en,jp,pf,code,yr,pubja,puben]=r;
   const hasEn=!!en;
@@ -983,37 +1029,7 @@ function card(r,idx){
 
     ${/^\d{13}$/.test(r[10]||'') ? `<div class="rak-slot" data-jan="${r[10]}"></div>` : ''}
 
-    ${r[12]?`<span class="nodisc">No disc &middot; download</span>`:`<div>
-      <div class="buy-head">
-        <h3>Buy this game</h3>
-        <p>Ordered by how likely you are to receive it, if you're outside Japan.</p>
-      </div>
-
-      <div class="group">
-        <div class="group-label"><span class="n">Ships worldwide</span><span class="d">proxy &amp; international — English, they handle Japanese</span></div>
-        <div class="stores">
-          ${kwBuyee?`<a class="store primary" target="_blank" rel="noopener" href="https://buyee.jp/item/search/query/${kwBuyee}?lang=en">Buyee <span class="en">EN</span></a>`:''}
-          <a class="store" target="_blank" rel="noopener" href="https://www.ebay.com/sch/i.html?_nkw=${kwEn}">eBay <span class="en">EN</span></a>
-        </div>
-      </div>
-
-      ${codes.length?`<div class="group">
-        <div class="group-label"><span class="n">By product code</span><span class="d">exact — Japanese checkout</span></div>
-        <div class="stores">
-          <a class="store" target="_blank" rel="noopener" href="https://www.suruga-ya.jp/search?search_word=${kwCode}">Suruga-ya</a>
-        </div>
-      </div>`:''}
-
-      <div class="group">
-        <div class="group-label"><span class="n">By Japanese title</span><span class="d">domestic listings — usually needs a proxy</span></div>
-        <div class="stores">
-          <a class="store" target="_blank" rel="noopener" href="https://www.suruga-ya.jp/search?search_word=${kwKana}">Suruga-ya</a>
-          <a class="store" target="_blank" rel="noopener" href="https://jp.mercari.com/search?keyword=${kwName}">Mercari</a>
-          <a class="store" target="_blank" rel="noopener" href="https://shopping.bookoff.co.jp/search/keyword/${kwKana}">Book-Off</a>
-          <a class="store" target="_blank" rel="noopener" href="https://netmall.hardoff.co.jp/cate/00010012/?q=${kwKanaHard}&amp;s=7">Hard-Off</a>
-        </div>
-      </div>
-    </div>`}
+    ${r[12]?`<span class="nodisc">No disc &middot; download</span>`:buyBlock({kwBuyee,kwEn,kwCode,kwKana,kwName,kwKanaHard,codes})}
   </article>`;
 }
 
