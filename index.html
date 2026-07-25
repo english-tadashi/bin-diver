@@ -954,7 +954,7 @@ function buyBlock(k){
         <div class="stores">
           <a class="${clsTitle}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwKana)}">Suruga-ya</a>
           <a class="store" target="_blank" rel="noopener" href="https://jp.mercari.com/search?keyword=${k.kwName}&amp;category_id=76">Mercari</a>
-          <a class="store" target="_blank" rel="noopener" href="https://shopping.bookoff.co.jp/search/genre/51/keyword/${k.kwKana}">Book-Off</a>
+          <a class="store" target="_blank" rel="noopener" href="https://shopping.bookoff.co.jp/search/genre/51/keyword/${k.kwKanaBo}">Book-Off</a>
           <a class="store" target="_blank" rel="noopener" href="https://netmall.hardoff.co.jp/cate/00010012/?q=${k.kwKanaHard}&amp;s=7">Hard-Off</a>
         </div>
       </div>`;
@@ -1000,6 +1000,14 @@ function card(r,idx){
     return (m && CAT_PAREN_OK.has(m[1])) ? s.slice(0, m.index).trim() : s;
   };
   const kwKana = enc(dropCatalogParen(r[8] || jp || en));
+  // ★ブックオフだけ、日本語文字の直後の数字の前に半角スペースを入れる。
+  //   ブックオフは分かち書きでトークナイズするので「ソリッド2」は0件、「ソリッド 2」は当たる。
+  //   実測（2026-07-25・150行標本）: 0件だった44行のうち15行が救済＝34.1%。件数が減った行は0。
+  // ★駿河屋には絶対に適用しない。駿河屋では救済0・順位低下2/30（同日実測）。
+  //   同じルールが店ごとに真逆に働く。
+  // ★文字クラスは測定時と同一。変えると上の数字が当てはまらなくなる。
+  const spaceBeforeNum = s => s.replace(/([ぁ-んァ-ヴー一-龥々〆])(\d)/g, '$1 $2');
+  const kwKanaBo = enc(spaceBeforeNum(dropCatalogParen(r[8] || jp || en)));
   const kwKanaHard = enc(dropCatalogParen(r[8] || jp || en).replace(/・/g, ' '));
   const credit = [pubs.join(' \u00b7 '), yr].filter(Boolean).join('  \u00b7  ');
   // row[1](日本語名)にかな・カタカナ・漢字が1字も無い＝箱の表記自体がラテン文字。
@@ -1102,7 +1110,7 @@ function card(r,idx){
 
     ${/^\d{13}$/.test(r[10]||'') ? `<div class="rak-slot" data-jan="${r[10]}"></div>` : ''}
 
-    ${r[12]?`<span class="nodisc">No disc &middot; download</span>`:buyBlock({kwBuyee,kwEn,kwCode,kwCodeSg,kwKana,kwName,kwKanaHard,codes})}
+    ${r[12]?`<span class="nodisc">No disc &middot; download</span>`:buyBlock({kwBuyee,kwEn,kwCode,kwCodeSg,kwKana,kwKanaBo,kwName,kwKanaHard,codes})}
   </article>`;
 }
 
