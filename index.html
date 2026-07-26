@@ -630,6 +630,14 @@ const fold = s => (s||'').replace(/[\p{P}\p{S}]/gu,' ').replace(/\s+/g,' ').trim
 // 列ごとに畳んでから \n で連結する。連結してから畳むと列の境界が消え、
 // 英題の末尾と日本語名の先頭をまたいだ誤ヒットが出る（実測: "revelations biohazard" が 0→1件）。
 const HAY  = DATA.map(r => [r[0],r[1],r[2],r[3],r[5],r[6],r[8]||'',r[9]||''].map(fold).join('\n'));
+// 第4レーン: fold からさらにスペースを消した索引。狙いは「三國志8remake」「halo5」のように
+// スペースを打たずに入力された題を拾うこと。fold/クエリ側は対称なので不一致ではなく、
+// String.includes の連続部分一致が「打った側にスペースが無い」だけで落ちるのが真因。
+// ★対象は row[0]/row[1] のタイトル2列だけ。全8列に掛けると機種列(row[2])まで同一視され、
+//   nintendoswitch が845行・gameboyadvance が888行を巻き込む（機種はプルダウンの仕事）。
+// ★列ごとに squash してから \n で連結。\n は squash で消えないので列境界は HAY と同じく残る。
+const squash = s => fold(s).replace(/ /g,'');
+const HAY4 = DATA.map(r => [r[0],r[1]].map(squash).join('\n'));
 // 第2レーン: ローマ字(row[9])だけを対象に、同じ母音の重なりを1つに潰した索引。
 // 狙いは ryuu ga gotoku(読みに忠実な表示) を ryu ga gotoku(英語圏の入力)で引くこと（罠30）。
 // fold 本体には入れない。全列に掛けると英題を巻き込んで壊れる（実測: Dragoon→Dragon で+148、
@@ -934,7 +942,7 @@ function buyBlock(k){
      「ほぼ消える」は外れた。残ったのは Switch / PS5 / Xbox系 / Wii U / 64DD で、
      型番は 1,389行すべてが保持（100%）＝同定は効いている。 */
   const noProxy  = !k.kwBuyee;   // row[7] が空＝Buyee の <a> が出ない（941行）
-  const clsBuyee = jp ? 'store' : 'store primary';
+  const clsBuyee = (jp || noProxy) ? 'store' : 'store primary';
   const clsCode  = ((jp || noProxy) && k.codes.length)     ? 'store primary' : 'store';
   const clsTitle = ((jp || noProxy) && k.codes.length===0) ? 'store primary' : 'store';
 
@@ -960,7 +968,7 @@ function buyBlock(k){
   const gWorld = `<div class="group">
         <div class="group-label"><span class="n">Ships worldwide</span><span class="d">${worldDesc}</span></div>
         <div class="stores">
-          ${k.kwBuyee?`<a class="${clsBuyee}" target="_blank" rel="noopener" href="https://buyee.jp/item/search/query/${k.kwBuyee}?lang=en">Buyee <span class="en">EN</span></a>`:''}
+          ${(k.kwBuyee||k.kwBuyeeFallback)?`<a class="${clsBuyee}" target="_blank" rel="noopener" href="https://buyee.jp/item/search/query/${k.kwBuyee||k.kwBuyeeFallback}?lang=en">Buyee <span class="en">EN</span></a>`:''}
           <a class="store" target="_blank" rel="noopener" href="https://www.ebay.com/sch/i.html?_nkw=${k.kwEn}">eBay <span class="en">EN</span></a>
         </div>
       </div>`;
@@ -1010,6 +1018,7 @@ function card(r,idx){
   const kwCode = enc(codes[0]||'');  // first product code only — Suruga-ya "by code" comparison link
   const kwCodeSg = enc((codes[0]||'').replace(/-JPN$/,''));  // 駿河屋アフィリエイト専用: 型番末尾の -JPN を除去
   const kwBuyee = r[7] ? enc(jp + ' ' + r[7]) : '';   // 日本語タイトル(row[1]) + Buyeeキーワード(row[7])。空なら出さない
+  const kwBuyeeFallback = r[7] ? '' : enc(r[1]);
   // 括弧内が「目録用語」に完全一致するときだけ除去。実測（2026-07-25・末尾括弧139行の全数測定）に基づく。
   // ★完全一致(Set.has)にする。部分一致の正規表現だと (ゲームボーイ) が「ゲーム」を含んで漏れ除去され、
   //   機種名を削ってしまうのを実測（[9610]TMNT・[32971]新SDガンダム外伝の2行）。だから Set 完全一致。
@@ -1133,7 +1142,7 @@ function card(r,idx){
 
     ${/^\d{13}$/.test(r[10]||'') ? `<div class="rak-slot" data-jan="${r[10]}"></div>` : ''}
 
-    ${r[12]?`<span class="nodisc">No disc &middot; download</span>`:buyBlock({kwBuyee,kwEn,kwCode,kwCodeSg,kwKana,kwKanaBo,kwName,kwKanaHard,codes})}
+    ${r[12]?`<span class="nodisc">No disc &middot; download</span>`:buyBlock({kwBuyee,kwBuyeeFallback,kwEn,kwCode,kwCodeSg,kwKana,kwKanaBo,kwName,kwKanaHard,codes})}
   </article>`;
 }
 
@@ -1160,6 +1169,7 @@ function run(){
   const lo=fold(q.value);   // HAY と同じ畳み方。非対称にすると打った記号で当たらなくなる
   const qk=codeKey(q.value.trim());   // 型番照合用（正規化済み）。判定ではなく、下の床つき部分一致に使う。
   const loc=collapseV(lo);            // 第2レーン用のクエリ（同母音を潰した形）
+  const sq=squash(q.value);           // 第4レーン用。lo ではなく q.value から作る（squash 内で fold が走る）
   // 床8: 短い針を潰すと乱射する（moon→mon 等）。8文字以上＝実質フルタイトル入力のときだけ第2レーンを使う。
   const lane2 = loc.length >= 8;
   const pf=plat.value, pv=pub.value, yv=year.value;
@@ -1178,6 +1188,7 @@ function run(){
       let hit = HAY[i].includes(lo);
       if(!hit && lane2) hit = RJ[i].includes(loc);   // 第2レーン: ローマ字だけ長音を潰して照合
       if(!hit && qk.length >= 4) hit = CODEKEYS[i].some(c => c.includes(qk));  // 4文字未満はJPN等が数千件に当たるので床
+      if(!hit && sq.length >= 5) hit = HAY4[i].includes(sq);  // 床5: halo5(5)を残す上限と star/gear(4)を弾く下限の唯一解
       if(!hit) continue;
     }
     res.push(r);
