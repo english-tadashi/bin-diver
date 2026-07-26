@@ -626,7 +626,18 @@ const MAX=60;
 // 長音符ー(Lm)は記号ではないので残る。中黒・はP*なので、従来どおりスペースになる。
 // これで表示は "Resident Evil: Revelations" のまま、"resident evil revelations" でも当たる
 // （実測: 英題を持つ5,213行のうち、記号を抜いて打つと当たらない行が 1,561 → 0）。
-const fold = s => (s||'').replace(/[\p{P}\p{S}]/gu,' ').replace(/\s+/g,' ').trim().toLowerCase();
+// 全角ローマ数字(U+2160–217F)を十進化。検索索引のみに効かせる(表示は元字形のまま)。
+// run単位で整数解釈: ⅩⅥ→16, Ⅶ→7。減算則あり。Ⅰ&Ⅱ→1&2(&はrun外で残る)。
+const RN_VAL = [1,2,3,4,5,6,7,8,9,10,11,12,50,100,500,1000];
+const RN_MAP = new Map();
+for (let _i=0; _i<16; _i++){ RN_MAP.set(String.fromCharCode(0x2160+_i), RN_VAL[_i]); RN_MAP.set(String.fromCharCode(0x2170+_i), RN_VAL[_i]); }
+const romanToArabic = s => (s||'').replace(/[\u2160-\u217f]+/g, run => {
+  const v = [...run].map(c => RN_MAP.get(c));
+  let t = 0;
+  for (let i=0; i<v.length; i++) t += (i+1<v.length && v[i] < v[i+1]) ? -v[i] : v[i];
+  return String(t);
+});
+const fold = s => romanToArabic(s).replace(/[\p{P}\p{S}]/gu,' ').replace(/\s+/g,' ').trim().toLowerCase();
 // 列ごとに畳んでから \n で連結する。連結してから畳むと列の境界が消え、
 // 英題の末尾と日本語名の先頭をまたいだ誤ヒットが出る（実測: "revelations biohazard" が 0→1件）。
 const HAY  = DATA.map(r => [r[0],r[1],r[2],r[3],r[5],r[6],r[8]||'',r[9]||''].map(fold).join('\n'));
