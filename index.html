@@ -1411,6 +1411,7 @@ function showByJan(raw){
     q.value=''; plat.value='All'; pubReset(); year.value='All';
     current=rows; shown=Math.min(MAX,rows.length); paint();
     results.scrollIntoView({behavior:'smooth',block:'start'});
+    lastScanHit=true;
     return true;
   }
   current=[]; shown=0; more.innerHTML=''; count.textContent='';
@@ -1423,12 +1424,16 @@ function showByJan(raw){
     +'<span style="font-family:monospace">NTR-</span>, '
     +'<span style="font-family:monospace">SHVC-</span>) in the search above — '
     +'it often matches even when the barcode doesn\'t.</div>';
+  lastScanHit=false;
   return false;
 }
 
 const scanBtn=$('#scanBtn'), overlay=$('#scanOverlay'), video=$('#scanVideo'),
       scanMsg=$('#scanMsg'), scanClose=$('#scanClose'), scanJan=$('#scanJan'), scanGo=$('#scanGo');
 let stream=null, detector=null, zxingReader=null, rafId=0, closing=false;
+// 直近のスキャン結果。null=まだ読んでいない / true=カタログに有り / false=無し。
+// closeScan で false のときだけ検索欄にフォーカスを移す(外れた直後は型番手入力に進むため)。
+let lastScanHit=null;
 
 async function getDecoder(){
   if('BarcodeDetector' in window){
@@ -1456,7 +1461,7 @@ function onDetected(text){
 }
 
 async function openScan(){
-  overlay.classList.add('on'); scanMsg.textContent=''; closing=false;
+  overlay.classList.add('on'); scanMsg.textContent=''; closing=false; lastScanHit=null;
   try{
     stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
     video.srcObject=stream; await video.play();
@@ -1490,6 +1495,7 @@ function closeScan(){
   if(stream){ stream.getTracks().forEach(t=>t.stop()); stream=null; }
   video.srcObject=null;
   overlay.classList.remove('on');
+  if(lastScanHit === false){ q.focus(); }   // 外れたときだけ。当たり(true)/未スキャン(null)は何もしない
 }
 
 scanBtn.addEventListener('click',openScan);
