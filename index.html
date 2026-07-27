@@ -1027,7 +1027,11 @@ function card(r,idx){
   const kwName = enc(jp||en);        // Japanese name (fallback English) — Suruga-ya / Mercari
   const kwEn   = enc(en||jp);        // English title (fallback Japanese) — eBay
   const kwCode = enc(codes[0]||'');  // first product code only — Suruga-ya "by code" comparison link
-  const kwCodeSg = enc((codes[0]||'').replace(/-JPN.*$/,''));  // 駿河屋: 型番の -JPN 以降(接尾辞含む)を除去。19タイトル実地検索で全機種この形が最良/同点・既存の当たりを壊す例0(2026-07-27)。全数空撃ちで被害55行のみ変化・他10,241行不変を確認
+  // ゼルダTPHD(row[3]がこの値の1行のみ): codes[0]がWii Uディスク規格品番WUP-006で
+  // 駿河屋が別商品に飛ぶため、この行だけソフト型番codes[1]を使う。
+  // 実測: WUP-006(JPN)→無関係2件 / WUP-P-AZAJ→正しいゼルダ3件(2026-07-27)。
+  const sgSrc = (code === 'WUP-006(JPN);WUP-P-AZAJ-JPN-0' && codes[1]) ? codes[1] : codes[0];
+  const kwCodeSg = enc((sgSrc||'').replace(/-JPN.*$/,''));  // 駿河屋: 型番の -JPN 以降(接尾辞含む)を除去。19タイトル実地検索で全機種この形が最良/同点(2026-07-27)
   const kwBuyee = r[7] ? enc(jp + ' ' + r[7]) : '';   // 日本語タイトル(row[1]) + Buyeeキーワード(row[7])。空なら出さない
   const kwBuyeeFallback = r[7] ? '' : enc(r[1]);
   // 括弧内が「目録用語」に完全一致するときだけ除去。実測（2026-07-25・末尾括弧139行の全数測定）に基づく。
