@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Scan test — camera, ZXing, focus</title>
+<style>
+  :root{
+    --bg:#0b0710; --surface:#171021; --line:#2e2440; --edge:#4a3a63;
+    --ink:#f2ecff; --muted:#a394bd; --accent:#ffe14d; --accent-ink:#1a1206;
+    --ok:#5ee08a; --ng:#ff6b7f;
+    --mono:ui-monospace,SFMono-Regular,Menlo,"Space Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;padding:16px;background:var(--bg);color:var(--ink);
+       font-family:var(--mono);font-size:14px;line-height:1.6;
+       padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+  h1{font-size:16px;margin:0 0 4px;letter-spacing:.02em}
+  .sub{color:var(--muted);font-size:12px;margin:0 0 14px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  button{font-family:var(--mono);font-size:14px;padding:11px 16px;
+         border:2px solid var(--edge);background:var(--surface);color:var(--ink);
+         cursor:pointer;min-height:44px}
+  button:hover:not(:disabled),button:focus-visible{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);outline:none}
+  button:disabled{opacity:.4;cursor:default}
+  .vidwrap{position:relative;background:#000;aspect-ratio:3/2;overflow:hidden;
+           border:1px solid var(--line);margin-bottom:12px}
+  video{width:100%;height:100%;object-fit:cover;display:block}
+  .reticle{position:absolute;inset:22% 12%;border:2px solid var(--accent);pointer-events:none}
+  .result{border:2px solid var(--edge);background:var(--surface);padding:14px;margin-bottom:12px}
+  .result .lb{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+  #code{font-size:clamp(22px,7vw,40px);font-weight:700;word-break:break-all;
+        line-height:1.25;margin-top:4px;min-height:1.25em}
+  #code.empty{color:var(--muted);font-size:16px;font-weight:400}
+  .field{display:flex;gap:8px;margin-bottom:12px}
+  input{flex:1;min-width:0;font-family:var(--mono);font-size:16px;padding:11px 12px;
+        border:2px solid var(--edge);background:#100a19;color:var(--ink)}
+  input:focus{outline:3px solid var(--accent);outline-offset:1px}
+  #focusState{border:2px solid var(--edge);background:var(--surface);padding:10px 12px;margin-bottom:12px;font-size:13px}
+  #log{border:1px solid var(--line);background:#0d0814;padding:10px 12px;
+       font-size:12px;white-space:pre-wrap;word-break:break-word;
+       max-height:44vh;overflow:auto;margin:0}
+  .ok{color:var(--ok)} .ng{color:var(--ng)} .dim{color:var(--muted)}
+  .note{font-size:11px;color:var(--muted);margin:10px 2px 0}
+</style>
+</head>
+<body>
+
+<h1>Scan test</h1>
+<p class="sub">Camera &rarr; ZXing decode &rarr; stop &rarr; focus. Test page only; nothing here touches the catalog.</p>
+
+<div class="row">
+  <button type="button" id="startBtn">Start camera</button>
+  <button type="button" id="stopBtn" disabled>Stop</button>
+  <button type="button" id="clearBtn">Clear log</button>
+</div>
+
+<div class="vidwrap">
+  <video id="video" playsinline muted></video>
+  <div class="reticle"></div>
+</div>
+
+<div class="result">
+  <div class="lb">Last barcode</div>
+  <div id="code" class="empty">nothing read yet</div>
+</div>
+
+<div class="field">
+  <input id="target" type="text" inputmode="numeric" autocomplete="off" placeholder="focus target — Stop should land here">
+</div>
+
+<div id="focusState" class="dim">activeElement: (not checked yet)</div>
+
+<pre id="log"></pre>
+
+<p class="note">
+  Same loader as production: dynamic <code>import()</code> of
+  <code>@zxing/browser@0.1.5</code> from jsDelivr, <code>BrowserMultiFormatReader</code>,
+  <code>decodeFromVideoElement</code>. Needs HTTPS (or localhost) for camera access.
+</p>
+
+<script>
+(function(){
+  'use strict';
+
+  var startBtn = document.getElementById('startBtn');
+  var stopBtn  = document.getElementById('stopBtn');
+  var clearBtn = document.getElementById('clearBtn');
+  var video    = document.getElementById('video');
+  var codeEl   = document.getElementById('code');
+  var target   = document.getElementById('target');
+  var focusEl  = document.getElementById('focusState');
+  var logEl    = document.getElementById('log');
+
+  // 本番と同じ状態変数（stream / reader / closing フラグ）
+  var stream = null, zxingReader = null, closing = false, reads = 0;
+
+  function ts(){
+    var d = new Date();
+    function p(n,w){ return String(n).padStart(w||2,'0'); }
+    return p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds())+'.'+p(d.getMilliseconds(),3);
+  }
+  function log(msg, cls){
+    var line = document.createElement('span');
+    line.className = cls || '';
+    line.textContent = '[' + ts() + '] ' + msg + '\n';
+    logEl.appendChild(line);
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  function describe(el){
+    if(!el) return '(null)';
+    var s = el.tagName.toLowerCase();
+    if(el.id) s += '#' + el.id;
+    if(el === document.body) s += '  <- body means focus did NOT land';
+    return s;
+  }
+  function reportFocus(label){
+    var el = document.activeElement;
+    var hit = (el === target);
+    focusEl.textContent = 'activeElement: ' + describe(el) + (hit ? '  — focus OK' : '  — focus NOT on input');
+    focusEl.className = hit ? 'ok' : 'ng';
+    log(label + ' activeElement = ' + describe(el) + (hit ? '  [FOCUS OK]' : '  [FOCUS FAILED]'), hit ? 'ok' : 'ng');
+    return hit;
+  }
+
+  // --- environment report (BarcodeDetector should be absent on iOS) ---
+  log('user agent: ' + navigator.userAgent, 'dim');
+  log('secure context: ' + (window.isSecureContext ? 'yes' : 'NO — getUserMedia will fail'),
+      window.isSecureContext ? 'ok' : 'ng');
+  log('mediaDevices.getUserMedia: ' + (navigator.mediaDevices && navigator.mediaDevices.getUserMedia ? 'available' : 'MISSING'),
+      (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) ? 'ok' : 'ng');
+  if('BarcodeDetector' in window){
+    log('BarcodeDetector: PRESENT (native path would be used in production)', 'ok');
+    try{
+      BarcodeDetector.getSupportedFormats().then(function(f){
+        log('BarcodeDetector formats: ' + f.join(', '), 'dim');
+      }).catch(function(){});
+    }catch(e){}
+  } else {
+    log('BarcodeDetector: absent (expected on iOS/Safari — ZXing fallback is what we are testing)', 'dim');
+  }
+  log('This page always uses the ZXing path, regardless of BarcodeDetector.', 'dim');
+
+  // --- ZXing loader: same library/version/init as production ---
+  async function getZxingReader(){
+    if(zxingReader) { log('ZXing already initialised — reusing reader', 'dim'); return zxingReader; }
+    log('importing @zxing/browser@0.1.5 from jsDelivr …');
+    var t0 = (window.performance && performance.now) ? performance.now() : 0;
+    var zx = await import('https://cdn.jsdelivr.net/npm/@zxing/browser@0.1.5/+esm');
+    var ms = t0 ? Math.round(performance.now() - t0) : 0;
+    log('ZXing module loaded' + (ms ? ' in ' + ms + ' ms' : ''), 'ok');
+    zxingReader = new zx.BrowserMultiFormatReader();
+    log('BrowserMultiFormatReader constructed — ZXing init OK', 'ok');
+    return zxingReader;
+  }
+
+  function onDetected(text){
+    reads++;
+    var digits = String(text).replace(/\D/g,'');
+    codeEl.textContent = text;
+    codeEl.classList.remove('empty');
+    log('DECODED #' + reads + ': "' + text + '"  (digits only: ' + (digits || '(none)') + ')', 'ok');
+  }
+
+  async function start(){
+    startBtn.disabled = true;
+    closing = false;
+    log('--- Start camera pressed ---');
+
+    // 1) camera
+    try{
+      log('requesting getUserMedia({video:{facingMode:"environment"}}) …');
+      stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
+      video.srcObject = stream;
+      await video.play();
+      var tr = stream.getVideoTracks()[0];
+      var st = tr && tr.getSettings ? tr.getSettings() : {};
+      log('camera started — track "' + (tr ? tr.label : '?') + '"'
+          + (st.width ? '  ' + st.width + 'x' + st.height : '')
+          + (st.facingMode ? '  facingMode=' + st.facingMode : ''), 'ok');
+      stopBtn.disabled = false;
+    }catch(e){
+      log('camera FAILED: ' + e.name + ' — ' + e.message, 'ng');
+      startBtn.disabled = false;
+      return;
+    }
+
+    // 2) ZXing
+    var reader;
+    try{
+      reader = await getZxingReader();
+    }catch(e){
+      log('ZXing init FAILED: ' + (e && e.message ? e.message : e), 'ng');
+      log('(camera is still running — press Stop to end the test)', 'dim');
+      return;
+    }
+
+    // 3) decode loop — same call shape as production
+    log('starting decodeFromVideoElement loop — point at a barcode …');
+    reader.decodeFromVideoElement(video, function(result, err){
+      if(closing) return;
+      if(result) onDetected(result.getText());
+    }).catch(function(e){
+      if(closing) return;
+      log('decode loop error: ' + (e && e.message ? e.message : e), 'ng');
+    });
+  }
+
+  function stop(){
+    log('--- Stop pressed ---');
+    closing = true;
+
+    try{
+      if(zxingReader && zxingReader.reset){ zxingReader.reset(); log('zxingReader.reset() called', 'dim'); }
+    }catch(e){ log('reset() threw: ' + e.message, 'ng'); }
+
+    if(stream){
+      stream.getTracks().forEach(function(t){ t.stop(); });
+      log('camera tracks stopped (' + stream.getTracks().length + ')', 'ok');
+      stream = null;
+    } else {
+      log('no active stream to stop', 'dim');
+    }
+    video.srcObject = null;
+
+    // focus immediately after stopping the camera — the untested part on iOS
+    log('calling target.focus() immediately after camera stop …');
+    target.focus();
+    reportFocus('immediately:');
+
+    // check again later: iOS sometimes drops focus asked for during teardown
+    setTimeout(function(){ reportFocus('after 300ms:'); }, 300);
+    setTimeout(function(){ reportFocus('after 1000ms:'); }, 1000);
+
+    stopBtn.disabled = true;
+    startBtn.disabled = false;
+  }
+
+  startBtn.addEventListener('click', start);
+  stopBtn.addEventListener('click', stop);
+  clearBtn.addEventListener('click', function(){ logEl.textContent = ''; log('log cleared', 'dim'); });
+
+  log('page ready — press "Start camera"', 'dim');
+})();
+</script>
+
+</body>
+</html>
