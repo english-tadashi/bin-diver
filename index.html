@@ -541,6 +541,104 @@ footer a:hover,footer a:focus{color:var(--accent)}
 .card .instore{ background:#171030; border:1px solid #4a4278; border-radius:2px; padding:14px; display:flex; flex-direction:column; gap:12px; }
 .card .instore > .field{margin:16px 0 14px;}
 .card .instore-head{ color:var(--tag); }
+/* ===== Logo migration: bitmap KATABAN + steady breathing (2026-07-29) =====
+   Replaces the h1 text logo (.blk). All new classes are kb- prefixed to stay
+   clear of existing selectors (.jp-chip, display:grid, etc.).
+   Colors reuse existing tokens: pink=var(--accent) cyan=var(--tag) ink=var(--accent-ink).
+   Breathing is on .kb-word only (brightness .97<->1.14 + glow, 4s). DATA untouched. */
+.kb-lockup{ display:flex; flex-direction:column; align-items:center; gap:20px;
+  position:relative; padding:6px 0 2px; }
+.kb-lockup::after{ content:""; position:absolute; inset:-8px 0; pointer-events:none;
+  background:repeating-linear-gradient(to bottom,
+    rgba(0,0,0,0) 0 2px, rgba(0,0,0,.22) 3px, rgba(0,0,0,0) 4px); }
+.kb-word{ position:relative; display:inline-block; margin:0; line-height:0;
+  --kb-px:clamp(7px,1.9vw,13px);
+  animation:kb-breathe 4s ease-in-out infinite; }
+.kb-word .kb-ghost{ position:absolute; inset:0; z-index:0;
+  transform:translate(4px,3px); opacity:.85; }
+.kb-word #kbGridPink{ position:relative; z-index:1; }
+.kb-grid{ display:grid; grid-template-columns:repeat(41,var(--kb-px));
+  grid-auto-rows:var(--kb-px); line-height:0; }
+.kb-grid i{ display:block; }
+.kb-on-pink{ background:var(--accent); box-shadow:0 0 12px var(--accent); }
+.kb-on-cyan{ background:var(--tag); box-shadow:0 0 8px var(--tag); }
+.kb-tagline{ margin:0; display:flex; align-items:center; gap:12px;
+  font-family:var(--f-pixel); font-size:12px; letter-spacing:2px;
+  color:var(--tag); text-shadow:0 0 8px rgba(34,211,238,.55); }
+.kb-tag-badge{ font-family:"IBM Plex Sans JP",sans-serif; font-weight:700;
+  font-size:13px; letter-spacing:1px; color:var(--accent-ink);
+  background:var(--tag); padding:2px 7px 3px; text-shadow:none;
+  box-shadow:0 0 10px rgba(34,211,238,.45); }
+/* logo is centered, so center the lede directly below it (overrides .lede) */
+header .lede{ margin:16px auto 0; text-align:center; }
+@keyframes kb-breathe{
+  0%,100%{ filter:brightness(.97) drop-shadow(0 0 1px rgba(255,55,199,0)); }
+  50%    { filter:brightness(1.14) drop-shadow(0 0 12px rgba(255,55,199,.5)); }
+}
+@media (prefers-reduced-motion:reduce){
+  .kb-word{ animation:none; filter:brightness(1.06) drop-shadow(0 0 10px rgba(255,55,199,.4)); }
+}
+/* ===== Stats band (2026-07-29): below search, above results. Numbers are
+   hardcoded (footer duplicates them) — update both if the dataset changes. ===== */
+.kb-stats{ display:grid; grid-template-columns:1fr 1fr 1fr;
+  margin:22px 0 6px; border:1px solid var(--edge); background:rgba(11,7,20,.5); }
+.kb-stat{ padding:18px 8px; text-align:center; }
+.kb-stat + .kb-stat{ border-left:1px solid var(--edge); }
+.kb-num{ font-family:var(--f-vt); font-size:clamp(30px,7.5vw,50px);
+  line-height:1; letter-spacing:1px; }
+.kb-num-pink{  color:var(--accent); text-shadow:0 0 14px rgba(255,55,199,.5); }
+.kb-num-cyan{  color:var(--tag);    text-shadow:0 0 14px rgba(34,211,238,.5); }
+.kb-num-white{ color:#f1eeff;       text-shadow:0 0 14px rgba(241,238,255,.35); }
+.kb-stat-lab{ margin-top:12px; font-family:var(--f-pixel);
+  font-size:clamp(9px,2.4vw,11px); letter-spacing:1px; color:var(--muted);
+  text-transform:uppercase; display:flex; align-items:center;
+  justify-content:center; gap:5px; }
+.kb-stat-lab .kb-jp{ font-family:"IBM Plex Sans JP",sans-serif;
+  color:var(--faint); text-transform:none; }
+/* ===== Supports chips (2026-07-29): under the stats band, above the results
+   empty-state. Static list; update if platform coverage changes. ===== */
+.kb-supports{ display:flex; flex-wrap:wrap; align-items:center;
+  justify-content:center; gap:10px; margin:18px 0 0; }
+.kb-supports .kb-slab{ font-family:var(--f-pixel); font-size:11px;
+  letter-spacing:1px; color:var(--muted); text-transform:uppercase;
+  margin-right:4px; }
+.kb-chip{ font-family:var(--f-pixel); font-size:11px; letter-spacing:1px;
+  color:var(--ink); border:1px solid var(--edge); padding:8px 11px;
+  border-radius:2px; }
+.kb-carts{ margin:12px 0 4px; text-align:center; font-family:var(--f-vt);
+  font-size:18px; letter-spacing:.5px; color:var(--faint); }
+/* ===== Search panel reskin (2026-07-29): mock-faithful layout. Wiring IDs and
+   the .pubwrap block are unchanged; only wrappers/labels/divider/hint were added
+   around them. Selects keep Space Mono for legibility of variable-length options. */
+.kb-panel{ margin-top:18px; padding:26px 24px 20px; position:relative;
+  border:1px solid var(--edge);
+  background:linear-gradient(180deg, rgba(20,13,42,.55), rgba(11,7,20,.55)); }
+.kb-panel::before{ content:""; position:absolute; left:-1px; bottom:-1px;
+  width:20px; height:20px; border-left:2px solid var(--accent);
+  border-bottom:2px solid var(--accent); box-shadow:0 0 12px rgba(255,55,199,.5);
+  pointer-events:none; }
+.kb-panel::after{ content:""; position:absolute; right:-1px; top:-1px;
+  width:20px; height:20px; border-right:2px solid var(--tag);
+  border-top:2px solid var(--tag); box-shadow:0 0 12px rgba(34,211,238,.4);
+  pointer-events:none; }
+.kb-lab{ display:flex; align-items:center; gap:8px; margin:0 0 10px;
+  font-family:var(--f-pixel); font-size:11px; letter-spacing:1px;
+  color:var(--muted); text-transform:uppercase; }
+.kb-lab .kb-lab-jp{ font-family:"IBM Plex Sans JP",sans-serif; color:var(--faint);
+  text-transform:none; letter-spacing:1px; }
+.kb-fieldrow{ margin:0 0 18px; }
+.kb-cols{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+.kb-col{ display:flex; flex-direction:column; min-width:0; }
+.kb-divider{ height:1px; background:var(--line); margin:22px 0 20px; }
+.kb-scanhint{ margin:14px 0 0; font-family:var(--f-vt); font-size:18px;
+  letter-spacing:.5px; color:var(--faint); }
+.kb-panel #q{ width:100%; font-size:18px; }
+.kb-panel #plat, .kb-panel #year, .kb-panel #pubInput{ width:100%; max-width:none; }
+.kb-panel .pubwrap{ width:100%; max-width:none; flex:none; }
+.kb-panel .scanbtn{ display:inline-flex; align-items:center; gap:12px;
+  padding:15px 22px; box-shadow:0 0 18px -2px rgba(255,55,199,.55); }
+.kb-bars rect{ shape-rendering:crispEdges; }
+@media (max-width:560px){ .kb-cols{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -553,26 +651,45 @@ footer a:hover,footer a:focus{color:var(--accent)}
 
 <div class="wrap">
   <header>
-    <p class="kicker">JDM retro game finder</p>
-    <h1>Kata<span class="blk">ban</span></h1>
+    <div class="kb-lockup">
+      <h1 class="kb-word" aria-label="Kataban">
+        <span class="kb-ghost" aria-hidden="true"><span class="kb-grid" id="kbGridCyan"></span></span>
+        <span class="kb-grid" id="kbGridPink" aria-hidden="true"></span>
+      </h1>
+      <p class="kb-tagline"><span class="kb-tag-badge">&#22411;&#30058;</span> Decode Japanese Game Shelves</p>
+    </div>
     <p class="lede">Type a game you want. Get its Japanese title, the cartridge code to hunt for on the shelf, and links to buy it.</p>
   </header>
 
-  <div class="search">
-    <div class="field">
+  <div class="search kb-panel">
+    <div class="kb-fieldrow">
+      <label class="kb-lab" for="q">Title <span class="kb-lab-jp">&#12479;&#12452;&#12488;&#12523;</span></label>
       <input id="q" type="search" autocomplete="off" placeholder="Search a Western title… e.g. Chrono Trigger" aria-label="Search a Western game title">
-      <select id="plat" aria-label="Filter by platform"></select>
-      <div class="pubwrap">
-        <input type="hidden" id="pub" value="All">
-        <input id="pubInput" type="text" autocomplete="off" spellcheck="false" placeholder="Publisher — e.g. namco, sce" aria-label="Filter by publisher" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="pubList">
-        <div id="pubList" role="listbox" hidden></div>
-      </div>
-      <select id="year" aria-label="Filter by release year"></select>
-      <button type="button" id="scanBtn" class="scanbtn" aria-label="Scan a barcode">Scan</button>
     </div>
-    <div class="count" id="count"></div>
+    <div class="kb-cols">
+      <div class="kb-col">
+        <label class="kb-lab" for="plat">Platform</label>
+        <select id="plat" aria-label="Filter by platform"></select>
+      </div>
+      <div class="kb-col">
+        <label class="kb-lab" for="pubInput">Publisher</label>
+        <div class="pubwrap">
+          <input type="hidden" id="pub" value="All">
+          <input id="pubInput" type="text" autocomplete="off" spellcheck="false" placeholder="Publisher — e.g. namco, sce" aria-label="Filter by publisher" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="pubList">
+          <div id="pubList" role="listbox" hidden></div>
+        </div>
+      </div>
+      <div class="kb-col">
+        <label class="kb-lab" for="year">Year</label>
+        <select id="year" aria-label="Filter by release year"></select>
+      </div>
+    </div>
+    <div class="kb-divider"></div>
+    <button type="button" id="scanBtn" class="scanbtn" aria-label="Scan a barcode"><svg class="kb-bars" width="22" height="16" viewBox="0 0 22 16" aria-hidden="true"><g fill="currentColor"><rect x="0" width="2" height="16"/><rect x="3" width="1" height="16"/><rect x="6" width="3" height="16"/><rect x="10" width="1" height="16"/><rect x="12" width="2" height="16"/><rect x="16" width="1" height="16"/><rect x="18" width="3" height="16"/></g></svg> SCAN BARCODE</button>
+    <p class="kb-scanhint">Point your camera at the JAN barcode on a disc case.</p>
   </div>
 
+  <div class="count" id="count"></div>
   <div id="results"></div>
   <div id="more"></div>
 
@@ -602,6 +719,26 @@ footer a:hover,footer a:focus{color:var(--accent)}
     <a class="kk-btn" target="_blank" rel="sponsored nofollow noopener" href="KLOOK_PENDING_DO_NOT_DEPLOY">See experiences on Klook →</a>
     <p class="cap">Affiliate link (PR).</p>
   </div>
+
+  <section class="kb-stats" aria-label="Database coverage">
+    <div class="kb-stat">
+      <div class="kb-num kb-num-pink">37,855</div>
+      <div class="kb-stat-lab">Entries</div>
+    </div>
+    <div class="kb-stat">
+      <div class="kb-num kb-num-cyan">10,296</div>
+      <div class="kb-stat-lab"><span class="kb-jp">&#22411;&#30058;</span> Product codes</div>
+    </div>
+    <div class="kb-stat">
+      <div class="kb-num kb-num-white">13,487</div>
+      <div class="kb-stat-lab">English titles</div>
+    </div>
+  </section>
+  <div class="kb-supports" aria-label="Supported platforms">
+    <span class="kb-slab">Supports</span>
+    <span class="kb-chip">PS1</span><span class="kb-chip">PS2</span><span class="kb-chip">PS3</span><span class="kb-chip">PSP</span><span class="kb-chip">Saturn</span><span class="kb-chip">Dreamcast</span><span class="kb-chip">DS</span>
+  </div>
+  <p class="kb-carts">Bare carts too, by code</p>
 
   <footer>
     Kataban · 37,855 entries from the Agency for Cultural Affairs Media Arts Database. 10,296 carry official product codes; 13,487 have English titles. English titles matched from Wikidata (CC0).
@@ -1615,6 +1752,28 @@ function attachRakutenSlots(root) {
     attachRakutenImage(slot, slot.dataset.jan);
   });
 }
+</script>
+<script>
+/* Logo paint: KATABAN 5x7 bitmap, two layers (cyan ghost + pink top) */
+(function(){
+  var FONT={
+    K:["10001","10010","10100","11000","10100","10010","10001"],
+    A:["01110","10001","10001","11111","10001","10001","10001"],
+    T:["11111","00100","00100","00100","00100","00100","00100"],
+    B:["11110","10001","10001","11110","10001","10001","11110"],
+    N:["10001","11001","10101","10101","10011","10001","10001"]
+  };
+  function paint(el,cls){
+    if(!el) return;
+    var rows=[];
+    for(var r=0;r<7;r++){ rows.push("KATABAN".split("").map(function(ch){return FONT[ch][r];}).join("0")); }
+    el.innerHTML=rows.map(function(row){
+      return row.split("").map(function(b){ return '<i class="'+(b==="1"?cls:"")+'"></i>'; }).join("");
+    }).join("");
+  }
+  paint(document.getElementById("kbGridPink"),"kb-on-pink");
+  paint(document.getElementById("kbGridCyan"),"kb-on-cyan");
+})();
 </script>
 </body>
 </html>
