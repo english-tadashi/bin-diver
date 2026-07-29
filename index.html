@@ -114,10 +114,10 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .pubopt:hover,.pubopt.active{background:var(--accent);color:var(--accent-ink)}
 .pubopt .c{font-size:11px;color:var(--muted);flex-shrink:0}
 .pubopt:hover .c,.pubopt.active .c{color:var(--accent-ink);opacity:.7}
-.count{font-family:"Space Mono",monospace;font-size:12px;color:var(--muted);margin:10px 2px 0}
+.count{font-family:"Space Mono",monospace;font-weight:700;font-size:20px;color:var(--tag);margin:20px 2px 16px}
 
 /* results */
-#results{padding:8px 0 16px;display:flex;flex-direction:column;gap:12px}
+#results{padding:8px 0 16px;display:flex;flex-direction:column;gap:24px}
 #more{padding:0 0 48px}
 .moreBtn{width:100%;cursor:pointer;font-family:"Space Mono",monospace;font-size:13px;letter-spacing:.04em;
   padding:14px;border:2px solid var(--edge);background:var(--surface);color:var(--ink);transition:background .12s,color .12s,border-color .12s}
@@ -163,17 +163,18 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 
 /* identity */
 .card .identity{display:flex; flex-direction:column; gap:14px;}
+.card .identity > .field + .field{margin-top:8px;}
 .card .field{display:flex; flex-direction:column; gap:4px;}
 .card .en-title{font:700 25px/1.12 var(--f-display); letter-spacing:.02em; color:#ece9f5;}   /* 太く・広く・カード内で最も明るい階調(#ece9f5>--ink)。書体は不変 */
 .card .ja-title{font:600 29px/1.2 var(--f-jp); color:var(--ink);}
-.card .romaji{font:400 13px/1.3 var(--f-mono); color:var(--muted); letter-spacing:.01em;}
+.card .romaji{font:400 17px/1.3 var(--f-mono); color:#ff8fd8; letter-spacing:.01em;}
 .card .part{font:500 12px/1.3 var(--f-mono); color:var(--signal-deep); letter-spacing:.01em;}
 
 /* SIGNATURE — 型番スラブ = カードの顔。強いのはここだけ。
    ★明色版では「暗い塊」であることが強さだった。地が暗くなってその手は使えないので、
      枠を桃にして強さを移す。カードの中で色が付いた枠はここだけ＝型番が主役
      （7/18の判断）を配色でも維持する。glow は足さない。 */
-.card .slab{background:var(--slab); border:1px solid var(--signal); border-radius:10px;
+.card .slab{background:var(--paper); border:1px solid var(--hair-strong); border-radius:10px;
   padding:16px 18px; display:flex; align-items:center; gap:14px;}
 .card .reg{flex-shrink:0; width:16px; height:16px; position:relative;}
 .card .reg::before,.card .reg::after{content:""; position:absolute; background:var(--signal);}
@@ -193,9 +194,9 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card .code .sep{color:var(--on-slab-faint); padding:0 .12em;}
 .card .slab-copy{flex-shrink:0; align-self:stretch; display:inline-flex; align-items:center; gap:6px;
   font:500 12px/1 var(--f-mono); letter-spacing:.04em; text-transform:uppercase;
-  color:var(--on-slab); background:transparent; border:1px solid #3a3266;
+  color:var(--on-slab); background:#241c40; border:1px solid #4a4278;
   border-radius:7px; padding:0 12px; cursor:pointer; transition:background .15s,border-color .15s;}
-.card .slab-copy:hover{background:#241c40; border-color:#55498c;}
+.card .slab-copy:hover{background:#2f2652; border-color:var(--ink);}
 .card .slab-copy.done{color:var(--signal); border-color:var(--signal);}
 .card .slab-copy.fail{color:#f0c04a; border-color:#f0c04a;}
 .card .cap{font:400 12px/1.4 var(--f-display); color:var(--muted);}
@@ -213,9 +214,9 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
   font:600 18px/1.2 var(--f-jp); color:var(--ink);}
 .card .btn-copy{flex-shrink:0; display:inline-flex; align-items:center; gap:6px;
   font:500 12px/1 var(--f-mono); letter-spacing:.04em; text-transform:uppercase;
-  color:var(--ink); background:var(--surface); border:1px solid var(--hair-strong);
+  color:var(--ink); background:#241c40; border:1px solid #4a4278;
   border-radius:8px; padding:0 14px; cursor:pointer; transition:border-color .15s,color .15s;}
-.card .btn-copy:hover{border-color:var(--ink);}
+.card .btn-copy:hover{background:#2f2652; border-color:var(--ink);}
 /* .done は桃のまま。明るいカード地では 3.09:1 しか出ていなかったが、
    地が暗くなったので同じ値で 6.3:1 になる（色は変えずコントラストだけ直った）。 */
 .card .btn-copy.done{color:var(--signal); border-color:var(--signal);}
@@ -229,7 +230,7 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card .shelf-row{display:flex; align-items:center; gap:12px;}
 .card .shelf-kana{flex-shrink:0; display:inline-flex; align-items:center; justify-content:center;
   min-width:46px; height:46px; padding:0 8px; font:600 26px/1 var(--f-jp); color:var(--ink);
-  background:var(--paper); border:1px solid var(--hair-strong); border-radius:8px;}
+  background:var(--paper); border:2px solid #e6e2f0; border-radius:8px;}
 .card .shelf-txt{min-width:0; font:400 12.5px/1.45 var(--f-display); color:var(--ink-2);}
 .card .shelf-txt b{font-weight:600; color:var(--ink);}
 .card .shelf-txt .gyo{font-family:var(--f-jp);}
@@ -250,7 +251,7 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card .specs{display:flex; border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);}
 .card .spec{flex:1; padding:12px 0; display:flex; flex-direction:column; gap:5px;}
 .card .spec + .spec{border-left:1px solid var(--hair); padding-left:14px;}
-.card .spec .v{font:500 14px/1.15 var(--f-display); color:var(--ink);}
+.card .spec .v{font:500 22px/1.15 var(--f-display); color:var(--ink);}
 .card .spec .v.jp{font-family:var(--f-jp);}
 
 /* region note */
@@ -287,16 +288,16 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card .buy-head{display:flex; flex-direction:column; gap:3px;}
 .card .buy-head h3{margin:0; font:600 15px/1.1 var(--f-display); color:var(--ink);}
 .card .buy-head p{margin:0; font:400 12px/1.4 var(--f-display); color:var(--muted);}
-.card .group{display:flex; flex-direction:column; gap:8px; margin-top:16px;}
+.card .group{display:flex; flex-direction:column; gap:8px; margin-top:32px;}
 .card .group-label{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;}
 .card .group-label .n{font:500 11px/1 var(--f-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--ink-2);}
 .card .group-label .d{font:400 11.5px/1.3 var(--f-display); color:var(--faint);}
 .card .stores{display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:8px;}
 .card .store{display:flex; align-items:center; justify-content:center; gap:6px; height:44px;
   border-radius:8px; font:500 14px/1 var(--f-display); cursor:pointer;
-  border:1px solid var(--hair-strong); background:var(--surface); color:var(--ink);
+  border:1px solid var(--tag); background:transparent; color:var(--tag);
   transition:border-color .12s, background .12s;}
-.card .store:hover{border-color:var(--ink);}
+.card .store:hover{border-color:var(--tag); background:rgba(34,211,238,.12);}
 .card .store .en{font:500 8px/1 var(--f-mono); letter-spacing:.1em; padding:2px 4px;
   border:1px solid currentColor; border-radius:3px; opacity:.7;}
 .card .store.primary{border-color:var(--signal); color:#07040f; background:var(--signal);}
@@ -351,7 +352,7 @@ h1{font-family:var(--f-pixel);}
    ★RELEASED の年も VT323 の対象だが、PUBLISHER と同じ .spec .v を共有していて
      CSS だけでは切り分けられない（PUBLISHER には日本語を含む行が残る。件数は BIN_DIVER_NOTES.md 参照）。HTML を触らない
      制約のため RELEASED はここでは当てず現行のまま。下の報告に記載。 */
-.card .spec .v.jp{font-family:'VT323',var(--f-jp); font-size:18px;}
+.card .spec .v.jp{font-family:'VT323',var(--f-jp); font-size:26px;}
 /* ★VT323 は同じ px でも字面が小さいため、CONSOLE の値(.v.jp)だけ 14→18px に上げて
    PUBLISHER/RELEASED(.v・Space Grotesk 14px)と同じ字高に見せる。size は .v.jp(0,4,0)が
    基底 .card .spec .v(0,3,0)に特異度で勝つので source order に依らず効く。
@@ -377,10 +378,27 @@ h1{font-family:var(--f-pixel);}
 .locbtn+.locbtn{border-left:1px solid var(--edge-input)}
 .locbtn.is-on{background:var(--accent);color:var(--accent-ink);font-weight:700}
 .locbtn.is-on::before{content:"";display:inline-block;width:8px;height:8px;background:currentColor;margin-right:8px;vertical-align:middle}
+/* ★Klook（旅行アクティビティのアフィリエイト）。日本にいる人にだけ出す page 枠の要素。
+   ゲームのカードには載せない（データ欄に飾りを付けない原則）。
+   既定は非表示。body.in-jp のときだけ表示（setLoc が in-jp を付け外しする）。
+   生hex は足さない。--signal（緋色）は使わない。色は inherit と --muted のみ。 */
+#klookbar{display:none;margin-top:28px;padding-top:18px;border-top:1px solid var(--edge)}
+body.in-jp #klookbar{display:block}
+#klookbar .kk-h{font-size:14px;font-weight:700;margin:0 0 4px}
+#klookbar .kk-d{font-size:13px;color:var(--muted);margin:0 0 12px}
+#klookbar .kk-btn{display:inline-block;min-height:44px;line-height:24px;padding:10px 16px;border:1px solid var(--edge-input);border-radius:2px;color:inherit;text-decoration:none}
 
 /* states */
 .state{padding:48px 6px;text-align:center;color:var(--muted)}
 .state b{display:block;color:var(--ink);font-size:18px;font-weight:600;margin-bottom:6px}
+/* How-to / About section (readable prose, NOT the pixel font) */
+.howto{ margin:36px 0 8px; padding-top:24px; border-top:1px solid var(--line); line-height:1.6; }
+.howto h2{ font-family:inherit; font-size:1.15rem; margin:22px 0 8px; }
+.howto h3.howto-sub{ font-family:inherit; font-size:1rem; margin:16px 0 6px; opacity:.85; }
+.howto ol{ margin:6px 0 14px 1.2em; padding:0; }
+.howto li{ margin:5px 0; }
+.howto em{ font-style:italic; }
+
 footer{border-top:2px solid var(--edge);padding:18px 0 40px;font-family:"Space Mono",monospace;font-size:11px;color:var(--muted);line-height:1.6}
 /* リンクは水色、hover で桃。a{color:inherit} は残す＝カード内のリンク(.card a)は
    これまでどおり文字色を継ぐ（このセレクタはフッターにしか当たらない）。 */
@@ -508,36 +526,20 @@ footer a:hover,footer a:focus{color:var(--accent)}
 /* 3. 番号バッジ（CSS counter・HTML/JS 不変）。水色地・暗い文字の小さなタブを枠上端に重ねる */
 #results{ counter-reset:cardnum; }
 .card{ border-radius:2px; counter-increment:cardnum; position:relative; }
-.card::before{ content:counter(cardnum); position:absolute; top:0; left:12px;
+.card::before{ content:counter(cardnum); position:absolute; top:0; left:0;
   transform:translateY(-50%); z-index:3;
   background:var(--tag); color:var(--accent-ink);
-  font:700 11px/1 var(--f-mono); letter-spacing:.08em; padding:3px 8px; border-radius:2px; }
+  font:700 15px/1 var(--f-mono); letter-spacing:.08em; padding:4px 10px; border-radius:2px; }
 
 /* 6. スラブの枠だけ発光（外側に桃の弱い光。文字は光らせない＝text-shadow なし）。radius も 2px。 */
-.card .slab{ border-radius:2px; box-shadow:0 0 12px rgba(255,55,199,.28); position:relative; }
-
-/* 2. 四隅の「+」（水色 --tag）。背景グラデーション8層で 4隅×2本の十字を描く＝DOM を増やさない。
-   card/slab とも ::after を使用（card ::before は番号タブ）。offset は padding 内なので文字に被らない。
-   既存のスラブ左「+」(.reg) は残す（flexレイアウトの一部で、消すと桁がずれるため）。 */
-.card::after, .card .slab::after{ content:""; position:absolute; inset:0; pointer-events:none; z-index:2;
-  background-image:
-    linear-gradient(var(--tag),var(--tag)), linear-gradient(var(--tag),var(--tag)),
-    linear-gradient(var(--tag),var(--tag)), linear-gradient(var(--tag),var(--tag)),
-    linear-gradient(var(--tag),var(--tag)), linear-gradient(var(--tag),var(--tag)),
-    linear-gradient(var(--tag),var(--tag)), linear-gradient(var(--tag),var(--tag));
-  background-size:8px 2px,2px 8px, 8px 2px,2px 8px, 8px 2px,2px 8px, 8px 2px,2px 8px;
-  background-position:
-    left 6px top 9px, left 9px top 6px,
-    right 6px top 9px, right 9px top 6px,
-    left 6px bottom 9px, left 9px bottom 6px,
-    right 6px bottom 9px, right 9px bottom 6px;
-  background-repeat:no-repeat; }
+.card .slab{ border-radius:2px; position:relative; }
 
 /* 3. 店ブロックを1枠に（「In a store right now?」＋ Show to shop staff ＋ 棚案内）。
    枠線1px・角2px（他要素と揃える）。枠線は新カード地#281d4cで視認できる#4a4278
    （--hair-strong は新地に対し 1.03:1 でほぼ不可視のため）。見出しは水色 var(--tag)・micro サイズ。
    配信専用(row[12])では card() 側で枠ごと出さない（空枠は残らない）。 */
-.card .instore{ border:1px solid #4a4278; border-radius:2px; padding:14px; display:flex; flex-direction:column; gap:12px; }
+.card .instore{ background:#171030; border:1px solid #4a4278; border-radius:2px; padding:14px; display:flex; flex-direction:column; gap:12px; }
+.card .instore > .field{margin:16px 0 14px;}
 .card .instore-head{ color:var(--tag); }
 </style>
 </head>
@@ -573,6 +575,33 @@ footer a:hover,footer a:focus{color:var(--accent)}
 
   <div id="results"></div>
   <div id="more"></div>
+
+  <section class="howto" aria-label="What Kataban is and how to use it">
+    <h2>What is Kataban?</h2>
+    <p>Japanese games are labeled only in Japanese, and many were never sold outside Japan. Kataban (<em>kataban</em> means <em>product code</em> in Japanese) helps you find and buy them even if you can't read Japanese. Type a game's English name, and Kataban gives you its official Japanese title, the product code printed on the cartridge or disc, and links to buy it from Japan.</p>
+    <h2>How to use it</h2>
+    <h3 class="howto-sub">Buying online, from outside Japan</h3>
+    <ol>
+      <li>Type the game you want — English is fine.</li>
+      <li>Kataban shows the matching Japanese release, with its Japanese title and product code.</li>
+      <li>Follow a store link to the listing. Buyee ships worldwide: it buys the item inside Japan for you and forwards it overseas.</li>
+    </ol>
+    <h3 class="howto-sub">Inside a store in Japan (Book-Off, Hard-Off, Suruga-ya…)</h3>
+    <ol>
+      <li>Type the game you want.</li>
+      <li>Tap <b>"Show to shop staff"</b> — Kataban puts the Japanese title and product code on a clean screen you can show a clerk.</li>
+      <li>Or match the product code and Japanese title yourself on the shelf.</li>
+    </ol>
+    <p>Kataban is free to use. Some store links are affiliate links — see the note at the bottom of the page.</p>
+  </section>
+
+  <!-- ★KLOOK: 承認後、本番トラッキングリンクに差し替える。差し替えるまでデプロイしない。 -->
+  <div id="klookbar">
+    <p class="kk-h">In Japan right now?</p>
+    <p class="kk-d">Browse teamLab, museums, day trips and experiences on Klook — booked in English.</p>
+    <a class="kk-btn" target="_blank" rel="sponsored nofollow noopener" href="KLOOK_PENDING_DO_NOT_DEPLOY">See experiences on Klook →</a>
+    <p class="cap">Affiliate link (PR).</p>
+  </div>
 
   <footer>
     Kataban · 37,855 entries from the Agency for Cultural Affairs Media Arts Database. 10,296 carry official product codes; 13,487 have English titles. English titles matched from Wikidata (CC0).
@@ -920,6 +949,7 @@ function setLoc(v,skipSave){
     b.classList.toggle('is-on',on);
     b.setAttribute('aria-pressed',on?'true':'false');
   });
+  document.body.classList.toggle('in-jp', LOC==='jp');
   if(!skipSave){
     try{ localStorage.setItem('kataban_loc',LOC); }catch(e){}
     try{
@@ -955,8 +985,8 @@ function buyBlock(k){
      型番は 1,389行すべてが保持（100%）＝同定は効いている。 */
   const noProxy  = !k.kwBuyee;   // row[7] が空＝Buyee の <a> が出ない（941行）
   const clsBuyee = (jp || noProxy) ? 'store' : 'store primary';
-  const clsCode  = ((jp || noProxy) && k.codes.length)     ? 'store primary' : 'store';
-  const clsTitle = ((jp || noProxy) && k.codes.length===0) ? 'store primary' : 'store';
+  const clsCode  = ((jp || noProxy) && k.codes.length===0) ? 'store primary' : 'store';
+  const clsTitle = ((jp || noProxy) && k.codes.length)     ? 'store primary' : 'store';
 
   /* ★2026-07-26: 海外モードで row[7] が空のとき、強調を Buyee から
      駿河屋の型番リンクへ移す（型番も無ければ題名リンクへ落とす）。
@@ -1097,13 +1127,10 @@ function card(r,idx){
       </div>
     </div>
 
-    ${codes.length?`<div>
-      <div class="slab">
-        <span class="reg" aria-hidden="true"></span>
-        <div class="slab-main">
-          <span class="slab-label">Product code &middot; exact match</span>
-          <span class="code">${codeShow}</span>
-        </div>
+    ${codes.length?`<div class="field">
+      <span class="micro">Product code &middot; exact match</span>
+      <div class="jp-copy-row">
+        <div class="jp-chip"><span class="code">${codeShow}</span></div>
         <button class="slab-copy" type="button" data-copy="${codeCopy}"><span class="txt">Copy</span></button>
       </div>
       <div class="cap" style="margin-top:7px;">Latin letters — type it into any store yourself, or copy.</div>
@@ -1126,12 +1153,8 @@ function card(r,idx){
         <div class="jp-chip">${esc(jpMain)}</div>
         ${r[12]?'':`<button class="btn-copy" type="button" data-copy="${esc(jpMain)}">Copy</button>`}
       </div>
+      ${r[12]?'':`<div class="cap" style="margin-top:7px;">${jaLatin?`Latin letters — you can type this yourself, or copy.`:`You can't type this — copy, then paste into the search box.`}</div>`}
     </div>`}
-
-    <!-- 日本語タイトル欄の直下の注記は常に1行だけ。桃色スラブでも通常 .field でも同じ位置に出る。
-         jaLatin(箱がラテン文字)なら「自分で打てる」、それ以外は「打てない＝コピーして貼る」。
-         配信専用(row[12])は店に貼る先が無いので出さない。 -->
-    ${r[12]?'':`<div class="cap" style="margin-top:7px;">${jaLatin?`Latin letters — you can type this yourself, or copy.`:`You can't type this — copy, then paste into the search box.`}</div>`}
 
     <!-- 配信専用(row[12])ではボタンごと出さない。店に行く行為が無いので見せる相手がいない。
          disabled や淡色にはしない ―― 押せないボタンは「壊れている」と読まれる。
