@@ -568,9 +568,11 @@ footer a:hover,footer a:focus{color:var(--accent)}
 .kb-tag-badge{ font-family:"IBM Plex Sans JP",sans-serif; font-weight:700;
   font-size:13px; letter-spacing:1px; color:var(--accent-ink);
   background:var(--tag); padding:2px 7px 3px; text-shadow:none;
-  box-shadow:0 0 10px rgba(34,211,238,.45); }
+  box-shadow:0 0 10px rgba(34,211,238,.45);
+  white-space:nowrap; flex-shrink:0; }
 /* logo is centered, so center the lede directly below it (overrides .lede) */
-header .lede{ margin:16px auto 0; text-align:center; }
+header .lede{ margin:1.75rem auto 0.75rem; text-align:center; color:#ffffff; font-weight:700; }
+header .lede .lede-sub{ font-weight:400; }
 @keyframes kb-breathe{
   0%,100%{ filter:brightness(.97) drop-shadow(0 0 1px rgba(255,55,199,0)); }
   50%    { filter:brightness(1.14) drop-shadow(0 0 12px rgba(255,55,199,.5)); }
@@ -658,7 +660,7 @@ header .lede{ margin:16px auto 0; text-align:center; }
       </h1>
       <p class="kb-tagline"><span class="kb-tag-badge">&#22411;&#30058;</span> Decode Japanese Game Shelves</p>
     </div>
-    <p class="lede">Type a game you want. Get its Japanese title, the cartridge code to hunt for on the shelf, and links to buy it.</p>
+    <p class="lede">Type a game you want.<br><span class="lede-sub">Get its Japanese title, the cartridge code to hunt for on the shelf, and links to buy it.</span></p>
   </header>
 
   <div class="search kb-panel">
@@ -1353,7 +1355,7 @@ function run(){
   const pf=plat.value, pv=pub.value, yv=year.value;
   if(!lo && pf==='All' && pv==='All' && yv==='All'){
     current=[]; shown=0; more.innerHTML=''; count.textContent='';
-    results.innerHTML='<div class="state"><b>Type a title to start digging.</b>Search by the Western name you know — the Japanese title and code appear automatically.</div>';
+    results.innerHTML='';
     return;
   }
   const res=[];
