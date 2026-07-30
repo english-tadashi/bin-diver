@@ -1141,8 +1141,8 @@ function buyBlock(k){
      型番は 1,389行すべてが保持（100%）＝同定は効いている。 */
   const noProxy  = !k.kwBuyee;   // row[7] 空でも kwBuyeeFallback(和名) で Buyee は出る。primary だけ型番へ移す(2026-07-26)＝1,389行
   const clsBuyee = (jp || noProxy) ? 'store' : 'store primary';
-  const clsCode  = ((jp || noProxy) && k.codes.length===0) ? 'store primary' : 'store';
-  const clsTitle = ((jp || noProxy) && k.codes.length)     ? 'store primary' : 'store';
+  const clsCode  = ((jp || noProxy) && k.codes.length)     ? 'store primary' : 'store';
+  const clsTitle = ((jp || noProxy) && k.codes.length===0) ? 'store primary' : 'store';
 
   /* ★2026-07-26: 海外モードで row[7] が空のとき、強調を Buyee から
      駿河屋の型番リンクへ移す（型番も無ければ題名リンクへ落とす）。
@@ -1151,8 +1151,7 @@ function buyBlock(k){
      型番は exact match で日本版に届き、1,389行すべてが型番を持っている。
      ★963行の並び（届く可能性の順）は変えていない。変えたのは強調の基準だけで、
      「届く可能性」から「正しい物である可能性」に寄せた。この2つは別の指標である。
-     ★型番なしの分岐は現在の1,389行では発動しない（型番100%）。
-     次のMADB更新で型番の無い行が来ても塗りゼロに戻らないための保険。 */
+     ★型番なし行(物理20,450)は clsTitle が primary。jpモードで実際に使う主経路(罠#116を2026-07-30に解消) */
 
   /* ★C: row[7] が空のときの説明文。「代理購入が使えない」とは書かない——
      空なのは Kataban が検索キーを持っていないだけで、Buyee に品が無い証拠ではない
