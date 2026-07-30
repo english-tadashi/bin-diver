@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" shape-rendering="crispEdges">
+  <rect x="2" y="2" width="44" height="44" rx="10" fill="#07040f" stroke="#2a1c46" stroke-width="1.5"/>
+  <g>
+<rect x="12.70" y="7.70" width="5.00" height="5.00" fill="#22d3ee"/>
+<rect x="32.70" y="7.70" width="5.00" height="5.00" fill="#22d3ee"/>
+<rect x="12.70" y="12.70" width="5.00" height="5.00" fill="#22d3ee"/>
+<rect x="27.70" y="12.70" width="5.00" height="5.00" fill="#22d3ee"/>
+<rect x="12.70" y="17.70" width="5.00" height="5.00" fill="#22d3ee"/>
+<rect x="22.70" y="17.70" width="5.00" height="5.00" fill="#22d3ee"/>
+<rect x="12.70" y="22.70" width="5.00" height="5.00" fill="#22d3ee"/>
+<rect x="17.70" y="22.70" width="5.00" height="5.00" fill="#22d3ee"/>
+<rect x="12.70" y="27.70" width="5.00" height="5.00" fill="#22d3ee"/>
+<rect x="22.70" y="27.70" width="5.00" height="5.00" fill="#22d3ee"/>
+<rect x="12.70" y="32.70" width="5.00" height="5.00" fill="#22d3ee"/>
+<rect x="27.70" y="32.70" width="5.00" height="5.00" fill="#22d3ee"/>
+<rect x="12.70" y="37.70" width="5.00" height="5.00" fill="#22d3ee"/>
+<rect x="32.70" y="37.70" width="5.00" height="5.00" fill="#22d3ee"/>
+  </g>
+  <g>
+<rect x="11.50" y="6.50" width="5.00" height="5.00" fill="#ff37c7"/>
+<rect x="31.50" y="6.50" width="5.00" height="5.00" fill="#ff37c7"/>
+<rect x="11.50" y="11.50" width="5.00" height="5.00" fill="#ff37c7"/>
+<rect x="26.50" y="11.50" width="5.00" height="5.00" fill="#ff37c7"/>
+<rect x="11.50" y="16.50" width="5.00" height="5.00" fill="#ff37c7"/>
+<rect x="21.50" y="16.50" width="5.00" height="5.00" fill="#ff37c7"/>
+<rect x="11.50" y="21.50" width="5.00" height="5.00" fill="#ff37c7"/>
+<rect x="16.50" y="21.50" width="5.00" height="5.00" fill="#ff37c7"/>
+<rect x="11.50" y="26.50" width="5.00" height="5.00" fill="#ff37c7"/>
+<rect x="21.50" y="26.50" width="5.00" height="5.00" fill="#ff37c7"/>
+<rect x="11.50" y="31.50" width="5.00" height="5.00" fill="#ff37c7"/>
+<rect x="26.50" y="31.50" width="5.00" height="5.00" fill="#ff37c7"/>
+<rect x="11.50" y="36.50" width="5.00" height="5.00" fill="#ff37c7"/>
+<rect x="31.50" y="36.50" width="5.00" height="5.00" fill="#ff37c7"/>
+  </g>
+</svg>
