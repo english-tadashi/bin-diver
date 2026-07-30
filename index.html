@@ -1139,7 +1139,7 @@ function buyBlock(k){
      ★2026-07-26: PS3/Vita/3DS を追加して 5,099→1,389行（物理30,746の4.52%）。
      「ほぼ消える」は外れた。残ったのは Switch / PS5 / Xbox系 / Wii U / 64DD で、
      型番は 1,389行すべてが保持（100%）＝同定は効いている。 */
-  const noProxy  = !k.kwBuyee;   // row[7] が空＝Buyee の <a> が出ない（941行）
+  const noProxy  = !k.kwBuyee;   // row[7] 空でも kwBuyeeFallback(和名) で Buyee は出る。primary だけ型番へ移す(2026-07-26)＝1,389行
   const clsBuyee = (jp || noProxy) ? 'store' : 'store primary';
   const clsCode  = ((jp || noProxy) && k.codes.length===0) ? 'store primary' : 'store';
   const clsTitle = ((jp || noProxy) && k.codes.length)     ? 'store primary' : 'store';
@@ -1158,9 +1158,9 @@ function buyBlock(k){
      空なのは Kataban が検索キーを持っていないだけで、Buyee に品が無い証拠ではない
      （上のコメント参照）。Kataban 側の限界として書く。 */
   const worldDesc = jp
-    ? (noProxy ? 'for buyers abroad — eBay only for this console'
+    ? (noProxy ? 'for buyers abroad — Buyee search by Japanese title'
                : 'for buyers abroad — adds proxy fees')
-    : (noProxy ? 'eBay only — our proxy search does not cover this console yet'
+    : (noProxy ? 'Buyee search uses the Japanese title here — may show other console versions. Use the highlighted store link for the exact match.'
                : 'proxy &amp; international — English, they handle Japanese');
 
   const gWorld = `<div class="group">
