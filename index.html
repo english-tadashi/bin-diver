@@ -814,10 +814,19 @@ const romanToArabic = s => (s||'').replace(/[\u2160-\u217f]+/g, run => {
   for (let i=0; i<v.length; i++) t += (i+1<v.length && v[i] < v[i+1]) ? -v[i] : v[i];
   return String(t);
 });
+// アクセント畳み込み。NFD(正準分解)して結合ダイアクリティカルマーク(U+0300-036F)だけ落とす。
+// NFKD ではなく NFD なので、仮名の濁点(U+3099/309A)も全角記号も互換分解も一切触らない。
+// 掛けるのは r0(英題)の索引とクエリだけ。他列に掛けると濁点が消えて日本語が壊れる
+// （実測: r1 に掛けると 22,042 セルが「ゲームス→ケームス」化。r0 は 521 セルが Dōkyūsei→Dokyusei）。
+// ★末尾の NFC が必須。NFD のままだと仮名の濁点が U+3099 に分離し、fold(\p{P}\p{S})では消えないため
+//   クエリだけ分解形になり、NFC のままの r1/r5/r6/r8 索引と一致しなくなる（「ドラゴン」が0件化）。
+const accent = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').normalize('NFC');
 const fold = s => romanToArabic(s).replace(/[\p{P}\p{S}]/gu,' ').replace(/\s+/g,' ').trim().toLowerCase();
 // 列ごとに畳んでから \n で連結する。連結してから畳むと列の境界が消え、
 // 英題の末尾と日本語名の先頭をまたいだ誤ヒットが出る（実測: "revelations biohazard" が 0→1件）。
-const HAY  = DATA.map(r => [r[0],r[1],r[2],r[3],r[5],r[6],r[8]||'',r[9]||''].map(fold).join('\n'));
+// ★r0(英題)だけ accent を通してから fold する。Dōkyūsei を dokyusei で引くため。
+//   他列は素の fold のまま（r1/r5/r6/r8 に掛けると濁点が落ちて日本語が壊れる）。
+const HAY  = DATA.map(r => [accent(r[0]),r[1],r[2],r[3],r[5],r[6],r[8]||'',r[9]||''].map(fold).join('\n'));
 // 第4レーン: fold からさらにスペースを消した索引。狙いは「三國志8remake」「halo5」のように
 // スペースを打たずに入力された題を拾うこと。fold/クエリ側は対称なので不一致ではなく、
 // String.includes の連続部分一致が「打った側にスペースが無い」だけで落ちるのが真因。
@@ -1354,7 +1363,7 @@ function paint(){
 }
 
 function run(){
-  const lo=fold(q.value);   // HAY と同じ畳み方。非対称にすると打った記号で当たらなくなる
+  const lo=fold(accent(q.value));   // HAY と同じ畳み方＋accent。é で打っても e で打っても r0 に当たる
   const qk=codeKey(q.value.trim());   // 型番照合用（正規化済み）。判定ではなく、下の床つき部分一致に使う。
   const loc=collapseV(lo);            // 第2レーン用のクエリ（同母音を潰した形）
   const sq=squash(q.value);           // 第4レーン用。lo ではなく q.value から作る（squash 内で fold が走る）
