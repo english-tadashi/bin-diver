@@ -1702,22 +1702,35 @@ const RAKUTEN = {
 const _rakCache = new Map();            // jan -> {img,url,name,price} | null(null も覚える=再取得しない)
 let   _rakChain = Promise.resolve();    // 直列化 = レート制限(約1.6秒/回)を守る
 
+// 中央値: 数値を昇順に並べ、奇数件なら真ん中の1つ、偶数件なら中央2つの平均。
+// 空配列(0件・非200)は null = 中央値なし。楽天の返り順は当てにせず数値として並べ直す。
+function _rakMedian(nums) {
+  const s = nums.filter(Number.isFinite).sort((a, b) => a - b);
+  if (!s.length) return null;
+  const m = s.length >> 1;
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+}
+
 async function _rakFetch(jan) {
   const p = new URLSearchParams({
     applicationId: RAKUTEN.appId, accessKey: RAKUTEN.accessKey, affiliateId: RAKUTEN.affiliateId,
-    keyword: jan, availability: '1', imageFlag: '1', hits: '1', sort: '+itemPrice', format: 'json',
+    keyword: jan, availability: '1', imageFlag: '1', hits: '30', sort: '+itemPrice', format: 'json',
   });
   let result = null;
   try {
     const res = await fetch(`${RAKUTEN.endpoint}?${p}`);
     if (res.ok) {
-      const item = (await res.json())?.Items?.[0]?.Item;
+      const items = (await res.json())?.Items ?? [];
+      // 画像と価格は従来どおり先頭1件から。sort:'+itemPrice' なので先頭 = 最安。
+      const item = items[0]?.Item;
+      // 中央値は返ってきた全件の itemPrice から。0件なら _rakMedian が null を返す。
+      const medianPrice = _rakMedian(items.map(x => Number(x?.Item?.itemPrice)));
       // 楽天がホストする画像を URL で表示するだけ(複製・改変ではない)。実サイズだけ上げる。
       // _ex が無い URL が来ても replace は何もしない = そのまま通る(壊れない)。
       const raw = item?.mediumImageUrls?.[0]?.imageUrl;
       const img = raw ? raw.replace(/_ex=\d+x\d+/, '_ex=300x300') : null;
       if (item && img && item.affiliateUrl)
-        result = { img, url: item.affiliateUrl, name: item.itemName, price: item.itemPrice };
+        result = { img, url: item.affiliateUrl, name: item.itemName, price: item.itemPrice, medianPrice };
     }
   } catch (e) { console.warn('rakuten', jan, e); }   // 失敗は握らず記録(罠#47)
   _rakCache.set(jan, result);
