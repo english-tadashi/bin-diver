@@ -454,6 +454,9 @@ footer a:hover,footer a:focus{color:var(--accent)}
 .rak-img img{max-width:300px;height:auto;display:block;border-radius:4px;cursor:pointer}
 /* 出典の注記ではなく買うためのリンク。それに見合う可読性にする。 */
 .rak-cap{display:block;font-family:"Space Mono",monospace;font-weight:700;font-size:14px;color:var(--tag);opacity:1;margin-top:4px;text-decoration:underline}  /* キャプションは画像の外 */
+/* 相場の行。リンクではない = 下線なし・水色でもない。読みやすさは .rak-cap と揃える。
+   装飾/glow/text-shadow は付けない(データ欄の原則)。 */
+.rak-market{display:block;font-family:"Space Mono",monospace;font-size:14px;color:var(--muted);margin-top:2px;text-decoration:none}
 
 /* ============================================================
    コピー失敗のトースト。
@@ -1771,21 +1774,29 @@ function attachRakutenImage(slotEl, jan) {
       img.src = hit.img; img.alt = ''; img.loading = 'lazy';
       const cap = document.createElement('span');
       cap.className = 'rak-cap';
-      // 「写真の出典」ではなく「ここで買える」と読ませる。全分岐に Rakuten を入れる
-      // = リンク先が楽天だと文言そのもので明示する(規約側の要求)。
       // 金額は「有限かつ正」だけを出す(0・負・NaN・null は出さない = 嘘の価格は出さない)。
-      // (PR) は全分岐で維持(ステマ規制)。hit.price は画像選択の内部値でここでは使わない。
       const money = v => { const n = Number(v); return (Number.isFinite(n) && n > 0) ? n : null; };
-      const lo  = money(hit.minPrice);        // 全件(在庫切れ込み)の最安
-      const mid = money(hit.medianPrice);     // 全件の中央値。小数なら四捨五入して整数で出す
-      const yen = n => `¥${Math.round(n).toLocaleString('ja-JP')}`;
-      cap.textContent =
-          (lo && mid) ? `on Rakuten from ${yen(lo)} · used ~${yen(mid)} (PR)`
-        : lo          ? `on Rakuten from ${yen(lo)} (PR)`
-        : mid         ? `on Rakuten · used ~${yen(mid)} (PR)`
-        :               'See listings on Rakuten (PR)';
+      const yen = n => `¥${Math.round(n).toLocaleString('ja-JP')}`;   // 小数は四捨五入
+      // 行1(リンク内): いま買える1件の値段。リンク先が楽天だと文言で明示(規約側の要求)。
+      // (PR) はこの行だけ = 広告リンクなのはこの行だけ(ステマ規制)。
+      const now = money(hit.price);            // 在庫あり最安 = 画像に選んだ現物
+      cap.textContent = now
+        ? `Buy this one on Rakuten: ${yen(now)} (PR)`
+        : 'See this listing on Rakuten (PR)';
       a.append(img, cap);                      // 画像は必ず affiliateUrl のリンクで包む
       slotEl.appendChild(a);
+      // 行2(リンク外): 相場。広告ではないのでリンクも (PR) も付けない。
+      // 中央値が取れない時は span 自体を作らない = 空の「Market:」を出さない。
+      // minPrice は行2では使わない: 在庫切れ込みの最安は買えない値段で、
+      // 行1(在庫あり最安)より安く並んで誤読を招くため(2026-07-31)。
+      const mid = money(hit.medianPrice);      // 全件の中央値
+      const market = mid ? `Market: used ~${yen(mid)}` : null;
+      if (market) {
+        const mk = document.createElement('span');
+        mk.className = 'rak-market';
+        mk.textContent = market;
+        slotEl.appendChild(mk);                // <a> の外 = .rak-slot 直下
+      }
     });
   }, { rootMargin: '200px' });
   io.observe(slotEl);
