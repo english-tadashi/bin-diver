@@ -1726,14 +1726,18 @@ async function _rakFetch(jan) {
       // sort:'+itemPrice' で安い順に並んでいる = 最初に見つかった在庫あり品が最安。
       // 在庫ありが1件も無ければ従来どおり全体の先頭(最安)にフォールバック。
       const item = (items.find(x => Number(x?.Item?.availability) === 1) ?? items[0])?.Item;
+      // 返ってきた全件の itemPrice を数値化。空文字や欠損で NaN になったものは捨てる。
+      const prices = items.map(x => Number(x?.Item?.itemPrice)).filter(Number.isFinite);
       // 中央値は返ってきた全件の itemPrice から(母集団は在庫切れ込み)。0件なら _rakMedian が null。
-      const medianPrice = _rakMedian(items.map(x => Number(x?.Item?.itemPrice)));
+      const medianPrice = _rakMedian(prices);
+      // 最安は全件の最小値。sort:'+itemPrice' で先頭が最安のはずだが数値として取り直す。0件なら null。
+      const minPrice = prices.length ? Math.min(...prices) : null;
       // 楽天がホストする画像を URL で表示するだけ(複製・改変ではない)。実サイズだけ上げる。
       // _ex が無い URL が来ても replace は何もしない = そのまま通る(壊れない)。
       const raw = item?.mediumImageUrls?.[0]?.imageUrl;
       const img = raw ? raw.replace(/_ex=\d+x\d+/, '_ex=300x300') : null;
       if (item && img && item.affiliateUrl)
-        result = { img, url: item.affiliateUrl, name: item.itemName, price: item.itemPrice, medianPrice };
+        result = { img, url: item.affiliateUrl, name: item.itemName, price: item.itemPrice, medianPrice, minPrice };
     }
   } catch (e) { console.warn('rakuten', jan, e); }   // 失敗は握らず記録(罠#47)
   _rakCache.set(jan, result);
