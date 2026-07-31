@@ -757,6 +757,7 @@ header .lede .lede-sub{ font-weight:400; }
   <footer>
     Kataban · 37,855 entries from the Agency for Cultural Affairs Media Arts Database. 10,296 carry official product codes; 13,487 have English titles. English titles matched from Wikidata (CC0).
     <br>Some links and product images on this page are affiliate links, and Kataban may earn a commission, including as an eBay Partner Network affiliate (PR). &middot; <a href="https://webservice.rakuten.co.jp/" target="_blank" rel="noopener">Supported by Rakuten Developers</a>
+    <br>"Used on Rakuten" is a median of used Rakuten listings only — a rough guide, not a live price. Other stores may differ.
   </footer>
 </div>
 
@@ -1786,11 +1787,11 @@ function attachRakutenImage(slotEl, jan) {
       a.append(img, cap);                      // 画像は必ず affiliateUrl のリンクで包む
       slotEl.appendChild(a);
       // 行2(リンク外): 相場。広告ではないのでリンクも (PR) も付けない。
-      // 中央値が取れない時は span 自体を作らない = 空の「Market:」を出さない。
+      // 中央値が取れない時は span 自体を作らない = 空の「Used on Rakuten:」を出さない。
       // minPrice は行2では使わない: 在庫切れ込みの最安は買えない値段で、
       // 行1(在庫あり最安)より安く並んで誤読を招くため(2026-07-31)。
       const mid = money(hit.medianPrice);      // 全件の中央値
-      const market = mid ? `Market: used ~${yen(mid)}` : null;
+      const market = mid ? `Used on Rakuten: ~${yen(mid)}` : null;
       if (market) {
         const mk = document.createElement('span');
         mk.className = 'rak-market';
