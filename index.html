@@ -1714,16 +1714,19 @@ function _rakMedian(nums) {
 async function _rakFetch(jan) {
   const p = new URLSearchParams({
     applicationId: RAKUTEN.appId, accessKey: RAKUTEN.accessKey, affiliateId: RAKUTEN.affiliateId,
-    keyword: jan, availability: '1', imageFlag: '1', hits: '30', sort: '+itemPrice', format: 'json',
+    keyword: jan, availability: '0', imageFlag: '1', hits: '30', sort: '+itemPrice', format: 'json',
   });
   let result = null;
   try {
     const res = await fetch(`${RAKUTEN.endpoint}?${p}`);
     if (res.ok) {
       const items = (await res.json())?.Items ?? [];
-      // 画像と価格は従来どおり先頭1件から。sort:'+itemPrice' なので先頭 = 最安。
-      const item = items[0]?.Item;
-      // 中央値は返ってきた全件の itemPrice から。0件なら _rakMedian が null を返す。
+      // 画像・URL・価格に使う1件は「在庫あり(availability=1)の中の最安」。
+      // availability:'0' で在庫切れ込みで取っているので、ここで在庫ありだけを選び直す。
+      // sort:'+itemPrice' で安い順に並んでいる = 最初に見つかった在庫あり品が最安。
+      // 在庫ありが1件も無ければ従来どおり全体の先頭(最安)にフォールバック。
+      const item = (items.find(x => Number(x?.Item?.availability) === 1) ?? items[0])?.Item;
+      // 中央値は返ってきた全件の itemPrice から(母集団は在庫切れ込み)。0件なら _rakMedian が null。
       const medianPrice = _rakMedian(items.map(x => Number(x?.Item?.itemPrice)));
       // 楽天がホストする画像を URL で表示するだけ(複製・改変ではない)。実サイズだけ上げる。
       // _ex が無い URL が来ても replace は何もしない = そのまま通る(壊れない)。
