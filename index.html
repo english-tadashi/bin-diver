@@ -1771,12 +1771,19 @@ function attachRakutenImage(slotEl, jan) {
       img.src = hit.img; img.alt = ''; img.loading = 'lazy';
       const cap = document.createElement('span');
       cap.className = 'rak-cap';
-      // 「写真の出典」ではなく「ここで買える」と読ませる。リンク先が楽天だと明示 = 規約側の要求。
-      // 価格が取れない時は金額を出さない(嘘の価格は出さない)。(PR) は常時維持(ステマ規制)。
-      const yen = Number(hit.price);
-      cap.textContent = (Number.isFinite(yen) && yen > 0)
-        ? `Buy on Rakuten from ¥${yen.toLocaleString('ja-JP')} (PR)`
-        : 'See listings on Rakuten (PR)';
+      // 「写真の出典」ではなく「ここで買える」と読ませる。全分岐に Rakuten を入れる
+      // = リンク先が楽天だと文言そのもので明示する(規約側の要求)。
+      // 金額は「有限かつ正」だけを出す(0・負・NaN・null は出さない = 嘘の価格は出さない)。
+      // (PR) は全分岐で維持(ステマ規制)。hit.price は画像選択の内部値でここでは使わない。
+      const money = v => { const n = Number(v); return (Number.isFinite(n) && n > 0) ? n : null; };
+      const lo  = money(hit.minPrice);        // 全件(在庫切れ込み)の最安
+      const mid = money(hit.medianPrice);     // 全件の中央値。小数なら四捨五入して整数で出す
+      const yen = n => `¥${Math.round(n).toLocaleString('ja-JP')}`;
+      cap.textContent =
+          (lo && mid) ? `on Rakuten from ${yen(lo)} · used ~${yen(mid)} (PR)`
+        : lo          ? `on Rakuten from ${yen(lo)} (PR)`
+        : mid         ? `on Rakuten · used ~${yen(mid)} (PR)`
+        :               'See listings on Rakuten (PR)';
       a.append(img, cap);                      // 画像は必ず affiliateUrl のリンクで包む
       slotEl.appendChild(a);
     });
