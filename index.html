@@ -164,6 +164,7 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
   color:var(--ink); font-family:var(--f-display); line-height:1.4;}
 .card a{text-decoration:none; color:inherit;}
 .card .micro{font:600 10px/1 var(--f-mono); letter-spacing:.16em; text-transform:uppercase; color:var(--faint);}
+.card .micro.plain{font-family:var(--f-mono); letter-spacing:.01em; text-transform:none;}
 
 /* status line */
 .card .status{display:flex; align-items:center; gap:8px; font:500 11px/1 var(--f-mono);
@@ -244,6 +245,13 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card .shelf-txt b{font-weight:600; color:var(--ink);}
 .card .shelf-txt .gyo{font-family:var(--f-jp);}
 
+/* 行ロケーター（第1段：位置と大きさだけ）。配色・書体の作り込みは次段。
+   ★.shelf-row は既に display:flex の器として使われているので名前を借りない。
+     行名は .shelf-gyo。--signal（朱）は使わない。 */
+.card .shelf-loc{margin-top:10px; padding-top:9px; border-top:1px solid var(--line);
+  font:400 12.5px/1.5 var(--f-display); color:var(--ink-2);}
+.card .shelf-loc .shelf-gyo{font:600 17px/1 var(--f-jp); color:var(--ink);}
+
 /* 店員に見せるボタン。2人が読むので、英語と日本語を1つのボタンに重ねる。
    ★明色版は「本文色で塗り潰した塊」だった。そのまま反転すると明るい板になり、
      カードの中で一番目立つのが型番スラブではなくこのボタンになってしまう。
@@ -251,7 +259,7 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
      押せることは分かる（枠は 11.7:1）。強い色はスラブの桃だけに残す。 */
 .card .btn-clerk{width:100%; display:flex; align-items:center; justify-content:center; gap:10px;
   min-height:52px; padding:10px 16px; cursor:pointer; text-align:center;
-  border:1px solid var(--signal); border-radius:10px; background:var(--paper); color:var(--signal);
+  border:1px solid var(--signal); border-radius:2px; background:var(--paper); color:var(--signal);
   font:500 15px/1.2 var(--f-display); transition:opacity .12s;}
 .card .btn-clerk:hover{opacity:.86;}
 .card .btn-clerk .jp{font:500 14px/1.2 var(--f-jp); color:var(--muted);}
@@ -299,7 +307,7 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card .buy-head p{margin:0; font:400 12px/1.4 var(--f-display); color:var(--muted);}
 .card .group{display:flex; flex-direction:column; gap:8px; margin-top:32px;}
 .card .group-label{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;}
-.card .group-label .n{font:500 11px/1 var(--f-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--ink-2);}
+.card .group-label .n{font:500 11px/1 var(--f-mono); letter-spacing:.01em; text-transform:none; color:var(--ink-2);}
 .card .group-label .d{font:400 11.5px/1.3 var(--f-display); color:var(--faint);}
 .card .stores{display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:8px;}
 .card .store{display:flex; align-items:center; justify-content:center; gap:6px; height:44px;
@@ -343,7 +351,6 @@ h1{font-family:var(--f-pixel);}
    基底の 10px/1 のまま（行間が広すぎる不自然さを出さない）。
    （:has はこの CSS で使用実績あり＝.rak-slot:has(.rak-img)。line-height だけ・px は不変。） */
 .card .field:has(.jp-copy-row) .micro{line-height:1.5;}
-.card .group-label .n{font-family:var(--f-pixel);}
 /* ボタンの英字ラベル（COPY / SCAN / Buyee / eBay / 店リンク名）。
    ・.slab-copy / .btn-copy の中身は "Copy"。押下時は ✓ / Hold に変わるが、
      ✓ は Press Start 2P に無く、フォールバック側で普通に出る（崩れない）。
@@ -550,7 +557,7 @@ footer a:hover,footer a:focus{color:var(--accent)}
    枠線1px・角2px（他要素と揃える）。枠線は新カード地#281d4cで視認できる#4a4278
    （--hair-strong は新地に対し 1.03:1 でほぼ不可視のため）。見出しは水色 var(--tag)・micro サイズ。
    配信専用(row[12])では card() 側で枠ごと出さない（空枠は残らない）。 */
-.card .instore{ background:#171030; border:1px solid #4a4278; border-radius:2px; padding:14px; display:flex; flex-direction:column; gap:12px; }
+.card .instore{ padding:14px 0 0; display:flex; flex-direction:column; gap:12px; }
 .card .instore > .field{margin:16px 0 14px;}
 .card .instore-head{ color:var(--tag); }
 /* ===== Logo migration: bitmap KATABAN + steady breathing (2026-07-29) =====
@@ -653,6 +660,97 @@ header .lede .lede-sub{ font-weight:400; }
   padding:15px 22px; box-shadow:0 0 18px -2px rgba(255,55,199,.55); }
 .kb-bars rect{ shape-rendering:crispEdges; }
 @media (max-width:560px){ .kb-cols{ grid-template-columns:1fr; } }
+
+/* ============================================================
+   ジャンル早見表（第1段：器だけ。中身は次段）。
+   ★モーダルはカードごとに複製しない。ページに1つだけ置いて、リンクは
+     「同じ器を開く」だけにする。将来ディスク機の入口を足すときも、
+     増えるのはリンク側だけで済む。
+   ★--signal（朱）は使わない。カード外なので :root のトークンで組む。
+   ============================================================ */
+/* 行ロケーターの直下に出る枠線ボタン。行ロケーターと同じ条件でしか描かれない。
+   塗りは載せない（.btn-clerk が既にカード内で一番強い。ここを同じ強さにすると競る）。
+   枠線＋普通体で「押せるが主役ではない」段に置く。 */
+.card .genre-link{width:100%; display:flex; align-items:center; justify-content:center; gap:10px;
+  min-height:52px; padding:10px 16px; cursor:pointer; text-align:center;
+  border:1px solid var(--tag); border-radius:2px; background:none; color:var(--tag);
+  font:500 15px/1.2 var(--f-display); letter-spacing:.02em;}
+.card .genre-link:hover{background:rgba(34,211,238,.08);}
+
+/* ★書体トークンをここで定義し直す。--f-display / --f-jp は :root ではなく .card{} の
+   中でしか定義されていない（色トークンは :root にある）。モーダルは .card の外なので
+   var(--f-display) が未解決になり、`font:` ショートハンドが丸ごと無効になって
+   ブラウザ既定(16px・既定書体)に落ちていた ―― 指定した字の大きさが一切効かない。
+   値は .card と同一。ここで閉じておけば :root を触らずに済む。 */
+#genre-modal{position:fixed; inset:0; z-index:70; display:none;
+  align-items:center; justify-content:center; padding:20px;
+  background:rgba(7,4,15,.78);
+  --f-display:'Space Grotesk',-apple-system,Helvetica,Arial,sans-serif;
+  --f-jp:'IBM Plex Sans JP','Hiragino Sans','Noto Sans JP',sans-serif;}
+#genre-modal.on{display:flex;}
+/* オーバーレイのクリックで閉じるので、中身は独立した層にして伝播を止める。 */
+.genre-in{position:relative; width:100%; max-width:720px; max-height:86vh;
+  display:flex; flex-direction:column; overflow:hidden;
+  background:var(--surface); border:1px solid var(--edge); border-radius:12px;}
+.genre-bar{flex-shrink:0; display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:16px 18px; border-bottom:1px solid var(--line);}
+.genre-bar h2{margin:0; font:500 16px/1.3 var(--f-display); color:var(--ink);}
+.genre-bar h2 .jp{display:block; font:400 13px/1.4 var(--f-jp); color:var(--muted);}
+#genre-close{flex-shrink:0; width:38px; height:38px; cursor:pointer;
+  border:1px solid var(--edge-input); border-radius:8px; background:var(--field); color:var(--ink);
+  font:400 18px/1 var(--f-display);}
+#genre-close:hover,#genre-close:focus-visible{background:var(--edge); outline:none;}
+#genre-modal-body{flex:1; min-height:0; overflow-y:auto; -webkit-overflow-scrolling:touch;
+  padding:18px; font:400 14px/1.6 var(--f-display); color:var(--ink);}
+/* 冒頭の一文。ここだけ読めば「英語で探して、右の札を棚で探す」と分かる。 */
+.genre-intro{margin:0 0 4px; font:400 13px/1.6 var(--f-display); color:var(--muted);}
+.genre-intro b{color:var(--ink); font-weight:500;}
+
+/* 1グループ＝1行。左が主(英語)・右が従(日本語の棚札)。
+   ★align-items:stretch にしない。札は内容の長さで伸びるので、左の高さに引き伸ばすと
+     「シミュレーション」だけ間延びして札に見えなくなる。
+   ★左右とも上下中央に置く。縦書きの札は必ず左の英語ブロックより背が高いので、
+     左を上寄せにすると余りが全部「左下の空白」として溜まる（見た目が抜ける）。
+     中央に置くと同じ余りが上下に割れて、行の余白として読める。 */
+.genre-row{display:flex; align-items:center; gap:16px;
+  padding:14px 0; border-bottom:1px solid var(--line);}
+.genre-row:last-child{border-bottom:0;}
+.genre-main{flex:1 1 auto; min-width:0;}
+.genre-en{margin:0 0 8px; font:500 15px/1.35 var(--f-display); color:var(--ink);}
+/* 引くための語。チップにするのは「目で拾う」ため（文章として読ませる列ではない）。 */
+.genre-terms{display:flex; flex-wrap:wrap; gap:5px;}
+.genre-terms span{padding:2px 8px; border:1px solid var(--line); border-radius:99px;
+  background:var(--field); color:var(--muted); font:400 11.5px/1.6 var(--f-display);}
+
+/* 棚の仕切り札。実店舗の札に寄せる＝白地・黒字・細い黒枠。ブランド配色（桃/水色）は
+   当てない。暗いモーダルの中で札だけ白く浮くのは意図どおり（棚の札と照合するため、
+   画面の中で一番「紙に見える」必要がある）。店員画面 #clerk が白地#fff・文字#111 なのと
+   同じ考え方で、「店で使う面」だけ現実の紙に寄せている。
+   ★flex:0 0 auto。縦書きが効かない環境では横書きに落ちるが、その場合も
+     縮まずに自分の幅を取るだけなので、左の列と重ならない（読めれば可）。 */
+/* ★display:flex。ここを既定のブロックのままにすると、中の inline-block(.genre-jp) が
+     行ボックスを作り、下に6px前後の行送りの余りが付く。その余りごと中央に置かれるので
+     札が数px上にずれる。flex にすると行ボックスが消えて、札そのものが中央に来る。 */
+.genre-tag{flex:0 0 auto; display:flex; align-items:center;}
+/* ★min-height ではなく min-inline-size。縦書き(vertical-rl)ではインライン軸＝縦なので
+     「札の長さ」の下限として効き、横書きに落ちた環境では自動的に「札の幅」の下限に化ける。
+     min-height 固定だと、横書きフォールバック時に中身が2文字でも高さ104pxの空箱が残る。
+   ★下限120px。短い札（「恋愛」2字）を伸ばして長い札（「シミュレーション」8字）に寄せる。
+     実測で札の長さは 120〜156px に収まる（下限なしだと 40〜168px でばらばらだった）。
+     字を小さくして最長を縮めるより、下限で最短を伸ばすほうが札として読める大きさを保てる。
+   ★字送り .14em では字が離れて1語に見えなかった。.05em は詰まらず空きすぎず、
+     縦に並べたときに語のまとまりが保てる。 */
+.genre-jp{writing-mode:vertical-rl;
+  display:inline-block; min-inline-size:120px; padding:11px 9px;
+  border:1px solid #111; border-radius:3px; background:#fff; color:#111;
+  font:600 16px/1 var(--f-jp); letter-spacing:.05em;
+  text-align:center; white-space:nowrap;}
+
+@media (max-width:560px){
+  .genre-in{max-height:92vh;} #genre-modal{padding:10px;}
+  .genre-row{gap:12px;}
+  .genre-jp{min-inline-size:100px; font-size:14px; padding:9px 7px;}
+}
 </style>
 </head>
 <body>
@@ -782,6 +880,18 @@ header .lede .lede-sub{ font-weight:400; }
       <button type="button" id="clerkClose">Close</button>
     </div>
     <div id="clerkBody"></div>
+  </div>
+</div>
+
+<!-- ジャンル早見表。ページに1つだけ。中身は次段で #genre-modal-body に流し込む。
+     DATA とは無関係の場所に置いてある（DATA 行には一切触っていない）。 -->
+<div id="genre-modal" role="dialog" aria-modal="true" aria-labelledby="genre-title">
+  <div class="genre-in">
+    <div class="genre-bar">
+      <h2 id="genre-title">Genre guide<span class="jp">ジャンル早見表</span></h2>
+      <button type="button" id="genre-close" aria-label="Close">&times;</button>
+    </div>
+    <div id="genre-modal-body"></div>
   </div>
 </div>
 
@@ -1045,33 +1155,67 @@ function regionNote(r){
 // 配信専用(row[12])は棚に物が無いので、どちらも出さない。
 // ============================================================
 const GYO = {
-  'ア':'ア行','イ':'ア行','ウ':'ア行','エ':'ア行','オ':'ア行',
-  'カ':'カ行','キ':'カ行','ク':'カ行','ケ':'カ行','コ':'カ行',
-  'サ':'サ行','シ':'サ行','ス':'サ行','セ':'サ行','ソ':'サ行',
-  'タ':'タ行','チ':'タ行','ツ':'タ行','テ':'タ行','ト':'タ行',
-  'ナ':'ナ行','ニ':'ナ行','ヌ':'ナ行','ネ':'ナ行','ノ':'ナ行',
-  'ハ':'ハ行','ヒ':'ハ行','フ':'ハ行','ヘ':'ハ行','ホ':'ハ行',
-  'マ':'マ行','ミ':'マ行','ム':'マ行','メ':'マ行','モ':'マ行',
-  'ヤ':'ヤ行','ユ':'ヤ行','ヨ':'ヤ行',
-  'ラ':'ラ行','リ':'ラ行','ル':'ラ行','レ':'ラ行','ロ':'ラ行',
-  'ワ':'ワ行',
+  'ア':'あ行','イ':'あ行','ウ':'あ行','エ':'あ行','オ':'あ行',
+  'カ':'か行','キ':'か行','ク':'か行','ケ':'か行','コ':'か行',
+  'サ':'さ行','シ':'さ行','ス':'さ行','セ':'さ行','ソ':'さ行',
+  'タ':'た行','チ':'た行','ツ':'た行','テ':'た行','ト':'た行',
+  'ナ':'な行','ニ':'な行','ヌ':'な行','ネ':'な行','ノ':'な行',
+  'ハ':'は行','ヒ':'は行','フ':'は行','ヘ':'は行','ホ':'は行',
+  'マ':'ま行','ミ':'ま行','ム':'ま行','メ':'ま行','モ':'ま行',
+  'ヤ':'や行','ユ':'や行','ヨ':'や行',
+  'ラ':'ら行','リ':'ら行','ル':'ら行','レ':'ら行','ロ':'ら行',
+  'ワ':'わ行',
 };
 function shelfNote(r){
   if(r[12]) return '';                       // 配信専用。棚そのものが無い
   const kana = r[11] || '';
   if(!kana) return `<div class="field">
-      <span class="micro">On the shelf</span>
+      <span class="micro plain">On the shelf</span>
       <div class="cap">No shelf hint for this title — we don't have a reading for it, and a wrong shelf is worse than none.</div>
     </div>`;
   const gyo = GYO[kana] || '';
+  const gyoHead = gyo ? gyo.charAt(0) : '';   // 「は行」→「は」。行の頭1字だけを札に出す
   return `<div class="field">
-      <span class="micro">On the shelf &middot; kana order</span>
+      <span class="micro plain">On the shelf &middot; kana order</span>
       <div class="shelf-row">
-        <span class="shelf-kana">${esc(kana)}</span>
+        <span class="shelf-kana">${esc(kana)}</span>${gyoHead?`
+        <span class="shelf-kana shelf-kana-gyo">${esc(gyoHead)}</span>`:''}
         <span class="shelf-txt">Japanese shops file games by the <i>reading</i> of the title.
           Look under <b class="gyo">${esc(kana)}</b>${gyo?` — or the <b class="gyo">${esc(gyo)}</b> group where shelves are split by row`:''}.</span>
       </div>
     </div>`;
+}
+
+// ============================================================
+// 行ロケーター（第1段：器だけ）
+// 棚が「行」単位で切られていることを実測で確認できた5機種にだけ出す。
+// row[11] の空率が Famicom 0.2% / Game Boy 1.3% と低く、10行への変換も
+// 取りこぼし0だったのがこの5機種（measure_tana3/tana4）。PS4/PS5/Switch は
+// 空率 10〜29% で、出したり出さなかったりがカード間でばらつくので今は外す。
+// ★null を返したら器ごと出さない。空の器は「まだ調べていない」ではなく
+//   「情報が無い店」と読まれる。中身が無いなら枠も出さない。
+const SYLLABARY_PLATFORMS = ['Famicom','Super Famicom','Nintendo 64','Game Boy','Game Boy Advance'];
+// measure_tana4.js と同一の変換表。ひらがなの行名を返す（棚の札は「あ行」表記）。
+// 上の GYO（ヲ/ン無し）とは別物。統合はしない ―― あちらは全機種向けの
+// 文章内表記で、こちらは対象機種限定のロケーター。用途が違うものを1つにすると
+// 片方の都合でもう片方が動く。
+const GYO_LOC = {
+  'ア':'あ行','イ':'あ行','ウ':'あ行','エ':'あ行','オ':'あ行',
+  'カ':'か行','キ':'か行','ク':'か行','ケ':'か行','コ':'か行',
+  'サ':'さ行','シ':'さ行','ス':'さ行','セ':'さ行','ソ':'さ行',
+  'タ':'た行','チ':'た行','ツ':'た行','テ':'た行','ト':'た行',
+  'ナ':'な行','ニ':'な行','ヌ':'な行','ネ':'な行','ノ':'な行',
+  'ハ':'は行','ヒ':'は行','フ':'は行','ヘ':'は行','ホ':'は行',
+  'マ':'ま行','ミ':'ま行','ム':'ま行','メ':'ま行','モ':'ま行',
+  'ヤ':'や行','ユ':'や行','ヨ':'や行',
+  'ラ':'ら行','リ':'ら行','ル':'ら行','レ':'ら行','ロ':'ら行',
+  'ワ':'わ行','ヲ':'わ行','ン':'わ行',
+};
+function shelfGyo(r){
+  if(!SYLLABARY_PLATFORMS.includes(r[2])) return null;   // 対象外の機種
+  const kana = (r[11]||'').trim();
+  if(!kana) return null;                                 // 初字が無い
+  return GYO_LOC[kana] || null;                          // 変換表に無い字も出さない
 }
 
 /* 位置トグルの状態。'out'=海外在住（初期） / 'jp'=日本の店頭。
@@ -1252,7 +1396,7 @@ function card(r,idx){
   const credit = [pubs.join(' \u00b7 '), yr].filter(Boolean).join('  \u00b7  ');
   // row[1](日本語名)にかな・カタカナ・漢字が1字も無い＝箱の表記自体がラテン文字。
   const jaLatin = !!jp && !/[぀-ヿ㐀-鿿]/.test(jp);
-  // 英題があるラテン表記の行では「Japanese · on the box」を出さない(英題と同じ文字列の重複を止める)。
+  // 英題があるラテン表記の行では「Japanese reading」の見出しを出さない(英題と同じ文字列の重複を止める)。
   // row[0] が空の行では従来どおり出す(見出しが英題側に無いため)。
   // ★ただし row[0] と row[1] が別表記(例 Resident Evil 4 / biohazard4)なら箱の背表紙照合に要るので消さない。
   //   codeKey(NFKC+大文字化+英数字以外除去=全角半角統一・空白/記号除去)で正規化して一致する行だけ消す。
@@ -1273,22 +1417,53 @@ function card(r,idx){
 
     <div class="status"><span class="dot"></span>Match &middot; Japan / NTSC-J</div>
 
+    ${(pf||pubs.length||yr)?`<div class="specs">
+      ${pf?`<div class="spec"><span class="micro">Console</span><span class="v jp">${esc(pf)}</span></div>`:''}
+      ${pubs.length?`<div class="spec"><span class="micro">Publisher</span><span class="v">${esc(pubShow)}</span></div>`:''}
+      ${yr?`<div class="spec"><span class="micro">Released</span><span class="v">${esc(yr)}</span></div>`:''}
+    </div>`:''}
+
     <div class="identity">
       ${en?`<div class="field">
-        <span class="micro">English</span>
+        <span class="micro plain">English</span>
         <div class="en-title">${esc(en)}</div>
         ${AMBIG_EN.has(strong(en))?`<div class="cap">This English name covers more than one Japanese release. Check the Japanese title and the code below.</div>`:''}
       </div>`:''}
       <div class="field">
-        ${hideJa?'':`<span class="micro">Japanese &middot; on the box</span>`}
+        ${hideJa?'':`<span class="micro plain">Japanese reading</span>`}
         ${hideJa?'':`<div class="ja-title">${esc(jpMain)}</div>`}
         ${romaji?`<div class="romaji">${esc(romaji)}</div>`:''}
         ${noCode?`<div class="romaji">No product code on record</div>`:''}
       </div>
     </div>
 
+    <!-- 配信専用(row[12])ではボタンごと出さない。店に行く行為が無いので見せる相手がいない。
+         disabled や淡色にはしない ―― 押せないボタンは「壊れている」と読まれる。
+         理由は下の灰色帯(region.dl)と NO DISC バッジが説明している。
+         ★これが clerkOpen() への唯一の入口（下方の function clerkOpen(r) を参照）。
+           ※このコメントはテンプレートリテラルの中にある。バッククォートを書くと
+             文字列がそこで閉じてJSが壊れる（実際に一度壊した）。
+           あちらは「配信専用の行は来ない」前提で書いてあり、r[12] を一切見ていない。
+           **この条件を外すなら、必ず clerkOpen() 側も直すこと。**
+           外したまま渡すと、配信専用の行で「在庫はありますか？」と店員に聞かせることになる。 -->
+    ${r[12]?'':`<div class="instore">
+      ${shelfNote(r)}
+      ${(()=>{const g=shelfGyo(r); return g?`<div class="shelf-loc">この棚を探す: <span class="shelf-gyo">${esc(g)}</span></div>`:'';})()}
+      <button class="genre-link" type="button">Find by genre</button>
+      <span class="micro plain instore-head">Still can't find it?</span>
+      <button class="btn-clerk" type="button" data-clerk="${idx}">Show to shop staff</button>
+    </div>`}
+
+    ${regionNote(r)}
+
+    <hr class="div">
+
+    ${/^\d{13}$/.test(r[10]||'') ? `<div class="rak-slot" data-jan="${r[10]}"></div>` : ''}
+
+    ${r[12]?`<span class="nodisc">No disc &middot; download</span>`:buyBlock({kwBuyee,kwBuyeeFallback,kwEn,kwCode,kwCodeSg,kwKana,kwKanaBo,kwName,kwKanaHard,codes})}
+
     ${codes.length?`<div class="field">
-      <span class="micro">Product code &middot; exact match</span>
+      <span class="micro plain">Product code &middot; exact match</span>
       <div class="jp-copy-row">
         <div class="jp-chip"><span class="code">${codeShow}</span></div>
         <button class="slab-copy" type="button" data-copy="${codeCopy}"><span class="txt">Copy</span></button>
@@ -1308,42 +1483,13 @@ function card(r,idx){
         </div>
       </div>
     </div>`:`<div class="field">
-      <span class="micro">Japanese title${r[12]?'':' &middot; copy to paste into a store'}</span>
+      <span class="micro plain">Japanese title${r[12]?'':' &middot; copy to paste into a store'}</span>
       <div class="jp-copy-row">
         <div class="jp-chip">${esc(jpMain)}</div>
         ${r[12]?'':`<button class="btn-copy" type="button" data-copy="${esc(jpMain)}">Copy</button>`}
       </div>
       ${r[12]?'':`<div class="cap" style="margin-top:7px;">${jaLatin?`Latin letters — you can type this yourself, or copy.`:`You can't type this — copy, then paste into the search box.`}</div>`}
     </div>`}
-
-    <!-- 配信専用(row[12])ではボタンごと出さない。店に行く行為が無いので見せる相手がいない。
-         disabled や淡色にはしない ―― 押せないボタンは「壊れている」と読まれる。
-         理由は下の灰色帯(region.dl)と NO DISC バッジが説明している。
-         ★これが clerkOpen() への唯一の入口（下方の function clerkOpen(r) を参照）。
-           ※このコメントはテンプレートリテラルの中にある。バッククォートを書くと
-             文字列がそこで閉じてJSが壊れる（実際に一度壊した）。
-           あちらは「配信専用の行は来ない」前提で書いてあり、r[12] を一切見ていない。
-           **この条件を外すなら、必ず clerkOpen() 側も直すこと。**
-           外したまま渡すと、配信専用の行で「在庫はありますか？」と店員に聞かせることになる。 -->
-    ${r[12]?'':`<div class="instore">
-      <span class="micro instore-head">In a store right now?</span>
-      <button class="btn-clerk" type="button" data-clerk="${idx}">Show to shop staff<span class="jp">店員に見せる</span></button>
-      ${shelfNote(r)}
-    </div>`}
-
-    ${(pf||pubs.length||yr)?`<div class="specs">
-      ${pf?`<div class="spec"><span class="micro">Console</span><span class="v jp">${esc(pf)}</span></div>`:''}
-      ${pubs.length?`<div class="spec"><span class="micro">Publisher</span><span class="v">${esc(pubShow)}</span></div>`:''}
-      ${yr?`<div class="spec"><span class="micro">Released</span><span class="v">${esc(yr)}</span></div>`:''}
-    </div>`:''}
-
-    ${regionNote(r)}
-
-    <hr class="div">
-
-    ${/^\d{13}$/.test(r[10]||'') ? `<div class="rak-slot" data-jan="${r[10]}"></div>` : ''}
-
-    ${r[12]?`<span class="nodisc">No disc &middot; download</span>`:buyBlock({kwBuyee,kwBuyeeFallback,kwEn,kwCode,kwCodeSg,kwKana,kwKanaBo,kwName,kwKanaHard,codes})}
   </article>`;
 }
 
@@ -1566,6 +1712,65 @@ results.addEventListener('click', e=>{
   if(!btn) return;
   const row = current[+btn.dataset.clerk];
   if(row) clerkOpen(row);
+});
+
+/* ジャンル早見表。
+   ★リンクはカードごとに描かれるが、開く器は #genre-modal ひとつ。将来ディスク機から
+     開けるようにするときも、足すのはリンクだけでよい。
+   ★ブラウザストレージは使わない。状態は .on の有無だけ。
+
+   GENRE_GUIDE は静的な用語集。DATA とは無関係で、行ごとに中身が変わることはない
+   （個々のタイトルのジャンルではなく「棚の仕切り札の読み方」を出す表）。
+   だから開くたびに組み直さず、読み込み時に1回だけ描く。
+   ★外部ファイルは読まない（1ファイル完結を保つ）。並び順は渡された順のまま。 */
+const GENRE_GUIDE = [
+  { en:"Role-Playing (RPG)", terms:["RPG","JRPG","action RPG","tactical / strategy RPG","roguelike","dungeon crawler","soulslike","MMORPG"], jp:"ロールプレイング" },
+  { en:"Action", terms:["action","platformer","action-adventure","hack & slash","beat 'em up","Metroidvania","stealth","vehicular combat"], jp:"アクション" },
+  { en:"Shooter", terms:["shoot 'em up (shmup)","FPS","TPS","bullet hell","run & gun","rail shooter","light-gun","tactical shooter","looter shooter"], jp:"シューティング" },
+  { en:"Adventure", terms:["adventure","visual novel","point-and-click","mystery / detective","sound novel","walking sim","escape room"], jp:"アドベンチャー" },
+  { en:"Fighting", terms:["fighting","2D fighter","3D fighter","arena fighter","platform fighter"], jp:"対戦格闘" },
+  { en:"Dating / Romance", terms:["dating sim","otome","romance","visual novel (romance)","Yuri","BL (Boys' Love)"], jp:"恋愛" },
+  { en:"Simulation / Strategy", terms:["simulation","life sim","management / business sim","city-building","god game","strategy","RTS","turn-based strategy","tower defense","wargame","4X","flight / train / vehicle sim","virtual pet"], jp:"シミュレーション" },
+  { en:"Sports", terms:["sports","soccer / football","baseball","basketball","tennis","golf","wrestling","boxing","hockey","fishing"], jp:"スポーツ" },
+  { en:"Racing", terms:["racing","kart racer","sim racing","arcade racer","off-road","driving"], jp:"レース" },
+  { en:"Puzzle", terms:["puzzle","falling-block","match-3","maze","nonogram / picross","pinball","block breaker"], jp:"パズル" },
+  { en:"Music / Rhythm", terms:["rhythm","music","dance","karaoke"], jp:"音楽" },
+  { en:"Table / Board", terms:["mahjong","shogi","go","chess","card game","casino / gambling","quiz","board game","pachinko"], jp:"テーブル" },
+  { en:"Horror", terms:["horror","survival horror","psychological horror"], jp:"ホラー" },
+  { en:"Adult (18+)", terms:["eroge","hentai","ecchi"], jp:"アダルト" },
+  { en:"Other", terms:["sci-fi","fantasy","party","arcade","educational","and anything not listed above"], jp:"その他" },
+];
+
+const genreEl=$('#genre-modal'), genreClose=$('#genre-close');
+
+/* 読み込み時に1回だけ組む。esc() を通すのは、この表がいずれ手で編集されるため
+   （& や ' を含む語が既にある。生で入れると次に足した語で壊れる）。 */
+$('#genre-modal-body').innerHTML =
+  `<p class="genre-intro">Find your genre in English, then look for the Japanese shelf tag <b>&rarr;</b>.
+   Disc-era shelves are usually split by genre, not by kana.</p>` +
+  GENRE_GUIDE.map(g=>`<div class="genre-row">
+    <div class="genre-main">
+      <h3 class="genre-en">${esc(g.en)}</h3>
+      <div class="genre-terms">${g.terms.map(t=>`<span>${esc(t)}</span>`).join('')}</div>
+    </div>
+    <div class="genre-tag"><span class="genre-jp">${esc(g.jp)}</span></div>
+  </div>`).join('');
+function genreShow(){
+  genreEl.classList.add('on');
+  document.body.style.overflow='hidden';   // 背後が動くと、閉じた後どこにいたか分からなくなる
+  genreClose.focus();
+}
+function genreHide(){
+  genreEl.classList.remove('on');
+  document.body.style.overflow='';
+}
+genreClose.addEventListener('click', genreHide);
+// 背景（オーバーレイ）のクリックで閉じる。中身(.genre-in)の上のクリックは拾わない。
+genreEl.addEventListener('click', e=>{ if(e.target===genreEl) genreHide(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && genreEl.classList.contains('on')) genreHide(); });
+// カード上のリンク。行は見ていない（今は器を開くだけで、行ごとの中身が無いため）。
+results.addEventListener('click', e=>{
+  if(e.target.closest('.genre-link')) genreShow();
 });
 
 let t; q.addEventListener('input',()=>{clearTimeout(t);t=setTimeout(run,90);});
