@@ -1314,7 +1314,7 @@ function buyBlock(k){
   const gWorld = `<div class="group">
         <div class="group-label"><span class="n">Ships worldwide</span><span class="d">${worldDesc}</span></div>
         <div class="stores">
-          ${(k.kwBuyee||k.kwBuyeeFallback)?`<a class="${clsBuyee}" target="_blank" rel="noopener" href="https://buyee.jp/item/search/query/${k.kwBuyee||k.kwBuyeeFallback}?lang=en">Buyee <span class="en">EN</span></a>`:''}
+          ${k.buyeeWrapped?`<a class="${clsBuyee}" target="_blank" rel="sponsored nofollow noopener" href="${k.buyeeWrapped}">Buyee <span class="en">EN</span></a>`:''}
           <a class="store" target="_blank" rel="sponsored nofollow noopener" href="https://www.ebay.com/sch/i.html?_nkw=${k.kwEn}&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0&amp;campid=5339175838&amp;customid=&amp;toolid=10001&amp;mkevt=1">eBay <span class="en">EN</span></a>
         </div>
       </div>`;
@@ -1371,6 +1371,7 @@ function card(r,idx){
   const kwCodeSg = enc(/^HAC-/.test(sgBase) ? sgBase.replace(/-?[（(][^）)]*[）)]/g,'') : sgBase);
   const kwBuyee = r[7] ? enc(jp + ' ' + r[7]) : '';   // 日本語タイトル(row[1]) + Buyeeキーワード(row[7])。空なら出さない
   const kwBuyeeFallback = r[7] ? '' : enc(r[1]);
+  const buyeeWrapped = (k=>k?("https://i0c.xyz/6a6994d1e0b3f?url="+enc("https://buyee.jp/item/search/query/"+k+"?lang=en")):'')(kwBuyee||kwBuyeeFallback);
   // 括弧内が「目録用語」に完全一致するときだけ除去。実測（2026-07-25・末尾括弧139行の全数測定）に基づく。
   // ★完全一致(Set.has)にする。部分一致の正規表現だと (ゲームボーイ) が「ゲーム」を含んで漏れ除去され、
   //   機種名を削ってしまうのを実測（[9610]TMNT・[32971]新SDガンダム外伝の2行）。だから Set 完全一致。
@@ -1460,7 +1461,7 @@ function card(r,idx){
 
     ${/^\d{13}$/.test(r[10]||'') ? `<div class="rak-slot" data-jan="${r[10]}"></div>` : ''}
 
-    ${r[12]?`<span class="nodisc">No disc &middot; download</span>`:buyBlock({kwBuyee,kwBuyeeFallback,kwEn,kwCode,kwCodeSg,kwKana,kwKanaBo,kwName,kwKanaHard,codes})}
+    ${r[12]?`<span class="nodisc">No disc &middot; download</span>`:buyBlock({kwBuyee,kwBuyeeFallback,buyeeWrapped,kwEn,kwCode,kwCodeSg,kwKana,kwKanaBo,kwName,kwKanaHard,codes})}
 
     ${codes.length?`<div class="field">
       <span class="micro plain">Product code &middot; exact match</span>
