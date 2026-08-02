@@ -354,7 +354,7 @@ h1{font-family:var(--f-pixel);}
 /* ボタンの英字ラベル（COPY / SCAN / Buyee / eBay / 店リンク名）。
    ・.slab-copy / .btn-copy の中身は "Copy"。押下時は ✓ / Hold に変わるが、
      ✓ は Press Start 2P に無く、フォールバック側で普通に出る（崩れない）。
-   ・.store は Buyee / eBay / Suruga-ya / Mercari / Book-Off / Hard-Off（全部英字）。
+   ・.store は Buyee / eBay / Suruga-ya / Book-Off / Hard-Off（全部英字）。Mercari は2026-08-02に廃止。
    ・.scanbtn は "Scan"。
    ★.btn-clerk は「店員に見せる」を含む混在ボタンなので当てない（現行のまま）。 */
 .card .slab-copy{font-family:var(--f-pixel);}
@@ -1324,15 +1324,18 @@ function buyBlock(k){
   const gCode = (k.codes.length && !k.sgNoCode)?`<div class="group">
         <div class="group-label"><span class="n">By product code</span><span class="d">${jp?'exact match — buy direct, Japanese site':'exact match — Japanese site, needs a proxy'}</span></div>
         <div class="stores">
-          <a class="${clsCode}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwCodeSg)}">Suruga-ya</a>
+          <a class="${clsCode}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwCodeSg)}">Suruga-ya (code)</a>
         </div>
       </div>`:'';
 
+  // Mercari 導線は 2026-08-02 に非表示化（この1本がファイル内で唯一の mercari.com リンクだった）。
+  // 生成をやめただけで DATA・他店の導線・並び順には触れていない。復活は下の Suruga-ya の次行に
+  // jp.mercari.com/search?keyword=(kwName)&category_id=76 を張る .store の a 要素を戻すだけ。
+  // kwName の生成(card内)は他店と共用なので残してある。
   const gTitle = `<div class="group">
         <div class="group-label"><span class="n">By Japanese title</span><span class="d">${jp?'domestic listings — buy direct, Japanese site':'domestic listings — usually needs a proxy'}</span></div>
         <div class="stores">
-          <a class="${clsTitle}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwKana)}">Suruga-ya</a>
-          <a class="store" target="_blank" rel="noopener" href="https://jp.mercari.com/search?keyword=${k.kwName}&amp;category_id=76">Mercari</a>
+          <a class="${clsTitle}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwKana)}">Suruga-ya (title)</a>
           <a class="store" target="_blank" rel="noopener" href="https://shopping.bookoff.co.jp/search/genre/51/keyword/${k.kwKanaBo}">Book-Off</a>
           <a class="store" target="_blank" rel="noopener" href="https://netmall.hardoff.co.jp/cate/00010012/?q=${k.kwKanaHard}&amp;s=7">Hard-Off</a>
         </div>
@@ -1361,7 +1364,7 @@ function card(r,idx){
   // 発売元は英語(row[6])を優先し、無ければ日本語(row[5])。どちらも空なら出さない。
   const pubs  = (puben||pubja).split(';').map(s=>s.trim()).filter(Boolean);
   // Buy-link keywords: sellers list by TITLE, not by product code.
-  const kwName = enc(jp||en);        // Japanese name (fallback English) — Suruga-ya / Mercari
+  const kwName = enc(jp||en);        // Japanese name (fallback English) — no consumer now (passed to buyBlock only)
   const kwEn   = enc(en||jp);        // English title (fallback Japanese) — eBay
   const kwCode = enc(codes[0]||'');  // first product code only — Suruga-ya "by code" comparison link
   // ゼルダTPHD(row[3]がこの値の1行のみ): codes[0]がWii Uディスク規格品番WUP-006で
