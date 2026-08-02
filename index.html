@@ -321,6 +321,10 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 /* ★白は桃の上で 3.17:1 しか出ない。地色を載せて 6.4:1 にする。 */
 .card .store.primary:hover{background:var(--signal); color:#07040f;}
 .card .store.primary:hover .en{opacity:1;}
+/* Buyee の費用注記。.group(308行)が flex column gap:8px なので、間隔は親が持つ。
+   ここで足すのは文字サイズと色だけ = レイアウトには触れない。値は同じ役割の
+   .group-label .d(311行)と揃える。 */
+.card .buyee-note{font:400 11.5px/1.4 var(--f-display); color:var(--faint);}
 @media(max-width:420px){
   .card{padding:18px;} .card .ja-title{font-size:25px;} .card .en-title{font-size:22px;}
   .card .code{font-size:20px;}
@@ -1330,12 +1334,20 @@ function buyBlock(k){
     : (noProxy ? 'Buyee search uses the Japanese title here — may show other console versions. Use the highlighted store link for the exact match.'
                : 'proxy &amp; international — English, they handle Japanese');
 
+  /* 代理購入の費用内訳。jp モードでは出さない——国内の買い手は Buyee を経由しないので
+     手数料の話が要らないため。.stores の中ではなく .group 直下に置く: .stores は
+     auto-fit グリッド(312行)なので、中に入れるとボタンと横並びのセルを1つ占める。 */
+  const buyeeNote = !jp
+    ? `<div class="buyee-note">Buyee adds a flat ¥500 service fee, plus Japan domestic shipping (¥150&ndash;1,500) and international shipping &mdash; the international cost is shown once your item reaches their warehouse.</div>`
+    : '';
+
   const gWorld = `<div class="group">
         <div class="group-label"><span class="n">Ships worldwide</span><span class="d">${worldDesc}</span></div>
         <div class="stores">
           ${k.buyeeWrapped?`<a class="${clsBuyee}" target="_blank" rel="sponsored nofollow noopener" href="${k.buyeeWrapped}">Buyee <span class="en">EN</span></a>`:''}
           <a class="store" target="_blank" rel="sponsored nofollow noopener" href="https://www.ebay.com/sch/i.html?_nkw=${k.kwEn}&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0&amp;campid=5339175838&amp;customid=&amp;toolid=10001&amp;mkevt=1">eBay <span class="en">EN</span></a>
         </div>
+        ${buyeeNote}
       </div>`;
 
   // k.sgNoCode: 型番も JAN も駿河屋に無く、どの形でも 0件と実測で確定した行(DL-DOL- 族の2行)。
