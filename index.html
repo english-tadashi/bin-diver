@@ -1422,7 +1422,22 @@ function card(r,idx){
     if(s === 'SLPS-02177-(PS-0013)') return s.replace(/-?[（(][^）)]*[）)]/g,'');   // → SLPS-02177
     return s;                                    // RVL-006(USA)(恒久除外)・その他は現状維持
   };
-  const kwCodeSg = enc(sgParen(sgPdash));   // sgPdash = sgBase から -P- を落とした値(上の定義。二重ハイフン行は素通り)
+  // 動物番長(2026-08-02・1行特例): DATA の型番 DOL-GKDJ-JPN は誤りで、GKDJ は巨人のドシンの型番。
+  // 実測(生URL): DOL-GKDJ → 200/5件が全て巨人のドシン(157000022 ほか)で動物番長は0件＝本番で誤着地していた。
+  // 正しい型番は不明。駿河屋の商品ページは Cloudflare で 403、検索結果ページに型番の記載は無く、
+  // 外部からの推測値を DATA に書くことはしない(罠#141)。代わりに JAN 検索に逃がす。
+  // 実測: JAN 4902370505900 → 200/2件が全て動物番長(157000013 / 157000608)＝到達○。
+  // 対照でカービィのエアライドの JAN 4902370506594 → 200/6件が全てカービィで、型番 DOL-GKYJ の
+  // 5件より広く拾った。JAN が型番の代替として機能する実例が2件取れている(n=2・族には一般化しない)。
+  // ★判定は code 列の完全一致。巨人のドシンの DL-DOL-GKDJ-JPN が DOL-GKDJ-JPN を部分文字列として
+  //   含むため、部分一致だと巨人のドシンまで JAN 化して壊す(罠#90 と同じ「完全一致で持て」)。
+  // ★JAN の生値をコードに直書きせず r[10] から読む。DATA が正典で、値を二重持ちすると将来ズレる。
+  //   判定だけ型番一致・値は列から取る。r[10] が空になったら自動で通常パイプラインに戻る。
+  // ★型番用の変換(sgParen / -P- / SG_REGION)は通さない。JAN は型番体系ではないので、
+  //   将来それらのルールが増えたときに数字列を壊されない位置に置く。WUP-006 の源差し替えより
+  //   1段あと(sgSrc ではなくここ)にあるのはそのため。
+  const sgJan = (code === 'DOL-GKDJ-JPN' && r[10]) ? r[10] : '';
+  const kwCodeSg = enc(sgJan || sgParen(sgPdash));   // sgPdash = sgBase から -P- を落とした値(上の定義。二重ハイフン行は素通り)
   const kwBuyee = r[7] ? enc(jp + ' ' + r[7]) : '';   // 日本語タイトル(row[1]) + Buyeeキーワード(row[7])。空なら出さない
   const kwBuyeeFallback = r[7] ? '' : enc(r[1]);
   const buyeeWrapped = (k=>k?("https://i0c.xyz/6a6994d1e0b3f?url="+enc("https://buyee.jp/item/search/query/"+k+"?lang=en")):'')(kwBuyee||kwBuyeeFallback);
