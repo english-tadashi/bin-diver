@@ -1319,7 +1319,9 @@ function buyBlock(k){
         </div>
       </div>`;
 
-  const gCode = k.codes.length?`<div class="group">
+  // k.sgNoCode: 型番も JAN も駿河屋に無く、どの形でも 0件と実測で確定した行(DL-DOL- 族の2行)。
+  // 空振りリンクを出さない。他の導線(Buyee/eBay/タイトル検索)は下のブロックでそのまま出る。
+  const gCode = (k.codes.length && !k.sgNoCode)?`<div class="group">
         <div class="group-label"><span class="n">By product code</span><span class="d">${jp?'exact match — buy direct, Japanese site':'exact match — Japanese site, needs a proxy'}</span></div>
         <div class="stores">
           <a class="${clsCode}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwCodeSg)}">Suruga-ya</a>
@@ -1437,7 +1439,26 @@ function card(r,idx){
   //   将来それらのルールが増えたときに数字列を壊されない位置に置く。WUP-006 の源差し替えより
   //   1段あと(sgSrc ではなくここ)にあるのはそのため。
   const sgJan = (code === 'DOL-GKDJ-JPN' && r[10]) ? r[10] : '';
-  const kwCodeSg = enc(sgJan || sgParen(sgPdash));   // sgPdash = sgBase から -P- を落とした値(上の定義。二重ハイフン行は素通り)
+  // DL-DOL- 族(2026-08-02): GameCube の複合型番 DL-DOL-XXXX-JPN は駿河屋の実表記と噛み合わず、
+  // 族が丸ごと未到達だった。全数対照87行で現送信形は測った全てが 404/0。
+  // 実測(生URL・87行全数): JAN は 82/82 が到達(100%)・(a)変換 DOL-XXXX は 82/87 が到達。
+  // (a) だけが到達する行は0行で、JAN が使える行では JAN が常に当たる。よって JAN 優先・(a)フォールバック。
+  // JAN は「その商品そのもの」に正確([説明書のみ]等の部分品まで拾う)、(a) は同梱版・廉価版まで広く拾う。
+  // ★族検出は codes 全要素の走査。前方一致 /^DL-DOL-/ にしない。3種の変則を1式で拾うため:
+  //   GS-DL-DOL-GGFJ-JPN(GIFTPIA・前置あり) / 684-00001;DL-DOL-GMBJ-JPN-01(モンキーボール・2要素目に隠れ)
+  //   / DL--DOL-GMSJ-JPN(サンシャイン・二重ハイフン)。ハイフンを -+ にすれば3種とも一致する。
+  //   ★測定時に前方一致で候補を作り、GIFTPIA と モンキーボールの2行を変換し損ねた(404/19件のノイズ)。
+  //     実装で同じ轍を踏まないよう、検出も変換も全要素走査で持つ。
+  // ★救えない2行(PAC-MAN VS. / ドルアーガの塔)は型番も JAN も無く原理的に未到達なので、
+  //   駿河屋のコード検索リンク自体を出さない(下の gCode)。空振りリンクを見せるより出さないほうがまし
+  //   (罠#27 と同じ判断)。Buyee/eBay/タイトル検索など他の導線は残す＝到達手段を消さない。
+  //   判定は型番の完全一致。両文字列とも DATA でその行だけ・部分一致の巻き込み無しを確認済み(罠#90)。
+  const FAM_RE = /DL-+DOL-/;                                   // 族の判定(ハイフン1本でも2本でも拾う)
+  const SG_DEAD = new Set(['DL-DOL-PRJJ-JPN','DL-DOL-PKBJ-JPN']);   // 型番もJANも無く到達不能な2行
+  const famElem = codes.map(c => (c||'').replace(/-JPN.*$/,'').replace(/ *- *| +/g,'-')).find(c => FAM_RE.test(c)) || '';
+  const sgFam = famElem ? (r[10] || famElem.replace(/^.*DL-+DOL-/,'DOL-')) : '';   // JAN優先・無ければ(a)変換
+  const sgNoCode = SG_DEAD.has(code);                          // 駿河屋コード検索リンクを出さない行
+  const kwCodeSg = enc(sgJan || sgFam || sgParen(sgPdash));   // sgPdash = sgBase から -P- を落とした値(上の定義。二重ハイフン行は素通り)
   const kwBuyee = r[7] ? enc(jp + ' ' + r[7]) : '';   // 日本語タイトル(row[1]) + Buyeeキーワード(row[7])。空なら出さない
   const kwBuyeeFallback = r[7] ? '' : enc(r[1]);
   const buyeeWrapped = (k=>k?("https://i0c.xyz/6a6994d1e0b3f?url="+enc("https://buyee.jp/item/search/query/"+k+"?lang=en")):'')(kwBuyee||kwBuyeeFallback);
@@ -1530,7 +1551,7 @@ function card(r,idx){
 
     ${/^\d{13}$/.test(r[10]||'') ? `<div class="rak-slot" data-jan="${r[10]}"></div>` : ''}
 
-    ${r[12]?`<span class="nodisc">No disc &middot; download</span>`:buyBlock({kwBuyee,kwBuyeeFallback,buyeeWrapped,kwEn,kwCode,kwCodeSg,kwKana,kwKanaBo,kwName,kwKanaHard,codes})}
+    ${r[12]?`<span class="nodisc">No disc &middot; download</span>`:buyBlock({kwBuyee,kwBuyeeFallback,buyeeWrapped,kwEn,kwCode,kwCodeSg,kwKana,kwKanaBo,kwName,kwKanaHard,codes,sgNoCode})}
 
     ${codes.length?`<div class="field">
       <span class="micro plain">Product code &middot; exact match</span>
