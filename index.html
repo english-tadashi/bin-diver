@@ -539,8 +539,13 @@ footer a:hover,footer a:focus{color:var(--accent)}
 /* 5. 日本語タイトルを桃色に（text-shadow なし。カード地に対し 6.13:1） */
 .card .ja-title{ color:var(--signal); }
 
-/* 4. By Japanese title の店ボタンを 2×2（買う枠内で最後の .group＝日本語タイトル群） */
-.card .group:last-child .stores{ grid-template-columns:1fr 1fr; }
+/* 4. 2ボタンを横並び2等分にする .stores（現在は Book-Off / Hard-Off の1箇所）。
+   ★2026-08-02: 旧 `.card .group:last-child .stores` をやめた。:last-child は
+   「買う枠内で最後の .group」を指すが、その最後がどのグループかは LOC で入れ替わる
+   （jp: code→title→world / out: world→code→title＝1351行の order）。
+   さらに Suruga-ya (title) を別の .stores に分けた結果、out モードでは単独ボタンの
+   .stores にもこの2カラムが当たって半分幅になっていた。当てる先を class で名指しする。 */
+.card .stores.pair{ grid-template-columns:1fr 1fr; }
 
 /* 3. 番号バッジ（CSS counter・HTML/JS 不変）。水色地・暗い文字の小さなタブを枠上端に重ねる */
 #results{ counter-reset:cardnum; }
@@ -1276,10 +1281,17 @@ const sgAf = w => SG_AF + encodeURIComponent('https://www.suruga-ya.jp/search?ca
 function buyBlock(k){
   const jp = LOC==='jp';
 
-  /* ★塗り(primary)は常に1つだけ。5つ塗ると「まずどれを押すか」が伝わらない。
-     蛍光灯下で最初に押す店を1つ示すのが塗りの役目。
-     IN JAPAN: 型番があれば型番の駿河屋、無ければ日本語タイトルの駿河屋。必ず1つ付く。
-     OUTSIDE : Buyee。row[7] が空のときは駿河屋の型番リンクへ強調を移す（2026-07-26）。
+  /* ★塗り(primary)の方針【2026-08-02 に変更】＝「押しやすい入口を複数示す」。
+     それまでは「塗りは常に1つだけ。蛍光灯下で最初に押す店を1つ示すのが塗りの役目」
+     という方針だったが、日本語タイトルでの駿河屋検索はどちらのモードでも主経路なので、
+     位置に応じた入口(Buyee / 型番)と並べて常に塗る形に変えた。塗りは最大2つになる。
+     IN JAPAN: Suruga-ya (code) ＋ Suruga-ya (title) の2つ。
+               型番が無い行(または sgNoCode)は gCode 自体が出ないので Suruga-ya (title) の1つ。
+     OUTSIDE : Buyee ＋ Suruga-ya (title) の2つ。
+               row[7] が空(noProxy)の行だけは Buyee を塗らず、駿河屋の型番リンクへ移す
+               （2026-07-26）ので Suruga-ya (code) ＋ (title) の2つ。型番も無ければ (title) の1つ。
+     ★3つ以上は塗らない。Book-Off / Hard-Off / eBay は常に枠線のまま。
+       全部塗ると「まずどれを押すか」が伝わらない、という元の理由はここでは生きている。
      ★eBayへのフォールバックは意図して却下した（2026-07-25）。
        row[7] が空なのは「検索キーを持っていない」だけで、Buyeeで買えない証拠ではない。
        それを根拠に転売価格のeBayを主役にすると、中間業者の上乗せ回避という
@@ -1291,7 +1303,12 @@ function buyBlock(k){
   const noProxy  = !k.kwBuyee;   // row[7] 空でも kwBuyeeFallback(和名) で Buyee は出る。primary だけ型番へ移す(2026-07-26)＝1,389行
   const clsBuyee = (jp || noProxy) ? 'store' : 'store primary';
   const clsCode  = ((jp || noProxy) && k.codes.length)     ? 'store primary' : 'store';
-  const clsTitle = ((jp || noProxy) && k.codes.length===0) ? 'store primary' : 'store';
+  /* ★2026-08-02: Suruga-ya (title) は条件分岐を持たず常に塗る（同日の2段階で現在の形になった）。
+     旧1: ((jp || noProxy) && k.codes.length===0) ＝「型番が無い行だけ塗る」で clsCode と排他。
+     旧2: (jp || noProxy) ＝ 海外モードでは水色のまま。
+     現: 無条件。jp では Suruga-ya (code) と、out では Buyee と、塗りが2つ並ぶ
+     ＝上の方針コメント（この関数の先頭）に書いた「最大2つ」の形。clsCode / clsBuyee は不変。 */
+  const clsTitle = 'store primary';
 
   /* ★2026-07-26: 海外モードで row[7] が空のとき、強調を Buyee から
      駿河屋の型番リンクへ移す（型番も無ければ題名リンクへ落とす）。
@@ -1336,6 +1353,8 @@ function buyBlock(k){
         <div class="group-label"><span class="n">By Japanese title</span><span class="d">${jp?'domestic listings — buy direct, Japanese site':'domestic listings — usually needs a proxy'}</span></div>
         <div class="stores">
           <a class="${clsTitle}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwKana)}">Suruga-ya (title)</a>
+        </div>
+        <div class="stores pair">
           <a class="store" target="_blank" rel="noopener" href="https://shopping.bookoff.co.jp/search/genre/51/keyword/${k.kwKanaBo}">Book-Off</a>
           <a class="store" target="_blank" rel="noopener" href="https://netmall.hardoff.co.jp/cate/00010012/?q=${k.kwKanaHard}&amp;s=7">Hard-Off</a>
         </div>
