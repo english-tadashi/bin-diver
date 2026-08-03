@@ -1397,8 +1397,10 @@ function buyBlock(k){
         ${buyeeNote}
       </div>`;
 
-  // k.sgNoCode: 型番も JAN も駿河屋に無く、どの形でも 0件と実測で確定した行(DL-DOL- 族の2行)。
-  // 空振りリンクを出さない。他の導線(Buyee/eBay/タイトル検索)は下のブロックでそのまま出る。
+  // k.sgNoCode: コード検索リンクを出さない行。実測で確定した2種類が入る(SG_DEAD・1540行付近)。
+  //   (a) DL-DOL- 族の2行 = 型番も JAN も駿河屋に無く、どの形でも 0件（空振り）。
+  //   (b) RVL-006 / RVL-006(USA) の2行 = ハード規格品番で無関係な商品に着地（誤着地）。
+  // 空振りも誤着地も出さない。他の導線(Buyee/eBay/タイトル検索)は下のブロックでそのまま出る。
   const gCode = (k.codes.length && !k.sgNoCode)?`<div class="group">
         <div class="group-label"><span class="n">By product code</span><span class="d">${jp?'exact match — buy direct, Japanese site':'exact match — Japanese site, needs a proxy'}</span></div>
         <div class="stores">
@@ -1537,7 +1539,28 @@ function card(r,idx){
   //   (罠#27 と同じ判断)。Buyee/eBay/タイトル検索など他の導線は残す＝到達手段を消さない。
   //   判定は型番の完全一致。両文字列とも DATA でその行だけ・部分一致の巻き込み無しを確認済み(罠#90)。
   const FAM_RE = /DL-+DOL-/;                                   // 族の判定(ハイフン1本でも2本でも拾う)
-  const SG_DEAD = new Set(['DL-DOL-PRJJ-JPN','DL-DOL-PKBJ-JPN']);   // 型番もJANも無く到達不能な2行
+  // RVL-006 / RVL-006(USA)(2026-08-04・2行追加): ドラゴンクエストソード(Wii)の海外版2行。
+  // codes[0] が Wii のハード規格品番で、特定ソフトを指さない ―― 1453行の WUP-006 と同型。
+  // ★ゼルダTPHD の remedy(codes[1] の本物のソフト型番へ源を差し替え)は使えない。
+  //   両行とも codes が1要素しか無く、差し替え先が存在しないため。
+  // 実測(2026-08-04・af_jump/UTM 無しの生URL・自己クリック回避):
+  //   RVL-006      → 200/80件。1ページ20件を全数確認し「ソード」「SWORDS」「剣神」は0回。
+  //                  中身は Wiiリモコン[RVL-003]/ACアダプタ[RVL-002]/ヌンチャク[RVL-004]/
+  //                  LANアダプタ/D端子ケーブル等の周辺機器と無関係のソフト＝完全な誤着地。
+  //   RVL-006(USA) → 404/0件。誤着地はしないが空振り。
+  //   JAN 5060121822719(idx1945) → 404/0件。動物番長の「JAN逃がし」も効かない。
+  //   (もう1行 idx1941 は JAN 自体が空。)
+  // ★1483行の恒久除外コメントが「(USA)を外すと 0件が別商品に化ける」と予測していた状態が、
+  //   idx1945 では DATA の値が最初から裸の RVL-006 なので既に現実になっていた。予測は正しく、
+  //   ここで塞ぐのはその予測どおりの害。誤った値より無いほうがまし(罠#27)。
+  // ★jp モードでは clsCode が (jp || noProxy) で無条件に primary＝塗りボタンが誤着地していた。
+  //   row[7] が "Wii" で埋まっているため海外モードの primary は Buyee 側にあり無傷だったが、
+  //   「row[7] が空でなければ安全」ではないことの実例。
+  // ★消すのはコード検索リンク1本だけ。Buyee/eBay/Suruga-ya(title) は残る＝到達手段は消さない。
+  //   両行とも row[8] に「ドラゴンクエストソード 仮面の女王と鏡の塔」を持ち、常に primary の
+  //   Suruga-ya (title) はこの正しい日本語タイトルを送っている。
+  const SG_DEAD = new Set(['DL-DOL-PRJJ-JPN','DL-DOL-PKBJ-JPN',   // 型番もJANも無く到達不能な2行
+                           'RVL-006','RVL-006(USA)']);            // ハード規格品番で誤着地する2行
   const famElem = codes.map(c => (c||'').replace(/-JPN.*$/,'').replace(/ *- *| +/g,'-')).find(c => FAM_RE.test(c)) || '';
   const sgFam = famElem ? (r[10] || famElem.replace(/^.*DL-+DOL-/,'DOL-')) : '';   // JAN優先・無ければ(a)変換
   const sgNoCode = SG_DEAD.has(code);                          // 駿河屋コード検索リンクを出さない行
