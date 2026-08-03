@@ -701,8 +701,15 @@ header .lede .lede-sub{ font-weight:400; }
 .genre-in{position:relative; width:100%; max-width:720px; max-height:86vh;
   display:flex; flex-direction:column; overflow:hidden;
   background:var(--surface); border:1px solid var(--edge); border-radius:12px;}
+/* 下の .genre-section-h（状態表記の帯）と同じ見た目にする。どちらも「ここから表が始まる」
+   合図なので、上部タイトルだけ地の色のままだと同じ役割に見えない。
+   ★border-top は付けない。.genre-in の border と border-radius:12px の内側に接しているので、
+     ここに1本足すと角丸の内側に直線が重なって角が濁る。
+   ★margin の打ち消しも不要。#genre-modal-body と違い .genre-bar は .genre-in の直下にあり、
+     自分の padding だけで端まで届いている。 */
 .genre-bar{flex-shrink:0; display:flex; align-items:center; justify-content:space-between; gap:12px;
-  padding:16px 18px; border-bottom:1px solid var(--line);}
+  padding:16px 18px; background:var(--field);
+  border-bottom:1px solid var(--line); border-left:3px solid var(--accent);}
 .genre-bar h2{margin:0; font:500 16px/1.3 var(--f-display); color:var(--ink);}
 .genre-bar h2 .jp{display:block; font:400 13px/1.4 var(--f-jp); color:var(--muted);}
 #genre-close{flex-shrink:0; width:38px; height:38px; cursor:pointer;
@@ -714,6 +721,21 @@ header .lede .lede-sub{ font-weight:400; }
 /* 冒頭の一文。ここだけ読めば「英語で探して、右の札を棚で探す」と分かる。 */
 .genre-intro{margin:0 0 4px; font:400 13px/1.6 var(--f-display); color:var(--muted);}
 .genre-intro b{color:var(--ink); font-weight:500;}
+/* 表と表の間の見出し（状態表記の段）。ジャンルの表と状態の表の切れ目なので、帯にして切る。
+   ★var(--field)。上部の .genre-bar は background を持たず、親 .genre-in の var(--surface) が
+     透けているだけ ―― 同じ値を入れても #genre-modal-body の地と同色で帯にならない。
+     1段明るい --field（入力欄・チップと同じ地）を使って、面として浮かせる。
+   ★margin:0 -18px で #genre-modal-body の padding:18px を打ち消し、帯を左右の端まで伸ばす。
+     padding も同じ18pxなので、字の左端は打ち消し前と同じ位置に残る（帯だけが外へ広がる）。
+   ★上下は var(--line)（.genre-row の区切りと同じ薄い枠）で帯を閉じる。左だけ桃の3pxを立てて
+     「ここから別の表」と示す。帯が端まで伸びているので、この3pxはモーダルの左端に付く。
+   ★--accent は :root にある（--f-display と違い .card の中ではない）ので、
+     モーダルからそのまま解決できる。 */
+.genre-section-h{font:500 16px/1.3 var(--f-display); color:var(--ink);
+  background:var(--field); margin:0 -18px; padding:10px 18px;
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  border-left:3px solid var(--accent);}
+.genre-section-h .jp{display:block; font:400 13px/1.4 var(--f-jp); color:var(--muted);}
 
 /* 1グループ＝1行。左が主(英語)・右が従(日本語の棚札)。
    ★align-items:stretch にしない。札は内容の長さで伸びるので、左の高さに引き伸ばすと
@@ -755,10 +777,34 @@ header .lede .lede-sub{ font-weight:400; }
   font:600 16px/1 var(--f-jp); letter-spacing:.05em;
   text-align:center; white-space:nowrap;}
 
+/* 右端は縦札だけ。ラッパは1枚しか包まなくなったが残してある ―― 行の右端の置き場所を
+   決めているのはこのラッパで、.genre-tag 側は札そのものの組み方しか持っていない。 */
+.genre-tags{flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:8px;}
+
+/* 横書きの併記。縦書きが読めない／読み慣れない相手のための同じ札。
+   色・枠線・字は縦札(.genre-jp)と同一で、writing-mode だけ指定しない（＝既定の horizontal-tb）。
+   置き場所は右端ではなく左の英語ブロックの中（見出しの直下・チップの直上）。
+   ★棚で照合するのは右の縦札。こちらは「英語の見出しが日本語で何と書かれるか」を示す行なので、
+     中央でも右端でもなく、上の h3 と下のチップに左端を揃える。
+   ★display:inline-block。ここを flex や block にすると幅が親いっぱいに伸びて、
+     短い札（「美品」2字）が横長の白帯になる。inline-block なら中身の幅で止まる。
+   ★min-inline-size は入れない。右の縦札の120pxは「棚札として読める長さ」の下限だが、
+     こちらは文中のラベルなので、下限で伸ばすと語の長さと箱の幅が合わなくなる。
+   ★padding は縦札と同値のまま。上下左右を入れ替えると枠と字の余白が食い違って、
+     同じ札の別表記に見えなくなる。 */
+.genre-tag-h{display:inline-block; margin:0 0 8px;}
+.genre-jp-h{display:inline-block; padding:11px 9px;
+  border:1px solid #111; border-radius:3px; background:#fff; color:#111;
+  font:600 16px/1 var(--f-jp); letter-spacing:.05em;
+  text-align:center; white-space:nowrap;}
+
 @media (max-width:560px){
   .genre-in{max-height:92vh;} #genre-modal{padding:10px;}
   .genre-row{gap:12px;}
-  .genre-jp{min-inline-size:100px; font-size:14px; padding:9px 7px;}
+  /* 字と余白は両方縮める。長さの下限は縦札だけ ―― 横札は内容幅で止める方針なので、
+     ここで下限を掛け直すと狭い画面でだけ短い札が伸びる。 */
+  .genre-jp, .genre-jp-h{font-size:14px; padding:9px 7px;}
+  .genre-jp{min-inline-size:100px;}
 }
 </style>
 </head>
@@ -899,7 +945,7 @@ header .lede .lede-sub{ font-weight:400; }
 <div id="genre-modal" role="dialog" aria-modal="true" aria-labelledby="genre-title">
   <div class="genre-in">
     <div class="genre-bar">
-      <h2 id="genre-title">Genre guide<span class="jp">ジャンル早見表</span></h2>
+      <h2 id="genre-title">Genre<span class="jp">ジャンル早見表</span></h2>
       <button type="button" id="genre-close" aria-label="Close">&times;</button>
     </div>
     <div id="genre-modal-body"></div>
@@ -1576,7 +1622,7 @@ function card(r,idx){
     ${r[12]?'':`<div class="instore">
       ${shelfNote(r)}
       ${(()=>{const g=shelfGyo(r); return g?`<div class="shelf-loc">この棚を探す: <span class="shelf-gyo">${esc(g)}</span></div>`:'';})()}
-      <button class="genre-link" type="button">Find by genre</button>
+      <button class="genre-link" type="button">Find by genre &amp; condition guide</button>
       <span class="micro plain instore-head">Still can't find it?</span>
       <button class="btn-clerk" type="button" data-clerk="${idx}">Show to shop staff</button>
     </div>`}
@@ -1868,20 +1914,40 @@ const GENRE_GUIDE = [
   { en:"Other", terms:["sci-fi","fantasy","party","arcade","educational","and anything not listed above"], jp:"その他" },
 ];
 
+/* 状態表記。GENRE_GUIDE と同じ形（en / terms / jp）で持つ ―― 描画側を1本の
+   テンプレートで共用するため。こちらも DATA とは無関係の静的な用語集。
+   ★棚札ではなく「値札・商品説明に出る語」。札として白く浮かせる見え方は共通でよい
+     （店頭で現物と照合する語という点は同じ）ため .genre-jp をそのまま使う。 */
+const CONDITION_GUIDE = [
+  {en:'No notation — standard', terms:['no defects noted','standard used condition'], jp:'表記なし'},
+  {en:'Rank B — visible wear', terms:['case or manual damage','plays fine, nothing missing'], jp:'ランクB'},
+  {en:'Junk — as-is', terms:['no returns','not guaranteed to work'], jp:'ジャンク'},
+  {en:'Unopened', terms:['sealed','shrink wrap intact'], jp:'未開封品'},
+  {en:'Near-mint (used)', terms:['opened but like new','little to no wear'], jp:'美品'}
+];
+
 const genreEl=$('#genre-modal'), genreClose=$('#genre-close');
 
 /* 読み込み時に1回だけ組む。esc() を通すのは、この表がいずれ手で編集されるため
    （& や ' を含む語が既にある。生で入れると次に足した語で壊れる）。 */
+// 行の組み方は2つの表で同一。片方だけ直して食い違うのを防ぐため、テンプレートは1本にする。
+const guideRow = g=>`<div class="genre-row">
+    <div class="genre-main">
+      <h3 class="genre-en">${esc(g.en)}</h3>
+      <div class="genre-tag-h"><span class="genre-jp-h">${esc(g.jp)}</span></div>
+      <div class="genre-terms">${g.terms.map(t=>`<span>${esc(t)}</span>`).join('')}</div>
+    </div>
+    <div class="genre-tags">
+      <div class="genre-tag"><span class="genre-jp">${esc(g.jp)}</span></div>
+    </div>
+  </div>`;
+
 $('#genre-modal-body').innerHTML =
   `<p class="genre-intro">Find your genre in English, then look for the Japanese shelf tag <b>&rarr;</b>.
    Disc-era shelves are usually split by genre, not by kana.</p>` +
-  GENRE_GUIDE.map(g=>`<div class="genre-row">
-    <div class="genre-main">
-      <h3 class="genre-en">${esc(g.en)}</h3>
-      <div class="genre-terms">${g.terms.map(t=>`<span>${esc(t)}</span>`).join('')}</div>
-    </div>
-    <div class="genre-tag"><span class="genre-jp">${esc(g.jp)}</span></div>
-  </div>`).join('');
+  GENRE_GUIDE.map(guideRow).join('') +
+  `<h3 class="genre-section-h">Condition terms<span class="jp">状態表記</span></h3>` +
+  CONDITION_GUIDE.map(guideRow).join('');
 function genreShow(){
   genreEl.classList.add('on');
   document.body.style.overflow='hidden';   // 背後が動くと、閉じた後どこにいたか分からなくなる
