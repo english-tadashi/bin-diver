@@ -1657,12 +1657,16 @@ function card(r,idx){
         </div>
       </div>
     </div>`:`<div class="field">
-      <span class="micro plain">Japanese title${r[12]?'':' &middot; copy to paste into a store'}</span>
+      <!-- Copy と注記は配信専用(row[12])でも出す。2026-07-24 に「現物が無い行が店の検索欄に貼れと
+           指示していた」として3か所とも消したが、実店舗を指すのは見出しの文言だけなので、
+           2026-08-03 に見出しの row[12] 分岐へ置き換えた(配信専用=日本のストアで検索/物理=店に貼る)。
+           ★.instore と購入ブロックの r[12] ゲートは別物。ここと一緒に外さないこと。 -->
+      <span class="micro plain">Japanese title${r[12]?' &middot; copy to search the Japanese store':' &middot; copy to paste into a store'}</span>
       <div class="jp-copy-row">
         <div class="jp-chip">${esc(jpMain)}</div>
-        ${r[12]?'':`<button class="btn-copy" type="button" data-copy="${esc(jpMain)}">Copy</button>`}
+        <button class="btn-copy" type="button" data-copy="${esc(jpMain)}">Copy</button>
       </div>
-      ${r[12]?'':`<div class="cap" style="margin-top:7px;">${jaLatin?`Latin letters — you can type this yourself, or copy.`:`You can't type this — copy, then paste into the search box.`}</div>`}
+      <div class="cap" style="margin-top:7px;">${jaLatin?`Latin letters — you can type this yourself, or copy.`:`You can't type this — copy, then paste into the search box.`}</div>
     </div>`}
   </article>`;
 }
