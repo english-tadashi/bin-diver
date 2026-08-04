@@ -686,7 +686,9 @@ header .lede .lede-sub{ font-weight:400; }
    ★--signal（朱）は使わない。カード外なので :root のトークンで組む。
    ============================================================ */
 /* 行ロケーターの直下に出る枠線ボタン。行ロケーターと同じ条件でしか描かれない。
-   塗りは載せない（.btn-clerk が既にカード内で一番強い。ここを同じ強さにすると競る）。
+   この店頭ゾーンでは塗りは載せない（.btn-clerk がゾーン内で一番強い。ここを同じ強さに
+   すると競る）。カード全体で一番強いのはこのゾーンではなく、購入ブロックの
+   `.store.primary`（328行）の桃**塗り**。
    枠線＋普通体で「押せるが主役ではない」段に置く。 */
 .card .genre-link{width:100%; display:flex; align-items:center; justify-content:center; gap:10px;
   min-height:52px; padding:10px 16px; cursor:pointer; text-align:center;
