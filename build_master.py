@@ -939,6 +939,65 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
         # Microsoft
         "Xbox", "Xbox 360", "Xbox One",
     }
+    # ---- 罠#16 の名指し除外（data_line.js だけに効かせる。master_final.csv=rows は素通し）----
+    # 上の KEEP_PLATFORMS は機種単位の一律フィルタで、ここは**行単位の名指し**。
+    # 別の道具として分けてある ―― 機種や platform_ja で一律に落とすと、
+    # 「Nintendo Entertainment System を丸ごと切る」＝将来 MADB が日本版を
+    # この生値で登録したときに巻き込む。切るべきは機種ではなく、この5行だけ。
+    #
+    # 【この5行が何か】MADB が**北米版**の資料として登録している行。
+    #   原典（data/metadata301.ttl）で5行すべてが
+    #     ma:mediaFormat "Game Pak (Nintendo Entertainment System)"
+    #     ma:seriesName  "Nintendo Entertainment System"
+    #   を持ち、M727104 / M727504 は ma:locationPublished が "Redmond, WA"
+    #   （＝任天堂 of America の所在地）。型番も全て `-USA` 接尾辞。
+    #
+    # 【なぜ日本版の棚に出てしまうか】schema:gamePlatform の生値が
+    #   "Nintendo Entertainment System" で、上の PLATFORM_RENAME が
+    #   「同一機なので寄せる」として Famicom に寄せるため。名寄せ自体は正しいが、
+    #   北米版の行まで一緒に日本版の棚へ運んでしまう（罠#16）。
+    #
+    # 【なぜ型番を直すのではなく落とすのか】対応する**日本版の行は別途 master に在り、
+    #   既に正しく出ている**。だから落としても日本のソフトが1本も減らない。
+    #     M727104 SNS-F4-USA  … `SNS-` は北米SNESの接頭辞＝機種違いも重なる二重の誤り。
+    #                            日本版は M726991 / Super Famicom / SHVC-F4（FINAL FANTASY 4）。
+    #                            ゲームIDの `F4` が一致する同一ソフトの日米版。
+    #     M727504 NES-MH-USA  … 本体同梱の2in1。日本未発売で、日本は2本別売り＝
+    #                            M727790 HVC-SM（スーパーマリオブラザーズ）と
+    #                            M727853 HVC-DH（ダックハント）が既に在る。
+    #     M728043 NES-XV-USA  … 北米はバンダイ発売。日本版はナムコの
+    #                            M727847 NXV-4900（XEVIOUS）が既に在る。
+    #     M728046 NES-WH-USA  … 本体同梱の3in1。日本未発売＝対応する日本版が存在しない。
+    #     M728047 NES-BS -USA … 北米版（原典の copyrightHolder は "©1987 LJN Toys, LTD."）。
+    #                            型番文字列に空白が混入してもいる。日本未発売。
+    #                            ★同名の M878432「メジャーリーグ」はアイレムの**別ゲーム**。
+    #                              対応する日本版ではないので、突き合わせないこと。
+    #
+    # 【落とさないと何が起きるか】実測（_experiments/famicom_5rows_collision_check.txt）:
+    #   カードは全行共通の固定文字列 `Match · Japan / NTSC-J` を出し、さらに
+    #   `needs a Japanese Famicom: the 60-pin cartridge does not fit an NES.
+    #    The game's text is Japanese.` と、この5行では**主張が丸ごと逆**の1文を出す
+    #   （実物は NES の72ピンで日本のファミコンに挿さらず、中身は英語）。
+    #   画面上に北米版だと読み取れる要素は無い。また "duck hunt" で検索すると
+    #   結果2件が両方この北米版で、本物の日本版（HVC-DH）は英題を持たないため出ない。
+    #
+    # ★増やすときは1行ずつ、原典を見て理由を書くこと。パターン（`-USA` を含む等）で
+    #   括らない ―― master 全体を走査すると `-USA` は他に M1104128（Game Boy /
+    #   DMG-TR-USA / TETRIS）も持っており、そちらは platform_ja が「ゲームボーイ」で
+    #   性質が違う（今回は対象外＝未判断のまま残す）。パターンで書くと、
+    #   測っていない行まで一緒に消える。
+    EXCLUDE_MADB_ID = {
+        "M727104": "SNS-F4-USA  FINAL FANTASY 2 (北米SNES版。日本版=M726991 SHVC-F4)",
+        "M727504": "NES-MH-USA  SUPER MARIO BROS. / DUCK HUNT (北米2in1。日本未発売)",
+        "M728043": "NES-XV-USA  XEVIOUS (北米バンダイ版。日本版=M727847 NXV-4900)",
+        "M728046": "NES-WH-USA  SUPER MARIO BROS / DUCK HUNT / WORLD CLASS TRACK MEET (北米3in1。日本未発売)",
+        "M728047": "NES-BS -USA MAJOR LEAGUE BASEBALL (北米版。日本未発売)",
+    }
+    # 名指しの ID が master に無くなったら黙って0行除外になる。それを見えるようにする。
+    _missing_exclude = sorted(set(EXCLUDE_MADB_ID) - {r["madb_id"] for r in rows})
+    if _missing_exclude:
+        print(f"★ EXCLUDE_MADB_ID に master へ現れない ID がある（MADB更新で消えた?）: {_missing_exclude}")
+
     # ---- アプリ用パブリッシャー名寄せ v2（data_line.js の row[6] だけ。rows=master は素通し）----
     # プルダウン/手入力を「短く・読める・絞れる」に。row[5](日本語)と master は一切触らない。
     # 処理順: ①掃除(全社) → ③名指し置換(casefold照合) → ②casefold自動集約(多数派表記, UPPER_FIX)。
@@ -992,8 +1051,14 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
         return _CANON_CF.get(n.casefold(), n)               # ③/旧テーブル（casefold 照合）
 
     # パス1: KEEP機種の行だけを対象に、①③後の綴りを casefold グループで集計（多数派を決めるため）
+    # ★除外行（罠#16）はここでも数えない。data_line.js に出ない行が綴りの多数決に
+    #   票を入れているのは、見えないところで結果を動かす形になる。下の出力ループと
+    #   同じ集合を見せて、母集団を1つに保つ。
+    #   （実測: 除外の有無で他 37,850 行の [0]〜[12] は完全一致＝この5票は多数派を動かさない）
     _cf_counts = defaultdict(Counter)
     for r in rows:
+        if r["madb_id"] in EXCLUDE_MADB_ID:
+            continue
         plat = PLATFORM_RENAME.get(r["platform_en"], r["platform_en"])
         if plat not in KEEP_PLATFORMS:
             continue
@@ -1027,7 +1092,11 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
               + ", ".join(f"{n}×{c}" for n, c in sorted(_upper_left, key=lambda x: -x[1])[:20]))
 
     data = []
+    _excluded = []
     for r in rows:                                         # rows(=master) は変更しない。読むだけ。
+        if r["madb_id"] in EXCLUDE_MADB_ID:                # 罠#16: 行単位の名指し除外（上の定義を見ること）
+            _excluded.append(r["madb_id"])                 # 機種フィルタより先に見る＝理由を1つに保つ
+            continue
         plat = PLATFORM_RENAME.get(r["platform_en"], r["platform_en"])   # 先に機種名寄せ
         if plat not in KEEP_PLATFORMS:                     # 名寄せ後の名前で判定。空欄もここで落ちる。
             continue
@@ -1043,6 +1112,10 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
 
     print(f"出力行数             : {len(rows):,}  -> {out_path}")
     print(f"                       {len(data):,} 件 x {len(data[0])} フィールド -> {js_path}  ({size/1024/1024:.2f} MB)")
+    # 名指し除外（罠#16）の実効を毎回出す。「入れたつもりで効いていない」を黙らせない。
+    print(f"名指し除外(罠#16)      : {len(_excluded)}/{len(EXCLUDE_MADB_ID)} 行")
+    for mid in _excluded:
+        print(f"  - {mid}  {EXCLUDE_MADB_ID[mid]}")
     print()
     for k, v in stats.most_common():
         print(f"  {k:22} {v:6,}")
