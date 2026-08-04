@@ -1462,7 +1462,7 @@ function buyBlock(k){
   const gEnTitle = (!jp && k.sgComUrl)?`<div class="group">
         <div class="group-label"><span class="n">By English title</span><span class="d">Suruga-ya's English site &mdash; ships overseas, no proxy needed</span></div>
         <div class="stores">
-          <a class="store wide" target="_blank" rel="noopener" href="${k.sgComUrl}">&#128269; Search Suruga-ya.com (English &middot; ships overseas)</a>
+          <a class="store wide" target="_blank" rel="noopener" href="${k.sgComUrl}">Suruga-ya.com (English &middot; ships overseas)</a>
         </div>
       </div>`:'';
 
@@ -1473,7 +1473,7 @@ function buyBlock(k){
   const gCode = (k.codes.length && !k.sgNoCode)?`<div class="group">
         <div class="group-label"><span class="n">By product code</span><span class="d">${jp?'exact match — buy direct, Japanese site':'exact match — Japanese site, needs a proxy'}</span></div>
         <div class="stores">
-          <a class="${clsCode}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwCodeSg)}">Suruga-ya (code)</a>
+          <a class="${clsCode}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwCodeSg)}">Suruga-ya.jp (code)</a>
         </div>${jpOnlyNote}
       </div>`:'';
 
@@ -1484,7 +1484,7 @@ function buyBlock(k){
   const gTitle = `<div class="group">
         <div class="group-label"><span class="n">By Japanese title</span><span class="d">${jp?'domestic listings — buy direct, Japanese site':'domestic listings — usually needs a proxy'}</span></div>
         <div class="stores">
-          <a class="${clsTitle}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwKana)}">Suruga-ya (title)</a>
+          <a class="${clsTitle}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwKana)}">Suruga-ya.jp (title)</a>
         </div>${jpOnlyNote}
         <div class="stores pair">
           <a class="store" target="_blank" rel="noopener" href="https://shopping.bookoff.co.jp/search/genre/51/keyword/${k.kwKanaBo}">Book-Off</a>
