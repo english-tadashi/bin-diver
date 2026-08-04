@@ -1675,8 +1675,22 @@ function card(r,idx){
   const sgFam = famElem ? (r[10] || famElem.replace(/^.*DL-+DOL-/,'DOL-')) : '';   // JAN優先・無ければ(a)変換
   const sgNoCode = SG_DEAD.has(code);                          // 駿河屋コード検索リンクを出さない行
   const kwCodeSg = enc(sgJan || sgFam || sgParen(sgPdash));   // sgPdash = sgBase から -P- を落とした値(上の定義。二重ハイフン行は素通り)
-  const kwBuyee = r[7] ? enc(jp + ' ' + r[7]) : '';   // 日本語タイトル(row[1]) + Buyeeキーワード(row[7])。空なら出さない
-  const kwBuyeeFallback = r[7] ? '' : enc(r[1]);
+  // Buyee検索キー専用の日本語タイトル。「/」を半角スペースに置換する(2026-08-04)。
+  // 理由: Buyee の検索はキーを URL の「パスの一部」に載せる形式(下の buyeeWrapped)。
+  //   enc() で / は %2F になり、さらに i0c ラッパの二重エンコードで %252F として出る。
+  //   区切り文字がパス位置に入るため、ラッパのデコード後にパスとして解釈されうる。
+  // 実測(2026-08-04・DATAに載る37,855行の全数集計): title_ja に / を持ち、配信専売(row[12])
+  //   でもない＝実際にこのURLを吐く行は 189行(うち row[7] あり179 / なし10)。
+  //   PS2 39・PSP 29・PS4 18・PSVita 18 が上位。.hack//G.U. 系のように // を持つ行もある。
+  // ★置換するのは Buyee のキーだけ。jp 本体は触らない＝画面表示・駿河屋・eBay は不変。
+  // ★title_en 側の / は Buyee のキーに入らない(キーは title_ja 由来)ので対象外。
+  //   英題の / が効くのは eBay の kwEn(上の定義)。そちらは今回変更していない。
+  // ★2026-08-04(2): 置換だけだと「/」が連続する行(.hack//G.U.)や前後に空白がある行
+  //   (SUPER MARIO BROS. / DUCK HUNT)で空白が2〜3連になる。実測41行。畳んで trim する。
+  //   \s なので全角スペース(U+3000)も半角1個に寄る＝Buyee のキーとしては同じ語の並びになる。
+  const jpBuyee = jp.replace(/\//g, ' ').replace(/\s+/g, ' ').trim();   // 「/」を空白へ→連続空白を1個に畳む
+  const kwBuyee = r[7] ? enc(jpBuyee + ' ' + r[7]) : '';   // 日本語タイトル(row[1]) + Buyeeキーワード(row[7])。空なら出さない
+  const kwBuyeeFallback = r[7] ? '' : enc(jpBuyee);
   const buyeeWrapped = (k=>k?("https://i0c.xyz/6a6994d1e0b3f?url="+enc("https://buyee.jp/item/search/query/"+k+"?lang=en")):'')(kwBuyee||kwBuyeeFallback);
   // 括弧内が「目録用語」に完全一致するときだけ除去。実測（2026-07-25・末尾括弧139行の全数測定）に基づく。
   // ★完全一致(Set.has)にする。部分一致の正規表現だと (ゲームボーイ) が「ゲーム」を含んで漏れ除去され、
