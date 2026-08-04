@@ -315,8 +315,13 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card .buy-head p{margin:0; font:400 12px/1.4 var(--f-display); color:var(--muted);}
 .card .group{display:flex; flex-direction:column; gap:8px; margin-top:32px;}
 .card .group-label{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;}
-.card .group-label .n{font:500 11px/1 var(--f-mono); letter-spacing:.01em; text-transform:none; color:var(--ink-2);}
-.card .group-label .d{font:400 11.5px/1.3 var(--f-display); color:var(--faint);}
+/* ★見出し(.n)と説明文(.d)をどちらも 700 にする（2026-08-04・.n は 500→700・.d は 400→700）。
+   このセレクタは `.group-label` の内側に限定されており、`class="n"` / `class="d"` は
+   buyBlock の4グループ（Ships worldwide / By English title / By product code /
+   By Japanese title）の見出し行でしか使っていない＝他セクションには波及しない。
+   Product code 欄・Japanese title 欄などのラベルは .micro / .slab-label で別系統。 */
+.card .group-label .n{font:700 11px/1 var(--f-mono); letter-spacing:.01em; text-transform:none; color:var(--ink-2);}
+.card .group-label .d{font:700 11.5px/1.3 var(--f-display); color:var(--faint);}
 .card .stores{display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:8px;}
 .card .store{display:flex; align-items:center; justify-content:center; gap:6px; height:44px;
   border-radius:8px; font:500 14px/1 var(--f-display); cursor:pointer;
@@ -329,9 +334,12 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 /* ★白は桃の上で 3.17:1 しか出ない。地色を載せて 6.4:1 にする。 */
 .card .store.primary:hover{background:var(--signal); color:#07040f;}
 .card .store.primary:hover .en{opacity:1;}
-/* Buyee の費用注記。.group(308行)が flex column gap:8px なので、間隔は親が持つ。
-   ここで足すのは文字サイズと色だけ = レイアウトには触れない。値は同じ役割の
-   .group-label .d(311行)と揃える。 */
+/* Buyee の費用注記。.group(316行)が flex column gap:8px なので、間隔は親が持つ。
+   ここで足すのは文字サイズと色だけ = レイアウトには触れない。
+   ★2026-08-04まで「値は .group-label .d と揃える」と書いていたが、同日に .d だけを
+     700 にしたので揃っていない（サイズ 11.5px と色 var(--faint) は今も共通・太さだけ違う）。
+     .d を太くしたのは見出し行として立たせるためで、この注記は本文なので 400 のまま。
+     この行と `Suruga-ya.jp (Japan domestic shipping only)…` の注記は同じ .buyee-note を使う。 */
 .card .buyee-note{font:400 11.5px/1.4 var(--f-display); color:var(--faint);}
 /* 駿河屋.com の入口ボタン(2026-08-04)。ラベルが他店(「Buyee」「Book-Off」)と違って一文なので、
    .store の height:44px 固定・1行前提のままだと溢れる。この1本だけ折り返しを許す。
