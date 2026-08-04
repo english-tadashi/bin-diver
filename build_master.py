@@ -41,6 +41,32 @@ import sys
 from collections import Counter, defaultdict
 
 # ---------------------------------------------------------------
+# 「title_ja がラテン文字だけか」の判定（束1の転記に使う唯一の定義）
+#
+# ★この定義は _experiments/survey_missing_title_en_20260805.py（2026-08-05 の調査で
+#   「束1＝2,676行」を出した実測）と**同じ1つの関数**である。あちらがこちらを import する。
+#   逆向き（build がこちらから import）にしなかったのは、_experiments/ が .gitignore で
+#   丸ごと除外されているため。使い捨ての実験フォルダに本番ビルドをぶら下げると、
+#   フォルダを消した瞬間にビルドが動かなくなる。定義は追跡されている側に置く。
+#   ―― 2つ書いて「同じはず」と信じる形にはしない（罠#141 と同じ理由。目視で揃えた
+#   コピーは必ずズレる）。件数が動いたら、それは調査とビルドが別物になった合図。
+#
+# 判定は「日本語の文字が1つも無い」。ひらがな・カタカナ・漢字・半角カナ・全角空白の
+# いずれも含まない行だけが真になる。ローマ数字（Ⅱ）や ×、ö のような非ASCIIは
+# 日本語ではないので通る ―― 原文にそう書いてあるものを、そのまま複製するだけ。
+#
+# ★ main() 内の _script() とは別物。あちらは title_ja の**先頭1文字**だけを見て
+#   字種の内訳を印字する統計用で、判定の粒度が違う。混ぜないこと。
+# ---------------------------------------------------------------
+_RE_ANY_JA = re.compile(r"[぀-ヿ一-鿿㐀-䶿ｦ-ﾟ　]")
+
+
+def is_latin_only(title):
+    """title_ja に日本語の文字が1つも無い＝すでにラテン文字だけで書かれている。"""
+    return not _RE_ANY_JA.search(title)
+
+
+# ---------------------------------------------------------------
 # ローマ字変換（決定的・ヘボン式簡易）
 # 入力は schema:name の @ja-hrkt 読み（カナ）。漢字タイトルの読みもカナで入っている。
 # 読みはカナなのでローマ字は一意に決まる。漢字から読みを推測することは「しない」
@@ -1091,6 +1117,20 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
         print("パブリッシャー正規名(全大文字・UPPER_FIX外, 要確認): "
               + ", ".join(f"{n}×{c}" for n, c in sorted(_upper_left, key=lambda x: -x[1])[:20]))
 
+    # ---- 束1: ラテン文字だけの title_ja を title_en へ転記（data_line.js だけ。rows=master は素通し）----
+    # ★根拠: title_ja が既にラテン文字のみのため、title_en への転記は**外部からの推測値ではなく
+    #   原文の複製**である（罠#141 に抵触しない）。MADB が持っている文字列を、同じレコードの
+    #   別の列へ1文字も変えずに写しているだけで、外から値を持ってきていない。
+    #   だから翻訳も整形もしない ―― 大文字小文字の直し、記号の正規化、綴りの統一、どれもやらない。
+    #   『Final fantasy Ⅶ remake』は『Final fantasy Ⅶ remake』のまま入る。見栄えを整えた瞬間に
+    #   「原文の複製」ではなくなり、罠#141 の側へ落ちる。整えたくなったら別の工程として立てること。
+    #
+    # 上書きはしない。title_en が既に入っている行（Wikidata 由来 / TITLE_EN の手書き）は素通し。
+    # 転記が効くのは「空 かつ ラテンのみ」の行だけ＝英題が増える方向にしか動かない。
+    #
+    # master_final.csv を触らないのは、罠#16 の名指し除外・パブリッシャー名寄せ v2 と同じ理由。
+    # master は MADB の完全な記録として保つ。アプリ向けの加工は data_line.js 側だけに効かせる。
+    _latin_copied = 0
     data = []
     _excluded = []
     for r in rows:                                         # rows(=master) は変更しない。読むだけ。
@@ -1100,7 +1140,11 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
         plat = PLATFORM_RENAME.get(r["platform_en"], r["platform_en"])   # 先に機種名寄せ
         if plat not in KEEP_PLATFORMS:                     # 名寄せ後の名前で判定。空欄もここで落ちる。
             continue
-        data.append([r["title_en"], r["title_ja"], plat, r["product_code"],
+        title_en = r["title_en"]
+        if not title_en and is_latin_only(r["title_ja"]):  # 束1。空のときだけ、原文をそのまま写す
+            title_en = r["title_ja"]
+            _latin_copied += 1
+        data.append([title_en, r["title_ja"], plat, r["product_code"],
                      r["year"], r["publisher"], _canon_pub_final(r["publisher_en"]), r["buyee_kw"],
                      r["title_ja_kana"], r["title_romaji"], r["jan"], r["kana_row"],
                      r["online"]])
@@ -1116,6 +1160,10 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
     print(f"名指し除外(罠#16)      : {len(_excluded)}/{len(EXCLUDE_MADB_ID)} 行")
     for mid in _excluded:
         print(f"  - {mid}  {EXCLUDE_MADB_ID[mid]}")
+    # 束1の転記も毎回実数を出す。2026-08-05 の調査は 2,676 行。ここがズレたら、
+    # MADB 側でタイトルか英題が動いたということ ―― 黙って通さない。
+    print(f"英題を原文複製(束1)    : {_latin_copied:,} 行  "
+          f"(title_en が空 かつ title_ja がラテン文字のみ。調査時 2,676 行)")
     print()
     for k, v in stats.most_common():
         print(f"  {k:22} {v:6,}")
