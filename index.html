@@ -252,17 +252,25 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
   font:400 12.5px/1.5 var(--f-display); color:var(--ink-2);}
 .card .shelf-loc .shelf-gyo{font:600 17px/1 var(--f-jp); color:var(--ink);}
 
-/* 店員に見せるボタン。2人が読むので、英語と日本語を1つのボタンに重ねる。
-   ★明色版は「本文色で塗り潰した塊」だった。そのまま反転すると明るい板になり、
-     カードの中で一番目立つのが型番スラブではなくこのボタンになってしまう。
-     塗りをやめて、本文色の1px枠＋窪みの地にする。幅・高さ・字は変えていないので
-     押せることは分かる（枠は 11.7:1）。強い色はスラブの桃だけに残す。 */
+/* 店員に見せるボタン。ラベルは英語1本（"Show to shop staff"）。
+   ★以前はここに日本語を重ねていたが、2人が読む役は clerkOpen() が開く店員画面へ移した。
+     ボタン内に日本語は無い＝`.btn-clerk .jp` は到達不能だったので撤去した（2026-08-04）。
+   ★見た目は塗りではなく1px枠＋窪みの地。幅・高さ・字は明色版から変えていないので
+     押せることは分かる（枠は 11.7:1）。
+   ★★配分は 2026-07-29 に逆転している。当時このコメントは「強い色はスラブの桃だけに残す」
+     ＝型番スラブが主役、と書いていたが、同日 `.slab` の桃枠と発光を撤去した（187行）。
+     いま桃(--signal)の枠を**常時**持つのはこのボタンだけで、桃＝店頭アクションの合図。
+     スラブ側に残る桃は `.reg` の「+」印（190行）だけ＝枠ではない。
+     だから「一番目立つのがスラブではなくこのボタンになってしまう」という当時の心配は、
+     もう心配ではなく現状そのもの。ここを塗りに戻すかどうかは配分の再設計として扱うこと。
+   ★ただし「カード内で一番強い面」はこのボタンではない。購入ブロックの `.store.primary`
+     （328行）が桃の**塗り**で、こちらは枠だけ＝一段下。`.slab-copy.done` /
+     `.btn-copy.done` の桃枠はコピー成功後の一時状態なので、常時の配分には数えない。 */
 .card .btn-clerk{width:100%; display:flex; align-items:center; justify-content:center; gap:10px;
   min-height:52px; padding:10px 16px; cursor:pointer; text-align:center;
   border:1px solid var(--signal); border-radius:2px; background:var(--paper); color:var(--signal);
   font:500 15px/1.2 var(--f-display); transition:opacity .12s;}
 .card .btn-clerk:hover{opacity:.86;}
-.card .btn-clerk .jp{font:500 14px/1.2 var(--f-jp); color:var(--muted);}
 
 /* spec row */
 .card .specs{display:flex; border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);}
