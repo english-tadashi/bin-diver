@@ -333,6 +333,15 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
    ここで足すのは文字サイズと色だけ = レイアウトには触れない。値は同じ役割の
    .group-label .d(311行)と揃える。 */
 .card .buyee-note{font:400 11.5px/1.4 var(--f-display); color:var(--faint);}
+/* 駿河屋.com の入口ボタン(2026-08-04)。ラベルが他店(「Buyee」「Book-Off」)と違って一文なので、
+   .store の height:44px 固定・1行前提のままだと溢れる。この1本だけ折り返しを許す。
+   .stores の grid 定義(320行)には触らない＝他店ボタンの寸法は不変。 */
+.card .store.wide{height:auto; min-height:44px; padding:10px 14px; line-height:1.35;
+  text-align:center; white-space:normal;}
+/* .buyee-note の中に置く Buyee へのリンク。.card a{color:inherit}(165行)で文字色を継ぐため、
+   下線と水色を足さないとリンクだと分からない。見え方はフッターのリンク(433行)に揃える。 */
+.card .note-link{color:var(--tag); text-decoration:underline;}
+.card .note-link:hover,.card .note-link:focus{color:var(--accent);}
 @media(max-width:420px){
   .card{padding:18px;} .card .ja-title{font-size:25px;} .card .en-title{font-size:22px;}
   .card .code{font-size:20px;}
@@ -1341,6 +1350,23 @@ function setLoc(v,skipSave){
 const SG_AF='https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=';
 const SG_UTM='&utm_medium=affiliate&utm_source=gamekataban.com&utm_content=%2F&utm_campaign=afid5357';
 const sgAf = w => SG_AF + encodeURIComponent('https://www.suruga-ya.jp/search?category=2&search_word=' + w + SG_UTM);
+/* 駿河屋の英語サイト(.com)。2026-08-04 追加。.jp と違って海外発送に対応する＝日本国内の
+   住所も代理購入業者も要らない。海外モードでだけ出す(IN JAPAN は .jp のみで変更なし)。
+   ★af_jump を通さない。アフィリエイトではない直リンクなので、通すと .jp のアフィリエイト
+     経由に見せかけることになる。sgAf と別系統にしてあるのはそのため。
+   ★検索語は「英題 + 機種名(英語)」。DATA の r[0] と r[2] をそのまま繋ぐ。
+     r[2] は PLATFORM_RENAME 適用後の platform_en(build_master.py 991行)。
+   実測(2026-08-04・30件を目視): 1ページ目に対象あり 56.7% / 誤表示 0件。
+   4割強は空振りするが、空振りは「検索結果が薄い」だけで別物を掴ませない＝罠#27 の害は出ない。
+   その代わり塗り(primary)にはしない。下の gEnTitle のコメントを見ること。 */
+const SG_COM='https://www.suruga-ya.com/en/products?category=2&keyword=';
+/* ★空白は %20 ではなく + で送る(2026-08-04)。56.7% の測定に使った30本の URL が + 区切りで、
+   %20 のままだと「測ったものと違う URL を本番に置く」ことになる。クエリ値としては等価の
+   はずだが、等価かどうかは駿河屋側の実装次第で、こちらでは測っていない。
+   ★置換するのは %20 だけ。%3A(:) 等の記号エンコードは encodeURIComponent のまま残す
+     ＝測定時(Python の quote_plus)と同じ形。差が残るのは ' の1文字だけで、
+     quote_plus は %27・こちらは素の ' を送る(該当は英題にアポストロフィを含む行)。 */
+const sgCom = (en,pf) => SG_COM + encodeURIComponent([en,pf].filter(Boolean).join(' ')).replace(/%20/g,'+');
 function buyBlock(k){
   const jp = LOC==='jp';
 
@@ -1407,6 +1433,39 @@ function buyBlock(k){
         ${buyeeNote}
       </div>`;
 
+  /* ★駿河屋.jp が国内発送のみであることの注記(2026-08-04)。海外モードでだけ出す。
+     .jp のリンクは押せば商品は見つかるが、そこから直接は届かない ―― この非対称は
+     押す前に伝えないと「見つかった＝買える」と読まれる。
+     ★code / title の両方に付ける。片方だけだと「型番のほうなら送れる」と読める余地が残る
+     （両リンクとも同じ .jp で、制約はリンクの種類によらない）。
+     ★"Buyee" は既存の代理購入リンクへ繋ぐ。buyeeWrapped は row[7] も row[1] も
+       空の行では作れないので、その場合はプレーンテキストに落とす＝リンク切れを作らない。
+     ★埋め込みは </div> と同じ行に置く（下の gCode / gTitle）。改行して ${...} を独立行に
+       すると、jp モード(空文字)のときに空白だけの行が残り、IN JAPAN の出力が
+       変更前とバイト単位で一致しなくなる。同じ行なら jp モードは完全に無変化。 */
+  const jpOnlyNote = !jp
+    ? `<div class="buyee-note">Suruga-ya.jp (Japan domestic shipping only) &mdash; Can't ship to you directly, use ${k.buyeeWrapped?`<a class="note-link" target="_blank" rel="sponsored nofollow noopener" href="${k.buyeeWrapped}">Buyee</a>`:'Buyee'} to receive it overseas</div>`
+    : '';
+
+  /* ★駿河屋.com(英語・海外発送)の入口(2026-08-04)。海外モードかつ英題がある行だけ。
+     英題が空の行(DATA の r[0] が空)では検索語が「機種名だけ」になり、その機種の商品を
+     無差別に並べる＝探している物と無関係な結果を主導線として見せることになるので出さない
+     （空振りより誤誘導のほうが害が大きい・罠#27）。sgComUrl は card 側で英題が
+     空なら '' にしてある。
+     ★独立したグループにする。既存の .jp 2群に混ぜると "By product code" / "By Japanese title"
+       という見出しの意味が壊れる（これは英題での検索で、どちらでもない）。
+     ★塗り(primary)にしない。海外モードの塗りは Buyee ＋ Suruga-ya (title) の2つで、
+       関数先頭の方針コメントにあるとおり3つ以上は塗らない。加えて的中 56.7% は
+       「蛍光灯の下で最初に押す1本」として出せる数字ではない。枠線でも導線は死なない。
+     ★.jp 群より上・Ships worldwide より下に置く。海外の買い手にとって
+       「直接届く」ものが上、「代理が要る」ものが下、という既存の並びの理屈に合わせる。 */
+  const gEnTitle = (!jp && k.sgComUrl)?`<div class="group">
+        <div class="group-label"><span class="n">By English title</span><span class="d">Suruga-ya's English site &mdash; ships overseas, no proxy needed</span></div>
+        <div class="stores">
+          <a class="store wide" target="_blank" rel="noopener" href="${k.sgComUrl}">&#128269; Search Suruga-ya.com (English &middot; ships overseas)</a>
+        </div>
+      </div>`:'';
+
   // k.sgNoCode: コード検索リンクを出さない行。実測で確定した2種類が入る(SG_DEAD・1540行付近)。
   //   (a) DL-DOL- 族の2行 = 型番も JAN も駿河屋に無く、どの形でも 0件（空振り）。
   //   (b) RVL-006 / RVL-006(USA) の2行 = ハード規格品番で無関係な商品に着地（誤着地）。
@@ -1415,7 +1474,7 @@ function buyBlock(k){
         <div class="group-label"><span class="n">By product code</span><span class="d">${jp?'exact match — buy direct, Japanese site':'exact match — Japanese site, needs a proxy'}</span></div>
         <div class="stores">
           <a class="${clsCode}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwCodeSg)}">Suruga-ya (code)</a>
-        </div>
+        </div>${jpOnlyNote}
       </div>`:'';
 
   // Mercari 導線は 2026-08-02 に非表示化（この1本がファイル内で唯一の mercari.com リンクだった）。
@@ -1426,14 +1485,15 @@ function buyBlock(k){
         <div class="group-label"><span class="n">By Japanese title</span><span class="d">${jp?'domestic listings — buy direct, Japanese site':'domestic listings — usually needs a proxy'}</span></div>
         <div class="stores">
           <a class="${clsTitle}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwKana)}">Suruga-ya (title)</a>
-        </div>
+        </div>${jpOnlyNote}
         <div class="stores pair">
           <a class="store" target="_blank" rel="noopener" href="https://shopping.bookoff.co.jp/search/genre/51/keyword/${k.kwKanaBo}">Book-Off</a>
           <a class="store" target="_blank" rel="noopener" href="https://netmall.hardoff.co.jp/cate/00010012/?q=${k.kwKanaHard}&amp;s=7">Hard-Off</a>
         </div>
       </div>`;
 
-  const order = jp ? [gCode, gTitle, gWorld] : [gWorld, gCode, gTitle];
+  // gEnTitle は jp モードでは '' なので、IN JAPAN の並びは 3群のまま＝変更なし。
+  const order = jp ? [gCode, gTitle, gWorld] : [gWorld, gEnTitle, gCode, gTitle];
 
   return `<div>
       <div class="buy-head">
@@ -1459,6 +1519,10 @@ function card(r,idx){
   const kwName = enc(jp||en);        // Japanese name (fallback English) — no consumer now (passed to buyBlock only)
   const kwEn   = enc(en||jp);        // English title (fallback Japanese) — eBay
   const kwCode = enc(codes[0]||'');  // first product code only — Suruga-ya "by code" comparison link
+  // 駿河屋.com(英語・海外発送)の検索URL。英題(en)が空の行は '' にする＝buyBlock 側でリンクごと出ない。
+  // ここで en を見るのは、DATA の生の英題を持っているのが card だけだから(buyBlock には k しか渡らない)。
+  // ★title(英題→和名フォールバック)ではなく en を使う。和名を .com の英語検索に投げても当たらない。
+  const sgComUrl = en ? sgCom(en, pf) : '';
   // ゼルダTPHD(row[3]がこの値の1行のみ): codes[0]がWii Uディスク規格品番WUP-006で
   // 駿河屋が別商品に飛ぶため、この行だけソフト型番codes[1]を使う。
   // 実測: WUP-006(JPN)→無関係2件 / WUP-P-AZAJ→正しいゼルダ3件(2026-07-27)。
@@ -1683,7 +1747,7 @@ function card(r,idx){
 
     ${/^\d{13}$/.test(r[10]||'') ? `<div class="rak-slot" data-jan="${r[10]}"></div>` : ''}
 
-    ${r[12]?`<span class="nodisc">No disc &middot; download</span>`:buyBlock({kwBuyee,kwBuyeeFallback,buyeeWrapped,kwEn,kwCode,kwCodeSg,kwKana,kwKanaBo,kwName,kwKanaHard,codes,sgNoCode})}
+    ${r[12]?`<span class="nodisc">No disc &middot; download</span>`:buyBlock({kwBuyee,kwBuyeeFallback,buyeeWrapped,kwEn,kwCode,kwCodeSg,kwKana,kwKanaBo,kwName,kwKanaHard,codes,sgNoCode,sgComUrl})}
 
     ${codes.length?`<div class="field">
       <span class="micro plain">Product code &middot; exact match</span>
