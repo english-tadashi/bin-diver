@@ -1492,8 +1492,20 @@ function buyBlock(k){
         </div>
       </div>`;
 
-  // gEnTitle は jp モードでは '' なので、IN JAPAN の並びは 3群のまま＝変更なし。
-  const order = jp ? [gCode, gTitle, gWorld] : [gWorld, gEnTitle, gCode, gTitle];
+  /* gEnTitle は jp モードでは '' なので、IN JAPAN の並びは 3群のまま＝変更なし。
+     ★海外モードの gCode / gTitle の順は noProxy で分ける（2026-08-04）。
+     通常行: gTitle を先に出す。Buyee で受け取れる行では和名検索のほうが実際に使う主経路で、
+             型番の exact match は「念のため」の位置づけになる。
+     noProxy行(row[7]空・1,389行): gCode を先に出す＝**元の順序を維持する**。
+             この行では clsCode が primary になる(2026-07-26の判断＝「届く可能性」ではなく
+             「正しい物である可能性」で塗りを決めた)。その塗りボタンを Book-Off / Hard-Off より
+             下へ動かすと、塗りで示した主経路が最後に来て、塗りの意味が消える。
+     ★塗りの数はどちらも2つで、関数先頭の方針「最大2つ・3つ以上は塗らない」は不変。 */
+  const order = jp
+    ? [gCode, gTitle, gWorld]
+    : noProxy
+      ? [gWorld, gEnTitle, gCode, gTitle]
+      : [gWorld, gEnTitle, gTitle, gCode];
 
   return `<div>
       <div class="buy-head">
