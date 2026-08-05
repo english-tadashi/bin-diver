@@ -678,7 +678,7 @@ KANA_SPLIT_FIX = {
 # ★なぜ機械的な鍵一致で一括処理せず、madb_id で名指しするのか。
 #   鍵が一致しても別の作品であることがあり、機械には見分けられないため。
 #   確認は _experiments/bucket2_candidates_20260805.txt（216行を1行ずつ並べたもの）で行い、
-#   下の3種の印が付いた **34行を除いた 182行だけ** をここに置いた:
+#   下の3種の印が付いた **34行を除いた 182行だけ** を先に置いた:
 #     ★候補が複数（3行）   同じ鍵に別々の英題がぶら下がる。
 #                          例: 'ロックマン' に 'Mega Man' と 'Rockman Complete Works'
 #     ◆通し番号の食い違い（9行）
@@ -689,6 +689,13 @@ KANA_SPLIT_FIX = {
 #                          例: 'ウルトラマン'(Game Boy) に 'Ultraman: Towards the Future'(SFC)
 #   （印は重なる。3+9+25=37 だが実体は34行。除外後が182行）
 #
+# ★2026-08-05 追記 ―― その34行を1件ずつ目視し、**32行をこの表に足した**（182 → 214行）。
+#   目視は _experiments/bucket_flagged_34_review.md（34行を印の種類ごとに並べたシート）で行った。
+#   足した32行も出所は同じ「DATA 内の別行の複製」で、上と1文字も違わない扱いにしてある。
+#   残る2行（M878080 / M755824）は**複製ではなくなった**ので、この表には入れていない。
+#   下の MANUAL_TITLE_EN_FLAGGED34 を見ること。値の出所が違うものを同じ表に混ぜると、
+#   この表の見出しに書いた「値の出所＝別行の複製」が嘘になる。
+#
 # ★前方一致は1行も使っていない。'ドラゴンボールZ Kakarot' が 'Dragon Ball Z: Budokai' を
 #   拾う型の外れが混ざるため、候補を出す道具までに留める（2026-08-05 の決定）。
 #   ここに在るのは全件が**鍵の完全一致**である。
@@ -697,20 +704,34 @@ KANA_SPLIT_FIX = {
 #   保つ。上書きもしない ―― title_en が空の行にだけ入れる。
 #
 # 母集団の定義（束2）: title_en が空 × 音写系（漢字ひらがな無し・カナ含む）× レトロ機 ×
-#   同じ鍵を持つ英題付きの行が DATA に在る = 216行。うち印なしの182行が下の表。
+#   同じ鍵を持つ英題付きの行が DATA に在る = 216行。
+#   内訳: 印なし182行 ＋ 目視で採用した32行 = 214行が下の表。残る2行は下の別表。
 TRANSLITERATED_TITLE_EN = {
+    "M1104127": "Phantasy Star",                        # ファンタシースター / Sega Mark III  ← M755115（ファンタシースター / Wii）
+    "M1108821": "Ice Climber",                          # アイスクライマー / Game Boy Advance  ← M720275（アイスクライマー / Game Boy Advance）ほか2行
     "M718904": "Battle Pinball",                        # バトルピンボール / 3DO  ← M754144（バトルピンボール / Super Famicom）
+    "M722515": "Advanced V.G.",                         # アドヴァンスト ヴァリアブル・ジオ / PlayStation  ← M726193（アドヴァンスト ヴァリアブル・ジオ / PC Engine）ほか3行
     "M724312": "Lode Runner: The Legend Returns",       # ロードランナーレジェンドリターンズ / PlayStation  ← M758968（ロードランナー レジェンド・リターンズ / PlayStation）ほか1行
     "M724428": "Gran Turismo",                          # グランツーリスモ / PlayStation  ← M747602（グランツーリスモ / PSP）ほか4行
     "M724432": "The King of Fighters '98",              # ザ・キング・オブ・ファイターズ'98 / PlayStation  ← M748514（ザ・キング・オブ・ファイターズ '98 / Wii）
     "M725377": "Game & Watch Gallery",                  # ゲームボーイギャラリー / Game Boy  ← M747994（ゲームボーイギャラリー / Nintendo 3DS）
     "M726688": "Batman Returns",                        # バットマン・リターンズ / Game Gear  ← M726578（バットマン・リターンズ / Mega Drive）
+    "M727554": "Alex Kidd: The Lost Stars",             # アレックスキッド ザ ロストスターズ / Sega Mark III  ← M745176（アレックスキッド ザ・ロストスターズ / Wii）
     "M728275": "Ape Escape",                            # サルゲッチュ / PlayStation  ← M723772（サルゲッチュ / PlayStation）ほか1行
+    "M728469": "Alpha Mission II",                      # ASO2  ～ラストガーディアン～ / Neo Geo  ← M728468（ASO2  ～ラストガーディアン～ / Wii）
+    "M728470": "Alpha Mission II",                      # ASO2  ～ラストガーディアン～ / Neo Geo CD  ← M728468（ASO2  ～ラストガーディアン～ / Wii）
     "M733919": "Ayrton Senna's Super Monaco GP II",     # アイルトン・セナ スーパーモナコGP2 / Mega Drive  ← M733918（アイルトン・セナ スーパーモナコ GP 2 / Game Gear）
     "M734348": "Final Fantasy II",                      # ファイナルファンタジー2 / WonderSwan  ← M727491（ファイナルファンタジー2 / Famicom）ほか3行
     "M734501": "Langrisser III",                        # ラングリッサー3 / Sega Saturn  ← M734500（ラングリッサー3 / Sega Saturn）
     "M734502": "Langrisser III",                        # ラングリッサー3 / Sega Saturn  ← M734500（ラングリッサー3 / Sega Saturn）
     "M736919": "James Bond 007: Everything or Nothing", # 007 エブリシング オア ナッシング / Game Boy Advance  ← M736918（007 エブリシング オア ナッシング / GameCube）ほか1行
+    "M738787": "Emit",                                  # EMIT バリューセット / Sega Saturn  ← M725853（EMIT バリューセット / PlayStation）
+    "M738788": "Emit",                                  # EMITバリューセット / Super Famicom  ← M725853（EMIT バリューセット / PlayStation）
+    "M741209": "NFL Quarterback Club",                  # NFL クォーターバッククラブ '95 / Mega Drive  ← M741211（NFL クォーターバッククラブ'95 / Super Famicom）
+    "M741210": "NFL Quarterback Club",                  # NFL クォーターバッククラブ '95 / Mega Drive  ← M741211（NFL クォーターバッククラブ'95 / Super Famicom）
+    "M741214": "NFL Quarterback Club",                  # NFLクォーターバッククラブ'95 / Game Gear  ← M741211（NFL クォーターバッククラブ'95 / Super Famicom）
+    "M741215": "NFL Quarterback Club",                  # NFLクォーターバッククラブ'95 / Game Boy  ← M741211（NFL クォーターバッククラブ'95 / Super Famicom）
+    "M744531": "Another World",                         # アウター・ワールド / Super Famicom  ← M744532（アウターワールド / 3DO）
     "M744895": "The Addams Family",                     # アダムス・ファミリー / Game Boy  ← M744894（アダムス ファミリー / Super Famicom）
     "M744896": "The Addams Family",                     # アダムスファミリー / Game Gear  ← M744894（アダムス ファミリー / Super Famicom）
     "M745194": "Angelique",                             # アンジェリーク / Game Boy Advance  ← M725808（アンジェリーク / Super Famicom）ほか1行
@@ -718,6 +739,7 @@ TRANSLITERATED_TITLE_EN = {
     "M745217": "Angelique",                             # アンジェリークSpecial / PlayStation  ← M723429（アンジェリーク Special / PlayStation）ほか2行
     "M745218": "Angelique",                             # アンジェリークSpecial / Sega Saturn  ← M723429（アンジェリーク Special / PlayStation）ほか2行
     "M745219": "Angelique",                             # アンジェリークSpecial / Sega Saturn  ← M723429（アンジェリーク Special / PlayStation）ほか2行
+    "M745883": "Ultraman: Towards the Future",          # ウルトラマン / Game Boy  ← M727049（ウルトラマン / Super Famicom）ほか1行
     "M745885": "Ultraman Fighting Evolution",           # ウルトラマン Fighting Evolution / PlayStation  ← M724970（ウルトラマン FIGHTING EVOLUTION / PlayStation）
     "M745926": "Aerobiz",                               # エアーマネジメント / PlayStation  ← M724471（エアーマネジメント / PlayStation）
     "M745970": "Alien Syndrome",                        # エイリアンシンドローム / Game Gear  ← M728044（エイリアン シンドローム / Sega Mark III）
@@ -728,6 +750,7 @@ TRANSLITERATED_TITLE_EN = {
     "M748217": "Golden Axe",                            # ゴールデンアックス / WonderSwan  ← M748214（ゴールデンアックス / Wii）ほか2行
     "M748537": "The King of Fighters '98",              # ザ・キング・オブ・ファイターズ'98 / PlayStation  ← M748514（ザ・キング・オブ・ファイターズ '98 / Wii）
     "M748566": "The Sims",                              # ザ・シムズ / Game Boy Advance  ← M748565（ザ・シムズ / GameCube）ほか1行
+    "M748706": "Cyber Knight",                          # サイバーナイト / Super Famicom  ← M727169（サイバーナイト / PC Engine）
     "M748718": "Cyborg 009",                            # サイボーグ009 / Super Famicom  ← M748719（サイボーグ009 / Mega Drive）
     "M749020": "Shining Wisdom",                        # シーバス・フィッシング / PlayStation  ← M719585（シーバス・フィッシング / Sega Saturn）
     "M749127": "Jigsaw World",                          # ジグソーワールド / PlayStation  ← M726020（ジグソーワールド / PlayStation）
@@ -738,10 +761,15 @@ TRANSLITERATED_TITLE_EN = {
     "M749351": "Jurassic Park",                         # ジュラシック・パーク / Game Gear  ← M749350（ジュラシック パーク / Mega Drive）ほか2行
     "M749954": "Star Soldier",                          # スターソルジャー / GameCube  ← M720273（スターソルジャー / Game Boy Advance）ほか3行
     "M749994": "Standby Say You!",                      # スタンバイSay You! / Sega Saturn  ← M749992（スタンバイ Say You! / PlayStation）ほか1行
+    "M750164": "Kung-Fu Master",                        # スパルタンX / Game Boy  ← M727799（スパルタンX / Famicom）
+    "M750197": "Space Invaders",                        # スペース・インベーダー / PlayStation  ← M727806（スペースインベーダー / Famicom）ほか1行
+    "M750199": "Space Invaders",                        # スペースインベーダー / WonderSwan  ← M727806（スペースインベーダー / Famicom）ほか1行
     "M750224": "Space Harrier",                         # スペースハリアー / Mega Drive  ← M719551（スペースハリアー / Sega Saturn）ほか4行
     "M750226": "B.O.B.",                                # スペースファンキーB.O.B. / Super Famicom  ← M750225（スペースファンキーB.O.B. / Mega Drive）
     "M750627": "Sonic the Hedgehog",                    # ソニック・ザ・ヘッジホッグ / Game Gear  ← M750624（ソニック・ザ・ヘッジホッグ / Nintendo 3DS）
+    "M750881": "Tiny Toon Adventures: Buster Busts Loose!", # タイニー・トゥーン アドベンチャーズ / Game Boy  ← M726636（タイニー・トゥーン アドベンチャーズ / Super Famicom）
     "M751008": "Tatsunoko Fight",                       # タツノコファイト / PlayStation  ← M723641（タツノコファイト / PlayStation）
+    "M751104": "Street Slam",                           # ダンクドリーム / Neo Geo  ← M726029（ダンクドリーム / Neo Geo CD）ほか1行
     "M751462": "Discworld",                             # ディスクワールド / PlayStation  ← M751464（ディスクワールド / Sega Saturn）
     "M751463": "Discworld",                             # ディスクワールド / PlayStation  ← M751464（ディスクワールド / Sega Saturn）
     "M751593": "Tails Adventure",                       # テイルスアドベンチャー / Game Gear  ← M751592（テイルスアドベンチャー / Nintendo 3DS）
@@ -749,17 +777,21 @@ TRANSLITERATED_TITLE_EN = {
     "M752562": "Dragon Ball Z: Budokai",                # ドラゴンボールZ / GameCube  ← M722534（ドラゴンボールZ / PlayStation 2）ほか1行
     "M752680": "DreamMix TV World Fighters",            # ドリームミックスTV ワールドファイターズ / GameCube  ← M722348（ドリームミックスTV ワールドファイターズ / GameCube）
     "M753335": "Burger Burger",                         # バーガーバーガー / PlayStation  ← M753334（バーガーバーガー / PlayStation）
+    "M753336": "Burger Burger",                         # バーガーバーガー / PlayStation  ← M753334（バーガーバーガー / PlayStation）
     "M753352": "Virtua Fighter",                        # バーチャファイター / Mega Drive  ← M719651（バーチャファイター / Sega Saturn）
     "M753397": "Virtua Racing",                         # バーチャレーシング デラックス / Mega Drive  ← M728060（バーチャ レーシング デラックス / Mega Drive）
     "M753436": "Burning Fight",                         # バーニングファイト / Neo Geo  ← M753437（バーニングファイト / Neo Geo CD）
     "M753505": "Resident Evil 2",                       # バイオハザード 2 / Nintendo 64  ← M753506（バイオハザード 2 / PlayStation）
     "M753624": "Biomotor Unitron",                      # バイオモーター ユニトロン / Neo Geo Pocket  ← M724387（バイオモーター・ユニトロン / Neo Geo Pocket）
+    "M753810": "Puzzle Bobble",                         # パズルボブル / WonderSwan  ← M753809（パズルボブル / Game Gear）ほか2行
     "M753813": "Puzzle Bobble",                         # パズルボブル / Neo Geo CD  ← M753809（パズルボブル / Game Gear）ほか2行
     "M753819": "Puzzle Bobble 2",                       # パズルボブル2X / Sega Saturn  ← M719553（パズルボブル2X / Sega Saturn）
     "M754026": "Batman",                                # バットマン / Game Boy  ← M754025（バットマン / Mega Drive）ほか1行
     "M754137": "Battle Dodge Ball: Toukyuu Daigekitotsu!", # バトルドッジボール / Game Boy  ← M726990（バトルドッジボール / Super Famicom）
     "M754212": "Battle Lode Runner",                    # バトルロードランナー / PC Engine  ← M754211（バトルロードランナー / Wii）
     "M754228": "Panel Quiz Attack 25",                  # パネルクイズアタック25 / PlayStation  ← M754226（パネルクイズ アタック25 / PlayStation 2）
+    "M754354": "Pulstar",                               # パルスター / Neo Geo  ← M754353（パルスター / Wii）
+    "M754355": "Pulstar",                               # パルスター / Neo Geo CD  ← M754353（パルスター / Wii）
     "M754401": "Paro Wars",                             # パロウォーズ / PlayStation  ← M725137（パロウォーズ / PlayStation）
     "M754704": "Vib-Ribbon",                            # ビブリボン / PlayStation  ← M724068（ビブリボン / PlayStation）
     "M754705": "Vib-Ribbon",                            # ビブリボン / PlayStation  ← M724068（ビブリボン / PlayStation）
@@ -805,19 +837,24 @@ TRANSLITERATED_TITLE_EN = {
     "M759201": "Lock 'n' Chase",                        # ロックンチェイス / Game Boy  ← M759200（ロックンチェイス / Nintendo 3DS）
     "M759239": "Romancing SaGa",                        # ロマンシング サ・ガ / WonderSwan  ← M759236（ロマンシング サ・ガ / Nintendo 3DS）ほか1行
     "M759240": "Romancing SaGa",                        # ロマンシング サ・ガ / WonderSwan  ← M759236（ロマンシング サ・ガ / Nintendo 3DS）ほか1行
+    "M759299": "Elite Soccer",                          # ワールドカップストライカー / Game Boy  ← M726217（ワールドカップストライカー / Super Famicom）
+    "M759300": "Elite Soccer",                          # ワールドカップストライカー / Game Boy  ← M726217（ワールドカップストライカー / Super Famicom）
     "M759362": "World Heroes 2",                        # ワールドヒーローズ 2 / Super Famicom  ← M726504（ワールドヒーローズ2 / Neo Geo）ほか1行
     "M759365": "World Heroes 2",                        # ワールドヒーローズ2 / PC Engine  ← M726504（ワールドヒーローズ2 / Neo Geo）ほか1行
     "M759424": "Wagan Land",                            # ワギャンランド / Game Gear  ← M727462（ワギャンランド / Famicom）ほか1行
     "M877861": "Street Fighter 2010: The Final Fight",  # 2010 ストリートファイター / Famicom  ← M737017（2010 ストリートファイター / Nintendo 3DS）
+    "M877875": "J-League Fighting Soccer",              # Jリーグファイティングサッカー / Famicom  ← M740055（Jリーグ ファイティングサッカー / Game Boy）
     "M877956": "Urban Champion",                        # アーバンチャンピオン / Famicom  ← M744377（アーバンチャンピオン / Wii）
     "M877959": "Ice Climber",                           # アイスクライマー / Famicom  ← M720275（アイスクライマー / Game Boy Advance）ほか2行
     "M877960": "Ice Climber",                           # アイスクライマー / Famicom  ← M720275（アイスクライマー / Game Boy Advance）ほか2行
     "M877961": "Ice Hockey",                            # アイスホッケー / Famicom  ← M744452（アイスホッケー / Wii）
+    "M877970": "Adventures of Lolo 2",                  # アドベンチャーズ オブ ロロ / Famicom  ← M744945（アドベンチャーズ オブ ロロ / Wii）
     "M877986": "Yie Ar Kung-Fu",                        # イー・アル・カンフー / Famicom  ← M745282（イー・アル・カンフー / Nintendo 3DS）ほか1行
     "M877987": "Image Fight",                           # イメージファイト / Famicom  ← M727210（イメージファイト / PC Engine）
     "M877988": "Insector X",                            # インセクターX / Famicom  ← M745487（インセクターX / Mega Drive）
     "M878002": "Alien Syndrome",                        # エイリアンシンドローム / Famicom  ← M728044（エイリアン シンドローム / Sega Mark III）
     "M878006": "Exerion",                               # エクセリオン / Famicom  ← M746056（エクセリオン / Wii）
+    "M878008": "Esper Dream",                           # エスパードリーム / Famicom  ← M746080（エスパードリーム / Nintendo 3DS）ほか1行
     "M878018": "Elevator Action EX",                    # エレベーターアクション / Famicom  ← M746158（エレベーターアクション / Game Boy）
     "M878047": "King's Knight",                         # キングスナイト / Famicom  ← M747356（キングスナイト / Nintendo 3DS）
     "M878051": "Galaga",                                # ギャラガ / Famicom  ← M747209（ギャラガ / Nintendo 3DS）ほか2行
@@ -828,10 +865,12 @@ TRANSLITERATED_TITLE_EN = {
     "M878058": "Crazy Climber",                         # クレイジークライマー / Famicom  ← M747775（クレイジー クライマー / Wii）ほか1行
     "M878063": "The Goonies",                           # グーニーズ / Famicom  ← M727729（グーニーズ / Famicom）
     "M878064": "Nemesis 2",                             # グラディウス2 / Famicom  ← M728232（グラディウス 2 / Famicom）ほか1行
+    "M878082": "Blades of Steel",                       # コナミックアイスホッケー / Famicom  ← M748329（コナミックアイスホッケー / Game Boy）
     "M878094": "Golf",                                  # ゴルフ / Famicom  ← M727852（ゴルフ / Famicom）ほか2行
     "M878101": "Soccer",                                # サッカー / Famicom  ← M727807（サッカー / Famicom）ほか2行
     "M878115": "Shadowgate",                            # シャドウゲイト / Famicom  ← M749271（シャドウゲイト / Nintendo 3DS）
     "M878142": "Super Mario Bros.",                     # スーパーマリオブラザーズ / Famicom  ← M720070（スーパーマリオブラザーズ / Game Boy Advance）ほか4行
+    "M878143": "Super Mario Bros.: The Lost Levels",    # スーパーマリオブラザーズ2 / Famicom  ← M720179（スーパーマリオブラザーズ2 / Game Boy Advance）
     "M878148": "Sky Kid",                               # スカイキッド / Famicom  ← M749831（スカイキッド / Nintendo 3DS）ほか2行
     "M878154": "Stargate",                              # スター・ゲイト / Famicom  ← M749942（スターゲイト / Game Gear）ほか1行
     "M878155": "Star Soldier",                          # スターソルジャー / Famicom  ← M720273（スターソルジャー / Game Boy Advance）ほか3行
@@ -873,15 +912,47 @@ TRANSLITERATED_TITLE_EN = {
     "M878417": "Mach Rider",                            # マッハライダー / Famicom  ← M756885（マッハライダー / Nintendo 3DS）ほか1行
     "M878418": "Mappy",                                 # マッピー / Famicom  ← M727031（マッピー / Game Gear）ほか2行
     "M878425": "Mini-Putt",                             # ミニ・パット / Famicom  ← M757258（ミニ・パット / Game Boy）
+    "M878433": "Metal Slader Glory",                    # メタルスレイダーグローリー / Famicom  ← M757599（メタルスレイダーグローリー / Wii）
     "M878438": "Monopoly",                              # モノポリー / Famicom  ← M726895（モノポリー / Game Boy）ほか1行
     "M878445": "Ripple Island",                         # リップルアイランド / Famicom  ← M758489（リップルアイランド / Nintendo 3DS）
+    "M878453": "Rainbow Islands: The Story of Bubble Bobble 2", # レインボーアイランド / Famicom  ← M758733（レインボーアイランド / PC Engine）
     "M878454": "Wrecking Crew",                         # レッキングクルー / Famicom  ← M758822（レッキングクルー / Nintendo 3DS）ほか1行
     "M878455": "Wrecking Crew",                         # レッキングクルー / Famicom  ← M758822（レッキングクルー / Nintendo 3DS）ほか1行
     "M878458": "Rolling Thunder",                       # ローリングサンダー / Famicom  ← M758977（ローリングサンダー / Wii）
     "M878459": "Gemfire",                               # ロイヤルブラッド / Famicom  ← M726768（ロイヤルブラッド / Mega Drive）
-    "M1104127": "Phantasy Star",                        # ファンタシースター / Sega Mark III  ← M755115（ファンタシースター / Wii）
-    "M1108821": "Ice Climber",                          # アイスクライマー / Game Boy Advance  ← M720275（アイスクライマー / Game Boy Advance）ほか2行
+    "M878462": "Mega Man",                              # ロックマン / Famicom  ← M759041（ロックマン / Nintendo 3DS）ほか1行
 }
+
+# ---- 束2の目視で「値を手で直した」2行（2026-08-05） ----
+#
+# ★この2行だけは出所が違う。上の TRANSLITERATED_TITLE_EN は全件が
+#   「DATA 内の別行が持っている title_en の**そのままの複製**」だが、
+#   下の2行は **借用元の英題から、続編を示す語を人が手で取り除いた値**である。
+#   複製ではないので上の表には入れない ―― 混ぜると上の表の見出しが嘘になる。
+#
+# 直した理由 ―― どちらも ◆通し番号の食い違い（和題に番号が無いのに英題に番号がある）で、
+# 借用元は**続編の行**だった。鍵（記号を落とした title_ja）が一致してしまうのは、
+# 和題側が続編でも番号を持たない書き方をしているため。そのまま複製すると、
+# 初代の行に続編の英題が付く（レビューシートで『★英題にだけ番号』と印を付けた型）。
+#
+#   M878080 コスモポリス ギャリバン / Famicom（1988）
+#     借用元 M748267「Cosmo Police Galivan II: Arrow of Justice」= 続編（SFC）の英題。
+#     'II: Arrow of Justice' を落として初代の英題にした。
+#   M755824 プロサッカー / Game Boy
+#     借用元 M726963「Kick Off 2」= 続編の英題。'2' を落とした。
+#
+# ★罠#141 との関係 ―― 上の表とは線が違う。外部サイトを見て英題を決めてはいないが、
+#   「借用元の値をそのまま写した」とも言えない（人の手が1回入っている）。
+#   だから表を分け、どの行から何を削ったかを上に書いてある。あとから
+#   「この英題はどこから来た」を追えるようにするための分離であって、正しさの主張ではない。
+#
+# ★上の表と同じく data_line.js 側にしか効かせない。上書きもしない
+#   ―― title_en が空の行にだけ入れる。master_final.csv は不変。
+MANUAL_TITLE_EN_FLAGGED34 = {
+    "M755824": "Kick Off",                              # プロサッカー / Game Boy  ← M726963「Kick Off 2」から '2' を除いた
+    "M878080": "Cosmo Police Galivan",                  # コスモポリス ギャリバン / Famicom  ← M748267「Cosmo Police Galivan II: Arrow of Justice」から 'II: Arrow of Justice' を除いた
+}
+
 
 # 発売元の誤字だけを直す。社名の歴史的変遷は「直さない」。
 # スクウェア と スクウェア・エニックス は別会社であり、
@@ -1450,6 +1521,9 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
     _translit_copied = 0
     _translit_skipped = []          # 既に英題を持っていた行（下で必ず印字する）
     _translit_seen = set()          # 表の madb_id のうち DATA まで届いたもの
+    _manual_copied = 0              # 手直しの2行。束2とは別に数える（出所が違うため）
+    _manual_skipped = []
+    _manual_seen = set()
     data = []
     _excluded = []
     for r in rows:                                         # rows(=master) は変更しない。読むだけ。
@@ -1462,10 +1536,20 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
         title_en = r["title_en"]
         # 束2 を束1より先に見る。両方に当たる行は無い（束2は音写系＝カナを含むので
         # is_latin_only() が偽）が、順序を暗黙の前提にしない ―― 名指しのほうが強い。
+        # 手直しの2行（MANUAL_TITLE_EN_FLAGGED34）も同じ扱いで見る。効き方は同じで、
+        # **値の出所だけが違う**ので表を分けてある。数は別々に印字する。
         _borrowed = TRANSLITERATED_TITLE_EN.get(r["madb_id"])
+        _manual = MANUAL_TITLE_EN_FLAGGED34.get(r["madb_id"])
         if _borrowed:
             _translit_seen.add(r["madb_id"])
-        if _borrowed and not title_en:                     # 束2。空のときだけ、別行の英題を写す
+        if _manual:
+            _manual_seen.add(r["madb_id"])
+        if _manual and not title_en:                       # 手直し。空のときだけ入れる
+            title_en = _manual
+            _manual_copied += 1
+        elif _manual:                                      # 既に英題がある＝手で入れる必要が無くなった
+            _manual_skipped.append((r["madb_id"], title_en))
+        elif _borrowed and not title_en:                   # 束2。空のときだけ、別行の英題を写す
             title_en = _borrowed
             _translit_copied += 1
         elif _borrowed:                                    # 既に英題がある＝借りる必要が無くなった
@@ -1503,6 +1587,14 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
     # 落ちた場合の両方がここに出る。どちらも「表の行が1つ効かなくなった」ことに変わりはない。
     for mid in sorted(set(TRANSLITERATED_TITLE_EN) - _translit_seen):
         print(f"  ★ TRANSLITERATED_TITLE_EN: {mid} が DATA に現れない"
+              f"（master から消えた / 機種フィルタや罠#16 で落ちた）")
+    # 手直しの2行も別立てで実数を出す。束2の数に混ぜると、出所の違いが数の上で見えなくなる。
+    print(f"英題を手直しして転記    : {_manual_copied}/{len(MANUAL_TITLE_EN_FLAGGED34)} 行  "
+          f"(借用元から続編を示す語を人が除いた値。複製ではない)")
+    for mid, cur in _manual_skipped:
+        print(f"  ★ MANUAL_TITLE_EN_FLAGGED34: {mid} は既に英題 {cur!r} を持つ。上書きしていない")
+    for mid in sorted(set(MANUAL_TITLE_EN_FLAGGED34) - _manual_seen):
+        print(f"  ★ MANUAL_TITLE_EN_FLAGGED34: {mid} が DATA に現れない"
               f"（master から消えた / 機種フィルタや罠#16 で落ちた）")
     print()
     for k, v in stats.most_common():
