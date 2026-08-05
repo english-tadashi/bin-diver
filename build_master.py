@@ -659,6 +659,118 @@ KANA_SPLIT_FIX = {
     "M752847": "なつきクライシスバトル",  # Super Famicom  (型番なし)  なつきクライシスバトル
 }
 
+# ---- 副題付き title_ja_kana を data_line.js だけで捨てる（2026-08-05・罠#95 の到達確認済み） ----
+#
+# 対象は「row[8](title_ja_kana) が row[1](title_ja) の接頭辞になっている」145行群のうち、
+# row[8] で駿河屋が0件・row[1] なら非0件になった56行から、**目的の商品への到達を実測で
+# 確かめられた54行**。空にすると index.html の `r[8] || jp || en`（1707行）が row[1] に落ち、
+# 駿河屋のタイトル検索が当たるようになる。
+#
+# ★PRODUCT_CODE_TYPO と構造は同じ（madb_id で1行ずつ名指し）だが、**当てる場所が違う**。
+#   PRODUCT_CODE_TYPO は「MADB 側の綴りが誤っている」ので rows(=master_final.csv) ごと直す。
+#   こちらは row[8] の値そのものは**正しいカタログ表記**であって、誤りではない。
+#   駿河屋の検索語として噛み合わないだけなので、**data_line.js（アプリ）だけに効かせ、
+#   master_final.csv には元の値を残す**。PLATFORM_RENAME / パブリッシャー名寄せと同じ線。
+#   ここを master 側でやると、MADB/Wikidata 由来の記録が消えて出所が追えなくなる。
+#
+# 実測（2026-08-05・af_jump/UTM 無しの生URL・2.5秒間隔・自己クリック回避）:
+#   56行中 54行が row[1] 検索の**1ページ目**に目的の商品を出す（1位22 / 3位以内36 /
+#   5位以内43 / 10位以内49 / 最下位でも17位）。各行の順位は下のコメントに1行ずつ書いてある。
+#   生データは _experiments/rank56_*_20260805.*（恒久保存ではない）。
+#
+# ★表に**入れていない2行**。どちらも「非0件だが目的の商品が無い」＝在庫自体の不在で、
+#   空にしても状態は変わらない（悪化もしないが、改善もしない）。測っていない行を
+#   混ぜないため、名指しから外してある:
+#     idx16158 M743162  TETRIS（PSP/2009/EA）  19件を全数見たが PSPソフトが駿河屋に無い
+#     idx25812 M754438  パロディウス（Wii/2010・バーチャルコンソール配信）  35件中に Wii版が無い
+# ★同じ145行群のうち row[1] でも0件のまま5行（ソニックアドベンチャーDX / TIMES OF LORE /
+#   ファミスタ'89 開幕版 / Winning Eleven 2014 / とびだスゴロク）も入れていない。
+#   空にしても 0件 のままで、変える理由が無い。
+#
+# ★145行群の残り84行（row[8] で非0件だった行）には一切触らない。そちらは今の値で当たっている。
+TITLE_KANA_OVERRIDE = {
+    # ---- 120円の春 ---- 1行 / row[1]検索の件数 1件
+    "M736961": "",  # idx11458  プレイステーション2 / 2005  元row[8]「120円の春 \120Stories」→ 1位
+    # ---- Carnage Heart EZ ---- 1行 / row[1]検索の件数 3件
+    "M725197": "",  # idx7641  プレイステーション / 1997  元row[8]「Carnage Heart EZ Easy Zapping」→ 1位
+    # ---- DIABOLIK LOVERS ---- 2行 / row[1]検索の件数 24件
+    "M738453": "",  # idx12596  プレイステーション・ポータブル / 2012  元row[8]「DIABOLIK LOVERS -ディアボリックラヴァーズ-」→ 14位
+    "M738454": "",  # idx12597  プレイステーション・ポータブル / 2012  元row[8]「DIABOLIK LOVERS -ディアボリックラヴァーズ-」→ 14位
+    # ---- Kunoichi ---- 1行 / row[1]検索の件数 2件
+    "M719882": "",  # idx2692  プレイステーション2 / 2003  元row[8]「Kunoichi -忍-」→ 1位
+    # ---- MeltyMoment ---- 3行 / row[1]検索の件数 2件
+    "M740612": "",  # idx14195  PSVita / 2015  元row[8]「MeltyMoment -メルティモーメント-」→ 1位
+    "M740613": "",  # idx14196  PSVita / 2015  元row[8]「MeltyMoment -メルティモーメント-」→ 1位
+    "M740614": "",  # idx14197  PSVita / 2015  元row[8]「MeltyMoment -メルティモーメント-」→ 1位
+    # ---- PERFECT PERFORMER ---- 1行 / row[1]検索の件数 1件
+    "M741519": "",  # idx14892  プレイステーション / 1999  元row[8]「PERFECT PERFORMER -THE YELLOW MONKEY-」→ 1位
+    # ---- THE DOG HAPPY LIFE ---- 1行 / row[1]検索の件数 2件
+    "M743191": "",  # idx16177  プレイステーション・ポータブル / 2006  元row[8]「THE DOG HAPPY LIFE ～幸せワンコ生活第1弾～」→ 2位
+    # ---- とある魔術の禁書目録 ---- 2行 / row[1]検索の件数 18件
+    "M720903": "",  # idx3679  プレイステーション・ポータブル / 2012  元row[8]「とある魔術の禁書目録のゲーム」→ 3位
+    "M720980": "",  # idx3756  プレイステーション・ポータブル / 2011  元row[8]「とある魔術の禁書目録のゲーム」→ 1位
+    # ---- ぷよぷよ! ---- 6行 / row[1]検索の件数 183件
+    "M721672": "",  # idx4432  プレイステーション2 / 2008  元row[8]「ぷよぷよ! Puyopuyo 15th anniversary」→ 4位
+    "M755379": "",  # idx26603  Wii / 2007  元row[8]「ぷよぷよ! Puyopuyo 15th anniversary」→ 17位
+    "M755380": "",  # idx26604  プレイステーション2 / 2007  元row[8]「ぷよぷよ! Puyopuyo 15th anniversary」→ 6位
+    "M755381": "",  # idx26605  プレイステーション・ポータブル / 2007  元row[8]「ぷよぷよ! Puyopuyo 15th anniversary」→ 15位
+    "M755382": "",  # idx26606  プレイステーション・ポータブル / 2008  元row[8]「ぷよぷよ! Puyopuyo 15th anniversary」→ 14位
+    "M755383": "",  # idx26607  Wii / 2008  元row[8]「ぷよぷよ! Puyopuyo 15th anniversary」→ 9位
+    # ---- ぷよぷよ!! ---- 10行 / row[1]検索の件数 183件
+    "M755385": "",  # idx26609  Wii / 2011  元row[8]「ぷよぷよ!! Puyopuyo 20th anniversary」→ 10位
+    "M755386": "",  # idx26610  Wii / 2012  元row[8]「ぷよぷよ!! Puyopuyo 20th anniversary」→ 2位
+    "M755387": "",  # idx26611  ニンテンドー3DS / 2011  元row[8]「ぷよぷよ!! Puyopuyo 20th anniversary」→ 3位
+    "M755388": "",  # idx26612  ニンテンドー3DS / 2011  元row[8]「ぷよぷよ!! Puyopuyo 20th anniversary」→ 3位
+    "M755389": "",  # idx26613  ニンテンドー3DS / 2012  元row[8]「ぷよぷよ!! Puyopuyo 20th anniversary」→ 1位
+    "M755390": "",  # idx26614  プレイステーション・ポータブル / 2012  元row[8]「ぷよぷよ!! Puyopuyo 20th anniversary」→ 9位
+    "M755391": "",  # idx26615  プレイステーション・ポータブル / 2011  元row[8]「ぷよぷよ!! Puyopuyo 20th anniversary」→ 5位
+    "M755392": "",  # idx26616  プレイステーション・ポータブル / 2012  元row[8]「ぷよぷよ!! Puyopuyo 20th anniversary」→ 9位
+    "M755393": "",  # idx26617  ニンテンドーDS / 2011  元row[8]「ぷよぷよ!! Puyopuyo 20th anniversary」→ 6位
+    "M755395": "",  # idx26619  ニンテンドーDS / 2012  元row[8]「ぷよぷよ!! Puyopuyo 20th anniversary」→ 4位
+    # ---- ウイニングイレブン 2018 ---- 3行 / row[1]検索の件数 3件
+    "M745623": "",  # idx18092  プレイステーション4 / 2017  元row[8]「ウイニングイレブン 2018 体験版 オンライン配信版」→ 2位
+    "M745624": "",  # idx18093  プレイステーション4 / 2017  元row[8]「ウイニングイレブン 2018 FCバルセロナエディション」→ 2位
+    "M745626": "",  # idx18095  プレイステーション3 / 2017  元row[8]「ウイニングイレブン 2018 体験版 オンライン配信版」→ 1位
+    # ---- ウッディポップ ---- 1行 / row[1]検索の件数 3件
+    "M745856": "",  # idx18308  ゲームギア / 1991  元row[8]「ウッディポップ 新人類のブロックくずし」→ 3位
+    # ---- ウルトラマンネクサス ---- 1行 / row[1]検索の件数 1件
+    "M745899": "",  # idx18347  プレイステーション2 / 2005  元row[8]「ウルトラマンネクサス (プレイステーション2版)」→ 1位
+    # ---- ガンバレット ---- 2行 / row[1]検索の件数 8件
+    "M724281": "",  # idx6756  プレイステーション / 1999  元row[8]「ガンバレットシリーズ」→ 4位
+    "M746987": "",  # idx19324  プレイステーション / 1997  元row[8]「ガンバレットシリーズ」→ 1位
+    # ---- ストリートレーサー ---- 2行 / row[1]検索の件数 6件
+    "M750093": "",  # idx22059  ゲームボーイ / 1996  元row[8]「ストリートレーサーエクストラ」→ 3位
+    "M750094": "",  # idx22060  スーパーファミコン / 1994  元row[8]「ストリートレーサーエクストラ」→ 4位
+    # ---- デジモンストーリー 超クロスウォーズ レッド ---- 1行 / row[1]検索の件数 2件
+    "M721445": "",  # idx4209  ニンテンドーDS / 2011  元row[8]「デジモンストーリー 超クロスウォーズ レッド/ブルー」→ 1位
+    # ---- バトルドッジボール ---- 1行 / row[1]検索の件数 9件
+    "M726990": "",  # idx9398  スーパーファミコン / 1991  元row[8]「バトルドッジボール 闘球大激突!」→ 2位
+    # ---- パジャマヒーロー ---- 1行 / row[1]検索の件数 2件
+    "M727147": "",  # idx9552  ファミリーコンピュータ / 1990  元row[8]「パジャマヒーロー NEMO」→ 1位
+    # ---- パルフェ ---- 2行 / row[1]検索の件数 10件
+    "M754374": "",  # idx25757  PSVita / 2015  元row[8]「パルフェ 〜ショコラ second brew〜」→ 1位
+    "M754375": "",  # idx25758  PSVita / 2015  元row[8]「パルフェ 〜ショコラ second brew〜」→ 1位
+    # ---- パロディウスだ! ---- 2行 / row[1]検索の件数 17件
+    "M727056": "",  # idx9464  ゲームボーイ / 1991  元row[8]「パロディウスだ! 〜神話からお笑いへ〜」→ 4位
+    "M727150": "",  # idx9554  ファミリーコンピュータ / 1990  元row[8]「パロディウスだ! 〜神話からお笑いへ〜」→ 2位
+    # ---- ボンバーマンランド2 ---- 4行 / row[1]検索の件数 21件
+    "M756580": "",  # idx27658  ゲームキューブ / 2003  元row[8]「ボンバーマンランド2 ゲーム史上最大のテーマパーク」→ 3位
+    "M756581": "",  # idx27659  ゲームキューブ / 2004  元row[8]「ボンバーマンランド2 ゲーム史上最大のテーマパーク」→ 4位
+    "M756582": "",  # idx27660  プレイステーション2 / 2003  元row[8]「ボンバーマンランド2 ゲーム史上最大のテーマパーク」→ 1位
+    "M756583": "",  # idx27661  プレイステーション2 / 2004  元row[8]「ボンバーマンランド2 ゲーム史上最大のテーマパーク」→ 2位
+    # ---- ボンビンアイランド ---- 2行 / row[1]検索の件数 1件
+    "M725202": "",  # idx7646  プレイステーション / 1997  元row[8]「ボンビンアイランド キッドクラウンのクレイジーパズル」→ 1位
+    "M756590": "",  # idx27667  プレイステーション / 2002  元row[8]「ボンビンアイランド キッドクラウンのクレイジーパズル」→ 1位
+    # ---- 極上パロディウス ---- 1行 / row[1]検索の件数 10件
+    "M760777": "",  # idx31309  スーパーファミコン / 1994  元row[8]「極上パロディウス 〜過去の栄光を求めて〜」→ 2位
+    # ---- 武戯 ---- 1行 / row[1]検索の件数 17件
+    "M765613": "",  # idx35758  プレイステーション / 1998  元row[8]「武戯 〜BUGI〜」→ 1位
+    # ---- 真・女神転生 デビルチルドレン 光の書 ---- 1行 / row[1]検索の件数 2件
+    "M762878": "",  # idx33259  ゲームボーイアドバンス / 2002  元row[8]「真・女神転生 デビルチルドレン 光の書・闇の書」→ 1位
+    # ---- 鋼の錬金術師 デュアルシンパシー ---- 1行 / row[1]検索の件数 1件
+    "M761302": "",  # idx31801  ニンテンドーDS / 2005  元row[8]「鋼の錬金術師 デュアルシンパシー 二人の絆」→ 1位
+}
+
 # ---- 束2: 音写系タイトルの英題を、同じ作品の別行から名指しで転記する（2026-08-05） ----
 #
 # ★値の出所 ―― **DATA 内の別行が既に持っている title_en の複製**である。
@@ -1524,6 +1636,9 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
     _manual_copied = 0              # 手直しの2行。束2とは別に数える（出所が違うため）
     _manual_skipped = []
     _manual_seen = set()
+    _kana_dropped = 0               # title_ja_kana を空にした行数
+    _kana_already_empty = []        # 名指ししたが既に空だった行（下で必ず印字する）
+    _kana_seen = set()              # 表の madb_id のうち DATA まで届いたもの
     data = []
     _excluded = []
     for r in rows:                                         # rows(=master) は変更しない。読むだけ。
@@ -1557,9 +1672,19 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
         elif not title_en and is_latin_only(r["title_ja"]):  # 束1。空のときだけ、原文をそのまま写す
             title_en = r["title_ja"]
             _latin_copied += 1
+        # 副題付き title_ja_kana を名指しで捨てる（上の TITLE_KANA_OVERRIDE を見ること）。
+        # rows(=master_final.csv) は書き換えない。data_line.js の row[8] にだけ効かせる。
+        kana = r["title_ja_kana"]
+        if r["madb_id"] in TITLE_KANA_OVERRIDE:
+            _kana_seen.add(r["madb_id"])
+            if kana:                                       # 上流がまだ副題付きの値を持っている
+                kana = TITLE_KANA_OVERRIDE[r["madb_id"]]   # ＝空文字列
+                _kana_dropped += 1
+            else:                                          # 既に空＝表から外す判断が要る
+                _kana_already_empty.append(r["madb_id"])
         data.append([title_en, r["title_ja"], plat, r["product_code"],
                      r["year"], r["publisher"], _canon_pub_final(r["publisher_en"]), r["buyee_kw"],
-                     r["title_ja_kana"], r["title_romaji"], r["jan"], r["kana_row"],
+                     kana, r["title_romaji"], r["jan"], r["kana_row"],
                      r["online"]])
     js_path = os.path.join(os.path.dirname(out_path) or ".", "data_line.js")
     with open(js_path, "w", encoding="utf-8") as f:
@@ -1595,6 +1720,14 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
         print(f"  ★ MANUAL_TITLE_EN_FLAGGED34: {mid} は既に英題 {cur!r} を持つ。上書きしていない")
     for mid in sorted(set(MANUAL_TITLE_EN_FLAGGED34) - _manual_seen):
         print(f"  ★ MANUAL_TITLE_EN_FLAGGED34: {mid} が DATA に現れない"
+              f"（master から消えた / 機種フィルタや罠#16 で落ちた）")
+    # 副題付きカナの名指し破棄も毎回実数を出す。調査時 54行（罠#95 の到達確認済み）。
+    print(f"副題付きカナを破棄      : {_kana_dropped}/{len(TITLE_KANA_OVERRIDE)} 行  "
+          f"(data_line.js の row[8] だけ。master_final.csv は元の値のまま)")
+    for mid in _kana_already_empty:                        # 上流が変わった＝表から外す判断が要る
+        print(f"  ★ TITLE_KANA_OVERRIDE: {mid} の title_ja_kana は既に空。捨てるものが無い")
+    for mid in sorted(set(TITLE_KANA_OVERRIDE) - _kana_seen):
+        print(f"  ★ TITLE_KANA_OVERRIDE: {mid} が DATA に現れない"
               f"（master から消えた / 機種フィルタや罠#16 で落ちた）")
     print()
     for k, v in stats.most_common():
