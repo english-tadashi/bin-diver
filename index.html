@@ -49,9 +49,16 @@
      （地 5.8 / 面 5.7 / 入力欄 5.4:1）。カード側の --muted も同じ値に揃えてある。 */
   --muted:#8b84ab;          /* ラベル */
   --faint:#6f6790;          /* 淡い */
-  --accent:#ff37c7;         /* 桃 = 主アクセント */
-  --accent-ink:#07040f;     /* 桃の上に載る文字。白だと 3.2:1 しか出ないので地色を使う */
-  --tag:#22d3ee;            /* 水色 = 副アクセント（リンク・hover） */
+  --accent:#b337ff;         /* 紫 = 主アクセント */
+  --accent-ink:#07040f;     /* 紫の上に載る文字。白だと4.28:1(基準4.5をわずかに下回る)なので地色を使う。シアン地のhoverでも流用 */
+  --tag:#11eeff;            /* シアン = 副アクセント（リンク・hover） */
+  /* 黄 = ギャラクシアン旗艦色。唯一の参照先だったカード内ローマ字読み(.romaji)を白へ移した
+     ため、現在この変数を参照している箇所は無い（定義のみ残存・--signal-wash と同じ状態）。 */
+  --rare:#dcdc00;
+  --danger:#dc0000;         /* 赤 = ギャラクシアン敵機色。SCAN BARCODEボタン専用 */
+  --danger-ink:#ffffff;     /* 赤の上に載る文字。--accent-inkだと3.91:1で基準未達のため白を使う */
+  --logo-pink:#e840a8;      /* ロゴ背面の発光と同じピンク。位置トグルの選択中に使用 */
+  --logo-gold:#f8b820;      /* ロゴ前面のゴールド */
   /* ============================================================
      レトロ書体（ステップ3・書体だけの差し替え。字の大きさは変えない）。
      Press Start 2P / VT323 は**日本語グリフを持たない**。だから当てる先は
@@ -89,7 +96,7 @@ header{padding:34px 0 14px}
 .kicker{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
 h1{font-size:clamp(34px,7vw,52px);line-height:.98;font-weight:700;letter-spacing:-.02em;margin:0}
 /* ロゴの反転ブロック。明色版は「黒地に紙色」だったので、暗色版では地と同化してしまう。
-   桃地に地色の文字へ入れ替える（形・傾きはそのまま）。 */
+   紫地に地色の文字へ入れ替える（形・傾きはそのまま）。 */
 h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);padding:0 .14em;transform:skewX(-5deg)}
 .lede{margin:14px 0 0;max-width:48ch;color:var(--muted);font-size:15px}
 
@@ -103,7 +110,7 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 #q{flex:1 1 240px;min-width:0;font-family:"Space Grotesk",sans-serif;font-size:17px;font-weight:500;
   padding:13px 14px;border:2px solid var(--edge-input);background:var(--field);color:var(--ink);border-radius:0}
 #q:focus{outline:3px solid var(--accent);outline-offset:1px}
-#q::placeholder{color:var(--faint)}
+#q::placeholder{color:var(--muted)}
 #plat,#pub,#year{max-width:220px;font-family:"Space Mono",monospace;font-size:13px;padding:13px 12px;border:2px solid var(--edge-input);background:var(--field);color:var(--ink);border-radius:0}
 #plat:focus,#year:focus{outline:3px solid var(--accent);outline-offset:1px}
 /* プルダウンの中身は OS が描く。地だけ暗くすると環境によっては白地に白文字になるので、
@@ -113,13 +120,13 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .pubwrap{position:relative;flex:1 1 180px;max-width:240px;min-width:0}
 #pubInput{width:100%;font-family:"Space Mono",monospace;font-size:13px;padding:13px 12px;border:2px solid var(--edge-input);background:var(--field);color:var(--ink);border-radius:0}
 #pubInput:focus{outline:3px solid var(--accent);outline-offset:1px}
-#pubInput::placeholder{color:var(--faint)}
+#pubInput::placeholder{color:var(--muted)}
 #pubList{position:absolute;left:0;right:0;top:calc(100% + 2px);z-index:40;background:var(--surface);border:2px solid var(--edge);max-height:300px;overflow-y:auto}
 #pubList[hidden]{display:none}
 .pubopt{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:42px;padding:9px 12px;cursor:pointer;font-family:"Space Mono",monospace;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line)}
 .pubopt:last-child{border-bottom:none}
 /* 反転の作り方は v1 と同じ（地と文字を入れ替える）。入れ替え先が本文色だと
-   暗い地の上で明るい板になるだけなので、桃＝フォーカスの輪郭と同じ色に合わせる。 */
+   暗い地の上で明るい板になるだけなので、紫＝フォーカスの輪郭と同じ色に合わせる。 */
 .pubopt:hover,.pubopt.active{background:var(--accent);color:var(--accent-ink)}
 .pubopt .c{font-size:11px;color:var(--muted);flex-shrink:0}
 .pubopt:hover .c,.pubopt.active .c{color:var(--accent-ink);opacity:.7}
@@ -134,7 +141,7 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 /* ============================================================
    検索結果カード = 「検索端末 (Field readout)」 v1
    基準: bin-diver-field-readout.html / 正典: BIN_DIVER_DESIGN.md
-   計器の言語。朱色(--signal)は「型番の一致」と「Buyee=届く経路」の2意味だけ。
+   計器の言語。紫(--signal)は「型番の一致」と「Buyee=届く経路」の2意味だけ。
    トークンは .card にスコープし、ページ地色(header/search/footer/scanner)には触れない。
    ============================================================ */
 .card{
@@ -148,12 +155,12 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
   --ink:#c9c3e0; --ink-2:#a9a2c6; --muted:#8b84ab; --faint:#8079a0;
   --hair:#221a3d; --hair-strong:#2a2247;
   --slab:#140d24; --on-slab:#c9c3e0; --on-slab-faint:#8079a0;
-  /* 朱色 → 桃(#ff37c7)。**意味は変えていない**: 「型番の一致」と「Buyee=届く経路」の
+  /* 朱色 → 桃 → 紫(#b337ff)。**意味は変えていない**: 「型番の一致」と「Buyee=届く経路」の
      2箇所だけという予約はそのまま（BIN_DIVER_DESIGN.md）。
      -deep は明るい地に載る文字用に暗くした値だった。地が暗くなったので役目が消え、
-     桃そのものに畳んである（暗いカード地に 6.3:1）。-wash は Buyee のボタンの地で、
-     白桃 → 桃を落とした暗い地へ反転（この上の桃の文字が 5.6:1）。 */
-  --signal:#ff37c7; --signal-deep:#ff37c7; --signal-wash:#2b0b24;
+     紫そのものに畳んである（暗いカード面 --surface に 4.54:1）。-wash は桃時代に Buyee
+     ボタンの地として置いた値だが、現在この変数を参照している箇所は無い（定義のみ残存）。 */
+  --signal:#b337ff; --signal-deep:#b337ff; --signal-wash:#2b0b24;
   --f-display:'Space Grotesk',-apple-system,Helvetica,Arial,sans-serif;
   --f-jp:'IBM Plex Sans JP','Hiragino Sans','Noto Sans JP',sans-serif;
   --f-mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
@@ -168,21 +175,24 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 
 /* status line */
 .card .status{display:flex; align-items:center; gap:8px; font:500 11px/1 var(--f-mono);
-  letter-spacing:.1em; text-transform:uppercase; color:var(--muted);}
+  letter-spacing:.1em; text-transform:uppercase; color:#ffffff;}
 .card .status .dot{width:7px; height:7px; border-radius:50%; background:var(--signal);}
 
 /* identity */
 .card .identity{display:flex; flex-direction:column; gap:14px;}
 .card .identity > .field + .field{margin-top:8px;}
 .card .field{display:flex; flex-direction:column; gap:4px;}
-.card .en-title{font:700 25px/1.12 var(--f-display); letter-spacing:.02em; color:#ece9f5;}   /* 太く・広く・カード内で最も明るい階調(#ece9f5>--ink)。書体は不変 */
+.card .en-title{font:700 25px/1.12 var(--f-display); letter-spacing:.02em; color:#ece9f5;}   /* 太く・広く、--ink(#c9c3e0)より明るい階調。書体は不変。★最も明るいのは日本語タイトル/ローマ字の #ffffff（この画面の主役は日本語側） */
 .card .ja-title{font:600 29px/1.2 var(--f-jp); color:var(--ink);}
-.card .romaji{font:400 17px/1.3 var(--f-mono); color:#ff8fd8; letter-spacing:.01em;}
+/* ローマ字読み。黄(--rare)から白へ。直書きは .card .status / .card .spec .v と同じ慣習
+   （カードに白系トークンは無く、--ink #c9c3e0 は白ではない）。カード面 #0f0a1c に 19.4:1。 */
+.card .romaji{font:400 17px/1.3 var(--f-mono); color:#ffffff; letter-spacing:.01em;}
+.card .no-code-notice{font:400 17px/1.3 var(--f-mono); color:#ff8fd8; letter-spacing:.01em;}
 .card .part{font:500 12px/1.3 var(--f-mono); color:var(--signal-deep); letter-spacing:.01em;}
 
 /* SIGNATURE — 型番スラブ = カードの顔。強いのはここだけ。
    ★明色版では「暗い塊」であることが強さだった。地が暗くなってその手は使えないので、
-     枠を桃にして強さを移す。カードの中で色が付いた枠はここだけ＝型番が主役
+     枠を紫にして強さを移す。カードの中で色が付いた枠はここだけ＝型番が主役
      （7/18の判断）を配色でも維持する。glow は足さない。 */
 .card .slab{background:var(--paper); border:1px solid var(--hair-strong); border-radius:10px;
   padding:16px 18px; display:flex; align-items:center; gap:14px;}
@@ -207,7 +217,12 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
   color:var(--on-slab); background:#241c40; border:1px solid #4a4278;
   border-radius:7px; padding:0 12px; cursor:pointer; transition:background .15s,border-color .15s;}
 .card .slab-copy:hover{background:#2f2652; border-color:var(--ink);}
-.card .slab-copy.done{color:var(--signal); border-color:var(--signal);}
+/* .done の文字色は #bf57ff で直書き。--signal(#b337ff) だとボタン地 #241c40 の上で 3.73:1
+   しか出ず AA の 4.5 を下回るため、同じ色相のまま明度だけ上げた .done 専用色を当てている。
+   border-color は非文字要素なので --signal のまま（非文字の 3:1 はクリアしている）。
+   ★--signal を今後変更しても、この2箇所（.slab-copy.done / .btn-copy.done）の文字色は
+     追随しない。トークンを触るときは必ず個別に見直すこと。 */
+.card .slab-copy.done{color:#bf57ff; border-color:var(--signal);}
 .card .slab-copy.fail{color:#f0c04a; border-color:#f0c04a;}
 .card .cap{font:400 12px/1.4 var(--f-display); color:var(--muted);}
 /* スラブ地(--slab #140d24)に載る .cap だけ明るくする。カード地の .cap は据え置き。
@@ -227,16 +242,16 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
   color:var(--ink); background:#241c40; border:1px solid #4a4278;
   border-radius:8px; padding:0 14px; cursor:pointer; transition:border-color .15s,color .15s;}
 .card .btn-copy:hover{background:#2f2652; border-color:var(--ink);}
-/* .done は桃のまま。明るいカード地では 3.09:1 しか出ていなかったが、
-   地が暗くなったので同じ値で 6.3:1 になる（色は変えずコントラストだけ直った）。 */
-.card .btn-copy.done{color:var(--signal); border-color:var(--signal);}
+/* .done の文字色 #bf57ff は直書き（--signal は使わない）。理由と、--signal 変更時にここが
+   追随しない件は .slab-copy.done の直前コメントにまとめてある。 */
+.card .btn-copy.done{color:#bf57ff; border-color:var(--signal);}
 /* ★失敗の琥珀は暗い文字(#8a6a12)だった＝暗いカードでは 2.3:1 で読めない。
    スラブ側の .slab-copy.fail と同じ明るい琥珀に揃える（11.7:1）。
    コピーが落ちたことが読めないと、店の検索窓に何も貼れないまま気づけない。 */
 .card .btn-copy.fail{color:#f0c04a; border-color:#f0c04a;}
 
 /* 棚の目安。店員画面から結果カード側へ移した（探すのはユーザー本人なので、
-   渡す前の画面に要る）。朱色は使わない＝「一致」と Buyee に予約（デザインv1）。 */
+   渡す前の画面に要る）。紫は使わない＝「一致」と Buyee に予約（デザインv1）。 */
 .card .shelf-row{display:flex; align-items:center; gap:12px;}
 .card .shelf-kana{flex-shrink:0; display:inline-flex; align-items:center; justify-content:center;
   min-width:46px; height:46px; padding:0 8px; font:600 26px/1 var(--f-jp); color:var(--ink);
@@ -245,43 +260,47 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card .shelf-txt b{font-weight:600; color:var(--ink);}
 .card .shelf-txt .gyo{font-family:var(--f-jp);}
 
-/* 行ロケーター（第1段：位置と大きさだけ）。配色・書体の作り込みは次段。
-   ★.shelf-row は既に display:flex の器として使われているので名前を借りない。
-     行名は .shelf-gyo。--signal（朱）は使わない。 */
-.card .shelf-loc{margin-top:10px; padding-top:9px; border-top:1px solid var(--line);
-  font:400 12.5px/1.5 var(--f-display); color:var(--ink-2);}
-.card .shelf-loc .shelf-gyo{font:600 17px/1 var(--f-jp); color:var(--ink);}
-
 /* 店員に見せるボタン。ラベルは英語1本（"Show to shop staff"）。
    ★以前はここに日本語を重ねていたが、2人が読む役は clerkOpen() が開く店員画面へ移した。
      ボタン内に日本語は無い＝`.btn-clerk .jp` は到達不能だったので撤去した（2026-08-04）。
    ★見た目は塗りではなく1px枠＋窪みの地。幅・高さ・字は明色版から変えていないので
      押せることは分かる（枠は 11.7:1）。
-   ★★配分は 2026-07-29 に逆転している。当時このコメントは「強い色はスラブの桃だけに残す」
+   ★★配分は 2026-07-29 に逆転している。当時このコメントは「強い色はスラブの桃（当時の主アクセント）だけに残す」
      ＝型番スラブが主役、と書いていたが、同日 `.slab` の桃枠と発光を撤去した（187行）。
-     いま桃(--signal)の枠を**常時**持つのはこのボタンだけで、桃＝店頭アクションの合図。
-     スラブ側に残る桃は `.reg` の「+」印（190行）だけ＝枠ではない。
+     いま --signal（紫 #b337ff）の枠を**常時**持つのはこのボタンだけで、紫＝店頭アクションの合図。
+     スラブ側に残る紫は `.reg` の「+」印（190行）だけ＝枠ではない。
      だから「一番目立つのがスラブではなくこのボタンになってしまう」という当時の心配は、
      もう心配ではなく現状そのもの。ここを塗りに戻すかどうかは配分の再設計として扱うこと。
    ★ただし「カード内で一番強い面」はこのボタンではない。購入ブロックの `.store.primary`
-     （328行）が桃の**塗り**で、こちらは枠だけ＝一段下。`.slab-copy.done` /
-     `.btn-copy.done` の桃枠はコピー成功後の一時状態なので、常時の配分には数えない。 */
+     （328行）が紫の**塗り**で、こちらは枠だけ＝一段下。`.slab-copy.done` /
+     `.btn-copy.done` の紫枠はコピー成功後の一時状態なので、常時の配分には数えない。 */
+/* 文字色は #bf57ff で直書き。--signal(#b337ff) だとボタン地 --paper(#140d24) の上で 4.41:1
+   しか出ず AA の 4.5 をわずかに下回るため、同じ色相のまま明度だけ上げた専用色を当てている
+   （5.41:1）。これは .slab-copy.done / .btn-copy.done と同じ値・同じ手当てで、紫は
+   #b337ff と #bf57ff の2本に留めてある。
+   border-color は非文字要素なので --signal のまま（非文字の 3:1 は 4.41:1 でクリア）。
+   ★hover は opacity:.86 だった＝要素ごと透過するので文字も地へ沈み、#bf57ff にしても
+     4.25:1 で AA を割っていた。地を一段明るくする作り（.btn-copy:hover と同じ）へ替えて、
+     hover でも 4.58:1 を出す。押せる場所を指したときに読めないと店頭で詰まる。
+   ★--signal を今後変更しても、ここの文字色と hover の枠色(#bf57ff)は追随しない。
+     トークンを触るときは .slab-copy.done の直前コメントと併せて必ず個別に見直すこと。 */
 .card .btn-clerk{width:100%; display:flex; align-items:center; justify-content:center; gap:10px;
   min-height:52px; padding:10px 16px; cursor:pointer; text-align:center;
-  border:1px solid var(--signal); border-radius:2px; background:var(--paper); color:var(--signal);
-  font:500 15px/1.2 var(--f-display); transition:opacity .12s;}
-.card .btn-clerk:hover{opacity:.86;}
+  border:1px solid var(--signal); border-radius:2px; background:var(--paper); color:#bf57ff;
+  font:500 15px/1.2 var(--f-display); transition:background .12s,border-color .12s;}
+.card .btn-clerk:hover{background:#241c40; border-color:#bf57ff;}
 
 /* spec row */
 .card .specs{display:flex; border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);}
 .card .spec{flex:1; padding:12px 0; display:flex; flex-direction:column; gap:5px;}
 .card .spec + .spec{border-left:1px solid var(--hair); padding-left:14px;}
-.card .spec .v{font:500 22px/1.15 var(--f-display); color:var(--ink);}
+.card .spec .v{font:500 22px/1.15 var(--f-display); color:#ffffff;}
+.card .spec .micro{color:var(--tag);}
 .card .spec .v.jp{font-family:var(--f-jp);}
 
 /* region note */
 /* リージョン注記。2行になる機種があるので align は flex-start。
-   朱色(--signal)は使わない = 「型番の一致」と「届く経路」の2意味を薄めない(BIN_DIVER_DESIGN.md)。
+   紫(--signal)は使わない = 「型番の一致」と「届く経路」の2意味を薄めない(BIN_DIVER_DESIGN.md)。
    ★本文は必ず <span class="t"> で1つに包む。flex は裸のテキストと <b> を別々の
      フレックスアイテムにするので、包まないと1文が3列に割れる（実測で踏んだ）。 */
 .card .region{display:flex; align-items:flex-start; gap:9px; font:400 12.5px/1.45 var(--f-display); color:var(--ink-2);}
@@ -290,9 +309,9 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card .region b{font-weight:600; color:var(--ink);}
 /* 配信専用の注記だけ、地色で帯にする。棚にも本体にも話が及ばない＝他と種類が違う注記なので、
    読み飛ばされると「探しに行って無い」が起きる。
-   ★朱色は使わない（--signal は「型番の一致」と「Buyee=届く経路」に予約・デザインv1）。
+   ★紫は使わない（--signal は「型番の一致」と「Buyee=届く経路」に予約・デザインv1）。
    文字色は他の region と同じまま。区別は地の色だけで作る。 */
-/* ★v2(カード暗色化): 地を暗く・文字を明るくして反転させた。桃も朱も使わない
+/* ★v2(カード暗色化): 地を暗く・文字を明るくして反転させた。--signal(紫)は使わない
    （--signal の予約を守る）。地はカードの面より一段持ち上げた #221a3d、枠は #2a2247。
    文字は他の region と同じ --ink-2 のまま＝**区別は地の色だけで作る**という v1 の作りを
    そのまま引き継いでいる（帯の上で本文 6.8:1 / 太字 9.6:1）。 */
@@ -303,7 +322,7 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card hr.div{border:none; border-top:1px solid var(--hair); margin:0;}
 
 /* No disc / download — 配信版(row[12]=1)。購入ブロックを消し、静かなグレーのバッジ。
-   朱色は使わない(入手経路が生きていない=「届く」の合図を出さないのが正しい)。 */
+   紫は使わない(入手経路が生きていない=「届く」の合図を出さないのが正しい)。 */
 .card .nodisc{display:inline-flex; align-items:center; gap:8px; align-self:flex-start;
   font:500 12px/1 var(--f-mono); letter-spacing:.08em; text-transform:uppercase;
   color:var(--muted); background:var(--paper); border:1px solid var(--hair-strong);
@@ -327,11 +346,11 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
   border-radius:8px; font:500 14px/1 var(--f-display); cursor:pointer;
   border:1px solid var(--tag); background:transparent; color:var(--tag);
   transition:border-color .12s, background .12s;}
-.card .store:hover{border-color:var(--tag); background:rgba(34,211,238,.12);}
+.card .store:hover{border-color:var(--tag); background:rgba(17,238,255,.12);}
 .card .store .en{font:500 8px/1 var(--f-mono); letter-spacing:.1em; padding:2px 4px;
   border:1px solid currentColor; border-radius:3px; opacity:.7;}
 .card .store.primary{border-color:var(--signal); color:#07040f; background:var(--signal);}
-/* ★白は桃の上で 3.17:1 しか出ない。地色を載せて 6.4:1 にする。 */
+/* ★白は紫の上で 4.28:1 しか出ない。地色を載せて 4.75:1 にする。 */
 .card .store.primary:hover{background:var(--signal); color:#07040f;}
 .card .store.primary:hover .en{opacity:1;}
 /* Buyee の費用注記。.group(316行)が flex column gap:8px なので、間隔は親が持つ。
@@ -347,7 +366,7 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card .store.wide{height:auto; min-height:44px; padding:10px 14px; line-height:1.35;
   text-align:center; white-space:normal;}
 /* .buyee-note の中に置く Buyee へのリンク。.card a{color:inherit}(165行)で文字色を継ぐため、
-   下線と水色を足さないとリンクだと分からない。見え方はフッターのリンク(433行)に揃える。 */
+   下線とシアンを足さないとリンクだと分からない。見え方はフッターのリンク(433行)に揃える。 */
 .card .note-link{color:var(--tag); text-decoration:underline;}
 .card .note-link:hover,.card .note-link:focus{color:var(--accent);}
 @media(max-width:420px){
@@ -421,7 +440,7 @@ h1{font-family:var(--f-pixel);}
 .locpair{display:flex;max-width:420px;margin:0 auto;border:1px solid var(--edge-input);border-radius:2px;overflow:hidden}
 .locbtn{flex:1;min-height:44px;padding:10px 8px;background:transparent;border:0;color:var(--muted);font:inherit;font-size:13px;cursor:pointer}
 .locbtn+.locbtn{border-left:1px solid var(--edge-input)}
-.locbtn.is-on{background:var(--accent);color:var(--accent-ink);font-weight:700}
+.locbtn.is-on{background:var(--logo-pink);color:var(--accent-ink);font-weight:700}
 .locbtn.is-on::before{content:"";display:inline-block;width:8px;height:8px;background:currentColor;margin-right:8px;vertical-align:middle}
 /* ★Klook（旅行アクティビティのアフィリエイト）。日本にいる人にだけ出す page 枠の要素。
    ゲームのカードには載せない（データ欄に飾りを付けない原則）。
@@ -445,7 +464,7 @@ body.in-jp #klookbar{display:block}
 .howto em{ font-style:italic; }
 
 footer{border-top:2px solid var(--edge);padding:18px 0 40px;font-family:"Space Mono",monospace;font-size:11px;color:var(--muted);line-height:1.6}
-/* リンクは水色、hover で桃。a{color:inherit} は残す＝カード内のリンク(.card a)は
+/* リンクはシアン、hover で紫。a{color:inherit} は残す＝カード内のリンク(.card a)は
    これまでどおり文字色を継ぐ（このセレクタはフッターにしか当たらない）。 */
 footer a{color:var(--tag);text-decoration:underline}
 footer a:hover,footer a:focus{color:var(--accent)}
@@ -457,9 +476,10 @@ footer a:hover,footer a:focus{color:var(--accent)}
 
 /* barcode scanner */
 .scanbtn{font-family:var(--f-pixel);font-size:13px;font-weight:700;letter-spacing:.04em;
-  padding:13px 16px;border:2px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer;
+  padding:13px 16px;border:2px solid var(--danger);background:var(--danger);color:var(--danger-ink);cursor:pointer;
   text-transform:uppercase;border-radius:0;transition:background .12s,color .12s,border-color .12s}
-/* 押した先が桃のままだと反応が見えないので、hover/focus で副アクセントの水色へ振る。 */
+/* 通常時は --danger（赤）、hover/focus で --tag（シアン）へ振る。押した先が同じ赤のままだと
+   反応が見えないため、意図的に離れた色相へ切り替えている。 */
 .scanbtn:hover,.scanbtn:focus{background:var(--tag);border-color:var(--tag);color:var(--accent-ink);outline:none}
 #scanOverlay{position:fixed;inset:0;z-index:50;background:rgba(5,3,11,.93);display:none;
   flex-direction:column;align-items:center;justify-content:center;padding:20px}
@@ -490,7 +510,7 @@ footer a:hover,footer a:focus{color:var(--accent)}
 .rak-img img{max-width:300px;height:auto;display:block;border-radius:4px;cursor:pointer}
 /* 出典の注記ではなく買うためのリンク。それに見合う可読性にする。 */
 .rak-cap{display:block;font-family:"Space Mono",monospace;font-weight:700;font-size:14px;color:var(--tag);opacity:1;margin-top:4px;text-decoration:underline}  /* キャプションは画像の外 */
-/* 相場の行。リンクではない = 下線なし・水色でもない。読みやすさは .rak-cap と揃える。
+/* 相場の行。リンクではない = 下線なし・シアンでもない。読みやすさは .rak-cap と揃える。
    装飾/glow/text-shadow は付けない(データ欄の原則)。 */
 .rak-market{display:block;font-family:"Space Mono",monospace;font-size:14px;color:var(--muted);margin-top:2px;text-decoration:none}
 
@@ -556,8 +576,8 @@ footer a:hover,footer a:focus{color:var(--accent)}
 
 /* ================= デザイン案に寄せる（2026-07-24 夕）=================
    変更は <style> 内のみ。既存ルールの後段に置き、同特異度は source order で勝たせる。
-   ★「水色」の指示: この配色では var(--accent) は桃(#ff37c7)で、水色は var(--tag) #22d3ee。
-     指示語「水色」に合わせ、四隅の「+」と番号タブには --tag を使う（--accent ではない）。 */
+   ★「水色」の指示: この配色では var(--accent) は紫(#b337ff)で、水色に当たるのは var(--tag) シアン #11eeff。
+     指示語「水色」に合わせ、番号バッジ（下の「3.」）に --tag を使う。四隅の「+」は撤去済み。 */
 
 /* 1. 角を四角く（2px）: 入力欄・全ボタン・付随フィールド（カード/スラブは下の該当ブロックで） */
 #q, #plat, #pub, #year, #pubInput, #scanJan,
@@ -565,8 +585,12 @@ footer a:hover,footer a:focus{color:var(--accent)}
 .card .slab-copy, .card .btn-copy, .card .btn-clerk, .card .store,
 .card .jp-chip, .card .shelf-kana{ border-radius:2px; }
 
-/* 5. 日本語タイトルを桃色に（text-shadow なし。カード地に対し 6.13:1） */
-.card .ja-title{ color:var(--signal); }
+/* 5. 日本語タイトルを白に（text-shadow なし。カード面 #0f0a1c に対し 19.4:1）。
+   旧: var(--signal) の紫（4.54:1）。--signal は「型番の一致」と「Buyee=届く経路」の
+   2意味に予約された色で、日本語タイトルはその3番目の用途として乗っていた。白に移して
+   予約どおり2意味に戻す。★184行の基底 color:var(--ink) はこの後段指定に負けて効かない
+   （同特異度 0,2,0 で source order 勝ち）。色を変えるときはここを触ること。 */
+.card .ja-title{ color:#ffffff; }
 
 /* 4. 2ボタンを横並び2等分にする .stores（現在は Book-Off / Hard-Off の1箇所）。
    ★2026-08-02: 旧 `.card .group:last-child .stores` をやめた。:last-child は
@@ -576,7 +600,7 @@ footer a:hover,footer a:focus{color:var(--accent)}
    .stores にもこの2カラムが当たって半分幅になっていた。当てる先を class で名指しする。 */
 .card .stores.pair{ grid-template-columns:1fr 1fr; }
 
-/* 3. 番号バッジ（CSS counter・HTML/JS 不変）。水色地・暗い文字の小さなタブを枠上端に重ねる */
+/* 3. 番号バッジ（CSS counter・HTML/JS 不変）。シアン地・暗い文字の小さなタブを枠上端に重ねる */
 #results{ counter-reset:cardnum; }
 .card{ border-radius:2px; counter-increment:cardnum; position:relative; }
 .card::before{ content:counter(cardnum); position:absolute; top:0; left:0;
@@ -584,12 +608,12 @@ footer a:hover,footer a:focus{color:var(--accent)}
   background:var(--tag); color:var(--accent-ink);
   font:700 15px/1 var(--f-mono); letter-spacing:.08em; padding:4px 10px; border-radius:2px; }
 
-/* 6. スラブの枠だけ発光（外側に桃の弱い光。文字は光らせない＝text-shadow なし）。radius も 2px。 */
+/* 6. スラブの radius も 2px。★ここに書いていた「枠の発光」は 2026-07-29 に撤去済み（264行）。 */
 .card .slab{ border-radius:2px; position:relative; }
 
 /* 3. 店ブロックを1枠に（「In a store right now?」＋ Show to shop staff ＋ 棚案内）。
    枠線1px・角2px（他要素と揃える）。枠線は新カード地#281d4cで視認できる#4a4278
-   （--hair-strong は新地に対し 1.03:1 でほぼ不可視のため）。見出しは水色 var(--tag)・micro サイズ。
+   （--hair-strong は新地に対し 1.03:1 でほぼ不可視のため）。見出しはシアン var(--tag)・micro サイズ。
    配信専用(row[12])では card() 側で枠ごと出さない（空枠は残らない）。 */
 .card .instore{ padding:14px 0 0; display:flex; flex-direction:column; gap:12px; }
 .card .instore > .field{margin:16px 0 14px;}
@@ -613,25 +637,25 @@ footer a:hover,footer a:focus{color:var(--accent)}
 .kb-grid{ display:grid; grid-template-columns:repeat(41,var(--kb-px));
   grid-auto-rows:var(--kb-px); line-height:0; }
 .kb-grid i{ display:block; }
-.kb-on-pink{ background:var(--accent); box-shadow:0 0 12px var(--accent); }
-.kb-on-cyan{ background:var(--tag); box-shadow:0 0 8px var(--tag); }
+.kb-on-pink{ background:var(--logo-gold); box-shadow:0 0 12px var(--logo-gold); }
+.kb-on-cyan{ background:var(--logo-pink); box-shadow:0 0 8px var(--logo-pink); }
 .kb-tagline{ margin:0; display:flex; align-items:center; gap:12px;
   font-family:var(--f-pixel); font-size:12px; letter-spacing:2px;
-  color:var(--tag); text-shadow:0 0 8px rgba(34,211,238,.55); }
+  color:#ffffff; text-shadow:0 0 8px rgba(255,255,255,.55); }
 .kb-tag-badge{ font-family:"IBM Plex Sans JP",sans-serif; font-weight:700;
   font-size:13px; letter-spacing:1px; color:var(--accent-ink);
-  background:var(--tag); padding:2px 7px 3px; text-shadow:none;
-  box-shadow:0 0 10px rgba(34,211,238,.45);
+  background:#ffffff; padding:2px 7px 3px; text-shadow:none;
+  box-shadow:0 0 10px rgba(255,255,255,.45);
   white-space:nowrap; flex-shrink:0; }
 /* logo is centered, so center the lede directly below it (overrides .lede) */
 header .lede{ margin:1.75rem auto 0.75rem; text-align:center; color:#ffffff; font-weight:700; }
 header .lede .lede-sub{ font-weight:400; }
 @keyframes kb-breathe{
-  0%,100%{ filter:brightness(.97) drop-shadow(0 0 1px rgba(255,55,199,0)); }
-  50%    { filter:brightness(1.14) drop-shadow(0 0 12px rgba(255,55,199,.5)); }
+  0%,100%{ filter:brightness(.97) drop-shadow(0 0 1px rgba(248,184,32,0)); }
+  50%    { filter:brightness(1.14) drop-shadow(0 0 12px rgba(248,184,32,.5)); }
 }
 @media (prefers-reduced-motion:reduce){
-  .kb-word{ animation:none; filter:brightness(1.06) drop-shadow(0 0 10px rgba(255,55,199,.4)); }
+  .kb-word{ animation:none; filter:brightness(1.06) drop-shadow(0 0 10px rgba(248,184,32,.4)); }
 }
 /* ===== Stats band (2026-07-29): below search, above results. Numbers are
    hardcoded (footer duplicates them) — update both if the dataset changes. ===== */
@@ -641,8 +665,8 @@ header .lede .lede-sub{ font-weight:400; }
 .kb-stat + .kb-stat{ border-left:1px solid var(--edge); }
 .kb-num{ font-family:var(--f-vt); font-size:clamp(30px,7.5vw,50px);
   line-height:1; letter-spacing:1px; }
-.kb-num-pink{  color:var(--accent); text-shadow:0 0 14px rgba(255,55,199,.5); }
-.kb-num-cyan{  color:var(--tag);    text-shadow:0 0 14px rgba(34,211,238,.5); }
+.kb-num-pink{  color:var(--accent); text-shadow:0 0 14px rgba(179,55,255,.5); }
+.kb-num-cyan{  color:var(--tag);    text-shadow:0 0 14px rgba(17,238,255,.5); }
 .kb-num-white{ color:#f1eeff;       text-shadow:0 0 14px rgba(241,238,255,.35); }
 .kb-stat-lab{ margin-top:12px; font-family:var(--f-pixel);
   font-size:clamp(9px,2.4vw,11px); letter-spacing:1px; color:var(--muted);
@@ -665,33 +689,25 @@ header .lede .lede-sub{ font-weight:400; }
 /* ===== Search panel reskin (2026-07-29): mock-faithful layout. Wiring IDs and
    the .pubwrap block are unchanged; only wrappers/labels/divider/hint were added
    around them. Selects keep Space Mono for legibility of variable-length options. */
-.kb-panel{ margin-top:18px; padding:26px 24px 20px; position:relative;
-  border:1px solid var(--edge);
-  background:linear-gradient(180deg, rgba(20,13,42,.55), rgba(11,7,20,.55)); }
-.kb-panel::before{ content:""; position:absolute; left:-1px; bottom:-1px;
-  width:20px; height:20px; border-left:2px solid var(--accent);
-  border-bottom:2px solid var(--accent); box-shadow:0 0 12px rgba(255,55,199,.5);
-  pointer-events:none; }
-.kb-panel::after{ content:""; position:absolute; right:-1px; top:-1px;
-  width:20px; height:20px; border-right:2px solid var(--tag);
-  border-top:2px solid var(--tag); box-shadow:0 0 12px rgba(34,211,238,.4);
-  pointer-events:none; }
+/* 2026-08-06: 塗りと枠を落としてフラット化。地は --paper のまま透ける。
+   段の区切りは .kb-lab と .kb-divider が持つので、囲みは要らない。 */
+.kb-panel{ margin-top:18px; padding:26px 24px 20px; position:relative; }
 .kb-lab{ display:flex; align-items:center; gap:8px; margin:0 0 10px;
   font-family:var(--f-pixel); font-size:11px; letter-spacing:1px;
-  color:var(--muted); text-transform:uppercase; }
-.kb-lab .kb-lab-jp{ font-family:"IBM Plex Sans JP",sans-serif; color:var(--faint);
+  color:#ffffff; text-transform:uppercase; }
+.kb-lab .kb-lab-jp{ font-family:"IBM Plex Sans JP",sans-serif; color:var(--muted);
   text-transform:none; letter-spacing:1px; }
 .kb-fieldrow{ margin:0 0 18px; }
 .kb-cols{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
 .kb-col{ display:flex; flex-direction:column; min-width:0; }
 .kb-divider{ height:1px; background:var(--line); margin:22px 0 20px; }
 .kb-scanhint{ margin:14px 0 0; font-family:var(--f-vt); font-size:18px;
-  letter-spacing:.5px; color:var(--faint); }
+  letter-spacing:.5px; color:var(--muted); }
 .kb-panel #q{ width:100%; font-size:18px; }
 .kb-panel #plat, .kb-panel #year, .kb-panel #pubInput{ width:100%; max-width:none; }
 .kb-panel .pubwrap{ width:100%; max-width:none; flex:none; }
 .kb-panel .scanbtn{ display:inline-flex; align-items:center; gap:12px;
-  padding:15px 22px; box-shadow:0 0 18px -2px rgba(255,55,199,.55); }
+  padding:15px 22px; box-shadow:0 0 18px -2px rgba(220,0,0,.55); }
 .kb-bars rect{ shape-rendering:crispEdges; }
 @media (max-width:560px){ .kb-cols{ grid-template-columns:1fr; } }
 
@@ -700,18 +716,18 @@ header .lede .lede-sub{ font-weight:400; }
    ★モーダルはカードごとに複製しない。ページに1つだけ置いて、リンクは
      「同じ器を開く」だけにする。将来ディスク機の入口を足すときも、
      増えるのはリンク側だけで済む。
-   ★--signal（朱）は使わない。カード外なので :root のトークンで組む。
+   ★--signal（紫）は使わない。カード外なので :root のトークンで組む。
    ============================================================ */
 /* 行ロケーターの直下に出る枠線ボタン。行ロケーターと同じ条件でしか描かれない。
    この店頭ゾーンでは塗りは載せない（.btn-clerk がゾーン内で一番強い。ここを同じ強さに
    すると競る）。カード全体で一番強いのはこのゾーンではなく、購入ブロックの
-   `.store.primary`（328行）の桃**塗り**。
+   `.store.primary`（328行）の紫**塗り**。
    枠線＋普通体で「押せるが主役ではない」段に置く。 */
 .card .genre-link{width:100%; display:flex; align-items:center; justify-content:center; gap:10px;
   min-height:52px; padding:10px 16px; cursor:pointer; text-align:center;
   border:1px solid var(--tag); border-radius:2px; background:none; color:var(--tag);
   font:500 15px/1.2 var(--f-display); letter-spacing:.02em;}
-.card .genre-link:hover{background:rgba(34,211,238,.08);}
+.card .genre-link:hover{background:rgba(17,238,255,.08);}
 
 /* ★書体トークンをここで定義し直す。--f-display / --f-jp は :root ではなく .card{} の
    中でしか定義されていない（色トークンは :root にある）。モーダルは .card の外なので
@@ -754,7 +770,7 @@ header .lede .lede-sub{ font-weight:400; }
      1段明るい --field（入力欄・チップと同じ地）を使って、面として浮かせる。
    ★margin:0 -18px で #genre-modal-body の padding:18px を打ち消し、帯を左右の端まで伸ばす。
      padding も同じ18pxなので、字の左端は打ち消し前と同じ位置に残る（帯だけが外へ広がる）。
-   ★上下は var(--line)（.genre-row の区切りと同じ薄い枠）で帯を閉じる。左だけ桃の3pxを立てて
+   ★上下は var(--line)（.genre-row の区切りと同じ薄い枠）で帯を閉じる。左だけ紫の3pxを立てて
      「ここから別の表」と示す。帯が端まで伸びているので、この3pxはモーダルの左端に付く。
    ★--accent は :root にある（--f-display と違い .card の中ではない）ので、
      モーダルからそのまま解決できる。 */
@@ -780,7 +796,7 @@ header .lede .lede-sub{ font-weight:400; }
 .genre-terms span{padding:2px 8px; border:1px solid var(--line); border-radius:99px;
   background:var(--field); color:var(--muted); font:400 11.5px/1.6 var(--f-display);}
 
-/* 棚の仕切り札。実店舗の札に寄せる＝白地・黒字・細い黒枠。ブランド配色（桃/水色）は
+/* 棚の仕切り札。実店舗の札に寄せる＝白地・黒字・細い黒枠。ブランド配色（紫/シアン）は
    当てない。暗いモーダルの中で札だけ白く浮くのは意図どおり（棚の札と照合するため、
    画面の中で一番「紙に見える」必要がある）。店員画面 #clerk が白地#fff・文字#111 なのと
    同じ考え方で、「店で使う面」だけ現実の紙に寄せている。
@@ -1271,38 +1287,6 @@ function shelfNote(r){
     </div>`;
 }
 
-// ============================================================
-// 行ロケーター（第1段：器だけ）
-// 棚が「行」単位で切られていることを実測で確認できた5機種にだけ出す。
-// row[11] の空率が Famicom 0.2% / Game Boy 1.3% と低く、10行への変換も
-// 取りこぼし0だったのがこの5機種（measure_tana3/tana4）。PS4/PS5/Switch は
-// 空率 10〜29% で、出したり出さなかったりがカード間でばらつくので今は外す。
-// ★null を返したら器ごと出さない。空の器は「まだ調べていない」ではなく
-//   「情報が無い店」と読まれる。中身が無いなら枠も出さない。
-const SYLLABARY_PLATFORMS = ['Famicom','Super Famicom','Nintendo 64','Game Boy','Game Boy Advance'];
-// measure_tana4.js と同一の変換表。ひらがなの行名を返す（棚の札は「あ行」表記）。
-// 上の GYO（ヲ/ン無し）とは別物。統合はしない ―― あちらは全機種向けの
-// 文章内表記で、こちらは対象機種限定のロケーター。用途が違うものを1つにすると
-// 片方の都合でもう片方が動く。
-const GYO_LOC = {
-  'ア':'あ行','イ':'あ行','ウ':'あ行','エ':'あ行','オ':'あ行',
-  'カ':'か行','キ':'か行','ク':'か行','ケ':'か行','コ':'か行',
-  'サ':'さ行','シ':'さ行','ス':'さ行','セ':'さ行','ソ':'さ行',
-  'タ':'た行','チ':'た行','ツ':'た行','テ':'た行','ト':'た行',
-  'ナ':'な行','ニ':'な行','ヌ':'な行','ネ':'な行','ノ':'な行',
-  'ハ':'は行','ヒ':'は行','フ':'は行','ヘ':'は行','ホ':'は行',
-  'マ':'ま行','ミ':'ま行','ム':'ま行','メ':'ま行','モ':'ま行',
-  'ヤ':'や行','ユ':'や行','ヨ':'や行',
-  'ラ':'ら行','リ':'ら行','ル':'ら行','レ':'ら行','ロ':'ら行',
-  'ワ':'わ行','ヲ':'わ行','ン':'わ行',
-};
-function shelfGyo(r){
-  if(!SYLLABARY_PLATFORMS.includes(r[2])) return null;   // 対象外の機種
-  const kana = (r[11]||'').trim();
-  if(!kana) return null;                                 // 初字が無い
-  return GYO_LOC[kana] || null;                          // 変換表に無い字も出さない
-}
-
 /* 位置トグルの状態。'out'=海外在住（初期） / 'jp'=日本の店頭。
    変えるのは表示の並び順と説明文だけ。検索結果(current)は変わらないので
    run() ではなく paint() を呼ぶ。第1段-a の時点では card() が LOC を
@@ -1402,7 +1386,7 @@ function buyBlock(k){
   const clsCode  = ((jp || noProxy) && k.codes.length)     ? 'store primary' : 'store';
   /* ★2026-08-02: Suruga-ya (title) は条件分岐を持たず常に塗る（同日の2段階で現在の形になった）。
      旧1: ((jp || noProxy) && k.codes.length===0) ＝「型番が無い行だけ塗る」で clsCode と排他。
-     旧2: (jp || noProxy) ＝ 海外モードでは水色のまま。
+     旧2: (jp || noProxy) ＝ 海外モードではシアンのまま。
      現: 無条件。jp では Suruga-ya (code) と、out では Buyee と、塗りが2つ並ぶ
      ＝上の方針コメント（この関数の先頭）に書いた「最大2つ」の形。clsCode / clsBuyee は不変。 */
   const clsTitle = 'store primary';
@@ -1754,7 +1738,7 @@ function card(r,idx){
         ${hideJa?'':`<span class="micro plain">Japanese reading</span>`}
         ${hideJa?'':`<div class="ja-title">${esc(jpMain)}</div>`}
         ${romaji?`<div class="romaji">${esc(romaji)}</div>`:''}
-        ${noCode?`<div class="romaji">No product code on record</div>`:''}
+        ${noCode?`<div class="no-code-notice">No product code on record</div>`:''}
       </div>
     </div>
 
@@ -1769,7 +1753,6 @@ function card(r,idx){
            外したまま渡すと、配信専用の行で「在庫はありますか？」と店員に聞かせることになる。 -->
     ${r[12]?'':`<div class="instore">
       ${shelfNote(r)}
-      ${(()=>{const g=shelfGyo(r); return g?`<div class="shelf-loc">この棚を探す: <span class="shelf-gyo">${esc(g)}</span></div>`:'';})()}
       <button class="genre-link" type="button">Find by genre &amp; condition guide</button>
       <span class="micro plain instore-head">Still can't find it?</span>
       <button class="btn-clerk" type="button" data-clerk="${idx}">Show to shop staff</button>
