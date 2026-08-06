@@ -1,0 +1,40 @@
+# 既定で全エントリを無視し、追跡したいファイルだけを ! で許可する。
+# バックアップ106本・data/ 180M・実験フォルダを誤って取り込まないための安全策。
+# 追跡したいファイルが増えたら ! 行を足す（消えても「未追跡」になるだけで安全）。
+/*
+!/.gitignore
+!/index.html
+!/copytest.html
+!/build_master.py
+!/swap_data.py
+!/BIN_DIVER_NOTES.md
+!/BIN_DIVER_DESIGN.md
+!/DELETED_BAKS_LEDGER.md
+!/scantest.html
+
+# APIトークン。上の /* で既に無視されるが、! 行を足す人が誤って許可しないよう明示する。
+indoleads_token.txt
+/_experiments/
+/_experiments/yahoo_appid.txt
+
+# トップページのデザイン原本（意図の原本として履歴に残す）。
+!/kataban_top.html
+
+# サイトアイコン一式と OG 画像。Pages のルートに置いて配信する実ファイルなので追跡する。
+!/favicon.svg
+!/favicon.ico
+!/apple-touch-icon.png
+!/favicon-32.png
+!/favicon-16.png
+!/og.png
+
+# クローラ向けの実ファイル。Pages のルートに置いて配信するので追跡する。
+!/sitemap.xml
+!/robots.txt
+
+# 上のアイコン／OG を焼くスクリプト。2026-07-30 に一度これを残さず、2026-08-06 の
+# 配色移行で旧ファイルの実測から復元する羽目になった。生成物だけ追跡して生成器を
+# 捨てると、次に触る人が同じ復元をやり直すことになるので一緒に追跡する。
+!/gen_icons.py
+!/build_og.py
+!/measure.py
