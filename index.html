@@ -294,6 +294,28 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card .specs{display:flex; border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);}
 .card .spec{flex:1; padding:12px 0; display:flex; flex-direction:column; gap:5px;}
 .card .spec + .spec{border-left:1px solid var(--hair); padding-left:14px;}
+/* ★狭い画面で3列を 2列＋1列に折る（2026-08-07）。
+   flex アイテムの既定は min-width:auto ＝最小内容幅より縮まないので、語の長い行
+   （"PlayStation Vita" / "Nippon Ichi Software" 等）が入ると3列の合計が .specs を
+   突き抜け、**ページ全体に横スクロールが出る**。実測: 幅320で113px、幅360で73px、
+   幅390で43px はみ出し、ページの最右端が viewport を 6〜77px 超えていた。
+   ★min-width:0 を足すだけでは直らない。ラベル（--f-pixel の1語）は折り返せないので、
+     列が縮んだ分だけ "PUBLISHER" と "RELEASED" が重なる（実測で確認）。
+     列数そのものを減らすしかない。
+   ★列を減らしただけでは足りない。空白の無い長い1語（"コーエーテクモゲームス" など）は
+     どこでも折れないので、幅320で 45px 残った（実測）。値側に overflow-wrap:anywhere を
+     足して初めて 0 になる。ラベル(.micro)には掛けない ―― "PUBLISHER" が途中で折れると
+     読めなくなるうえ、2列なら幅は足りている。
+   ★480px という区切りは既存の .code の折り返し（471-474行）と同じ。
+     広い画面には一切影響しない（3列のまま）。 */
+@media (max-width:480px){
+  .card .specs{display:grid; grid-template-columns:1fr 1fr;}
+  .card .spec{min-width:0;}
+  .card .spec .v{overflow-wrap:anywhere;}
+  .card .spec + .spec{border-left:none; padding-left:0;}
+  .card .spec:nth-child(2){border-left:1px solid var(--hair); padding-left:14px;}
+  .card .spec:nth-child(3){grid-column:1 / -1; border-top:1px solid var(--hair);}
+}
 .card .spec .v{font:500 22px/1.15 var(--f-display); color:#ffffff;}
 .card .spec .micro{color:var(--tag);}
 .card .spec .v.jp{font-family:var(--f-jp);}
@@ -712,7 +734,12 @@ header .lede .lede-sub{ font-weight:400; }
 @media (max-width:560px){ .kb-cols{ grid-template-columns:1fr; } }
 
 /* ============================================================
-   検索パネルの呼び戻し（2026-08-07）
+   検索パネルの呼び戻し（2026-08-07・第2版＝ボタンで手動開閉）
+   ★第1版はスクロール方向で自動開閉していたが、実機で不具合が出たのと、
+     「勝手に出入りする」挙動そのものをやめる判断で手動開閉に作り変えた。
+     .is-stuck / .is-hidden の CSS はそのまま流用している（開＝is-hidden 無し、
+     閉＝is-hidden あり）。変わったのは「誰が is-hidden を付け外しするか」だけで、
+     スクロール方向は一切見ない。
    ★flow 内の見た目は一切変えない。地を敷かないという104-108行の判断は
      そのまま生きている ―― 塗るのは .is-stuck が付いている間だけ。
    ★#locbar(sticky・top:0) の直下に貼るので、top は locbar の実測高。
@@ -735,17 +762,55 @@ header .lede .lede-sub{ font-weight:400; }
   background:var(--paper);            /* 貼っている間だけ不透明 */
   transition:transform .2s ease;
 }
-.kb-panel.is-stuck.is-hidden{ transform:translateY(calc(-100% - var(--locbar-h))); }
-/* 貼り付き/剥がれの瞬間だけ transition を殺す。ここを動かすと、自然に
-   スクロールで消えたはずの帯が上へ飛んでいく余計な動きになる。 */
+/* 閉じている間。画面外へ送るだけでなく visibility も落とす ―― 落とさないと
+   画面に無い入力欄へ Tab で入れてしまう（帯は開くまで操作対象ではない）。
+   visibility は transform が終わってから切り替える（0s だが .2s 遅らせる）。
+   開くときは基底の transition（遅延なし）に戻るので即座に見える。 */
+.kb-panel.is-stuck.is-hidden{
+  transform:translateY(calc(-100% - var(--locbar-h)));
+  visibility:hidden;
+  transition:transform .2s ease, visibility 0s linear .2s;
+}
+/* 貼り付き/剥がれの瞬間だけ transition を殺す。ここを動かすと、貼った瞬間に
+   帯が上へ飛んでいく余計な動きになる。 */
 .kb-panel.no-anim{ transition:none; }
 .kb-panel-spacer{ pointer-events:none; }
 /* ★scrollIntoView の着地点を、上に貼り付いているものの下へ下ろす。
    スキャン成功時の showByJan() が results.scrollIntoView({block:'start'}) で
    結果の先頭を viewport 上端に合わせるので、これが無いと1件目が #locbar と
    呼び戻した検索パネルの下に潜る（＝スキャンした本人にだけ結果が見えない）。
-   貼っていない間は --panel-h:0 なので locbar 分だけ下がる。 */
+   ★第2版では --panel-h は「開いている間だけ」帯の実測高。閉じていれば 0
+   （閉じた帯は画面に無いので、下ろす必要があるのは locbar の分だけ）。 */
 #results{ scroll-margin-top:calc(var(--locbar-h) + var(--panel-h)); }
+
+/* 呼び戻しボタン（右下の丸）。★開閉トグル1つに統合（2026-08-07）。
+   帯に貼り付いている間はずっと同じ位置に出しっぱなしにし、閉＝虫眼鏡 / 開＝×で
+   状態を示す。以前あった帯の中の .kb-close は撤去した（押す場所が2つに割れて、
+   「今どちらの操作をしているか」が位置で変わるのをやめる）。
+   ★z-index 22 = 帯(21)の上、#pubList(40)/#scanOverlay(50)/#clerk(60)/
+     #copyToast(70) の下。開いている間もボタンは押せる必要があるので帯より上。
+   ★56px は 431-438行の「タップ域は 44px 以上（下げない）」を満たす。
+   ★色は既存トークンのみ。通常 --accent（紫）、hover/focus で --tag（シアン）へ
+     振るのは .scanbtn（478-483行）と同じ作法。新しい生hexは足さない。
+   ★right/bottom はノッチ・ホームバーの安全域を足す。env() 非対応でも
+     フォールバック 0px で 12px に落ちるだけ。 */
+#recallBtn{
+  position:fixed; z-index:22;
+  right:calc(12px + env(safe-area-inset-right, 0px));
+  bottom:calc(12px + env(safe-area-inset-bottom, 0px));
+  width:56px; height:56px; border-radius:50%;
+  display:none; align-items:center; justify-content:center;
+  background:var(--accent); color:var(--accent-ink);
+  border:2px solid var(--accent); cursor:pointer; padding:0;
+  box-shadow:0 4px 18px -2px rgba(179,55,255,.55);
+  transition:background .12s, border-color .12s, color .12s;
+}
+#recallBtn.on{ display:flex; }
+#recallBtn:hover,#recallBtn:focus{ background:var(--tag); border-color:var(--tag); color:var(--accent-ink); outline:none; }
+/* アイコンの入れ替え。開いている間だけ × を出す。 */
+#recallBtn .rb-x{ display:none; }
+#recallBtn.is-open .rb-find{ display:none; }
+#recallBtn.is-open .rb-x{ display:block; }
 
 /* ============================================================
    ジャンル早見表（第1段：器だけ。中身は次段）。
@@ -934,6 +999,11 @@ header .lede .lede-sub{ font-weight:400; }
     <button type="button" id="scanBtn" class="scanbtn" aria-label="Scan a barcode"><svg class="kb-bars" width="22" height="16" viewBox="0 0 22 16" aria-hidden="true"><g fill="currentColor"><rect x="0" width="2" height="16"/><rect x="3" width="1" height="16"/><rect x="6" width="3" height="16"/><rect x="10" width="1" height="16"/><rect x="12" width="2" height="16"/><rect x="16" width="1" height="16"/><rect x="18" width="3" height="16"/></g></svg> SCAN BARCODE</button>
     <p class="kb-scanhint">Point your camera at the JAN barcode on a disc case.</p>
   </div>
+
+  <!-- 呼び戻しトグル。position:fixed なので DOM 上の位置は見た目に効かないが、
+       開く相手（.kb-panel）の直後に置いて対応を読み取れるようにしている。
+       アイコンは2枚入れて CSS で出し分ける（閉＝虫眼鏡 / 開＝×）。 -->
+  <button type="button" id="recallBtn" aria-label="Open search panel" aria-expanded="false"><svg class="rb-find" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.4 15.4 L21 21" stroke-linecap="round"/></svg><svg class="rb-x" width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 4 L18 18 M18 4 L4 18" stroke-linecap="round"/></svg></button>
 
   <div class="count" id="count"></div>
   <div id="results"></div>
@@ -2404,21 +2474,27 @@ function attachRakutenSlots(root) {
 </script>
 <script>
 /* ============================================================
-   検索パネルの呼び戻し（2026-08-07）
-   元の位置より下へ流れたら .kb-panel を #locbar の直下に固定し、下スクロール中は
-   畳み、上スクロール中に戻す。元の位置より上へ戻ったら flow へ返す。
+   検索パネルの呼び戻し（2026-08-07・第2版＝ボタンで手動開閉）
+   元の位置より下へ流れたら .kb-panel を #locbar の直下へ固定し、既定は閉じた状態
+   （画面外）にする。右下の丸ボタン #recallBtn がそのまま開閉トグルで、閉＝虫眼鏡 /
+   開＝× とアイコンで状態を示す。元の位置より上へ戻ったら flow へ返し、ボタンも消す。
+   ★ボタンは貼り付いている間ずっと同じ位置に出しっぱなし（開いていても消さない）。
+   ★第1版はスクロール方向（前フレームとの pageYOffset 差）で自動開閉していた。
+     方向判定・setHidden・キーボード判定（visualViewport）は丸ごと撤去した。
+     スクロールを見るのは「貼るか剥がすか」の1点だけで、開閉には一切関与しない。
    ★flow へ戻す条件は「貼った条件の裏返し」そのもの（同じ anchorY）。別の閾値に
      すると境界でカクつく。
    ★固定した分の高さは spacer が持つ。margin まで写さないと後続が 18px 詰まる。
    ★スクロール中の DOM 読みは rAF 1回にまとめる。listener は passive。
    ============================================================ */
 (function(){
-  var panel  = document.querySelector('.kb-panel');
-  var locbar = document.getElementById('locbar');
-  if(!panel || !panel.parentNode) return;
+  var panel    = document.querySelector('.kb-panel');
+  var locbar   = document.getElementById('locbar');
+  var fab      = document.getElementById('recallBtn');
+  if(!panel || !panel.parentNode || !fab) return;
 
-  var spacer = null, stuck = false, hidden = false, ticking = false;
-  var lastY = 0, locH = 61;
+  var spacer = null, stuck = false, open = false, ticking = false;
+  var locH = 61;
   var basePadL = 24, basePadR = 24, baseMT = '18px', baseMB = '0px';
 
   // flow 時の余白を控える（貼っている間は inline で上書きするので、外れている時だけ読む）
@@ -2434,8 +2510,8 @@ function attachRakutenSlots(root) {
     document.documentElement.style.setProperty('--locbar-h', locH + 'px');
   }
 
-  // #results の scroll-margin-top の材料。貼っている間だけ帯の実測高を渡し、
-  // 外れている間は 0（上を塞いでいるのは locbar だけ）。
+  // #results の scroll-margin-top の材料。★開いている間だけ帯の実測高を渡す。
+  // 閉じている帯は画面に無いので、下ろす必要があるのは locbar の分だけ。
   function setPanelH(px){
     document.documentElement.style.setProperty('--panel-h', Math.round(px) + 'px');
   }
@@ -2453,16 +2529,32 @@ function attachRakutenSlots(root) {
     if(!stuck || !spacer) return;
     var r = spacer.getBoundingClientRect();
     var vw = document.documentElement.clientWidth;   // 固定位置の基準はスクロールバーを含まない
-    panel.style.paddingLeft  = Math.max(0, r.left)        + basePadL + 'px';
-    panel.style.paddingRight = Math.max(0, vw - r.right)  + basePadR + 'px';
+    panel.style.paddingLeft  = Math.max(0, r.left)       + basePadL + 'px';
+    panel.style.paddingRight = Math.max(0, vw - r.right) + basePadR + 'px';
   }
 
-  function setHidden(v){
-    // 入力中の欄は畳まない。畳むとモバイルではキーボードごと足元をさらわれる。
-    if(v && panel.contains(document.activeElement)) v = false;
-    if(v === hidden) return;
-    hidden = v;
-    panel.classList.toggle('is-hidden', v);
+  // 丸ボタンは「貼り付いている間」ずっと同じ位置に出す。開いていても消さない
+  // ＝同じボタンが閉じるボタンでもある。消えるのはページ最上部（flow 表示）だけ。
+  function syncFab(){
+    fab.classList.toggle('on', stuck);
+    fab.classList.toggle('is-open', open);
+    fab.setAttribute('aria-expanded', open ? 'true' : 'false');
+    fab.setAttribute('aria-label', open ? 'Close search panel' : 'Open search panel');
+  }
+
+  function setOpen(v){
+    if(!stuck || v === open) return;
+    if(!v){
+      // ★閉じる前にパネル内のフォーカスを外す。外さないと、モバイルでキーボードが
+      //   出たまま入力欄だけ画面外へ飛ぶ（第1版がキーボード判定で避けようとした状態を、
+      //   こちらは「閉じるときに必ず手を離す」で作らないようにする）。
+      var ae = document.activeElement;
+      if(ae && panel.contains(ae) && ae.blur) ae.blur();
+    }
+    open = v;
+    panel.classList.toggle('is-hidden', !v);
+    setPanelH(v ? panel.getBoundingClientRect().height : 0);
+    syncFab();
   }
 
   function stick(){
@@ -2475,15 +2567,15 @@ function attachRakutenSlots(root) {
     spacer.style.marginTop    = baseMT;
     spacer.style.marginBottom = baseMB;
     panel.parentNode.insertBefore(spacer, panel);
-    stuck = true;
-    // 貼るのは必ず下スクロール中 = 畳んだ状態から始める。ここを animate すると
-    // 「スクロールで消えたはずの帯が上へ飛ぶ」余計な動きになる。
-    panel.classList.add('no-anim', 'is-stuck');
+    stuck = true; open = false;
+    // 貼った直後は必ず閉じた状態。ここを animate すると、元の位置を通り過ぎた瞬間に
+    // 帯が上へ飛んでいく余計な動きになる。
+    panel.classList.add('no-anim', 'is-stuck', 'is-hidden');
     applyGutter();
-    setPanelH(panel.getBoundingClientRect().height);   // 貼った後の実測値で確定させる
-    setHidden(true);
+    setPanelH(0);
     void panel.offsetHeight;                  // 反映させてから transition を戻す
     panel.classList.remove('no-anim');
+    syncFab();
   }
 
   function unstick(){
@@ -2492,29 +2584,22 @@ function attachRakutenSlots(root) {
     panel.classList.remove('is-stuck', 'is-hidden');
     panel.style.paddingLeft = '';
     panel.style.paddingRight = '';
-    hidden = false;
     if(spacer && spacer.parentNode) spacer.parentNode.removeChild(spacer);
-    spacer = null; stuck = false;
+    spacer = null; stuck = false; open = false;
     setPanelH(0);
     void panel.offsetHeight;
     panel.classList.remove('no-anim');
     readBase();
+    syncFab();
   }
 
+  // ★スクロールが決めるのは「貼るか剥がすか」だけ。開閉には触らない。
   function update(){
     ticking = false;
     var y = window.pageYOffset; if(y < 0) y = 0;   // iOS のラバーバンドで負になる
     var a = anchorY();
-    if(!stuck){
-      if(y > a) stick();
-    }else if(y <= a){
-      unstick();
-    }else{
-      var d = y - lastY;
-      if(d >  2) setHidden(true);                  // 2px 未満は指の震え扱い
-      else if(d < -2) setHidden(false);
-    }
-    lastY = y;
+    if(!stuck){ if(y > a) stick(); }
+    else if(y <= a){ unstick(); }
   }
 
   function onScroll(){
@@ -2529,14 +2614,16 @@ function attachRakutenSlots(root) {
       applyGutter();
       var h = panel.getBoundingClientRect().height;
       spacer.style.height = h + 'px';
-      setPanelH(h);                       // 1列/3列の切り替えで帯の高さが変わる
+      if(open) setPanelH(h);              // 1列/3列の切り替えで帯の高さが変わる
     }
   }
+
+  // 同じボタンで開閉する。開いていれば閉じ、閉じていれば開く。
+  fab.addEventListener('click', function(){ setOpen(!open); });
 
   readBase();
   measureLocbar();
   setPanelH(0);
-  lastY = Math.max(0, window.pageYOffset);
   window.addEventListener('scroll', onScroll, {passive:true});
   window.addEventListener('resize', onResize);
   // Web フォントが後から届くとパネルの高さと元位置が動く。届いたら測り直す。
