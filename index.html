@@ -712,6 +712,42 @@ header .lede .lede-sub{ font-weight:400; }
 @media (max-width:560px){ .kb-cols{ grid-template-columns:1fr; } }
 
 /* ============================================================
+   検索パネルの呼び戻し（2026-08-07）
+   ★flow 内の見た目は一切変えない。地を敷かないという104-108行の判断は
+     そのまま生きている ―― 塗るのは .is-stuck が付いている間だけ。
+   ★#locbar(sticky・top:0) の直下に貼るので、top は locbar の実測高。
+     JS が --locbar-h を毎回書き直す（既定 61px = 44+16+1、431-438行の計算と同じ）。
+   ★z-index は 21。#locbar(20) の上、#pubList(40)/#scanOverlay(50)/#clerk(60)/
+     #copyToast(70) の下。店員パネル・スキャナ・トーストの上には絶対に載らない。
+   ★隠すときは -100% ではなく -100% - locbar 分まで送る。-100% だと帯の下端が
+     ちょうど y=61px に来る＝ z-index が locbar より上なので、畳んだ帯が
+     locbar を覆って見える。locbar の上端(y=0)より外へ完全に追い出す。
+   ★left/right は 0（全幅）。中身の桁は .wrap(760px) のままにしたいので、
+     左右パディングだけ JS が実測値で差し替える。中央 760px の箱にすると
+     広い画面で暗い長方形が浮く（#locbar で実測済み・434-435行と同じ罠）。
+   ============================================================ */
+/* --locbar-h / --panel-h はどちらも JS が実測値で上書きする。ここの値は
+   スクリプトが走る前の初期値（--panel-h は「貼っていない」＝0）。 */
+:root{ --locbar-h:61px; --panel-h:0px; }
+.kb-panel.is-stuck{
+  position:fixed; top:var(--locbar-h); left:0; right:0; z-index:21;
+  margin-top:0;                       /* 元の 18px は spacer 側が持つ */
+  background:var(--paper);            /* 貼っている間だけ不透明 */
+  transition:transform .2s ease;
+}
+.kb-panel.is-stuck.is-hidden{ transform:translateY(calc(-100% - var(--locbar-h))); }
+/* 貼り付き/剥がれの瞬間だけ transition を殺す。ここを動かすと、自然に
+   スクロールで消えたはずの帯が上へ飛んでいく余計な動きになる。 */
+.kb-panel.no-anim{ transition:none; }
+.kb-panel-spacer{ pointer-events:none; }
+/* ★scrollIntoView の着地点を、上に貼り付いているものの下へ下ろす。
+   スキャン成功時の showByJan() が results.scrollIntoView({block:'start'}) で
+   結果の先頭を viewport 上端に合わせるので、これが無いと1件目が #locbar と
+   呼び戻した検索パネルの下に潜る（＝スキャンした本人にだけ結果が見えない）。
+   貼っていない間は --panel-h:0 なので locbar 分だけ下がる。 */
+#results{ scroll-margin-top:calc(var(--locbar-h) + var(--panel-h)); }
+
+/* ============================================================
    ジャンル早見表（第1段：器だけ。中身は次段）。
    ★モーダルはカードごとに複製しない。ページに1つだけ置いて、リンクは
      「同じ器を開く」だけにする。将来ディスク機の入口を足すときも、
@@ -2364,6 +2400,148 @@ function attachRakutenSlots(root) {
   }
   paint(document.getElementById("kbGridPink"),"kb-on-pink");
   paint(document.getElementById("kbGridCyan"),"kb-on-cyan");
+})();
+</script>
+<script>
+/* ============================================================
+   検索パネルの呼び戻し（2026-08-07）
+   元の位置より下へ流れたら .kb-panel を #locbar の直下に固定し、下スクロール中は
+   畳み、上スクロール中に戻す。元の位置より上へ戻ったら flow へ返す。
+   ★flow へ戻す条件は「貼った条件の裏返し」そのもの（同じ anchorY）。別の閾値に
+     すると境界でカクつく。
+   ★固定した分の高さは spacer が持つ。margin まで写さないと後続が 18px 詰まる。
+   ★スクロール中の DOM 読みは rAF 1回にまとめる。listener は passive。
+   ============================================================ */
+(function(){
+  var panel  = document.querySelector('.kb-panel');
+  var locbar = document.getElementById('locbar');
+  if(!panel || !panel.parentNode) return;
+
+  var spacer = null, stuck = false, hidden = false, ticking = false;
+  var lastY = 0, locH = 61;
+  var basePadL = 24, basePadR = 24, baseMT = '18px', baseMB = '0px';
+
+  // flow 時の余白を控える（貼っている間は inline で上書きするので、外れている時だけ読む）
+  function readBase(){
+    var cs = getComputedStyle(panel);
+    basePadL = parseFloat(cs.paddingLeft)  || 0;
+    basePadR = parseFloat(cs.paddingRight) || 0;
+    baseMT = cs.marginTop; baseMB = cs.marginBottom;
+  }
+
+  function measureLocbar(){
+    locH = locbar ? Math.round(locbar.getBoundingClientRect().height) : 61;
+    document.documentElement.style.setProperty('--locbar-h', locH + 'px');
+  }
+
+  // #results の scroll-margin-top の材料。貼っている間だけ帯の実測高を渡し、
+  // 外れている間は 0（上を塞いでいるのは locbar だけ）。
+  function setPanelH(px){
+    document.documentElement.style.setProperty('--panel-h', Math.round(px) + 'px');
+  }
+
+  // 貼る/剥がす境界。貼っている間は spacer が元の位置を持っている。
+  function anchorY(){
+    var el = stuck ? spacer : panel;
+    if(!el) return 0;
+    return el.getBoundingClientRect().top + window.pageYOffset - locH;
+  }
+
+  // 全幅の帯にしたまま、中身の左右端は flow の位置に据え置く。
+  // spacer は flow 上の元の箱そのものなので、その矩形を viewport 座標へ写せばいい。
+  function applyGutter(){
+    if(!stuck || !spacer) return;
+    var r = spacer.getBoundingClientRect();
+    var vw = document.documentElement.clientWidth;   // 固定位置の基準はスクロールバーを含まない
+    panel.style.paddingLeft  = Math.max(0, r.left)        + basePadL + 'px';
+    panel.style.paddingRight = Math.max(0, vw - r.right)  + basePadR + 'px';
+  }
+
+  function setHidden(v){
+    // 入力中の欄は畳まない。畳むとモバイルではキーボードごと足元をさらわれる。
+    if(v && panel.contains(document.activeElement)) v = false;
+    if(v === hidden) return;
+    hidden = v;
+    panel.classList.toggle('is-hidden', v);
+  }
+
+  function stick(){
+    if(stuck) return;
+    var h = panel.getBoundingClientRect().height;
+    spacer = document.createElement('div');
+    spacer.className = 'kb-panel-spacer';
+    spacer.setAttribute('aria-hidden', 'true');
+    spacer.style.height       = h + 'px';
+    spacer.style.marginTop    = baseMT;
+    spacer.style.marginBottom = baseMB;
+    panel.parentNode.insertBefore(spacer, panel);
+    stuck = true;
+    // 貼るのは必ず下スクロール中 = 畳んだ状態から始める。ここを animate すると
+    // 「スクロールで消えたはずの帯が上へ飛ぶ」余計な動きになる。
+    panel.classList.add('no-anim', 'is-stuck');
+    applyGutter();
+    setPanelH(panel.getBoundingClientRect().height);   // 貼った後の実測値で確定させる
+    setHidden(true);
+    void panel.offsetHeight;                  // 反映させてから transition を戻す
+    panel.classList.remove('no-anim');
+  }
+
+  function unstick(){
+    if(!stuck) return;
+    panel.classList.add('no-anim');
+    panel.classList.remove('is-stuck', 'is-hidden');
+    panel.style.paddingLeft = '';
+    panel.style.paddingRight = '';
+    hidden = false;
+    if(spacer && spacer.parentNode) spacer.parentNode.removeChild(spacer);
+    spacer = null; stuck = false;
+    setPanelH(0);
+    void panel.offsetHeight;
+    panel.classList.remove('no-anim');
+    readBase();
+  }
+
+  function update(){
+    ticking = false;
+    var y = window.pageYOffset; if(y < 0) y = 0;   // iOS のラバーバンドで負になる
+    var a = anchorY();
+    if(!stuck){
+      if(y > a) stick();
+    }else if(y <= a){
+      unstick();
+    }else{
+      var d = y - lastY;
+      if(d >  2) setHidden(true);                  // 2px 未満は指の震え扱い
+      else if(d < -2) setHidden(false);
+    }
+    lastY = y;
+  }
+
+  function onScroll(){
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }
+
+  function onResize(){
+    measureLocbar();
+    if(stuck){
+      applyGutter();
+      var h = panel.getBoundingClientRect().height;
+      spacer.style.height = h + 'px';
+      setPanelH(h);                       // 1列/3列の切り替えで帯の高さが変わる
+    }
+  }
+
+  readBase();
+  measureLocbar();
+  setPanelH(0);
+  lastY = Math.max(0, window.pageYOffset);
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onResize);
+  // Web フォントが後から届くとパネルの高さと元位置が動く。届いたら測り直す。
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(onResize).catch(function(){});
+  update();   // リロード時に既に下まで戻されている場合の初期化
 })();
 </script>
 </body>
