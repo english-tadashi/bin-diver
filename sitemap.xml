@@ -1,8 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  載せるもの: 検索させたいページだけ。
+  載せないもの:
+    - /404.html          … エラーページ。sitemap に載せるのは誤り（noindex も付けてある）
+    - /copytest.html     … 実験ページ
+    - /scantest.html     … 実験ページ
+    - /blog/_template.html … そもそも公開していない（.gitignore で除外）
+
+  記事を1本足すたびに、<url> を1つ足す。並び順は問われないが、
+  読む人のために新しい記事を下に積む（＝上から時系列）。
+  ★ここを更新し忘れると新しい記事が見つけられない。記事追加の手順は
+    blog/_template.html の先頭コメントに全部書いてある。
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://gamekataban.com/</loc>
     <lastmod>2026-07-30</lastmod>
     <changefreq>weekly</changefreq>
   </url>
+  <url>
+    <loc>https://gamekataban.com/blog/</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <!-- ===== 記事はここから下に足す =====
+       1件ぶんのテンプレート（lastmod は最後に中身を直した日）:
+
+  <url>
+    <loc>https://gamekataban.com/blog/2026-08-08-example-slug.html</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>monthly</changefreq>
+  </url>
+
+       ===== 記事ここまで ===== -->
 </urlset>
