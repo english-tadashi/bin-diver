@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog — Kataban</title>
+<meta name="description" content="Guides on buying Japanese retro games from Japan: product codes, secondhand stores, proxy shipping, and how to read a Japanese game shelf.">
+<meta property="og:title" content="Blog — Kataban">
+<meta property="og:description" content="Guides on buying Japanese retro games from Japan: product codes, secondhand stores, proxy shipping, and how to read a Japanese game shelf.">
+<meta property="og:url" content="https://gamekataban.com/blog/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://gamekataban.com/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://gamekataban.com/blog/">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=IBM+Plex+Sans+JP:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/kataban.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+
+  <!-- サイトヘッダー。ロゴとタイトルの両方をツール本体(/)へのリンクにする。
+       .backlink は「戻る場所がある」ことを明示する側の導線。 -->
+  <header class="sitehead">
+    <a class="sitehead-brand" href="/" aria-label="Kataban — back to the search tool">
+      <span class="kb-word">
+        <span class="kb-ghost" aria-hidden="true"><span class="kb-grid" id="kbGridCyan"></span></span>
+        <span class="kb-grid kb-top" id="kbGridPink" aria-hidden="true"></span>
+      </span>
+      <span class="sitehead-badge">&#22411;&#30058;</span>
+    </a>
+    <a class="backlink" href="/"><span class="arrow" aria-hidden="true">&#8592;</span> Back to search</a>
+  </header>
+
+  <main id="main">
+
+    <div class="pagehead">
+      <p class="kicker">Kataban Blog</p>
+      <h1>Buying Japanese games, explained</h1>
+      <p class="lede">Field notes on product codes, secondhand shops, proxy services and everything else that stands between you and the game you want.</p>
+    </div>
+
+    <!-- ============================================================
+         記事一覧。新しい順（＝いちばん上が最新）に並べる。
+         記事を1本目を足すときの手順:
+           1. 下の <ul class="postlist"> のコメントを外す
+           2. その中に下のテンプレートを **いちばん上** に貼る
+           3. 入れ替わりに <div class="emptystate"> を消す
+           4. /sitemap.xml に <url> を1つ足す（末尾のマーカーコメント参照）
+
+         1件ぶんのテンプレート（日付は記事ファイル名の YYYY-MM-DD と揃える）:
+
+         <li>
+           <a class="post" href="/blog/2026-08-08-example-slug.html">
+             <span class="post-date">2026-08-08</span>
+             <h2 class="post-title">記事タイトル</h2>
+             <p class="post-summary">1〜2文の要約。一覧で読むかどうかを決められる長さにする。</p>
+           </a>
+         </li>
+
+         ★<time> ではなく <span class="post-date"> にしてあるのは、日付を
+           VT323（数字だけの書体）で出すため。日付は機械可読にする必要が出たら
+           <time datetime="2026-08-08"> に変えてよい（見た目は変わらない）。
+         ============================================================ -->
+
+    <!--
+    <ul class="postlist">
+    </ul>
+    -->
+
+    <!-- 記事が0本のあいだだけ出す。1本目を足したら丸ごと消す。 -->
+    <div class="emptystate">
+      <p class="es-lead">No posts yet</p>
+      <p>The first guide is being written. In the meantime, the tool itself is ready &mdash; search a game and it will hand you the Japanese title and the product code to hunt for.</p>
+    </div>
+
+    <div class="cta">
+      <h2>Know the code, find the game</h2>
+      <p>Type a Western title. Get the Japanese name, the cartridge code printed on the spine, and links to the shops that have it.</p>
+      <a class="ctabtn" href="/">Search a game</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Kataban &middot; Data from the Agency for Cultural Affairs Media Arts Database. English titles matched from Wikidata (CC0).
+    <br>Some links on this site are affiliate links, and Kataban may earn a commission, including as an eBay Partner Network affiliate (PR).
+    <br><a href="/">Back to the search tool</a>
+  </footer>
+
+</div>
+
+<script src="/kataban.js"></script>
+</body>
+</html>
