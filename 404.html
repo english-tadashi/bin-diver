@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     GitHub Pages のカスタム404（2026-08-08 作成）
+
+     Pages は **publishing source のルート** に置いた 404.html を、その
+     サイト内の存在しないパス全部に対して返す。このリポジトリの Pages 設定は
+     `source: { branch: "main", path: "/" }` なので、リポジトリのルート＝
+     公開ルートで、このファイルの置き場所はここで正しい。
+     `.html` なので Jekyll の front matter は不要（`.md` で作る場合だけ必要）。
+
+     ★アセットのパスは必ずルート相対（/…）で書く。このページは
+       /a/b/c/存在しないパス でも返るので、相対パスだと CSS も JS も壊れる。
+
+     ★デプロイ後の確認: `gh api repos/english-tadashi/bin-diver/pages --jq .custom_404`
+       が false → true に変わる。存在しないURLを curl して 404 のまま
+       このページの中身が返ることも合わせて見る（200 に化けていたら間違い）。
+     ============================================================ -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found — Kataban</title>
+<meta name="description" content="That page doesn't exist. Search for a Japanese game title and its product code on Kataban instead.">
+<!-- 404 は検索結果に出したくないので noindex。sitemap にも載せない。 -->
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=IBM+Plex+Sans+JP:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/kataban.css">
+<style>
+/* 404 だけの調整。中身が短いので、上下に余白を取って中央に寄せる。 */
+.nf{ padding:60px 0 20px; text-align:center; }
+/* ★セレクタは必ず `.nf .nf-code`（詳細度 0,2,0）で書く。`.nf-code`(0,1,0) だと
+   下の `.nf p`(0,1,1) に font-size と margin を奪われ、120px のはずの数字が
+   15px で出る。2026-08-08 に実測で踏んだ（見た目では「小さいだけ」に見えて
+   原因が分かりにくい）。 */
+.nf .nf-code{ font-family:var(--f-vt); font-size:clamp(64px,18vw,120px); line-height:1;
+  letter-spacing:2px; color:var(--accent); text-shadow:0 0 20px rgba(179,55,255,.5);
+  margin:0 0 10px; max-width:none; }
+.nf h1{ font-size:clamp(22px,4.6vw,30px); line-height:1.25; margin:0 0 14px; color:#ffffff; }
+.nf p{ margin:0 auto; max-width:44ch; color:var(--muted); font-size:15px; line-height:1.7; }
+.nf .jp{ font-family:"IBM Plex Sans JP",sans-serif; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+
+  <header class="sitehead">
+    <a class="sitehead-brand" href="/" aria-label="Kataban — back to the search tool">
+      <span class="kb-word">
+        <span class="kb-ghost" aria-hidden="true"><span class="kb-grid" id="kbGridCyan"></span></span>
+        <span class="kb-grid kb-top" id="kbGridPink" aria-hidden="true"></span>
+      </span>
+      <span class="sitehead-badge">&#22411;&#30058;</span>
+    </a>
+    <a class="backlink" href="/"><span class="arrow" aria-hidden="true">&#8592;</span> Back to search</a>
+  </header>
+
+  <main id="main">
+
+    <div class="nf">
+      <p class="nf-code" aria-hidden="true">404</p>
+      <h1>Page not found</h1>
+      <p>This page doesn&rsquo;t exist &mdash; it may have moved, or the link may be mistyped.<br><span class="jp">&#12362;&#25506;&#12375;&#12398;&#12506;&#12540;&#12472;&#12399;&#35211;&#12388;&#12363;&#12426;&#12414;&#12379;&#12435;&#12290;</span></p>
+    </div>
+
+    <div class="cta">
+      <h2>Looking for a game?</h2>
+      <p>Type a Western title. Get the Japanese name, the cartridge code printed on the spine, and links to the shops that have it.</p>
+      <a class="ctabtn" href="/">Search a game</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Kataban &middot; Data from the Agency for Cultural Affairs Media Arts Database. English titles matched from Wikidata (CC0).
+    <br><a href="/">Search tool</a> &middot; <a href="/blog/">Blog</a>
+  </footer>
+
+</div>
+
+<script src="/kataban.js"></script>
+</body>
+</html>
