@@ -1,0 +1,219 @@
+/* ============================================================
+   kataban.css — /blog/ と /404.html が共有する土台
+   作成: 2026-08-08（ブログセクション雛形）
+
+   ★index.html はこのファイルを読み込まない。
+     本体は 8MB の単一ファイルで CSS を内蔵しており、そこへ手を入れると
+     DATA 行を巻き込む事故（＝デプロイ時の drift 判定が効かなくなる）を招く。
+     このファイルは「本体に触らずに増やせるページ」のためだけに在る。
+
+   ★:root のトークンは index.html の値を**そのまま写した**もの。
+     値を変えるときは index.html 側と両方直す。片方だけ直すと
+     トップページとブログで色が食い違う（コメントも本体の意図を残してある）。
+
+   ★パスは全部ルート相対（/…）で書く。404.html は
+     /a/b/c/存在しないパス でも配信されるので、相対パスだと壊れる。
+   ============================================================ */
+
+:root{
+  color-scheme:dark;
+  --paper:#07040f;          /* 地 */
+  --surface:#0b0714;        /* 面（パネル・ボタン） */
+  --field:#140d24;          /* 入力欄 */
+  --edge:#2a2247;           /* 枠 */
+  --edge-input:#6f6790;     /* 入力欄・プルダウンの枠 */
+  --line:#221a3d;           /* 薄い枠 */
+  --ink:#c9c3e0;            /* 本文 */
+  --muted:#8b84ab;          /* ラベル（地 5.8 / 面 5.7:1 ＝ AA を確保した値） */
+  --faint:#6f6790;          /* 淡い */
+  --accent:#b337ff;         /* 紫 = 主アクセント */
+  --accent-ink:#07040f;     /* 紫の上に載る文字。白だと 4.28:1 で基準未達なので地色を使う */
+  --tag:#11eeff;            /* シアン = 副アクセント（リンク・hover） */
+  --rare:#dcdc00;
+  --danger:#dc0000;
+  --danger-ink:#ffffff;
+  --logo-pink:#e840a8;      /* ロゴ背面の発光 */
+  --logo-gold:#f8b820;      /* ロゴ前面のゴールド */
+  /* Press Start 2P / VT323 は日本語グリフを持たない。当てる先は
+     「必ず英数字だけ」と分かっている短いラベルに限る。フォールバックには
+     必ず現行の書体を1つ残す（読み込み失敗や日本語混在でそこだけ落ちるように）。 */
+  --f-pixel:'Press Start 2P','Space Mono',ui-monospace,monospace;
+  --f-vt:'VT323','Space Mono',ui-monospace,monospace;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background-color:var(--paper); color:var(--ink);
+  min-height:100vh;
+  font-family:"Space Grotesk",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased; line-height:1.4;
+}
+/* 地のグラデーションは viewport の大きさで敷く。body に background-image で持たせると
+   高さが本文に追従し、長い記事では紫の光が画面全部を覆う。
+   background-attachment:fixed は iOS Safari で効かないので、固定した層を1枚敷く。 */
+body::before{
+  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:radial-gradient(120% 90% at 50% -10%, #1e0d38 0%, #0a0619 45%, #07040f 100%);
+}
+a{color:inherit}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px}
+
+/* 目が見えない人向けの読み飛ばしリンク。フォーカスされたときだけ現れる。 */
+.skip{position:absolute;left:-9999px;top:0}
+.skip:focus{left:0;z-index:80;background:var(--accent);color:var(--accent-ink);
+  padding:10px 14px;font-family:var(--f-pixel);font-size:11px}
+
+/* ============================================================
+   サイトヘッダー（ブログ／404 共通）
+   本体トップの巨大ロックアップではなく、1行に収まる小さい版。
+   ロゴのビットマップと配色は index.html と同じ仕組みを使う。
+   ============================================================ */
+.sitehead{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; flex-wrap:wrap;
+  padding:22px 0 16px; border-bottom:2px solid var(--edge);
+}
+.sitehead-brand{ display:flex; align-items:center; gap:12px;
+  text-decoration:none; line-height:0; }
+/* 小さい版のドット寸法。本体は clamp(7px,1.9vw,13px)。 */
+.kb-word{ position:relative; display:inline-block; margin:0; line-height:0;
+  --kb-px:clamp(3px,0.95vw,5px); }
+.kb-word .kb-ghost{ position:absolute; inset:0; z-index:0;
+  transform:translate(2px,2px); opacity:.85; }
+.kb-word .kb-top{ position:relative; z-index:1; }
+.kb-grid{ display:grid; grid-template-columns:repeat(41,var(--kb-px));
+  grid-auto-rows:var(--kb-px); line-height:0; }
+.kb-grid i{ display:block; }
+.kb-on-pink{ background:var(--logo-gold); box-shadow:0 0 8px var(--logo-gold); }
+.kb-on-cyan{ background:var(--logo-pink); box-shadow:0 0 6px var(--logo-pink); }
+/* ロゴの隣の「型番」バッジ。日本語なので IBM Plex Sans JP。
+   ★line-height を必ず指定する。親の .sitehead-brand はロゴのドット格子のために
+     line-height:0 を持っており、そのまま継承すると日本語が行の高さ0に潰れて
+     白い帯の中で読めなくなる（2026-08-08 の実測で確認）。 */
+.sitehead-badge{ font-family:"IBM Plex Sans JP",sans-serif; font-weight:700;
+  font-size:12px; line-height:1.3; letter-spacing:1px; color:var(--accent-ink);
+  background:#ffffff; padding:3px 7px 4px; white-space:nowrap;
+  box-shadow:0 0 10px rgba(255,255,255,.35); }
+
+/* ツール本体へ戻る導線。ヘッダー右端。 */
+.backlink{
+  font-family:var(--f-pixel); font-size:10px; letter-spacing:1px;
+  text-transform:uppercase; text-decoration:none;
+  color:var(--ink); border:2px solid var(--edge); background:var(--surface);
+  padding:11px 14px; display:inline-flex; align-items:center; gap:9px;
+  transition:background .12s,color .12s,border-color .12s;
+}
+.backlink:hover,.backlink:focus{
+  background:var(--tag); border-color:var(--tag); color:var(--accent-ink); outline:none;
+}
+.backlink .arrow{ font-family:"Space Mono",monospace; font-size:13px; }
+
+/* ============================================================
+   ページ見出し
+   ============================================================ */
+.pagehead{ padding:34px 0 6px; }
+.kicker{ font-family:var(--f-pixel); font-size:11px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--accent); margin:0 0 14px; }
+.pagehead h1{ font-size:clamp(28px,5.5vw,40px); line-height:1.1; font-weight:700;
+  letter-spacing:-.02em; margin:0; color:#ffffff; }
+.pagehead .lede{ margin:16px 0 0; max-width:52ch; color:var(--muted); font-size:15px; }
+
+/* ============================================================
+   記事一覧
+   ============================================================ */
+.postlist{ list-style:none; margin:30px 0 0; padding:0;
+  display:flex; flex-direction:column; gap:0; }
+.postlist > li{ border-top:1px solid var(--line); }
+.postlist > li:last-child{ border-bottom:1px solid var(--line); }
+.post{ display:block; padding:24px 0; text-decoration:none; }
+.post:hover .post-title,
+.post:focus .post-title{ color:var(--tag); }
+.post:focus{ outline:3px solid var(--accent); outline-offset:2px; }
+.post-date{ font-family:var(--f-vt); font-size:18px; letter-spacing:.5px;
+  color:var(--faint); margin:0 0 6px; display:block; }
+.post-title{ font-size:1.25rem; font-weight:700; line-height:1.3; margin:0;
+  color:#ffffff; transition:color .12s; }
+.post-summary{ margin:9px 0 0; color:var(--muted); font-size:14px; line-height:1.6; }
+
+/* 記事が1本も無いときの表示。1本目を足したら .postlist ごと差し替える。 */
+.emptystate{ margin:30px 0 0; padding:34px 24px; text-align:center;
+  border:1px solid var(--edge); background:rgba(11,7,20,.5); }
+.emptystate p{ margin:0; color:var(--muted); font-size:14px; line-height:1.7; }
+.emptystate .es-lead{ font-family:var(--f-vt); font-size:24px; letter-spacing:.5px;
+  color:var(--ink); margin:0 0 10px; }
+
+/* ============================================================
+   記事本文（.prose）
+   本体の .howto と同じ考え方: 見出しは本文書体のまま大きさだけで階層を出す。
+   ピクセル書体は日本語グリフを持たないので本文には当てない。
+   ============================================================ */
+.prose{ margin:26px 0 0; line-height:1.75; font-size:16px; }
+.prose > *:first-child{ margin-top:0; }
+.prose h2{ font-size:1.3rem; line-height:1.35; margin:38px 0 12px; color:#ffffff;
+  padding-top:20px; border-top:1px solid var(--line); }
+.prose h3{ font-size:1.06rem; margin:26px 0 8px; color:var(--ink); }
+.prose p{ margin:0 0 16px; }
+.prose ul,.prose ol{ margin:0 0 18px 1.3em; padding:0; }
+.prose li{ margin:7px 0; }
+.prose a{ color:var(--tag); text-decoration:underline; }
+.prose a:hover,.prose a:focus{ color:var(--accent); }
+.prose strong{ color:#ffffff; }
+.prose em{ font-style:italic; }
+.prose blockquote{ margin:20px 0; padding:2px 0 2px 18px;
+  border-left:3px solid var(--accent); color:var(--muted); }
+/* 型番・コマンドなど。本体のカードと同じ IBM Plex Mono。 */
+.prose code{ font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.9em;
+  background:var(--field); border:1px solid var(--edge); padding:1px 5px; }
+.prose pre{ background:var(--field); border:1px solid var(--edge); padding:14px;
+  overflow-x:auto; margin:0 0 18px; }
+.prose pre code{ background:none; border:none; padding:0; }
+.prose img{ max-width:100%; height:auto; display:block; margin:20px 0; }
+.prose figure{ margin:20px 0; }
+.prose figcaption{ margin-top:8px; font-size:13px; color:var(--faint); }
+/* 表は狭い画面で溢れるので、囲いの側で横スクロールさせる（本文は横に流さない）。 */
+.prose .tablewrap{ overflow-x:auto; margin:0 0 18px; }
+.prose table{ border-collapse:collapse; width:100%; font-size:14px; }
+.prose th,.prose td{ border:1px solid var(--edge); padding:9px 11px; text-align:left; }
+.prose th{ background:var(--surface); color:#ffffff; font-weight:700; }
+/* 日本語のタイトル・読みを本文に混ぜるとき用。本体のカードと同じ書体に揃える。 */
+.prose .jp{ font-family:"IBM Plex Sans JP",sans-serif; }
+
+/* 記事メタ（日付） */
+.postmeta{ margin:14px 0 0; font-family:var(--f-vt); font-size:19px;
+  letter-spacing:.5px; color:var(--faint); }
+
+/* ============================================================
+   CTA — ツール本体への導線。記事の本文下と 404 で使う。
+   ============================================================ */
+.cta{ margin:44px 0 0; padding:28px 24px; text-align:center;
+  border:1px solid var(--edge); background:rgba(11,7,20,.5); }
+.cta h2{ margin:0 0 10px; font-size:1.15rem; line-height:1.35; color:#ffffff; }
+.cta p{ margin:0 0 20px; color:var(--muted); font-size:14px; line-height:1.65; }
+.ctabtn{
+  display:inline-flex; align-items:center; gap:12px;
+  font-family:var(--f-pixel); font-size:12px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; text-decoration:none;
+  padding:15px 22px; border:2px solid var(--accent);
+  background:var(--accent); color:var(--accent-ink);
+  box-shadow:0 0 18px -2px rgba(179,55,255,.55);
+  transition:background .12s,color .12s,border-color .12s;
+}
+/* 押した先が同じ紫のままだと反応が見えないので、意図的に離れた色相へ振る
+   （本体の SCAN BARCODE ボタンと同じ考え方）。 */
+.ctabtn:hover,.ctabtn:focus{
+  background:var(--tag); border-color:var(--tag); color:var(--accent-ink); outline:none;
+}
+
+/* ============================================================
+   フッター（本体と同じ見た目）
+   ============================================================ */
+footer{ margin-top:52px; border-top:2px solid var(--edge); padding:18px 0 40px;
+  font-family:"Space Mono",monospace; font-size:11px; color:var(--muted); line-height:1.6; }
+footer a{ color:var(--tag); text-decoration:underline; }
+footer a:hover,footer a:focus{ color:var(--accent); }
+
+@media (max-width:480px){
+  .sitehead{ padding:16px 0 14px; }
+  .backlink{ padding:10px 12px; font-size:9px; }
+}
