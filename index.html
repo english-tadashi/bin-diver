@@ -959,7 +959,9 @@ header .lede .lede-sub{ font-weight:400; }
   .genre-jp{min-inline-size:100px;}
 }
 
-/* ================= ヘッダーから /blog/ への導線（2026-08-12）=================
+/* ================= ページ末尾から /blog/ への導線（2026-08-12）=================
+   ★置き場所は当初 header 内（.lede の直下）だったが、同日 .kb-carts と footer の
+     間へ移した。検索が主役のページなので、ファーストビューの操作は検索に絞る。
    ★.backlink は kataban.css:100-110 からの**複製**であって、共有ではない。
      index.html は kataban.css を読み込まない（外部 CSS は Google Fonts の1本だけ・33行）。
      クラス名だけ書いても a{color:inherit}(99行) に落ちて素のテキストになるので、
@@ -978,19 +980,21 @@ header .lede .lede-sub{ font-weight:400; }
 }
 .backlink .arrow{ font-family:"Space Mono",monospace; font-size:13px; }
 
-/* 配置だけを header 内に閉じて上書きする。header .lede(681行) と同じ手口で、
+/* 配置だけを「.kb-carts の直後の .backlink」に閉じて上書きする。
    共有している .backlink 本体（＝ブログ側と揃えたい部分）には触らない。
+   ★隣接セレクタにしてあるのは、置き場所そのものを CSS 側にも書き残すため。
+     .wrap > .backlink でも同じ結果になるが、それだと「末尾に置いた」意図が読めない。
+     リンクを動かしたらこのセレクタも一緒に動かすことになる ―― それが狙い。
    ★display を inline-flex → flex に変える必要がある。inline-flex はインラインレベルなので
      margin:auto が効かず中央に寄らない。width:max-content で幅を内容なりに保ったまま
      ブロックレベルにして、左右 auto で中央へ。align-items/gap は本体から継ぐ。
-   余白は header .lede の margin(1.75rem auto .75rem) を一段小さくした対の値。
-   実際の間隔: 上は .lede の margin-bottom(12px) と相殺して 24px、
-   下は 8px + header の padding-bottom(14px) + .kb-panel の margin-top(18px) = 40px。
-   ★ただし画面で見える下の余白は 66px。.kb-panel の padding-top(26px・724行) が
-     さらに乗るため。詰めたくなったらこの行の3つ目の値(.5rem)を触る。
-     40px より下は .kb-panel 側を触ることになるので、ここでは下げない。
-   検索パネルが主役なので、リードより下を広く取ってヘッダー側にグループさせている。 */
-header .backlink{ display:flex; width:max-content; margin:1.5rem auto .5rem; }
+   実際の間隔: 上は .kb-carts の margin-bottom(4px・717行) と相殺して 28px。
+   下は 32px で、その直後が footer の border-top(2px・496行)。
+   ★上下とも「見えている余白」＝この行の値そのもの。header にあった頃と違って
+     間に padding を持つ要素が挟まらないので、計算値と見た目が一致する。
+   カード列を読み終えた人を次に送る位置なので、上下とも footer の区切り線に
+   ぶつからない程度に離してある。 */
+.kb-carts + .backlink{ display:flex; width:max-content; margin:1.75rem auto 2rem; }
 
 @media (max-width:480px){
   .backlink{ padding:10px 12px; font-size:9px; }
@@ -1015,9 +1019,6 @@ header .backlink{ display:flex; width:max-content; margin:1.5rem auto .5rem; }
       <p class="kb-tagline"><span class="kb-tag-badge">&#22411;&#30058;</span> Decode Japanese Game Shelves</p>
     </div>
     <p class="lede">Type a game you want.<br><span class="lede-sub">Get its Japanese title, the cartridge code to hunt for on the shelf, and links to buy it.</span></p>
-    <!-- /blog/ への導線。ブログ側ヘッダーの「← BACK TO SEARCH」と対になる。
-         .backlink の実体は <style> 末尾（kataban.css からの複製・理由はそこに書いた）。 -->
-    <a class="backlink" href="/blog/">Blog <span class="arrow" aria-hidden="true">&#8594;</span></a>
   </header>
 
   <div class="search kb-panel">
@@ -1107,6 +1108,10 @@ header .backlink{ display:flex; width:max-content; margin:1.5rem auto .5rem; }
     <span class="kb-chip">PS1</span><span class="kb-chip">PS2</span><span class="kb-chip">PS3</span><span class="kb-chip">PSP</span><span class="kb-chip">Saturn</span><span class="kb-chip">Dreamcast</span><span class="kb-chip">DS</span>
   </div>
   <p class="kb-carts">Bare carts too, by code</p>
+  <!-- /blog/ への導線。ブログ側ヘッダーの「← BACK TO SEARCH」と対になる。
+       ページ末尾（.kb-carts と footer の間）に置く。読み終えた人を次に送る位置。
+       .backlink の実体は <style> 末尾（kataban.css からの複製・理由はそこに書いた）。 -->
+  <a class="backlink" href="/blog/">Blog <span class="arrow" aria-hidden="true">&#8594;</span></a>
 
   <footer>
     Kataban · 37,855 entries from the Agency for Cultural Affairs Media Arts Database. 10,296 carry official product codes; 13,487 have English titles. English titles matched from Wikidata (CC0).
