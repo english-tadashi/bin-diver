@@ -2208,6 +2208,13 @@ results.addEventListener('click', e=>{
   if(e.target.closest('.genre-link')) genreShow();
 });
 
+// URLクエリ ?q= から検索語を復元する。X等の外部SNSからの共有リンクで
+// 型番やタイトルを渡す用途（例: gamekataban.com/?q=SLPS-02040）。
+try{
+  const urlQ = new URLSearchParams(location.search).get('q');
+  if(urlQ){ q.value = urlQ; }
+}catch(e){}
+
 let t; q.addEventListener('input',()=>{clearTimeout(t);t=setTimeout(run,90);});
 plat.addEventListener('change',run);
 year.addEventListener('change',run);
