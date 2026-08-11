@@ -958,6 +958,43 @@ header .lede .lede-sub{ font-weight:400; }
   .genre-jp, .genre-jp-h{font-size:14px; padding:9px 7px;}
   .genre-jp{min-inline-size:100px;}
 }
+
+/* ================= ヘッダーから /blog/ への導線（2026-08-12）=================
+   ★.backlink は kataban.css:100-110 からの**複製**であって、共有ではない。
+     index.html は kataban.css を読み込まない（外部 CSS は Google Fonts の1本だけ・33行）。
+     クラス名だけ書いても a{color:inherit}(99行) に落ちて素のテキストになるので、
+     定義ごと持ってくる必要がある。ブログ側と見た目を1対1に保つため値は一字も変えていない。
+   ★二重管理になっている。kataban.css 側の .backlink を触ったら、ここも同じ値に直す。
+     （逆も同じ。片方だけ直すと「戻る」と「進む」で見た目がずれる。） */
+.backlink{
+  font-family:var(--f-pixel); font-size:10px; letter-spacing:1px;
+  text-transform:uppercase; text-decoration:none;
+  color:var(--ink); border:2px solid var(--edge); background:var(--surface);
+  padding:11px 14px; display:inline-flex; align-items:center; gap:9px;
+  transition:background .12s,color .12s,border-color .12s;
+}
+.backlink:hover,.backlink:focus{
+  background:var(--tag); border-color:var(--tag); color:var(--accent-ink); outline:none;
+}
+.backlink .arrow{ font-family:"Space Mono",monospace; font-size:13px; }
+
+/* 配置だけを header 内に閉じて上書きする。header .lede(681行) と同じ手口で、
+   共有している .backlink 本体（＝ブログ側と揃えたい部分）には触らない。
+   ★display を inline-flex → flex に変える必要がある。inline-flex はインラインレベルなので
+     margin:auto が効かず中央に寄らない。width:max-content で幅を内容なりに保ったまま
+     ブロックレベルにして、左右 auto で中央へ。align-items/gap は本体から継ぐ。
+   余白は header .lede の margin(1.75rem auto .75rem) を一段小さくした対の値。
+   実際の間隔: 上は .lede の margin-bottom(12px) と相殺して 24px、
+   下は 8px + header の padding-bottom(14px) + .kb-panel の margin-top(18px) = 40px。
+   ★ただし画面で見える下の余白は 66px。.kb-panel の padding-top(26px・724行) が
+     さらに乗るため。詰めたくなったらこの行の3つ目の値(.5rem)を触る。
+     40px より下は .kb-panel 側を触ることになるので、ここでは下げない。
+   検索パネルが主役なので、リードより下を広く取ってヘッダー側にグループさせている。 */
+header .backlink{ display:flex; width:max-content; margin:1.5rem auto .5rem; }
+
+@media (max-width:480px){
+  .backlink{ padding:10px 12px; font-size:9px; }
+}
 </style>
 </head>
 <body>
@@ -978,6 +1015,9 @@ header .lede .lede-sub{ font-weight:400; }
       <p class="kb-tagline"><span class="kb-tag-badge">&#22411;&#30058;</span> Decode Japanese Game Shelves</p>
     </div>
     <p class="lede">Type a game you want.<br><span class="lede-sub">Get its Japanese title, the cartridge code to hunt for on the shelf, and links to buy it.</span></p>
+    <!-- /blog/ への導線。ブログ側ヘッダーの「← BACK TO SEARCH」と対になる。
+         .backlink の実体は <style> 末尾（kataban.css からの複製・理由はそこに書いた）。 -->
+    <a class="backlink" href="/blog/">Blog <span class="arrow" aria-hidden="true">&#8594;</span></a>
   </header>
 
   <div class="search kb-panel">
