@@ -978,6 +978,10 @@ header .lede .lede-sub{ font-weight:400; }
 .backlink:hover,.backlink:focus{
   background:var(--tag); border-color:var(--tag); color:var(--accent-ink); outline:none;
 }
+/* ★このページでは .arrow は使っていない（2026-08-12 に矢印を外して "BLOG" だけにした）。
+   それでも消さないのは、この .backlink 一式が kataban.css:100-110 の**1対1の複製**だから。
+   片方から1行抜くと複製が崩れ、上の「値は一字も変えていない」が嘘になる。
+   矢印そのものは /blog/ 側と 404.html でまだ現役（← Back to search / ← All posts）。 */
 .backlink .arrow{ font-family:"Space Mono",monospace; font-size:13px; }
 
 /* 配置だけを「.kb-carts の直後の .backlink」に閉じて上書きする。
@@ -993,8 +997,15 @@ header .lede .lede-sub{ font-weight:400; }
    ★上下とも「見えている余白」＝この行の値そのもの。header にあった頃と違って
      間に padding を持つ要素が挟まらないので、計算値と見た目が一致する。
    カード列を読み終えた人を次に送る位置なので、上下とも footer の区切り線に
-   ぶつからない程度に離してある。 */
-.kb-carts + .backlink{ display:flex; width:max-content; margin:1.75rem auto 2rem; }
+   ぶつからない程度に離してある。
+   ★min-height:44px は 2026-08-12 に矢印（→ の span）を外したときに足した。
+     矢印は font-size:13px（Space Mono）で本体の 10px（Press Start 2P）より背が高く、
+     行ボックスを 4px 押し上げていた。外した結果 44px→40px に縮み、
+     .locbtn / #klookbar .kk-btn が守っている 44px の基準を下回った。
+     ★**中身の文字が変わると高さが変わる**ので、下限は明示しておく。
+       ここに置いたのは .backlink 本体（kataban.css との1対1の複製）を汚さないため。
+     align-items:center は本体から継ぐので、下限を足しても文字は縦中央のまま。 */
+.kb-carts + .backlink{ display:flex; width:max-content; min-height:44px; margin:1.75rem auto 2rem; }
 
 @media (max-width:480px){
   .backlink{ padding:10px 12px; font-size:9px; }
@@ -1111,7 +1122,7 @@ header .lede .lede-sub{ font-weight:400; }
   <!-- /blog/ への導線。ブログ側ヘッダーの「← BACK TO SEARCH」と対になる。
        ページ末尾（.kb-carts と footer の間）に置く。読み終えた人を次に送る位置。
        .backlink の実体は <style> 末尾（kataban.css からの複製・理由はそこに書いた）。 -->
-  <a class="backlink" href="/blog/">Blog <span class="arrow" aria-hidden="true">&#8594;</span></a>
+  <a class="backlink" href="/blog/">Blog</a>
 
   <footer>
     Kataban · 37,855 entries from the Agency for Cultural Affairs Media Arts Database. 10,296 carry official product codes; 13,487 have English titles. English titles matched from Wikidata (CC0).
