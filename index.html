@@ -1144,20 +1144,30 @@ header .lede .lede-sub{ font-weight:400; }
        ・x.com … 外部サイトなので target="_blank" + rel="noopener"。/blog/ は同一サイトなので付けない。 -->
   <div class="linkrow">
     <a class="backlink" href="/blog/"><svg viewBox="0 0 16 14" width="16" height="14" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><g fill="#e8203a"><rect x="0" y="2" width="5" height="1"></rect><rect x="0" y="3" width="6" height="1"></rect><rect x="0" y="4" width="2" height="1"></rect><rect x="5" y="4" width="2" height="1"></rect><rect x="0" y="5" width="2" height="1"></rect><rect x="5" y="5" width="2" height="1"></rect><rect x="0" y="6" width="6" height="1"></rect><rect x="0" y="7" width="6" height="1"></rect><rect x="0" y="8" width="2" height="1"></rect><rect x="5" y="8" width="2" height="1"></rect><rect x="0" y="9" width="2" height="1"></rect><rect x="5" y="9" width="2" height="1"></rect><rect x="0" y="10" width="2" height="1"></rect><rect x="5" y="10" width="2" height="1"></rect><rect x="0" y="11" width="6" height="1"></rect><rect x="0" y="12" width="5" height="1"></rect></g><g fill="#ffd400"><rect x="9" y="0" width="2" height="1"></rect><rect x="9" y="1" width="7" height="7"></rect><rect x="9" y="8" width="2" height="4"></rect><rect x="8" y="12" width="5" height="2"></rect></g></svg>Blog</a>
-    <!-- ×字は対角線2本。左は x=1+k、右はそれを viewBox 中心(7.5)で鏡像にした x=12-k
-         （k=0..11 が y=1..12 に対応）。上下左右に1マスずつ余白が残り、Blog と同じ 16x14 に収まる。
-         ★1行あたりの幅は 3。2 だと**線に直交する実効の太さが 2/√2 ≒ 1.41px** にしかならず、
-           Blog アイコンの「B」と旗（正真正銘 2px の縦横線）の隣で1本だけ細く見えた。
-           3 なら 3/√2 ≒ 2.12px で、縦横 2px の線とほぼ同じ重さになる。
-           鏡像の式が 13-k から 12-k に変わるのは幅を1増やしたぶんの平行移動。
-         ★幅 2 のときは k=5.5 の代わりに y=7 で左右が同じマスに重なったが、幅 3 では
-           左 x=7、右 x=6 とずれるので重複はない。部分的に重なるだけで塗り結果は変わらない。
-         色は Blog アイコンの赤と同じ #e8203a。地色(--surface #0b0714)でも hover のシアン
-         (--tag #11eeff)でも沈まないので、hover で色を差し替える必要がない。
+    <!-- ×字は path 2枚の重ね。1枚目が黄(#ffcd2f)のベタ塗り、2枚目は同じ d を fill:none +
+         stroke:#e91235 でなぞる縁取り。塗りと線を別要素に分けてあるので、線幅を変えても
+         塗りの形は動かない（stroke は d の外周に対して内外へ半分ずつ載る）。
+         ★shape-rendering="crispEdges" は付けない。付けるとアンチエイリアスが切れて
+           斜めの縁がジャギる ―― この札は 16px でドット絵に見せる意図の絵なので、
+           曲線部（.04 刻みの制御点）を潰さないほうが元絵に近い。
+         ★viewBox は元データの 0 0 85.04 85.04 ではなく 26.5 43 30.9 27 を使う。d は元のまま、
+           見る窓だけを動かしている。理由は2段階：
+           ・元の正方形だと絵は中央付近（x 28〜55, y 46〜67）にしかなく、周囲の余白ごと
+             1/5 に縮む。16px 指定でも実際に描かれるのは **5x4px** ―― 隣の Blog
+             （16x14 いっぱい）と並ぶと別物の小ささになる。
+           ・かといって塗りの外接矩形ぴったり（27.97 44.15 27.93 24.44）まで詰めると、
+             今度は **stroke のはみ出し分が入らない**。線は d の外周に対して内外へ
+             半分ずつ載るので外側に 0.875 必要で、詰めた枠では左右と下辺の赤が
+             平らに切り落とされた（実寸14倍で確認）。26.5 43 30.9 27 はその逃げを見た枠。
+           30.9 : 27 は 16:14 とほぼ同じ比なので、width/height も Blog と同じ 16x14 で歪まない
+           （高さを 16 のままにすると縦に間延びする）。
+         ★stroke-width:1.75 は既定値 1 からの引き上げ。ユーザー単位は 16/30.9 ≒ 0.518 倍で
+           CSS px に落ちるので、既定の 1 では 0.52px＝サブピクセルになり、赤が黄に溶けて
+           オレンジのにじみにしか見えなかった。1.75 なら約 0.9px で縁として読める。
          ★テキストノードは持たない（アイコンのみ）。だから読み上げ名は aria-label が唯一の出所 ――
            svg は aria-hidden なので、これを外すとリンク名が空になる。
            .backlink の gap:6px はこの札では効かない（flex アイテムが1つしかない）。 -->
-    <a class="backlink" href="https://x.com/gamekataban" target="_blank" rel="noopener" aria-label="X (Twitter)"><svg viewBox="0 0 16 14" width="16" height="14" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><g fill="#e8203a"><rect x="1" y="1" width="3" height="1"></rect><rect x="12" y="1" width="3" height="1"></rect><rect x="2" y="2" width="3" height="1"></rect><rect x="11" y="2" width="3" height="1"></rect><rect x="3" y="3" width="3" height="1"></rect><rect x="10" y="3" width="3" height="1"></rect><rect x="4" y="4" width="3" height="1"></rect><rect x="9" y="4" width="3" height="1"></rect><rect x="5" y="5" width="3" height="1"></rect><rect x="8" y="5" width="3" height="1"></rect><rect x="6" y="6" width="3" height="1"></rect><rect x="7" y="6" width="3" height="1"></rect><rect x="7" y="7" width="3" height="1"></rect><rect x="6" y="7" width="3" height="1"></rect><rect x="8" y="8" width="3" height="1"></rect><rect x="5" y="8" width="3" height="1"></rect><rect x="9" y="9" width="3" height="1"></rect><rect x="4" y="9" width="3" height="1"></rect><rect x="10" y="10" width="3" height="1"></rect><rect x="3" y="10" width="3" height="1"></rect><rect x="11" y="11" width="3" height="1"></rect><rect x="2" y="11" width="3" height="1"></rect><rect x="12" y="12" width="3" height="1"></rect><rect x="1" y="12" width="3" height="1"></rect></g></svg></a>
+    <a class="backlink" href="https://x.com/gamekataban" target="_blank" rel="noopener" aria-label="X (Twitter)"><svg viewBox="26.5 43 30.9 27" width="16" height="14" aria-hidden="true" focusable="false"><path fill="#ffcd2f" d="M55.36,66.73l-9.53-11.83c-.04-.06-.04-.12,0-.18l6.47-8.71c.1-.13-.04-.28-.25-.28h-4.66c-.11,0-.2.04-.25.11l-4.96,6.69c-.11.14-.4.14-.5,0l-4.96-6.69c-.05-.07-.15-.11-.25-.11h-4.66c-.21,0-.35.15-.25.28l6.47,8.71c.04.06.04.12,0,.18l-9.53,11.83c-.1.13.04.28.25.28h10.33c.11,0,.2-.04.25-.11l2.35-3.17c.11-.14.4-.14.5,0l2.35,3.17c.05.07.15.11.25.11h10.33c.21,0,.35-.15.25-.28Z"></path><path fill="none" stroke="#e91235" stroke-miterlimit="10" stroke-width="1.75" d="M55.36,66.73l-9.53-11.83c-.04-.06-.04-.12,0-.18l6.47-8.71c.1-.13-.04-.28-.25-.28h-4.66c-.11,0-.2.04-.25.11l-4.96,6.69c-.11.14-.4.14-.5,0l-4.96-6.69c-.05-.07-.15-.11-.25-.11h-4.66c-.21,0-.35.15-.25.28l6.47,8.71c.04.06.04.12,0,.18l-9.53,11.83c-.1.13.04.28.25.28h10.33c.11,0,.2-.04.25-.11l2.35-3.17c.11-.14.4-.14.5,0l2.35,3.17c.05.07.15.11.25.11h10.33c.21,0,.35-.15.25-.28Z"></path></svg></a>
   </div>
 
   <footer>
