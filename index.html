@@ -984,20 +984,26 @@ header .lede .lede-sub{ font-weight:400; }
    矢印そのものは /blog/ 側と 404.html でまだ現役（← Back to search / ← All posts）。 */
 .backlink .arrow{ font-family:"Space Mono",monospace; font-size:13px; }
 
-/* 配置だけを「.kb-carts の直後の .backlink」に閉じて上書きする。
+/* 配置だけを「.kb-carts の直後の .linkrow」に閉じて上書きする。
    共有している .backlink 本体（＝ブログ側と揃えたい部分）には触らない。
    ★隣接セレクタにしてあるのは、置き場所そのものを CSS 側にも書き残すため。
-     .wrap > .backlink でも同じ結果になるが、それだと「末尾に置いた」意図が読めない。
+     .wrap > .linkrow でも同じ結果になるが、それだと「末尾に置いた」意図が読めない。
      リンクを動かしたらこのセレクタも一緒に動かすことになる ―― それが狙い。
-   ★display を inline-flex → flex に変える必要がある。inline-flex はインラインレベルなので
-     margin:auto が効かず中央に寄らない。width:max-content で幅を内容なりに保ったまま
-     ブロックレベルにして、左右 auto で中央へ。align-items/gap は本体から継ぐ。
+   ★2026-08-12 に札が2枚（Blog / X）になり、包む .linkrow を足した。それまでは
+     .kb-carts + .backlink が直接この役をしていた（札の中身を並べる flex と、
+     ページ内での中央寄せを1つの要素で兼ねていた）。2枚になった時点で
+     「札の中の並び」と「札どうしの並び」は別物なので、後者をこの行に分けた。
+   ★中央寄せは margin:auto ではなく justify-content:center。auto にすると余った幅が
+     札の外側に分配され、札どうしの間隔が gap ではなく auto 側で決まってしまう。
    実際の間隔: 上は .kb-carts の margin-bottom(4px・717行) と相殺して 28px。
    下は 32px で、その直後が footer の border-top(2px・496行)。
    ★上下とも「見えている余白」＝この行の値そのもの。header にあった頃と違って
      間に padding を持つ要素が挟まらないので、計算値と見た目が一致する。
    カード列を読み終えた人を次に送る位置なので、上下とも footer の区切り線に
-   ぶつからない程度に離してある。
+   ぶつからない程度に離してある。 */
+.kb-carts + .linkrow{ display:flex; justify-content:center; gap:10px; margin:1.75rem 0 2rem; }
+
+/* 札1枚ぶんの上書き。上の行（＝札どうしの並び）とは別の話なので分けてある。
    ★min-height:44px は 2026-08-12 に矢印（→ の span）を外したときに足した。
      矢印は font-size:13px（Space Mono）で本体の 10px（Press Start 2P）より背が高く、
      行ボックスを 4px 押し上げていた。外した結果 44px→40px に縮み、
@@ -1009,8 +1015,13 @@ header .lede .lede-sub{ font-weight:400; }
      本体の 9px は kataban.css 側の矢印（→ の span・13px Space Mono）に合わせた値で、
      16px 幅のドット絵アイコンだと空きすぎる。だが本体は kataban.css:100-110 の
      1対1の複製なので、そちらに無いアイコンの都合で値を書き換えるわけにいかない。
-     アイコンはこのページの .backlink にしか無い ―― だから上書きもここに閉じる。 */
-.kb-carts + .backlink{ display:flex; width:max-content; min-height:44px; margin:1.75rem auto 2rem; gap:6px; }
+     アイコンはこのページの .backlink にしか無い ―― だから上書きもここに閉じる。
+   ★この2つは .linkrow 側に書けない。gap を親に書くと札どうしの 10px と衝突して
+     アイコンと文字の間隔まで 10px になり、min-height を親に書くと札の高さが
+     align-items の既定値(stretch)頼みになる ―― どちらも札自身が持つべき値。
+   ★display は指定しない。flex アイテムは inline-flex → flex に blockify されるので、
+     本体（971行）の inline-flex のままで並ぶ。width:max-content も同じ理由で不要。 */
+.linkrow .backlink{ min-height:44px; gap:6px; }
 
 @media (max-width:480px){
   .backlink{ padding:10px 12px; font-size:9px; }
@@ -1124,10 +1135,30 @@ header .lede .lede-sub{ font-weight:400; }
     <span class="kb-chip">PS1</span><span class="kb-chip">PS2</span><span class="kb-chip">PS3</span><span class="kb-chip">PSP</span><span class="kb-chip">Saturn</span><span class="kb-chip">Dreamcast</span><span class="kb-chip">DS</span>
   </div>
   <p class="kb-carts">Bare carts too, by code</p>
-  <!-- /blog/ への導線。ブログ側ヘッダーの「← BACK TO SEARCH」と対になる。
-       ページ末尾（.kb-carts と footer の間）に置く。読み終えた人を次に送る位置。
-       .backlink の実体は <style> 末尾（kataban.css からの複製・理由はそこに書いた）。 -->
-  <a class="backlink" href="/blog/"><svg viewBox="0 0 16 14" width="16" height="14" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><g fill="#e8203a"><rect x="0" y="2" width="5" height="1"></rect><rect x="0" y="3" width="6" height="1"></rect><rect x="0" y="4" width="2" height="1"></rect><rect x="5" y="4" width="2" height="1"></rect><rect x="0" y="5" width="2" height="1"></rect><rect x="5" y="5" width="2" height="1"></rect><rect x="0" y="6" width="6" height="1"></rect><rect x="0" y="7" width="6" height="1"></rect><rect x="0" y="8" width="2" height="1"></rect><rect x="5" y="8" width="2" height="1"></rect><rect x="0" y="9" width="2" height="1"></rect><rect x="5" y="9" width="2" height="1"></rect><rect x="0" y="10" width="2" height="1"></rect><rect x="5" y="10" width="2" height="1"></rect><rect x="0" y="11" width="6" height="1"></rect><rect x="0" y="12" width="5" height="1"></rect></g><g fill="#ffd400"><rect x="9" y="0" width="2" height="1"></rect><rect x="9" y="1" width="7" height="7"></rect><rect x="9" y="8" width="2" height="4"></rect><rect x="8" y="12" width="5" height="2"></rect></g></svg>Blog</a>
+  <!-- 外部導線の並び。ページ末尾（.kb-carts と footer の間）に置く。読み終えた人を次に送る位置。
+       ★中央寄せは .linkrow（justify-content:center）が持つ。個々の .backlink は margin:auto を
+         持たない ―― 札が1枚だったころの名残で auto を残すと、2枚目を足したとき間隔が
+         gap ではなく auto の分配で決まってしまい、gap:10px が効いていないように見える。
+       ★.backlink の実体は <style> 末尾（kataban.css からの複製・理由はそこに書いた）。
+       ・/blog/ … ブログ側ヘッダーの「← BACK TO SEARCH」と対になる。
+       ・x.com … 外部サイトなので target="_blank" + rel="noopener"。/blog/ は同一サイトなので付けない。 -->
+  <div class="linkrow">
+    <a class="backlink" href="/blog/"><svg viewBox="0 0 16 14" width="16" height="14" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><g fill="#e8203a"><rect x="0" y="2" width="5" height="1"></rect><rect x="0" y="3" width="6" height="1"></rect><rect x="0" y="4" width="2" height="1"></rect><rect x="5" y="4" width="2" height="1"></rect><rect x="0" y="5" width="2" height="1"></rect><rect x="5" y="5" width="2" height="1"></rect><rect x="0" y="6" width="6" height="1"></rect><rect x="0" y="7" width="6" height="1"></rect><rect x="0" y="8" width="2" height="1"></rect><rect x="5" y="8" width="2" height="1"></rect><rect x="0" y="9" width="2" height="1"></rect><rect x="5" y="9" width="2" height="1"></rect><rect x="0" y="10" width="2" height="1"></rect><rect x="5" y="10" width="2" height="1"></rect><rect x="0" y="11" width="6" height="1"></rect><rect x="0" y="12" width="5" height="1"></rect></g><g fill="#ffd400"><rect x="9" y="0" width="2" height="1"></rect><rect x="9" y="1" width="7" height="7"></rect><rect x="9" y="8" width="2" height="4"></rect><rect x="8" y="12" width="5" height="2"></rect></g></svg>Blog</a>
+    <!-- ×字は対角線2本。左は x=1+k、右はそれを viewBox 中心(7.5)で鏡像にした x=12-k
+         （k=0..11 が y=1..12 に対応）。上下左右に1マスずつ余白が残り、Blog と同じ 16x14 に収まる。
+         ★1行あたりの幅は 3。2 だと**線に直交する実効の太さが 2/√2 ≒ 1.41px** にしかならず、
+           Blog アイコンの「B」と旗（正真正銘 2px の縦横線）の隣で1本だけ細く見えた。
+           3 なら 3/√2 ≒ 2.12px で、縦横 2px の線とほぼ同じ重さになる。
+           鏡像の式が 13-k から 12-k に変わるのは幅を1増やしたぶんの平行移動。
+         ★幅 2 のときは k=5.5 の代わりに y=7 で左右が同じマスに重なったが、幅 3 では
+           左 x=7、右 x=6 とずれるので重複はない。部分的に重なるだけで塗り結果は変わらない。
+         色は Blog アイコンの赤と同じ #e8203a。地色(--surface #0b0714)でも hover のシアン
+         (--tag #11eeff)でも沈まないので、hover で色を差し替える必要がない。
+         ★テキストノードは持たない（アイコンのみ）。だから読み上げ名は aria-label が唯一の出所 ――
+           svg は aria-hidden なので、これを外すとリンク名が空になる。
+           .backlink の gap:6px はこの札では効かない（flex アイテムが1つしかない）。 -->
+    <a class="backlink" href="https://x.com/gamekataban" target="_blank" rel="noopener" aria-label="X (Twitter)"><svg viewBox="0 0 16 14" width="16" height="14" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><g fill="#e8203a"><rect x="1" y="1" width="3" height="1"></rect><rect x="12" y="1" width="3" height="1"></rect><rect x="2" y="2" width="3" height="1"></rect><rect x="11" y="2" width="3" height="1"></rect><rect x="3" y="3" width="3" height="1"></rect><rect x="10" y="3" width="3" height="1"></rect><rect x="4" y="4" width="3" height="1"></rect><rect x="9" y="4" width="3" height="1"></rect><rect x="5" y="5" width="3" height="1"></rect><rect x="8" y="5" width="3" height="1"></rect><rect x="6" y="6" width="3" height="1"></rect><rect x="7" y="6" width="3" height="1"></rect><rect x="7" y="7" width="3" height="1"></rect><rect x="6" y="7" width="3" height="1"></rect><rect x="8" y="8" width="3" height="1"></rect><rect x="5" y="8" width="3" height="1"></rect><rect x="9" y="9" width="3" height="1"></rect><rect x="4" y="9" width="3" height="1"></rect><rect x="10" y="10" width="3" height="1"></rect><rect x="3" y="10" width="3" height="1"></rect><rect x="11" y="11" width="3" height="1"></rect><rect x="2" y="11" width="3" height="1"></rect><rect x="12" y="12" width="3" height="1"></rect><rect x="1" y="12" width="3" height="1"></rect></g></svg></a>
+  </div>
 
   <footer>
     Kataban · 37,855 entries from the Agency for Cultural Affairs Media Arts Database. 10,296 carry official product codes; 13,487 have English titles. English titles matched from Wikidata (CC0).
