@@ -1004,8 +1004,13 @@ header .lede .lede-sub{ font-weight:400; }
      .locbtn / #klookbar .kk-btn が守っている 44px の基準を下回った。
      ★**中身の文字が変わると高さが変わる**ので、下限は明示しておく。
        ここに置いたのは .backlink 本体（kataban.css との1対1の複製）を汚さないため。
-     align-items:center は本体から継ぐので、下限を足しても文字は縦中央のまま。 */
-.kb-carts + .backlink{ display:flex; width:max-content; min-height:44px; margin:1.75rem auto 2rem; }
+     align-items:center は本体から継ぐので、下限を足しても文字は縦中央のまま。
+   ★gap は本体の 9px を 6px で上書きしている（2026-08-12・アイコンを足したとき）。
+     本体の 9px は kataban.css 側の矢印（→ の span・13px Space Mono）に合わせた値で、
+     16px 幅のドット絵アイコンだと空きすぎる。だが本体は kataban.css:100-110 の
+     1対1の複製なので、そちらに無いアイコンの都合で値を書き換えるわけにいかない。
+     アイコンはこのページの .backlink にしか無い ―― だから上書きもここに閉じる。 */
+.kb-carts + .backlink{ display:flex; width:max-content; min-height:44px; margin:1.75rem auto 2rem; gap:6px; }
 
 @media (max-width:480px){
   .backlink{ padding:10px 12px; font-size:9px; }
@@ -1122,7 +1127,7 @@ header .lede .lede-sub{ font-weight:400; }
   <!-- /blog/ への導線。ブログ側ヘッダーの「← BACK TO SEARCH」と対になる。
        ページ末尾（.kb-carts と footer の間）に置く。読み終えた人を次に送る位置。
        .backlink の実体は <style> 末尾（kataban.css からの複製・理由はそこに書いた）。 -->
-  <a class="backlink" href="/blog/">Blog</a>
+  <a class="backlink" href="/blog/"><svg viewBox="0 0 16 14" width="16" height="14" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><g fill="#e8203a"><rect x="0" y="2" width="5" height="1"></rect><rect x="0" y="3" width="6" height="1"></rect><rect x="0" y="4" width="2" height="1"></rect><rect x="5" y="4" width="2" height="1"></rect><rect x="0" y="5" width="2" height="1"></rect><rect x="5" y="5" width="2" height="1"></rect><rect x="0" y="6" width="6" height="1"></rect><rect x="0" y="7" width="6" height="1"></rect><rect x="0" y="8" width="2" height="1"></rect><rect x="5" y="8" width="2" height="1"></rect><rect x="0" y="9" width="2" height="1"></rect><rect x="5" y="9" width="2" height="1"></rect><rect x="0" y="10" width="2" height="1"></rect><rect x="5" y="10" width="2" height="1"></rect><rect x="0" y="11" width="6" height="1"></rect><rect x="0" y="12" width="5" height="1"></rect></g><g fill="#ffd400"><rect x="9" y="0" width="2" height="1"></rect><rect x="9" y="1" width="7" height="7"></rect><rect x="9" y="8" width="2" height="4"></rect><rect x="8" y="12" width="5" height="2"></rect></g></svg>Blog</a>
 
   <footer>
     Kataban · 37,855 entries from the Agency for Cultural Affairs Media Arts Database. 10,296 carry official product codes; 13,487 have English titles. English titles matched from Wikidata (CC0).
