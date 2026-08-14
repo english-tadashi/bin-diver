@@ -1574,13 +1574,17 @@ function setLoc(v,skipSave){
          Ganbare Goemon ps1        → 10/10 すべて PS1 の日本版・無関係品 0
 
    ★機種ごとに正解の向きが違う。素直な小文字化が正解とは限らないので、値を推測で変えないこと。
-     実測で決めたのは6機種（下の各項）。残り29機種は下記の方針で置いた未実測値。
+     実測したのは9機種（下の各項。うち PSP / Nintendo DS / Xbox は「仮値のままで正解」と
+     確認しただけで値は変えていない。PlayStation Vita は実測済みだが追試待ちで保留）。
+     残り26機種は下記の方針で置いた未実測値。
        ・そのまま小文字化（20機種）
        ・欧米通称グループ（5機種）… 和名側で統一。北米通称（NES/SNES/Genesis/
          TurboGrafx-16/Master System）は採らない＝北米版を引き寄せる方向に効くため。
          実測: `Secret of Mana` 単独は上位10件とも北米 SNES/PAL で日本版0件、
          `super famicom` を足して初めて NTSC-J 202/321 になった。
-       ・略称グループ（5機種）… 出品タイトルで一般的な略称。
+       ・略称グループ（5機種）… 出品タイトルで一般的な略称、という想定で置いた枠。
+         ただし実測すると**想定どおりだったのは PSP だけ**で、Nintendo DS は略称かどうかが
+         無関係（eBay が同一視）、Nintendo 64 は略称のほうが取りこぼした。枠名で決めないこと。
        ・(a) 短い名前が長い名前に含まれる組（5機種）… 語として上位機種・派生機種を
          巻き込む。**5機種とも実測済み**。うち Xbox だけは素直な小文字化が正解だった。
 
@@ -1624,11 +1628,61 @@ const PLATFORM_EBAY = {
   'Sega Mark III':     'sega mark iii',      //   27  北米は Master System
 
   // ---- 略称グループ（5機種）----
-  'PSP':               'psp',                // 3646
-  'Nintendo DS':       'nintendo ds',        // 2535
-  'PlayStation Vita':  'ps vita',            // 2407
+  // ★このグループは「略称のほうが出品タイトルで一般的」という想定で置いた枠だが、
+  //   2026-08-14(3) に3機種を実測したところ**想定どおりだったのは PSP だけ**だった。
+  //   Nintendo DS は略称かどうかが無関係（eBay が同一視）、Nintendo 64 は略称のほうが
+  //   取りこぼす（下記）。枠の名前に引きずられて値を決めないこと。
+  //
+  // ★'PSP' は実測済み・変更不要（2026-08-14(3)。'playstation portable' と比較）。
+  //     Sol Trigger（日本専売。完全一致7件しか無い）
+  //       psp                 7件 … 対象 **7/7**・無関係 0            ←最良
+  //       playstation portable 7件 … 対象 6/7・無関係1（攻略本）
+  //       facet は両者完全一致（Sony PSP 15 / NTSC-J 15）
+  //     Monster Hunter Portable 3rd（日本専売。北米は Freedom Unite=2nd G まで）
+  //       psp                 433件 … 対象 3/10・本体(PSP-3000 MH限定モデル) **6**・セット1
+  //       playstation portable 492件 … 対象 4/10・本体2・セット2・グリップ1・まとめ1
+  //   割れたが 'psp' を維持する。MHP3 は題名自体に "Portable" を含むので
+  //   'playstation portable' はトークン重複になり照合が緩む側に働いた分を差し引く必要があり、
+  //   かつ facet では 'playstation portable' のほうが **PS3 を 19→57件** と3倍拾う
+  //   （MHP3rd HD 版が PS3 に在るため）。短くて漏れが少ない 'psp' が良い。
+  'PSP':               'psp',                // 3646 実測済み・変更不要
+  //
+  // ★'Nintendo DS' は実測済み・変更不要（2026-08-14(3)。'nds' と比較）。
+  //   **eBay は 'nintendo ds' と 'nds' を同一視する。** 総件数だけでなく facet の数値も
+  //   1つ残らず一致した:
+  //     Jump Ultimate Stars … 両方 60件 / 任天堂DS 51 / NTSC-J 44 / PS4 2 / PS3 3 / 3DS 2
+  //     Soma Bringer        … 両方 13件 / 任天堂DS 7 / NTSC-J 7
+  //   上位10件も同じ顔ぶれの並べ替え。'gameboy' と 'game boy' と同じ現象で、変えても
+  //   何も変わらない＝短くする意味も無いので現状維持。
+  'Nintendo DS':       'nintendo ds',        // 2535 実測済み・変更不要
+  //
+  // ★'PlayStation Vita' は 'playstation vita' への変更を検討中（2026-08-14(3) 時点で保留）。
+  //   **eBay は 'ps vita' と 'playstation vita' を同一視しない**（DS とは挙動が違う）。
+  //     Genkai Tokki: Seven Pirates（日本専売）
+  //       ps vita          完全一致4件 … 対象 4/4
+  //       playstation vita 完全一致5件 … 対象 5/5。増えた1件は題名を "PlayStation Vita" と
+  //                        綴った出品で、'ps vita' はこれを境界より下に落としていた
+  //     To Heart 2: Dungeon Travelers（日本専売）… 3クエリとも同じ結果で差なし
+  //     'vita' 単独は却下。Seven Pirates で同シリーズ別作品を5件拾い対象 4/10 に落ちた
+  //   差が1タイトルの1件だけで Vita は出品数自体が薄いため、追試してから決める。
+  'PlayStation Vita':  'ps vita',            // 2407 追試待ち（'playstation vita' が有力）
+  //
   'Nintendo 3DS':      'nintendo 3ds',       // 2302
-  'Nintendo 64':       'n64',                //  211
+  //
+  // ★'Nintendo 64' → 'nintendo 64' の根拠（2026-08-14(3) 実測。'n64' と比較）。
+  //   北米版が存在しない日本専売2本で比較した（英題は DATA の r[0] 実物）。
+  //     Sin and Punishment（罪と罰。N64 版は日本のみ）
+  //       n64         28件 … 上位10件 **10/10** 対象・無関係0 / facet N64 26・NTSC-J 26
+  //       nintendo 64 38件 … 上位10件 **10/10** 対象・無関係0 / facet N64 **36**・NTSC-J 29
+  //     Goemon Mononoke Sugoroku（ゴエモンもののけ双六。日本のみ）
+  //       n64         20件 … 対象 9/10・無関係1（攻略本 Perfect Guide）/ facet N64 16
+  //       nintendo 64 20件 … 対象 **10/10**・無関係 **0**          / facet N64 **18**
+  //   【なぜ長いほうが勝つか】'n64' を書く出品は 'nintendo 64' でも拾えるが、逆は取りこぼす
+  //     ＝上位互換の関係。Sin and Punishment では母集団が 28→38件に広がり、増えた分も
+  //     facet 上すべて N64 だった（26→36）。Goemon では上位10件から攻略本が落ちた。
+  //   ★Game Boy（'gb' が正解＝略称が勝つ）とは逆向きの結果。同じ「略称グループ」でも
+  //     機種ごとに向きが違うという例がまた1つ増えた。
+  'Nintendo 64':       'nintendo 64',        //  211 実測で決定
 
   // ---- (a) 短い名前が長い名前に含まれる組（5機種）----
   // 5機種とも実測で決着済み（2026-08-14 に PlayStation / Wii / Game Boy、同日(2) に
