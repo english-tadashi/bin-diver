@@ -1638,7 +1638,7 @@ function buyBlock(k){
         <div class="group-label"><span class="n">Ships worldwide</span><span class="d">${worldDesc}</span></div>
         <div class="stores">
           ${k.buyeeWrapped?`<a class="${clsBuyee}" target="_blank" rel="sponsored nofollow noopener" href="${k.buyeeWrapped}">Buyee <span class="en">EN</span></a>`:''}
-          <a class="store" target="_blank" rel="sponsored nofollow noopener" href="https://www.ebay.com/sch/i.html?_nkw=${k.kwEn}&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0&amp;campid=5339175838&amp;customid=&amp;toolid=10001&amp;mkevt=1">eBay <span class="en">EN</span></a>
+          ${k.kwEn?`<a class="store" target="_blank" rel="sponsored nofollow noopener" href="https://www.ebay.com/sch/i.html?_nkw=${k.kwEn}&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0&amp;campid=5339175838&amp;customid=&amp;toolid=10001&amp;mkevt=1">eBay <span class="en">EN</span></a>`:''}
         </div>
         ${buyeeNote}
       </div>`;
@@ -1762,7 +1762,20 @@ function card(r,idx){
   const pubs  = (puben||pubja).split(';').map(s=>s.trim()).filter(Boolean);
   // Buy-link keywords: sellers list by TITLE, not by product code.
   const kwName = enc(jp||en);        // Japanese name (fallback English) — no consumer now (passed to buyBlock only)
-  const kwEn   = enc(en||jp);        // English title (fallback Japanese) — eBay
+  /* eBay の検索キー。★2026-08-14: 和名フォールバック(en||jp)をやめ、英題が無い行は '' にする
+     ＝ buyBlock 側で eBay リンクごと出さない（物理30,741行のうち17,651行・57.4%が該当）。
+     理由(2026-08-14 実測・実ブラウザで ebay.com の SRP を目視):
+       ・和名をそのまま _nkw に入れると eBay 側が機械翻訳して別語に化ける。
+         「風のクロノア1&2アンコール」→ "style chronos 1 & 2 encore"(風=style)で 2件、
+         見えている上位10件のうち8件がランプ・ワッシャー・カウボーイベルト等の完全な無関係品。
+       ・化けない場合も完全一致0件になる。「聖剣伝説3トライアルズオブマナ」は 0件で、
+         表示されるのは関連品フォールバック(フィギュア・アクリルスタンド・ポストカード)のみ
+         ＝ゲームソフトが1件も出ない。和名にスペースが無く1トークン化する行が6,258ある。
+     ★ゲートは kwEn 側に置く。buyBlock は k しか受け取らず en を持たないため、フラグを増やさず
+       「キーが空ならリンクを出さない」という既存の形(下の sgComUrl)に揃える。
+     ★en が空白文字のみの行は0行なので、truthy 判定で取りこぼしは無い(全数確認)。
+     ★英題が空 かつ Buyee リンクも作れない行は0行＝.stores が空箱になる行は存在しない(全数確認)。 */
+  const kwEn   = en ? enc(en) : '';  // English title only — eBay (空なら eBay リンクを出さない)
   const kwCode = enc(codes[0]||'');  // first product code only — Suruga-ya "by code" comparison link
   // 駿河屋.com(英語・海外発送)の検索URL。英題(en)が空の行は '' にする＝buyBlock 側でリンクごと出ない。
   // ここで en を見るのは、DATA の生の英題を持っているのが card だけだから(buyBlock には k しか渡らない)。
@@ -1909,7 +1922,8 @@ function card(r,idx){
   //   PS2 39・PSP 29・PS4 18・PSVita 18 が上位。.hack//G.U. 系のように // を持つ行もある。
   // ★置換するのは Buyee のキーだけ。jp 本体は触らない＝画面表示・駿河屋・eBay は不変。
   // ★title_en 側の / は Buyee のキーに入らない(キーは title_ja 由来)ので対象外。
-  //   英題の / が効くのは eBay の kwEn(上の定義)。そちらは今回変更していない。
+  //   英題の / が効くのは eBay の kwEn(上の定義)。2026-08-14 に kwEn の定義自体は変えたが
+  //   (和名フォールバックを廃止 = en ? enc(en) : '')、/ の扱いは enc(en) のまま不変。
   // ★2026-08-04(2): 置換だけだと「/」が連続する行(.hack//G.U.)や前後に空白がある行
   //   (SUPER MARIO BROS. / DUCK HUNT)で空白が2〜3連になる。実測41行。畳んで trim する。
   //   \s なので全角スペース(U+3000)も半角1個に寄る＝Buyee のキーとしては同じ語の並びになる。
