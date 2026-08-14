@@ -1574,10 +1574,11 @@ function setLoc(v,skipSave){
          Ganbare Goemon ps1        → 10/10 すべて PS1 の日本版・無関係品 0
 
    ★機種ごとに正解の向きが違う。素直な小文字化が正解とは限らないので、値を推測で変えないこと。
-     実測したのは9機種（下の各項。うち PSP / Nintendo DS / Xbox は「仮値のままで正解」と
-     確認しただけで値は変えていない）。
-     残り26機種は下記の方針で置いた未実測値。
-       ・そのまま小文字化（20機種）
+     実測したのは13機種（下の各項。うち PSP / Nintendo DS / Xbox / PlayStation 4 の4機種は
+     「仮値のままで正解」と確認しただけで値は変えていない）。
+     残り22機種は下記の方針で置いた未実測値。
+       ・据置 PlayStation 3世代（PS2/PS3/PS4）… 実測済み。テーブル冒頭
+       ・そのまま小文字化（17機種）
        ・欧米通称グループ（5機種）… 和名側で統一。北米通称（NES/SNES/Genesis/
          TurboGrafx-16/Master System）は採らない＝北米版を引き寄せる方向に効くため。
          実測: `Secret of Mana` 単独は上位10件とも北米 SNES/PAL で日本版0件、
@@ -1597,10 +1598,70 @@ function setLoc(v,skipSave){
    ★sgCom（駿河屋.com・下の 1573 行）にこのテーブルを流用しないこと。あちらの
      56.7% の実測は r[2] の生値を繋いだ URL で測っており、語を変えると測定が無効になる。 */
 const PLATFORM_EBAY = {
-  // ---- そのまま小文字化（20機種）----
-  'PlayStation 2':     'playstation 2',      // 4797
-  'PlayStation 4':     'playstation 4',      // 2572
-  'PlayStation 3':     'playstation 3',      // 2543
+  // ---- 据置 PlayStation 3世代（実測済み。2026-08-14(5)）----
+  // ★'playstation N' は2トークン、'psN' は1トークン。**'playstation' は全世代で共有される
+  //   トークン**なので、'playstation 2' は他世代の出品も引き寄せる。'psN' は世代固有の
+  //   1トークンで、その漏れが小さい。PS2 / PS3 はこれを理由に 'psN' へ変えた。
+  //   PS4 だけは2タイトルとも結果が完全に同一だったので変えていない（下記）。
+  //   ※PS Vita で 'playstation vita' が勝ったのとは逆向きだが、あちらは「PS Vita と綴った
+  //     出品を取りこぼす」という別要因。世代番号を持つこの3機種とは事情が違う。
+  //
+  // ★'PlayStation 2' → 'ps2' の根拠（'playstation 2' と比較。日本専売2本）。
+  //     Kingdom Hearts Final Mix（PS2 の Final Mix は日本のみ。北米版 Kingdom Hearts が
+  //                               大量に在るので混入テストになる）
+  //       playstation 2 210件 … 上位10の対象 **6**・無関係3（KH2 Final Mix+ 2・キーホルダー1）
+  //       ps2           165件 … 上位10の対象 5・無関係4（すべて KH2 Final Mix+）
+  //     Sengoku Basara 2（北米は1作目を Devil Kings として出しただけ。2は未ローカライズ）
+  //       playstation 2 291件 … 上位10の対象 2・無関係7（BASARA 1 が2・X Cross・攻略本・お椀）
+  //       ps2           257件 … 上位10の対象 **4**・無関係4                      ←最良
+  //   上位10件は割れたが、**facet の他世代漏れが決め手**:
+  //       Kingdom Hearts Final Mix   PS2 / PS1 / PS3 / PSP / PS4
+  //         playstation 2            157 /  20 / **14** / **13** / **7**  ＝他世代 34件
+  //         ps2                      155 /  20 /  **3** /  **3** / **3**  ＝他世代  9件
+  //       Sengoku Basara 2           PS2 / PS3
+  //         playstation 2            219 / **14**
+  //         ps2                      211 /  **6**
+  'PlayStation 2':     'ps2',                // 4797 実測で決定
+  //
+  // ★'PlayStation 3' → 'ps3' の根拠（'playstation 3' と比較。日本専売2本）。
+  //     428: Shibuya Scramble（PS3 版は日本のみ。北米は後年 PS4）
+  //       playstation 3 / ps3 … **完全一致7件が完全に同一**（7/7 対象）＝引き分け。
+  //                             PS4 版は境界より下のパディングに2件
+  //     Ryū ga Gotoku Kenzan!（龍が如く 見参!。日本のみ）
+  //       playstation 3  **10件** … 上位10の対象 10/10 だが母集団が薄い / facet PS3 9
+  //       ps3            **54件** … 上位10の対象 8/10（残り2はシリーズまとめ売り）/
+  //                                 **facet PS3 54/54 ＝ 100%**                  ←最良
+  //   【トークン数の問題】Kenzan で 5倍の差が出た理由を切り分けた（同じ題名で4パターン）:
+  //       `Ryū ga Gotoku Kenzan! playstation 3` → eBay の heading は
+  //          **`ryu ga gotoku kenzan!playstation3`**（小文字化・マクロン除去に加え
+  //          **空白が消えて癒着**）… 10件
+  //       `Ryu ga Gotoku Kenzan! playstation 3`（ASCII）→ 書き換えなし … 11件
+  //       `Ryu ga Gotoku Kenzan playstation 3`（! を外す）→ `ryuga gotoku kenzan ...` … 62件
+  //       `Ryu ga Gotoku Kenzan! ps3` → `ryu ga gotoku kenzan! ps3` … 54件
+  //     ＝**eBay は不透明なクエリ書き換えパスを通す**（小文字化・ダイアクリティカル除去・
+  //       トークンの癒着/分割）。ただし**書き換えは主因ではない**。書き換えが起きなかった
+  //       ASCII 版でも 11件しか返らず、効いているのは**トークン数**だった。'playstation 3'
+  //       は2トークンで、題名に `!` が付いて要求トークンが増えると2トークン側だけが崩れる
+  //       （`!` を外すと 'playstation 3' でも 62件に戻る）。'ps3' は1トークンなので頑健。
+  //     DATA で該当する行（描画される英題あり行のうち）: PS2 は `!`/`?` 53行(2.7%)・
+  //       非ASCII 96行(4.9%)、PS3 は 5行(0.5%)・14行(1.3%)、PS4 は 5行(0.9%)・27行(4.9%)。
+  //       全機種では `!`/`?` 374行・非ASCII 702行。少数だが確実に居る。
+  'PlayStation 3':     'ps3',                // 2543 実測で決定
+  //
+  // ★'PlayStation 4' は実測済み・**差なし・変更不要**（'ps4' と比較。日本専売2本）。
+  //     Winning Post 8 2016（コーエーの競馬シム。未ローカライズ）
+  //       playstation 4 / ps4 … **11件で完全に同一**（上位10件・facet とも一致）
+  //     Nobunaga's Ambition: Souzou（信長の野望・創造。北米は別題 Sphere of Influence）
+  //       playstation 4 / ps4 … **完全一致3件で完全に同一**（3/3 対象）
+  //   PS2/PS3 で効いた「他世代漏れ」が PS4 では観測されなかった＝変える理由が無い。
+  //   ★ただし Winning Post は**シリーズ内の他ハード版混入が深刻**（facet: PS4 6 /
+  //     **PS Vita 3** / 未指定1。上位10件にも Vita 2件・PS2表記1件・年度違い3件）。
+  //     これは**両クエリで同一**で、原因はハード名ではなく
+  //     `Winning Post 8 2016 PC PS4 PS3 PSV ... Guide` のように**1つの出品が複数機種を
+  //     題名に列挙している**こと。ハード名では分離できない種類の誤爆。
+  'PlayStation 4':     'playstation 4',      // 2572 実測済み・変更不要
+
+  // ---- そのまま小文字化（17機種）----
   'Sega Saturn':       'sega saturn',        // 1239
   'Game Boy Advance':  'game boy advance',   //  903
   'Nintendo Switch':   'nintendo switch',    //  845
