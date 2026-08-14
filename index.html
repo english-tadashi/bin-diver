@@ -1574,7 +1574,7 @@ function setLoc(v,skipSave){
          Ganbare Goemon ps1        → 10/10 すべて PS1 の日本版・無関係品 0
 
    ★機種ごとに正解の向きが違う。素直な小文字化が正解とは限らないので、値を推測で変えないこと。
-     実測で決めたのは4機種だけ（下の各項）。残り31機種は下記の方針で置いた未実測値。
+     実測で決めたのは6機種（下の各項）。残り29機種は下記の方針で置いた未実測値。
        ・そのまま小文字化（20機種）
        ・欧米通称グループ（5機種）… 和名側で統一。北米通称（NES/SNES/Genesis/
          TurboGrafx-16/Master System）は採らない＝北米版を引き寄せる方向に効くため。
@@ -1582,7 +1582,7 @@ function setLoc(v,skipSave){
          `super famicom` を足して初めて NTSC-J 202/321 になった。
        ・略称グループ（5機種）… 出品タイトルで一般的な略称。
        ・(a) 短い名前が長い名前に含まれる組（5機種）… 語として上位機種・派生機種を
-         巻き込む。母数の大きい3機種は実測済み、残る Neo Geo / Xbox は仮値。
+         巻き込む。**5機種とも実測済み**。うち Xbox だけは素直な小文字化が正解だった。
 
    ★ハード名では取り除けない誤爆が残る。正体は**同じハードの別作品**で、
      北米版の有無とは無関係（Chrono Cross / Tobal No.1 / Final Fantasy Chronicles /
@@ -1631,7 +1631,8 @@ const PLATFORM_EBAY = {
   'Nintendo 64':       'n64',                //  211
 
   // ---- (a) 短い名前が長い名前に含まれる組（5機種）----
-  // PlayStation / Wii / Game Boy は実測で決着済み。Neo Geo と Xbox だけ未実測の仮値。
+  // 5機種とも実測で決着済み（2026-08-14 に PlayStation / Wii / Game Boy、同日(2) に
+  // Neo Geo / Xbox）。Xbox だけは素直な小文字化がそのまま正解だった。
   //
   // ★'PlayStation' → 'ps1' の根拠（2026-08-14 実測）。北米版が存在するタイトル
   //   （Chrono Trigger）と、存在しない日本専売タイトル（Tobal 2 / がんばれゴエモン。
@@ -1694,16 +1695,39 @@ const PLATFORM_EBAY = {
   //     ＝PS1 とは逆で短い略称が正しい。機種ごとに実測が要るというのはこの逆転のこと。
   'Game Boy':          'gb',                 // 1342 実測で決定
   //
-  // ---- 母数が小さいため未実測。素直な小文字化で仮置き（2026-08-14）----
-  // 上の3機種で 4559+1448+1342=7349 行を潰した結果、残りはこの2機種＝合計199行(全体の0.5%)。
-  // 実測コスト（1機種あたり北米版あり/日本専売の2題×候補数）に見合わないので仮値で置く。
-  // ★どちらも巻き込み問題は残っている。効かないと分かったら実測して直すこと:
-  //     'neo geo' … Neo Geo CD(98行) / Neo Geo Pocket(95行) を巻き込む。
-  //                 候補は 'neo geo aes' / 'neo geo rom'（日本版は AES の ROM カセット）
-  //     'xbox'    … Xbox 360(144行) / Xbox One(29行) を巻き込む。候補は 'original xbox'
-  //   なお Xbox は日本版の出品自体が少ない見込みで、ハード名を足す価値も未検証。
-  'Neo Geo':           'neo geo',            //  117 未実測・仮値
-  'Xbox':              'xbox',               //   82 未実測・仮値
+  // ★'Neo Geo' → 'neo geo aes' の根拠（2026-08-14(2) 実測。'neo geo' と比較）。
+  //   北米 AES 未発売の日本専売2本で比較した（英題は DATA の r[0] 実物）。
+  //     Kizuna Encounter: Super Tag Battle（総件数 / 上位10の AES / 無関係）
+  //       neo geo     14件 … 7 / 3（MVS=業務用基板2・箱のみ1）
+  //       neo geo aes 11件 … 7 / 3（同じ顔ぶれで順序が入れ替わるだけ）      ←引き分け
+  //     Samurai Shodown V Special（同）
+  //       neo geo     46件 … 4 / 6（**PS4 2・Switch 1**・PC 1・キーホルダー1・別作品1）
+  //       neo geo aes 35件 … 5 / 5（PC 2・別作品3。**PS4/Switch は 0件**）  ←最良
+  //   【なぜ 'aes' を足すか】'neo geo' は「Neo Geo」を題名に含む**移植版**を拾う。
+  //     Limited Run Games の PS4 版が `Neo Geo AES Edition`、Switch 版が
+  //     `NeoGeo Collection` と名乗るため。'aes' を足すと上位10件から消える。
+  //   ★Neo Geo CD/Pocket の巻き込みは元から軽微だった。Kizuna の facet に CD が1件
+  //     居て 'aes' で消えるが、そもそも上位10件には出ていない。Pocket は両方0件。
+  //   ★'aes' を足しても **MVS（業務用基板）は落ちない**。出品タイトルに "AES / MVS" と
+  //     両方書く売り方が多いため。ここは語では詰められない。
+  //   ★残るリスク: "AES" と書かない正規 AES 出品を落とす可能性（Kizuna 14→11件・
+  //     SS5SP 46→35件の減少分の中身は未確認）。117行なので実害は小さいと見て採った。
+  'Neo Geo':           'neo geo aes',        //  117 実測で決定
+
+  // ★'Xbox' → 'xbox' は実測済み、**変更不要**（2026-08-14(2)。'original xbox' と比較）。
+  //     segaGT Online（Xbox 専売。※北米版が在り「日本専売」の条件は満たさないと
+  //                    実測後に判明したが、ハードの巻き込み検出には使える）
+  //       xbox          48件 … 初代 Xbox 9/10・無関係1（寄せ集め出品）・360/One **0**
+  //       original xbox 22件 … 初代 Xbox 8/10・無関係2（雑誌広告・Wall Art）・360/One **0**
+  //     DOUBLE-S.T.E.A.L（北米は別題 Wreckless ＝この題名は日本版のみ）
+  //       xbox          **完全一致4件** … うち3件が目的の日本版（Japan Import 表記）
+  //       original xbox **完全一致0〜1件** … 目的の3件が全部パディング領域に落ちる
+  //   【なぜ 'original xbox' ではないか】日本版の出品タイトルに "original" と書く人が
+  //     いないため、必須トークンが1つ増えて完全一致を壊す。'playstation 1' の「1」と
+  //     同じ構造の問題。DOUBLE-S.T.E.A.L では 4件→0件になった。
+  //   【360/One は巻き込まない】どちらのクエリでも上位10件に 360/One は0件。
+  //     segaGT の facet も `Microsoft Xbox 17` ＝全部初代。素直な小文字化で正解だった。
+  'Xbox':              'xbox',               //   82 実測済み・変更不要
 };
 const SG_AF='https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=';
 const SG_UTM='&utm_medium=affiliate&utm_source=gamekataban.com&utm_content=%2F&utm_campaign=afid5357';
