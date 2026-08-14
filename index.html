@@ -1000,8 +1000,17 @@ header .lede .lede-sub{ font-weight:400; }
    ★上下とも「見えている余白」＝この行の値そのもの。header にあった頃と違って
      間に padding を持つ要素が挟まらないので、計算値と見た目が一致する。
    カード列を読み終えた人を次に送る位置なので、上下とも footer の区切り線に
-   ぶつからない程度に離してある。 */
-.kb-carts + .linkrow{ display:flex; justify-content:center; gap:10px; margin:1.75rem 0 2rem; }
+   ぶつからない程度に離してある。
+   ★flex-wrap:wrap は 2026-08-15 に札が5枚（+YouTube/Instagram/TikTok）になったとき足した。
+     既定の nowrap のままだと、480px 以下の font-size:9px でも5枚の合計幅が 500px 前後あり、
+     375px 幅の端末に収まらない。札の中身は1語なので改行で縮むこともできず、
+     縮まないまま行からはみ出す ―― ページ全体に横スクロールが出る。
+     wrap にすると溢れた札が次の行へ落ち、justify-content:center が行ごとに効くので
+     2行目も中央に揃う。gap:10px は行間（row-gap）も兼ねるので、札どうしの縦の
+     間隔も横と同じ 10px になり、別途 row-gap を書く必要はない。
+   ★これは既存行への追記であって新しいルールではない。札の枚数はこの先も増えうるので、
+     枚数が変わるたびに幅を数え直さずに済むほうを既定にしておく。 */
+.kb-carts + .linkrow{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin:1.75rem 0 2rem; }
 
 /* 札1枚ぶんの上書き。上の行（＝札どうしの並び）とは別の話なので分けてある。
    ★min-height:44px は 2026-08-12 に矢印（→ の span）を外したときに足した。
@@ -1141,7 +1150,14 @@ header .lede .lede-sub{ font-weight:400; }
          gap ではなく auto の分配で決まってしまい、gap:10px が効いていないように見える。
        ★.backlink の実体は <style> 末尾（kataban.css からの複製・理由はそこに書いた）。
        ・/blog/ … ブログ側ヘッダーの「← BACK TO SEARCH」と対になる。
-       ・x.com … 外部サイトなので target="_blank" + rel="noopener"。/blog/ は同一サイトなので付けない。 -->
+       ・x.com … 外部サイトなので target="_blank" + rel="noopener"。/blog/ は同一サイトなので付けない。
+       ・YouTube / Instagram / TikTok（2026-08-15 追加）も外部なので同じく _blank + noopener。
+         この3枚はアイコンを持たず文字だけ ―― Blog と X のドット絵は手で起こしたもので、
+         各社のロゴを同じ調子に描き起こすのは別作業（かつ商標の扱いも別問題）なので、
+         そこが済むまでは .backlink 素のまま並べる。アイコンが無い札は flex アイテムが
+         1つなので .linkrow .backlink の gap:6px は効かない（X 札と同じ理屈）。
+       ★aria-label は付けない。X 札と違って中身がテキストノードなので、リンク名は
+         その文字がそのまま出所になる ―― 付けると同じ語を二重に持つことになる。 -->
   <div class="linkrow">
     <a class="backlink" href="/blog/"><svg viewBox="0 0 16 14" width="16" height="14" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><g fill="#e8203a"><rect x="0" y="2" width="5" height="1"></rect><rect x="0" y="3" width="6" height="1"></rect><rect x="0" y="4" width="2" height="1"></rect><rect x="5" y="4" width="2" height="1"></rect><rect x="0" y="5" width="2" height="1"></rect><rect x="5" y="5" width="2" height="1"></rect><rect x="0" y="6" width="6" height="1"></rect><rect x="0" y="7" width="6" height="1"></rect><rect x="0" y="8" width="2" height="1"></rect><rect x="5" y="8" width="2" height="1"></rect><rect x="0" y="9" width="2" height="1"></rect><rect x="5" y="9" width="2" height="1"></rect><rect x="0" y="10" width="2" height="1"></rect><rect x="5" y="10" width="2" height="1"></rect><rect x="0" y="11" width="6" height="1"></rect><rect x="0" y="12" width="5" height="1"></rect></g><g fill="#ffd400"><rect x="9" y="0" width="2" height="1"></rect><rect x="9" y="1" width="7" height="7"></rect><rect x="9" y="8" width="2" height="4"></rect><rect x="8" y="12" width="5" height="2"></rect></g></svg>Blog</a>
     <!-- ×字は path 2枚の重ね。1枚目が黄(#ffcd2f)のベタ塗り、2枚目は同じ d を fill:none +
@@ -1168,6 +1184,9 @@ header .lede .lede-sub{ font-weight:400; }
            svg は aria-hidden なので、これを外すとリンク名が空になる。
            .backlink の gap:6px はこの札では効かない（flex アイテムが1つしかない）。 -->
     <a class="backlink" href="https://x.com/gamekataban" target="_blank" rel="noopener" aria-label="X (Twitter)"><svg viewBox="26.5 43 30.9 27" width="16" height="14" aria-hidden="true" focusable="false"><path fill="#ffcd2f" d="M55.36,66.73l-9.53-11.83c-.04-.06-.04-.12,0-.18l6.47-8.71c.1-.13-.04-.28-.25-.28h-4.66c-.11,0-.2.04-.25.11l-4.96,6.69c-.11.14-.4.14-.5,0l-4.96-6.69c-.05-.07-.15-.11-.25-.11h-4.66c-.21,0-.35.15-.25.28l6.47,8.71c.04.06.04.12,0,.18l-9.53,11.83c-.1.13.04.28.25.28h10.33c.11,0,.2-.04.25-.11l2.35-3.17c.11-.14.4-.14.5,0l2.35,3.17c.05.07.15.11.25.11h10.33c.21,0,.35-.15.25-.28Z"></path><path fill="none" stroke="#e91235" stroke-miterlimit="10" stroke-width="1.75" d="M55.36,66.73l-9.53-11.83c-.04-.06-.04-.12,0-.18l6.47-8.71c.1-.13-.04-.28-.25-.28h-4.66c-.11,0-.2.04-.25.11l-4.96,6.69c-.11.14-.4.14-.5,0l-4.96-6.69c-.05-.07-.15-.11-.25-.11h-4.66c-.21,0-.35.15-.25.28l6.47,8.71c.04.06.04.12,0,.18l-9.53,11.83c-.1.13.04.28.25.28h10.33c.11,0,.2-.04.25-.11l2.35-3.17c.11-.14.4-.14.5,0l2.35,3.17c.05.07.15.11.25.11h10.33c.21,0,.35-.15.25-.28Z"></path></svg></a>
+    <a class="backlink" href="https://www.youtube.com/@Gamekataban" target="_blank" rel="noopener">YouTube</a>
+    <a class="backlink" href="https://www.instagram.com/gamekataban/" target="_blank" rel="noopener">Instagram</a>
+    <a class="backlink" href="https://www.tiktok.com/@gamekataban" target="_blank" rel="noopener">TikTok</a>
   </div>
 
   <footer>
