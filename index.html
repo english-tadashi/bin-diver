@@ -1574,15 +1574,18 @@ function setLoc(v,skipSave){
          Ganbare Goemon ps1        → 10/10 すべて PS1 の日本版・無関係品 0
 
    ★機種ごとに正解の向きが違う。素直な小文字化が正解とは限らないので、値を推測で変えないこと。
-     実測したのは13機種（下の各項。うち PSP / Nintendo DS / Xbox / PlayStation 4 の4機種は
-     「仮値のままで正解」と確認しただけで値は変えていない）。
-     残り22機種は下記の方針で置いた未実測値。
+     実測したのは16機種（下の各項。うち PSP / Nintendo DS / Nintendo 3DS / Xbox /
+     PlayStation 4 / Sega Saturn / Famicom / Super Famicom の8機種は「仮値のままで正解」と
+     確認しただけで値は変えていない）。
+     残り19機種は下記の方針で置いた未実測値。
        ・据置 PlayStation 3世代（PS2/PS3/PS4）… 実測済み。テーブル冒頭
        ・そのまま小文字化（17機種）
        ・欧米通称グループ（5機種）… 和名側で統一。北米通称（NES/SNES/Genesis/
          TurboGrafx-16/Master System）は採らない＝北米版を引き寄せる方向に効くため。
          実測: `Secret of Mana` 単独は上位10件とも北米 SNES/PAL で日本版0件、
-         `super famicom` を足して初めて NTSC-J 202/321 になった。
+         `super famicom` を足して初めて NTSC-J 202/321 になった。**2026-08-14(7) に
+         Famicom で `nes` と直接比較して、この方針が正しいことを確認済み**
+         （`Super Mario Bros. 3` の日本版比率が 70%→6% に崩壊した。下の 'Famicom' の項）。
        ・略称グループ（5機種）… 出品タイトルで一般的な略称、という想定で置いた枠。
          ただし実測すると**想定どおりだったのは PSP だけ**で、Nintendo DS は略称かどうかが
          無関係（eBay が同一視）、Nintendo 64 は略称のほうが取りこぼした。枠名で決めないこと。
@@ -1662,7 +1665,18 @@ const PLATFORM_EBAY = {
   'PlayStation 4':     'playstation 4',      // 2572 実測済み・変更不要
 
   // ---- そのまま小文字化（17機種）----
-  'Sega Saturn':       'sega saturn',        // 1239
+  // ★'Sega Saturn' は実測済み・変更不要（2026-08-14(7)。'saturn' と比較。日本専売2本）。
+  //     Sakura Wars（サターン版は日本のみ。北米版は2020年の PS4 で別物）
+  //       sega saturn 450件 … 上位10の対象 **4**・無関係6（サクラ大戦2 が3・コラムス3）
+  //       saturn      539件 … 上位10の対象 3・無関係7（別作品4・**フィギュア1・
+  //                           Power Memory アクセサリ2**）
+  //       ★増えた89件は **Saturn の facet に載っていない**（セガサターン 342→343 と
+  //         ほぼ不変で、未指定が増える）＝増分はゲームではなくグッズ／周辺機器。
+  //     Dragon Force II（北米未発売。1作目は Working Designs から出ている）
+  //       sega saturn 36件 / saturn 35件 … 上位10の対象とも 4/10 で**ほぼ同一**
+  //                                         （facet セガサターン 35 vs 34）
+  //   2語のままのほうがゲームに寄る。短縮する利得が無いので現状維持。
+  'Sega Saturn':       'sega saturn',        // 1239 実測済み・変更不要
   'Game Boy Advance':  'game boy advance',   //  903
   'Nintendo Switch':   'nintendo switch',    //  845
   'Dreamcast':         'dreamcast',          //  671
@@ -1683,7 +1697,34 @@ const PLATFORM_EBAY = {
   // ---- 欧米通称グループ（5機種）----
   // 5機種とも和名側（＝日本版を狙う表記）で統一。理由は上の方針コメント。
   'Super Famicom':     'super famicom',      // 1460  実測済（'sfc' も結果集合はほぼ同一だった）
-  'Famicom':           'famicom',            // 1252  北米は NES
+  //
+  // ★'Famicom' は実測済み・**維持確定**（2026-08-14(7)。'nes' と比較）。
+  //   **この機種の実測で、(b) グループの方針そのものが正しいと確認できた。**
+  //
+  //   ① 日本専売タイトルだけ見ると 'nes' が良く見える（＝ここで判断すると誤る）:
+  //        Fire Emblem Gaiden famicom  55件 … 対象 7/10・無関係3（セット2・空カート1）
+  //        Fire Emblem Gaiden nes      54件 … 対象 7/10・無関係3（英訳リプロ1 ほか）＝互角
+  //        Ganbare Goemon 2 famicom   119件 … 対象 **2/10**・**スーパーファミコン版 6件**
+  //        Ganbare Goemon 2 nes        98件 … 対象 **7/10**・SFC 1件        ←'nes' の勝ち
+  //   ② **北米版が存在するタイトルで測ると 'nes' は崩壊する**（日本専売2本では
+  //      引き寄せる北米版が存在せず、この害が見えなかった）:
+  //        `_nkw`                                 総件数 / NTSC-J / NTSC-U/C / 上位10件
+  //        Super Mario Bros. 3 famicom             362 / **253(70%)** /   39 / 10/10 日本版
+  //        Super Mario Bros. 3 nes              3,300+ / **219( 6%)** / 1,465 / 9/10 北米NES
+  //                                                     ＋PAL 979
+  //        Castlevania III: Dracula's Curse famicom 85 /  21 /  38 / 日本版5・北米NES5
+  //        Castlevania III: Dracula's Curse nes    179 / **13( 7%)** / 100 / 10/10 北米NES
+  //      日本版比率が **70% → 6%** に落ち、母集団が10倍に膨れて北米版と PAL 版で埋まる。
+  //      DATA の Famicom 436行（描画される英題あり行）には北米版を持つ題が多数ある。
+  //
+  //   ★**未解決の弱点**: 'famicom' は **Super Famicom を巻き込む**。
+  //     「Super Famicom」は「famicom」をトークンとして含むので語では排除できない。
+  //     Ganbare Goemon 2 では上位10件に SFC 版（奇天烈将軍マッギネス）が6件入り、
+  //     facet でも SFC系 54件を含んでいた。これは (a)「短い名前が長い名前に含まれる組」
+  //     と同じ構造で、Famicom を (b) に分類したときには見落としていた。
+  //     'nes' は解決策にならない（上の②）。**未検証の候補として `family computer`**
+  //     （日本の出品者がよく書く表記）が残っている。測るならここから。
+  'Famicom':           'famicom',            // 1252  実測済み・維持確定（北米は NES）
   'PC Engine':         'pc engine',          //  687  北米は TurboGrafx-16
   'Mega Drive':        'mega drive',         //  557  北米は Genesis
   'Sega Mark III':     'sega mark iii',      //   27  北米は Master System
@@ -1742,7 +1783,17 @@ const PLATFORM_EBAY = {
   //     という妙な混入がある。3クエリ共通なのでハード名の問題ではない。原因は未特定。
   'PlayStation Vita':  'playstation vita',   // 2407 実測で決定
   //
-  'Nintendo 3DS':      'nintendo 3ds',       // 2302
+  // ★'Nintendo 3DS' は実測済み・変更不要（2026-08-14(7)。'3ds' と比較。日本専売2本）。
+  //   **eBay は 'nintendo 3ds' と '3ds' を実質同一視する。** facet の数値が
+  //   両タイトルとも1つ残らず一致した:
+  //     Dragon Quest Monsters: Terry's Wonderland 3D
+  //       nintendo 3ds 41件 / 3ds 44件 … どちらも 3DS 28 / NTSC-J 23・上位10の対象 7/10
+  //     Inazuma Eleven GO 2: Chrono Stone
+  //       nintendo 3ds 94件 / 3ds 95件 … どちらも 3DS 71 / DS 3 / 2DS 2 / NTSC-J 22・
+  //                                      上位10の対象 8/10
+  //   総件数だけ僅かに違うが上位10件は同じ顔ぶれの並べ替え。DS/2DS の混入も同数。
+  //   'nintendo ds' と 'nds' のときと同じ現象で、変えても何も変わらないので現状維持。
+  'Nintendo 3DS':      'nintendo 3ds',       // 2302 実測済み・変更不要
   //
   // ★'Nintendo 64' → 'nintendo 64' の根拠（2026-08-14(3) 実測。'n64' と比較）。
   //   北米版が存在しない日本専売2本で比較した（英題は DATA の r[0] 実物）。
