@@ -1691,6 +1691,29 @@ function buyBlock(k){
   // 生成をやめただけで DATA・他店の導線・並び順には触れていない。復活は下の Suruga-ya の次行に
   // jp.mercari.com/search?keyword=(kwName)&category_id=76 を張る .store の a 要素を戻すだけ。
   // kwName の生成(card内)は他店と共用なので残してある。
+
+  /* ★Book-Off / Hard-Off も国内発送のみであることの注記(2026-08-14)。海外モードでだけ出す。
+     上の jpOnlyNote(1656行) と同じ理由 ―― 押せば商品は見つかるが、そこから直接は届かない。
+     駿河屋.jp にだけ注記が付いた状態だと「注記が無い店は送れる」と読める余地が残るので、
+     同じ .stores の並びで扱いを揃える。
+     ★2店まとめて1本にする。両方とも同じ制約で、ボタン1つずつに付けると
+       .stores.pair の2列の下に同じ文が2度並ぶ＝カード内の反復が増えるだけ。
+     ★jpOnlyNote と違いリンクを含まない（プレーンテキスト）。海外モードのカードには
+       すでに Buyee への導線が3本ある（gWorld のボタン＋ jpOnlyNote 内のリンク2本）。
+       4本目を足しても行き先は同じで、増えるのは押せる青字の数だけ。
+       ここは「この2店では受け取れない」ことだけを伝えれば足りる。
+     ★店名を出さず "a proxy service" と書く(2026-08-14・実画面を見て変更)。
+       リンク無しで "Buyee" と書くと、同じカード内で押せる Buyee と押せない Buyee が
+       近接して並ぶ＝同じ単語の見え方だけが違う状態になる。押す先を1つに絞る役目は
+       上の3本が持っているので、ここは制約の説明だけを担う。
+     ★buyeeWrapped を参照しない＝row[7] も row[1] も空の行でも文面が変わらない。
+     ★埋め込みは </div> と同じ行に置く（下の .stores pair）。改行して ${...} を独立行に
+       すると、jp モード(空文字)のときに空白だけの行が残り、IN JAPAN の出力が
+       変更前とバイト単位で一致しなくなる。同じ行なら jp モードは完全に無変化。 */
+  const pairJpOnlyNote = !jp
+    ? `<div class="buyee-note">Japan domestic shipping only &mdash; needs a proxy service to receive it overseas</div>`
+    : '';
+
   const gTitle = `<div class="group">
         <div class="group-label"><span class="n">By Japanese title</span><span class="d">${jp?'domestic listings — buy direct, Japanese site':'domestic listings — usually needs a proxy'}</span></div>
         <div class="stores">
@@ -1699,7 +1722,7 @@ function buyBlock(k){
         <div class="stores pair">
           <a class="store" target="_blank" rel="noopener" href="https://shopping.bookoff.co.jp/search/genre/51/keyword/${k.kwKanaBo}">Book-Off</a>
           <a class="store" target="_blank" rel="noopener" href="https://netmall.hardoff.co.jp/cate/00010012/?q=${k.kwKanaHard}&amp;s=7">Hard-Off</a>
-        </div>
+        </div>${pairJpOnlyNote}
       </div>`;
 
   /* gEnTitle は jp モードでは '' なので、IN JAPAN の並びは 3群のまま＝変更なし。
