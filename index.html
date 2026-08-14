@@ -1575,7 +1575,7 @@ function setLoc(v,skipSave){
 
    ★機種ごとに正解の向きが違う。素直な小文字化が正解とは限らないので、値を推測で変えないこと。
      実測したのは9機種（下の各項。うち PSP / Nintendo DS / Xbox は「仮値のままで正解」と
-     確認しただけで値は変えていない。PlayStation Vita は実測済みだが追試待ちで保留）。
+     確認しただけで値は変えていない）。
      残り26機種は下記の方針で置いた未実測値。
        ・そのまま小文字化（20機種）
        ・欧米通称グループ（5機種）… 和名側で統一。北米通称（NES/SNES/Genesis/
@@ -1656,16 +1656,30 @@ const PLATFORM_EBAY = {
   //   何も変わらない＝短くする意味も無いので現状維持。
   'Nintendo DS':       'nintendo ds',        // 2535 実測済み・変更不要
   //
-  // ★'PlayStation Vita' は 'playstation vita' への変更を検討中（2026-08-14(3) 時点で保留）。
-  //   **eBay は 'ps vita' と 'playstation vita' を同一視しない**（DS とは挙動が違う）。
-  //     Genkai Tokki: Seven Pirates（日本専売）
-  //       ps vita          完全一致4件 … 対象 4/4
-  //       playstation vita 完全一致5件 … 対象 5/5。増えた1件は題名を "PlayStation Vita" と
-  //                        綴った出品で、'ps vita' はこれを境界より下に落としていた
-  //     To Heart 2: Dungeon Travelers（日本専売）… 3クエリとも同じ結果で差なし
-  //     'vita' 単独は却下。Seven Pirates で同シリーズ別作品を5件拾い対象 4/10 に落ちた
-  //   差が1タイトルの1件だけで Vita は出品数自体が薄いため、追試してから決める。
-  'PlayStation Vita':  'ps vita',            // 2407 追試待ち（'playstation vita' が有力）
+  // ★'PlayStation Vita' → 'playstation vita' の根拠（2026-08-14(3)+(4) 実測。
+  //   'ps vita' / 'playstation vita' / 'vita' を比較。日本専売4タイトルで **2勝2分・負けなし**）。
+  //   **eBay は 'ps vita' と 'playstation vita' を同一視しない**（Nintendo DS の
+  //   'nintendo ds'/'nds' が完全に同一だったのとは挙動が違う。ここが判断の分かれ目）。
+  //
+  //     タイトル（すべて日本専売）      ps vita              playstation vita        判定
+  //     Genkai Tokki: Seven Pirates   完全一致4件・対象4/4  完全一致**5件**・**5/5**  playstation vita
+  //     To Heart 2: Dungeon Travelers 4件・対象2/4          4件・対象2/4             引き分け
+  //     Ciel Nosurge                  23件・対象**7/10**    26件・対象**8/10**        playstation vita
+  //     Love Live! School Idol        14件・Vol.1単品6/10   13件・Vol.1単品6/10       引き分け
+  //       Paradise Vol.1 Printemps
+  //
+  //   【勝因は1つ】'ps vita' が**題名を "PlayStation Vita" と綴った出品を取りこぼす**。
+  //     勝った2件はどちらもこれで説明できる:
+  //       Seven Pirates … `... Sony PlayStation Vita Japan Import` を 'ps vita' は
+  //                       完全一致の境界より下に落としていた
+  //       Ciel Nosurge  … `Ciel Nosurge *Playstation Vita* PSV Japan B` を新たに拾い、
+  //                       代わりに `Sony PS Vita Games (Loose)` という寄せ集め出品が落ちた
+  //     **負けたケースが1つも無い**のが採用の決め手。引き分け2件は上位10件が同一。
+  //   【'vita' 単独は却下】Seven Pirates で同シリーズ別作品（Moero Crystal /
+  //     Monster Monpiece / Moero Chronicle）を5件拾い、対象が 4/10 に落ちた。
+  //   ★To Heart 2 は3クエリとも**完全一致4件のうち2件が `J.League Winning Eleven 5`(PS2)**
+  //     という妙な混入がある。3クエリ共通なのでハード名の問題ではない。原因は未特定。
+  'PlayStation Vita':  'playstation vita',   // 2407 実測で決定
   //
   'Nintendo 3DS':      'nintendo 3ds',       // 2302
   //
