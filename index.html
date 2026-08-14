@@ -1557,6 +1557,154 @@ function setLoc(v,skipSave){
    ★店URLの変更は駿河屋の af_jump ラップのみ（2026-07-25）。他店のURL・店名は不変。
    ★強調(primary)の付け替えは実施済み（第1段-c / 2026-07-25）。
      割り当ては下の clsBuyee / clsCode / clsTitle を見ること。 */
+/* eBay の _nkw に英題へ足す機種名(英語)。キーは DATA の r[2]＝build_master.py の
+   KEEP_PLATFORMS 35機種そのまま（1491行）。値は全部小文字（_nkw は大小を区別しない）。
+   使うのは card() の kwEn だけ（下の 1778 付近）。
+
+   ★なぜ足すのか（2026-08-14 実測・実 Chrome を CDP で駆動して ebay.com の SRP を目視。
+     方法は memory/ebay-srp-needs-real-chrome.md。日本 IP からの計測なので順位が
+     海外からの閲覧と同一である保証は無い）:
+       英題だけだと対象機種が上位10件に1件も出ないことがある。
+         Chrono Trigger  → PS1 が 0件（SNES 2・DS 3・グッズ 4・SFC 1）
+         Secret of Mana  → SFC 日本版が 0件（上位10件すべて北米 SNES / PAL）
+         Ganbare Goemon  → PS1 が 1件だけ（Switch 2・FC・N64・PS5・書籍・グッズで埋まる）
+       機種名を足すと上位10件のハードはほぼ揃う。
+         Chrono Trigger ps1        → PS1 10/10
+         Secret of Mana super famicom → SFC 系 10/10・NTSC-J 202/321
+         Ganbare Goemon ps1        → 10/10 すべて PS1 の日本版・無関係品 0
+
+   ★機種ごとに正解の向きが違う。素直な小文字化が正解とは限らないので、値を推測で変えないこと。
+     実測で決めたのは4機種だけ（下の各項）。残り31機種は下記の方針で置いた未実測値。
+       ・そのまま小文字化（20機種）
+       ・欧米通称グループ（5機種）… 和名側で統一。北米通称（NES/SNES/Genesis/
+         TurboGrafx-16/Master System）は採らない＝北米版を引き寄せる方向に効くため。
+         実測: `Secret of Mana` 単独は上位10件とも北米 SNES/PAL で日本版0件、
+         `super famicom` を足して初めて NTSC-J 202/321 になった。
+       ・略称グループ（5機種）… 出品タイトルで一般的な略称。
+       ・(a) 短い名前が長い名前に含まれる組（5機種）… 語として上位機種・派生機種を
+         巻き込む。母数の大きい3機種は実測済み、残る Neo Geo / Xbox は仮値。
+
+   ★ハード名では取り除けない誤爆が残る。正体は**同じハードの別作品**で、
+     北米版の有無とは無関係（Chrono Cross / Tobal No.1 / Final Fantasy Chronicles /
+     聖剣伝説3 / Pokémon Leaf Green）。日本専売の Tobal 2 ですら同シリーズの
+     Tobal No.1 が 'ps1' で 4/10 を占めた。ここを詰めるなら別の手（型番・
+     リージョン絞り込み等）が要る。日本専売タイトルのリプロカート（Pokémon Green の
+     "English Version" 等）も同様に残る。
+   ★sgCom（駿河屋.com・下の 1573 行）にこのテーブルを流用しないこと。あちらの
+     56.7% の実測は r[2] の生値を繋いだ URL で測っており、語を変えると測定が無効になる。 */
+const PLATFORM_EBAY = {
+  // ---- そのまま小文字化（20機種）----
+  'PlayStation 2':     'playstation 2',      // 4797
+  'PlayStation 4':     'playstation 4',      // 2572
+  'PlayStation 3':     'playstation 3',      // 2543
+  'Sega Saturn':       'sega saturn',        // 1239
+  'Game Boy Advance':  'game boy advance',   //  903
+  'Nintendo Switch':   'nintendo switch',    //  845
+  'Dreamcast':         'dreamcast',          //  671
+  'GameCube':          'gamecube',           //  308
+  'PlayStation 5':     'playstation 5',      //  258
+  'WonderSwan':        'wonderswan',         //  223
+  '3DO':               '3do',                //  215
+  'Game Gear':         'game gear',          //  195
+  'Xbox 360':          'xbox 360',           //  144
+  'Neo Geo CD':        'neo geo cd',         //   98
+  'Neo Geo Pocket':    'neo geo pocket',     //   95
+  'PC-FX':             'pc-fx',              //   44
+  'Xbox One':          'xbox one',           //   29
+  'Wii U':             'wii u',              //   20
+  'Virtual Boy':       'virtual boy',        //   13
+  '64DD':              '64dd',               //    6
+
+  // ---- 欧米通称グループ（5機種）----
+  // 5機種とも和名側（＝日本版を狙う表記）で統一。理由は上の方針コメント。
+  'Super Famicom':     'super famicom',      // 1460  実測済（'sfc' も結果集合はほぼ同一だった）
+  'Famicom':           'famicom',            // 1252  北米は NES
+  'PC Engine':         'pc engine',          //  687  北米は TurboGrafx-16
+  'Mega Drive':        'mega drive',         //  557  北米は Genesis
+  'Sega Mark III':     'sega mark iii',      //   27  北米は Master System
+
+  // ---- 略称グループ（5機種）----
+  'PSP':               'psp',                // 3646
+  'Nintendo DS':       'nintendo ds',        // 2535
+  'PlayStation Vita':  'ps vita',            // 2407
+  'Nintendo 3DS':      'nintendo 3ds',       // 2302
+  'Nintendo 64':       'n64',                //  211
+
+  // ---- (a) 短い名前が長い名前に含まれる組（5機種）----
+  // PlayStation / Wii / Game Boy は実測で決着済み。Neo Geo と Xbox だけ未実測の仮値。
+  //
+  // ★'PlayStation' → 'ps1' の根拠（2026-08-14 実測）。北米版が存在するタイトル
+  //   （Chrono Trigger）と、存在しない日本専売タイトル（Tobal 2 / がんばれゴエモン。
+  //   英題は DATA の r[0] 実物）で3クエリを比較した。
+  //     ┌─ Tobal 2（総件数 / 上位10のうち Tobal 2 の実物 / 日本版 / 無関係）
+  //     │  基準 "Tobal 2"        98件 … 4 / 4 / 6（Tobal No.1×3、テレカ・広告×3）
+  //     │  ps1                   50件 … 6 / 6 / 4（全部 Tobal No.1）        ←最良
+  //     │  playstation 1         72件 … 4 / 4 / 6（No.1×2、攻略本・広告・キーホルダー×4）
+  //     │  psx                   18件 … 1 / 1 / 9（No.1×8、10本まとめ×1）   ←最悪
+  //     └─ がんばれゴエモン（同）
+  //        基準 "Ganbare Goemon" 1100+件 … 1 / 1 / 9（Switch×2・FC・N64・PS5・書籍・グッズ）
+  //        ps1                    75件 … 10 / 10 / 0（上位10件すべて PS1 日本版）←最良
+  //        playstation 1          99件 …  6 /  6 / 4（本体セット・寄せ集め出品を拾う）
+  //        psx                   397件 …  9 /  9 / 1（ただし9件中8件が同一スペイン出品者の
+  //                                     ほぼ同文の重複で、作品を題名から特定できない）
+  //     Chrono Trigger ps1 は 190件・PS1 10/10・日本版2・無関係1（Chrono Cross）で、
+  //     同日の前回計測と内訳が完全一致＝この測り方は再現する。
+  //   【なぜ 'playstation 1' ではないか】「1」が独立トークンとして弱くしか効かず、
+  //     非ゲーム（攻略本・雑誌広告・キーホルダー・本体セット・寄せ集め出品）を通す。
+  //     2タイトルとも上位10件に4件ずつ混ざった。語の構造の問題なので作品を選ばない。
+  //   【なぜ 'psx' ではないか】母集団の増減が極端で、どちらに振れても質が落ちる。
+  //     Tobal 2 では 98→18件に潰れたうえ中身が Tobal No.1 に化け、ゴエモンでは
+  //     397件に膨らんで同一出品者の重複で埋まった。psx はセラーが検索寄せのために
+  //     題名へ詰め込む語で、その出品を優先的に拾っているように見える。
+  'PlayStation':       'ps1',                // 4559 実測で決定
+  //
+  // ★'Wii' → 'wii' の根拠（2026-08-14 実測。'nintendo wii' と比較）。北米版あり＝
+  //   Super Mario Galaxy（Wii U にも配信された作品を意図的に選んだ）、日本専売＝
+  //   Captain Rainbow / 斬撃のREGINLEIV。
+  //     Super Mario Galaxy（総件数 / 上位10の Wii / 日本版 / 無関係 / Wii U 混入）
+  //       wii          4,100+件 … 10 / 0 / 2（Galaxy 2・Wii寄せ集め）/ 0
+  //       nintendo wii 4,200+件 … 10 / 0 / 2（同上）              / 0
+  //       facet も同値（NTSC-U/C 2155 vs 2156・NTSC-J 135 vs 135・PAL 504 vs 504）
+  //     Captain Rainbow / 斬撃のREGINLEIV（ともに完全一致7件しか無い）
+  //       wii / nintendo wii … 完全一致の7件が1件単位まで同一（順序だけ入れ替わる）。
+  //       7件とも Wii の日本版。facet も同値（任天堂Wii 7・NTSC-J 4）
+  //   【Wii U は巻き込まない】Wii U が出るのは `一部の語句に一致する検索結果` バナーより
+  //     下のパディング領域だけで、完全一致には1件も入らなかった。語を伸ばす利得が無いので
+  //     短い 'wii' を採る。※ヒット数が10件未満のクエリはこの境界を越えて数えてしまうので、
+  //     測り直すときは heading の件数と突き合わせること。
+  'Wii':               'wii',                // 1448 実測で決定（'nintendo wii' と差が無いので短い方）
+  //
+  // ★'Game Boy' → 'gb' の根拠（2026-08-14 実測。'gameboy' / 'game boy' / 'gb' を比較）。
+  //   北米版あり＝Super Mario Land、日本専売＝Pokémon Green（ポケットモンスター 緑）。
+  //   【まず 'gameboy' と 'game boy' は eBay 内部で同一視される】facet の数値が一致する。
+  //     Pokémon Green: どちらも GB 420 / GBA 573 / GBC 66 / NTSC-J 384、総件数 864 vs 863。
+  //     Super Mario Land も同様（GB 2395 vs 2392 / GBA 171 vs 170）。＝選択肢は実質2つ。
+  //     Pokémon Green（総件数 / GB / GBA / NTSC-J）
+  //       gameboy    864件 … GB 420 / GBA 573 / NTSC-J 384(44%)
+  //       game boy   863件 … GB 420 / GBA 573 / NTSC-J 384(44%)
+  //       gb         309件 … GB 316 / GBA  63 / NTSC-J 268(87%)   ←最良
+  //     上位10件で見ると 'game boy' は Pokémon Leaf Green(GBA) を4件入れた。'gb' は0件。
+  //     日本版（正規）は gameboy 2 / game boy 3 / gb 5。
+  //     Super Mario Land（上位10。この題では 'gb' がやや不利）
+  //       gameboy 2,800+件 … GB 10/10・対象作品 7・シリーズ別作品 3
+  //       game boy 2,700+件 … 同じ
+  //       gb      1,800+件 … GB 10/10・対象作品 5・シリーズ別作品 5
+  //   【なぜ 'gb' が勝つか】GBA/GBC の出品は自分を 'GBA'/'GBC' と書くので 'gb' では
+  //     拾われない。一方 'game boy' は "Game Boy Advance" の部分文字列なので必ず巻き込む。
+  //     ＝PS1 とは逆で短い略称が正しい。機種ごとに実測が要るというのはこの逆転のこと。
+  'Game Boy':          'gb',                 // 1342 実測で決定
+  //
+  // ---- 母数が小さいため未実測。素直な小文字化で仮置き（2026-08-14）----
+  // 上の3機種で 4559+1448+1342=7349 行を潰した結果、残りはこの2機種＝合計199行(全体の0.5%)。
+  // 実測コスト（1機種あたり北米版あり/日本専売の2題×候補数）に見合わないので仮値で置く。
+  // ★どちらも巻き込み問題は残っている。効かないと分かったら実測して直すこと:
+  //     'neo geo' … Neo Geo CD(98行) / Neo Geo Pocket(95行) を巻き込む。
+  //                 候補は 'neo geo aes' / 'neo geo rom'（日本版は AES の ROM カセット）
+  //     'xbox'    … Xbox 360(144行) / Xbox One(29行) を巻き込む。候補は 'original xbox'
+  //   なお Xbox は日本版の出品自体が少ない見込みで、ハード名を足す価値も未検証。
+  'Neo Geo':           'neo geo',            //  117 未実測・仮値
+  'Xbox':              'xbox',               //   82 未実測・仮値
+};
 const SG_AF='https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=';
 const SG_UTM='&utm_medium=affiliate&utm_source=gamekataban.com&utm_content=%2F&utm_campaign=afid5357';
 const sgAf = w => SG_AF + encodeURIComponent('https://www.suruga-ya.jp/search?category=2&search_word=' + w + SG_UTM);
@@ -1775,7 +1923,40 @@ function card(r,idx){
        「キーが空ならリンクを出さない」という既存の形(下の sgComUrl)に揃える。
      ★en が空白文字のみの行は0行なので、truthy 判定で取りこぼしは無い(全数確認)。
      ★英題が空 かつ Buyee リンクも作れない行は0行＝.stores が空箱になる行は存在しない(全数確認)。 */
-  const kwEn   = en ? enc(en) : '';  // English title only — eBay (空なら eBay リンクを出さない)
+  /* ★2026-08-14(2): 英題に機種名(英語)を足す。PLATFORM_EBAY は r[2] をキーに引く（定義と
+     実測の根拠はテーブル側のコメント・1560 付近）。pf は上の分割代入で既に r[2] が入っている。
+     ★未知のキー / 'TBD' は「足さない」に倒す＝この行の _nkw は変更前と完全に同じになる。
+       undefined や 'TBD' が URL に混ざることは無い（既存の「キーが空ならリンクを出さない」と
+       同じ、安全側に倒す形）。r[2] は KEEP_PLATFORMS 通過後の35種でテーブルも同じ35キーなので
+       現時点で発火する行は0行＝将来 KEEP_PLATFORMS に機種を足したときの受け皿。
+     ★pf.toLowerCase() のような自動フォールバックは入れない。未実測の語を黙って本番に出す
+       ことになり、しかも素直な小文字化が誤りである実例が2つある（'playstation' は PS2〜5・
+       Vita を巻き込む / 'game boy' は Game Boy Advance を巻き込む）。
+     ★hasOwn で引く。r[2] はホワイトリスト由来なので実害は無いが、'constructor' のような
+       継承キーで関数が返る余地を残さない。
+     ★enc() は連結後の文字列にかける。enc(en) + ' ' + pfTerm だと空白が生のまま URL に入る。
+     ★エンコードは encodeURIComponent のまま＝空白は %20。実測に使った URL も
+       encodeURIComponent で組んだので、測ったものと同じ URL が本番に出る。sgCom が
+       %20 を + に置換しているのは駿河屋側の測定条件に合わせたためで、eBay には持ち込まない。
+     ★jp / 海外モードで同じ処理にする。eBay リンクは gWorld の中にあり両モードとも出る
+       （order は 1740 付近）。飛び先が同じ eBay の SRP なのでモードで結果が変わる要素が無く、
+       罠#27 の理屈（別物を最短距離で指すのは誤った値を出すのと同じ害）は国内の買い手にも
+       同じく当たる。前回の eBay 変更（英題が無い行はリンクごと出さない）も両モード適用。
+     ★語の重複を除くガードは**意図して入れていない**。英題に既に機種名が入っている行が
+       65行あり（buyBlock を吐く13,090行の0.5%。Wii 23・Game Boy 10・Nintendo Switch 9・
+       3DS 7・Dreamcast 5・WonderSwan 4 ほか）、"New Super Mario Bros. Wii wii" のように
+       語が2回続く。2026-08-14 に3組を実測して**質の劣化なし**を確認した:
+         New Super Mario Bros. Wii / + wii     … 3,700件→5,800件と母集団は膨らむが、
+           上位10件はどちらも10/10 この作品の Wii 版で中身は同等
+         Princess Arthur for Nintendo Switch / + nintendo switch
+           … 6件で完全一致6件が**完全に同一**（2語フレーズの重複でも影響ゼロ）
+         beat mania GB / + gb                  … 68件 vs 67件。重複ありのほうが10位に
+           無関係なポスターではなく BEATMANIA GB が入り**むしろ改善**（差は揺れの範囲）
+       ＝測って害が無いと分かったものに未測定の正規表現分岐を足すほうがリスクが高い。
+       ガードを入れるなら en に \b<語>\b が在るとき pfTerm を落とす形になるが、不要と判断した。 */
+  const pfRaw  = Object.hasOwn(PLATFORM_EBAY, pf) ? PLATFORM_EBAY[pf] : '';
+  const pfTerm = (pfRaw && pfRaw !== 'TBD') ? pfRaw : '';
+  const kwEn   = en ? enc(pfTerm ? en + ' ' + pfTerm : en) : '';  // English title + console (空なら eBay リンクを出さない)
   const kwCode = enc(codes[0]||'');  // first product code only — Suruga-ya "by code" comparison link
   // 駿河屋.com(英語・海外発送)の検索URL。英題(en)が空の行は '' にする＝buyBlock 側でリンクごと出ない。
   // ここで en を見るのは、DATA の生の英題を持っているのが card だけだから(buyBlock には k しか渡らない)。
