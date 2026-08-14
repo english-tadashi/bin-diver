@@ -1574,18 +1574,22 @@ function setLoc(v,skipSave){
          Ganbare Goemon ps1        → 10/10 すべて PS1 の日本版・無関係品 0
 
    ★機種ごとに正解の向きが違う。素直な小文字化が正解とは限らないので、値を推測で変えないこと。
-     実測したのは16機種（下の各項。うち PSP / Nintendo DS / Nintendo 3DS / Xbox /
-     PlayStation 4 / Sega Saturn / Famicom / Super Famicom の8機種は「仮値のままで正解」と
-     確認しただけで値は変えていない）。
-     残り19機種は下記の方針で置いた未実測値。
+     実測したのは19機種（下の各項。うち PSP / Nintendo DS / Nintendo 3DS / Xbox /
+     PlayStation 4 / Sega Saturn / Famicom / Super Famicom / PC Engine / Dreamcast /
+     Mega Drive の11機種は「仮値のままで正解」と確認しただけで値は変えていない）。
+     残り16機種は下記の方針で置いた未実測値。
        ・据置 PlayStation 3世代（PS2/PS3/PS4）… 実測済み。テーブル冒頭
        ・そのまま小文字化（17機種）
        ・欧米通称グループ（5機種）… 和名側で統一。北米通称（NES/SNES/Genesis/
          TurboGrafx-16/Master System）は採らない＝北米版を引き寄せる方向に効くため。
          実測: `Secret of Mana` 単独は上位10件とも北米 SNES/PAL で日本版0件、
-         `super famicom` を足して初めて NTSC-J 202/321 になった。**2026-08-14(7) に
-         Famicom で `nes` と直接比較して、この方針が正しいことを確認済み**
-         （`Super Mario Bros. 3` の日本版比率が 70%→6% に崩壊した。下の 'Famicom' の項）。
+         `super famicom` を足して初めて NTSC-J 202/321 になった。**2026-08-14(7)〜(8) に
+         Famicom / PC Engine で `nes` / `turbografx` と直接比較して、この方針が正しいことを
+         確認済み**（`Super Mario Bros. 3` の日本版比率が 70%→6% に崩壊し、
+         `Bonk's Adventure turbografx` は上位10件すべてが北米版になった）。
+         ★ただし **Mega Drive では和名側でも不十分**。「Mega Drive」は**欧州(PAL)版とも
+         名前を共有する**ので、日本版を分離できない（下の 'Mega Drive' の項）。
+         和名側＝日本版、とは限らないことに注意。
        ・略称グループ（5機種）… 出品タイトルで一般的な略称、という想定で置いた枠。
          ただし実測すると**想定どおりだったのは PSP だけ**で、Nintendo DS は略称かどうかが
          無関係（eBay が同一視）、Nintendo 64 は略称のほうが取りこぼした。枠名で決めないこと。
@@ -1679,7 +1683,19 @@ const PLATFORM_EBAY = {
   'Sega Saturn':       'sega saturn',        // 1239 実測済み・変更不要
   'Game Boy Advance':  'game boy advance',   //  903
   'Nintendo Switch':   'nintendo switch',    //  845
-  'Dreamcast':         'dreamcast',          //  671
+  // ★'Dreamcast' は実測済み・変更不要（2026-08-14(8)。'dc' と比較）。
+  //     Segagaga（日本専売）
+  //       dreamcast 23件 … 上位10の対象 **9/10**・無関係1（SEGA TETRIS）/ NTSC-J 22
+  //       dc        26件 … 対象 6/10・無関係4（**ファミ通DC誌・攻略本・VMU メモリカード**・
+  //                        SEGA TETRIS）/ NTSC-J 21
+  //     Sonic Adventure（北米版あり）
+  //       dreamcast 601件 … 対象(SA1) 6/10（SA2 が4件）/ NTSC-J 176・**PAL 55**
+  //       dc        412件 … 対象 **8/10**（SA2 2件）/ NTSC-J 145・PAL **9**
+  //   割れたが 'dreamcast' を維持する。**日本専売タイトルで負ける語は採れない**——
+  //   'dc' は「DC」が雑誌名・型番の一部として頻出するため非ゲーム（誌・攻略本・
+  //   メモリカード）を通し、Segagaga で 9/10→6/10 に落ちた。この道具の目的は
+  //   日本版に届くことなので、日本専売側の劣化を許容できない。
+  'Dreamcast':         'dreamcast',          //  671 実測済み・変更不要
   'GameCube':          'gamecube',           //  308
   'PlayStation 5':     'playstation 5',      //  258
   'WonderSwan':        'wonderswan',         //  223
@@ -1725,8 +1741,61 @@ const PLATFORM_EBAY = {
   //     'nes' は解決策にならない（上の②）。**未検証の候補として `family computer`**
   //     （日本の出品者がよく書く表記）が残っている。測るならここから。
   'Famicom':           'famicom',            // 1252  実測済み・維持確定（北米は NES）
-  'PC Engine':         'pc engine',          //  687  北米は TurboGrafx-16
-  'Mega Drive':        'mega drive',         //  557  北米は Genesis
+  //
+  // ★'PC Engine' は実測済み・変更不要（2026-08-14(8)。'turbografx' / 'pce' と比較）。
+  //     Snatcher（PCE CD 版は日本のみ。北米版は Sega CD で出た）
+  //       pc engine   52件 … 上位10の対象 **10/10**・無関係0 / NTSC-J 29・NTSC-U/C 2
+  //       turbografx  56件 … 対象 7/10・無関係3（Devils Crush・Lords of Thunder＝別ゲーム、
+  //                          TG16 まとめ売り）/ NTSC-J 28・NTSC-U/C **12**
+  //       pce          6件 … 対象 6/6（母集団が薄い）
+  //     Bonk's Adventure（北米 TurboGrafx-16 版あり＝Famicom と同じ轍の検証）
+  //       pc engine   94件 … 上位10の日本版（PC原人）4・北米2 / NTSC-U/C 36
+  //       turbografx  93件 … 日本版 **0**・**上位10件すべて北米 TurboGrafx-16** /
+  //                          NTSC-U/C **48**
+  //       pce      12〜23件 … 日本版4だが母集団が 1/8 に潰れる
+  //   【'turbografx' は 'nes' と同じ轍】北米通称を送ると上位10件が北米版で埋まる。
+  //     (b) の方針どおり和名側を採る。
+  //   【'pce' を採らない理由】母集団が壊滅的に小さいうえ、facet に **任天堂ゲームボーイ 9件**
+  //     が混じった（Bonk の GB 版を拾っている）。2文字トークンの副作用。
+  'PC Engine':         'pc engine',          //  687  実測済み・変更不要（北米は TurboGrafx-16）
+  //
+  // ★'Mega Drive' は実測済み・変更不要（2026-08-14(8)。'md' / 'megadrive' と比較。
+  //   日本専売2本＋他リージョン版が競合する2本、計4タイトルを同一バッチで実測）。
+  //
+  //     タイトル（条件）        クエリ       母集団  上位10の対象/日本版  無関係の中身
+  //     Puyo Puyo 2（日本のみ） mega drive     60      8/10             ぷよぷよ1作目2
+  //                             md             37      8/10             全く別のゲーム2
+  //                             megadrive      72      8/10             攻略本1・1作目1
+  //     Gunstar Heroes          mega drive    101      日本版 **1/10**  PAL 4・北米3・復刻2
+  //     （北米 Genesis 版あり）  md             52      日本版 **8/10**  北米2
+  //                             megadrive     129      日本版 3/10      **PAL 6**・北米1
+  //     Langrisser II           mega drive    385      6/10             英訳リプロ3・攻略本1
+  //     （日本のみ）             md         **15**      7/10             攻略本2・**PS1版1**
+  //                             megadrive     384      6/10             mega drive とほぼ同一
+  //     Alien Soldier           mega drive     24      日本版 4/10      欧州2・リプロ2
+  //     （日本＋欧州）           md             12      日本版 **7/10**  ケースのみ1
+  //                             megadrive      33      日本版 **2/10**  **ブートレグ/リプロ4**
+  //
+  //   【'megadrive'（1語）は却下】**eBay 内部で 'mega drive' と同一視される。**
+  //     facet の数値が一致した（Puyo Puyo 2: NTSC-U/C 1 / NTSC-J 40 / リージョンフリー1 /
+  //     未指定19 が完全一致。Gunstar: NTSC-U/C 15 / NTSC-J 30 / PAL 11 / 未指定59 が完全一致。
+  //     Langrisser II: NTSC-J 296 vs 295 で ±1）。`gameboy`/`game boy` と同じ現象。
+  //     ところが**総件数だけ増える**（60→72・101→129・24→33）＝**増分は facet に載らない
+  //     出品**で、実際 Alien Soldier ではブートレグ/クローン/リプロを4件拾い日本版 2/10 と
+  //     3クエリ中で最悪になった。＝「'mega drive' に未分類のゴミを足したもの」。
+  //
+  //   【'md' を採らなかった理由】'md' は他リージョン版が競合するとき圧倒的に強い
+  //     （Gunstar 1/10→8/10、Alien Soldier 4/10→7/10）。しかし**日本専売タイトルで
+  //     在庫を消す**（Langrisser II が 385→**15件**＝96%消滅）。母集団は4タイトルとも
+  //     一貫して縮んだ（-38% / -49% / -96% / -50%）。
+  //     **在庫消失は取り返しがつかない**（押しても品が出てこないリンクになる）のに対し、
+  //     **リージョン混入は画面に出ているリージョンコードの facet で買い手が気づける**。
+  //     この非対称を理由に 'mega drive' を維持する。★これは価値判断であって、罠#27
+  //     （別物を最短距離で指す害）を重く見るなら 'md' に倒す筋も依然ある。
+  //   ★'md' が拾った無関係品の性質も記録しておく: 別ハードの同名作（Langrisser I & II の
+  //     **PS1版** SLPM-86798）・攻略本（題名に "MD" が入る）・全く別のゲーム2件。
+  //     型番や雑誌名を誤って拾った例は無かった。
+  'Mega Drive':        'mega drive',         //  557  実測済み・変更不要（北米は Genesis）
   'Sega Mark III':     'sega mark iii',      //   27  北米は Master System
 
   // ---- 略称グループ（5機種）----
