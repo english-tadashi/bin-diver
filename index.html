@@ -2074,6 +2074,31 @@ const PLATFORM_EBAY = {
    ★他機種へ広げるときは必ず測り直すこと。値は機種ごとに facet の href を見て写す
      （'NTSC-J (Japan)' 以外のリージョン名を使う機種がある可能性を潰していない）。
 
+   ★【PS2 を追加した（2026-08-15・同日の追試）】facet href を PS2 の SRP で採り直し、
+     PS1 と**同一の文字列**であることを確認した上で適用対象に足した。値は流用してよい。
+       A群（北米で同名発売）… 上位10件の日本版が
+         Devil May Cry ps2  0/10 → 10/10   母集団 2,400+ → 194・NTSC-J比率 14.4% → ほぼ全部
+         MGS3 Snake Eater   1/10 → 10/10   954 → 113・14.3%
+         Silent Hill 2      0/10 →  9/10   773 → 133・30.4%
+       B群（日本専売）… 上位10件は劣化せず、在庫損失は PS1 より軽い
+         Boku no Natsuyasumi 2  43 → 41（-4.7%）
+         Sengoku Basara 2      257 → 205（-20%・落ちたのはリージョンコード未指定の52件）
+         Kenka Bancho           45 →  45（**損失ゼロ**）
+   ★【PS2 で新たに見つかった穴1: 韓国版】Silent Hill 2 の aspect 適用後の8位に
+     `SUPER RARE Korean Silent Hill 2 PS2 Korean Version`（発送元 韓国）が残った。
+     出品者が**リージョンコードを NTSC-J とタグ付けしている**ため aspect では落ちない。
+     PS1 では出なかった型。**NTSC-J＝日本版とは限らない。**
+   ★【PS2 で新たに見つかった穴2: B群でも合本・別作品が出る】PS1 の B群は3本とも 10/10 で
+     無傷だったが、PS2 では Sengoku Basara 2 が 4/10・Kenka Bancho が 4/10 に落ちた。
+     切り分けると**決定要因は機種でもリージョンでもなく「同じハードに同シリーズの他作品が
+     何本あるか」**だった:
+       崩れた… DMC(1/2/3/3SE が全部PS2)・Silent Hill(2/3/4)・Basara(1/2/X/英雄外伝)・
+               喧嘩番長(1/2)
+       無傷… Boku no Natsuyasumi 2 は**1がPS1・3がPS3**で PS2 には2しか無い
+             ＝機種名が期せずして作品の同定にも効いた
+     **つまり「日本専売なら安全」ではない。**シリーズが1機種に集中している作品は、
+     リージョンを解いても上位10件の半分以上が別作品・合本になる。
+
    ★このコメントを編集するときの注意: このファイルはアスタリスク強調と「10/10」形の分数を
      多用する。分数の直前で強調を閉じると、閉じ側のアスタリスクと分数のスラッシュが並んで
      ブロックコメントの終端記号になり、**スクリプト全体が構文エラーになる**
@@ -2332,13 +2357,14 @@ function card(r,idx){
   const pfRaw  = Object.hasOwn(PLATFORM_EBAY, pf) ? PLATFORM_EBAY[pf] : '';
   const pfTerm = (pfRaw && pfRaw !== 'TBD') ? pfRaw : '';
   const kwEn   = en ? enc(pfTerm ? en + ' ' + pfTerm : en) : '';  // English title + console (空なら eBay リンクを出さない)
-  /* eBay のリージョン絞り込み。★2026-08-15: PS1 の行だけ NTSC-J（日本）で絞る。
+  /* eBay のリージョン絞り込み。★2026-08-15: PS1 と PS2 の行を NTSC-J（日本）で絞る。
      根拠と「他機種に広げる前に測り直すこと」はテーブル側のコメント（EBAY_REGION_NTSCJ・1990 付近）。
      ★kwEn が空の行は eBay リンク自体が出ないので、ここも '' に倒して URL 片を作らない。
      ★enc() には通さない。二重エンコードされた生文字列で、再エンコードすると効かなくなる。
      ★pf の直値で判定する。PLATFORM_EBAY のように 35 機種のテーブルにしていないのは、
-       実測したのが PS1 だけだから＝未実測の機種に黙って適用しないため。 */
-  const ebayRegion = (pf === 'PlayStation' && kwEn) ? EBAY_REGION_NTSCJ : '';
+       実測した機種にしか適用しないため＝未実測の機種に黙って広げない。
+       現在の適用対象は2機種（PS1 1,861行・PS2 1,974行）。 */
+  const ebayRegion = ((pf === 'PlayStation' || pf === 'PlayStation 2') && kwEn) ? EBAY_REGION_NTSCJ : '';
   const kwCode = enc(codes[0]||'');  // first product code only — Suruga-ya "by code" comparison link
   // 駿河屋.com(英語・海外発送)の検索URL。英題(en)が空の行は '' にする＝buyBlock 側でリンクごと出ない。
   // ここで en を見るのは、DATA の生の英題を持っているのが card だけだから(buyBlock には k しか渡らない)。
