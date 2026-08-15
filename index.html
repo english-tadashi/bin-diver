@@ -92,9 +92,21 @@ body{
    紫の光が画面全部を覆ってしまう。background-attachment:fixed は iOS Safari で
    効かない（＝まさにその「数千px」の見え方に落ちる）ので、固定した層を1枚敷く。
    ★これは地のグラデーションだけ。スキャンライン／ビネット／床グリッドは入れていない。 */
+/* ★2枚目＝ドットの散らし。要素も z-index も増やさず、この1個の background を
+   2レイヤーにするだけで済ませる（先に書いた方が上）。SVG を data URI で持つので
+   追加のリクエストは無い。タイルは 200px 角・72点、色は既存4色
+   （--logo-gold #f8b820 / --logo-pink #e840a8 / --accent #b337ff / 白）、
+   直径 1〜2px・不透明度 .15〜.4 でランダムに混ぜてある。
+   ★点は端から2px内側に置いてある。r が最大1pxなので、タイルの継ぎ目で点が
+     切れて半円になることがない（切れると 200px 間隔の格子が目に見えてしまう）。
+   ★グラデーション側に no-repeat / cover を明示する。レイヤーが2枚になると
+     repeat・size はレイヤーごとに要るので、書かないとグラデーションまで
+     200px タイルで敷き詰められる。 */
 body::before{
   content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
-  background:radial-gradient(120% 90% at 50% -10%, #1e0d38 0%, #0a0619 45%, #07040f 100%);
+  background:
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='200'%20height='200'%20viewBox='0%200%20200%20200'%3E%3Cg%20fill='%23f8b820'%3E%3Ccircle%20cx='187.6'%20cy='132.2'%20r='.93'%20opacity='.16'/%3E%3Ccircle%20cx='178.2'%20cy='171.2'%20r='.55'%20opacity='.24'/%3E%3Ccircle%20cx='85.2'%20cy='150.8'%20r='.6'%20opacity='.27'/%3E%3Ccircle%20cx='159.3'%20cy='56.1'%20r='.93'%20opacity='.35'/%3E%3Ccircle%20cx='34.1'%20cy='168.3'%20r='.53'%20opacity='.29'/%3E%3Ccircle%20cx='59.9'%20cy='162.3'%20r='.82'%20opacity='.24'/%3E%3Ccircle%20cx='24.5'%20cy='2.1'%20r='.74'%20opacity='.24'/%3E%3Ccircle%20cx='124.9'%20cy='126.3'%20r='.86'%20opacity='.27'/%3E%3Ccircle%20cx='169.8'%20cy='109.9'%20r='.96'%20opacity='.16'/%3E%3Ccircle%20cx='55.5'%20cy='4.9'%20r='.85'%20opacity='.24'/%3E%3Ccircle%20cx='70.8'%20cy='174.3'%20r='.75'%20opacity='.16'/%3E%3Ccircle%20cx='154.7'%20cy='114.6'%20r='.84'%20opacity='.39'/%3E%3Ccircle%20cx='47.3'%20cy='18.4'%20r='.67'%20opacity='.19'/%3E%3Ccircle%20cx='54.7'%20cy='183.7'%20r='.73'%20opacity='.33'/%3E%3Ccircle%20cx='130.4'%20cy='2.8'%20r='.97'%20opacity='.19'/%3E%3C/g%3E%3Cg%20fill='%23e840a8'%3E%3Ccircle%20cx='102.6'%20cy='22'%20r='.72'%20opacity='.16'/%3E%3Ccircle%20cx='173.8'%20cy='88'%20r='.74'%20opacity='.35'/%3E%3Ccircle%20cx='142.5'%20cy='143.1'%20r='.68'%20opacity='.22'/%3E%3Ccircle%20cx='51.1'%20cy='86.7'%20r='.79'%20opacity='.16'/%3E%3Ccircle%20cx='138.8'%20cy='176.6'%20r='.51'%20opacity='.35'/%3E%3Ccircle%20cx='180.6'%20cy='151.7'%20r='.65'%20opacity='.21'/%3E%3Ccircle%20cx='51.1'%20cy='62.4'%20r='.76'%20opacity='.33'/%3E%3Ccircle%20cx='59.2'%20cy='149.3'%20r='.88'%20opacity='.37'/%3E%3Ccircle%20cx='189.5'%20cy='91.6'%20r='.9'%20opacity='.21'/%3E%3Ccircle%20cx='33.7'%20cy='145.1'%20r='.83'%20opacity='.3'/%3E%3Ccircle%20cx='63.8'%20cy='189.9'%20r='.64'%20opacity='.29'/%3E%3Ccircle%20cx='7.1'%20cy='169.3'%20r='.67'%20opacity='.35'/%3E%3Ccircle%20cx='151.3'%20cy='132.8'%20r='.64'%20opacity='.24'/%3E%3Ccircle%20cx='197.6'%20cy='190.9'%20r='.99'%20opacity='.29'/%3E%3Ccircle%20cx='56.5'%20cy='76.8'%20r='1'%20opacity='.39'/%3E%3Ccircle%20cx='101.9'%20cy='132.1'%20r='.87'%20opacity='.26'/%3E%3Ccircle%20cx='126.9'%20cy='54.7'%20r='.77'%20opacity='.29'/%3E%3Ccircle%20cx='106.3'%20cy='177.7'%20r='.78'%20opacity='.19'/%3E%3Ccircle%20cx='28.9'%20cy='64.8'%20r='.88'%20opacity='.31'/%3E%3Ccircle%20cx='119.6'%20cy='31.4'%20r='.55'%20opacity='.16'/%3E%3Ccircle%20cx='40.8'%20cy='107.6'%20r='.67'%20opacity='.25'/%3E%3C/g%3E%3Cg%20fill='%23b337ff'%3E%3Ccircle%20cx='136.1'%20cy='159.4'%20r='.78'%20opacity='.36'/%3E%3Ccircle%20cx='152.2'%20cy='178.8'%20r='.63'%20opacity='.3'/%3E%3Ccircle%20cx='15.9'%20cy='185.4'%20r='.79'%20opacity='.32'/%3E%3Ccircle%20cx='196.6'%20cy='78.3'%20r='.8'%20opacity='.32'/%3E%3Ccircle%20cx='69.2'%20cy='122.5'%20r='.89'%20opacity='.18'/%3E%3Ccircle%20cx='163.3'%20cy='19'%20r='.87'%20opacity='.18'/%3E%3Ccircle%20cx='150.7'%20cy='14.8'%20r='.52'%20opacity='.25'/%3E%3Ccircle%20cx='34'%20cy='189.1'%20r='.93'%20opacity='.26'/%3E%3Ccircle%20cx='172.3'%20cy='196.3'%20r='.82'%20opacity='.37'/%3E%3Ccircle%20cx='93.3'%20cy='63.5'%20r='.5'%20opacity='.4'/%3E%3Ccircle%20cx='7.9'%20cy='59.7'%20r='.75'%20opacity='.16'/%3E%3Ccircle%20cx='6'%20cy='156.3'%20r='.52'%20opacity='.28'/%3E%3Ccircle%20cx='197.5'%20cy='64'%20r='.8'%20opacity='.17'/%3E%3Ccircle%20cx='54.4'%20cy='137.9'%20r='.69'%20opacity='.21'/%3E%3Ccircle%20cx='38.1'%20cy='55.9'%20r='.72'%20opacity='.21'/%3E%3Ccircle%20cx='74.2'%20cy='79.9'%20r='.74'%20opacity='.26'/%3E%3C/g%3E%3Cg%20fill='%23ffffff'%3E%3Ccircle%20cx='19.2'%20cy='149.4'%20r='.64'%20opacity='.17'/%3E%3Ccircle%20cx='184.4'%20cy='64.9'%20r='.73'%20opacity='.23'/%3E%3Ccircle%20cx='95.6'%20cy='6.6'%20r='.89'%20opacity='.33'/%3E%3Ccircle%20cx='86.1'%20cy='87.2'%20r='.96'%20opacity='.39'/%3E%3Ccircle%20cx='107.5'%20cy='195.6'%20r='.96'%20opacity='.23'/%3E%3Ccircle%20cx='184.8'%20cy='116.2'%20r='.88'%20opacity='.28'/%3E%3Ccircle%20cx='86.3'%20cy='26.6'%20r='.64'%20opacity='.22'/%3E%3Ccircle%20cx='170.3'%20cy='59.7'%20r='.67'%20opacity='.33'/%3E%3Ccircle%20cx='16.7'%20cy='40.1'%20r='.56'%20opacity='.39'/%3E%3Ccircle%20cx='83.6'%20cy='46.5'%20r='.53'%20opacity='.23'/%3E%3Ccircle%20cx='170'%20cy='47.5'%20r='.59'%20opacity='.16'/%3E%3Ccircle%20cx='79.3'%20cy='63'%20r='.76'%20opacity='.25'/%3E%3Ccircle%20cx='158'%20cy='75.7'%20r='.66'%20opacity='.37'/%3E%3Ccircle%20cx='160.8'%20cy='40.4'%20r='.9'%20opacity='.4'/%3E%3Ccircle%20cx='108.6'%20cy='67.5'%20r='.92'%20opacity='.32'/%3E%3Ccircle%20cx='130.4'%20cy='92.6'%20r='.51'%20opacity='.37'/%3E%3Ccircle%20cx='186.8'%20cy='2'%20r='.59'%20opacity='.26'/%3E%3Ccircle%20cx='102.4'%20cy='98.2'%20r='.77'%20opacity='.37'/%3E%3Ccircle%20cx='17.4'%20cy='25.1'%20r='.63'%20opacity='.31'/%3E%3Ccircle%20cx='174.5'%20cy='71.5'%20r='.57'%20opacity='.3'/%3E%3C/g%3E%3C/svg%3E") repeat 0 0 / 200px 200px,
+    radial-gradient(120% 90% at 50% -10%, #1e0d38 0%, #0a0619 45%, #07040f 100%) no-repeat 0 0 / cover;
 }
 a{color:inherit}
 .wrap{max-width:760px;margin:0 auto;padding:0 18px}
@@ -1174,6 +1186,16 @@ header .lede .lede-sub{ font-weight:400; }
     <!-- ×字は path 2枚の重ね。1枚目が黄(#ffcd2f)のベタ塗り、2枚目は同じ d を fill:none +
          stroke:#e91235 でなぞる縁取り。塗りと線を別要素に分けてあるので、線幅を変えても
          塗りの形は動かない（stroke は d の外周に対して内外へ半分ずつ載る）。
+         ★元データは assets/icons/kataban-x-icon.svg。他の4枚と違って Illustrator 書き出しで、
+           d は2本とも1文字も変えていない。変えたのは svg 開始タグと、色の載せ方だけ。
+           ・元は <defs><style> の .st0（fill:none + stroke:#e91235 + stroke-miterlimit:10）と
+             .st1（fill:#ffcd2f）に色を持たせ、path 側は class 参照だった。ここでは同じ値を
+             各 path の属性へ直書きに展開して <defs> ごと落としている ―― インライン SVG の
+             <style> は scoped ではなくページ全体に効くので、.st0 / .st1 という Illustrator
+             既定の総称名のまま置くと、無関係な要素まで巻き込む事故になる。
+             （stroke-width だけは .st0 に無い値。下の★で足している。）
+           ・XML 宣言・Generator コメント・id="_レイヤー_2"・version="1.1" も落とす。
+             インラインでは意味を持たず、id は重複の種にもなる。
          ★shape-rendering="crispEdges" は付けない。付けるとアンチエイリアスが切れて
            斜めの縁がジャギる ―― この札は 16px でドット絵に見せる意図の絵なので、
            曲線部（.04 刻みの制御点）を潰さないほうが元絵に近い。
