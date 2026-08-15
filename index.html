@@ -2099,6 +2099,23 @@ const PLATFORM_EBAY = {
      **つまり「日本専売なら安全」ではない。**シリーズが1機種に集中している作品は、
      リージョンを解いても上位10件の半分以上が別作品・合本になる。
 
+   ★【GameCube を追加した（2026-08-15）】facet href は PS1/PS2 と同一（毎回自動照合する）。
+       A群（北米で同名発売・上位10件の日本版）… 素の状態はほぼ0 → aspect で **3本とも 10/10**
+         Pikmin 2                 340 → 133（NTSC-U/C 129・PAL 29 を排除）
+         Luigi's Mansion          544 →  77（NTSC-U/C **332**・PAL 47 を排除）
+         Mario Kart: Double Dash  850 →  87（NTSC-U/C **461**・PAL 103 を排除）
+       B群（日本専売）の損失… Giftpia -12% / Kururin Squash! -25% /
+         Nintendo Puzzle Collection -44%（ただし内訳は NTSC-U/C 14・PAL 11 の他リージョン
+         タグ付けで、**落として正しいもの**を含む。aspect 後の上位10件は 10/10 が目的の商品）
+     ★選定時に外したもの（続き8の基準）: Metroid Prime は接頭辞衝突1、Zelda 系は GC 内に4本で
+       Collector's Edition が合本、Resident Evil 4 は GC 内に5本かつ和名が biohazard4。
+     ★**GameCube はまとめ売りが機種レベルで多い。**束売り慣習のあるシリーズを避けて選んだのに、
+       aspect 後の上位10件で Pikmin 2 は4件・Luigi's Mansion は3件がロット出品だった
+       （中古価格が安く、日本のセラーがまとめて出すため）。タイトル選定では避けきれない。
+     ★適用の可否は「未指定率」で事前に見当がつく。GameCube の日本専売3本は 11%/12%/22%
+       （平均15%）で、適用した PS1/PS2 の 2〜10% に近く、見送った Sega Saturn の 28〜42% から
+       離れていた。**実測前のスクリーニングとして機能する**ことがこの機種で確認できた。
+
    ★このコメントを編集するときの注意: このファイルはアスタリスク強調と「10/10」形の分数を
      多用する。分数の直前で強調を閉じると、閉じ側のアスタリスクと分数のスラッシュが並んで
      ブロックコメントの終端記号になり、**スクリプト全体が構文エラーになる**
@@ -2357,14 +2374,17 @@ function card(r,idx){
   const pfRaw  = Object.hasOwn(PLATFORM_EBAY, pf) ? PLATFORM_EBAY[pf] : '';
   const pfTerm = (pfRaw && pfRaw !== 'TBD') ? pfRaw : '';
   const kwEn   = en ? enc(pfTerm ? en + ' ' + pfTerm : en) : '';  // English title + console (空なら eBay リンクを出さない)
-  /* eBay のリージョン絞り込み。★2026-08-15: PS1 と PS2 の行を NTSC-J（日本）で絞る。
+  /* eBay のリージョン絞り込み。★2026-08-15: PS1 / PS2 / GameCube の行を NTSC-J（日本）で絞る。
      根拠と「他機種に広げる前に測り直すこと」はテーブル側のコメント（EBAY_REGION_NTSCJ・1990 付近）。
      ★kwEn が空の行は eBay リンク自体が出ないので、ここも '' に倒して URL 片を作らない。
      ★enc() には通さない。二重エンコードされた生文字列で、再エンコードすると効かなくなる。
      ★pf の直値で判定する。PLATFORM_EBAY のように 35 機種のテーブルにしていないのは、
        実測した機種にしか適用しないため＝未実測の機種に黙って広げない。
-       現在の適用対象は2機種（PS1 1,861行・PS2 1,974行）。 */
-  const ebayRegion = ((pf === 'PlayStation' || pf === 'PlayStation 2') && kwEn) ? EBAY_REGION_NTSCJ : '';
+       現在の適用対象は3機種（PS1 1,861行・PS2 1,974行・GameCube 225行）。
+     ★実測して**見送った**機種: PlayStation 3（リージョンフリー機・下記コメント参照）、
+       Sega Saturn（日本専売タイトルの損失が -33〜-39% と大きい）。 */
+  const ebayRegion = ((pf === 'PlayStation' || pf === 'PlayStation 2' || pf === 'GameCube') && kwEn)
+    ? EBAY_REGION_NTSCJ : '';
   const kwCode = enc(codes[0]||'');  // first product code only — Suruga-ya "by code" comparison link
   // 駿河屋.com(英語・海外発送)の検索URL。英題(en)が空の行は '' にする＝buyBlock 側でリンクごと出ない。
   // ここで en を見るのは、DATA の生の英題を持っているのが card だけだから(buyBlock には k しか渡らない)。
