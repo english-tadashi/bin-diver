@@ -2373,7 +2373,53 @@ function card(r,idx){
        ガードを入れるなら en に \b<語>\b が在るとき pfTerm を落とす形になるが、不要と判断した。 */
   const pfRaw  = Object.hasOwn(PLATFORM_EBAY, pf) ? PLATFORM_EBAY[pf] : '';
   const pfTerm = (pfRaw && pfRaw !== 'TBD') ? pfRaw : '';
-  const kwEn   = en ? enc(pfTerm ? en + ' ' + pfTerm : en) : '';  // English title + console (空なら eBay リンクを出さない)
+  /* ★2026-08-16: eBay に投げる英題を accent() で畳む（`Dōkyūsei`→`Dokyusei`）。
+     ★掛けるのは kwEn だけ。カード見出し・検索索引(HAY)・sgComUrl は en のまま。
+       駿河屋.com の英語検索で畳み込みが要るかは**測っていない**ので持ち込まない。
+     ★accent() は 1309 行の既存関数をそのまま使う（HAY の r0 に既に掛けているもの）。
+       NFD → U+0300-036F 除去 → NFC なので、**結合ダイアクリティカルしか落ちない**。
+       波ダッシュ `～` / 全角 `＆` / `☆` / `Ψ` / ローマ数字 `Ⅶ` には触れない
+       ＝続き13の6節で「白紙6件」の原因になった記号群は**この変更の対象外**。
+     ★影響範囲（2026-08-16・DATA 全 37,850行の全数確認）: eBayリンクが出る 13,090行のうち
+       非ASCII英題は 702行。**_nkw が変わるのは 460行**で、残 242行は1文字も変わらない。
+       ASCII だけの行で変わったものは **0行**（＝この変更が触れないことの全数確認）。
+       畳まれた文字は15種で全部が結合ダイアクリティカル
+       （ō 354 / ū 173 / é 70 / Ō 27 / ä 9 / ë 7 / ö 5 ほか）。
+       触れなかった 242行 に残るのは ～113 / ☆31 / –30 / 〜30 / ×20 / Ⅱ17 / ＆13 など。
+       ★8行は「畳んだうえで記号が残る」（例 `Masō Kishin 3 – Pride of Justice` の en dash、
+         `NOëL ～La neige～` の波ダッシュ）。ダイアクリティカルだけ落ちて記号は残る＝意図どおり。
+     ★理由(2026-08-16 実測・素のURL・profile7・対照6本通過。accent12.mjs / accent12b.mjs /
+       accent12c.mjs、生データ accent12*.json):
+       ・**効いているのは「ō→o」ではなく「eBay の書き換えパスを通らせない」こと。**
+         マクロンを送ると 12本中10本で eBay がクエリを書き換える（heading が小文字化して返る）。
+         書き換えの中身が一貫していない ―― `ō→o` と `ū→uu` が同一クエリ内で混ざり
+         (`jikkyo powerful pro yakyuu 11`)、`ō` が片方だけ残り
+         (`kurohyō: ryu ga gotoku shinsho`)、最悪は**別語に化ける**
+         (`Astronōka`→`astronomy`／`Astronouka`→`astronaut`)。
+         ASCII を送ると 12本中11本で書き換えが起きない（例外は `!` を含む Kenzan!）。
+       ・12本の合計: facet が出ない行 6→2、リージョンfacet計 292→389、NTSC-J 102→177。
+       ・**件数の増減で判断してはいけない。**`Jikkyō…Yakyū 11` は 8件→5件と減るが、
+         上位が「メモリーカードのシール」から実物の PS2 ソフトに入れ替わる。
+         `Ōkamiden` の 98→78 は facet が完全同一で、消えた20件はリージョン欄の無いグッズ。
+     ★`ō→ou` 置換（続き13の7節が推した案）は**採らない**。同じ12本で直接対決させた結果:
+         facet計 264 / NTSC-J 171 で accent(389 / 177) に負ける。
+         長音の由来を区別できないのが致命的で、`Ōkamiden`(大神=おおかみ)→`Oukamiden` は
+         facet 85→**0**。`Butouden` は仮名として正しい綴りなのに facet 80→16 になる
+         ―― 西側で同名発売された行が必要としているのは仮名の正しさではなく
+         **ASCII 畳み込み形そのもの**（西側の正式題名が `Okamiden` / `Butoden`）。
+       row[9](title_romaji) から正しい重ね方を引く案も測った（`Ookamiden` と当てられる）。
+       ou よりは良い（facet計 330 / NTSC-J 217）が、**accent には勝てない**
+       ―― B群では勝つ(224→299)が A群で大敗する(165→31)ため。
+     ★直らないものは直らない。`Cyber Knight II: Chikyū Teikoku no Yabō`（セラーは
+       `Chikyuu…Yabou`）と `Jikū Tantei DD: Maboroshi no Rōrerai`（セラーは全員
+       **`Lorelei`**）は accent でも0件のまま。後者はマクロンの問題ですらなく
+       続き13の「流通名の乖離」クラスで、どの綴り方式でも解けない。
+     ★行ごとに accent と row[9] を測り分ければ NTSC-J 231 まで伸びる（12本実測）が、
+       それは「測った結果を持たせる場所」が要る＝build_master.py の名指し表の仕事になる。
+       ここは**測らずに全行へ一律に掛けられる範囲**だけを入れる。
+     ★空判定は `en` のまま（accent(en) ではない）。既存の「キーが空ならリンクを出さない」
+       と1文字も変えない ―― 下の ebayRegion もこの kwEn を見ている。 */
+  const kwEn   = en ? enc(pfTerm ? accent(en) + ' ' + pfTerm : accent(en)) : '';  // English title + console (空なら eBay リンクを出さない)
   /* eBay のリージョン絞り込み。★2026-08-15: PS1 / PS2 / GameCube の行を NTSC-J（日本）で絞る。
      根拠と「他機種に広げる前に測り直すこと」はテーブル側のコメント（EBAY_REGION_NTSCJ・1990 付近）。
      ★kwEn が空の行は eBay リンク自体が出ないので、ここも '' に倒して URL 片を作らない。
