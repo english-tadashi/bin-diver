@@ -589,6 +589,35 @@ PRODUCT_CODE_TYPO = {
     "SVHC-NO": "SHVC-NO",                    # ナムコットオープン
 }
 
+# ---- MADB 側の題名の綴り誤りを名指しで直す（2026-08-16・罠#178 の系統） ----
+# ★PRODUCT_CODE_TYPO と同じ「MADB の値そのものが誤っているので rows(=master_final.csv)
+#   ごと直す」系統である。下の TITLE_JA_KANA 系や束1・束2（data_line.js だけに効かせる表）とは
+#   **当てる場所が違う** ―― 混ぜないこと（この区別は下の 678行あたりに書いてあるのと同じ）。
+#
+# ★採用基準はこれ1つだけ: **同じレコードの @ja-latn が正しい読みを持っていること。**
+#   MADB 内部が矛盾している行だけを扱う。「正しい題名を知っている」という外部知識を
+#   持ち込まないので、この表は機械的に誤りと言い切れる範囲に留まる。
+#     M723901  schema:name "…intelligent gube" / @ja-latn "…intelijiento kiyubu" ＝ Qube
+#     M724027  schema:name "GHOKOBO STALLION"  / @ja-latn "Chokobo sutarion"     ＝ CHOKOBO
+#   ★逆に beatmania の "2DX"（M722812 ほか15行）は @ja-latn も "2 derakkusu" で
+#     **MADB 内部が一貫している**ので、この表には入れない。あれは誤植ではなく表記の選択であり、
+#     直すなら eBay 実測という別の根拠が要る。混ぜると採用基準が溶ける。
+#
+# ★当てる先は schema:name と @ja-hrkt の**両方**。MADB は同じ誤りを両フィールドに持っており、
+#   title_ja(row[1]) だけ直すと title_romaji(row[9]＝HAY検索用) に誤植が残る。
+#   rdfs:label にも同じ誤りがあるが、このスクリプトは読んでいないので触らない。
+#
+# ★キーは madb_id。PRODUCT_CODE_TYPO は「誤った値」をキーにしているが、型番と違って
+#   題名は再販・廉価版で同じ文字列が複数レコードに出るため、値キーだと将来の別レコードにも
+#   無条件で当たってしまう。その代わり取りこぼす側は main() の全数走査
+#   （表に無い行に同じ綴りが出たら印字）で顕在化させる ―― 名指しの表を置くときは
+#   「効いていない」と「知らないうちに増えた」の両方を黙らせない（罠#16）。
+TITLE_TYPO = {
+    # madb_id: [(誤, 正), ...]
+    "M723901": [("gube", "Qube")],        # I.Q REMIX+ -intelligent gube-
+    "M724027": [("GHOKOBO", "CHOKOBO")],  # GHOKOBO STALLION（正: チョコボスタリオン）
+}
+
 # ---- title_ja_kana の誤連結を名指しで直す（2026-08-05・罠#114 の系統） ----
 # `data/wikidata_ja.json` には、同じ madb_id に複数の日本語ラベルがぶら下がったとき、
 # それを捨てずに `#` で連結した値が混ざっている（4通り・17行）。
@@ -1179,6 +1208,13 @@ PUBLISHER_EN = {
 #   全角ローマ数字 Ⅲ → 半角 III（既存の主流）
 #   分かち書き CHAMPION SHIP → Championship
 # 表示の一貫性のための正規化であり、検索の当たり方には影響しない（fold() が小文字化する）。
+#
+# ★空文字列は「英題なし」の名指しである（2026-08-16 に追加）。値を入れる表であると同時に、
+#   Wikidata の値を**止める**表でもある。だから引き方は `TITLE_EN.get() or ...` ではなく
+#   **キーの有無**（`madb_id in TITLE_EN`）―― 空文字列は falsy なので、`or` で繋ぐと
+#   止めたはずの Wikidata 値が復活する。引く側（main() 内）にも同じ注意を書いてある。
+#   「英題は無い」も1件ずつ目視で確かめた判断であり、表に入れてよい値である
+#   （誤った英題を貼るより、無いほうがまし ―― この判断はファイル冒頭の docstring と同じ）。
 TITLE_EN = {
     "M877878": "The Game of Life",                    # RPG人生ゲーム
     "M878000": "Aces Iron Eagle III",                  # エイセス・アイアンイーグル3
@@ -1186,7 +1222,113 @@ TITLE_EN = {
     "M878034": "A Week of Garfield",                   # ガーフィールドの一週間
     "M878152": "Star Wars: The Empire Strikes Back",   # スター・ウォーズ 帝国の逆襲
     "M878549": "The New Type",                         # 新人類
+    # ★英題なしを名指しした唯一の行（出所が違うので、上の6件とはコメントで区別する）。
+    #   ドラゴンバスターII 闇の封印 / ファミコン / 1989-04-27 / ナムコ / gtin 4907892000568。
+    #   MADB(metadata301.ttl) は全項目が整合していて **英題を持っていない**。誤っているのは
+    #   Wikidata 側の {"madb": "M727424", "enTitle": "Network Battle Quiz Answer×Answer"} ――
+    #   別作品（アンサー×アンサー）の英題が P7886 でこのM番号に貼られている。
+    #   load_english_titles() は「同じM番号に**複数**の英題」しか捨てないので、1件しか
+    #   ぶら下がっていないこの誤結合はすり抜ける。自動検出は不可能（docstring の
+    #   Shining Wisdom / シーバス・フィッシングと同じ形の2例目）なので、名指しで止める。
+    #   ★英題を「作らない」。DRAGON BUSTER 2 は箱の印字だが、それを英題として入れるのは
+    #     外から値を持ち込むこと（罠#141）になる。ここでは Wikidata を止めるだけに留める。
+    #     title_ja に日本語（闇の封印）が残るので束1の原文複製も効かず、row[0] は空になる。
+    # ★M727424 は WIKIDATA_MISLINK へ移した（2026-08-17）。この表は「値を入れる」用途に戻った。
 }
+
+
+# ---- Wikidata の P7886 誤結合を名指しで止める（2026-08-17・罠#185/#187） ----
+# `wikidata_en.json` と `wikidata_ja.json` は**同じ P7886 文から同じ項目**の
+# en / ja ラベルを引いている。よって誤った P7886 は1本で複数列を同時に汚す:
+#     title_en      (row[0])  ← wikidata_en.json
+#     title_ja_kana (row[8])  ← wikidata_ja.json
+#     kana_row      (row[11]) ← @ja-hrkt がラテンのとき wikidata_ja.json に降りる
+# ★値の第1要素は「Wikidata がこの行に貼っている誤った英題」＝原因側の情報である。
+#   結果（空になる／束1で原文複製が入る）は書かない。swap_data.py の
+#   --allow-mislink がこの第1要素を使って「予測した変化」を組み立てる。
+# ★この表は「原因」を名指しする。結果（正しい初字など）は書かない。
+#   kana_row は値を与えず、Wikidata に降りる経路を塞いで @ja-latn へ落とす
+#   （KANA_SPLIT_FIX と同じ思想＝上流が直ったら自動で追随する。値を焼き付けない）。
+# ★TITLE_KANA_OVERRIDE(58件) とは種別が違うので混ぜない。あちらは
+#   「値そのものは正しいカタログ表記だが余分な語を抱えている」行の検索最適化。
+#   こちらは「値そのものが別作品」＝汚染。
+# ★引くのは `.get() or` ではなく `in`（キーの有無）。TITLE_EN と同じ作法。
+# 選定: 機種QID・年代乖離・兄弟行の3軸で洗い、1件ずつ目視で確定したもののみ。
+#   保留 M723490（LOVE★パラ → Superstar Dance Club）は海外版の可能性が残るため含めない。
+WIKIDATA_MISLINK = {
+    # 値 = (Wikidata が貼っている誤った英題, その行が何者か)
+    # --- ① 別作品が貼られている（9件）---
+    "M726395": ("Monster Hunter Portable 3rd",          "FINAL STRETCH (SFC 1993)"),
+    "M747202": ("Project Justice",                      "キャメルトライ (SFC 1992)"),
+    "M766404": ("King of the Monsters",                 "野獣刑事 東京同時多発テロを鎮圧せよ! (DS 2008)"),
+    "M722953": ("Marvelous: Mōhitotsu no Takarajima",   "ガラクタ名作劇場 ラクガキ王国 (PS2 2002)"),
+    "M723110": ("Super Mahjong Taikai",                 "A VISUAL MIX (PS2 2001)"),
+    "M752510": ("Gal*Gun: Double Peace",                "ドラゴンナイト 4 (PC-FX 1997)"),
+    "M747540": ("R-Type and R-Type II",                 "クラッシュ・バンディクー (PS1 2001)"),
+    "M722651": ("Dragon Age: Inquisition",              "ROCKMAN X6 (PS1 2002)"),
+    "M727545": ("Double Dragon Advance",                "双截龍 (FC 1988)"),
+    # ★2026-08-17 追加。Double Dragon Advance の P7886 が指す MADB ID は
+    #   これで7件すべてが表に載った。ただし他の項目に同型が残る可能性は消えていない。
+    #   3件は軸A の PF_SKIP(3DS/Wii)にいたため初回の走査で漏れた（罠#190）。
+    #   3件とも title_ja は「ダブルドラゴン」（アドバンス無し）・発売元アークシステムワークスで、
+    #   Double Dragon Advance（2003 GBA / アトラス）とは機種・年・発売元のどれも噛み合わない。
+    "M751018": ("Double Dragon Advance",                "ダブルドラゴン (3DS 2011・VC/アークシステムワークス)"),
+    "M751019": ("Double Dragon Advance",                "ダブルドラゴン (3DS 2013・VC/アークシステムワークス)"),
+    "M751022": ("Double Dragon Advance",                "ダブルドラゴン (Wii 2009・VC/アークシステムワークス)"),
+    # --- ★続き22で TITLE_EN 側に置いていた1件をここへ移した（2026-08-17）---
+    #     title_ja_kana は正しく(ドラゴンバスターII)、kana_row も無事なので
+    #     この行で止まるのは title_en だけ。適用点は title_en / title_ja_kana / kana_row の3箇所だが、
+    #     この行が通るのは title_en の1箇所のみ。
+    #     ★第1要素は wikidata_en.json の値である。この行の master 上の title_en は
+    #       続き22 の処置で既に空なので、before のビルドからは取れない（唯一の例外）。
+    "M727424": ("Network Battle Quiz Answer×Answer",    "DRAGON BUSTER 2 闇の封印 (FC 1989)"),
+    # --- 2026-08-17（続き）軸D で見つけた6件 ---
+    #   軸D = title_ja_kana(Wikidata の日本語ラベル) と title_ja(MADB) の文字集合の重なり。
+    #   ★軸A(機種QID)・軸C(年代乖離)より当たりが濃い（73件中23件が別作品）。
+    #   ★ただし「V が付いただけ」は文字集合が近いので捕まらない（M749716 は軸Cで拾った）。
+    #   6件とも汚染は title_en と title_ja_kana の2列のみ。kana_row は @ja-hrkt が
+    #   仮名なので第1の源で埋まり無傷。
+    "M745304": ("Shinobi Legions",                      "イース -ナピシュテムの匣- (PSP 2006)"),
+    "M756576": ("Pokémon Art Academy",                  "ボンバーマンランド Wii (Wii 2007)"),
+    "M749716": ("Super Robot Wars V",                   "スーパーロボット大戦 (Vita 2014)"),
+    "M723449": ("MeiKing",                              "フランベルジュの精霊 (PS1 2001)"),
+    "M727937": ("Ruriiro no Yuki",                      "ふりむけば隣に (PS1 2001)"),
+    "M725958": ("Flash Hiders",                         "バトルタイクーン (SFC 1995)"),
+    # --- 2026-08-17（続き）軸D の日英領域から1件 ---
+    #   MADB 側の読み4つ（@ja-hrkt / kana_row / title_romaji / @ja-latn）が
+    #   すべて「アドベンチャーアイランド」で一致し、title_ja_kana だけが外れている。
+    #   Wonder Boy III の正しい行は M734486（ゲームギア 1992）として別に存在する。
+    #   wd pfids が3機種なのも、リンク先が複数機種展開のウエストン作品である証拠。
+    "M727045": ("Wonder Boy III: The Dragon's Trap",    "ADVENTURE ISLAND (PCエンジン 1991・ハドソン)"),
+    # --- ② 同一シリーズの別機種版の題名（2件）---
+    "M727218": ("Double Dragon Advance",                "ダブルドラゴン (GB 1990・GBA版の題)"),
+    "M727645": ("Morita Shogi 64",                      "森田将棋 (FC 1987・N64版の題)"),
+    # ★アーケード版の移植であって Advance（GBA用リメイク）ではない。①の3件とは性質が違うので
+    #   こちらに置く。title_ja が「アーケードアーカイブス」で始まるため kana_row は「ア」で、
+    #   ①の3件（「タ」）とも挙動が違う。
+    "M744308": ("Double Dragon Advance",                "アーケードアーカイブス ダブルドラゴン (PS4 2014・アーケード版の移植)"),
+}
+
+# ★以下は誤結合だが表に足さないと決めた（2026-08-17）。
+#   「気づかなかった」と「気づいたが止めないと決めた」を区別するための記録。
+#   ・M721291 ニンテンドークラシックミニ SUPER FAMICOM ← ハード項目
+#       → platform_ja が空で KEEP_PLATFORMS に落ち、DATA に出ない。表示に影響なし。
+#   ・M751826 テディ ボーイ ブルース ← 人物項目「石野陽子」
+#   ・M726021 SPACE GRIFFON VF-9 ← kana だけ HAMLET に化けている
+#   ・M727848 4人打ち麻雀 ← kana だけ ジャン狂
+#       → この3件は title_en が正しいので、止めると英題まで巻き添えになる。
+#         kana だけを止めるには表を「madb_id → 止める列」の形に作り替える必要がある。
+#   ・関連作・海外版題（M757233 / M726880 / M761914 等）は pfid も year も一致し、
+#     誤リンクではない。触らない。
+
+# ★WIKIDATA_MISLINK に載っているが title_ja_kana は正しい行。
+#   P7886 は正しい項目と誤った項目の両方がこの madb_id を指しており、
+#   en 側だけが誤った項目から来ている（列ごとに汚染の有無が違う）。
+#   ノート 2026-08-17「12件が一律ではない」の実例。
+#   ★この集合が育ったら、表を madb_id → 止める列の集合、に作り替えることを検討する。
+#   M727424 のカナ題は「ドラゴンバスターII」。駿河屋・ブックオフの棚検索に使える正規形なので、
+#   ここを空にすると正しい検索語を捨てることになる。
+MISLINK_KANA_KEEP = {"M727424"}
 
 
 # 日本語の法人格
@@ -1328,6 +1470,51 @@ def canonical_case(names):
     return {n: best[n.lower()] for n in tally}
 
 
+def apply_title_typo(madb_id, name, hrkt, stats):
+    """TITLE_TYPO を schema:name と @ja-hrkt の両方へ当てる。(name, hrkt) を返す。
+
+    当てるのは表の綴りが**実際に在るとき**だけ。上流(MADB)が直せばこの行は自動的に
+    効かなくなり、そのことを印字する（KANA_SPLIT_FIX と同じ思想 ―― 直った値を
+    古い判断で焼き付け続けない）。置換は素の部分文字列置換で、大文字小文字は区別する。
+    """
+    for wrong, right in TITLE_TYPO.get(madb_id, []):
+        if wrong in name or wrong in hrkt:
+            name = name.replace(wrong, right)
+            hrkt = hrkt.replace(wrong, right)
+            stats[f"TITLE_TYPO<-{madb_id} {wrong}→{right}"] += 1
+        else:
+            print(f"  ★ TITLE_TYPO: {madb_id} に {wrong!r} が無い"
+                  f"（MADB が直した? M番号が変わった?）。当てていない")
+    return name, hrkt
+
+
+def report_untabled_title_typos(packages):
+    """TITLE_TYPO に載っていないレコードに同じ綴りが出ていないかを全数で見る。
+
+    キーを madb_id にした代償（値キーなら自動で当たる別レコードを取りこぼす）を、
+    黙って取りこぼさずに印字で顕在化させるためのもの。直しはしない ―― 見つかったら
+    人が @ja-latn を確かめて表に足すかどうかを決める。
+    """
+    re_id = re.compile(r'schema:identifier "([^"]*)"')
+    wrongs = sorted({w for pairs in TITLE_TYPO.values() for w, _ in pairs})
+    found = []
+    for b in packages:
+        m = re_id.search(b)
+        mid = m.group(1) if m else ""
+        if mid in TITLE_TYPO:
+            continue
+        name = first(b, "schema:name")
+        ym = re.search(r'"([^"]*)"@ja-hrkt', b)
+        hrkt = ym.group(1) if ym else ""
+        for w in wrongs:
+            if w in name or w in hrkt:
+                found.append((mid, w, name))
+    for mid, w, name in found:
+        print(f"  ★ TITLE_TYPO: 表に無い {mid} が {w!r} を持つ（{name!r}）。"
+              f"@ja-latn を確かめて表に足すか判断すること")
+    return len(found)
+
+
 def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
     en_titles = load_english_titles(wd_path) if wd_path else {}
     ja_titles = load_ja_titles(ja_path)
@@ -1343,6 +1530,21 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
     rows = []
     stats = Counter()
     unknown_platforms = Counter()
+    # TITLE_EN(手書き)の実効。値を入れた行と、空で Wikidata を止めた行を別々に控える。
+    # 「入れたつもりで効いていない」を黙らせないため、下で必ず印字する（罠#16 と同じ思想）。
+    # ★空を名指しした行は、効いても**画面に何も現れない**（英題が消えるだけ）。
+    #   だからこそ、止めた値を控えて印字する ―― 止まったことを確かめる手段が他に無い。
+    _title_en_written = set()      # 値を入れた行
+    _title_en_blocked = []         # 空を名指しした行 (madb_id, 止めた Wikidata の値)
+    # WIKIDATA_MISLINK の title_en 側の到達確認（同じく罠#16）。止めた値も控える。
+    _mislink_en_seen = set()       # 誤結合として title_en を空にした行
+    _mislink_en_blocked = []       # (madb_id, 止めた Wikidata の値)
+    _mislink_kana_seen = set()     # 誤結合として title_ja_kana を空にした行（実際に値を捨てた行）
+    _mislink_kana_blocked = []     # (madb_id, 止めた Wikidata のカナ題)
+    _mislink_kana_already_empty = []   # 元から空＝止めるものが無かった行
+    _mislink_kana_kept = []            # (madb_id, 残したカナ題) MISLINK_KANA_KEEP による意図的除外
+    _mislink_row_skipped = set()       # kana_row で Wikidata に降りる経路を塞いだ行
+    _mislink_row_result = {}           # madb_id -> 塞いだ結果の kana_row（空なら棚から消えた）
 
     # 取り込み対象の機種。新しい判断を足さない ―― 既にこのファイルが持っている
     # 集合を組み合わせるだけ。だから配信サービス(ゲームアーカイブス・PS Now)・
@@ -1398,25 +1600,44 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
         year = (re.search(r"\d{4}", year).group(0)) if re.search(r"\d{4}", year) else ""
 
         madb_id = first(b, "schema:identifier")
+        # ★MADB の綴り誤りの名指し修正は、ここで schema:name と @ja-hrkt の両方に当てる。
+        #   romaji() と gojuon_initial() に渡る**前**に通すこと（後段は全部この2値から派生する）。
+        title_ja = first(b, "schema:name")
+        ym = re.search(r'"([^"]*)"@ja-hrkt', b)
+        hrkt = ym.group(1) if ym else ""
+        title_ja, hrkt = apply_title_typo(madb_id, title_ja, hrkt, stats)
         # ローマ字: schema:name の @ja-hrkt 読み(カナ)から決定的に生成。
         # 読みが無い行(全体の約3%)は空。漢字から読みを推測しない(誤読を避ける)。
-        ym = re.search(r'"([^"]*)"@ja-hrkt', b)
-        title_romaji = romaji(ym.group(1)) if ym else ""
+        title_romaji = romaji(hrkt) if ym else ""
         # 五十音初字: 同じ @ja-hrkt 生カナの先頭1文字から。棚案内(五十音)用。空の行もある。
         # 五十音初字: まず @ja-hrkt 読み(97%、決定的)。空なら Wikidataカタカナ題(41%)で補う。
         # ラテンタイトルは @ja-hrkt もラテンのまま=初字が取れないため、ここで CHRONO CROSS→ク 等を救う。
         # どちらも無ければ空(罠8: 憶測変換はしない。ラテンのまま置く方が、誤った行より良い)。
         # ★上書きしない。空のときだけ次の源に降りる（順序＝確からしい順）。
-        kana_row = gojuon_initial(ym.group(1)) if ym else ""
-        if not kana_row:
+        kana_row = gojuon_initial(hrkt) if ym else ""
+        if not kana_row and madb_id not in WIKIDATA_MISLINK:
             kana_row = gojuon_initial(ja_titles.get(madb_id, ""))
+        elif not kana_row:
+            # ★誤結合行。Wikidata のカナ題に降りると別作品の初字を拾う（罠#187）。
+            #   値は与えず、第3の源（@ja-latn）に落とす。
+            #   ★正しい初字を表に写経しない ―― それは gojuon_initial_from_latn() の出力であって、
+            #     関数が直ったとき写経側だけ古いまま残る（KANA_SPLIT_FIX と同じ思想）。
+            _mislink_row_skipped.add(madb_id)
         if not kana_row:
             # 第3の源: @ja-latn（読みのラテン転写）。素通しの行は空のまま返る。★2026-07-24
             yl = re.search(r'"([^"]*)"@ja-latn', b)
             if yl:
-                kana_row = gojuon_initial_from_latn(yl.group(1), first(b, "schema:name"))
+                # ★素通しガードには**訂正後の**題名を渡す。ガードの意図は
+                #   「@ja-latn が題名をそのまま写しているだけか」の判定なので、
+                #   比較対象は MADB の生値ではなく訂正後の題名が正しい。
+                #   ただし TITLE_TYPO の2行はここへ到達しない（到達順は下の検証済み）。
+                kana_row = gojuon_initial_from_latn(yl.group(1), title_ja)
                 if kana_row:
                     stats["五十音初字<-@ja-latn"] += 1
+        # 塞いだ行が最終的に何になったかを控える。空のまま残った行は棚から消えるので、
+        # 必ず見えるようにする（値を与えない設計の代償はここでしか観測できない）。
+        if madb_id in _mislink_row_skipped:
+            _mislink_row_result[madb_id] = kana_row
         # JAN: schema:gtin を13桁に正規化。カメラ(バーコード)の照合用。空の行もある。
         jan = normalize_jan(values(b, "schema:gtin"))
         # 配信版フラグ: ma:carrierType が「オンライン資料」なら1（バーチャルコンソール等）。
@@ -1427,12 +1648,46 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
         # additionalGenre("オンラインパッケージ") では 174件を取りこぼす（実測 2026-07-21:
         # A∪B∪C = |B| = 10,118、A∖B = C∖B = 0、B∖A = 171、B∖C = 3。carrierType が上位集合）。
         online = "1" if "オンライン資料" in values(b, "ma:carrierType") else ""
+        # 英題: 手書きが最優先。english_publisher() と同じ「手書き→Wikidata→空」の順序。
+        # ★見るのは**キーの有無**であって値の真偽ではない。TITLE_EN の空文字列は
+        #   「英題なし」の名指し（＝ Wikidata の誤結合を止める指示）なので、
+        #   `TITLE_EN.get(madb_id) or en_titles.get(...)` と書くと空が falsy に落ちて
+        #   止めたはずの値が復活する。表の側にも同じ注意を書いてある。
+        if madb_id in TITLE_EN:
+            title_en_val = TITLE_EN[madb_id]
+            if title_en_val:
+                _title_en_written.add(madb_id)
+            else:                                  # 空を名指しした行。何を止めたかを控える
+                _title_en_blocked.append((madb_id, en_titles.get(madb_id, "")))
+        elif madb_id in WIKIDATA_MISLINK:
+            # ★誤結合。Wikidata を引かずに空にする（罠#185）。
+            #   値の真偽ではなくキーの有無で判定すること（空文字列は falsy）。
+            title_en_val = ""
+            _mislink_en_seen.add(madb_id)
+            _mislink_en_blocked.append((madb_id, en_titles.get(madb_id, "")))
+        else:
+            title_en_val = en_titles.get(madb_id, "")
+        # カタログ店用のカナ題。誤結合行は Wikidata を引かずに空にする（罠#185）。
+        # ★ここは rows 構築時なので master_final.csv にも効く。
+        #   TITLE_KANA_OVERRIDE(58件・data_line.js のみ) とは別物で、あちらには触れていない。
+        #   あちらは「値は正しいが検索が噛み合わない」行の最適化、こちらは「値が別作品」＝汚染。
+        if madb_id in WIKIDATA_MISLINK and madb_id not in MISLINK_KANA_KEEP:
+            _src = ja_titles.get(madb_id, "")
+            kana_val = ""
+            if _src:                                   # 上流がまだ誤ったカナ題を持っている
+                _mislink_kana_seen.add(madb_id)
+                _mislink_kana_blocked.append((madb_id, _src))
+            else:                                      # 既に空＝表から外す判断が要る
+                _mislink_kana_already_empty.append(madb_id)
+        else:
+            kana_val = ja_titles.get(madb_id, "")
+            if madb_id in MISLINK_KANA_KEEP:           # 意図して残した行（異常ではない）
+                _mislink_kana_kept.append((madb_id, kana_val))
         rows.append(
             {
                 "madb_id": madb_id,
-                # 手書きが最優先。english_publisher() と同じ「手書き→Wikidata→空」の順序。
-                "title_en": TITLE_EN.get(madb_id) or en_titles.get(madb_id, ""),
-                "title_ja": first(b, "schema:name"),
+                "title_en": title_en_val,
+                "title_ja": title_ja,
                 "platform_ja": platform_ja,
                 "platform_en": platform_en,
                 "product_code": ";".join(PRODUCT_CODE_TYPO.get(c, c) for c in codes),
@@ -1441,7 +1696,7 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
                 "publisher_en": publisher_en,
                 "buyee_kw": buyee_keyword(platform_ja),
                 # カタログ店用の日本語正規タイトル。空なら UI は title_ja に戻る。
-                "title_ja_kana": ja_titles.get(madb_id, ""),
+                "title_ja_kana": kana_val,
                 # 読み(@ja-hrkt)由来のローマ字。主に検索用(HAY)。空の行もある。
                 "title_romaji": title_romaji,
                 # JAN(13桁, gtin由来)。カメラ用。row[10]。
@@ -1452,6 +1707,13 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
                 "online": online,
             }
         )
+
+    # 名指し修正の到達確認（罠#16）。当たった件数は stats に出る。ここでは
+    # 「表に無いのに同じ綴りを持つレコード」を全数で洗って印字する。
+    untabled = report_untabled_title_typos(packages)
+    applied = sum(v for k, v in stats.items() if k.startswith("TITLE_TYPO<-"))
+    print(f"題名の綴り誤り修正     : {applied} 件適用 / 表 "
+          f"{sum(len(v) for v in TITLE_TYPO.values())} 件・表外の同綴り {untabled} 件")
 
     # 英語名の綴りを多数派に統一してから書き出す
     case_map = canonical_case([p for r in rows for p in r["publisher_en"].split(";") if p])
@@ -1741,6 +2003,62 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
     print(f"名指し除外(罠#16)      : {len(_excluded)}/{len(EXCLUDE_MADB_ID)} 行")
     for mid in _excluded:
         print(f"  - {mid}  {EXCLUDE_MADB_ID[mid]}")
+    # 手書きの英題表も毎回実効を出す。master 段階（機種フィルタより前）で数えている。
+    _title_en_hit = len(_title_en_written) + len(_title_en_blocked)
+    print(f"英題を手書き(TITLE_EN) : {_title_en_hit}/{len(TITLE_EN)} 行  "
+          f"(値を入れた {len(_title_en_written)} / 空を名指しして Wikidata を止めた {len(_title_en_blocked)})")
+    for mid, blocked in _title_en_blocked:
+        if blocked:
+            print(f"  - {mid}  Wikidata の {blocked!r} を止めた（英題なしとして出力）")
+        else:                                              # 上流が直った＝表から外す判断が要る
+            print(f"  ★ TITLE_EN: {mid} は空を名指ししているが、Wikidata 側にも英題が無い。"
+                  f"止めるものが無い（誤結合が消えたなら表から外す）")
+    for mid in sorted(set(TITLE_EN) - _title_en_written - {m for m, _ in _title_en_blocked}):
+        print(f"  ★ TITLE_EN: {mid} が master に現れない（MADB から消えた / 取り込み条件で落ちた）")
+    # 誤結合表の title_en 側。空にした行は画面に何も現れないので、止めた値を必ず印字する。
+    print(f"誤結合の英題を止めた   : {len(_mislink_en_seen)}/{len(WIKIDATA_MISLINK)} 行  (WIKIDATA_MISLINK)")
+    for mid, blocked in _mislink_en_blocked:
+        if blocked:
+            print(f"  - {mid}  Wikidata の {blocked!r} を止めた（英題なしとして出力）")
+        else:                                              # 上流が直った＝表から外す判断が要る
+            print(f"  ★ WIKIDATA_MISLINK: {mid} は Wikidata 側に英題が無い。"
+                  f"止めるものが無い（誤結合が消えたなら表から外す）")
+    for mid in sorted(set(WIKIDATA_MISLINK) - _mislink_en_seen):
+        print(f"  ★ WIKIDATA_MISLINK: {mid} が master に現れない（MADB から消えた / 取り込み条件で落ちた）")
+    # 誤結合表のカナ題側。分子は**実際に値を捨てた行数**なので、見込みは 21/23。
+    #   （23 − M747540〔元からカナ題が空〕− M727424〔正しいので MISLINK_KANA_KEEP で残す〕）
+    #   23 なら「残すべき値まで止めた」異常、21 未満なら「上流が変わった」合図である。
+    # ★この見込み値は手書きなので、表に行を足したら**必ずここも直す**こと。
+    #   2026-08-17 に 12→16 へ増やしたとき、この数字だけ 10 のまま残って一度古くなった（罠#191）。
+    #   同日の軸D 6件（16→22）では、6件とも Wikidata 側にカナ題があるので 14→20 になった。
+    #   さらに同日 M727045（22→23）を足した。Wikidata 側にカナ題があるので 20→21 になる。
+    print(f"誤結合のカナ題を止めた : {len(_mislink_kana_seen)}/{len(WIKIDATA_MISLINK)} 行  "
+          f"(WIKIDATA_MISLINK ― 見込み 21)")
+    for mid, blocked in _mislink_kana_blocked:
+        print(f"  - {mid}  Wikidata の {blocked!r} を止めた（カナ題なしとして出力）")
+    # 元から空＝止めるものが無い。上流が直ったなら表から外す判断が要るので黙らせない（罠#16）。
+    for mid in _mislink_kana_already_empty:
+        print(f"  ★ WIKIDATA_MISLINK: {mid} は Wikidata 側にカナ題が無い。"
+              f"止めるものが無い（誤結合が消えたなら表から外す）")
+    # ★こちらは「効かなかった」ではなく「意図して外した」。警告ではなく事実として出す。
+    for mid, kept in _mislink_kana_kept:
+        print(f"  = {mid}  カナ題 {kept!r} は正しいので残した（MISLINK_KANA_KEEP）")
+    # 誤結合表の五十音初字側。★見込みは 3/23 ―― この経路に来るのは
+    #   「@ja-hrkt がラテンで第1の源が空になる」行だけ（M726395 / M723110 / M722651）。
+    #   他の20件は第1の源（仮名の読み）で埋まるので、そもそも Wikidata に降りない。
+    #   23 なら「第1の源まで壊れた」異常、3 未満なら「上流が変わった」合図である。
+    #   ★軸D の6件は @ja-hrkt が全件仮名（イース ナピシュテム ノ ハコ 等）なので
+    #     ここは 3 のまま増えない。増えたら第1の源が壊れたということ。
+    #   ★M727045 も @ja-hrkt が「アドベンチャー アイランド」＝仮名なので同じく増えない。
+    print(f"誤結合の棚初字を塞いだ : {len(_mislink_row_skipped)}/{len(WIKIDATA_MISLINK)} 行  "
+          f"(WIKIDATA_MISLINK ― 見込み 3)")
+    for mid in sorted(_mislink_row_skipped):
+        got = _mislink_row_result.get(mid, "")
+        if got:
+            print(f"  - {mid}  Wikidata を塞ぎ、@ja-latn から {got!r} を得た")
+        else:
+            print(f"  ★ WIKIDATA_MISLINK: {mid} は塞いだ結果 kana_row が空。"
+                  f"@ja-latn も拾えず**五十音棚から消えた**（残すべきか要判断）")
     # 束1の転記も毎回実数を出す。2026-08-05 の調査は 2,676 行。ここがズレたら、
     # MADB 側でタイトルか英題が動いたということ ―― 黙って通さない。
     print(f"英題を原文複製(束1)    : {_latin_copied:,} 行  "
