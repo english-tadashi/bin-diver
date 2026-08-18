@@ -1407,6 +1407,16 @@ WIKIDATA_MISLINK = {
     "M745542": ({"kana"},       "",                                   "ヴァンパイア ザ ナイト ウォーリアーズ ← kana だけ続編「ヴァンパイアハンター」(PS1 1996・カプコン)。en=Darkstalkers: The Night Warriors は初代の海外題として正しいので残す ―― ヴァンパイアハンター側の en は Night Warriors: Darkstalkers' Revenge で、M719584 がそれを持っている"),
     "M746084": ({"en", "kana"}, "Achrome Etude: Canvas4",             "エターナル・エチュード Canvas4 (PSP 2011・PIACCI)。同じ題の兄弟行 M746083 / M746085 は kana が空。en の Achrome も kana 側(アクロウム)から来ている"),
     "M765455": ({"en", "kana"}, "Idol Janshi Suchie-Pai",             "美少女雀士スーチーパイ (Wii 2010・ハムスター / SFC版のVC)。原典は M726463 (SFC 1993・ジャレコ)。アイドル雀士スーチーパイ は M719008 ほかに別系列として在り、en の Idol も kana 側から来ている"),
+    # --- 2026-08-19 軸E（1項目に複数の P7886・シリーズ番号の食い違い）で見つけた1件 ---
+    #   軸A(機種QID)・軸C(年代乖離)・軸D(文字集合の重なり)の3軸すべてを素通りする型。
+    #   Q1886919「Super Mario Advance 4: Super Mario Bros. 3」が P7886 を2つ持ち、
+    #   正しい M720373 と並べて別作品の M749653 を貼っている。
+    #   正しい項目 Q9383518「Yoshi's Island: Super Mario Advance 3」の P7886 は
+    #   C35351 のみで M番号を持たない ―― M749653 は正しい項目から孤立している。
+    #   ★en / ja 両方が同じ1本の誤りから来るので列集合は {"en","kana"}。
+    #   ★数字1文字の違いが本質なので、軸D の文字集合の重なりでは高類似＝正常に見える。
+    #     機種は両方 GBA、年は 2002/2003 の1年差で、軸A・軸C も引っかからない。
+    "M749653": ({"en", "kana"}, "Super Mario Advance 4: Super Mario Bros. 3", "スーパーマリオアドバンス 3 ヨッシーアイランド + マリオブラザーズ (GBA 2002・AGB-P-A3AJ)。正しい スーパーマリオアドバンス4 は M720373 (GBA 2003・AGB-AX4J-JPN) に別に在る"),
 }
 
 # ★以下は誤結合だが表に足さないと決めた（2026-08-17）。
