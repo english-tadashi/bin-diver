@@ -310,6 +310,27 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
   font:500 15px/1.2 var(--f-display); transition:background .12s,border-color .12s;}
 .card .btn-clerk:hover{background:#241c40; border-color:#bf57ff;}
 
+/* ============================================================
+   マイリスト用ボタン（2026-08-19）。型番ブロックの直下に1枚だけ出る。
+   ★色の予約に触らない: 紫(--signal)は「型番の一致」と「Buyee=届く経路」の2つだけ、
+     シアン(--tag)は店頭ゾーン(.genre-link)。どちらも使わず罫と本文色だけで組む
+     ＝カード内の強さの配分（.store.primary の塗り > .btn-clerk の紫枠 > ここ）を変えない。
+   ★寸法は .btn-clerk / .genre-link と同じ（width:100% / min-height:52px / radius:2px）。
+     押せる面の大きさを店頭の他のボタンと揃える。
+   ★書体は var(--f-display)。ラベルは英字なので .btn-clerk / .genre-link と同じ書体に揃える。
+     （2026-08-19 にラベルを日本語から英語へ変えた際 --f-jp から戻した。仮名を出すなら --f-jp が要る。）
+   ★.is-on は「押せない」ではなく「もう入っている」という**表示**。だから枠と字を一段
+     落として（--hair / --muted）主張を消す。反転させて強くすると済んだものが未済より目立つ。
+     cursor は default に戻す＝押しても何も起きないことを手で示す。 */
+.card .btn-list{width:100%; display:flex; align-items:center; justify-content:center; gap:10px;
+  min-height:52px; padding:10px 16px; cursor:pointer; text-align:center;
+  border:1px solid var(--hair-strong); border-radius:2px; background:var(--paper); color:var(--ink);
+  font:500 15px/1.2 var(--f-display); transition:background .12s,border-color .12s;}
+.card .btn-list:hover{background:#241c40; border-color:var(--ink-2);}
+.card .btn-list.is-on{background:none; border-color:var(--hair); color:var(--muted); cursor:default;}
+.card .btn-list.is-on:hover{background:none; border-color:var(--hair);}
+
+
 /* spec row */
 .card .specs{display:flex; border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);}
 .card .spec{flex:1; padding:12px 0; display:flex; flex-direction:column; gap:5px;}
@@ -1047,13 +1068,127 @@ header .lede .lede-sub{ font-weight:400; }
 @media (max-width:480px){
   .backlink{ padding:10px 12px; font-size:9px; }
 }
+
+/* ============================================================
+   マイリストの入口（2026-08-19）。#locbar は画面上端に常に居る唯一の帯なので、
+   検索中でも結果を読んでいる最中でも1タップで開ける。
+   ★既存の #locbar / .locpair / .locbtn は1行も書き換えていない。中身を .locbar-in で
+     包み直して横に並べているだけ（.locpair の margin:0 auto だけ包んだ側で打ち消す）。
+   ★flex-wrap:wrap。狭い画面では札が下へ落ちて帯が高くなるが、帯の高さは
+     measureLocbar() が実測して --locbar-h に入れているので追随する。 */
+.locbar-in{display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;}
+.locbar-in .locpair{margin:0; flex:1 1 300px;}
+#myListBtn{flex-shrink:0; min-height:44px; padding:10px 14px; cursor:pointer;
+  border:1px solid var(--edge-input); border-radius:2px; background:transparent; color:var(--ink);
+  font:inherit; font-size:13px; font-weight:600;}
+#myListBtn:hover,#myListBtn:focus-visible{background:var(--field); outline:none;}
+#myListBtn .n{color:var(--muted); font-weight:400;}
+
+/* ============================================================
+   マイリスト画面（2026-08-19）
+   開く器は #clerk / #genre-modal と同じ「全画面の .on トグル」。このページに
+   ルーティングは無い（1ファイル1画面）ので、画面の切り替えはこれが唯一の形。
+   ★地色は暗いページ側の配色にする。#clerk が白なのは読む相手が日本の店員だからで、
+     こちらは画面の持ち主が自分で読む＝ページと同じ地でよい。
+   ★z-index 65 … #clerk(60) の上、#copyToast(70) の下。保存に失敗したときの
+     トーストはこの画面の上に出る必要があるので、必ずトーストより下に潜ること。
+   ★--f-display / --f-jp / --f-mono を器に定義し直す。この3つは :root ではなく
+     .card{} の中にしか無いので、器のクロームからは解決できない(#genre-modal と同じ手当て)。
+     中の1件1件は .card を付けてあるので、そちらは .card 側の定義で解決する。
+   ============================================================ */
+#mylist{position:fixed; inset:0; z-index:65; display:none;
+  overflow-y:auto; -webkit-overflow-scrolling:touch; padding:0 0 48px;
+  background:var(--paper); color:var(--ink);
+  --f-display:'Space Grotesk',-apple-system,Helvetica,Arial,sans-serif;
+  --f-jp:'IBM Plex Sans JP','Hiragino Sans','Noto Sans JP',sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;}
+#mylist.on{display:block;}
+/* 見出し帯。sticky で開いている間ずっと出す＝閉じる場所が常に見えている
+   （#clerk の .clerk-bar と同じ役だが、あちらは非 sticky で画面が短いのに対し
+     こちらは件数ぶん伸びるので、下までスクロールしても閉じられるようにする）。 */
+.mylist-bar{position:sticky; top:0; z-index:1; display:flex; align-items:center;
+  justify-content:space-between; gap:12px; padding:12px 18px;
+  background:var(--field); border-bottom:1px solid var(--edge);}
+.mylist-bar h2{margin:0; font:500 17px/1.3 var(--f-display); color:var(--ink);}
+.mylist-bar h2 .n{display:block; font:400 12px/1.5 var(--f-mono); color:var(--muted);}
+#mylistClose{flex-shrink:0; min-height:44px; padding:10px 16px; cursor:pointer;
+  border:1px solid var(--edge-input); border-radius:2px; background:var(--surface); color:var(--ink);
+  font:500 13px/1 var(--f-display);}
+/* :focus ではなく :focus-visible。開いた直後に focus() するので、:focus だと
+   常時「押された後」の見た目になる（#clerkClose と同じ理由）。 */
+#mylistClose:hover,#mylistClose:focus-visible{background:var(--edge); outline:none;}
+#mylistBody{max-width:640px; margin:0 auto; padding:18px;
+  display:flex; flex-direction:column; gap:18px;
+  font:400 14px/1.6 var(--f-display); color:var(--ink);}
+
+/* 1件 = .card + .mycard。.card を付けるのは色と書体のトークンがそこにしか無いためで、
+   ついでに shelfNote() が返す .field / .shelf-row / .shelf-kana がそのまま効く。
+   ★.mycard が足すのは「検索結果より一段大きく」だけ。棚の前で腕を伸ばして読む画面なので、
+     型番と日本語タイトルは結果カード(.code 24px / .ja-title 29px)より確実に大きくする。
+   ★特異度は .card 側と同じ(0,2,0)。後段に置いてあるので source order で勝つ。 */
+.mycard .my-code{font:500 clamp(26px,6.6vw,34px)/1.15 var(--f-mono); letter-spacing:.05em;
+  color:#ffffff; word-break:break-all;}
+.mycard .my-code .sep{color:var(--faint); padding:0 .12em;}
+.mycard .my-title{font:600 clamp(28px,7vw,38px)/1.25 var(--f-jp); color:#ffffff; word-break:break-word;}
+.mycard .my-sub{font:400 15px/1.45 var(--f-display); color:var(--ink-2);}
+.mycard .micro{font-size:11px;}
+.mycard .shelf-txt{font-size:15px;}
+.mycard .shelf-kana{min-width:54px; height:54px; font-size:30px;}
+/* DATA から引けなかった型番。黙って捨てない ―― 捨てるとその1件を外す手段が無くなる。 */
+.mycard .my-orphan{font:400 14px/1.5 var(--f-display); color:var(--muted);}
+/* 削除。--signal(紫)も --tag(シアン)も使わない ―― どちらも予約済みで、ここは
+   「取り除く」だけの弱い操作。枠と本文色で足りる（.btn-list と同じ段）。 */
+.mycard .btn-remove{align-self:flex-start; min-height:44px; padding:10px 18px; cursor:pointer;
+  border:1px solid var(--hair-strong); border-radius:2px; background:var(--paper); color:var(--muted);
+  font:500 14px/1.2 var(--f-display);}
+.mycard .btn-remove:hover,.mycard .btn-remove:focus-visible{border-color:var(--ink-2); color:var(--ink); outline:none;}
+
+/* ============================================================
+   マイリストからの店頭提示（2026-08-19・簡易版）
+   器は既存の #clerk をそのまま使う（全画面・白・.on トグル・Escape・閉じるボタン）。
+   足すのは「中身の段だけ差し替える」ための修飾クラス2つ（.brief / .over-mylist）で、
+   検索結果からの clerkOpen() の見た目には一切当たらない。
+
+   ★z-index。#clerk は 60 で #mylist(65) より**下**なので、そのままだとマイリストの
+     裏に出て何も見えない。マイリストから開くときだけ .over-mylist を足して 66 に上げる
+     ―― #copyToast(70) の下は守る（保存失敗のトーストはこの画面の上に出る必要がある）。
+   ★字の大小はこの画面だけ逆にする。検索結果側の店員画面は「日本語タイトルが一番大きい」
+     （まだどれを買うか決めていない＝タイトルで照合する場面）。マイリストは「もう決めた
+     1本を出す」画面なので、店員が在庫システムに打つ**型番**を一番大きくする。
+     .clerk-title / .clerk-code の基底値は触らず、#clerk.brief の中でだけ上書きする。
+   ============================================================ */
+#clerk.over-mylist{z-index:66;}
+#clerk.brief .clerk-code{font-size:clamp(34px,9vw,56px);}
+#clerk.brief .clerk-title{font-size:clamp(22px,5.2vw,32px);}
+/* 先頭の段だけ上罫を消す。.clerk-row は段の**間**を仕切るための罫なので、
+   1段目に付くと見出し帯のすぐ下に二重線が出る。 */
+#clerk.brief .clerk-brief-first{border-top:0; padding-top:0;}
+/* 棚の目安の CSS はここから削除した（.clerk-brief-shelf / .clerk-brief-kana /
+   .clerk-brief-gyo・2026-08-19）。clerkOpenBrief() が段ごと出さなくなり、参照が
+   1つも無くなったため。上の #clerk 本体にも同じ趣旨の記録がある（.clerk-shelf /
+   .clerk-kana）。棚は結果カードの .shelf-row とマイリストのカードに出ている。 */
+/* 店員に見せる1行。この画面で唯一の「お願い」なので、罫で区切って最後に置く。 */
+.clerk-brief-ask{margin:26px 0 0; border-top:2px solid #111; padding-top:20px;
+  font-size:clamp(22px,5.6vw,32px); font-weight:600;}
+
+/* マイリストのカードに並ぶ2つのボタン。 */
+.mycard .my-actions{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+/* 店頭提示。枠の紫は .btn-clerk と同じ＝「紫の枠＝店頭でのアクション」という
+   既存の合図をそのまま使う（文字色 #bf57ff も .btn-clerk と同じ理由・同じ値）。 */
+.mycard .btn-clerk-mini{min-height:44px; padding:10px 18px; cursor:pointer;
+  border:1px solid var(--signal); border-radius:2px; background:var(--paper); color:#bf57ff;
+  font:500 14px/1.2 var(--f-display); transition:background .12s,border-color .12s;}
+.mycard .btn-clerk-mini:hover,.mycard .btn-clerk-mini:focus-visible{background:#241c40; border-color:#bf57ff; outline:none;}
 </style>
 </head>
 <body>
 <div id="locbar">
-  <div class="locpair" role="group" aria-label="Where are you buying from?">
-    <button type="button" class="locbtn is-on" data-loc="out" aria-pressed="true" onclick="setLoc('out')">I'm outside Japan</button>
-    <button type="button" class="locbtn" data-loc="jp" aria-pressed="false" onclick="setLoc('jp')">I'm in Japan</button>
+  <div class="locbar-in">
+    <div class="locpair" role="group" aria-label="Where are you buying from?">
+      <button type="button" class="locbtn is-on" data-loc="out" aria-pressed="true" onclick="setLoc('out')">I'm outside Japan</button>
+      <button type="button" class="locbtn" data-loc="jp" aria-pressed="false" onclick="setLoc('jp')">I'm in Japan</button>
+    </div>
+    <button type="button" id="myListBtn" aria-haspopup="dialog" aria-expanded="false">My List <span class="n" id="myListCount">(0)</span></button>
   </div>
 </div>
 
@@ -1254,6 +1389,18 @@ header .lede .lede-sub{ font-weight:400; }
   </div>
 </div>
 
+<!-- マイリスト画面。器は #clerk / #genre-modal と同じ「全画面の .on トグル」。
+     中身は開くたびに mylistRender() が組み直す ―― 保存してあるのは型番だけで、
+     行データは DATA から引き直す（データを二重に持たない）。 -->
+<div id="mylist" role="dialog" aria-modal="true" aria-labelledby="mylist-title">
+  <div class="mylist-bar">
+    <h2 id="mylist-title">My List<span class="n" id="mylistCount">0 saved</span></h2>
+    <button type="button" id="mylistClose">Close</button>
+  </div>
+  <div id="mylistBody"></div>
+</div>
+
+
 <!-- ジャンル早見表。ページに1つだけ。中身は次段で #genre-modal-body に流し込む。
      DATA とは無関係の場所に置いてある（DATA 行には一切触っていない）。 -->
 <div id="genre-modal" role="dialog" aria-modal="true" aria-labelledby="genre-title">
@@ -1279,6 +1426,81 @@ function codeKey(s){ return (s||'').normalize('NFKC').toUpperCase().replace(/[^A
 const q=$('#q'), plat=$('#plat'), pub=$('#pub'), year=$('#year'),
       results=$('#results'), count=$('#count'), more=$('#more');
 const MAX=60;
+
+/* ============================================================
+   マイリスト（保存だけ・2026-08-19）
+   カードの「リストに追加」を押すと、その行の**型番フィールド(row[3])を原文のまま**
+   localStorage に配列で貯める。一覧画面はまだ無い＝ここは「入れる」だけ。
+
+   ★保存するのは r[3] の原文（'SLPS-00533;SLPS-00534' のように ';' 区切りのまま）。
+     表示用の codes.join(' ') ではない ―― 後で一覧画面を作るとき
+     DATA.find(r => r[3] === saved) でそのまま行に戻せるのは原文のほうだから。
+   ★型番の無い行（noCode）にはボタンを出さない。保存する値が無いので、押せないボタンを
+     置くより出さないほうがよい（.btn-clerk の「押せないボタンは壊れて見える」と同じ方針）。
+   ★localStorage は必ず try/catch で囲む（locRead/setLoc と同じ理由。プライベート
+     ブラウズや一部WebViewでは getItem/setItem そのものが例外を投げる）。
+   ★真値は下の listSet。paint() はカードを毎回作り直すので、60枚ぶん
+     getItem+JSON.parse を回さずに済むよう起動時に1回だけ読む。
+   ★キー名は既存の 'kataban_loc' に合わせて 'kataban_' 接頭辞。
+   ★中身の確認: コンソールで myList() を叩く（下で window に出してある）。
+   ============================================================ */
+const LIST_KEY = 'kataban_mylist';
+
+// 起動時に1回だけ読む。localStorage は人が書き換えられるので、配列でない・文字列でない・
+// 空文字は黙って捨てる（locRead が 'jp'/'out' 以外を捨てているのと同じ）。
+// 壊れた値をそのまま持つと card() が落ちて検索画面ごと死ぬ。
+const listSet = (function(){
+  let raw = null;
+  try{ raw = localStorage.getItem(LIST_KEY); }catch(e){}
+  let arr = [];
+  try{ arr = JSON.parse(raw || '[]'); }catch(e){}
+  if(!Array.isArray(arr)) arr = [];
+  return new Set(arr.filter(v => typeof v === 'string' && v));
+})();
+
+// 書き込み。true=localStorage に入った / false=入らなかった。推測しない
+// （copyText と同じ方針。「入れたつもりで消えている」が一番困る）。
+function listSave(){
+  try{ localStorage.setItem(LIST_KEY, JSON.stringify([...listSet])); return true; }
+  catch(e){ return false; }
+}
+
+// 追加。保存に失敗したら Set からも戻す＝画面の表示と保存先を食い違わせない。
+function listAdd(code){
+  if(!code || listSet.has(code)) return false;
+  listSet.add(code);
+  if(!listSave()){ listSet.delete(code); return false; }
+  return true;
+}
+
+/* コンソール確認用。window に置くのは開発者コンソールから直接叩くため。
+   myList()      … いま localStorage に入っている配列を読んで表示し、返す
+   clearMyList() … 全消し。一覧画面がまだ無いので、外す手段は今のところこれだけ。 */
+window.myList = function(){
+  let raw = null;
+  try{ raw = localStorage.getItem(LIST_KEY); }
+  catch(e){ console.warn('[my-list] localStorage が読めません:', e); return []; }
+  let arr = [];
+  try{ arr = JSON.parse(raw || '[]'); }catch(e){}
+  if(!Array.isArray(arr)) arr = [];
+  console.log('[my-list] ' + LIST_KEY + ' … ' + arr.length + '件', arr);
+  return arr;
+};
+window.clearMyList = function(){
+  listSet.clear();
+  try{ localStorage.removeItem(LIST_KEY); }catch(e){}
+  // paint() は呼ばない（検索していない状態だと結果欄を空にしてしまう）。
+  // 画面に出ているボタンだけ戻す。
+  document.querySelectorAll('.btn-list.is-on').forEach(b=>{
+    b.classList.remove('is-on');
+    b.setAttribute('aria-pressed','false');
+    b.textContent = 'Add to list';
+  });
+  mylistRefresh();                       // 件数バッジ／開いていれば一覧も空にする
+  console.log('[my-list] 全消ししました');
+};
+console.info('[my-list] 保存済み ' + listSet.size + '件。コンソールで myList() / clearMyList() が叩けます。');
+
 
 // Pre-compute a lowercase search haystack per row ONCE (not per keystroke):
 // English title, Japanese name, platform, code(s) and BOTH publisher names (ja + en),
@@ -2711,6 +2933,14 @@ function card(r,idx){
       <div class="cap" style="margin-top:7px;">Latin letters — type it into any store yourself, or copy.</div>
     </div>`:''}
 
+    <!-- リストに追加（保存だけ・一覧画面はまだ無い）。押すと row[3] を localStorage に貯める。
+         ★型番の無い行には出さない ―― 保存する値が無いため（LIST_KEY 付近のコメント参照）。
+         ★このコメントはテンプレートリテラルの中にある。バッククォートを書くと文字列がそこで
+           閉じてJSが壊れる（上の .instore のコメントと同じ注意）。 -->
+    ${codes.length?`<button class="btn-list${listSet.has(code)?' is-on':''}" type="button"
+      data-list="${esc(code)}" aria-pressed="${listSet.has(code)?'true':'false'}">${listSet.has(code)?'In list':'Add to list'}</button>`:''}
+
+
     ${noCode?`<div>
       <div class="slab">
         <span class="reg" aria-hidden="true"></span>
@@ -2883,6 +3113,174 @@ document.addEventListener('click', e=>{
 });
 
 // ============================================================
+// リストに追加 — カードは paint() で作り直されるので個別結線ではなく委任
+// （[data-copy] と同じ理由）。付ける先は #results：このボタンはカードの中にしか無く、
+// 店員モードや各モーダルには出ない。
+// ★既に入っている行では何もしない。表示は既に「リスト済み」で、外す導線は一覧画面の仕事。
+// ★保存に失敗したらラベルを変えない。「入れたつもりで入っていない」を作らないため
+//   （[data-copy] が成否を見てから ✓/Hold を出しているのと同じ）。
+// ============================================================
+results.addEventListener('click', e=>{
+  const btn = e.target.closest('[data-list]');
+  if(!btn) return;
+  const code = btn.getAttribute('data-list');
+  if(listSet.has(code)) return;
+  if(!listAdd(code)){
+    toast('Couldn\u2019t save on this device \u2014 private browsing blocks storage.');
+    return;
+  }
+  btn.classList.add('is-on');
+  btn.setAttribute('aria-pressed','true');
+  btn.textContent = 'In list';
+  mylistRefresh();                       // 入口ボタンの件数バッジを合わせる
+  console.log('[my-list] added: ' + code + ' \u2192 ' + listSet.size + '件', [...listSet]);
+});
+
+/* ============================================================
+   マイリスト画面（2026-08-19）
+   保存されているのは型番(row[3])だけ。行データは開くたびに DATA から引き直す
+   ＝データを二重に持たない（DATA を直せば一覧の表示も直る）。
+   ★引き方は DATA.find(r => r[3] === code)。保存した値は card() が data-list に入れた
+     r[3] の原文そのものなので、加工せずに等値比較できる。
+   ★引けなかった型番も捨てずに出す。DATA から消えた行・手で書き換えられた値でも、
+     「Remove」が残っていないとその1件を外す手段が無くなる。
+   ★保存の経路は既存のまま。追加は listAdd、削除は下の listRemove で、どちらも
+     listSet を触って listSave() を1回呼ぶ形に揃えてある。
+   ============================================================ */
+const mylistEl = $('#mylist'), mylistBody = $('#mylistBody'),
+      mylistCloseBtn = $('#mylistClose'), myListBtn = $('#myListBtn');
+
+// 削除。listSet / listSave をそのまま使う（追加と同じ1本の保存経路）。
+// 保存に失敗したら Set を戻す＝画面と保存先を食い違わせない（listAdd と対称）。
+function listRemove(code){
+  if(!listSet.has(code)) return false;
+  listSet.delete(code);
+  if(!listSave()){ listSet.add(code); return false; }
+  return true;
+}
+
+// 件数表示を合わせ、開いていれば中身も組み直す。
+// ★要素は毎回 getElementById で引く。clearMyList() から呼ばれる可能性があり、
+//   上の const より先に走ると TDZ に落ちるため。
+function mylistRefresh(){
+  const n = listSet.size;
+  const badge = document.getElementById('myListCount');
+  if(badge) badge.textContent = '(' + n + ')';
+  const head = document.getElementById('mylistCount');
+  if(head) head.textContent = (n === 1) ? '1 saved' : n + ' saved';
+  const el = document.getElementById('mylist');
+  if(el && el.classList.contains('on')) mylistRender();
+}
+
+// 型番1件ぶんのカード。.card を付けるのは色・書体のトークンがそこにしか無いためで、
+// shelfNote() が返す .field / .shelf-row もそのまま効く（同じ器の中なので）。
+function mylistCard(code){
+  const r = DATA.find(row => row[3] === code);
+  const codes = code.split(';').map(s=>s.trim()).filter(Boolean);
+  // 区切りは card() の codeShow と同じ形（中黒の前は &nbsp; で前の型番にくっつける）。
+  const codeShow = codes.map(esc).join('<span class="sep">&nbsp;&middot;</span> ');
+  const remove = '<button class="btn-remove" type="button" data-remove="' + esc(code) + '">Remove</button>';
+  /* 店頭提示。★配信専用(row[12])の行では出さない ―― 現物が無い行について店員に
+     「これはありますか？」と聞かせることになる。clerkOpen() 側の同じゲート
+     （card() の .instore ブロック）と揃えてある。
+     ★DATA から引けなかった型番(!r)では出す。型番だけでも店の在庫システムには打てる。 */
+  const showClerk = (!r || !r[12])
+    ? '<button class="btn-clerk-mini" type="button" data-clerkcode="' + esc(code) + '">Show clerk</button>'
+    : '';
+  const actions = '<div class="my-actions">' + showClerk + remove + '</div>';
+  if(!r) return `<article class="card mycard">
+      <div class="field">
+        <span class="micro plain">Product code</span>
+        <div class="my-code">${codeShow}</div>
+      </div>
+      <div class="my-orphan">This code is no longer in the database. Remove it to clear it from your list.</div>
+      ${actions}
+    </article>`;
+  const jpMain = r[1] || r[0];
+  // 英題は日本語タイトルと別物のときだけ出す。row[1] が元々ラテン表記の行では
+  // row[0] と同じ文字列になり、同じ語が2行続く（card() の hideJa と同じ狙い）。
+  // ★照合は strong()（NFKC→小文字→約物・記号・空白の除去）で、codeKey() ではない。
+  //   codeKey は英数字**以外**を全部落とすので、かな漢字の付いた副題ごと消えてしまう
+  //   ―― 実測: 「DRAGON QUEST BUILDERS アレフガルドを復活せよ」が英題 "Dragon Quest
+  //   Builders" と同一と判定され、別物なのに英題の行が出なくなる。strong は仮名漢字を残す。
+  const enSub = (r[0] && strong(r[0]) !== strong(jpMain)) ? r[0] : '';
+  const sub = [r[2], r[4]].filter(Boolean).join('  \u00b7  ');   // 機種 · 発売年
+  return `<article class="card mycard">
+      <div class="field">
+        <span class="micro plain">Product code</span>
+        <div class="my-code">${codeShow}</div>
+      </div>
+      <div class="field">
+        <span class="micro plain">Japanese title</span>
+        <div class="my-title">${esc(jpMain)}</div>
+        ${enSub?`<div class="my-sub">${esc(enSub)}</div>`:''}
+      </div>
+      ${sub?`<div class="my-sub">${esc(sub)}</div>`:''}
+      ${shelfNote(r)}
+      ${actions}
+    </article>`;
+}
+
+function mylistRender(){
+  const codes = [...listSet];
+  mylistBody.innerHTML = codes.length
+    ? codes.map(mylistCard).join('')
+    : '<div class="state"><b>Nothing saved yet.</b>Your list is empty \u2014 tap \u201cAdd to list\u201d on any search result to keep its product code here.</div>';
+}
+
+function mylistOpen(){
+  mylistRender();
+  mylistEl.classList.add('on');
+  mylistEl.scrollTop = 0;
+  myListBtn.setAttribute('aria-expanded','true');
+  document.body.style.overflow = 'hidden';   // 背後の結果が動くと戻ったとき迷子になる（#clerk と同じ）
+  mylistCloseBtn.focus();
+}
+function mylistHide(){
+  mylistEl.classList.remove('on');
+  myListBtn.setAttribute('aria-expanded','false');
+  document.body.style.overflow = '';
+  myListBtn.focus();
+}
+myListBtn.addEventListener('click', mylistOpen);
+mylistCloseBtn.addEventListener('click', mylistHide);
+// ★店員画面が上に載っているときは何もしない。document 上の keydown は登録順に走るので、
+//   ガードが無いと Escape 1回で #clerk と #mylist の両方が閉じる（下の #clerk 側の
+//   ハンドラがこの直後に走る）。上の1枚だけを閉じる。
+document.addEventListener('keydown', e=>{
+  if(e.key!=='Escape') return;
+  if(document.querySelector('#clerk.on')) return;
+  if(mylistEl.classList.contains('on')) mylistHide();
+});
+
+// 削除。カードは mylistRender() で作り直されるので個別結線ではなく委任
+// （[data-copy] / [data-list] と同じ）。
+mylistBody.addEventListener('click', e=>{
+  const btn = e.target.closest('[data-remove]');
+  if(!btn) return;
+  const code = btn.getAttribute('data-remove');
+  if(!listRemove(code)){
+    // 保存できなかった＝消えていない。カードも消さない（「消したつもり」を作らない）。
+    toast('Couldn\u2019t update your list on this device \u2014 private browsing blocks storage.');
+    return;
+  }
+  // 背後の検索結果に出ている同じ行のボタンを「未追加」へ戻す。paint() は呼ばない
+  // （検索していない状態だと結果欄を空にしてしまう。clearMyList と同じ理由）。
+  document.querySelectorAll('#results .btn-list.is-on').forEach(b=>{
+    if(b.getAttribute('data-list') !== code) return;
+    b.classList.remove('is-on');
+    b.setAttribute('aria-pressed','false');
+    b.textContent = 'Add to list';
+  });
+  mylistRefresh();
+  console.log('[my-list] removed: ' + code + ' \u2192 ' + listSet.size + '件', [...listSet]);
+});
+
+mylistRefresh();   // 起動時のバッジ（保存済みの件数を帯に出す）
+
+
+
+// ============================================================
 // 店員モード — 全画面・白・大きい文字。カード1枚に1ボタン。
 // 読むのは日本の店員。だから中身は日本語だけにし、英語の説明は1ブロックだけ、
 // 挨拶の直下に置く(渡す前に、自分が何を見せるのか読めるように)。
@@ -2944,9 +3342,73 @@ function clerkOpen(r){
   clerkClose.focus();
 }
 function clerkHide(){
-  clerkEl.classList.remove('on');
-  document.body.style.overflow = '';
+  // .brief / .over-mylist はマイリストから開いたときだけ付く修飾。閉じるときに必ず外す
+  // ―― 残すと次に検索結果から開いた店員画面が簡易表示の字組みのまま出る。
+  clerkEl.classList.remove('on','brief','over-mylist');
+  const ml = document.getElementById('mylist');
+  if(ml && ml.classList.contains('on')){
+    // マイリストがまだ開いている＝背後スクロールの固定は解かない（解くと裏のページが動く）。
+    document.body.style.overflow = 'hidden';
+    // 開いた本人（Show clerk ボタン）へ戻す。カードが作り直されていたら閉じるボタンへ。
+    if(clerkOpener && document.contains(clerkOpener)) clerkOpener.focus();
+    else { const c = document.getElementById('mylistClose'); if(c) c.focus(); }
+  } else {
+    document.body.style.overflow = '';
+  }
+  clerkOpener = null;
 }
+/* ============================================================
+   マイリストからの店頭提示（簡易版）。器は #clerk をそのまま使い、中身だけ差し替える。
+   出すのは3つだけ ―― 型番（この画面で一番大きい）・日本語タイトル・
+   「これはありますか？」。閉じる以外の操作は置かない。
+   ★機種／発売元／発売年と英語の説明は出さない。マイリストは「もう決めた1本」を出す
+     画面なので、どれを買うか選ぶための材料はここには要らない（それは検索結果側の
+     clerkOpen() の仕事で、あちらは変えていない）。
+   ★棚の目安は出さない（2026-08-19 に一度入れて同日外した）。clerkOpen() 側が
+     2026-08-04 に「棚を探すのは店員ではなく本人だから、渡した後の画面に置いても
+     本人が読めない」として結果カード(shelfNote)へ移したのと同じ理由で、こちらも
+     店員に見せる面には置かない。棚は結果カードとマイリストのカードに出ている。
+   ★引数は型番。マイリストが持っているのは型番だけなので、行は DATA から引き直す
+     （mylistCard() と同じ引き方＝データを二重に持たない）。
+   ★配信専用(row[12])の行はここへ来ない。入口の Show clerk ボタンを出していない
+     （mylistCard() 内）。ゲートを外すならこの関数の文面も見直すこと。
+   ============================================================ */
+let clerkOpener = null;   // 戻り先。閉じたときにフォーカスを返す
+
+function clerkOpenBrief(code, opener){
+  const r = DATA.find(row => row[3] === code) || null;
+  const codes = (code||'').split(';').map(s=>s.trim()).filter(Boolean);
+  const parts = [];
+
+  // 1. 型番 = この画面の主役。店員が在庫システムに打つ値。
+  parts.push(`<div class="clerk-row clerk-brief-first"><span class="lb">型番</span>
+    <div class="clerk-code">${codes.map(esc).join('<br>')}</div></div>`);
+
+  if(r){
+    // 2. 日本語タイトル
+    parts.push(`<div class="clerk-row"><span class="lb">タイトル</span>
+      <div class="clerk-title">${esc(r[1] || r[0])}</div></div>`);
+  }
+
+  // 3. 店員に見せる1行。
+  parts.push(`<p class="clerk-ask clerk-brief-ask">これはありますか？</p>`);
+
+  clerkBody.innerHTML = parts.join('');
+  clerkOpener = opener || null;
+  clerkEl.classList.add('on','brief','over-mylist');
+  clerkEl.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+  clerkClose.focus();
+}
+
+// マイリストのカード上のボタン。カードは mylistRender() で作り直されるので委任
+// （[data-remove] と同じ。あちらのハンドラとは独立で、互いに邪魔しない）。
+mylistBody.addEventListener('click', e=>{
+  const btn = e.target.closest('[data-clerkcode]');
+  if(!btn) return;
+  clerkOpenBrief(btn.getAttribute('data-clerkcode'), btn);
+});
+
 clerkClose.addEventListener('click', clerkHide);
 document.addEventListener('keydown', e=>{ if(e.key==='Escape' && clerkEl.classList.contains('on')) clerkHide(); });
 // カード上のボタン。data-clerk は current[] の添字（card() は paint() から
@@ -3466,6 +3928,37 @@ function attachRakutenSlots(root) {
   // Web フォントが後から届くとパネルの高さと元位置が動く。届いたら測り直す。
   if(document.fonts && document.fonts.ready) document.fonts.ready.then(onResize).catch(function(){});
   update();   // リロード時に既に下まで戻されている場合の初期化
+})();
+</script>
+
+<!-- ============================================================
+     Service Worker の登録（2026-08-19）
+     一度開いたあとは電波が無くてもページが出るようにする。店頭（Book-Off の地下・
+     ハードオフの奥）は実際に圏外になる場所で、そこで開けないなら型番を持ち歩けない。
+
+     ★パスは相対 './sw.js'。独自ドメイン(https://gamekataban.com/)なら /sw.js＝スコープ /、
+       GitHub Pages のプロジェクトページ(/<repo>/)なら /<repo>/sw.js＝スコープ /<repo>/ になる。
+       先頭に '/' を付けるとプロジェクトページでスコープの外を指すので付けない。
+     ★scope は指定しない。既定＝sw.js の置き場所で、index.html と同じ階層に置く限り
+       ページは必ずその中に入る。明示すると上の2通りで書き分けが要る。
+     ★load を待ってから登録する。初回訪問で install が走るとページ本体(8MB)を取り直すので、
+       表示に必要な通信と競合させない。
+     ★失敗しても握りつぶす。SW が無くてもページは今までどおり動く ―― オフライン対応は
+       上乗せであって、これが無いと壊れるものは何も無い。
+     ★https / localhost 以外では registration が拒否されるので、先に protocol を見る
+       （file:// で開いたときに例外でコンソールを汚さないため）。
+     ============================================================ -->
+<script>
+(function(){
+  if(!('serviceWorker' in navigator)) return;
+  if(location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') return;
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('./sw.js').then(function(reg){
+      console.info('[sw] registered. scope: ' + reg.scope);
+    }).catch(function(err){
+      console.warn('[sw] registration failed (ページは通常どおり動きます):', err);
+    });
+  });
 })();
 </script>
 </body>

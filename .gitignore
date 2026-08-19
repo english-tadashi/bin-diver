@@ -68,3 +68,10 @@ indoleads_token.txt
 # ファイルのままにして、contents API で1本 PUT すれば直る運用を崩さないため）。
 !/kataban.css
 !/kataban.js
+
+# Service Worker。Pages のルート（index.html と同じ階層）に置いて配信する実ファイル。
+# ★これを追跡しないと sw.js が deploy されず、register('./sw.js') が 404 になって
+#   オフライン対応だけが静かに死ぬ（ページ自体は今までどおり出るので気づきにくい）。
+# ★スコープは「sw.js が置かれた階層以下」。index.html と同じ階層に置くことが前提で、
+#   下の階層へ移すとページがスコープの外に出る（詳細は sw.js 冒頭のコメント）。
+!/sw.js
