@@ -126,12 +126,20 @@ a{color:inherit}
   display:flex; flex-direction:column; gap:0; }
 .postlist > li{ border-top:1px solid var(--line); }
 .postlist > li:last-child{ border-bottom:1px solid var(--line); }
-.post{ display:block; padding:24px 0; text-decoration:none; }
+/* 「サムネ | 本文」の2カラム。テキスト3つ（date/title/summary）は .post-body で
+   1つの flex item にまとめてある ―― 裸のまま置くと横一列に並んでしまうため。
+   ★center ではなく flex-start。本文が縦に伸びる幅（特に480px以下）だと center では
+     サムネだけが中央に浮いて日付の行から離れる。 */
+.post{ display:flex; align-items:flex-start; gap:20px; padding:24px 0; text-decoration:none; }
+.post-body{ min-width:0; }
+/* flex-shrink:0 が要る。付けないと長いタイトルに押されてサムネが縦長に潰れる。 */
+.post-thumb{ flex:0 0 200px; width:200px; height:130px; object-fit:cover;
+  border-radius:6px; background:var(--line); display:block; }
 .post:hover .post-title,
 .post:focus .post-title{ color:var(--tag); }
 .post:focus{ outline:3px solid var(--accent); outline-offset:2px; }
 .post-date{ font-family:var(--f-vt); font-size:18px; letter-spacing:.5px;
-  color:var(--faint); margin:0 0 6px; display:block; }
+  color:var(--accent); margin:0 0 6px; display:block; }
 .post-title{ font-size:1.25rem; font-weight:700; line-height:1.3; margin:0;
   color:#ffffff; transition:color .12s; }
 .post-summary{ margin:9px 0 0; color:var(--muted); font-size:14px; line-height:1.6; }
@@ -216,4 +224,7 @@ footer a:hover,footer a:focus{ color:var(--accent); }
 @media (max-width:480px){
   .sitehead{ padding:16px 0 14px; }
   .backlink{ padding:10px 12px; font-size:9px; }
+  .post-title{ font-size:1.05rem; }
+  .post{ flex-direction:column; gap:12px; }
+  .post-thumb{ width:100%; height:auto; aspect-ratio:200/130; flex:0 0 auto; }
 }

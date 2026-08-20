@@ -62,37 +62,57 @@
 
          <li>
            <a class="post" href="/blog/2026-08-08-example-slug.html">
-             <span class="post-date">2026-08-08</span>
-             <h2 class="post-title">記事タイトル</h2>
-             <p class="post-summary">1〜2文の要約。一覧で読むかどうかを決められる長さにする。</p>
+             <img class="post-thumb" src="/blog/images/2026-08-08-example-slug/thumb.jpg" alt="" width="200" height="130" loading="lazy">
+             <div class="post-body">
+               <span class="post-date">2026-08-08</span>
+               <h2 class="post-title">記事タイトル</h2>
+               <p class="post-summary">1〜2文の要約。一覧で読むかどうかを決められる長さにする。</p>
+             </div>
            </a>
          </li>
 
          ★<time> ではなく <span class="post-date"> にしてあるのは、日付を
            VT323（数字だけの書体）で出すため。日付は機械可読にする必要が出たら
            <time datetime="2026-08-08"> に変えてよい（見た目は変わらない）。
+
+         ★サムネは 200x130（横長）に object-fit:cover で切られる（.post-thumb）。
+           元画像は横長のものを選ぶか、被写体を中央に置くこと。480px 以下では
+           幅100%に伸びるが aspect-ratio:200/130 を保つので、切り取り比率は変わらない。
+           img の width/height 属性も 200/130 に揃えること（ズレると読み込み時に CLS が出る）。
+           置き場所は記事本文の画像と同じ /blog/images/<記事スラッグ>/ 。
+         ★.post-body の div を外さないこと。.post は flex で「サムネ | 本文」の
+           2カラムにしてあるので、テキスト3つを裸で置くと横一列に並ぶ。
          ============================================================ -->
 
     <ul class="postlist">
       <li>
         <a class="post" href="/blog/2026-08-18-fire-emblem-famicom-super-famicom-origins.html">
-          <span class="post-date">2026-08-18</span>
-          <h2 class="post-title">Fire Emblem: Where It All Began &mdash; 5 Famicom &amp; Super Famicom Games You Can Import Today</h2>
-          <p class="post-summary">The five Famicom &amp; Super Famicom games that started Fire Emblem &mdash; none released in English, all still findable in Japan.</p>
+          <img class="post-thumb" src="/blog/images/2026-08-18-fire-emblem-famicom-super-famicom-origins/thumb.png" alt="" width="200" height="130" loading="lazy">
+          <div class="post-body">
+            <span class="post-date">2026-08-18</span>
+            <h2 class="post-title">Fire Emblem: Where It All Began &mdash; 5 Famicom &amp; Super Famicom Games You Can Import Today</h2>
+            <p class="post-summary">The five Famicom &amp; Super Famicom games that started Fire Emblem &mdash; none released in English, all still findable in Japan.</p>
+          </div>
         </a>
       </li>
       <li>
         <a class="post" href="/blog/2026-08-18-akihabara-chuo-dori-retro-row.html">
-          <span class="post-date">2026-08-18</span>
-          <h2 class="post-title">Akihabara's Chuo-dori Retro Row: The Essential First Walk for Overseas Collectors</h2>
-          <p class="post-summary">The core Akihabara retro game walk along Chuo-dori &mdash; four legendary shops, one straight line, no Japanese required.</p>
+          <img class="post-thumb" src="/blog/images/2026-08-18-akihabara-chuo-dori-retro-row/thumb.png" alt="" width="200" height="130" loading="lazy">
+          <div class="post-body">
+            <span class="post-date">2026-08-18</span>
+            <h2 class="post-title">Akihabara's Chuo-dori Retro Row: The Essential First Walk for Overseas Collectors</h2>
+            <p class="post-summary">The core Akihabara retro game walk along Chuo-dori &mdash; four legendary shops, one straight line, no Japanese required.</p>
+          </div>
         </a>
       </li>
       <li>
         <a class="post" href="/blog/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html">
-          <span class="post-date">2026-08-11</span>
-          <h2 class="post-title">How to Buy Japanese Retro Games Without Reading Japanese</h2>
-          <p class="post-summary">A step-by-step guide to finding, identifying, and buying used Japanese retro games online &mdash; no Japanese literacy required.</p>
+          <img class="post-thumb" src="/blog/images/2026-08-11-how-to-buy-japanese-retro-games-without-japanese/thumb.png" alt="" width="200" height="130" loading="lazy">
+          <div class="post-body">
+            <span class="post-date">2026-08-11</span>
+            <h2 class="post-title">How to Buy Japanese Retro Games Without Reading Japanese</h2>
+            <p class="post-summary">A step-by-step guide to finding, identifying, and buying used Japanese retro games online &mdash; no Japanese literacy required.</p>
+          </div>
         </a>
       </li>
     </ul>
