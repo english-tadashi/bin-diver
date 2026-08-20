@@ -126,7 +126,15 @@ a{color:inherit}
   display:flex; flex-direction:column; gap:0; }
 .postlist > li{ border-top:1px solid var(--line); }
 .postlist > li:last-child{ border-bottom:1px solid var(--line); }
-.post{ display:block; padding:24px 0; text-decoration:none; }
+/* 「サムネ | 本文」の2カラム。テキスト3つ（date/title/summary）は .post-body で
+   1つの flex item にまとめてある ―― 裸のまま置くと横一列に並んでしまうため。
+   ★center ではなく flex-start。本文が縦に伸びる幅（特に480px以下）だと center では
+     サムネだけが中央に浮いて日付の行から離れる。 */
+.post{ display:flex; align-items:flex-start; gap:16px; padding:24px 0; text-decoration:none; }
+.post-body{ min-width:0; }
+/* flex-shrink:0 が要る。付けないと長いタイトルに押されてサムネが縦長に潰れる。 */
+.post-thumb{ flex:0 0 96px; width:96px; height:96px; object-fit:cover;
+  border-radius:6px; background:var(--line); display:block; }
 .post:hover .post-title,
 .post:focus .post-title{ color:var(--tag); }
 .post:focus{ outline:3px solid var(--accent); outline-offset:2px; }
@@ -216,4 +224,8 @@ footer a:hover,footer a:focus{ color:var(--accent); }
 @media (max-width:480px){
   .sitehead{ padding:16px 0 14px; }
   .backlink{ padding:10px 12px; font-size:9px; }
+  /* 行数を詰めるのはサムネ幅ではなく文字サイズ側で。64pxへ縮めて本文を
+     242→274pxに広げても Fire Emblem のタイトルは4行のままで、代わりに
+     Akihabara が3→4行に増えた（幅と行数は単調ではない）。サムネは96pxのまま。 */
+  .post-title{ font-size:1.05rem; }
 }
