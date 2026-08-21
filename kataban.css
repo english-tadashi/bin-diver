@@ -184,6 +184,89 @@ a{color:inherit}
 .prose table{ border-collapse:collapse; width:100%; font-size:14px; }
 .prose th,.prose td{ border:1px solid var(--edge); padding:9px 11px; text-align:left; }
 .prose th{ background:var(--surface); color:#ffffff; font-weight:700; }
+
+/* ============================================================
+   .card-table — 600px以下で「1行 = 1カード」に積み替える表（2026-08-21）。
+   使い方:
+     <div class="tablewrap">
+       <table class="card-table">
+         <thead><tr><th>Title</th>…</tr></thead>
+         <tbody><tr><td data-label="Title">…</td>… <td class="cta" data-label="…"><a …></td></tr>
+   ★オプトイン。class を付けた表だけが積み替わる。素の <table> は今までどおり
+     .tablewrap の overflow-x:auto で横スクロールする（列を横に並べて比較させたい
+     表 ―― 例: 地域別の発売日 ―― はカードにすると比較が壊れるので、付けない）。
+   ★列名は td の data-label から出す。nth-child で CSS 側に列名を書くと表ごとに
+     別ルールが要るうえ、列を1つ足したときに黙ってラベルがずれる。
+   ★thead は display:none で消す。列名は各 td が data-label として持っているので
+     情報は落ちない（読み上げも td の ::before ではなく属性由来の文字が出る）。
+   ★.tablewrap の overflow-x:auto は外さない。カード化すると横に溢れないので
+     効かなくなるだけで、外すと600px超で効かなくなる。
+   ★600px超では1行も効かない。通常の表のまま。
+   ============================================================ */
+@media (max-width:600px){
+  /* 表の骨格を解体してブロックに戻す。border-collapse は separate へ戻さないと
+     tr に border-radius が効かない（collapse だと角が丸まらない）。 */
+  .prose table.card-table{ display:block; border-collapse:separate; border-spacing:0; }
+  .prose table.card-table thead{ display:none; }
+  .prose table.card-table tbody{ display:block; }
+
+  .prose table.card-table tr{
+    display:block;
+    margin:0 0 12px;
+    padding:12px 14px;
+    background:var(--surface);
+    border:1px solid var(--edge);
+    border-radius:8px;
+  }
+  .prose table.card-table tr:last-child{ margin-bottom:0; }
+
+  /* セルは .prose td の枠と余白を打ち消してから積む。仕切りは行間の細い罫だけ。 */
+  .prose table.card-table td{
+    display:block;
+    width:auto;
+    border:0;
+    padding:7px 0;
+    text-align:left;
+  }
+  .prose table.card-table td + td{ border-top:1px solid var(--line); }
+
+  /* 列名。--muted は面(--surface)の上で 5.7:1 を確保した値なのでラベルに使える。 */
+  .prose table.card-table td[data-label]::before{
+    content:attr(data-label);
+    display:block;
+    margin-bottom:3px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  /* リンクのセルはボタンにする。
+     ★クラス名は .cta ではなく .cell-cta。.cta は記事末尾の導線ブロック用として
+       既にサイト共通で使われている（下の「CTA」節。margin:44px / padding:28px 24px /
+       text-align:center / 枠 / 背景）。td に .cta を付けるとそれを全部拾い、
+       600px以下ではセルの手前に44pxの空きが出て、600px超では表のセルが崩れる。
+     リンクのセルはカード内で唯一押せるものなので幅いっぱいに広げ、
+     min-height:44px で指のサイズに合わせる（サイト全体の押せる面と同じ基準）。
+     ★ラベル(::before)は出さない。ボタンの文言自体が用を成すので、
+       「KATABAN」と重ねると同じことを2回言うことになる。
+     ★色は --accent(紫)の塗り。文字は --accent-ink＝地色を使う。白だと 4.28:1 で
+       コントラスト基準に届かない（:root のコメント参照）。 */
+  .prose table.card-table td.cell-cta{ padding:12px 0 2px; border-top:0; }
+  .prose table.card-table td.cell-cta::before{ content:none; }
+  .prose table.card-table td.cell-cta a{
+    display:flex; align-items:center; justify-content:center;
+    min-height:44px; padding:10px 14px;
+    background:var(--accent); color:var(--accent-ink);
+    border-radius:6px;
+    font-weight:700; text-decoration:none;
+  }
+  .prose table.card-table td.cell-cta a:hover,
+  .prose table.card-table td.cell-cta a:focus{
+    background:var(--tag); color:var(--accent-ink);
+  }
+}
 /* 日本語のタイトル・読みを本文に混ぜるとき用。本体のカードと同じ書体に揃える。 */
 .prose .jp{ font-family:"IBM Plex Sans JP",sans-serif; }
 
