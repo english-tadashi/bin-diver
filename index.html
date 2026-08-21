@@ -312,24 +312,42 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card .btn-clerk:hover{background:#241c40; border-color:#bf57ff;}
 
 /* ============================================================
-   マイリスト用ボタン（2026-08-19）。型番ブロックの直下に1枚だけ出る。
+   パワーアップアイコンの器。<use> で #icon-powerup-off / -on を差し込む。
+   カードのボタンとマイリスト画面の見出しの両方から使うので、寸法の既定だけ
+   ここに置き、見出し側は .mylist-bar h2 .pu-icon で上書きする。 */
+.pu-icon{display:block; width:20px; height:20px; transition:transform .12s;}
+
+/* ============================================================
+   マイリスト用ボタン（2026-08-19 / 2026-08-21 にアイコンのみへ変更）。
+   タイトルの左に1文字ぶんだけ置く。以前は型番ブロックの直下に出す全幅ボタン
+   （width:100% / min-height:52px / ラベル "Add to list"）だった。
    ★色の予約に触らない: 紫(--signal)は「型番の一致」と「Buyee=届く経路」の2つだけ、
-     シアン(--tag)は店頭ゾーン(.genre-link)。どちらも使わず罫と本文色だけで組む
-     ＝カード内の強さの配分（.store.primary の塗り > .btn-clerk の紫枠 > ここ）を変えない。
-   ★寸法は .btn-clerk / .genre-link と同じ（width:100% / min-height:52px / radius:2px）。
-     押せる面の大きさを店頭の他のボタンと揃える。
-   ★書体は var(--f-display)。ラベルは英字なので .btn-clerk / .genre-link と同じ書体に揃える。
-     （2026-08-19 にラベルを日本語から英語へ変えた際 --f-jp から戻した。仮名を出すなら --f-jp が要る。）
-   ★.is-on は「押せない」ではなく「もう入っている」という**表示**。だから枠と字を一段
-     落として（--hair / --muted）主張を消す。反転させて強くすると済んだものが未済より目立つ。
-     cursor は default に戻す＝押しても何も起きないことを手で示す。 */
-.card .btn-list{width:100%; display:flex; align-items:center; justify-content:center; gap:10px;
-  min-height:52px; padding:10px 16px; cursor:pointer; text-align:center;
-  border:1px solid var(--hair-strong); border-radius:2px; background:var(--paper); color:var(--ink);
-  font:500 15px/1.2 var(--f-display); transition:background .12s,border-color .12s;}
-.card .btn-list:hover{background:#241c40; border-color:var(--ink-2);}
-.card .btn-list.is-on{background:none; border-color:var(--hair); color:var(--muted); cursor:default;}
-.card .btn-list.is-on:hover{background:none; border-color:var(--hair);}
+     シアン(--tag)は店頭ゾーン(.genre-link)。ここはどちらも使わず、アイコンの
+     地の色（白＝未追加／黄＝追加済み）だけで状態を出す。
+   ★枠も背景も持たせない。カード内の強さの配分
+     （.store.primary の塗り > .btn-clerk の紫枠 > ここ）を変えないため。
+     全幅ボタンだった頃はこの配分の一番下に居たが、いま主張を担うのは色だけ。
+   ★見た目は 20px 角だが、::before で 32x40 の押せる面を作る。20px のままだと
+     指には小さすぎる（他の押せるものは min-height:44px で揃えてある）。
+     ::before はタイトル文字に左右6px ほど掛かるが、タイトル側に押せるものは
+     無いので取り合いにならない。
+   ★.title-row は align-items:baseline。タイトルは 25px/29px と行によって
+     大きさが違うので、中央揃えや固定の margin だと行ごとに高さがずれる。
+     ベースラインに載せれば英字の大文字と同じ高さで並ぶ。
+   ★.is-on でも cursor と hover はそのまま。2026-08-21 にトグル化したので、
+     追加済みの状態も「押せる（＝外せる）」。以前は片道だったため .is-on に
+     cursor:default と hover 無効を当てて「押しても何も起きない」を手で示していたが、
+     いまそれを残すと外せることが伝わらない。色（白/黄）だけが状態を担い、
+     押せる合図は両状態で同じにする。 */
+.card .title-row{display:flex; align-items:baseline; gap:9px;}
+.card .btn-list{position:relative; flex:0 0 auto; display:inline-flex;
+  align-items:center; justify-content:center; width:20px; height:20px;
+  padding:0; border:0; border-radius:3px; background:none; cursor:pointer;
+  -webkit-tap-highlight-color:transparent;}
+.card .btn-list::before{content:''; position:absolute; left:50%; top:50%;
+  width:32px; height:40px; transform:translate(-50%,-50%);}
+.card .btn-list:hover .pu-icon{transform:translateY(-2px);}
+.card .btn-list:focus-visible{outline:2px solid var(--ink-2); outline-offset:3px;}
 
 
 /* spec row */
@@ -1084,6 +1102,16 @@ header .lede .lede-sub{ font-weight:400; }
   font:inherit; font-size:13px; font-weight:600;}
 #myListBtn:hover,#myListBtn:focus-visible{background:var(--field); outline:none;}
 #myListBtn .n{color:var(--muted); font-weight:400;}
+/* 入口ボタンの飾り（2026-08-21）。マイリスト画面の見出しと同じ扱い＝押せない装飾なので
+   svg を直に置き、aria-hidden で読み上げからも外す（読まれる語は "My List (0)" のまま）。
+   ★ボタンを flex にはしない。"My List " と .n の間は素のスペース1つで空けてあり、
+     flex にすると gap の値がそこにも効いて既存の字間が変わる。inline-block で
+     文字の流れに載せれば、件数バッジ側の組版に一切触らずに済む。
+   ★寸法は活字に合わせる。この字は 13px なので 14px（見出しは 17px に対して 18px＝同じ比）。
+     vertical-align の -2px は「アイコンの中心を大文字の帯の中心に合わせる」値で、
+     字送りが変わったら (h/2 - capHeight/2) で引き直すこと。 */
+#myListBtn .pu-icon{display:inline-block; width:14px; height:14px;
+  vertical-align:-2px; margin-right:6px;}
 
 /* ============================================================
    マイリスト画面（2026-08-19）
@@ -1112,6 +1140,16 @@ header .lede .lede-sub{ font-weight:400; }
   background:var(--field); border-bottom:1px solid var(--edge);}
 .mylist-bar h2{margin:0; font:500 17px/1.3 var(--f-display); color:var(--ink);}
 .mylist-bar h2 .n{display:block; font:400 12px/1.5 var(--f-mono); color:var(--muted);}
+/* 見出しの飾り（2026-08-21）。カードの [data-list] と同じ色付きアイコンを静的に置く
+   ＝「このアイコンを押すとここに溜まる」を1画面で結ぶ。押せないので button ではなく
+   svg を直に置き、aria-hidden で読み上げからも外す（見出しの語は "My List" だけ）。
+   ★h2 は 17px。20px のままだと字より大きく見えるので 18px に落とし、
+     vertical-align で活字の高さに合わせる（.n が display:block なので改行はしない）。 */
+.mylist-bar h2 .pu-icon{display:inline-block; width:18px; height:18px;
+  vertical-align:-3px; margin-right:7px;}
+/* 空状態の案内文に混ぜる同じアイコン（未追加＝白い方）。文中に置くので本文の
+   活字サイズに合わせて 16px、display:block のままだと改行するので inline-block。 */
+#mylistBody .state .pu-icon{display:inline-block; width:16px; height:16px; vertical-align:-3px;}
 #mylistClose{flex-shrink:0; min-height:44px; padding:10px 16px; cursor:pointer;
   border:1px solid var(--edge-input); border-radius:2px; background:var(--surface); color:var(--ink);
   font:500 13px/1 var(--f-display);}
@@ -1138,7 +1176,9 @@ header .lede .lede-sub{ font-weight:400; }
 /* DATA から引けなかった型番。黙って捨てない ―― 捨てるとその1件を外す手段が無くなる。 */
 .mycard .my-orphan{font:400 14px/1.5 var(--f-display); color:var(--muted);}
 /* 削除。--signal(紫)も --tag(シアン)も使わない ―― どちらも予約済みで、ここは
-   「取り除く」だけの弱い操作。枠と本文色で足りる（.btn-list と同じ段）。 */
+   「取り除く」だけの弱い操作。枠と本文色で足りる。
+   ★かつては「.btn-list と同じ段」と書いていたが、.btn-list は 2026-08-21 に
+     枠も文字も持たないアイコンになったので、寸法・強さの基準はもう共有していない。 */
 .mycard .btn-remove{align-self:flex-start; min-height:44px; padding:10px 18px; cursor:pointer;
   border:1px solid var(--hair-strong); border-radius:2px; background:var(--paper); color:var(--muted);
   font:500 14px/1.2 var(--f-display);}
@@ -1183,13 +1223,269 @@ header .lede .lede-sub{ font-weight:400; }
 </style>
 </head>
 <body>
+
+<!-- ============================================================
+     パワーアップアイコン（2026-08-21）。kataban-powerup-icon.svg /
+     kataban-powerup-icon-white.svg を外部ファイル参照ではなく <symbol> として
+     ここに埋め込んである。使う側は下の2か所（カードの [data-list] ボタン、
+     マイリスト画面の見出し）。
+     ★埋め込みの理由: このアイコンは検索結果の**行数ぶん**出る。<img src> だと
+       1行1リクエストになるうえ、リストへ追加した瞬間の白→色の差し替えで
+       読み込み待ちのちらつきが出る。<use> なら差し替えは href 属性1つで即時。
+     ★2つの symbol は矩形116個の座標がまったく同じで、fill の3色だけが違う
+       （#ffffff→#f2e768 / #d6dade→#c9b81f / #8b949c→#7d6f12）。
+       片方だけ描き直すと未追加/追加済みでドットがずれる。直すときは必ず両方。
+     ★shape-rendering="crispEdges" は symbol 側に付けてある。16x16 のドット絵を
+       20px（1.25倍）で出すので、これを外すとエッジがぼける。
+     ★この svg 自体は display:none。<use> は display:none の中の symbol も引ける。
+     ★使う側の書き方: <svg class="pu-icon"><use href="#icon-powerup-off"></use></svg>
+       外側の svg に viewBox は要らない（symbol 側が持っているものが効く）。
+     ============================================================ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+<symbol id="icon-powerup-off" viewBox="0 0 16 16" shape-rendering="crispEdges">
+  <rect x="6" y="0" width="4" height="1" fill="#0f1114"/>
+  <rect x="4" y="1" width="1" height="1" fill="#0f1114"/>
+  <rect x="5" y="1" width="6" height="1" fill="#e4e8ec"/>
+  <rect x="11" y="1" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="2" width="2" height="1" fill="#0f1114"/>
+  <rect x="4" y="2" width="5" height="1" fill="#e4e8ec"/>
+  <rect x="9" y="2" width="1" height="1" fill="#98a2ab"/>
+  <rect x="10" y="2" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="12" y="2" width="2" height="1" fill="#0f1114"/>
+  <rect x="2" y="3" width="1" height="1" fill="#0f1114"/>
+  <rect x="3" y="3" width="3" height="1" fill="#e4e8ec"/>
+  <rect x="6" y="3" width="4" height="1" fill="#0f1114"/>
+  <rect x="10" y="3" width="2" height="1" fill="#98a2ab"/>
+  <rect x="12" y="3" width="1" height="1" fill="#e4e8ec"/>
+  <rect x="13" y="3" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="4" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="4" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="4" y="4" width="2" height="1" fill="#0f1114"/>
+  <rect x="6" y="4" width="1" height="1" fill="#23262b"/>
+  <rect x="7" y="4" width="2" height="1" fill="#ffffff"/>
+  <rect x="9" y="4" width="1" height="1" fill="#23262b"/>
+  <rect x="10" y="4" width="2" height="1" fill="#0f1114"/>
+  <rect x="12" y="4" width="2" height="1" fill="#98a2ab"/>
+  <rect x="14" y="4" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="5" width="3" height="1" fill="#e4e8ec"/>
+  <rect x="4" y="5" width="1" height="1" fill="#0f1114"/>
+  <rect x="5" y="5" width="1" height="1" fill="#23262b"/>
+  <rect x="6" y="5" width="2" height="1" fill="#ffffff"/>
+  <rect x="8" y="5" width="2" height="1" fill="#d6dade"/>
+  <rect x="10" y="5" width="1" height="1" fill="#23262b"/>
+  <rect x="11" y="5" width="1" height="1" fill="#0f1114"/>
+  <rect x="12" y="5" width="1" height="1" fill="#5b646d"/>
+  <rect x="13" y="5" width="2" height="1" fill="#98a2ab"/>
+  <rect x="0" y="6" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="6" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="6" width="1" height="1" fill="#0f1114"/>
+  <rect x="4" y="6" width="1" height="1" fill="#23262b"/>
+  <rect x="5" y="6" width="2" height="1" fill="#ffffff"/>
+  <rect x="7" y="6" width="4" height="1" fill="#d6dade"/>
+  <rect x="11" y="6" width="1" height="1" fill="#23262b"/>
+  <rect x="12" y="6" width="1" height="1" fill="#0f1114"/>
+  <rect x="13" y="6" width="1" height="1" fill="#5b646d"/>
+  <rect x="14" y="6" width="1" height="1" fill="#98a2ab"/>
+  <rect x="15" y="6" width="1" height="1" fill="#0f1114"/>
+  <rect x="0" y="7" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="7" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="7" width="1" height="1" fill="#0f1114"/>
+  <rect x="4" y="7" width="1" height="1" fill="#23262b"/>
+  <rect x="5" y="7" width="1" height="1" fill="#ffffff"/>
+  <rect x="6" y="7" width="5" height="1" fill="#d6dade"/>
+  <rect x="11" y="7" width="1" height="1" fill="#23262b"/>
+  <rect x="12" y="7" width="1" height="1" fill="#0f1114"/>
+  <rect x="13" y="7" width="1" height="1" fill="#5b646d"/>
+  <rect x="14" y="7" width="1" height="1" fill="#98a2ab"/>
+  <rect x="15" y="7" width="1" height="1" fill="#0f1114"/>
+  <rect x="0" y="8" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="8" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="8" width="1" height="1" fill="#0f1114"/>
+  <rect x="4" y="8" width="1" height="1" fill="#23262b"/>
+  <rect x="5" y="8" width="5" height="1" fill="#d6dade"/>
+  <rect x="10" y="8" width="1" height="1" fill="#8b949c"/>
+  <rect x="11" y="8" width="1" height="1" fill="#23262b"/>
+  <rect x="12" y="8" width="1" height="1" fill="#0f1114"/>
+  <rect x="13" y="8" width="1" height="1" fill="#5b646d"/>
+  <rect x="14" y="8" width="1" height="1" fill="#98a2ab"/>
+  <rect x="15" y="8" width="1" height="1" fill="#0f1114"/>
+  <rect x="0" y="9" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="9" width="1" height="1" fill="#e4e8ec"/>
+  <rect x="2" y="9" width="1" height="1" fill="#98a2ab"/>
+  <rect x="3" y="9" width="1" height="1" fill="#0f1114"/>
+  <rect x="4" y="9" width="1" height="1" fill="#23262b"/>
+  <rect x="5" y="9" width="4" height="1" fill="#d6dade"/>
+  <rect x="9" y="9" width="2" height="1" fill="#8b949c"/>
+  <rect x="11" y="9" width="1" height="1" fill="#23262b"/>
+  <rect x="12" y="9" width="1" height="1" fill="#0f1114"/>
+  <rect x="13" y="9" width="1" height="1" fill="#5b646d"/>
+  <rect x="14" y="9" width="1" height="1" fill="#98a2ab"/>
+  <rect x="15" y="9" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="10" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="10" width="1" height="1" fill="#98a2ab"/>
+  <rect x="4" y="10" width="1" height="1" fill="#0f1114"/>
+  <rect x="5" y="10" width="1" height="1" fill="#23262b"/>
+  <rect x="6" y="10" width="2" height="1" fill="#d6dade"/>
+  <rect x="8" y="10" width="2" height="1" fill="#8b949c"/>
+  <rect x="10" y="10" width="1" height="1" fill="#23262b"/>
+  <rect x="11" y="10" width="1" height="1" fill="#0f1114"/>
+  <rect x="12" y="10" width="1" height="1" fill="#5b646d"/>
+  <rect x="13" y="10" width="2" height="1" fill="#98a2ab"/>
+  <rect x="1" y="11" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="11" width="1" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="11" width="1" height="1" fill="#98a2ab"/>
+  <rect x="4" y="11" width="2" height="1" fill="#0f1114"/>
+  <rect x="6" y="11" width="1" height="1" fill="#23262b"/>
+  <rect x="7" y="11" width="2" height="1" fill="#8b949c"/>
+  <rect x="9" y="11" width="1" height="1" fill="#23262b"/>
+  <rect x="10" y="11" width="2" height="1" fill="#0f1114"/>
+  <rect x="12" y="11" width="1" height="1" fill="#5b646d"/>
+  <rect x="13" y="11" width="1" height="1" fill="#98a2ab"/>
+  <rect x="14" y="11" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="12" width="1" height="1" fill="#0f1114"/>
+  <rect x="3" y="12" width="1" height="1" fill="#e4e8ec"/>
+  <rect x="4" y="12" width="1" height="1" fill="#98a2ab"/>
+  <rect x="5" y="12" width="1" height="1" fill="#5b646d"/>
+  <rect x="6" y="12" width="4" height="1" fill="#0f1114"/>
+  <rect x="10" y="12" width="2" height="1" fill="#5b646d"/>
+  <rect x="12" y="12" width="1" height="1" fill="#98a2ab"/>
+  <rect x="13" y="12" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="13" width="2" height="1" fill="#0f1114"/>
+  <rect x="4" y="13" width="2" height="1" fill="#98a2ab"/>
+  <rect x="6" y="13" width="4" height="1" fill="#5b646d"/>
+  <rect x="10" y="13" width="2" height="1" fill="#98a2ab"/>
+  <rect x="12" y="13" width="2" height="1" fill="#0f1114"/>
+  <rect x="4" y="14" width="1" height="1" fill="#0f1114"/>
+  <rect x="5" y="14" width="6" height="1" fill="#98a2ab"/>
+  <rect x="11" y="14" width="1" height="1" fill="#0f1114"/>
+  <rect x="6" y="15" width="4" height="1" fill="#0f1114"/>
+</symbol>
+<symbol id="icon-powerup-on" viewBox="0 0 16 16" shape-rendering="crispEdges">
+  <rect x="6" y="0" width="4" height="1" fill="#0f1114"/>
+  <rect x="4" y="1" width="1" height="1" fill="#0f1114"/>
+  <rect x="5" y="1" width="6" height="1" fill="#e4e8ec"/>
+  <rect x="11" y="1" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="2" width="2" height="1" fill="#0f1114"/>
+  <rect x="4" y="2" width="5" height="1" fill="#e4e8ec"/>
+  <rect x="9" y="2" width="1" height="1" fill="#98a2ab"/>
+  <rect x="10" y="2" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="12" y="2" width="2" height="1" fill="#0f1114"/>
+  <rect x="2" y="3" width="1" height="1" fill="#0f1114"/>
+  <rect x="3" y="3" width="3" height="1" fill="#e4e8ec"/>
+  <rect x="6" y="3" width="4" height="1" fill="#0f1114"/>
+  <rect x="10" y="3" width="2" height="1" fill="#98a2ab"/>
+  <rect x="12" y="3" width="1" height="1" fill="#e4e8ec"/>
+  <rect x="13" y="3" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="4" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="4" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="4" y="4" width="2" height="1" fill="#0f1114"/>
+  <rect x="6" y="4" width="1" height="1" fill="#23262b"/>
+  <rect x="7" y="4" width="2" height="1" fill="#f2e768"/>
+  <rect x="9" y="4" width="1" height="1" fill="#23262b"/>
+  <rect x="10" y="4" width="2" height="1" fill="#0f1114"/>
+  <rect x="12" y="4" width="2" height="1" fill="#98a2ab"/>
+  <rect x="14" y="4" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="5" width="3" height="1" fill="#e4e8ec"/>
+  <rect x="4" y="5" width="1" height="1" fill="#0f1114"/>
+  <rect x="5" y="5" width="1" height="1" fill="#23262b"/>
+  <rect x="6" y="5" width="2" height="1" fill="#f2e768"/>
+  <rect x="8" y="5" width="2" height="1" fill="#c9b81f"/>
+  <rect x="10" y="5" width="1" height="1" fill="#23262b"/>
+  <rect x="11" y="5" width="1" height="1" fill="#0f1114"/>
+  <rect x="12" y="5" width="1" height="1" fill="#5b646d"/>
+  <rect x="13" y="5" width="2" height="1" fill="#98a2ab"/>
+  <rect x="0" y="6" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="6" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="6" width="1" height="1" fill="#0f1114"/>
+  <rect x="4" y="6" width="1" height="1" fill="#23262b"/>
+  <rect x="5" y="6" width="2" height="1" fill="#f2e768"/>
+  <rect x="7" y="6" width="4" height="1" fill="#c9b81f"/>
+  <rect x="11" y="6" width="1" height="1" fill="#23262b"/>
+  <rect x="12" y="6" width="1" height="1" fill="#0f1114"/>
+  <rect x="13" y="6" width="1" height="1" fill="#5b646d"/>
+  <rect x="14" y="6" width="1" height="1" fill="#98a2ab"/>
+  <rect x="15" y="6" width="1" height="1" fill="#0f1114"/>
+  <rect x="0" y="7" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="7" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="7" width="1" height="1" fill="#0f1114"/>
+  <rect x="4" y="7" width="1" height="1" fill="#23262b"/>
+  <rect x="5" y="7" width="1" height="1" fill="#f2e768"/>
+  <rect x="6" y="7" width="5" height="1" fill="#c9b81f"/>
+  <rect x="11" y="7" width="1" height="1" fill="#23262b"/>
+  <rect x="12" y="7" width="1" height="1" fill="#0f1114"/>
+  <rect x="13" y="7" width="1" height="1" fill="#5b646d"/>
+  <rect x="14" y="7" width="1" height="1" fill="#98a2ab"/>
+  <rect x="15" y="7" width="1" height="1" fill="#0f1114"/>
+  <rect x="0" y="8" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="8" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="8" width="1" height="1" fill="#0f1114"/>
+  <rect x="4" y="8" width="1" height="1" fill="#23262b"/>
+  <rect x="5" y="8" width="5" height="1" fill="#c9b81f"/>
+  <rect x="10" y="8" width="1" height="1" fill="#7d6f12"/>
+  <rect x="11" y="8" width="1" height="1" fill="#23262b"/>
+  <rect x="12" y="8" width="1" height="1" fill="#0f1114"/>
+  <rect x="13" y="8" width="1" height="1" fill="#5b646d"/>
+  <rect x="14" y="8" width="1" height="1" fill="#98a2ab"/>
+  <rect x="15" y="8" width="1" height="1" fill="#0f1114"/>
+  <rect x="0" y="9" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="9" width="1" height="1" fill="#e4e8ec"/>
+  <rect x="2" y="9" width="1" height="1" fill="#98a2ab"/>
+  <rect x="3" y="9" width="1" height="1" fill="#0f1114"/>
+  <rect x="4" y="9" width="1" height="1" fill="#23262b"/>
+  <rect x="5" y="9" width="4" height="1" fill="#c9b81f"/>
+  <rect x="9" y="9" width="2" height="1" fill="#7d6f12"/>
+  <rect x="11" y="9" width="1" height="1" fill="#23262b"/>
+  <rect x="12" y="9" width="1" height="1" fill="#0f1114"/>
+  <rect x="13" y="9" width="1" height="1" fill="#5b646d"/>
+  <rect x="14" y="9" width="1" height="1" fill="#98a2ab"/>
+  <rect x="15" y="9" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="10" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="10" width="1" height="1" fill="#98a2ab"/>
+  <rect x="4" y="10" width="1" height="1" fill="#0f1114"/>
+  <rect x="5" y="10" width="1" height="1" fill="#23262b"/>
+  <rect x="6" y="10" width="2" height="1" fill="#c9b81f"/>
+  <rect x="8" y="10" width="2" height="1" fill="#7d6f12"/>
+  <rect x="10" y="10" width="1" height="1" fill="#23262b"/>
+  <rect x="11" y="10" width="1" height="1" fill="#0f1114"/>
+  <rect x="12" y="10" width="1" height="1" fill="#5b646d"/>
+  <rect x="13" y="10" width="2" height="1" fill="#98a2ab"/>
+  <rect x="1" y="11" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="11" width="1" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="11" width="1" height="1" fill="#98a2ab"/>
+  <rect x="4" y="11" width="2" height="1" fill="#0f1114"/>
+  <rect x="6" y="11" width="1" height="1" fill="#23262b"/>
+  <rect x="7" y="11" width="2" height="1" fill="#7d6f12"/>
+  <rect x="9" y="11" width="1" height="1" fill="#23262b"/>
+  <rect x="10" y="11" width="2" height="1" fill="#0f1114"/>
+  <rect x="12" y="11" width="1" height="1" fill="#5b646d"/>
+  <rect x="13" y="11" width="1" height="1" fill="#98a2ab"/>
+  <rect x="14" y="11" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="12" width="1" height="1" fill="#0f1114"/>
+  <rect x="3" y="12" width="1" height="1" fill="#e4e8ec"/>
+  <rect x="4" y="12" width="1" height="1" fill="#98a2ab"/>
+  <rect x="5" y="12" width="1" height="1" fill="#5b646d"/>
+  <rect x="6" y="12" width="4" height="1" fill="#0f1114"/>
+  <rect x="10" y="12" width="2" height="1" fill="#5b646d"/>
+  <rect x="12" y="12" width="1" height="1" fill="#98a2ab"/>
+  <rect x="13" y="12" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="13" width="2" height="1" fill="#0f1114"/>
+  <rect x="4" y="13" width="2" height="1" fill="#98a2ab"/>
+  <rect x="6" y="13" width="4" height="1" fill="#5b646d"/>
+  <rect x="10" y="13" width="2" height="1" fill="#98a2ab"/>
+  <rect x="12" y="13" width="2" height="1" fill="#0f1114"/>
+  <rect x="4" y="14" width="1" height="1" fill="#0f1114"/>
+  <rect x="5" y="14" width="6" height="1" fill="#98a2ab"/>
+  <rect x="11" y="14" width="1" height="1" fill="#0f1114"/>
+  <rect x="6" y="15" width="4" height="1" fill="#0f1114"/>
+</symbol>
+</svg>
 <div id="locbar">
   <div class="locbar-in">
     <div class="locpair" role="group" aria-label="Where are you buying from?">
       <button type="button" class="locbtn is-on" data-loc="out" aria-pressed="true" onclick="setLoc('out')">I'm outside Japan</button>
       <button type="button" class="locbtn" data-loc="jp" aria-pressed="false" onclick="setLoc('jp')">I'm in Japan</button>
     </div>
-    <button type="button" id="myListBtn" aria-haspopup="dialog" aria-expanded="false">My List <span class="n" id="myListCount">(0)</span></button>
+    <button type="button" id="myListBtn" aria-haspopup="dialog" aria-expanded="false"><svg class="pu-icon" aria-hidden="true" focusable="false"><use href="#icon-powerup-on"></use></svg>My List <span class="n" id="myListCount">(0)</span></button>
   </div>
 </div>
 
@@ -1395,7 +1691,7 @@ header .lede .lede-sub{ font-weight:400; }
      行データは DATA から引き直す（データを二重に持たない）。 -->
 <div id="mylist" role="dialog" aria-modal="true" aria-labelledby="mylist-title">
   <div class="mylist-bar">
-    <h2 id="mylist-title">My List<span class="n" id="mylistCount">0 saved</span></h2>
+    <h2 id="mylist-title"><svg class="pu-icon" aria-hidden="true" focusable="false"><use href="#icon-powerup-on"></use></svg>My List<span class="n" id="mylistCount">0 saved</span></h2>
     <button type="button" id="mylistClose">Close</button>
   </div>
   <div id="mylistBody"></div>
@@ -1474,9 +1770,27 @@ function listAdd(code){
   return true;
 }
 
+/* アイコンボタン1個の見た目と読み上げを状態に合わせる（2026-08-21）。
+   ラベルが文字だった頃は各所で btn.textContent を書いていたが、いまは
+   is-on / aria-pressed / aria-label / <use href> の4つを必ず揃えて動かす必要があるので、
+   書き換える側（追加ハンドラ・マイリスト画面の削除・clearMyList の3か所）から
+   まとめてここを呼ぶ。1か所でも書き忘れると「白いのに追加済み」等の食い違いが出る。
+   ★保存の成否は見ない。呼ぶ側が listAdd / listRemove の戻り値を確かめてから呼ぶこと
+     （「入れたつもりで入っていない」を作らないため。[data-copy] と同じ考え方）。
+   ★<use> が引けなかった場合（描画前など）は href だけ黙って飛ばす。属性が揃っていれば
+     読み上げと状態は正しいまま。 */
+function listBtnPaint(btn, on){
+  btn.classList.toggle('is-on', on);
+  btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+  btn.setAttribute('aria-label', on ? 'Remove from My List' : 'Add to My List');
+  const use = btn.querySelector('use');
+  if(use) use.setAttribute('href', on ? '#icon-powerup-on' : '#icon-powerup-off');
+}
+
 /* コンソール確認用。window に置くのは開発者コンソールから直接叩くため。
    myList()      … いま localStorage に入っている配列を読んで表示し、返す
-   clearMyList() … 全消し。一覧画面がまだ無いので、外す手段は今のところこれだけ。 */
+   clearMyList() … 全消し。1件ずつ外すならカードのアイコン（トグル）か
+                   マイリスト画面の Remove で足りるので、これは一括用。 */
 window.myList = function(){
   let raw = null;
   try{ raw = localStorage.getItem(LIST_KEY); }
@@ -1492,11 +1806,7 @@ window.clearMyList = function(){
   try{ localStorage.removeItem(LIST_KEY); }catch(e){}
   // paint() は呼ばない（検索していない状態だと結果欄を空にしてしまう）。
   // 画面に出ているボタンだけ戻す。
-  document.querySelectorAll('.btn-list.is-on').forEach(b=>{
-    b.classList.remove('is-on');
-    b.setAttribute('aria-pressed','false');
-    b.textContent = 'Add to list';
-  });
+  document.querySelectorAll('.btn-list.is-on').forEach(b=>{ listBtnPaint(b, false); });
   mylistRefresh();                       // 件数バッジ／開いていれば一覧も空にする
   console.log('[my-list] 全消ししました');
 };
@@ -2877,6 +3187,21 @@ function card(r,idx){
   const codeCopy = esc(codes.join(' '));                              // スラブのコピー値(属性用にエスケープ)
   const pubShow  = pubs.join(' · ');
   const noCode = codes.length === 0 && !r[12];   // 型番の無い物理ソフト。日本語タイトルが唯一の検索キー
+  // マイリストのアイコンボタン（2026-08-21。以前は型番ブロック直下の全幅ボタンだった）。
+  // ★型番の無い行には出さない ―― 保存する値が無いため（LIST_KEY 付近のコメント参照）。
+  // ★置き場所は「そのカードで一番上に出るタイトル」の左。英題がある行は .en-title の左、
+  //   無い行は .ja-title の左（下の .identity を参照）。両方消える行は無い:
+  //   .ja-title を隠す hideJa は en が真のときしか立たないため、en が偽なら必ず出る。
+  // ★状態は3つ同時に持たせる: is-on（見た目）/ aria-pressed（押下状態）/ aria-label（読み上げ）。
+  //   label は状態の記述ではなく**押すと起きること**を書く（2026-08-21 のトグル化で
+  //   "In My List" から "Remove from My List" へ戻した）。aria-pressed が状態を伝えるので、
+  //   label まで状態にすると「押されている / リストにあります」と二重に読まれる。
+  //   押した後にこの3つと <use href> を書き換える手順は listBtnPaint() に寄せてある
+  //   ＝ここの初期値と listBtnPaint() は必ず同じ文言・同じ href を使うこと。
+  const inList = listSet.has(code);
+  const listBtn = codes.length ? `<button class="btn-list${inList?' is-on':''}" type="button"
+      data-list="${esc(code)}" aria-pressed="${inList?'true':'false'}"
+      aria-label="${inList?'Remove from My List':'Add to My List'}"><svg class="pu-icon" aria-hidden="true" focusable="false"><use href="#icon-powerup-${inList?'on':'off'}"></use></svg></button>` : '';
   return `<article class="card">
 
     <div class="status"><span class="dot"></span>Match &middot; Japan / NTSC-J</div>
@@ -2890,12 +3215,12 @@ function card(r,idx){
     <div class="identity">
       ${en?`<div class="field">
         <span class="micro plain">English</span>
-        <div class="en-title">${esc(en)}</div>
+        <div class="title-row">${listBtn}<div class="en-title">${esc(en)}</div></div>
         ${AMBIG_EN.has(strong(en))?`<div class="cap">This English name covers more than one Japanese release. Check the Japanese title and the code below.</div>`:''}
       </div>`:''}
       <div class="field">
         ${hideJa?'':`<span class="micro plain">Japanese reading</span>`}
-        ${hideJa?'':`<div class="ja-title">${esc(jpMain)}</div>`}
+        ${hideJa?'':`<div class="title-row">${en?'':listBtn}<div class="ja-title">${esc(jpMain)}</div></div>`}
         ${romaji?`<div class="romaji">${esc(romaji)}</div>`:''}
         ${noCode?`<div class="no-code-notice">No product code on record</div>`:''}
       </div>
@@ -2933,13 +3258,6 @@ function card(r,idx){
       </div>
       <div class="cap" style="margin-top:7px;">Latin letters — type it into any store yourself, or copy.</div>
     </div>`:''}
-
-    <!-- リストに追加（保存だけ・一覧画面はまだ無い）。押すと row[3] を localStorage に貯める。
-         ★型番の無い行には出さない ―― 保存する値が無いため（LIST_KEY 付近のコメント参照）。
-         ★このコメントはテンプレートリテラルの中にある。バッククォートを書くと文字列がそこで
-           閉じてJSが壊れる（上の .instore のコメントと同じ注意）。 -->
-    ${codes.length?`<button class="btn-list${listSet.has(code)?' is-on':''}" type="button"
-      data-list="${esc(code)}" aria-pressed="${listSet.has(code)?'true':'false'}">${listSet.has(code)?'In list':'Add to list'}</button>`:''}
 
 
     ${noCode?`<div>
@@ -3125,27 +3443,43 @@ document.addEventListener('click', e=>{
 });
 
 // ============================================================
-// リストに追加 — カードは paint() で作り直されるので個別結線ではなく委任
+// リストの追加／解除 — カードは paint() で作り直されるので個別結線ではなく委任
 // （[data-copy] と同じ理由）。付ける先は #results：このボタンはカードの中にしか無く、
 // 店員モードや各モーダルには出ない。
-// ★既に入っている行では何もしない。表示は既に「リスト済み」で、外す導線は一覧画面の仕事。
-// ★保存に失敗したらラベルを変えない。「入れたつもりで入っていない」を作らないため
-//   （[data-copy] が成否を見てから ✓/Hold を出しているのと同じ）。
+// ★2026-08-21 にトグルへ変更。それまでは片道（追加のみ）で、外す導線はマイリスト
+//   画面だけだった。押した本人がその場で取り消せないのが不便なため、同じボタンで
+//   追加⇔解除の両方を受ける。
+// ★分岐は listSet の中身だけで決める（見た目の .is-on ではなく保存側を正とする）。
+//   クラスを正にすると、保存に失敗した回の見た目のずれがそのまま次の判定に効いて
+//   「白いのに listSet には入っている」行が押しても直らなくなる。
+// ★保存に失敗したら見た目を変えない。「入れたつもりで入っていない」も
+//   「外したつもりで外れていない」も作らないため（[data-copy] が成否を見てから
+//   ✓/Hold を出しているのと同じ）。listAdd / listRemove は失敗時に listSet を
+//   自分で巻き戻すので、ここで戻す必要は無い。
+// ★listRemove は下のマイリスト画面の節で定義しているが、function 宣言なので
+//   巻き上げられてここから呼べる（実行はクリック時＝定義済み）。
+// ★mylistRefresh() は件数バッジを直し、マイリスト画面が開いていれば中身も組み直す
+//   ＝一覧を開いたまま背後のカードで解除しても、一覧側の行がその場で消える。
 // ============================================================
 results.addEventListener('click', e=>{
   const btn = e.target.closest('[data-list]');
   if(!btn) return;
   const code = btn.getAttribute('data-list');
-  if(listSet.has(code)) return;
-  if(!listAdd(code)){
-    toast('Couldn\u2019t save on this device \u2014 private browsing blocks storage.');
-    return;
+  const on = listSet.has(code);          // 押す**前**の状態。押した後は !on になる
+  if(on){
+    if(!listRemove(code)){
+      toast('Couldn\u2019t update your list on this device \u2014 private browsing blocks storage.');
+      return;
+    }
+  }else{
+    if(!listAdd(code)){
+      toast('Couldn\u2019t save on this device \u2014 private browsing blocks storage.');
+      return;
+    }
   }
-  btn.classList.add('is-on');
-  btn.setAttribute('aria-pressed','true');
-  btn.textContent = 'In list';
+  listBtnPaint(btn, !on);
   mylistRefresh();                       // 入口ボタンの件数バッジを合わせる
-  console.log('[my-list] added: ' + code + ' \u2192 ' + listSet.size + '件', [...listSet]);
+  console.log('[my-list] ' + (on?'removed':'added') + ': ' + code + ' \u2192 ' + listSet.size + '件', [...listSet]);
 });
 
 /* ============================================================
@@ -3237,7 +3571,7 @@ function mylistRender(){
   const codes = [...listSet];
   mylistBody.innerHTML = codes.length
     ? codes.map(mylistCard).join('')
-    : '<div class="state"><b>Nothing saved yet.</b>Your list is empty \u2014 tap \u201cAdd to list\u201d on any search result to keep its product code here.</div>';
+    : '<div class="state"><b>Nothing saved yet.</b>Your list is empty \u2014 tap the <svg class="pu-icon" aria-hidden="true" focusable="false"><use href="#icon-powerup-off"></use></svg> beside a title in your search results to keep its product code here.</div>';
 }
 
 function mylistOpen(){
@@ -3280,9 +3614,7 @@ mylistBody.addEventListener('click', e=>{
   // （検索していない状態だと結果欄を空にしてしまう。clearMyList と同じ理由）。
   document.querySelectorAll('#results .btn-list.is-on').forEach(b=>{
     if(b.getAttribute('data-list') !== code) return;
-    b.classList.remove('is-on');
-    b.setAttribute('aria-pressed','false');
-    b.textContent = 'Add to list';
+    listBtnPaint(b, false);
   });
   mylistRefresh();
   console.log('[my-list] removed: ' + code + ' \u2192 ' + listSet.size + '件', [...listSet]);
