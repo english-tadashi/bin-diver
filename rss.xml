@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kataban Blog</title>
+    <link>https://gamekataban.com/blog/</link>
+    <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
+    <language>en</language>
+    <lastBuildDate>Sat, 22 Aug 2026 17:21:54 +0900</lastBuildDate>
+    <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Aliens: Fireteam Elite 2 Is Coming — And the Japanese Alien Games That Came Before It</title>
+      <link>https://gamekataban.com/blog/2026-08-22-aliens-fireteam-elite-2-jp-data.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-08-22-aliens-fireteam-elite-2-jp-data.html</guid>
+      <description>Aliens: Fireteam Elite 2 releases August 25, 2026. Here's what Japan's game database actually holds from the games that came before it — and why the closest thing you can buy isn't officially Aliens.</description>
+      <pubDate>Sat, 22 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>What Does "Junk" Mean When Buying Used Games in Japan?</title>
+      <link>https://gamekataban.com/blog/2026-08-22-glossary-junk.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-08-22-glossary-junk.html</guid>
+      <description>In Japanese used game shops, "Junk" (ジャンク) doesn't mean broken — it means "sold as-is, no guarantee." Here's what that really means before you buy.</description>
+      <pubDate>Sat, 22 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>Golden Axe Is Getting an Anime. Here's What the Original Japanese Releases Actually Look Like</title>
+      <link>https://gamekataban.com/blog/2026-08-21-golden-axe-anime-jp-data.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-08-21-golden-axe-anime-jp-data.html</guid>
+      <description>Paramount+ drops the Golden Axe anime on September 16. Here is what the five original Japanese releases actually are, which versions never left Japan, and the product codes to search them by.</description>
+      <pubDate>Fri, 21 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>Fire Emblem: Where It All Began — 5 Famicom &amp; Super Famicom Games You Can Import Today</title>
+      <link>https://gamekataban.com/blog/2026-08-18-fire-emblem-famicom-super-famicom-origins.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-08-18-fire-emblem-famicom-super-famicom-origins.html</guid>
+      <description>Before Awakening, before Three Houses — discover the five Famicom and Super Famicom games that started Fire Emblem, and how to import them from Japan.</description>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>Akihabara's Chuo-dori Retro Row: The Essential First Walk for Overseas Collectors</title>
+      <link>https://gamekataban.com/blog/2026-08-18-akihabara-chuo-dori-retro-row.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-08-18-akihabara-chuo-dori-retro-row.html</guid>
+      <description>The core Akihabara retro game walk along Chuo-dori — four legendary shops, one straight line, no Japanese required.</description>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>How to Buy Japanese Retro Games Without Reading Japanese</title>
+      <link>https://gamekataban.com/blog/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html</guid>
+      <description>A step-by-step guide to finding, identifying, and buying used Japanese retro games online — no Japanese literacy required.</description>
+      <pubDate>Tue, 11 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+  </channel>
+</rss>
