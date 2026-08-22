@@ -34,4 +34,13 @@
   }
   paint(document.getElementById("kbGridPink"), "kb-on-pink");
   paint(document.getElementById("kbGridCyan"), "kb-on-cyan");
+  /* ヘッダー以外のロゴ（フッターの署名など）は data-kb 属性で拾う。
+     ID は1ページに1つしか置けないので、2つ目からはこちら。
+     ヘッダー側を ID のまま残してあるのは、既存の全ページの markup を
+     触らずに済ませるため（移行漏れのページでロゴが無言で消えるのを避ける）。
+     ★index.html 末尾の同名 IIFE にも同じ4行がある。片方だけ直さない。 */
+  var kbMore = document.querySelectorAll(".kb-grid[data-kb]");
+  for (var kbI = 0; kbI < kbMore.length; kbI++) {
+    paint(kbMore[kbI], kbMore[kbI].getAttribute("data-kb"));
+  }
 })();

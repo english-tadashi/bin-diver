@@ -304,6 +304,34 @@ footer{ margin-top:52px; border-top:2px solid var(--edge); padding:18px 0 40px;
 footer a{ color:var(--tag); text-decoration:underline; }
 footer a:hover,footer a:focus{ color:var(--accent); }
 
+/* ---- フッターのブランド署名（ロゴ＋タグライン）2026-08-22 ----
+   ヘッダー(.sitehead-brand)より更に小さい版。--kb-px は vw で伸ばさず 3px 固定にする。
+   足元の署名が画面幅で育つと主張が強くなりすぎるのと、固定値なら index.html 側と
+   全幅で同寸になる（ヘッダーの clamp が2系統ある問題を持ち込まない）ため。
+   41ドット×3px = 123px幅 / 7ドット×3px = 21px高。フッター本文 11px と釣り合う。
+
+   ★セレクタは .foot-brand で入れ子にしてある。.kb-word--foot のような同詳細度の
+     modifier にすると、kataban.css と index.html で .kb-word との前後関係が違うため
+     （index.html はフッターCSSがロゴCSSより前にある）片方だけ効かなくなる。
+   ★このブロックは index.html のインライン <style> と**バイト一致**で持つ。
+     ズレたら diff で分かるようにしてある。片方だけ直さない。 */
+.foot-brand{ display:flex; flex-direction:column; align-items:flex-start;
+  gap:9px; margin:0 0 16px; }
+/* animation/filter は index.html 側の .kb-word（呼吸アニメ・reduced-motion の
+   drop-shadow）を殺すためだけに要る。kataban.css には kb-breathe が無いので
+   ここでは無害だが、2つのコピーを同一に保つためあえて書いてある。 */
+.foot-brand .kb-word{ --kb-px:3px; animation:none; filter:none; }
+/* ゴーストのずらし幅。ヘッダーの 4px/2px は 3px ドットだと1ドット以上の段差になり
+   別の字に見えるので 1px まで詰める。 */
+.foot-brand .kb-ghost{ transform:translate(1px,1px); }
+/* グローもヘッダー基準(8〜12px)だと 3px ドットでは滲んで潰れる。 */
+.foot-brand .kb-on-pink{ box-shadow:0 0 4px var(--logo-gold); }
+.foot-brand .kb-on-cyan{ box-shadow:0 0 3px var(--logo-pink); }
+/* ★色は var(--muted) 固定。--tag(シアン)はフッターのリンク色なのでリンクに見え、
+   --accent(紫)は「型番の一致」「Buyee=届く経路」に予約されている（BIN_DIVER_DESIGN.md）。 */
+.foot-tagline{ margin:0; font-family:var(--f-pixel); font-size:10px;
+  letter-spacing:1.5px; line-height:1.5; color:var(--muted); }
+
 @media (max-width:480px){
   .sitehead{ padding:16px 0 14px; }
   .backlink{ padding:10px 12px; font-size:9px; }
