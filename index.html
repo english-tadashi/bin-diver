@@ -586,11 +586,14 @@ footer a:hover,footer a:focus{color:var(--accent)}
    ★ は一律 1em）。字形がプラットフォームで変わる点は承知のうえで許容する。
    ★margin-right の負値は letter-spacing の相殺。letter-spacing は**最後の1文字の
      後ろにも空きを作る**ので、これが無いと中央寄せが左へ半文字ぶんずれる。
-   ★色は var(--muted)。タグラインを白に上げたぶん★は一段下の重さに置き、視線が
-     タグラインに落ちるようにする。--accent(紫)は「型番の一致」「Buyee=届く経路」に
-     予約、--tag(シアン)はフッターのリンク色なのでリンクに見える（どちらも使えない）。 */
-.foot-stars{ margin:0; margin-right:-.7em; font-size:13px; line-height:1;
-  letter-spacing:.7em; color:var(--muted); }
+     どちらも em なので font-size を変えれば追従する（実寸を書かない理由）。
+   ★色は #ffffff（2026-08-22 に var(--muted) から変更）。タグラインと同じ白なので、
+     階層は**色ではなく字面の大きさと余白**で作る ―― ★16px / タグライン10px、
+     間は .foot-brand の gap:11px。色で差を付けようとして --accent(紫) や
+     --tag(シアン) に手を出さないこと。紫は「型番の一致」「Buyee=届く経路」に予約、
+     シアンはフッターのリンク色なのでリンクに見える。 */
+.foot-stars{ margin:0; margin-right:-.7em; font-size:16px; line-height:1;
+  letter-spacing:.7em; color:#ffffff; }
 /* 白はヘッダーの .kb-tagline に揃えた。ただし text-shadow のグローは付けない
    ＝足元はヘッダーより静かに保つ。 */
 .foot-tagline{ margin:0; font-family:var(--f-pixel); font-size:10px;
