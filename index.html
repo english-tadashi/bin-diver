@@ -551,19 +551,25 @@ footer{border-top:2px solid var(--edge);padding:18px 0 40px;font-family:"Space M
 footer a{color:var(--tag);text-decoration:underline}
 footer a:hover,footer a:focus{color:var(--accent)}
 
-/* ---- フッターのブランド署名（ロゴ＋タグライン）2026-08-22 ----
-   ヘッダー(.sitehead-brand)より更に小さい版。--kb-px は vw で伸ばさず 3px 固定にする。
-   足元の署名が画面幅で育つと主張が強くなりすぎるのと、固定値なら index.html 側と
-   全幅で同寸になる（ヘッダーの clamp が2系統ある問題を持ち込まない）ため。
-   41ドット×3px = 123px幅 / 7ドット×3px = 21px高。フッター本文 11px と釣り合う。
+/* ---- フッターのブランド署名（★★★／タグライン／ロゴ）2026-08-22 ----
+   フッターの**最下部**に置く署名。出典・アフィリエイト表記・ナビリンクを読み切った
+   あとに来る締めなので、上に 30px 空けて中央に積む。
+   ★区切り罫線は入れない。フッター上端に既に 2px の罫線があり、2本目を足すと
+     足元がうるさくなる（BIN_DIVER_DESIGN.md「罫線と余白で静かに整える」）。
 
-   ★セレクタは .foot-brand で入れ子にしてある。.kb-word--foot のような同詳細度の
+   ロゴは --kb-px を vw で伸ばさず 3px 固定にする。足元の署名が画面幅で育つと
+   主張が強くなりすぎるのと、固定値なら index.html 側と全幅で同寸になるため
+   （ヘッダーの clamp が2系統ある問題を持ち込まない）。41×3=123px / 7×3=21px。
+
+   ★セレクタは .foot-brand で入れ子にしてある。.foot-brand--x のような同詳細度の
      modifier にすると、kataban.css と index.html で .kb-word との前後関係が違うため
      （index.html はフッターCSSがロゴCSSより前にある）片方だけ効かなくなる。
    ★このブロックは index.html のインライン <style> と**バイト一致**で持つ。
      ズレたら diff で分かるようにしてある。片方だけ直さない。 */
-.foot-brand{ display:flex; flex-direction:column; align-items:flex-start;
-  gap:9px; margin:0 0 16px; }
+/* ★text-align:center は保険ではなく必須。320px 幅ではタグラインが2行に折り返すので
+   （実測: タグライン 287.5px vs 内容領域 284px）、align-items だけだと2行目が左に寄る。 */
+.foot-brand{ display:flex; flex-direction:column; align-items:center;
+  text-align:center; gap:11px; margin:30px 0 0; }
 /* animation/filter は index.html 側の .kb-word（呼吸アニメ・reduced-motion の
    drop-shadow）を殺すためだけに要る。kataban.css には kb-breathe が無いので
    ここでは無害だが、2つのコピーを同一に保つためあえて書いてある。 */
@@ -574,10 +580,21 @@ footer a:hover,footer a:focus{color:var(--accent)}
 /* グローもヘッダー基準(8〜12px)だと 3px ドットでは滲んで潰れる。 */
 .foot-brand .kb-on-pink{ box-shadow:0 0 4px var(--logo-gold); }
 .foot-brand .kb-on-cyan{ box-shadow:0 0 3px var(--logo-pink); }
-/* ★色は var(--muted) 固定。--tag(シアン)はフッターのリンク色なのでリンクに見え、
-   --accent(紫)は「型番の一致」「Buyee=届く経路」に予約されている（BIN_DIVER_DESIGN.md）。 */
+/* ★★★ は装飾。font-family をあえて指定していない ―― ★(U+2605) は Press Start 2P にも
+   Space Mono にも無く、どの指定でも必ずシステムのフォールバックが描くため、
+   指定しても結果が変わらない（20px 指定での実測: 各書体の 'A' は 10〜12.6px なのに
+   ★ は一律 1em）。字形がプラットフォームで変わる点は承知のうえで許容する。
+   ★margin-right の負値は letter-spacing の相殺。letter-spacing は**最後の1文字の
+     後ろにも空きを作る**ので、これが無いと中央寄せが左へ半文字ぶんずれる。
+   ★色は var(--muted)。タグラインを白に上げたぶん★は一段下の重さに置き、視線が
+     タグラインに落ちるようにする。--accent(紫)は「型番の一致」「Buyee=届く経路」に
+     予約、--tag(シアン)はフッターのリンク色なのでリンクに見える（どちらも使えない）。 */
+.foot-stars{ margin:0; margin-right:-.7em; font-size:13px; line-height:1;
+  letter-spacing:.7em; color:var(--muted); }
+/* 白はヘッダーの .kb-tagline に揃えた。ただし text-shadow のグローは付けない
+   ＝足元はヘッダーより静かに保つ。 */
 .foot-tagline{ margin:0; font-family:var(--f-pixel); font-size:10px;
-  letter-spacing:1.5px; line-height:1.5; color:var(--muted); }
+  letter-spacing:1.5px; line-height:1.5; color:#ffffff; }
 @media (max-width:480px){
   /* 狭い画面では型番が長い行(SLPS-01204;SLPS-01205 等)で溢れるので折り返す */
   .code{white-space:normal;word-break:break-all}
@@ -1685,17 +1702,18 @@ header .lede .lede-sub{ font-weight:400; }
   </div>
 
   <footer>
-    <div class="foot-brand">
-      <span class="kb-word" aria-hidden="true">
-        <span class="kb-ghost"><span class="kb-grid" data-kb="kb-on-cyan"></span></span>
-        <span class="kb-grid kb-top" data-kb="kb-on-pink"></span>
-      </span>
-      <p class="foot-tagline">Long live physical media.</p>
-    </div>
     Kataban · 37,855 entries from the Agency for Cultural Affairs Media Arts Database. 10,296 carry official product codes; 13,487 have English titles. English titles matched from Wikidata (CC0).
     <br>Some links and product images on this page are affiliate links, and Kataban may earn a commission, including as an eBay Partner Network affiliate (PR). &middot; <a href="https://webservice.rakuten.co.jp/" target="_blank" rel="noopener">Supported by Rakuten Developers</a>
     <br>"Used on Rakuten" is a median of used Rakuten listings only — a rough guide, not a live price. Other stores may differ.
     <br><a href="/privacy.html">Privacy</a>
+    <div class="foot-brand">
+      <p class="foot-stars" aria-hidden="true">★★★</p>
+      <p class="foot-tagline">Long live physical media.</p>
+      <span class="kb-word" aria-hidden="true">
+        <span class="kb-ghost"><span class="kb-grid" data-kb="kb-on-cyan"></span></span>
+        <span class="kb-grid kb-top" data-kb="kb-on-pink"></span>
+      </span>
+    </div>
   </footer>
 </div>
 
