@@ -109,6 +109,21 @@ a{color:inherit}
 }
 .backlink .arrow{ font-family:"Space Mono",monospace; font-size:13px; }
 
+/* ブログ記事の言語切替。backlink の隣に並ぶ小さいリンク群。 */
+.langlinks{ display:flex; align-items:center; gap:4px; }
+.langlinks a{
+  font-family:var(--f-pixel); font-size:9px; letter-spacing:.5px;
+  text-transform:uppercase; text-decoration:none; color:var(--ink);
+  border:2px solid transparent; padding:6px 8px;
+  transition:background .12s,color .12s,border-color .12s;
+}
+.langlinks a:hover,.langlinks a:focus{
+  border-color:var(--edge); outline:none;
+}
+.langlinks a[aria-current="page"]{
+  background:var(--tag); border-color:var(--tag); color:var(--accent-ink);
+}
+
 /* ============================================================
    ページ見出し
    ============================================================ */
