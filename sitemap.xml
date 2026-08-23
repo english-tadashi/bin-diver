@@ -1,74 +1,187 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-  載せるもの: 検索させたいページだけ。
-  載せないもの:
-    - /404.html          … エラーページ。sitemap に載せるのは誤り（noindex も付けてある）
-    - /copytest.html     … 実験ページ
-    - /scantest.html     … 実験ページ
-    - /blog/_template.html … そもそも公開していない（.gitignore で除外）
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog — Kataban</title>
+<meta name="description" content="Guides on buying Japanese retro games from Japan: product codes, secondhand stores, proxy shipping, and how to read a Japanese game shelf.">
+<meta property="og:title" content="Blog — Kataban">
+<meta property="og:description" content="Guides on buying Japanese retro games from Japan: product codes, secondhand stores, proxy shipping, and how to read a Japanese game shelf.">
+<meta property="og:url" content="https://gamekataban.com/blog/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://gamekataban.com/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://gamekataban.com/blog/">
+<link rel="alternate" type="application/rss+xml" title="Kataban Blog" href="/rss.xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=IBM+Plex+Sans+JP:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/kataban.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
 
-  記事を1本足すたびに、<url> を1つ足す。並び順は問われないが、
-  読む人のために新しい記事を下に積む（＝上から時系列）。
-  ★ここを更新し忘れると新しい記事が見つけられない。記事追加の手順は
-    blog/_template.html の先頭コメントに全部書いてある。
--->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://gamekataban.com/</loc>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://gamekataban.com/blog/</loc>
-    <lastmod>2026-08-08</lastmod>
-    <changefreq>weekly</changefreq>
-  </url>
+<div class="wrap">
 
-  <!-- ===== 記事はここから下に足す =====
-       1件ぶんのテンプレート（lastmod は最後に中身を直した日）:
+  <!-- サイトヘッダー。ロゴとタイトルの両方をツール本体(/)へのリンクにする。
+       .backlink は「戻る場所がある」ことを明示する側の導線。 -->
+  <header class="sitehead">
+    <a class="sitehead-brand" href="/" aria-label="Kataban — back to the search tool">
+      <span class="kb-word">
+        <span class="kb-ghost" aria-hidden="true"><span class="kb-grid" id="kbGridCyan"></span></span>
+        <span class="kb-grid kb-top" id="kbGridPink" aria-hidden="true"></span>
+      </span>
+      <span class="sitehead-badge">&#22411;&#30058;</span>
+    </a>
+    <a class="backlink" href="/"><span class="arrow" aria-hidden="true">&#8592;</span> Back to search</a>
+  </header>
 
-  <url>
-    <loc>https://gamekataban.com/blog/2026-08-08-example-slug.html</loc>
-    <lastmod>2026-08-08</lastmod>
-    <changefreq>monthly</changefreq>
-  </url>
-  -->
+  <main id="main">
 
-  <url>
-    <loc>https://gamekataban.com/blog/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html</loc>
-    <lastmod>2026-08-11</lastmod>
-    <changefreq>monthly</changefreq>
-  </url>
+    <div class="pagehead">
+      <p class="kicker">Kataban Blog</p>
+      <h1>Buying Japanese games, explained</h1>
+      <p class="lede">Field notes on product codes, secondhand shops, proxy services and everything else that stands between you and the game you want.</p>
+    </div>
 
-  <url>
-    <loc>https://gamekataban.com/blog/2026-08-18-akihabara-chuo-dori-retro-row.html</loc>
-    <lastmod>2026-08-18</lastmod>
-    <changefreq>monthly</changefreq>
-  </url>
+    <!-- ============================================================
+         記事一覧。新しい順（＝いちばん上が最新）に並べる。
+         記事を1本目を足すときの手順:
+           1. 下の <ul class="postlist"> のコメントを外す
+           2. その中に下のテンプレートを **いちばん上** に貼る
+           3. 入れ替わりに <div class="emptystate"> を消す
+           4. /sitemap.xml に <url> を1つ足す（末尾のマーカーコメント参照）
 
-  <url>
-    <loc>https://gamekataban.com/blog/2026-08-18-fire-emblem-famicom-super-famicom-origins.html</loc>
-    <lastmod>2026-08-18</lastmod>
-    <changefreq>monthly</changefreq>
-  </url>
+         1件ぶんのテンプレート（日付は記事ファイル名の YYYY-MM-DD と揃える）:
 
-  <url>
-    <loc>https://gamekataban.com/blog/2026-08-21-golden-axe-anime-jp-data.html</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>monthly</changefreq>
-  </url>
+         <li>
+           <a class="post" href="/blog/2026-08-08-example-slug.html">
+             <img class="post-thumb" src="/blog/images/2026-08-08-example-slug/thumb.jpg" alt="" width="200" height="130" loading="lazy">
+             <div class="post-body">
+               <span class="post-date">2026-08-08</span>
+               <h2 class="post-title">記事タイトル</h2>
+               <p class="post-summary">1〜2文の要約。一覧で読むかどうかを決められる長さにする。</p>
+             </div>
+           </a>
+         </li>
 
-  <url>
-    <loc>https://gamekataban.com/blog/2026-08-22-aliens-fireteam-elite-2-jp-data.html</loc>
-    <lastmod>2026-08-22</lastmod>
-    <changefreq>monthly</changefreq>
-  </url>
+         ★<time> ではなく <span class="post-date"> にしてあるのは、日付を
+           VT323（数字だけの書体）で出すため。日付は機械可読にする必要が出たら
+           <time datetime="2026-08-08"> に変えてよい（見た目は変わらない）。
 
-  <url>
-    <loc>https://gamekataban.com/blog/2026-08-22-glossary-junk.html</loc>
-    <lastmod>2026-08-22</lastmod>
-    <changefreq>monthly</changefreq>
-  </url>
+         ★サムネは 200x130（横長）に object-fit:cover で切られる（.post-thumb）。
+           元画像は横長のものを選ぶか、被写体を中央に置くこと。480px 以下では
+           幅100%に伸びるが aspect-ratio:200/130 を保つので、切り取り比率は変わらない。
+           img の width/height 属性も 200/130 に揃えること（ズレると読み込み時に CLS が出る）。
+           置き場所は記事本文の画像と同じ /blog/images/<記事スラッグ>/ 。
+         ★.post-body の div を外さないこと。.post は flex で「サムネ | 本文」の
+           2カラムにしてあるので、テキスト3つを裸で置くと横一列に並ぶ。
+         ============================================================ -->
 
-  <!-- ===== 記事ここまで ===== -->
-</urlset>
+    <ul class="postlist">
+      <li>
+        <a class="post" href="/blog/2026-08-23-akihabara-chain-store-crawl.html">
+          <img class="post-thumb" src="/blog/images/2026-08-23-akihabara-chain-store-crawl/thumb.png" alt="" width="200" height="130" loading="lazy">
+          <div class="post-body">
+            <span class="post-date">2026-08-23</span>
+            <h2 class="post-title">The Akihabara Chain-Store Crawl</h2>
+            <p class="post-summary">Four big chain names, four very different shelves &mdash; what Suruga-ya, Hard Off, Book-Off, and Lashinbang actually sell for retro game hunters.</p>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="post" href="/blog/2026-08-22-aliens-fireteam-elite-2-jp-data.html">
+          <img class="post-thumb" src="/blog/images/2026-08-22-aliens-fireteam-elite-2-jp-data/thumb.png" alt="" width="200" height="130" loading="lazy">
+          <div class="post-body">
+            <span class="post-date">2026-08-22</span>
+            <h2 class="post-title">Aliens: Fireteam Elite 2 Is Coming &mdash; And the Japanese Alien Games That Came Before It</h2>
+            <p class="post-summary">Four-player co-op lands August 25. Japan's game database tells a stranger story about what came before &mdash; and the closest thing you can actually buy isn't officially Aliens at all.</p>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="post" href="/blog/2026-08-22-glossary-junk.html">
+          <img class="post-thumb" src="/blog/images/2026-08-22-glossary-junk/thumb.png" alt="" width="200" height="130" loading="lazy">
+          <div class="post-body">
+            <span class="post-date">2026-08-22</span>
+            <h2 class="post-title">What Does "Junk" Mean When Buying Used Games in Japan?</h2>
+            <p class="post-summary">It's not garbage &mdash; it's a price category. Here's what "as-is, no guarantee" really means before you buy.</p>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="post" href="/blog/2026-08-21-golden-axe-anime-jp-data.html">
+          <img class="post-thumb" src="/blog/images/2026-08-21-golden-axe-anime-jp-data/thumb.png" alt="" width="200" height="130" loading="lazy">
+          <div class="post-body">
+            <span class="post-date">2026-08-21</span>
+            <h2 class="post-title">Golden Axe Is Getting an Anime. Here's What the Original Japanese Releases Actually Look Like</h2>
+            <p class="post-summary">Five regional releases, one myth about censorship that keeps getting repeated &mdash; and the product codes for the versions that never left Japan.</p>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="post" href="/blog/2026-08-18-fire-emblem-famicom-super-famicom-origins.html">
+          <img class="post-thumb" src="/blog/images/2026-08-18-fire-emblem-famicom-super-famicom-origins/thumb.png" alt="" width="200" height="130" loading="lazy">
+          <div class="post-body">
+            <span class="post-date">2026-08-18</span>
+            <h2 class="post-title">Fire Emblem: Where It All Began &mdash; 5 Famicom &amp; Super Famicom Games You Can Import Today</h2>
+            <p class="post-summary">The five Famicom &amp; Super Famicom games that started Fire Emblem &mdash; none released in English, all still findable in Japan.</p>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="post" href="/blog/2026-08-18-akihabara-chuo-dori-retro-row.html">
+          <img class="post-thumb" src="/blog/images/2026-08-18-akihabara-chuo-dori-retro-row/thumb.png" alt="" width="200" height="130" loading="lazy">
+          <div class="post-body">
+            <span class="post-date">2026-08-18</span>
+            <h2 class="post-title">Akihabara's Chuo-dori Retro Row: The Essential First Walk for Overseas Collectors</h2>
+            <p class="post-summary">The core Akihabara retro game walk along Chuo-dori &mdash; four legendary shops, one straight line, no Japanese required.</p>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="post" href="/blog/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html">
+          <img class="post-thumb" src="/blog/images/2026-08-11-how-to-buy-japanese-retro-games-without-japanese/thumb.png" alt="" width="200" height="130" loading="lazy">
+          <div class="post-body">
+            <span class="post-date">2026-08-11</span>
+            <h2 class="post-title">How to Buy Japanese Retro Games Without Reading Japanese</h2>
+            <p class="post-summary">A step-by-step guide to finding, identifying, and buying used Japanese retro games online &mdash; no Japanese literacy required.</p>
+          </div>
+        </a>
+      </li>
+    </ul>
+
+    <div class="cta">
+      <h2>Know the code, find the game</h2>
+      <p>Type a Western title. Get the Japanese name, the cartridge code printed on the spine, and links to the shops that have it.</p>
+      <a class="ctabtn" href="/">Search a game</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Kataban &middot; Data from the Agency for Cultural Affairs Media Arts Database. English titles matched from Wikidata (CC0).
+    <br>Some links on this site are affiliate links, and Kataban may earn a commission, including as an eBay Partner Network affiliate (PR).
+    <br><a href="/">Back to the search tool</a> &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/rss.xml">RSS</a>
+    <div class="foot-brand">
+      <p class="foot-stars" aria-hidden="true">★★★</p>
+      <p class="foot-tagline">Long live physical media.</p>
+      <span class="kb-word" aria-hidden="true">
+        <span class="kb-ghost"><span class="kb-grid" data-kb="kb-on-cyan"></span></span>
+        <span class="kb-grid kb-top" data-kb="kb-on-pink"></span>
+      </span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="/kataban.js"></script>
+</body>
+</html>
