@@ -123,6 +123,29 @@ a{color:inherit}
 .langlinks a[aria-current="page"]{
   background:var(--tag); border-color:var(--tag); color:var(--accent-ink);
 }
+/* Press Start 2P は CJK/ハングルのグリフを持たないため、中文・한국어のラベルだけ
+   フォールバックしてローマ字と字面の大きさが揃わない（2026-08-24 実測）。
+   IBM Plex Sans JP に明示的に切り替えて揃える。 */
+.langlinks a:lang(zh),.langlinks a:lang(ko){
+  font-family:"IBM Plex Sans JP",sans-serif; font-size:11px;
+}
+
+/* ブログ一覧カードの「他言語版」バッジ。カード本体の <a> の外、<li> の中に置く。 */
+.post-translations{
+  display:flex; align-items:center; gap:6px; margin-top:8px;
+  font-family:var(--f-pixel); font-size:9px; letter-spacing:.5px; text-transform:uppercase;
+}
+.post-translations-label{ color:var(--muted); }
+.post-translations a{
+  color:var(--ink); text-decoration:none; border:2px solid var(--edge);
+  padding:4px 7px; transition:background .12s,color .12s,border-color .12s;
+}
+.post-translations a:hover,.post-translations a:focus{
+  background:var(--tag); border-color:var(--tag); color:var(--accent-ink); outline:none;
+}
+.post-translations a:lang(zh),.post-translations a:lang(ko){
+  font-family:"IBM Plex Sans JP",sans-serif; font-size:11px;
+}
 
 /* ============================================================
    ページ見出し
