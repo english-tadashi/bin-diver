@@ -12,7 +12,7 @@
   ★ここを更新し忘れると新しい記事が見つけられない。記事追加の手順は
     blog/_template.html の先頭コメントに全部書いてある。
 -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://gamekataban.com/</loc>
     <lastmod>2026-07-30</lastmod>
@@ -36,8 +36,46 @@
 
   <url>
     <loc>https://gamekataban.com/blog/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/zh/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/ko/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/es/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html"/>
   </url>
 
   <url>
