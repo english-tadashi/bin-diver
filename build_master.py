@@ -284,6 +284,129 @@ PLATFORM_EN = {
 }
 
 # ---------------------------------------------------------------
+# PLATFORM_EN の逆引き（英名 -> 和名）。data_line.js の row[13] を作るために使う。
+#
+# 【何のためか】店員に見せる画面（index.html の clerkOpen）は日本語で組む面なのに、
+# 機種だけ row[2] の英語（Super Famicom 等）を出していた。row[13] に和名を持たせ、
+# UI 側は「row[13] があればそれを、無ければ row[2] に落とす」で読む。
+#
+# ★空文字を返すのは「変換し忘れ」ではなく「和名が存在しない」という意味である。
+#   実測（2026-08-23・BIN_DIVER_NOTES.md の「機種名の日本語化」調査）:
+#   KEEP_PLATFORMS 35機種のうち **10機種は MADB の生値からして英語**で、
+#   国内版パッケージ自体がラテン表記であることを ma:mediaFormat / ma:seriesName /
+#   ma:source("Title from disc label" 等) で裏付けた。
+#     Wii / Wii U / Nintendo Switch / Xbox / Xbox 360 / Xbox One / 3DO / PC-FX /
+#     64DD / Nintendo 64
+#   例) 同じ ma:mediaFormat 欄に `Wiiディスク` と `スーパーファミコン専用カセット` が並ぶ。
+#       同じ目録者が同じ言い回しで書いていて、片方だけラテンなのは
+#       **そのブランドの表記がラテンだから**。カタカナに直す先が無い。
+#   だからこの10機種は PLATFORM_EN に載っておらず、ここでも自然に空へ倒れる。
+#   ★「和名を足す」方向に直さないこと。`ニンテンドースイッチ` と書くほうが棚の現物から遠のく。
+#   ★空へ倒れる機種は **11**。上の10機種に加えて PlayStation Vita が
+#     PLATFORM_JA_DROP で落ちる（PLATFORM_EN には和名が載っているが、箱はラテン。
+#     理由は PLATFORM_JA_DROP の定義を見ること）。row[13] を持つのは 35-11 = 24機種。
+#
+# 【衝突の扱い】PLATFORM_EN は和名 -> 英名なので、逆引きすると複数の和名が
+# 1つの英名に潰れることがある。黙って dict の後勝ちに任せない（挿入順に依存して
+# 静かに変わる）。衝突は下の PLATFORM_JA_PREFER に**名指しで**書き、
+# 表に無い衝突が現れたら中止する。
+# ---------------------------------------------------------------
+# 衝突したときに採る和名。★増やすときは必ず実測して理由を書くこと。
+PLATFORM_JA_PREFER = {
+    # 'プレイステーション Vita'(全角スペースあり・2,353件) と
+    # 'プレイステーションVita'(なし・54件) が両方 PLATFORM_EN に載っている。
+    # 中黒や長音の違いではなく **区切りスペースの有無だけ**の揺れで、読みは同じ。
+    # 多数派（97.8%）を採る ―― canonical_case() が発売元の綴りを全行の多数決で
+    # 決めているのと同じ線（罠#5）。少数派を選ぶ理由が無い。
+    "PlayStation Vita": "プレイステーション Vita",
+    # ★この Vita の行は、決着後も残してある。下の PLATFORM_JA_DROP で
+    #   row[13] からは外したが、外したのは「和名を出すか」の判断であって
+    #   「2つの生値のどちらを代表とするか」の判断は別に生きている
+    #   （DROP から戻すことになったら、こちらの結論をもう一度出さずに済む）。
+    #   ★_build_platform_ja() は衝突を PLATFORM_JA_PREFER でしか解かないので、
+    #     DROP に入れてもこの行を消すと「未知の衝突」で中止する。消さないこと。
+}
+
+# ---------------------------------------------------------------
+# 逆引きはできるが、row[13] には出さない機種。
+#
+# ★PLATFORM_EN に和名が載っている＝「箱にその和名が印刷されている」ではない。
+#   MADB の目録者が機種を和名で登録しているだけで、パッケージの表記は別に測る要がある。
+#   ここはその測定結果で外す表。**空文字に倒れる＝row[2] のラテン表記を出す**。
+#
+# 【PlayStation Vita を外す理由】2026-08-23 の調査（BIN_DIVER_NOTES.md）。
+#   **箱の表記はラテン**と判明した:
+#   ・schema:name に `ペルソナ 4 ザ・ゴールデン　PlayStation®Vita the Best` 型が170件。
+#     **`®` つき＝箱の商標表記をそのまま転記したもの**。
+#   ・ma:mediaFormat が `PlayStation Vitaカード`(1,210件)。`Wiiディスク` と同じ、
+#     ラテンの機種名＋カタカナの媒体名という混在。
+#   ・箱に近い欄（タイトル/rdfs:label/商標表示/版表示）で数えると
+#     **カナ形 4 : ラテン形 196 ＝ カナ率 2%**。対照のスーパーファミコンは 74%。
+#     しかもそのカナ4件は本体同梱版2製品が2欄に重複しているだけで、
+#     **ソフトのパッケージには1件も無い**。
+#   ・`ヴィータ` はコーパス全体で 0件。カタカナに開く先が存在しない。
+#   ＝ Wii / Switch / Xbox系と同じ扱いが正しい。和名を出すほうが棚の現物から遠のく。
+#
+# 【ニンテンドーDS / ニンテンドー3DS を外さない理由】同じ調査で**逆の結果**が出た。
+#   箱に近い欄でのカナ率は DS 87%(20:3) / 3DS 75%(43:14) で、対照のスーパーファミコン
+#   (74%) と同じ水準。任天堂自身の商標表示も箱から転記されている:
+#     「NINTENDO DS・ニンテンドーDSは任天堂の登録商標です。」
+#     「ニンテンドー3DSのロゴ･ニンテンドー3DSは任天堂の商標です。」
+#   `DS` / `3DS` の部分がラテンなのは**公式の商標表記そのもの**であって訳し漏れではない。
+#   ★`DSカード` / `3DSカード`(ma:mediaFormat) を根拠に「ラテン側」と読まないこと。
+#     あれは媒体の略称（`UMD` や `HuCARD` と同じ層）で、機種名の表記を示していない。
+#     一度そう読み違えた。判定に使えるのはタイトル欄と商標表示のほう。
+# ---------------------------------------------------------------
+PLATFORM_JA_DROP = {
+    "PlayStation Vita",
+}
+
+
+def _build_platform_ja():
+    """PLATFORM_EN を逆にする。衝突は PLATFORM_JA_PREFER でしか解かない。
+    作りきった後に PLATFORM_JA_DROP の機種を落とす（順序の理由は下のコメント）。"""
+    dup = defaultdict(list)
+    for ja, en in PLATFORM_EN.items():
+        dup[en].append(ja)
+    rev = {}
+    for en, jas in dup.items():
+        if len(jas) == 1:
+            rev[en] = jas[0]
+            continue
+        pick = PLATFORM_JA_PREFER.get(en)
+        if pick is None:
+            raise SystemExit(
+                f"★ PLATFORM_EN の逆引きで未知の衝突: {en!r} <- {jas}。"
+                f"PLATFORM_JA_PREFER にどちらを採るか書くこと。中止")
+        if pick not in jas:
+            raise SystemExit(
+                f"★ PLATFORM_JA_PREFER[{en!r}] = {pick!r} が PLATFORM_EN に無い: {jas}。中止")
+        rev[en] = pick
+    # 表に書いたのに衝突が消えていたら（PLATFORM_EN の整理などで）気付けるようにする。
+    # 黙って死んだ行を残さない ―― EXCLUDE_MADB_ID の _missing_exclude と同じ趣旨。
+    for en in PLATFORM_JA_PREFER:
+        if len(dup.get(en, [])) < 2:
+            print(f"★ PLATFORM_JA_PREFER の {en!r} はもう衝突していない（PLATFORM_EN を整理した?）。"
+                  f"表から外せるか確認すること")
+    # ---- 生成の**後**に PLATFORM_JA_DROP を当てる ----
+    # 順序に意味がある。先に外すと衝突解決を素通りしてしまい、
+    # PLATFORM_JA_PREFER に書いた「どちらの生値を代表とするか」の判断が
+    # 検証されないまま残る（DROP から戻したときに黙って壊れる）。
+    # 逆引きは最後まで作りきり、出さない機種だけを最後に落とす。
+    for en in sorted(PLATFORM_JA_DROP):
+        if en not in rev:
+            # 名指ししたのに効いていない＝綴り違いか、PLATFORM_EN から消えた。
+            # 黙って0件除外にしない（EXCLUDE_MADB_ID の _missing_exclude と同じ趣旨）。
+            print(f"★ PLATFORM_JA_DROP の {en!r} が逆引きに無い（綴り違い? PLATFORM_EN から消えた?）。"
+                  f"除外は効いていない")
+            continue
+        del rev[en]
+    return rev
+
+
+PLATFORM_JA = _build_platform_ja()
+
+# ---------------------------------------------------------------
 # Buyee の検索キーワード（実測 2026-07-18）
 #
 # 25機種を「有名タイトル + 機種名」2本ずつで実測した。0件だったのは
@@ -726,6 +849,39 @@ KANA_SPLIT_FIX = {
 #   空にしても 0件 のままで、変える理由が無い。
 #
 # ★145行群の残り84行（row[8] で非0件だった行）には一切触らない。そちらは今の値で当たっている。
+# ---------------------------------------------------------------
+# MANUAL_KATABAN_FILL: MADB に型番が無いが、外部裏取り(n=2)で補完した値。
+# madb_id -> 型番。★原典(MADB)には存在しない**外部由来の値**である。
+#
+# 【なぜ表が要るか】この値は 2026-08-21 に index.html の DATA 行へ**直接手で**入れられた。
+#   パイプラインには戻されていなかったので、再生成のたびに消える。実際 2026-08-23 の
+#   再生成で消え、swap_data.py の [0]〜[6] 差分ガードが「説明のつかない消失 1 行」として
+#   止めた（ガードが正しく働いた＝退行を水際で捕まえた例）。
+#   ★手で DATA を直したら、必ずこの表に戻すこと。でないと次の再生成で黙って消える。
+#
+# 【他の表との違い】TITLE_TYPO / TRANSLITERATED_TITLE_EN / TITLE_KANA_OVERRIDE は
+#   いずれも**原典に在る値の直し方**（綴り誤りの訂正・別行からの転記・余分な語の破棄）。
+#   この表だけは**原典に無い値を外から足す**。だから出所の格が違う ―― 表を分けてある。
+#   ★増やすときは必ず (a) MADB に本当に無いことを確認し、(b) 独立した2つ以上の出典で
+#     裏を取り、(c) 出典と日付をその行のコメントに書くこと。
+#
+# 【効かせる範囲】data_line.js の row[3] だけ。master_final.csv(=rows) は素通し。
+#   master は MADB の完全な記録として保つ、という既存方針（束1/束2・TITLE_KANA_OVERRIDE
+#   と同じ線）。原典に無い値を master に混ぜると、master が「MADB の写し」でなくなる。
+#
+# 【上書きしない】MADB 側に型番が入ったら、そちらを優先して表の値は使わない。
+#   上流が直ったことに気付けるよう、その場合は毎回 ★ を印字する。
+# ---------------------------------------------------------------
+MANUAL_KATABAN_FILL = {
+    # Golden Axe (WonderSwan) — 2026-08-21、買取サイトのメーカー品番表記＋
+    # 独立コレクターフォーラムの品番一覧で裏取り(n=2)。裏取りは利用者が実施。
+    # 詳細: BIN_DIVER_NOTES.md:22649-22668
+    # ★原典確認済み: M748217 は schema:productID も schema:gtin も持たない（2026-08-23）。
+    #   master 上でも product_code は空。DATA では index 20399 の1行のみ
+    #   （'Golden Axe' かつ platform に 'WonderSwan' を含む行は全 DATA でこの1件）。
+    "M748217": "SWJ-BANC2B",
+}
+
 TITLE_KANA_OVERRIDE = {
     # ---- 120円の春 ---- 1行 / row[1]検索の件数 1件
     "M736961": "",  # idx11458  プレイステーション2 / 2005  元row[8]「120円の春 \120Stories」→ 1位
@@ -2071,6 +2227,9 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
     _kana_dropped = 0               # title_ja_kana を空にした行数
     _kana_already_empty = []        # 名指ししたが既に空だった行（下で必ず印字する）
     _kana_seen = set()              # 表の madb_id のうち DATA まで届いたもの
+    _kataban_filled = 0             # MADB に無い型番を外部由来の値で埋めた行数
+    _kataban_had_own = []           # MADB 側に型番が入った＝表が不要になった行（下で必ず印字）
+    _kataban_seen = set()           # 表の madb_id のうち DATA まで届いたもの
     data = []
     _excluded = []
     for r in rows:                                         # rows(=master) は変更しない。読むだけ。
@@ -2114,10 +2273,37 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
                 _kana_dropped += 1
             else:                                          # 既に空＝表から外す判断が要る
                 _kana_already_empty.append(r["madb_id"])
-        data.append([title_en, r["title_ja"], plat, r["product_code"],
+        # MADB に型番が無い行を、外部裏取りの値で埋める（上の MANUAL_KATABAN_FILL を見ること）。
+        # rows(=master_final.csv) は書き換えない。data_line.js の row[3] にだけ効かせる。
+        # ★空のときだけ入れる。MADB 側に型番が入ったら原典を優先し、表の値は使わない
+        #   （束1・束2 が「空のときだけ写す」のと同じ形）。
+        code = r["product_code"]
+        if r["madb_id"] in MANUAL_KATABAN_FILL:
+            _kataban_seen.add(r["madb_id"])
+            if not code:
+                code = MANUAL_KATABAN_FILL[r["madb_id"]]
+                _kataban_filled += 1
+            else:                                          # 上流が持つようになった＝表から外す判断が要る
+                _kataban_had_own.append((r["madb_id"], code))
+        # ★2026-08-23: 出力が **13列 -> 14列** になった。row[13] = 機種(日本語)。
+        #   足したのは末尾なので、既存の row[0]〜[12] の意味も添字も変わらない。
+        #   ・引くキーは `plat`（PLATFORM_RENAME を通した後＝row[2] に出る値そのもの）。
+        #     row[2] と row[13] が必ず同じ機種を指すようにするため、名寄せ前の
+        #     r["platform_en"] では引かない。
+        #     ※ その結果、生値 'Nintendo Entertainment System' の行は Famicom に寄ってから
+        #       'ファミリーコンピュータ' を引く。北米版に和名が付くことになるが、
+        #       該当の5行は上の EXCLUDE_MADB_ID（罠#16）で既に落ちていて DATA には来ない。
+        #   ・和名が無い機種は空文字。UI 側で row[2] に落とす前提（PLATFORM_JA の説明を見ること）。
+        #     Wii / Switch / Xbox系 / 3DO / PC-FX / 64DD / Nintendo 64 の10機種に
+        #     PlayStation Vita（PLATFORM_JA_DROP）を加えた **11機種**が該当し、
+        #     これは欠損ではなく「箱がラテン表記」という実測結果である。
+        #   ・swap_data.py の差分ガードは [0]〜[6] しか見ず、**列数を検証しない**
+        #     （len(old[0]) を表示するだけで比較しない）。13->14 は黙って通る。
+        #     ここでは触れるだけに留める。注入時に人手で確認すること。
+        data.append([title_en, r["title_ja"], plat, code,
                      r["year"], r["publisher"], _canon_pub_final(r["publisher_en"]), r["buyee_kw"],
                      kana, r["title_romaji"], r["jan"], r["kana_row"],
-                     r["online"]])
+                     r["online"], PLATFORM_JA.get(plat, "")])
     js_path = os.path.join(os.path.dirname(out_path) or ".", "data_line.js")
     with open(js_path, "w", encoding="utf-8") as f:
         f.write("const DATA = " + json.dumps(data, ensure_ascii=False,
@@ -2233,6 +2419,15 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
         print(f"  ★ TITLE_KANA_OVERRIDE: {mid} の title_ja_kana は既に空。捨てるものが無い")
     for mid in sorted(set(TITLE_KANA_OVERRIDE) - _kana_seen):
         print(f"  ★ TITLE_KANA_OVERRIDE: {mid} が DATA に現れない"
+              f"（master から消えた / 機種フィルタや罠#16 で落ちた）")
+    # 外部由来の型番補完も毎回実数を出す。★原典に無い値なので、黙って入れない。
+    print(f"型番を外部値で補完      : {_kataban_filled}/{len(MANUAL_KATABAN_FILL)} 行  "
+          f"(data_line.js の row[3] だけ。master_final.csv は空のまま＝MADB の写しを保つ)")
+    for mid, code in _kataban_had_own:                     # 上流が直った＝表から外す判断が要る
+        print(f"  ★ MANUAL_KATABAN_FILL: {mid} は MADB 側が型番 {code!r} を持つようになった。"
+              f"原典を優先した（表から外せるか確認すること）")
+    for mid in sorted(set(MANUAL_KATABAN_FILL) - _kataban_seen):
+        print(f"  ★ MANUAL_KATABAN_FILL: {mid} が DATA に現れない"
               f"（master から消えた / 機種フィルタや罠#16 で落ちた）")
     print()
     for k, v in stats.most_common():
