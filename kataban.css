@@ -109,52 +109,19 @@ a{color:inherit}
 }
 .backlink .arrow{ font-family:"Space Mono",monospace; font-size:13px; }
 
-/* ブログ記事の言語切替。backlink の隣に並ぶ小さいリンク群。 */
-.langlinks{ display:flex; align-items:center; gap:4px; }
-.langlinks a{
-  font-family:var(--f-pixel); font-size:9px; letter-spacing:.5px;
-  text-transform:uppercase; text-decoration:none; color:var(--ink);
-  border:2px solid transparent; padding:6px 8px;
-  transition:background .12s,color .12s,border-color .12s;
-}
-.langlinks a:hover,.langlinks a:focus{
-  border-color:var(--edge); outline:none;
-}
-.langlinks a[aria-current="page"]{
-  background:var(--tag); border-color:var(--tag); color:var(--accent-ink);
-}
-/* Press Start 2P は CJK/ハングルのグリフを持たないため、中文・한국어のラベルだけ
-   フォールバックしてローマ字と字面の大きさが揃わない（2026-08-24 実測）。
-   IBM Plex Sans JP に明示的に切り替えて揃える。 */
-.langlinks a:lang(zh),.langlinks a:lang(ko){
-  font-family:"IBM Plex Sans JP",sans-serif; font-size:11px;
-}
-
-/* ブログ一覧カードの「他言語版」バッジ。カード本体の <a> の外、<li> の中に置く。 */
-.post-translations{
-  display:flex; align-items:center; gap:6px; margin-top:8px;
-  font-family:var(--f-pixel); font-size:9px; letter-spacing:.5px; text-transform:uppercase;
-}
-.post-translations-label{ color:var(--muted); }
-.post-translations a{
-  color:var(--ink); text-decoration:none; border:2px solid var(--edge);
-  padding:4px 7px; transition:background .12s,color .12s,border-color .12s;
-}
-.post-translations a:hover,.post-translations a:focus{
-  background:var(--tag); border-color:var(--tag); color:var(--accent-ink); outline:none;
-}
-.post-translations a:lang(zh),.post-translations a:lang(ko){
-  font-family:"IBM Plex Sans JP",sans-serif; font-size:11px;
-}
-
-/* ブログ一覧ページの言語切替ドロップダウン（Amazon式のUIを踏襲）。
+/* ブログの言語切替ドロップダウン（Amazon式のUIを踏襲）。一覧4本と記事28本で共通。
    ★2026-08-24 に <main> の先頭から .sitehead の中（ロゴの右隣）へ移した。
      .sitehead は justify-content:space-between の flex 行なので、以前ここに居た
      .backlink と同じ位置に収まる ―― margin は 0 にする（20px の下マージンが
      残っていると、ヘッダーの罫線との間だけ空いて行が下にずれる）。
+   ★記事ページでは .backlink と並んで flex の子が3つになるが、wrap する行なので
+     そのまま収まる（同日、記事28本へ展開したときに実測）。
    .langswitch は position:relative の起点。.langswitch-menu がその中で絶対配置。
-   JS 側（kataban.js）は .langswitch の有無で「一覧ページかどうか」を判定するので、
-   このクラス名は他のページに流用しない。 */
+   ★JS 側（kataban.js）の「初回訪問時にブラウザ言語の一覧ページへ飛ばす」処理は、
+     .langswitch の**有無ではなく** data-autoredirect="true" の有無で判定する。
+     属性を出すのは build_feeds.py が生成する一覧4本だけ。記事ページへこの
+     マークアップを流用するときは属性を落とすこと（記事から別言語の一覧ページへ
+     飛ばしてしまう）。既定＝属性なし＝飛ばさない、が安全側。 */
 .langswitch{ position:relative; display:inline-block; margin:0; }
 .langswitch-toggle{
   display:flex; align-items:center; gap:7px;
@@ -188,6 +155,8 @@ a{color:inherit}
 .langswitch-menu a[aria-current="page"]{
   color:var(--tag); font-weight:600;
 }
+/* 中文・한국어だけラテン用の書体（ここは Space Grotesk）にグリフが無く、放っておくと
+   フォールバック先の字面がローマ字と揃わない（2026-08-24 実測）。明示的に切り替える。 */
 .langswitch-menu a:lang(zh),.langswitch-menu a:lang(ko){
   font-family:"IBM Plex Sans JP",sans-serif;
 }
@@ -227,12 +196,10 @@ a{color:inherit}
   color:#ffffff; transition:color .12s; }
 .post-summary{ margin:9px 0 0; color:var(--muted); font-size:14px; line-height:1.6; }
 
-/* 記事が1本も無いときの表示。1本目を足したら .postlist ごと差し替える。 */
-.emptystate{ margin:30px 0 0; padding:34px 24px; text-align:center;
-  border:1px solid var(--edge); background:rgba(11,7,20,.5); }
-.emptystate p{ margin:0; color:var(--muted); font-size:14px; line-height:1.7; }
-.emptystate .es-lead{ font-family:var(--f-vt); font-size:24px; letter-spacing:.5px;
-  color:var(--ink); margin:0 0 10px; }
+/* ★記事0本のときの表示（.emptystate / .es-lead）はここに在ったが、2026-08-24 に削除した。
+   blog/index.html は build_feeds.py の生成物になり、**0本時の分岐を持たない**（記事が
+   0本でも空の <ul class="postlist"> を書き出す）ので、この CSS だけ残しても発火しない。
+   復活させるなら build_feeds.py 側にマークアップを足すのが先。旧ルールは git 履歴に在る。 */
 
 /* ============================================================
    記事本文（.prose）
