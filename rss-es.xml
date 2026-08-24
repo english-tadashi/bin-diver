@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog de Kataban (Español)</title>
+    <link>https://gamekataban.com/blog/</link>
+    <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
+    <language>es-es</language>
+    <lastBuildDate>Mon, 24 Aug 2026 00:00:00 +0900</lastBuildDate>
+    <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>La ruta de tiendas de cadena en Akihabara: cuatro grandes nombres, cuatro estanterías muy distintas</title>
+      <link>https://gamekataban.com/blog/es/2026-08-23-akihabara-chain-store-crawl.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-08-23-akihabara-chain-store-crawl.html</guid>
+      <description>Suruga-ya, Hard Off, Book-Off y らしんばん venden videojuegos usados en Akihabara, pero tienen un surtido, precios y horarios de cierre completamente distintos. Aquí tienes qué puerta cruzar.</description>
+      <pubDate>Sun, 23 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>Llega Aliens: Fireteam Elite 2 — y los juegos japoneses de alienígenas que lo precedieron</title>
+      <link>https://gamekataban.com/blog/es/2026-08-22-aliens-fireteam-elite-2-jp-data.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-08-22-aliens-fireteam-elite-2-jp-data.html</guid>
+      <description>Aliens: Fireteam Elite 2 sale el 25 de agosto de 2026. Esto es lo que realmente contiene la base de datos japonesa de los juegos que lo precedieron, y por qué lo más cercano que puedes comprar oficialmente no se llama Aliens.</description>
+      <pubDate>Sat, 22 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>¿Qué significa "Junk" al comprar videojuegos usados en Japón?</title>
+      <link>https://gamekataban.com/blog/es/2026-08-22-glossary-junk.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-08-22-glossary-junk.html</guid>
+      <description>En las tiendas japonesas de videojuegos usados, "Junk" (ジャンク) no significa roto, sino "se vende tal cual, sin garantía de que funcione". Esto es lo que significa realmente antes de comprar.</description>
+      <pubDate>Sat, 22 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>Golden Axe tendrá un anime. Así son en realidad los lanzamientos japoneses originales</title>
+      <link>https://gamekataban.com/blog/es/2026-08-21-golden-axe-anime-jp-data.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-08-21-golden-axe-anime-jp-data.html</guid>
+      <description>Paramount+ estrena el anime de Golden Axe el 16 de septiembre. Esto es lo que realmente son los cinco lanzamientos japoneses originales, qué versiones nunca salieron de Japón y los códigos de producto para buscarlas.</description>
+      <pubDate>Fri, 21 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>Fire Emblem: donde todo empezó — 5 juegos de Famicom y Super Famicom que puedes importar hoy</title>
+      <link>https://gamekataban.com/blog/es/2026-08-18-fire-emblem-famicom-super-famicom-origins.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-08-18-fire-emblem-famicom-super-famicom-origins.html</guid>
+      <description>Antes de Awakening, antes de Three Houses: descubre los cinco juegos de Famicom y Super Famicom que iniciaron Fire Emblem, y cómo importarlos desde Japón.</description>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>La calle retro de Chuo-dori en Akihabara: el primer paseo imprescindible para coleccionistas extranjeros</title>
+      <link>https://gamekataban.com/blog/es/2026-08-18-akihabara-chuo-dori-retro-row.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-08-18-akihabara-chuo-dori-retro-row.html</guid>
+      <description>El paseo retro esencial por Chuo-dori, la calle principal de Akihabara — cuatro tiendas legendarias, una línea recta, sin necesidad de japonés.</description>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>Cómo comprar videojuegos retro japoneses sin saber japonés</title>
+      <link>https://gamekataban.com/blog/es/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html</guid>
+      <description>Una guía paso a paso para encontrar, identificar y comprar videojuegos retro japoneses usados por internet, sin necesidad de leer japonés.</description>
+      <pubDate>Tue, 11 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+  </channel>
+</rss>

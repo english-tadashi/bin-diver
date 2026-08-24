@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kataban 部落格（中文）</title>
+    <link>https://gamekataban.com/blog/</link>
+    <description>為海外收藏家打造的日本復古遊戲部落格——商店指南、進口教學，以及遊戲背後的故事。</description>
+    <language>zh-tw</language>
+    <lastBuildDate>Mon, 24 Aug 2026 00:00:00 +0900</lastBuildDate>
+    <atom:link href="https://gamekataban.com/rss-zh.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>秋葉原連鎖店巡禮：四大招牌、四種截然不同的貨架</title>
+      <link>https://gamekataban.com/blog/zh/2026-08-23-akihabara-chain-store-crawl.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-08-23-akihabara-chain-store-crawl.html</guid>
+      <description>Suruga-ya、Hard Off、Book-Off 和らしんばん都在秋葉原賣二手遊戲——但庫存、定價和打烊時間完全不同。這篇告訴你該走哪一家的門。</description>
+      <pubDate>Sun, 23 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>《異形：尖兵小隊 2》即將推出——在那之前，日本曾經有過的異形類遊戲</title>
+      <link>https://gamekataban.com/blog/zh/2026-08-22-aliens-fireteam-elite-2-jp-data.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-08-22-aliens-fireteam-elite-2-jp-data.html</guid>
+      <description>《異形：尖兵小隊 2》將於2026年8月25日發售。這篇文章告訴你，日本遊戲資料庫裡實際收錄了哪些前輩作品——以及為什麼你能買到最接近的那款，官方上根本不叫「異形」。</description>
+      <pubDate>Sat, 22 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>買日本二手遊戲時，「ジャンク」到底是什麼意思？</title>
+      <link>https://gamekataban.com/blog/zh/2026-08-22-glossary-junk.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-08-22-glossary-junk.html</guid>
+      <description>在日本的二手遊戲店裡，「ジャンク」（junk）不代表壞掉——它代表「現況出售，不保證能用」。買之前，先搞懂這個詞真正的意思。</description>
+      <pubDate>Sat, 22 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>Golden Axe要出動畫了。這是日本原版實際上長什麼樣子</title>
+      <link>https://gamekataban.com/blog/zh/2026-08-21-golden-axe-anime-jp-data.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-08-21-golden-axe-anime-jp-data.html</guid>
+      <description>Paramount+ 將於9月16日推出Golden Axe動畫。這篇文章告訴你五款日本原版遊戲實際上是什麼、哪些版本從未離開過日本，以及該用什麼商品編號去搜尋。</description>
+      <pubDate>Fri, 21 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>Fire Emblem：一切從這裡開始——5款你今天就能買到的 Famicom 與 Super Famicom 遊戲</title>
+      <link>https://gamekataban.com/blog/zh/2026-08-18-fire-emblem-famicom-super-famicom-origins.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-08-18-fire-emblem-famicom-super-famicom-origins.html</guid>
+      <description>在《Awakening》之前、在《風花雪月》之前——認識開啟 Fire Emblem 系列的五款 Famicom 與 Super Famicom 遊戲，以及如何從日本進口。</description>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>秋葉原中央通復古街：海外收藏家必走的第一條路線</title>
+      <link>https://gamekataban.com/blog/zh/2026-08-18-akihabara-chuo-dori-retro-row.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-08-18-akihabara-chuo-dori-retro-row.html</guid>
+      <description>沿著秋葉原主要幹道中央通的核心復古遊戲散步路線——四家傳奇店家、一條直線、不需要日文。</description>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>不會日文也能買到日本復古遊戲</title>
+      <link>https://gamekataban.com/blog/zh/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html</guid>
+      <description>一步步教你在不懂日文的情況下，尋找、辨識並購買日本二手復古遊戲。</description>
+      <pubDate>Tue, 11 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+  </channel>
+</rss>
