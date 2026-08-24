@@ -2,11 +2,11 @@
 """og.png のもとになる HTML を書き出す。旧 og.png の実測レイアウトを保ち、色だけ移す。
 
 ■ 使い方（この3手で og.png ができる）
-  1) python3 build_og.py og_draft.html
+  1) python3 _build_og.py og_draft.html
   2) '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new \\
        --disable-gpu --hide-scrollbars --virtual-time-budget=20000 \\
        --window-size=1200,630 --screenshot=og_raw.png og_draft.html
-  3) python3 build_og.py --reencode og_raw.png og.png    # 画素は不変・容量だけ落とす
+  3) python3 _build_og.py --reencode og_raw.png og.png    # 画素は不変・容量だけ落とす
 
   ★2) は Chrome 一本。この環境には rsvg-convert / ImageMagick / inkscape / cairosvg が
     無く、Pillow も arm64 非互換で使えない。Google Fonts は Chrome から読める。
@@ -114,7 +114,7 @@ def reencode(src, dst):
     （色数 旧3,624 / 新6,157）。減らすなら中央グローの層を外すのが効く。
     """
     import zlib, struct
-    from measure import decode
+    from _measure import decode
     im = decode(src)
     w, h, ch, px = im['w'], im['h'], im['ch'], im['px']
     assert ch == 3, 'RGB(colortype 2) を前提にしている'

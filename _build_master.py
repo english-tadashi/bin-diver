@@ -6,7 +6,7 @@ MADB metadata301.ttl (+ Wikidataの英題) -> master.csv
 発売元・機種・発売年・日本語名・英題とともにCSVへ出力する。
 
 使い方:
-    python3 build_master.py data/metadata301.ttl master.csv [英題.json] [発売元.json] [日本語タイトル.json]
+    python3 _build_master.py data/metadata301.ttl master.csv [英題.json] [発売元.json] [日本語タイトル.json]
 
 第5引数の 日本語タイトル.json は {madb_id: カタカナ正規タイトル} のフラットなdict。
 query.wikidata.org で P7886 の日本語ラベルを引いて作る（wikidata_ja.json）。
@@ -576,7 +576,7 @@ def buyee_keyword(platform_ja):
 # ―― 二重ハイフンが正しい型番が将来出てきたときに、静かに壊すため。
 #
 # AGB--P-B9AJ は 2026-08-02 に index.html 側を手で直した（コミット d662ee0）。
-# しかし build_master.py には入れていなかったので、再生成すれば元に戻る状態だった。
+# しかし _build_master.py には入れていなかったので、再生成すれば元に戻る状態だった。
 # 手で直したものは、必ずここにも書くこと。書かないと次の再生成で消える。
 #
 # DL--DOL-GMSJ-JPN（スーパーマリオサンシャイン / GameCube）は 2026-08-03 に追加した。
