@@ -78,7 +78,17 @@
            1. 下の <ul class="postlist"> のコメントを外す
            2. その中に下のテンプレートを **いちばん上** に貼る
            3. 入れ替わりに <div class="emptystate"> を消す
-           4. /sitemap.xml に <url> を1つ足す（末尾のマーカーコメント参照）
+
+         ★sitemap.xml・RSS4本（rss.xml と rss-{zh,ko,es}.xml）・zh/ko/es の一覧3本は
+           build_feeds.py --write の生成物。**手で触らない**（手で直しても次の --write で戻る）。
+           このページの外枠（見出し・CTA・フッター）も同じく生成物で、手で足してよいのは
+           下の <ul class="postlist"> の中のカードだけ。
+
+         ★2本目以降を足す手順は、記事HTML4本（blog/ と blog/{zh,ko,es}/）＋このファイルに
+           カード1枚 = 計5ファイル。書いたら
+             python3 build_feeds.py --check   # 差分を目で見る
+             python3 build_feeds.py --write   # 9本を書き出す
+           ★--check を飛ばして --write しないこと（手で直した外枠が黙って戻る）。
 
          1件ぶんのテンプレート（日付は記事ファイル名の YYYY-MM-DD と揃える）:
 
