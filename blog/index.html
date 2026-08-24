@@ -39,8 +39,11 @@
 <div class="wrap">
 
   <!-- サイトヘッダー。ロゴはツール本体(/)へのリンク。右は言語切替。
-       kataban.js は .langswitch の有無で「一覧ページかどうか」を判定するので、
-       このブロックを他のページへ流用しないこと。 -->
+       ★同じ見た目のドロップダウンは記事28本にも置いてある（見た目・開閉は共通）。
+       ここだけの違いは data-autoredirect="true" ―― kataban.js の
+       「初回訪問時にブラウザ言語の一覧ページへ飛ばす」処理はこの属性で判定する。
+       ★記事ページへこのブロックを流用するときは属性を落とすこと（記事から
+       別言語の一覧ページへ飛ばしてしまう）。 -->
   <header class="sitehead">
     <a class="sitehead-brand" href="/" aria-label="Kataban — back to the search tool">
       <span class="kb-word">
@@ -49,7 +52,7 @@
       </span>
       <span class="sitehead-badge">&#22411;&#30058;</span>
     </a>
-    <div class="langswitch" data-open="false">
+    <div class="langswitch" data-open="false" data-autoredirect="true">
       <button class="langswitch-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langswitch-menu">
         <span class="langswitch-current">EN &mdash; English</span>
         <span class="langswitch-caret" aria-hidden="true">&#9662;</span>
@@ -208,6 +211,6 @@
 
 </div>
 
-<script src="/kataban.js?v=d9ea3058"></script>
+<script src="/kataban.js?v=0f57e2f8"></script>
 </body>
 </html>
