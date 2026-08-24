@@ -147,11 +147,15 @@ a{color:inherit}
   font-family:"IBM Plex Sans JP",sans-serif; font-size:11px;
 }
 
-/* ブログ一覧ページ最上部の言語切替ドロップダウン（Amazon式のUIを踏襲）。
+/* ブログ一覧ページの言語切替ドロップダウン（Amazon式のUIを踏襲）。
+   ★2026-08-24 に <main> の先頭から .sitehead の中（ロゴの右隣）へ移した。
+     .sitehead は justify-content:space-between の flex 行なので、以前ここに居た
+     .backlink と同じ位置に収まる ―― margin は 0 にする（20px の下マージンが
+     残っていると、ヘッダーの罫線との間だけ空いて行が下にずれる）。
    .langswitch は position:relative の起点。.langswitch-menu がその中で絶対配置。
    JS 側（kataban.js）は .langswitch の有無で「一覧ページかどうか」を判定するので、
    このクラス名は他のページに流用しない。 */
-.langswitch{ position:relative; display:inline-block; margin:0 0 20px; }
+.langswitch{ position:relative; display:inline-block; margin:0; }
 .langswitch-toggle{
   display:flex; align-items:center; gap:7px;
   font-family:var(--f-pixel); font-size:10px; letter-spacing:.5px; text-transform:uppercase;
@@ -163,8 +167,12 @@ a{color:inherit}
 }
 .langswitch-caret{ font-size:9px; transition:transform .12s; }
 .langswitch[data-open="true"] .langswitch-caret{ transform:rotate(180deg); }
+/* ★メニューは右端揃え（left:0 ではなく right:0）。ヘッダーへ移したことで
+   トグルは行の**右端**に来る。メニューの min-width(150px) はトグルより広くなる
+   ことがある（ko は「한국어」だけなのでトグルが狭い）ので、左端揃えだと
+   はみ出す側が画面の外を向く。右端で揃えれば余る分は必ず内側へ伸びる。 */
 .langswitch-menu{
-  position:absolute; top:calc(100% + 4px); left:0; z-index:20;
+  position:absolute; top:calc(100% + 4px); right:0; left:auto; z-index:20;
   list-style:none; margin:0; padding:4px; min-width:150px;
   background:var(--surface); border:2px solid var(--edge);
 }

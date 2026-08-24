@@ -88,9 +88,15 @@
     for (var i = 0; i < links.length; i++) {
       links[i].addEventListener("click", function (e) {
         try { localStorage.setItem(STORAGE_KEY, e.currentTarget.getAttribute("data-lang")); }
-        catch (err) { /* localStorage無効環境ではリダイレクト側もスキップされるので無視してよい */ }
+        catch (err) { /* localStorage が無くても下の referrer 判定が効くので、ここは無視してよい */ }
+        // ★閉じてから遷移する。閉じずに出ると、bfcache（戻る）で戻ってきたときに
+        //   開いたままの DOM が復元され、次の1クリックが「開く」ではなく「閉じる」に
+        //   なる ―― 使う側には「ボタンが効かない」ように見える。
+        closeMenu();
       });
     }
+    // bfcache から戻るとスクリプトは再実行されない（DOM は離脱時のまま返ってくる）。
+    window.addEventListener("pageshow", function (e) { if (e.persisted) closeMenu(); });
   }
 
   // --- 初回訪問時の自動リダイレクト ---------------------------
@@ -100,6 +106,19 @@
   if (isBot) return;
 
   var currentLang = document.documentElement.getAttribute("data-blog-lang") || "en";
+
+  // ★一覧ページから来た＝直前に自分で言語を選んでいる。ここで自動リダイレクトを
+  //   かけると、その選択をその場で打ち消してしまう。
+  //   localStorage が使える環境では下の stored 判定が止めていたが、
+  //   **localStorage が使えない環境（プライバシー設定・ストレージ遮断）では
+  //   何度選んでも元の言語へ引き戻され、言語を変えられない**という事故になっていた。
+  //   保存に頼らず「どこから来たか」で判定するので、ストレージの可否に左右されない。
+  var LISTING_RE = /^\/blog\/(?:zh\/|ko\/|es\/)?$/;
+  var ref = document.referrer || "";
+  if (ref.indexOf(location.origin + "/blog/") === 0) {
+    var refPath = ref.slice(location.origin.length).split("?")[0].split("#")[0];
+    if (LISTING_RE.test(refPath)) return;
+  }
 
   var stored = null;
   try { stored = localStorage.getItem(STORAGE_KEY); } catch (err) { /* 無視 */ }
