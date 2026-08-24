@@ -147,6 +147,43 @@ a{color:inherit}
   font-family:"IBM Plex Sans JP",sans-serif; font-size:11px;
 }
 
+/* ブログ一覧ページ最上部の言語切替ドロップダウン（Amazon式のUIを踏襲）。
+   .langswitch は position:relative の起点。.langswitch-menu がその中で絶対配置。
+   JS 側（kataban.js）は .langswitch の有無で「一覧ページかどうか」を判定するので、
+   このクラス名は他のページに流用しない。 */
+.langswitch{ position:relative; display:inline-block; margin:0 0 20px; }
+.langswitch-toggle{
+  display:flex; align-items:center; gap:7px;
+  font-family:var(--f-pixel); font-size:10px; letter-spacing:.5px; text-transform:uppercase;
+  background:var(--surface); border:2px solid var(--edge); color:var(--ink);
+  padding:9px 13px; cursor:pointer; transition:border-color .12s,color .12s;
+}
+.langswitch-toggle:hover,.langswitch-toggle:focus{
+  border-color:var(--tag); color:var(--tag); outline:none;
+}
+.langswitch-caret{ font-size:9px; transition:transform .12s; }
+.langswitch[data-open="true"] .langswitch-caret{ transform:rotate(180deg); }
+.langswitch-menu{
+  position:absolute; top:calc(100% + 4px); left:0; z-index:20;
+  list-style:none; margin:0; padding:4px; min-width:150px;
+  background:var(--surface); border:2px solid var(--edge);
+}
+.langswitch-menu[hidden]{ display:none; }
+.langswitch-menu a{
+  display:block; padding:9px 11px; text-decoration:none; color:var(--ink);
+  font-family:"Space Grotesk",system-ui,sans-serif; font-size:13px;
+  border:2px solid transparent;
+}
+.langswitch-menu a:hover,.langswitch-menu a:focus{
+  background:var(--tag); color:var(--accent-ink); outline:none;
+}
+.langswitch-menu a[aria-current="page"]{
+  color:var(--tag); font-weight:600;
+}
+.langswitch-menu a:lang(zh),.langswitch-menu a:lang(ko){
+  font-family:"IBM Plex Sans JP",sans-serif;
+}
+
 /* ============================================================
    ページ見出し
    ============================================================ */

@@ -20,8 +20,46 @@
   </url>
   <url>
     <loc>https://gamekataban.com/blog/</loc>
-    <lastmod>2026-08-08</lastmod>
+    <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/zh/</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/ko/</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/es/</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/"/>
   </url>
 
   <!-- ===== 記事はここから下に足す =====

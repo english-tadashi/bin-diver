@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-blog-lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,6 +16,11 @@
 <meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://gamekataban.com/blog/">
+<link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/">
+<link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/">
+<link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/">
+<link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/">
+<link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/">
 <link rel="alternate" type="application/rss+xml" title="Kataban Blog" href="/rss.xml">
 <link rel="alternate" type="application/rss+xml" title="Kataban Blog (中文)" href="/rss-zh.xml">
 <link rel="alternate" type="application/rss+xml" title="Kataban Blog (한국어)" href="/rss-ko.xml">
@@ -47,6 +52,19 @@
   </header>
 
   <main id="main">
+
+    <div class="langswitch" data-open="false">
+      <button class="langswitch-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langswitch-menu">
+        <span class="langswitch-current">EN &mdash; English</span>
+        <span class="langswitch-caret" aria-hidden="true">&#9662;</span>
+      </button>
+      <ul class="langswitch-menu" id="langswitch-menu" role="menu" hidden>
+        <li role="none"><a role="menuitem" href="/blog/" hreflang="en" lang="en" data-lang="en" aria-current="page">English</a></li>
+        <li role="none"><a role="menuitem" href="/blog/zh/" hreflang="zh-Hant" lang="zh-Hant" data-lang="zh">&#20013;&#25991;</a></li>
+        <li role="none"><a role="menuitem" href="/blog/ko/" hreflang="ko" lang="ko" data-lang="ko">&#54620;&#44397;&#50612;</a></li>
+        <li role="none"><a role="menuitem" href="/blog/es/" hreflang="es" lang="es" data-lang="es">Espa&ntilde;ol</a></li>
+      </ul>
+    </div>
 
     <div class="pagehead">
       <p class="kicker">Kataban Blog</p>

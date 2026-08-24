@@ -44,3 +44,79 @@
     paint(kbMore[kbI], kbMore[kbI].getAttribute("data-kb"));
   }
 })();
+
+/* ============================================================
+   ブログ一覧ページの言語切替（2026-08-24 追加）
+   .langswitch が無いページ（記事ページ・404など）では何もしない。
+   これで「一覧ページだけの機能」という範囲を、マークアップ側から判定できる。
+   ============================================================ */
+(function () {
+  var root = document.querySelector(".langswitch");
+  if (!root) return;
+
+  var STORAGE_KEY = "kataban_blog_lang";
+  var SUPPORTED = ["en", "zh", "ko", "es"];
+  var PATHS = { en: "/blog/", zh: "/blog/zh/", ko: "/blog/ko/", es: "/blog/es/" };
+
+  // --- ドロップダウンの開閉 ---------------------------------
+  var toggle = root.querySelector(".langswitch-toggle");
+  var menu = root.querySelector(".langswitch-menu");
+
+  function closeMenu() {
+    root.setAttribute("data-open", "false");
+    toggle.setAttribute("aria-expanded", "false");
+    menu.hidden = true;
+  }
+  function openMenu() {
+    root.setAttribute("data-open", "true");
+    toggle.setAttribute("aria-expanded", "true");
+    menu.hidden = false;
+  }
+  if (toggle && menu) {
+    toggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (menu.hidden) { openMenu(); } else { closeMenu(); }
+    });
+    document.addEventListener("click", function (e) {
+      if (!root.contains(e.target)) closeMenu();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { closeMenu(); toggle.focus(); }
+    });
+    // 手動で言語を選んだら、その選択を覚える（次回訪問時に自動リダイレクトしない）。
+    var links = menu.querySelectorAll("a[data-lang]");
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener("click", function (e) {
+        try { localStorage.setItem(STORAGE_KEY, e.currentTarget.getAttribute("data-lang")); }
+        catch (err) { /* localStorage無効環境ではリダイレクト側もスキップされるので無視してよい */ }
+      });
+    }
+  }
+
+  // --- 初回訪問時の自動リダイレクト ---------------------------
+  // クローラーには介入しない（hreflangで多言語構成を伝える方針と衝突させないため）。
+  var ua = navigator.userAgent || "";
+  var isBot = /bot|crawl|spider|slurp|facebookexternalhit|preview|headless/i.test(ua);
+  if (isBot) return;
+
+  var currentLang = document.documentElement.getAttribute("data-blog-lang") || "en";
+
+  var stored = null;
+  try { stored = localStorage.getItem(STORAGE_KEY); } catch (err) { /* 無視 */ }
+  if (stored && SUPPORTED.indexOf(stored) !== -1) return; // 既に選択済み＝二度と自動で動かさない
+
+  var browserLangs = navigator.languages || [navigator.language || "en"];
+  var detected = "en";
+  for (var j = 0; j < browserLangs.length; j++) {
+    var code = (browserLangs[j] || "").toLowerCase();
+    if (code.indexOf("zh") === 0) { detected = "zh"; break; }
+    if (code.indexOf("ko") === 0) { detected = "ko"; break; }
+    if (code.indexOf("es") === 0) { detected = "es"; break; }
+    if (code.indexOf("en") === 0) { detected = "en"; break; }
+  }
+
+  if (detected !== currentLang) {
+    try { localStorage.setItem(STORAGE_KEY, detected); } catch (err) { /* 無視 */ }
+    location.replace(PATHS[detected]);
+  }
+})();
