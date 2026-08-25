@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>해외 컬렉터를 위한 일본 레트로 게임 블로그 — 매장 가이드, 수입 방법, 그리고 타이틀 뒤에 숨은 이야기.</description>
     <language>ko-kr</language>
-    <lastBuildDate>Tue, 25 Aug 2026 11:08:32 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 26 Aug 2026 07:48:47 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-ko.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>중고 게임 구매 시 "CIB"란 무슨 뜻일까?</title>
+      <link>https://gamekataban.com/blog/ko/2026-08-26-glossary-cib.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-08-26-glossary-cib.html</guid>
+      <description>CIB(Complete In Box)는 게임 본체, 케이스, 설명서가 모두 갖춰진 상태를 의미합니다. 구매 전 확인해야 할 사항과 일본어 표기와의 대응 관계를 정리했습니다.</description>
+      <pubDate>Wed, 26 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>"테라니그마" 2027년 리마스터 발매 확정 — 오리지널 SFC판 정보</title>
       <link>https://gamekataban.com/blog/ko/2026-08-25-news-terranigma-remake.html</link>

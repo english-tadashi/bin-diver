@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 25 Aug 2026 11:08:32 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 26 Aug 2026 07:48:47 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>What Does "CIB" Mean When Buying Used Games in Japan?</title>
+      <link>https://gamekataban.com/blog/2026-08-26-glossary-cib.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-08-26-glossary-cib.html</guid>
+      <description>CIB (Complete In Box) means the game, case, and manual are all present. Here's what to check before buying, and how it maps to Japanese listing terms.</description>
+      <pubDate>Wed, 26 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Terranigma Is Getting a Remaster in 2027 — Here's the Original SFC Version</title>
