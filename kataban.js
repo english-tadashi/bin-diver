@@ -65,15 +65,81 @@
   var toggle = root.querySelector(".langswitch-toggle");
   var menu = root.querySelector(".langswitch-menu");
 
+  // ★メニューの端揃えは CSS（kataban.css の .langswitch-menu）の right:0 が既定で、
+  //   ここはそれで画面外へ出てしまうときだけ上書きする。CSS 側だけでは決められない
+  //   ―― right:0 は「トグルが行の右端にいる」ことを前提にした指定で、その前提が
+  //   成り立つかは**折り返しの結果**、つまり実際に描画してみるまで分からないため。
+  //   一覧ページは .sitehead の flex の子が2つ（ロゴ＋langswitch）なので折り返しても
+  //   トグルは右端に残るが、記事ページは .backlink が入って子が3つになり、狭い画面では
+  //   langswitch だけが次の行の**左端**へ落ちる。そこで right:0 のまま開くと、
+  //   メニュー(min-width:150px)がトグルより広い分だけ画面の左外へ出る。
+  //   はみ出し量 = 150 - トグル幅 なので、トグルの文言が短い言語ほど大きい
+  //   （2026-08-25 実測 / 390px・記事ページ: ko=79.3px, zh=12.25px, en/es=0px。
+  //    .wrap の左padding 18px で吸収できるのは zh までで、ko は 61.3px はみ出して
+  //    メニューの4割が読めなくなっていた）。
+  //   言語では分岐しない。トグル幅は字面とフォントの読み込み状況で変わるので、
+  //   実測した座標だけで判定する。
+  var EDGE_GAP = 8; // 画面端との最小すき間(px)
+
+  // 端揃えの上書きを捨てて CSS の既定（right:0 / min-width:150px）へ戻す。
+  function resetMenuPos() {
+    menu.style.right = "";
+    menu.style.left = "";
+    menu.style.minWidth = "";
+    menu.style.maxWidth = "";
+  }
+
+  // 開いた状態のメニューを画面内へ収める。hidden のままだと矩形が 0 になるので、
+  // 必ず menu.hidden = false にした**後**で呼ぶこと。
+  function fitMenu() {
+    resetMenuPos();
+
+    var vw = document.documentElement.clientWidth;
+    var rect = menu.getBoundingClientRect();
+
+    // (1) CSS の既定（右揃え）で収まっているならそのまま。
+    //     en/es/zh の一覧・記事、ko の一覧はここで抜ける＝従来と1pxも変わらない。
+    if (rect.left >= EDGE_GAP && rect.right <= vw - EDGE_GAP) return;
+
+    // (2) 左揃え（トグルの左端そろえ）へ反転して測り直す。
+    //     トグルが行の左端に落ちている＝右側が空いている、という状況なので
+    //     たいていはこれで収まる（ko 記事 390px: -61.3..88.7 → 18..168）。
+    menu.style.right = "auto";
+    menu.style.left = "0";
+    rect = menu.getBoundingClientRect();
+    if (rect.left >= EDGE_GAP && rect.right <= vw - EDGE_GAP) return;
+
+    // (3) どちらの端揃えでも収まらない（起点が画面端に寄りすぎ／メニューより画面が狭い）。
+    //     ★メニューが入りきらないときは幅そのものを詰める。ここで「左端に寄せて右は
+    //       諦める」とやると、右へのはみ出しは（左と違って）そのまま横スクロールに
+    //       なるので、直したい症状を自分で作ってしまう。
+    //       min-width も打ち消すこと ―― CSS では min-width が max-width に勝つので、
+    //       max-width だけ入れても 150px のまま縮まない。
+    var room = vw - EDGE_GAP * 2;
+    if (rect.width > room) {
+      menu.style.minWidth = "0";
+      menu.style.maxWidth = room + "px";
+      rect = menu.getBoundingClientRect();
+    }
+
+    //     px 指定でビューポート内へ寄せる。left:0 を当てた直後なので、
+    //     「今の見た目の位置からどれだけずらすか」を足せばよい
+    //     ―― こう書くと containing block がどこであっても正しくずれる。
+    var wanted = Math.min(Math.max(rect.left, EDGE_GAP), vw - EDGE_GAP - rect.width);
+    menu.style.left = (wanted - rect.left) + "px";
+  }
+
   function closeMenu() {
     root.setAttribute("data-open", "false");
     toggle.setAttribute("aria-expanded", "false");
     menu.hidden = true;
+    resetMenuPos(); // 閉じている間は上書きを残さない（次に開くとき素の状態から測るため）
   }
   function openMenu() {
     root.setAttribute("data-open", "true");
     toggle.setAttribute("aria-expanded", "true");
     menu.hidden = false;
+    fitMenu();
   }
   if (toggle && menu) {
     toggle.addEventListener("click", function (e) {
@@ -86,6 +152,9 @@
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") { closeMenu(); toggle.focus(); }
     });
+    // 開いたまま画面が変わったら測り直す（回転、デスクトップの窓リサイズ、
+    // モバイルのURLバー出し入れ）。開いていないときは測っても 0 なので何もしない。
+    window.addEventListener("resize", function () { if (!menu.hidden) fitMenu(); });
     // 手動で言語を選んだら、その選択を覚える（次回訪問時に自動リダイレクトしない）。
     var links = menu.querySelectorAll("a[data-lang]");
     for (var i = 0; i < links.length; i++) {
