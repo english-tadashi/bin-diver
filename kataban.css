@@ -234,6 +234,32 @@ a{color:inherit}
 .prose pre{ background:var(--field); border:1px solid var(--edge); padding:14px;
   overflow-x:auto; margin:0 0 18px; }
 .prose pre code{ background:none; border:none; padding:0; }
+
+/* 公式ソース（トレーラー・公式発表）へのリンクを1本にまとめる箱。
+   地と枠は index.html の .slab-copy / .btn-copy と同じ #241c40 / #4a4278 を踏襲する。
+   ★あちらは押せるボタンなので hover を持つ。こちらは箱の中の <a> が押せる要素で
+     箱自体はクリック対象ではないため、箱には hover を付けない。
+   ★リンクの hover 色だけ差し替えている。.prose a:hover は --accent(#b337ff) だが、
+     この地 #241c40 の上では 3.73:1 しか出ず AA の 4.5 を下回る（実測）。
+     index.html が .slab-copy.done / .btn-copy.done で同じ問題に当てているのと
+     同じ色 #bf57ff（同色相・明度だけ上げたもの / 4.58:1）をここでも使う。
+     ★--accent を今後変更してもこの1行は追随しない。トークンを触るときは見直すこと。 */
+.prose .official-sources{ margin:0 0 18px; padding:14px 16px;
+  background:#241c40; border:1px solid #4a4278; border-radius:8px; }
+.prose .official-sources p{ margin:0; }
+.prose .official-sources a:hover,.prose .official-sources a:focus{ color:#bf57ff; }
+
+/* Kataban 自身の検索結果へ誘導する箱。すぐ上の .official-sources と見分けが付くように、
+   地は同じ #241c40 のまま**枠と文字だけ**ロゴの2色（--logo-pink / --logo-gold）で強める。
+   ★地を一段明るく(#2f2652)する案は採らなかった。その地ではリンクの hover が
+     .official-sources で使った #bf57ff でも 3.96:1 に落ちて AA(4.5)を割る（実測）。
+     地を据え置いて文字色を金に振れば 9.02:1 で、hover の白は 15.97:1 になる。
+   ★下線は .prose a から継承させたまま残す。色だけで「押せる」を伝えない。 */
+.prose .kataban-search-cta{ margin:0 0 18px; padding:14px 16px;
+  background:#241c40; border:2px solid var(--logo-pink); border-radius:8px; }
+.prose .kataban-search-cta p{ margin:0; }
+.prose .kataban-search-cta a{ color:var(--logo-gold); font-weight:600; }
+.prose .kataban-search-cta a:hover,.prose .kataban-search-cta a:focus{ color:#ffffff; }
 .prose img{ max-width:100%; height:auto; display:block; margin:20px 0; }
 .prose figure{ margin:20px 0; }
 .prose figcaption{ margin-top:8px; font-size:13px; color:var(--faint); }
