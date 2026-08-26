@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Wed, 26 Aug 2026 08:48:29 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 26 Aug 2026 09:25:34 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Capcom anuncia "Mega Man: Dual Override" por el 40.º aniversario de la serie</title>
+      <link>https://gamekataban.com/blog/es/2026-08-26-news-megaman-dual-override.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-08-26-news-megaman-dual-override.html</guid>
+      <description>Capcom anunció Mega Man: Dual Override para 2027 por el 40.º aniversario de la serie. Esto es lo que se reveló y dónde encontrar los originales de Famicom.</description>
+      <pubDate>Wed, 26 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>"Console Archives BUBBLE BOBBLE" lleva el original de Disk System de 1987 a Switch 2 y PS5</title>
       <link>https://gamekataban.com/blog/es/2026-08-26-news-console-archives-bubble-bobble.html</link>
