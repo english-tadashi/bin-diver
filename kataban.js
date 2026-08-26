@@ -58,8 +58,8 @@
   if (!root) return;
 
   var STORAGE_KEY = "kataban_blog_lang";
-  var SUPPORTED = ["en", "zh", "ko", "es"];
-  var PATHS = { en: "/blog/", zh: "/blog/zh/", ko: "/blog/ko/", es: "/blog/es/" };
+  var SUPPORTED = ["en", "zh", "ko", "es", "de", "fr"];
+  var PATHS = { en: "/blog/", zh: "/blog/zh/", ko: "/blog/ko/", es: "/blog/es/", de: "/blog/de/", fr: "/blog/fr/" };
 
   // --- ドロップダウンの開閉 ---------------------------------
   var toggle = root.querySelector(".langswitch-toggle");
@@ -212,6 +212,8 @@
     if (code.indexOf("zh") === 0) { detected = "zh"; break; }
     if (code.indexOf("ko") === 0) { detected = "ko"; break; }
     if (code.indexOf("es") === 0) { detected = "es"; break; }
+    if (code.indexOf("de") === 0) { detected = "de"; break; }
+    if (code.indexOf("fr") === 0) { detected = "fr"; break; }
     if (code.indexOf("en") === 0) { detected = "en"; break; }
   }
 
