@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog pour les collectionneurs à l'étranger en quête de jeux rétro japonais — guides boutiques, tutoriels d'importation, et les histoires derrière les titres.</description>
     <language>fr-fr</language>
-    <lastBuildDate>Mon, 31 Aug 2026 08:02:40 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 01 Sep 2026 08:24:05 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-fr.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Ganbare Goemon : la série dont l'Occident n'a eu que six jeux</title>
+      <link>https://gamekataban.com/blog/fr/2026-09-01-ganbare-goemon-import-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-09-01-ganbare-goemon-import-guide.html</guid>
+      <description>Ganbare Goemon, de Konami, compte une trentaine de jeux dont à peine une demi-douzaine a quitté le Japon. Ce que signifie ce nom, quels épisodes sont restés en japonais, et les codes produit pour trouver les cartouches aujourd'hui.</description>
+      <pubDate>Tue, 01 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Onimusha: Warlords — guide d'achat de la version PS2 d'origine</title>
       <link>https://gamekataban.com/blog/fr/2026-08-31-onimusha-warlords-buying-guide.html</link>
