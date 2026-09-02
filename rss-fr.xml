@@ -5,9 +5,23 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog pour les collectionneurs à l'étranger en quête de jeux rétro japonais — guides boutiques, tutoriels d'importation, et les histoires derrière les titres.</description>
     <language>fr-fr</language>
-    <lastBuildDate>Tue, 01 Sep 2026 08:24:05 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 02 Sep 2026 09:02:54 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-fr.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Avant Street Fighter II : le désordre brutal et magnifique du jeu d'arcade original de 1987</title>
+      <link>https://gamekataban.com/blog/fr/2026-09-02-street-fighter-arcade-origins.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-09-02-street-fighter-arcade-origins.html</guid>
+      <description>La borne d'arcade Street Fighter de 1987 avait des pavés sensibles à la pression qui blessaient les mains des joueurs. La disposition à six boutons qui les a remplacés, et le nom de Ryu, définissent encore la série.</description>
+      <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>La trilogie Fire Emblem sur GBA : là où l'Occident a vraiment rencontré la série</title>
+      <link>https://gamekataban.com/blog/fr/2026-09-02-fire-emblem-gba-trilogy.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-09-02-fire-emblem-gba-trilogy.html</guid>
+      <description>The Binding Blade, The Blazing Blade et The Sacred Stones — les trois Fire Emblem de la Game Boy Advance, pourquoi l'Occident a reçu celui du milieu en premier, et les codes produit pour retrouver les cartouches japonaises.</description>
+      <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Ganbare Goemon : la série dont l'Occident n'a eu que six jeux</title>
       <link>https://gamekataban.com/blog/fr/2026-09-01-ganbare-goemon-import-guide.html</link>

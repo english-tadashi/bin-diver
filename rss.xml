@@ -5,8 +5,24 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 01 Sep 2026 08:24:05 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 02 Sep 2026 09:02:54 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Before Street Fighter II: The Brutal, Beautiful Mess of the Original 1987 Arcade Game</title>
+      <link>https://gamekataban.com/blog/2026-09-02-street-fighter-arcade-origins.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-02-street-fighter-arcade-origins.html</guid>
+      <description>The original 1987 Street Fighter arcade game had pressure-sensitive punch pads that hurt players' hands. Its replacement six-button layout, and Ryu's name, still shape the series today.</description>
+      <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>Fire Emblem's GBA Trilogy: Where the West Actually Met the Series</title>
+      <link>https://gamekataban.com/blog/2026-09-02-fire-emblem-gba-trilogy.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-02-fire-emblem-gba-trilogy.html</guid>
+      <description>The Binding Blade, The Blazing Blade and The Sacred Stones — the three Game Boy Advance Fire Emblem games, why the West got the middle one first, and the product codes for finding Japanese cartridges today.</description>
+      <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Ganbare Goemon: The Series the West Only Got Six Of</title>
