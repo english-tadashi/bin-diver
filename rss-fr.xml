@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog pour les collectionneurs à l'étranger en quête de jeux rétro japonais — guides boutiques, tutoriels d'importation, et les histoires derrière les titres.</description>
     <language>fr-fr</language>
-    <lastBuildDate>Wed, 02 Sep 2026 09:02:54 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 02 Sep 2026 14:29:33 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-fr.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Histoire du développement de Street Fighter, partie 1 : la réunion ennuyeuse qui a donné naissance à un genre (1987)</title>
+      <link>https://gamekataban.com/blog/fr/2026-09-02-street-fighter-development-history-1.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-09-02-street-fighter-development-history-1.html</guid>
+      <description>Avant Street Fighter II, il y a eu un croquis griffonné pendant une réunion ennuyeuse, un bug qui rendait les boules de feu presque impossibles à lancer, et un entrepôt rempli de bornes invendues. Partie 1 d'une série en cinq volets sur la création de l'arcade original de 1987.</description>
+      <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Avant Street Fighter II : le désordre brutal et magnifique du jeu d'arcade original de 1987</title>
       <link>https://gamekataban.com/blog/fr/2026-09-02-street-fighter-arcade-origins.html</link>

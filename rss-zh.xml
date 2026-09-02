@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>為海外收藏家打造的日本復古遊戲部落格——商店指南、進口教學，以及遊戲背後的故事。</description>
     <language>zh-tw</language>
-    <lastBuildDate>Wed, 02 Sep 2026 09:02:54 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 02 Sep 2026 14:29:33 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-zh.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>快打旋風開發史 第1回：一場無聊會議如何催生一個類型（1987）</title>
+      <link>https://gamekataban.com/blog/zh/2026-09-02-street-fighter-development-history-1.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-02-street-fighter-development-history-1.html</guid>
+      <description>在《快打旋風II》之前，有一張無聊會議上隨手畫的草稿，一個讓波動拳幾乎打不出來的程式漏洞，以及一倉庫賣不出去的機台。系列開發史五部曲第1回：1987年原始街機版的誕生。</description>
+      <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>在《快打旋風II》之前：1987年初代街機版的粗糙與美麗</title>
       <link>https://gamekataban.com/blog/zh/2026-09-02-street-fighter-arcade-origins.html</link>

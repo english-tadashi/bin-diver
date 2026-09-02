@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>快打旋風開發史 第1回：一場無聊會議如何催生一個類型（1987） — Kataban</title>
+<meta name="description" content="在《快打旋風II》之前，有一張無聊會議上隨手畫的草稿，一個讓波動拳幾乎打不出來的程式漏洞，以及一倉庫賣不出去的機台。系列開發史五部曲第1回：1987年原始街機版的誕生。">
+<meta property="og:title" content="快打旋風開發史 第1回：一場無聊會議如何催生一個類型（1987）">
+<meta property="og:description" content="在《快打旋風II》之前，有一張無聊會議上隨手畫的草稿，一個讓波動拳幾乎打不出來的程式漏洞，以及一倉庫賣不出去的機台。系列開發史五部曲第1回：1987年原始街機版的誕生。">
+<meta property="og:url" content="https://gamekataban.com/blog/zh/2026-09-02-street-fighter-development-history-1.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://gamekataban.com/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://gamekataban.com/blog/zh/2026-09-02-street-fighter-development-history-1.html">
+<link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-09-02-street-fighter-development-history-1.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-09-02-street-fighter-development-history-1.html">
+<link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-09-02-street-fighter-development-history-1.html">
+<link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-09-02-street-fighter-development-history-1.html">
+<link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-09-02-street-fighter-development-history-1.html">
+<link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-09-02-street-fighter-development-history-1.html">
+<link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-09-02-street-fighter-development-history-1.html">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=IBM+Plex+Sans+JP:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/kataban.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+
+  <header class="sitehead">
+    <a class="sitehead-brand" href="/" aria-label="Kataban — back to the search tool">
+      <span class="kb-word">
+        <span class="kb-ghost" aria-hidden="true"><span class="kb-grid" id="kbGridCyan"></span></span>
+        <span class="kb-grid kb-top" id="kbGridPink" aria-hidden="true"></span>
+      </span>
+      <span class="sitehead-badge">&#22411;&#30058;</span>
+    </a>
+    <a class="backlink" href="/blog/zh/"><span class="arrow" aria-hidden="true">&#8592;</span> &#20840;&#37096;&#25991;&#31456;</a>
+    <div class="langswitch">
+      <button class="langswitch-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langswitch-menu">
+        <span class="langswitch-current">&#20013;&#25991; &mdash; &#32321;&#39636;&#20013;&#25991;</span>
+        <span class="langswitch-caret" aria-hidden="true">&#9662;</span>
+      </button>
+      <ul class="langswitch-menu" id="langswitch-menu" role="menu" hidden>
+      <li role="none"><a role="menuitem" href="/blog/2026-09-02-street-fighter-development-history-1.html" hreflang="en" lang="en" data-lang="en">English</a></li>
+      <li role="none"><a role="menuitem" href="/blog/zh/2026-09-02-street-fighter-development-history-1.html" hreflang="zh-Hant" lang="zh-Hant" data-lang="zh" aria-current="page">&#20013;&#25991;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/ko/2026-09-02-street-fighter-development-history-1.html" hreflang="ko" lang="ko" data-lang="ko">&#54620;&#44397;&#50612;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/es/2026-09-02-street-fighter-development-history-1.html" hreflang="es" lang="es" data-lang="es">Espa&ntilde;ol</a></li>
+      <li role="none"><a role="menuitem" href="/blog/de/2026-09-02-street-fighter-development-history-1.html" hreflang="de" lang="de" data-lang="de">Deutsch</a></li>
+      <li role="none"><a role="menuitem" href="/blog/fr/2026-09-02-street-fighter-development-history-1.html" hreflang="fr" lang="fr" data-lang="fr">Français</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <article>
+      <div class="pagehead">
+        <p class="kicker">Kataban 部落格</p>
+        <h1>快打旋風開發史 第1回：一場無聊會議如何催生一個類型（1987）</h1>
+        <p class="postmeta">2026-09-02</p>
+      </div>
+
+      <div class="prose">
+        <p>一部<a href="https://www.streetfightermovie.com/">真人電影版《快打旋風》</a>將於2026年10月16日重返大銀幕，所以接下來五週，我們要回頭看看這系列的遊戲本身是怎麼誕生的。這個系列一開始並不是精雕細琢的格鬥遊戲，而是從一場無聊會議上隨手傳遞的草稿、一塊會把開發者的手磨破皮的巨大橡膠感壓板，以及一個讓波動拳幾乎打不出來的程式漏洞開始的。前卡普空開發者岡本吉起多年來一直在自己的YouTube頻道上講述這些故事。這是第1回：1987年街機原版的誕生過程，出自他與同事們的親口敘述。</p>
+
+        <ul>
+          <li>1987年8月於日本街機上市，由西山隆志擔任導演</li>
+          <li>整個概念最初只是同事之間在一場沉悶的策略會議上傳遞的手繪草稿</li>
+          <li>必殺技的判定是在「放開」按鍵的瞬間觸發，而非按下的瞬間——與之後所有作品剛好相反</li>
+          <li>岡本氏回憶，清理滯銷庫存是後來成為業界標準的六按鍵配置背後的原因之一</li>
+        </ul>
+
+        <h2>快打旋風的構想為何誕生於一場無聊會議？</h2>
+        <p>初代《快打旋風》的構想並非誕生於正式的企劃會議，而是出自一場沉悶到讓西山隆志忍不住在筆記本上塗鴉解悶的公司會議。當時他身旁坐著另一組的組長岡本吉起。西山畫下的是兩名格鬥家一對一對戰的粗略概念，旁邊還寫著大意是「這樣如何，我覺得可行」的一句話。據岡本本人回憶，他看到的瞬間眼睛就亮了起來，當場表示想親自把它做出來。一張在誰都不想參加的會議上悄悄傳遞的手繪草稿，就此成為一個類型的起點。</p>
+
+        <h2>為什麼在原版遊戲中要打出波動拳這麼難？</h2>
+        <p>凡是實際玩過1987年原版的人，大概都記得必殺技有多麼難出，以及一旦打中波動拳或昇龍拳時那股驚人的破壞力（原版機台的感壓板同樣造就了這種手感，我們在<a href="/blog/zh/2026-09-02-street-fighter-arcade-origins.html">介紹原版硬體的文章</a>中也有提到）。岡本氏在自己的頻道上解釋過，難出招的原因其實藏在遊戲的輸入判定裡：程式是在按鍵被「放開」的那一刻，而不是按下的那一刻，去偵測必殺技指令。玩家在緊張時往往會下意識地用力按住按鍵不放——恰好是遊戲完全沒有在偵測的那個輸入方式。據他所說，這種以放開按鍵為判定基準的機制，在《快打旋風II》中被改良為按下或放開都能觸發指令，這項改動讓續作的操作手感大幅提升。</p>
+
+        <h2>滯銷庫存如何促成快打旋風走向六按鍵配置？</h2>
+        <p>初代《快打旋風》最初以昂貴的大型直立機台上市，銷售並不如卡普空預期，導致倉庫裡堆滿了賣不出去的基板與控制面板。後來這款遊戲被重新製作成較便宜的改裝套件，搭配8方向搖桿與六個按鍵——三個拳、三個腳——讓遊戲業者可以直接裝進手邊既有的機台裡。從壓力感應板改為按鍵的這項轉變，通常被歸因於玩家安全，因為感壓板確實會讓玩過的人受傷。岡本氏的回憶則補上了另一個更現實的因素：需要清掉的滯銷庫存，據他所說，這也是六按鍵版本能這麼快推向市場的原因之一。無論兩個因素各佔多少比重，這套配置後來成為格鬥遊戲的業界標準，並沿用至今數十年。</p>
+
+        <h2>為什麼快打旋風改變了卡普空撰寫企劃書的方式？</h2>
+        <p>初代《快打旋風》的企劃與程式團隊分別在大阪與金澤兩地工作，當時沒有快速可靠的方式讓遠端的程式團隊與企劃團隊保持同步。這段物理距離，據信正是促使卡普空開始撰寫詳細企劃書、而非僅靠口頭指示的原因，這個做法在初代上市後也延續了下來。這也是系列最知名的角色名字的由來：主角「隆（Ryu）」的名字，直接取自系列創作者西山隆志本人名字中「隆」字的另一種讀音。這位撐起系列將近40年的英雄，名字幾乎是原封不動地來自創造他的那個人。</p>
+
+        <p><strong>Street Fighter 30th Anniversary Collection International</strong> &middot; <span class="jp">ストリートファイター30thアニバーサリーコレクションインターナショナル</span> &middot; PlayStation 4 &middot; 2018 &middot; Capcom &middot; product code <code>PLJM-80264</code></p>
+        <p><strong>購買方式：</strong>
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3DPLJM-80264%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp（依商品編號）</a> &middot;
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3D%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2582%25BF%25E3%2583%25BC30th%25E3%2582%25A2%25E3%2583%258B%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B5%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%258A%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%258A%25E3%2583%25AB%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp（依日文商品名）</a> &middot;
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://i0c.xyz/6a6994d1e0b3f?url=https%3A%2F%2Fbuyee.jp%2Fitem%2Fsearch%2Fquery%2F%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2582%25BF%25E3%2583%25BC30th%25E3%2582%25A2%25E3%2583%258B%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B5%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%258A%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%258A%25E3%2583%25AB%2520%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B34%3Flang%3Den">Buyee</a></p>
+
+        <div class="kataban-search-cta">
+          <p><a href="/?q=&#12473;&#12488;&#12522;&#12540;&#12488;&#12501;&#12449;&#12452;&#12479;&#12540;">在Kataban目錄中瀏覽日版快打旋風全系列 &rarr;</a></p>
+        </div>
+
+        <div class="official-sources">
+          <p><strong>資料來源</strong></p>
+          <ul>
+            <li>岡本吉起（岡本吉起ゲームch），<a href="https://www.youtube.com/watch?v=2NzQWwV7YUQ">《ストⅡ誕生裏話》訪談</a></li>
+            <li>岡本吉起（岡本吉起ゲームch），<a href="https://www.youtube.com/watch?v=uqRFod7nuHo">與西山隆志的對談</a></li>
+          </ul>
+        </div>
+
+        <p><em>本文為系列「快打旋風開發史」五部曲的第1回，配合2026年10月電影上映推出。第2回將於下週刊出。</em></p>
+      </div>
+    </article>
+
+    <div class="cta">
+      <h2>知道編號，找到遊戲</h2>
+      <p>輸入英文標題，就能得到日文名稱、印在卡帶側邊的編號，以及有貨的商店連結。</p>
+      <a class="ctabtn" href="/">搜尋遊戲</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Kataban &middot; 資料來自文化廳 Media Arts Database。英文標題比對自 Wikidata (CC0)。
+    <br>本站部分連結為聯盟行銷連結，Kataban 可能因此獲得佣金，包括作為 eBay Partner Network 聯盟會員（廣告）。
+    <br><a href="/blog/zh/">全部文章</a> &middot; <a href="/">回到搜尋工具</a> &middot; <a href="/privacy.html">隱私政策</a>
+    <div class="foot-brand">
+      <p class="foot-stars" aria-hidden="true">★★★</p>
+      <p class="foot-tagline">讓實體媒介長存。</p>
+      <span class="kb-word" aria-hidden="true">
+        <span class="kb-ghost"><span class="kb-grid" data-kb="kb-on-cyan"></span></span>
+        <span class="kb-grid kb-top" data-kb="kb-on-pink"></span>
+      </span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="/kataban.js"></script>
+</body>
+</html>
