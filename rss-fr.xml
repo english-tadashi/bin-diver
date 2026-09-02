@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog pour les collectionneurs à l'étranger en quête de jeux rétro japonais — guides boutiques, tutoriels d'importation, et les histoires derrière les titres.</description>
     <language>fr-fr</language>
-    <lastBuildDate>Wed, 02 Sep 2026 14:29:33 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 03 Sep 2026 08:18:37 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-fr.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Le scénariste qui a hissé l'écriture des jeux vidéo au « niveau professionnel » : la légende de Noboru Sugimura — En l'honneur de la sortie du nouveau film Resident Evil et du jeu Onimusha</title>
+      <link>https://gamekataban.com/blog/fr/2026-09-02-sugimura-noboru-scenario-legend.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-09-02-sugimura-noboru-scenario-legend.html</guid>
+      <description>Avant les deux grandes sorties Capcom de ce mois-ci, découvrez le scénariste télé qui a réécrit l'histoire de Resident Evil 2 et fondé le studio Flagship, changeant à jamais la narration dans les jeux vidéo.</description>
+      <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Histoire du développement de Street Fighter, partie 1 : la réunion ennuyeuse qui a donné naissance à un genre (1987)</title>
       <link>https://gamekataban.com/blog/fr/2026-09-02-street-fighter-development-history-1.html</link>

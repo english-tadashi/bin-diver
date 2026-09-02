@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 02 Sep 2026 14:29:33 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 03 Sep 2026 08:18:37 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>The Screenwriter Who Made Game Stories Matter: Remembering Noboru Sugimura, the Man Behind Resident Evil and Onimusha</title>
+      <link>https://gamekataban.com/blog/2026-09-02-sugimura-noboru-scenario-legend.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-02-sugimura-noboru-scenario-legend.html</guid>
+      <description>Before Capcom's biggest September releases, meet the TV screenwriter whose rewrite of Resident Evil 2 and studio Flagship reshaped how game stories get told.</description>
+      <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Street Fighter Development History, Part 1: The Boring Meeting That Started a Genre (1987)</title>
