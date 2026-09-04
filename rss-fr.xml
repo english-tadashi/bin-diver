@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog pour les collectionneurs à l'étranger en quête de jeux rétro japonais — guides boutiques, tutoriels d'importation, et les histoires derrière les titres.</description>
     <language>fr-fr</language>
-    <lastBuildDate>Fri, 04 Sep 2026 08:12:49 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 05 Sep 2026 06:52:41 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-fr.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Chou Aniki et le culte du baka-ge : les jeux japonais glorieusement absurdes</title>
+      <link>https://gamekataban.com/blog/fr/2026-09-05-chou-aniki-baka-ge.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-09-05-chou-aniki-baka-ge.html</guid>
+      <description>Chou Aniki (1992) est le "baka-ge" japonais par excellence — un classique culte délibérément absurde. Son histoire, plus trois autres classiques cultes taillés dans la même étoffe, avec les codes produit pour dénicher de vrais exemplaires.</description>
+      <pubDate>Sat, 05 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Cybernetic Attack: Final Mission — TENGO PROJECT remake le classique NES S.C.A.T.</title>
       <link>https://gamekataban.com/blog/fr/2026-09-04-cybernetic-attack-final-mission-remake.html</link>
