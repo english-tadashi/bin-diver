@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Sat, 05 Sep 2026 06:52:41 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 06 Sep 2026 08:00:24 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Terra Cresta cumple 40: por qué el original de Famicom supera a la versión que jugó casi todo Occidente</title>
+      <link>https://gamekataban.com/blog/es/2026-09-06-terra-cresta-40th-anniversary.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-09-06-terra-cresta-40th-anniversary.html</guid>
+      <description>Terra Cresta llegó a Famicom el 27 de septiembre de 1986: hace cuarenta años este mes. Casi todo Occidente solo conoce el port de NES de 1990. Esto es lo que tiene el cartucho original y el código (NBF-TC) que lo encuentra.</description>
+      <pubDate>Sun, 06 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Chou Aniki y el culto al baka-ge: los juegos japoneses gloriosamente absurdos</title>
       <link>https://gamekataban.com/blog/es/2026-09-05-chou-aniki-baka-ge.html</link>

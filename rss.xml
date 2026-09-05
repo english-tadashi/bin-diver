@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 05 Sep 2026 06:52:41 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 06 Sep 2026 08:00:23 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Terra Cresta at 40: Why the Famicom Original Still Beats the Version Most Western Fans Played</title>
+      <link>https://gamekataban.com/blog/2026-09-06-terra-cresta-40th-anniversary.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-06-terra-cresta-40th-anniversary.html</guid>
+      <description>Terra Cresta hit the Famicom on September 27, 1986 — forty years ago this month. Most Western fans know only the 1990 NES port. Here's what the original cartridge has, and the product code (NBF-TC) that finds it.</description>
+      <pubDate>Sun, 06 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Chou Aniki and the Cult of Baka-ge: Japan's Gloriously Absurd Games</title>
