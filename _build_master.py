@@ -880,6 +880,35 @@ MANUAL_KATABAN_FILL = {
     #   master 上でも product_code は空。DATA では index 20399 の1行のみ
     #   （'Golden Axe' かつ platform に 'WonderSwan' を含む行は全 DATA でこの1件）。
     "M748217": "SWJ-BANC2B",
+    # Terra Cresta / テラクレスタ (ファミコン) — 2026-09-06、駿河屋の型番検索と
+    # Media World の商品ページで裏取り(n=2)。裏取りは利用者が実施。
+    # ★原典確認済み: M878214 は schema:productID も schema:gtin も持たない（2026-09-06、
+    #   metadata301.ttl:1510010-1510033 を目視）。master 上でも product_code は空。
+    #   DATA では title_ja 'テラクレスタ' かつ platform 'Famicom' の行は全 DATA でこの1件。
+    # ★駿河屋で `NBF-TC` を引くと3件、すべてファミコンの『テラクレスタ』
+    #   （発売日 1986/09/27・日本物産）。他機種・他作品は1件も混ざらない。
+    "M878214": "NBF-TC",
+}
+
+# ---------------------------------------------------------------
+# MANUAL_JAN_FILL: MADB に schema:gtin が無いが、外部裏取り(n=2)で補完した JAN。
+# madb_id -> 13桁JAN。★MANUAL_KATABAN_FILL と同じ格の表である ―― 原典に無い値を
+#   外から足す。増やすときの作法（(a) MADB に本当に無いことを確認、(b) 独立した
+#   2つ以上の出典、(c) 出典と日付を行のコメントに書く）はあちらと同一。
+#
+# 【効かせる範囲】data_line.js の row[10] だけ。master_final.csv(=rows) は素通し。
+#   master は MADB の完全な写しとして保つ（既存方針）。
+# 【上書きしない】MADB 側に gtin が入ったら原典を優先し、表の値は使わない。
+#   上流が直ったことに気付けるよう、その場合は毎回 ★ を印字する。
+# 【なぜ別表か】型番(row[3])は店の検索キー、JAN(row[10])はカメラ(バーコード)の
+#   照合用で、出所も使われ方も別。片方だけ裏が取れることがあるので表を分ける。
+# ★swap_data.py の [0]〜[6] 差分ガードは row[10] を見ない。ここを足しても
+#   ガードには現れない（型番=row[3] とは違う）。承認フラグは要らない。
+# ---------------------------------------------------------------
+MANUAL_JAN_FILL = {
+    # Terra Cresta / テラクレスタ (ファミコン) — 2026-09-06、駿河屋と Media World で
+    # 裏取り(n=2)。裏取りは利用者が実施。型番 NBF-TC と同じ行（M878214）。
+    "M878214": "4960641000035",
 }
 
 TITLE_KANA_OVERRIDE = {
@@ -1378,6 +1407,12 @@ TITLE_EN = {
     "M878034": "A Week of Garfield",                   # ガーフィールドの一週間
     "M878152": "Star Wars: The Empire Strikes Back",   # スター・ウォーズ 帝国の逆襲
     "M878549": "The New Type",                         # 新人類
+    # ★2026-09-06 追加。MADB は schema:name に "Terra Cresta"@ja-latn を持つが、
+    #   @ja-latn は「日本語をラテン文字で書いた形」であって英題の列(row[0])には来ない
+    #   （title_romaji=row[9] 側へ 'terakuresuta' として入る）。Wikidata 側にも英題が
+    #   無いため row[0] は空のままだった。北米では 1990 年に Vic Tokai が
+    #   NES 版を同じ 'Terra Cresta' で出しており、英題は箱の印字ではなく実在する。
+    "M878214": "Terra Cresta",                         # テラクレスタ (ファミコン/1986/日本物産)
     # ★英題なしを名指しした唯一の行（出所が違うので、上の6件とはコメントで区別する）。
     #   ドラゴンバスターII 闇の封印 / ファミコン / 1989-04-27 / ナムコ / gtin 4907892000568。
     #   MADB(metadata301.ttl) は全項目が整合していて **英題を持っていない**。誤っているのは
@@ -2230,6 +2265,9 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
     _kataban_filled = 0             # MADB に無い型番を外部由来の値で埋めた行数
     _kataban_had_own = []           # MADB 側に型番が入った＝表が不要になった行（下で必ず印字）
     _kataban_seen = set()           # 表の madb_id のうち DATA まで届いたもの
+    _jan_filled = 0                 # MADB に無い JAN を外部由来の値で埋めた行数
+    _jan_had_own = []               # MADB 側に gtin が入った＝表が不要になった行（下で必ず印字）
+    _jan_seen = set()               # 表の madb_id のうち DATA まで届いたもの
     data = []
     _excluded = []
     for r in rows:                                         # rows(=master) は変更しない。読むだけ。
@@ -2285,6 +2323,17 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
                 _kataban_filled += 1
             else:                                          # 上流が持つようになった＝表から外す判断が要る
                 _kataban_had_own.append((r["madb_id"], code))
+        # MADB に gtin が無い行を、外部裏取りの JAN で埋める（上の MANUAL_JAN_FILL を見ること）。
+        # rows(=master_final.csv) は書き換えない。data_line.js の row[10] にだけ効かせる。
+        # ★型番と同じく、空のときだけ入れる。MADB 側に gtin が入ったら原典を優先する。
+        jan = r["jan"]
+        if r["madb_id"] in MANUAL_JAN_FILL:
+            _jan_seen.add(r["madb_id"])
+            if not jan:
+                jan = MANUAL_JAN_FILL[r["madb_id"]]
+                _jan_filled += 1
+            else:                                          # 上流が持つようになった＝表から外す判断が要る
+                _jan_had_own.append((r["madb_id"], jan))
         # ★2026-08-23: 出力が **13列 -> 14列** になった。row[13] = 機種(日本語)。
         #   足したのは末尾なので、既存の row[0]〜[12] の意味も添字も変わらない。
         #   ・引くキーは `plat`（PLATFORM_RENAME を通した後＝row[2] に出る値そのもの）。
@@ -2302,7 +2351,7 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
         #     ここでは触れるだけに留める。注入時に人手で確認すること。
         data.append([title_en, r["title_ja"], plat, code,
                      r["year"], r["publisher"], _canon_pub_final(r["publisher_en"]), r["buyee_kw"],
-                     kana, r["title_romaji"], r["jan"], r["kana_row"],
+                     kana, r["title_romaji"], jan, r["kana_row"],
                      r["online"], PLATFORM_JA.get(plat, "")])
     js_path = os.path.join(os.path.dirname(out_path) or ".", "data_line.js")
     with open(js_path, "w", encoding="utf-8") as f:
@@ -2428,6 +2477,15 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
               f"原典を優先した（表から外せるか確認すること）")
     for mid in sorted(set(MANUAL_KATABAN_FILL) - _kataban_seen):
         print(f"  ★ MANUAL_KATABAN_FILL: {mid} が DATA に現れない"
+              f"（master から消えた / 機種フィルタや罠#16 で落ちた）")
+    # 外部由来の JAN 補完も同じ形で毎回実数を出す。★原典に無い値なので、黙って入れない。
+    print(f"JANを外部値で補完       : {_jan_filled}/{len(MANUAL_JAN_FILL)} 行  "
+          f"(data_line.js の row[10] だけ。master_final.csv は空のまま＝MADB の写しを保つ)")
+    for mid, jan_v in _jan_had_own:                        # 上流が直った＝表から外す判断が要る
+        print(f"  ★ MANUAL_JAN_FILL: {mid} は MADB 側が gtin {jan_v!r} を持つようになった。"
+              f"原典を優先した（表から外せるか確認すること）")
+    for mid in sorted(set(MANUAL_JAN_FILL) - _jan_seen):
+        print(f"  ★ MANUAL_JAN_FILL: {mid} が DATA に現れない"
               f"（master から消えた / 機種フィルタや罠#16 で落ちた）")
     print()
     for k, v in stats.most_common():
