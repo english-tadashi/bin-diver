@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>為海外收藏家打造的日本復古遊戲部落格——商店指南、進口教學，以及遊戲背後的故事。</description>
     <language>zh-tw</language>
-    <lastBuildDate>Sun, 06 Sep 2026 08:00:23 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 06 Sep 2026 09:26:59 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-zh.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Ghosts 'n Goblins 紅白機版：讓街機版顯得輕鬆的家用移植</title>
+      <link>https://gamekataban.com/blog/zh/2026-09-06-ghosts-n-goblins-famicom-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-06-ghosts-n-goblins-famicom-guide.html</guid>
+      <description>卡普空的《Ghosts 'n Goblins》1986 年 6 月 13 日登陸紅白機，由 Micronics 移植，普遍被認為比街機原版更難。本文說明這張卡帶是什麼，以及能找到它的型番 CAP-MK。</description>
+      <pubDate>Sun, 06 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Terra Cresta 40 週年：為何紅白機原版勝過多數西方玩家玩到的那個版本</title>
       <link>https://gamekataban.com/blog/zh/2026-09-06-terra-cresta-40th-anniversary.html</link>

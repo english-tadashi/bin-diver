@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Sun, 06 Sep 2026 08:00:23 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 06 Sep 2026 09:26:59 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Ghosts 'n Goblins on Famicom: The Home Port That Made the Arcade Look Easy</title>
+      <link>https://gamekataban.com/blog/2026-09-06-ghosts-n-goblins-famicom-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-06-ghosts-n-goblins-famicom-guide.html</guid>
+      <description>Capcom's Ghosts 'n Goblins reached the Famicom on June 13, 1986, ported by Micronics and widely considered harder than the arcade original. What the cartridge is, and the product code (CAP-MK) that finds it.</description>
+      <pubDate>Sun, 06 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Terra Cresta at 40: Why the Famicom Original Still Beats the Version Most Western Fans Played</title>

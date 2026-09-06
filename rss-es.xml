@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Sun, 06 Sep 2026 08:00:24 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 06 Sep 2026 09:26:59 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Ghosts 'n Goblins en Famicom: la conversión doméstica que hizo que la recreativa pareciera fácil</title>
+      <link>https://gamekataban.com/blog/es/2026-09-06-ghosts-n-goblins-famicom-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-09-06-ghosts-n-goblins-famicom-guide.html</guid>
+      <description>El Ghosts 'n Goblins de Capcom llegó a Famicom el 13 de junio de 1986, convertido por Micronics y considerado más difícil que el original de recreativa. Qué es el cartucho y el código de producto (CAP-MK) que lo encuentra.</description>
+      <pubDate>Sun, 06 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Terra Cresta cumple 40: por qué el original de Famicom supera a la versión que jugó casi todo Occidente</title>
       <link>https://gamekataban.com/blog/es/2026-09-06-terra-cresta-40th-anniversary.html</link>

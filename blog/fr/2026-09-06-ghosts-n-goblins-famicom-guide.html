@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ghosts 'n Goblins sur Famicom : le portage maison qui a fait passer l'arcade pour une promenade &mdash; Kataban</title>
+<meta name="description" content="Le Ghosts 'n Goblins de Capcom est arrivé sur Famicom le 13 juin 1986, porté par Micronics et réputé plus difficile que l'original d'arcade. Ce qu'est la cartouche, et le code produit (CAP-MK) qui la trouve.">
+<meta property="og:title" content="Ghosts 'n Goblins sur Famicom : le portage maison qui a fait passer l'arcade pour une promenade">
+<meta property="og:description" content="Le Ghosts 'n Goblins de Capcom est arrivé sur Famicom le 13 juin 1986, porté par Micronics et réputé plus difficile que l'original d'arcade. Ce qu'est la cartouche, et le code produit (CAP-MK) qui la trouve.">
+<meta property="og:url" content="https://gamekataban.com/blog/fr/2026-09-06-ghosts-n-goblins-famicom-guide.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:image" content="https://gamekataban.com/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://gamekataban.com/blog/fr/2026-09-06-ghosts-n-goblins-famicom-guide.html">
+<link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-09-06-ghosts-n-goblins-famicom-guide.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-09-06-ghosts-n-goblins-famicom-guide.html">
+<link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-09-06-ghosts-n-goblins-famicom-guide.html">
+<link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-09-06-ghosts-n-goblins-famicom-guide.html">
+<link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-09-06-ghosts-n-goblins-famicom-guide.html">
+<link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-09-06-ghosts-n-goblins-famicom-guide.html">
+<link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-09-06-ghosts-n-goblins-famicom-guide.html">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=IBM+Plex+Sans+JP:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/kataban.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+
+  <header class="sitehead">
+    <a class="sitehead-brand" href="/" aria-label="Kataban — retour à l'outil de recherche">
+      <span class="kb-word">
+        <span class="kb-ghost" aria-hidden="true"><span class="kb-grid" id="kbGridCyan"></span></span>
+        <span class="kb-grid kb-top" id="kbGridPink" aria-hidden="true"></span>
+      </span>
+      <span class="sitehead-badge">&#22411;&#30058;</span>
+    </a>
+    <a class="backlink" href="/blog/fr/"><span class="arrow" aria-hidden="true">&#8592;</span> Tous les articles</a>
+    <div class="langswitch">
+      <button class="langswitch-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langswitch-menu">
+        <span class="langswitch-current">FR &mdash; Français</span>
+        <span class="langswitch-caret" aria-hidden="true">&#9662;</span>
+      </button>
+      <ul class="langswitch-menu" id="langswitch-menu" role="menu" hidden>
+      <li role="none"><a role="menuitem" href="/blog/2026-09-06-ghosts-n-goblins-famicom-guide.html" hreflang="en" lang="en" data-lang="en">English</a></li>
+      <li role="none"><a role="menuitem" href="/blog/zh/2026-09-06-ghosts-n-goblins-famicom-guide.html" hreflang="zh-Hant" lang="zh-Hant" data-lang="zh">&#20013;&#25991;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/ko/2026-09-06-ghosts-n-goblins-famicom-guide.html" hreflang="ko" lang="ko" data-lang="ko">&#54620;&#44397;&#50612;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/es/2026-09-06-ghosts-n-goblins-famicom-guide.html" hreflang="es" lang="es" data-lang="es">Espa&ntilde;ol</a></li>
+      <li role="none"><a role="menuitem" href="/blog/de/2026-09-06-ghosts-n-goblins-famicom-guide.html" hreflang="de" lang="de" data-lang="de">Deutsch</a></li>
+      <li role="none"><a role="menuitem" href="/blog/fr/2026-09-06-ghosts-n-goblins-famicom-guide.html" hreflang="fr" lang="fr" data-lang="fr" aria-current="page">Français</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <article>
+      <div class="pagehead">
+        <p class="kicker">Blog Kataban</p>
+        <h1>Ghosts 'n Goblins sur Famicom : le portage maison qui a fait passer l'arcade pour une promenade</h1>
+        <p class="postmeta">2026-09-06</p>
+      </div>
+
+      <div class="prose">
+        <p>Le <em>Ghosts 'n Goblins</em> de Capcom est en promotion sur Steam en ce moment, dans le cadre de la remise sur le pack Capcom Arcade Stadium&nbsp;: une bonne occasion de revenir sur son brutal portage Famicom de 1986, qui est parvenu on ne sait comment à rendre encore plus dur un jeu d'arcade déjà punitif.</p>
+
+        <ul>
+          <li><strong>De quoi s'agit-il&nbsp;:</strong> un jeu d'action à défilement horizontal où le chevalier Arthur perd son armure, puis la vie, en deux coups, et se fraie un chemin à travers des hordes de morts-vivants pour sauver une princesse</li>
+          <li><strong>Original d'arcade&nbsp;:</strong> 1985, Capcom</li>
+          <li><strong>Portage Famicom&nbsp;:</strong> 13 juin 1986 &mdash; développé par Micronics, publié par Capcom</li>
+          <li><strong>Ce qui distingue la version Famicom&nbsp;:</strong> elle passe largement pour plus difficile que l'original d'arcade, avec des armes plus lentes et un timing plus strict, mais elle ajoute des personnages cachés absents de la version arcade</li>
+          <li><strong>Sortie occidentale&nbsp;:</strong> sur NES sous le nom Ghosts 'n Goblins (l'Europe PAL a utilisé Ghost 'n Goblins, au singulier)</li>
+          <li><strong>Code produit à chercher&nbsp;:</strong> <code>CAP-MK</code></li>
+        </ul>
+
+        <h2>Pourquoi la version Famicom est-elle plus difficile que l'original d'arcade&nbsp;?</h2>
+
+        <p>Capcom a confié le portage Famicom à Micronics, et le résultat a rogné la vitesse de l'arme d'Arthur et resserré le timing des ennemis pour tenir sur le matériel. Les rétrospectives japonaises publiées en juin dernier pour les 40 ans du portage ont pointé exactement cela&nbsp;: il est plus rude que la borne dont il vient. Une réputation qui colle à la cartouche depuis des décennies.</p>
+
+        <h2>Que veulent dire les fans japonais par &laquo;&nbsp;<span class="jp">&#39740;&#30044;&#12466;&#12540;</span>&nbsp;&raquo; et &laquo;&nbsp;<span class="jp">&#27515;&#12395;&#12466;&#12540;</span>&nbsp;&raquo;&nbsp;?</h2>
+
+        <p>Les joueurs japonais ont deux termes bien rodés pour les jeux atrocement difficiles de ce genre. <strong><span class="jp">&#39740;&#30044;&#12466;&#12540;</span></strong> (<em>kichiku-ge</em>, littéralement &laquo;&nbsp;jeu démoniaque&nbsp;&raquo;) désigne un jeu qui paraît injuste de façon presque sadique&nbsp;: coups gratuits, timing serré, aucune marge d'erreur. <strong><span class="jp">&#27515;&#12395;&#12466;&#12540;</span></strong> (<em>shinige</em>, &laquo;&nbsp;jeu de la mort&nbsp;&raquo;) est plus large&nbsp;: un jeu bâti sur l'échec répété, où mourir encore et encore est la façon prévue d'apprendre les schémas, et non le signe que vous jouez mal. <em>Ghosts 'n Goblins</em> &mdash; et sa version Famicom en particulier &mdash; reçoit les deux étiquettes. Les rétrospectives japonaises sur la cartouche emploient couramment <em>kichiku</em> pour décrire le timing plus strict du portage Micronics, tandis que <em>shinige</em> résume la philosophie de toute la série&nbsp;: deux boucles complètes rien que pour voir la vraie fin, et mourir fait simplement partie du programme.</p>
+
+        <h2>Pourquoi le Red Arremer traîne-t-il une telle réputation de &laquo;&nbsp;démon venu de l'enfer&nbsp;&raquo;&nbsp;?</h2>
+
+        <p>Demandez aux joueurs, au Japon comme en Occident, quel ennemi de <em>Ghosts 'n Goblins</em> ils détestent le plus&nbsp;: vous obtiendrez probablement la même réponse. Il encaisse trois coups, crache des boules de feu depuis les airs et, si le combat s'éternise au-delà d'une minute, il peut même se transformer en une variante blanche nettement plus agressive. Barrière de la langue mise à part, les joueurs des deux rives du Pacifique rendent le même verdict sur le Red Arremer&nbsp;: c'est le démon ultime.</p>
+
+        <h2>La version Famicom vaut-elle le détour à côté de celle d'arcade&nbsp;?</h2>
+
+        <p>Si vous avez pris goût à <em>Ghosts 'n Goblins</em> via Capcom Arcade Stadium, la cartouche Famicom est un jeu différent et plus dur, bâti sur la même histoire&nbsp;: il faut atteindre la fin deux fois pour en venir à bout, comme en arcade. Elle contient aussi des personnages cachés absents de la version arcade, que les guides de jeux rétro citent comme l'un de ses rares avantages sur l'original.</p>
+
+        <div class="official-sources">
+          <p>Fiche officielle&nbsp;: <a target="_blank" rel="noopener" href="https://store.steampowered.com/app/1515950/Capcom_Arcade_Stadium/">Capcom Arcade Stadium sur Steam</a></p>
+        </div>
+
+        <h2>Que regarder en rayon ou dans une annonce&nbsp;?</h2>
+
+        <p>Cherchez le code produit <strong><code>CAP-MK</code></strong>, imprimé sur l'étiquette de la cartouche.</p>
+
+        <p><strong>Ghosts 'n Goblins</strong> &middot; <span class="jp">&#39764;&#30028;&#26449;</span> &middot; Famicom &middot; 1986 &middot; Capcom (<span class="jp">&#12459;&#12503;&#12467;&#12531;</span>) &middot; code produit <code>CAP-MK</code></p>
+        <p><strong>Où acheter :</strong>
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&amp;goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3DCAP-MK%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp (par code produit)</a> &middot;
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://i0c.xyz/6a6994d1e0b3f?url=https%3A%2F%2Fbuyee.jp%2Fitem%2Fsearch%2Fquery%2F%25E9%25AD%2594%25E7%2595%258C%25E6%259D%2591%2520%25E3%2583%2595%25E3%2582%25A1%25E3%2583%259F%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2594%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25BF%3Flang%3Den">Buyee</a><br>
+          <a href="/?q=CAP-MK">Rechercher sur Kataban &rarr;</a></p>
+
+        <div class="kataban-search-cta">
+          <p><a href="/?q=CAP-MK">Consultez &laquo;&nbsp;<span class="jp">&#39764;&#30028;&#26449;</span>&nbsp;&raquo; (Makaimura) dans le catalogue Kataban pour confirmer le code et accéder directement à une annonce Buyee ou Suruga-ya &rarr;</a></p>
+        </div>
+      </div>
+    </article>
+
+    <div class="cta">
+      <h2>Trouvez le code, trouvez le jeu</h2>
+      <p>Saisissez un titre occidental. Obtenez le nom japonais, le code produit imprimé sur la tranche de la cartouche, et des liens vers les boutiques qui l'ont en stock.</p>
+      <a class="ctabtn" href="/">Rechercher un jeu</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Kataban &middot; Données issues de la Media Arts Database de l'Agence japonaise pour les affaires culturelles. Titres anglais recoupés avec Wikidata (CC0).
+    <br>Certains liens sur ce site sont des liens d'affiliation ; Kataban peut percevoir une commission, notamment en tant qu'affilié du eBay Partner Network (publicité).
+    <br><a href="/blog/fr/">Tous les articles</a> &middot; <a href="/">Retour à l'outil de recherche</a> &middot; <a href="/privacy.html">Confidentialité</a>
+    <div class="foot-brand">
+      <p class="foot-stars" aria-hidden="true">★★★</p>
+      <p class="foot-tagline">Longue vie aux jeux physiques.</p>
+      <span class="kb-word" aria-hidden="true">
+        <span class="kb-ghost"><span class="kb-grid" data-kb="kb-on-cyan"></span></span>
+        <span class="kb-grid kb-top" data-kb="kb-on-pink"></span>
+      </span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="/kataban.js"></script>
+</body>
+</html>
