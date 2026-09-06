@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Sun, 06 Sep 2026 09:26:59 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 07 Sep 2026 06:33:30 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>La espera de 30 años de Surging Aura por una traducción al inglés ha terminado</title>
+      <link>https://gamekataban.com/blog/es/2026-09-07-surging-aura-fan-translation.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-09-07-surging-aura-fan-translation.html</guid>
+      <description>El 28 de julio de 2026 se publicó un parche de traducción completa al inglés y al coreano para Surging Aura, el RPG de Mega Drive que Sega nunca localizó. Aquí está la historia del juego y dónde encontrar un cartucho original.</description>
+      <pubDate>Mon, 07 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Ghosts 'n Goblins en Famicom: la conversión doméstica que hizo que la recreativa pareciera fácil</title>
       <link>https://gamekataban.com/blog/es/2026-09-06-ghosts-n-goblins-famicom-guide.html</link>
