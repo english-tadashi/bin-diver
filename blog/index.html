@@ -16,6 +16,7 @@
 <meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://gamekataban.com/blog/">
+<link rel="next" href="https://gamekataban.com/blog/page/2/">
 <link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/">
 <link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/">
 <link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/">
@@ -35,7 +36,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=IBM+Plex+Sans+JP:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/kataban.css?v=fef45d48">
+<link rel="stylesheet" href="/kataban.css?v=39b8b9a5">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -83,41 +84,25 @@
     <!-- ============================================================
          記事一覧。新しい順（＝いちばん上が最新）に並べる。
 
-         ★sitemap.xml・RSS4本（rss.xml と rss-{zh,ko,es}.xml）・zh/ko/es の一覧3本は
-           build_feeds.py --write の生成物。**手で触らない**（手で直しても次の --write で戻る）。
-           このページの外枠（見出し・CTA・フッター）も同じく生成物で、手で足してよいのは
-           下の <ul class="postlist"> の中のカードだけ。
+         ★このページは **build_feeds.py --write の生成物**。手で直しても次の --write で戻る。
+           カードも含めて全部が生成物なので、**このファイルを編集しても記事は増えない**。
 
-         ★2本目以降を足す手順は、記事HTML4本（blog/ と blog/{zh,ko,es}/）＋このファイルに
-           カード1枚 = 計5ファイル。書いたら
-             python3 build_feeds.py --check   # 差分を目で見る
-             python3 build_feeds.py --write   # 9本を書き出す
-           ★--check を飛ばして --write しないこと（手で直した外枠が黙って戻る）。
+         ★記事を足すときに書くのは blog/_parts/cards.html（カードの台帳）。
+           掲載順・面子・サムネ・日付、そして英語版カードの題名/要約は全部そこが源で、
+           このページ・訳版一覧5本・RSS6本・sitemap.xml がまとめてそれを見ている。
+           足し方のテンプレートと注意書きは台帳の先頭コメントにある。
 
-         1件ぶんのテンプレート（日付は記事ファイル名の YYYY-MM-DD と揃える）:
+         ★2026-09-07 より前は、このファイルの <ul class="postlist"> 自身が台帳だった。
+           （＝出力が入力でもあった）。ページ分割と両立しないので台帳を切り出した。
 
-         <li>
-           <a class="post" href="/blog/2026-08-08-example-slug.html">
-             <img class="post-thumb" src="/blog/images/2026-08-08-example-slug/thumb.jpg" alt="" width="200" height="130" loading="lazy">
-             <div class="post-body">
-               <span class="post-date">2026-08-08</span>
-               <h2 class="post-title">記事タイトル</h2>
-               <p class="post-summary">1〜2文の要約。一覧で読むかどうかを決められる長さにする。</p>
-             </div>
-           </a>
-         </li>
-
-         ★<time> ではなく <span class="post-date"> にしてあるのは、日付を
-           VT323（数字だけの書体）で出すため。日付は機械可読にする必要が出たら
-           <time datetime="2026-08-08"> に変えてよい（見た目は変わらない）。
-
-         ★サムネは 200x130（横長）に object-fit:cover で切られる（.post-thumb）。
-           元画像は横長のものを選ぶか、被写体を中央に置くこと。480px 以下では
-           幅100%に伸びるが aspect-ratio:200/130 を保つので、切り取り比率は変わらない。
-           img の width/height 属性も 200/130 に揃えること（ズレると読み込み時に CLS が出る）。
-           置き場所は記事本文の画像と同じ /blog/images/<記事スラッグ>/ 。
-         ★.post-body の div を外さないこと。.post は flex で「サムネ | 本文」の
-           2カラムにしてあるので、テキスト3つを裸で置くと横一列に並ぶ。
+         生成されるのは13本:
+           blog/index.html と blog/{zh,ko,es,de,fr}/index.html
+           rss.xml と rss-{zh,ko,es,de,fr}.xml
+           sitemap.xml
+         手順:
+           python3 build_feeds.py --check   # 差分を目で見る
+           python3 build_feeds.py --write   # 13本を書き出す
+         ★--check を飛ばして --write しないこと。
          ============================================================ -->
 
     <ul class="postlist">
@@ -241,157 +226,12 @@
           </div>
         </a>
       </li>
-      <li>
-        <a class="post" href="/blog/2026-08-28-mgs-master-collection-vol2-originals.html">
-          <img class="post-thumb" src="/blog/images/2026-08-28-mgs-master-collection-vol2-originals/thumb.png" alt="" width="200" height="130" loading="lazy">
-          <div class="post-body">
-            <span class="post-date">2026-08-28</span>
-            <h2 class="post-title">Metal Gear Solid Master Collection Vol. 2 Just Shipped Three Originals</h2>
-            <p class="post-summary">Master Collection Vol. 2 landed August 27 with MGS4, Peace Walker, and Ghost Babel. Here's where to find the original Japanese releases of all three, with product codes.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="post" href="/blog/2026-08-28-akihabara-deep-cuts-route.html">
-          <img class="post-thumb" src="/blog/images/2026-08-28-akihabara-deep-cuts-route/thumb.png" alt="" width="200" height="130" loading="lazy">
-          <div class="post-body">
-            <span class="post-date">2026-08-28</span>
-            <h2 class="post-title">Akihabara Deep Cuts: BEEP and the Retro Game Camp Dungeon</h2>
-            <p class="post-summary">BEEP Akihabara and the Retro Game Camp Dungeon Store sit a short walk past the routes in Parts 1 and 2 &mdash; one for Japanese PC hardware and arcade boards, the other for the loose cartridge piles.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="post" href="/blog/2026-08-27-news-persona-4-revival.html">
-          <img class="post-thumb" src="/blog/images/2026-08-27-news-persona-4-revival/thumb.png" alt="" width="200" height="130" loading="lazy">
-          <div class="post-body">
-            <span class="post-date">2026-08-27</span>
-            <h2 class="post-title">Persona 4 Revival Gets a February 2027 Release Date and New Story Trailer</h2>
-            <p class="post-summary">Persona 4 Revival launches February 18, 2027 on PS5, Xbox, and PC. Atlus revealed a new story trailer at Gamescom 2026 &mdash; find the games that started it all.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="post" href="/blog/2026-08-26-news-megaman-dual-override.html">
-          <img class="post-thumb" src="/blog/images/2026-08-26-news-megaman-dual-override/thumb.png" alt="" width="200" height="130" loading="lazy">
-          <div class="post-body">
-            <span class="post-date">2026-08-26</span>
-            <h2 class="post-title">Capcom Announces &quot;Mega Man: Dual Override&quot; for the Series&#39; 40th Anniversary</h2>
-            <p class="post-summary">Capcom announced Mega Man: Dual Override for 2027, with both Mega Man and Proto Man playable. Here's what was revealed, and where the series started on the Famicom in 1987.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="post" href="/blog/2026-08-26-news-console-archives-bubble-bobble.html">
-          <img class="post-thumb" src="/blog/images/2026-08-26-news-console-archives-bubble-bobble/thumb.png" alt="" width="200" height="130" loading="lazy">
-          <div class="post-body">
-            <span class="post-date">2026-08-26</span>
-            <h2 class="post-title">&quot;Console Archives BUBBLE BOBBLE&quot; Brings the 1987 Disk System Original to Switch 2 and PS5</h2>
-            <p class="post-summary">HAMSTER's Console Archives series brings BUBBLE BOBBLE to Switch 2 and PS5. The 1987 Famicom original was a Disk System release, not a cartridge &mdash; here's what that means for collectors.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="post" href="/blog/2026-08-26-glossary-cib.html">
-          <img class="post-thumb" src="/blog/images/2026-08-26-glossary-cib/thumb.png" alt="" width="200" height="130" loading="lazy">
-          <div class="post-body">
-            <span class="post-date">2026-08-26</span>
-            <h2 class="post-title">What Does "CIB" Mean When Buying Used Games in Japan?</h2>
-            <p class="post-summary">CIB (Complete In Box) means the game, case, and manual are all present. Here's what to check before buying, and how it maps to Japanese listing terms.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="post" href="/blog/2026-08-25-news-terranigma-remake.html">
-          <img class="post-thumb" src="/blog/images/2026-08-25-news-terranigma-remake/thumb.png" alt="" width="200" height="130" loading="lazy">
-          <div class="post-body">
-            <span class="post-date">2026-08-25</span>
-            <h2 class="post-title">Terranigma Is Getting a Remaster in 2027 &mdash; Here's the Original SFC Version</h2>
-            <p class="post-summary">The 1995 Enix/Quintet classic Terranigma (Tenchi Souzou) is coming back in 2027 on modern platforms. Here's what was announced, and where to find the original Super Famicom release.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="post" href="/blog/2026-08-25-news-jajamaru-hyakki-yakouden.html">
-          <img class="post-thumb" src="/blog/images/2026-08-25-news-jajamaru-hyakki-yakouden/thumb.png" alt="" width="200" height="130" loading="lazy">
-          <div class="post-body">
-            <span class="post-date">2026-08-25</span>
-            <h2 class="post-title">Ninja JaJaMaru-kun Is Back &mdash; A New Action Game Is Coming in 2027</h2>
-            <p class="post-summary">City Connection has announced Jajamaru no Hyakki Yakouden, a new dungeon-crawling action game in the 40-year-old Ninja JaJaMaru-kun series. Here's what was revealed, and where to find the original 1985 Famicom game.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="post" href="/blog/2026-08-23-akihabara-chain-store-crawl.html">
-          <img class="post-thumb" src="/blog/images/2026-08-23-akihabara-chain-store-crawl/thumb.png" alt="" width="200" height="130" loading="lazy">
-          <div class="post-body">
-            <span class="post-date">2026-08-23</span>
-            <h2 class="post-title">The Akihabara Chain-Store Crawl</h2>
-            <p class="post-summary">Four big chain names, four very different shelves &mdash; what Suruga-ya, Hard Off, Book-Off, and Lashinbang actually sell for retro game hunters.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="post" href="/blog/2026-08-22-aliens-fireteam-elite-2-jp-data.html">
-          <img class="post-thumb" src="/blog/images/2026-08-22-aliens-fireteam-elite-2-jp-data/thumb.png" alt="" width="200" height="130" loading="lazy">
-          <div class="post-body">
-            <span class="post-date">2026-08-22</span>
-            <h2 class="post-title">Aliens: Fireteam Elite 2 Is Coming &mdash; And the Japanese Alien Games That Came Before It</h2>
-            <p class="post-summary">Four-player co-op lands August 25. Japan's game database tells a stranger story about what came before &mdash; and the closest thing you can actually buy isn't officially Aliens at all.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="post" href="/blog/2026-08-22-glossary-junk.html">
-          <img class="post-thumb" src="/blog/images/2026-08-22-glossary-junk/thumb.png" alt="" width="200" height="130" loading="lazy">
-          <div class="post-body">
-            <span class="post-date">2026-08-22</span>
-            <h2 class="post-title">What Does "Junk" Mean When Buying Used Games in Japan?</h2>
-            <p class="post-summary">It's not garbage &mdash; it's a price category. Here's what "as-is, no guarantee" really means before you buy.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="post" href="/blog/2026-08-21-golden-axe-anime-jp-data.html">
-          <img class="post-thumb" src="/blog/images/2026-08-21-golden-axe-anime-jp-data/thumb.png" alt="" width="200" height="130" loading="lazy">
-          <div class="post-body">
-            <span class="post-date">2026-08-21</span>
-            <h2 class="post-title">Golden Axe Is Getting an Anime. Here's What the Original Japanese Releases Actually Look Like</h2>
-            <p class="post-summary">Five regional releases, one myth about censorship that keeps getting repeated &mdash; and the product codes for the versions that never left Japan.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="post" href="/blog/2026-08-18-fire-emblem-famicom-super-famicom-origins.html">
-          <img class="post-thumb" src="/blog/images/2026-08-18-fire-emblem-famicom-super-famicom-origins/thumb.png" alt="" width="200" height="130" loading="lazy">
-          <div class="post-body">
-            <span class="post-date">2026-08-18</span>
-            <h2 class="post-title">Fire Emblem: Where It All Began &mdash; 5 Famicom &amp; Super Famicom Games You Can Import Today</h2>
-            <p class="post-summary">The five Famicom &amp; Super Famicom games that started Fire Emblem &mdash; none released in English, all still findable in Japan.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="post" href="/blog/2026-08-18-akihabara-chuo-dori-retro-row.html">
-          <img class="post-thumb" src="/blog/images/2026-08-18-akihabara-chuo-dori-retro-row/thumb.png" alt="" width="200" height="130" loading="lazy">
-          <div class="post-body">
-            <span class="post-date">2026-08-18</span>
-            <h2 class="post-title">Akihabara's Chuo-dori Retro Row: The Essential First Walk for Overseas Collectors</h2>
-            <p class="post-summary">The core Akihabara retro game walk along Chuo-dori &mdash; four legendary shops, one straight line, no Japanese required.</p>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a class="post" href="/blog/2026-08-11-how-to-buy-japanese-retro-games-without-japanese.html">
-          <img class="post-thumb" src="/blog/images/2026-08-11-how-to-buy-japanese-retro-games-without-japanese/thumb.png" alt="" width="200" height="130" loading="lazy">
-          <div class="post-body">
-            <span class="post-date">2026-08-11</span>
-            <h2 class="post-title">How to Buy Japanese Retro Games Without Reading Japanese</h2>
-            <p class="post-summary">A step-by-step guide to finding, identifying, and buying used Japanese retro games online &mdash; no Japanese literacy required.</p>
-          </div>
-        </a>
-      </li>
     </ul>
+
+    <nav class="pagenav" aria-label="Blog pages">
+        <span class="pagenav-pos">1 / 3</span>
+        <a class="pagenav-next" rel="next" href="/blog/page/2/">Older posts&nbsp;&rarr;</a>
+    </nav>
 
     <div class="cta">
       <h2>Know the code, find the game</h2>
