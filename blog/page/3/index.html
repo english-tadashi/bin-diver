@@ -36,7 +36,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=IBM+Plex+Sans+JP:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/kataban.css?v=39b8b9a5">
+<link rel="stylesheet" href="/kataban.css?v=1ba62a1b">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -108,9 +108,13 @@
     </ul>
 
     <nav class="pagenav" aria-label="Blog pages">
-        <a class="pagenav-prev" rel="prev" href="/blog/page/2/">&larr;&nbsp;Newer posts</a>
-        <span class="pagenav-pos">3 / 3</span>
-        <a class="pagenav-next" href="/blog/">Back to page 1&nbsp;&uarr;</a>
+      <a class="pagenav-item pagenav-edge" href="/blog/" aria-label="First page">&laquo;</a>
+      <a class="pagenav-item pagenav-edge" href="/blog/page/2/" rel="prev" aria-label="Newer posts">&lsaquo;</a>
+      <a class="pagenav-item pagenav-num" href="/blog/" aria-label="Page 1">1</a>
+      <a class="pagenav-item pagenav-num" href="/blog/page/2/" aria-label="Page 2">2</a>
+      <span class="pagenav-item pagenav-num is-current" aria-current="page">3</span>
+      <span class="pagenav-item pagenav-edge is-off" aria-hidden="true">&rsaquo;</span>
+      <span class="pagenav-item pagenav-edge is-off" aria-hidden="true">&raquo;</span>
     </nav>
 
     <div class="cta">

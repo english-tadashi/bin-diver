@@ -211,45 +211,54 @@ a{color:inherit}
 
 /* ============================================================
    一覧ページのページ送り（2ページ目以降がある言語だけに出る）
+       «  ‹  1 2 3 4 5  ›  »
    ★マークアップは build_feeds.py の build_listing() が作る生成物。
      入るのは <ul class="postlist"> の直後・.cta の直前。
-   ★3カラムの grid。flex + space-between では**駄目**だった ―― 1ページ目には prev が、
-     最終ページには next が出力されないので、要素数が 2/3/2 と変わり、
-     位置表示（1 / 3）が左→中→右へさまよう（2026-09-07 に実測して撮り直した）。
-     grid-column を明示すると、要素が欠けてもその列が空くだけで残りは動かない。
+   ★以前は3カラム grid（前へ / 位置表示 / 次へ）だった。要素の有無で位置が
+     さまようのを grid-column の明示で押さえていたが、いまは**ボタン群を
+     ひとかたまりで中央寄せ**するので、その問題自体が起きない。
+     行けない矢印も span で必ず出す（build_listing() 側）ので、
+     ボタンの個数と幅がページ間で変わらない。だから flex に戻せる。
+   ★480px 専用の指定は持たない。数字が増えて入り切らなければ flex-wrap で
+     2段に折り返すだけで、横スクロールは出ない。
+   ★align-items は center ではなく **stretch**。数字は VT323 20px、矢印は本文書体 18px で
+     中身の高さが違い、center だと箱が 42px と 40px に割れる（2026-09-07 実測）。
+     stretch なら行の中でいちばん高い箱に揃う。
    ============================================================ */
 .pagenav{
-  display:grid; grid-template-columns:1fr auto 1fr; align-items:stretch;
-  gap:12px 16px;
+  display:flex; flex-wrap:wrap; justify-content:center; align-items:stretch;
+  gap:8px;
   margin:28px 0 0; padding:20px 0 0; border-top:1px solid var(--line);
 }
-.pagenav-prev{ grid-column:1; grid-row:1; justify-self:start; }
-.pagenav-pos { grid-column:2; grid-row:1; justify-self:center; align-self:center; }
-.pagenav-next{ grid-column:3; grid-row:1; justify-self:end; }
-/* 数字だけなので VT323 を当てられる（.post-date / .postmeta と同じ条件）。
-   色は --faint。--accent はカードの日付が使っていて、そちらより目立たせたくない。 */
-.pagenav-pos{
-  font-family:var(--f-vt); font-size:18px; letter-spacing:.5px;
-  color:var(--faint);
-}
-/* リンクは footer / .prose と同じ「シアン → hover で紫」。
-   ★訳文が入るので --f-pixel も --f-vt も当てない（どちらも日本語グリフを持たない）。
-   ★塗り+グローの .ctabtn より一段弱い箱にする。同じページの CTA と競合させない。 */
-.pagenav a{
-  /* ★flex にして中身を中央に置くのは、align-items:stretch で高さが揃うから。
-     390px の西 "Entradas más recientes" / 仏 "Articles plus récents" だけが2行になり、
-     片方だけ背の高いボタンが並ぶのを防ぐ（2026-09-07 実測）。 */
+/* ★リンク(a)も、押せない矢印・現在ページ(span)も同じ箱。見た目の差は下の
+   .is-current / .is-off だけが付ける。 */
+.pagenav-item{
   display:flex; align-items:center; justify-content:center;
-  color:var(--tag); text-decoration:none;
+  min-width:42px; padding:9px 12px;
+  border:2px solid var(--edge); background:var(--surface);
   font-family:"Space Grotesk",system-ui,sans-serif;
-  font-size:14px; font-weight:600;
-  padding:10px 14px; border:2px solid var(--edge); background:var(--surface);
-  transition:color .12s,border-color .12s;
+  font-size:14px; font-weight:600; line-height:1;
+  color:var(--tag); text-decoration:none;
+  transition:color .12s,border-color .12s,background .12s;
 }
-.pagenav a:hover,.pagenav a:focus{
+/* 数字だけなので VT323 を当てられる（.post-date / .postmeta と同じ条件）。
+   矢印（« ‹ › »）は本文書体のまま ―― VT323 にグリフが無い。 */
+.pagenav-num{ font-family:var(--f-vt); font-size:20px; letter-spacing:.5px; }
+.pagenav-edge{ font-size:18px; }
+/* リンクは footer / .prose と同じ「シアン → hover で紫」。
+   ★span には当てない（押せないものが反応すると嘘になる）。 */
+a.pagenav-item:hover,a.pagenav-item:focus{
   color:var(--accent); border-color:var(--accent); outline:none;
 }
-.pagenav a:focus-visible{ outline:3px solid var(--accent); outline-offset:2px; }
+a.pagenav-item:focus-visible{ outline:3px solid var(--accent); outline-offset:2px; }
+/* 現在ページ。★白は --accent の上で 4.28:1 と基準未達なので地色(--accent-ink)を使う。 */
+.pagenav-item.is-current{
+  background:var(--accent); border-color:var(--accent); color:var(--accent-ink);
+}
+/* 行けない矢印。枠は残して幅を保ち、色だけ落とす。 */
+.pagenav-item.is-off{
+  color:var(--faint); border-color:var(--line); background:transparent;
+}
 
 /* ============================================================
    記事本文（.prose）
@@ -484,10 +493,4 @@ footer a:hover,footer a:focus{ color:var(--accent); }
   .post-title{ font-size:1.05rem; }
   .post{ flex-direction:column; gap:12px; }
   .post-thumb{ width:100%; height:auto; aspect-ratio:200/130; flex:0 0 auto; }
-  /* 3つ横に並べると窮屈（独 "Neuere Beitrage" 仏 "Articles plus recents" が長い）。
-     2カラムにして、数字は下段いっぱいに回す。 */
-  .pagenav{ grid-template-columns:1fr 1fr; gap:12px; }
-  .pagenav a{ font-size:13px; padding:9px 12px; }
-  .pagenav-next{ grid-column:2; }
-  .pagenav-pos { grid-column:1 / -1; grid-row:2; justify-self:center; }
 }

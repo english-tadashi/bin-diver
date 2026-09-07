@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=IBM+Plex+Sans+JP:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/kataban.css?v=39b8b9a5">
+<link rel="stylesheet" href="/kataban.css?v=1ba62a1b">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -109,9 +109,13 @@
     </ul>
 
     <nav class="pagenav" aria-label="블로그 페이지">
-        <a class="pagenav-prev" rel="prev" href="/blog/ko/page/2/">&larr;&nbsp;최신 글</a>
-        <span class="pagenav-pos">3 / 3</span>
-        <a class="pagenav-next" href="/blog/ko/">첫 페이지로&nbsp;&uarr;</a>
+      <a class="pagenav-item pagenav-edge" href="/blog/ko/" aria-label="첫 페이지">&laquo;</a>
+      <a class="pagenav-item pagenav-edge" href="/blog/ko/page/2/" rel="prev" aria-label="최신 글">&lsaquo;</a>
+      <a class="pagenav-item pagenav-num" href="/blog/ko/" aria-label="1페이지">1</a>
+      <a class="pagenav-item pagenav-num" href="/blog/ko/page/2/" aria-label="2페이지">2</a>
+      <span class="pagenav-item pagenav-num is-current" aria-current="page">3</span>
+      <span class="pagenav-item pagenav-edge is-off" aria-hidden="true">&rsaquo;</span>
+      <span class="pagenav-item pagenav-edge is-off" aria-hidden="true">&raquo;</span>
     </nav>
 
     <div class="cta">
