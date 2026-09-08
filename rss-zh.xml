@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>為海外收藏家打造的日本復古遊戲部落格——商店指南、進口教學，以及遊戲背後的故事。</description>
     <language>zh-tw</language>
-    <lastBuildDate>Tue, 08 Sep 2026 12:36:05 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2026 13:20:51 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-zh.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>快打旋風開發史 第5回：老一輩不敢打破的那條規則，與現代操作</title>
+      <link>https://gamekataban.com/blog/zh/2026-09-29-street-fighter-development-history-5.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-29-street-fighter-development-history-5.html</guid>
+      <description>格鬥遊戲三十多年來都預設六個按鍵和精準的指令輸入。《快打旋風6》的現代操作把這道門檻拆掉了，而當年訂下這些規則的岡本吉起說，換作是他不敢這麼做。系列開發史五部曲第5回。</description>
+      <pubDate>Tue, 29 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>快打旋風開發史 第4回：跳槽、外流，與惹惱Marvel的搞笑角色</title>
       <link>https://gamekataban.com/blog/zh/2026-09-22-street-fighter-development-history-4.html</link>

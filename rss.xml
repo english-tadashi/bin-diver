@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 08 Sep 2026 12:36:05 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2026 13:20:51 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Street Fighter Development History, Part 5: The Rule the Old Guard Couldn't Break</title>
+      <link>https://gamekataban.com/blog/2026-09-29-street-fighter-development-history-5.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-29-street-fighter-development-history-5.html</guid>
+      <description>Street Fighter 6's Modern controls broke a rule the series' own creators say they never could have. A generational handoff at Capcom rewrote three decades of fighting-game orthodoxy.</description>
+      <pubDate>Tue, 29 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Street Fighter Development History, Part 4: A Defection, a Leak, and a Marvel Meltdown</title>
