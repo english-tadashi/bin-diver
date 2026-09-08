@@ -3,27 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>快打旋風開發史 第4回：跳槽、外流，與惹惱Marvel的搞笑角色 — Kataban</title>
-<meta name="description" content="《快打旋風ZERO》是為了清庫存趕工三個月的產物；一個忘了關的DIP開關洩漏了卡普空的判定技術；三分之一的團隊跳槽SNK；一個綜藝節目的搞笑角色惹惱了Marvel。系列開發史五部曲第4回。">
-<meta property="og:title" content="快打旋風開發史 第4回：跳槽、外流，與惹惱Marvel的搞笑角色">
-<meta property="og:description" content="《快打旋風ZERO》是為了清庫存趕工三個月的產物；一個忘了關的DIP開關洩漏了卡普空的判定技術；三分之一的團隊跳槽SNK；一個綜藝節目的搞笑角色惹惱了Marvel。系列開發史五部曲第4回。">
-<meta property="og:url" content="https://gamekataban.com/blog/zh/2026-09-22-street-fighter-development-history-4.html">
-<meta property="og:type" content="article">
-<meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://gamekataban.com/og.png">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
-<meta name="twitter:card" content="summary_large_image">
+<title>尚未發布 — Kataban</title>
+<!-- 予告スタブ。2026-09-22-street-fighter-development-history-4.html は 2026-09-22 公開予定の記事。
+     2026-09-08 に誤って予定日より前に公開してしまったので、公開日まで取り下げている。
+     記事の本体は blog/_pending/ に置いてある（配信しない）。公開日に差し戻す。
+     GitHub Pages は 301/410 を返せないので、404 にせずこの案内ページを置く。
+     ★下の robots の行（noindex）が build_feeds.py の除外スイッチ
+       （collect() が英語版のこの行を見て sitemap / RSS 6本から落とす）。
+     ★一覧カードは別経路。英語一覧は台帳の全カードを出すので、
+       blog/_parts/cards.html から外さないと消えない。 -->
+<meta name="robots" content="noindex">
 <link rel="canonical" href="https://gamekataban.com/blog/zh/2026-09-22-street-fighter-development-history-4.html">
-<link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-09-22-street-fighter-development-history-4.html">
-<link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-09-22-street-fighter-development-history-4.html">
-<link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-09-22-street-fighter-development-history-4.html">
-<link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-09-22-street-fighter-development-history-4.html">
-<link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-09-22-street-fighter-development-history-4.html">
-<link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-09-22-street-fighter-development-history-4.html">
-<link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-09-22-street-fighter-development-history-4.html">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -33,7 +23,7 @@
 <link rel="stylesheet" href="/kataban.css">
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main">跳至內容</a>
 
 <div class="wrap">
 
@@ -61,78 +51,20 @@
       </ul>
     </div>
   </header>
-
   <main id="main">
 
     <article>
       <div class="pagehead">
         <p class="kicker">Kataban 部落格</p>
-        <h1>快打旋風開發史 第4回：跳槽、外流，與惹惱Marvel的搞笑角色</h1>
-        <p class="postmeta">2026-09-22</p>
+        <h1>本文尚未發布</h1>
       </div>
 
       <div class="prose">
-        <p>在<a href="/blog/zh/2026-09-15-street-fighter-development-history-3.html">第3回</a>中，我們談到卡普空自家工程師反過來從中學習的盜版基板、在美國適得其反的銷售方案，以及Panasonic的一筆祕密保證金，把卡普空最好的格鬥遊戲送上了一台沒人在買的主機。第4回要講的，是一家公司長時間過熱運轉之後會發生什麼事：一款純粹為了清倉庫存而做、卻備受喜愛的遊戲；一個出貨上的疏失，一口氣把卡普空的核心技術送給了所有競爭對手；一場讓開發團隊少掉三分之一的集體跳槽；以及一個綜藝節目的合作角色，差點和Marvel鬧成國際糾紛。</p>
-
-        <ul>
-          <li>《快打旋風ZERO》之所以存在，是因為卡普空需要清掉倉庫裡5萬塊賣不掉的上一代街機基板，三個月內做完，人手還是從已經遞出辭呈的員工裡拉回來的</li>
-          <li>出貨的街機基板上留著一個忘了關的DIP開關，任何競爭對手都能直接看到卡普空的判定程式如何運作</li>
-          <li>大約三分之一的卡普空開發人員，跟著《快打旋風》的共同創作者西山隆志，一次集體跳槽到對手SNK</li>
-          <li>一個為日本綜藝節目打造的搞笑角色進了《Marvel vs. Capcom》，惹惱了Marvel總部</li>
-        </ul>
-
-        <h2>《快打旋風ZERO》為什麼只花三個月就做出來？</h2>
-        <p>《快打旋風ZERO》讓人記得的是它的動畫風格美術和扎實的操作手感，但它之所以會存在，和創作上的野心完全無關。卡普空的街機業務當時已經轉到更新的CP System II基板，一次例行盤點卻查出問題：上一代的CP System I基板，還有大約5萬塊賣不掉，堆在倉庫裡。依照日本的會計規則，賣不掉的庫存算是資產，要照這個課稅，所以卡普空需要一款專門為了消化這批舊硬體而做的遊戲——在整個業界都已經往前走的時候，規格上反而退了一步。</p>
-        <p>團隊拿到的時間是三個月，只有這種規模的遊戲通常需要的一兩年的一小部分，而且進度不能拖過會計年度結束。好幾位已經遞出辭呈、正在跑離職流程的設計師，被請回來為這款遊戲畫圖，而不是去休他們早就該休的年假。同一時間，另一個《Marvel Super Heroes》專案的美術，每一張設計都要等Marvel美國總部的核可意見，一等就是好幾週；卡普空只要看到他們在等，就把人調來《快打旋風ZERO》，等於讓同一批已經被榨乾的人手同時跑兩個專案。</p>
-
-        <h2>兩位新角色，為什麼一個來自玩家的抱怨、一個來自硬推提案的美術？</h2>
-        <p>這份趕工出來的作品裡，最讓人印象深刻的兩位新角色，出自完全相反的理由。丹是對SNK的《餓狼傳說》／《龍虎之拳》系列的自嘲式惡搞，做出來是為了回應核心玩家一個很具體、又有點小心眼的要求：他們想要一個弱到「用他贏過對手」本身就是一種挑釁的角色。當時沒有時間從零畫一個新角色，團隊就沿用隆和肯的身體資料，換上新的臉和一段隨手寫的設定——他們一位不成材的師兄，只學到他們招式的半吊子版本。</p>
-        <p>系列中最強的隱藏頭目豪鬼之所以存在，是因為一位名叫Kimoto的圖形美術，直接把一個角色設計提案拿給開發負責人岡本吉起——這很不尋常，角色概念通常是企劃的工作，不是美術的。岡本氏喜歡這個提案，當場就把它丟給導演船水紀孝，只交代一句話：放進遊戲裡。船水收到的是一個已經帶著上司背書的完成品，沒什麼說不的餘地——團隊於是把這個隱藏頭目做得強到不講理，而這份強度後來成了這個角色最鮮明的特徵。</p>
-
-        <h2>一個忘了關的開關，如何讓卡普空的核心技術外流？</h2>
-        <p>卡普空的判定系統——遊戲如何決定一次攻擊究竟有沒有打中——是這家公司防得最緊的技術之一。開發用基板上有一個除錯模式，用特定的DIP開關組合叫出來，會把每個角色的攻擊判定框和受擊判定框直接用紅藍框線畫在畫面上，讓平衡測試更好做。這個模式照理說在任何基板出貨之前，都應該被移除或用實體方式關掉。</p>
-        <p>但它沒有。出貨的街機基板上，除錯開關還是活的，任何知道那組組合的人——競爭對手的開發者、遊樂場員工、手上剛好有那塊基板的任何人——都能看著卡普空的碰撞判定實際運作，等於免費逆向工程了好幾年份的調校知識。據說競爭對手的開發者半真心地向卡普空道謝，因為這讓他們自己做格鬥遊戲輕鬆太多了。出貨時的一個疏忽，就這樣悄悄把卡普空花了好幾年才掙來的捷徑，交給了整個類型的其他人。</p>
-
-        <h2>為什麼三分之一的卡普空團隊跳槽到SNK——後來又和他們聯手？</h2>
-        <p>《快打旋風》的共同創作者西山隆志離開卡普空，去了對手SNK，沒過多久，卡普空開發部門的數十位創作者——有說法是那個部門的70～80%——也跟著他走出大門。一次失去大約三分之一的核心開發人員，對公司幾乎是攸關存亡的打擊，這兩家同樣位於大阪的公司之間的關係也徹底崩壞。岡本氏一如他的作風，把這件事解讀成良性競爭而不是背叛：一種值得擁有的對抗關係，發生在兩家即使互相挖角、仍然彼此尊敬的公司之間。</p>
-        <p>多年之後，這份對抗關係催生出格鬥遊戲史上更難以想像的一次聯名。兩家的心結其實比那次跳槽更早，源自卡普空會長辻本憲三與SNK高層之間的私人決裂。然後，毫無預兆地，西山隆志約岡本氏吃飯。接著提出的，是沒有人預料到的提案：一份交叉授權，讓雙方都能使用對方的角色。原因後來才明朗——SNK因為Neo Geo Pocket掌機的失敗受到重創，資金正在悄悄見底，而西山看中的是《快打旋風》的知名度，那正是他自己的公司急需的一條活路。岡本氏認定兩邊陣容加起來會所向無敵，於是花了相當大的力氣（照他自己的說法，不只一次把話說得比事實漂亮），說服卡普空的會長和那家多年前掏空他開發團隊的公司做生意。《Capcom vs. SNK》在街機和家用版都成了真正的熱門作——但仍不足以救回SNK，續作出貨後沒多久，SNK就聲請了法院保護。</p>
-
-        <h2>一個綜藝節目的搞笑角色，為什麼差點引發國際糾紛？</h2>
-        <p>1997年，卡普空正和Marvel深入合作《Marvel Super Heroes》的時候，一個日本綜藝節目提出了一個卡普空原本沒有人預期會答應的企劃：把藝人木梨憲武在節目上現場設計出來的搞笑角色，做成即將推出的《Marvel vs. Capcom》裡可操作的格鬥角色。當時35歲、擔任卡普空開發負責人的岡本氏答應了現場實錄、不排練的拍攝，節目的攝影機就這樣毫無預告地開進了卡普空的辦公室。</p>
-        <p>憲磨呂（Norimaro）的設計過程中，至少有過一次差點出事：早期一版玩笑開得太過火，岡本氏在美術背後看著，低聲請他收斂一點，才沒有進到最終版本。Marvel總部看到成品之後，就沒那麼寬容了。他們的反對意見很直白：蜘蛛人、金鋼狼、美國隊長這些角色，竟然要和一個沒沒無聞的日本高中生平起平坐地對打，而那個角色的招式全是搞笑的鬧劇。為了保住這樁合作，卡普空同意憲磨呂只收錄在日本版，絕不出現在任何海外販售的版本裡。在日本國內，這個角色還是紅了——靠著電視節目的加持，這款遊戲在日本賣出超過20萬套，卡普空自家高層認為這波曝光相當於數億日圓的免費宣傳。</p>
-
-        <p><strong>Marvel Super Heroes vs. Street Fighter</strong> &middot; <span class="jp">マーヴル・スーパーヒーローズ VS. ストリートファイター</span> &middot; Sega Saturn &middot; 1998 &middot; Capcom &middot; no product code on record</p>
-        <p><strong>關於怎麼找它：</strong>Kataban的目錄裡有收錄這款遊戲，但原始資料沒有型番——欄位是空的，所以沒有型番可以拿去店家搜尋，也沒有對應的型番購買連結。改用它的日文名稱搜尋：<span class="jp">マーヴル・スーパーヒーローズ VS. ストリートファイター</span>。記得加上平台名<span class="jp">セガサターン</span>——不加的話，搜尋結果還會撈進PlayStation的EX版和一張街機的說明書。</p>
-        <p><strong>購買方式：</strong>
-          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3D%25E3%2583%259E%25E3%2583%25BC%25E3%2583%25B4%25E3%2583%25AB%25E3%2583%25BB%25E3%2582%25B9%25E3%2583%25BC%25E3%2583%2591%25E3%2583%25BC%25E3%2583%2592%25E3%2583%25BC%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25BA%2520VS.%2520%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2582%25BF%25E3%2583%25BC%2520%25E3%2582%25BB%25E3%2582%25AC%25E3%2582%25B5%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp（依日文商品名）</a> &middot;
-          <a target="_blank" rel="sponsored nofollow noopener" href="https://i0c.xyz/6a6994d1e0b3f?url=https%3A%2F%2Fbuyee.jp%2Fitem%2Fsearch%2Fquery%2F%25E3%2583%259E%25E3%2583%25BC%25E3%2583%25B4%25E3%2583%25AB%25E3%2583%25BB%25E3%2582%25B9%25E3%2583%25BC%25E3%2583%2591%25E3%2583%25BC%25E3%2583%2592%25E3%2583%25BC%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25BA%2520VS.%2520%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2582%25BF%25E3%2583%25BC%2520%25E3%2582%25BB%25E3%2582%25AC%25E3%2582%25B5%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%3Flang%3Den">Buyee</a></p>
-
-        <div class="kataban-search-cta">
-          <p><a href="/?q=%E3%83%9E%E3%83%BC%E3%83%B4%E3%83%AB%E3%83%BB%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%BA%20VS.%20%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%88%E3%83%95%E3%82%A1%E3%82%A4%E3%82%BF%E3%83%BC">在Kataban目錄中查詢 <span class="jp">マーヴル・スーパーヒーローズ VS. ストリートファイター</span> &rarr;</a></p>
-        </div>
-
-        <div class="official-sources">
-          <p><strong>資料來源</strong></p>
-          <ul>
-            <li>岡本吉起（岡本吉起ゲームch），<a href="https://www.youtube.com/watch?v=ekP3LjfNg4c">"There's actually a quality problem with Street Fighter Zero"</a></li>
-            <li>岡本吉起（岡本吉起ゲームch），<a href="https://www.youtube.com/watch?v=X9iNuF6W3e0">"Why did they make Akuma so strong?"</a></li>
-            <li>岡本吉起（岡本吉起ゲームch），<a href="https://www.youtube.com/watch?v=c-b5ce0LZ7w">"On the Fighter's History lawsuit rumors"</a></li>
-            <li>岡本吉起（岡本吉起ゲームch），<a href="https://www.youtube.com/watch?v=cAMkj6kjs5s">"Why the legendary creator of the original Street Fighter left Capcom"</a></li>
-            <li>岡本吉起（岡本吉起ゲームch），<a href="https://www.youtube.com/watch?v=l40SEDFW9Fg">"Telling you everything about the making of Capcom vs. SNK"</a></li>
-            <li>岡本吉起（岡本吉起ゲームch），<a href="https://www.youtube.com/watch?v=ED0WZTtcKIs">"How Norimaro came to be"</a></li>
-            <li>岡本吉起（岡本吉起ゲームch），<a href="https://www.youtube.com/watch?v=BO21D7kVPYk">"Was Norimaro's return real? Reflecting on a prediction I got wrong"</a></li>
-          </ul>
-        </div>
-
-        <p><em>本文為系列「快打旋風開發史」五部曲的第4回，配合2026年10月電影上映推出。如果錯過了，歡迎<a href="/blog/zh/2026-09-15-street-fighter-development-history-3.html">補看第3回</a>。<a href="/blog/zh/2026-09-29-street-fighter-development-history-5.html">第5回</a>將於下週刊出。</em></p>
+        <p>本文預定於 <strong>2026年9月22日</strong> 發布。先前曾提前短暫公開，現已撤下，將於該日再行刊出。</p>
+        <p><a href="/blog/zh/2026-09-08-street-fighter-development-history-2.html">在此之前，歡迎閱讀第2回 &rarr;</a></p>
+        <p><a href="/blog/zh/">全部文章 &rarr;</a></p>
       </div>
     </article>
-
-    <div class="cta">
-      <h2>知道編號，找到遊戲</h2>
-      <p>輸入英文標題，就能得到日文名稱、印在卡帶側邊的編號，以及有貨的商店連結。</p>
-      <a class="ctabtn" href="/">搜尋遊戲</a>
-    </div>
 
   </main>
 
@@ -149,7 +81,6 @@
       </span>
     </div>
   </footer>
-
 </div>
 
 <script src="/kataban.js"></script>

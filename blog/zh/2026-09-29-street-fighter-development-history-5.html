@@ -3,27 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>快打旋風開發史 第5回：老一輩不敢打破的那條規則，與現代操作 — Kataban</title>
-<meta name="description" content="格鬥遊戲三十多年來都預設六個按鍵和精準的指令輸入。《快打旋風6》的現代操作把這道門檻拆掉了，而當年訂下這些規則的岡本吉起說，換作是他不敢這麼做。系列開發史五部曲第5回。">
-<meta property="og:title" content="快打旋風開發史 第5回：老一輩不敢打破的那條規則，與現代操作">
-<meta property="og:description" content="格鬥遊戲三十多年來都預設六個按鍵和精準的指令輸入。《快打旋風6》的現代操作把這道門檻拆掉了，而當年訂下這些規則的岡本吉起說，換作是他不敢這麼做。系列開發史五部曲第5回。">
-<meta property="og:url" content="https://gamekataban.com/blog/zh/2026-09-29-street-fighter-development-history-5.html">
-<meta property="og:type" content="article">
-<meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://gamekataban.com/og.png">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
-<meta name="twitter:card" content="summary_large_image">
+<title>尚未發布 — Kataban</title>
+<!-- 予告スタブ。2026-09-29-street-fighter-development-history-5.html は 2026-09-29 公開予定の記事。
+     2026-09-08 に誤って予定日より前に公開してしまったので、公開日まで取り下げている。
+     記事の本体は blog/_pending/ に置いてある（配信しない）。公開日に差し戻す。
+     GitHub Pages は 301/410 を返せないので、404 にせずこの案内ページを置く。
+     ★下の robots の行（noindex）が build_feeds.py の除外スイッチ
+       （collect() が英語版のこの行を見て sitemap / RSS 6本から落とす）。
+     ★一覧カードは別経路。英語一覧は台帳の全カードを出すので、
+       blog/_parts/cards.html から外さないと消えない。 -->
+<meta name="robots" content="noindex">
 <link rel="canonical" href="https://gamekataban.com/blog/zh/2026-09-29-street-fighter-development-history-5.html">
-<link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-09-29-street-fighter-development-history-5.html">
-<link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-09-29-street-fighter-development-history-5.html">
-<link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-09-29-street-fighter-development-history-5.html">
-<link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-09-29-street-fighter-development-history-5.html">
-<link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-09-29-street-fighter-development-history-5.html">
-<link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-09-29-street-fighter-development-history-5.html">
-<link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-09-29-street-fighter-development-history-5.html">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -33,7 +23,7 @@
 <link rel="stylesheet" href="/kataban.css">
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main">跳至內容</a>
 
 <div class="wrap">
 
@@ -61,70 +51,20 @@
       </ul>
     </div>
   </header>
-
   <main id="main">
 
     <article>
       <div class="pagehead">
         <p class="kicker">Kataban 部落格</p>
-        <h1>快打旋風開發史 第5回：老一輩不敢打破的那條規則，與現代操作</h1>
-        <p class="postmeta">2026-09-29</p>
+        <h1>本文尚未發布</h1>
       </div>
 
       <div class="prose">
-        <p>在<a href="/blog/zh/2026-09-22-street-fighter-development-history-4.html">第4回</a>中，我們談到一款純粹為了清庫存而趕工的作品、一次外流的技術機密、一場集體跳槽到對手陣營的風波，以及一個差點和Marvel鬧成國際糾紛的搞笑角色。這個系列的最終回，配合2026年10月的電影上映，我們要往後跳三十年，看看這個系列最新的一款作品《快打旋風6》，以及一個連它自己的創作者都說「換作是我不敢做」的改變。</p>
-
-        <ul>
-          <li>三十多年來，格鬥遊戲都要求六個按鍵和精準的、得背下來的指令輸入——這道門檻讓這個類型的玩家群只是原地一起變老</li>
-          <li>親手訂下這些規則的其中一人岡本吉起說，如果他當年留在卡普空，他絕不會批准去打破它們</li>
-          <li>《快打旋風6》的現代操作把按鍵縮到四個，並加入一鍵發動的必殺技和輔助連段</li>
-          <li>岡本氏認為，在競技的最高層級上，現代操作其實對某些經典角色是有利的</li>
-        </ul>
-
-        <h2>格鬥遊戲三十年來遵守的那條沒人明說的規則是什麼？</h2>
-        <p>到了《快打旋風6》開發的時候，格鬥遊戲這個類型已經悄悄安定在一個沒人質疑的前提上：格鬥遊戲就該有六個按鍵，分成拳和腳兩組；連段則建立在精準的、得背下來的指令輸入之上，要真的練過才打得出來。這個前提獎勵的是那些累積了數十年肌肉記憶的玩家，也讓任何新手都很難擠進門——新玩家在學習曲線前彈開，競技場的年齡層因此愈來愈高。</p>
-
-        <h2>岡本氏為什麼認為這個改變不可能由他自己來做？</h2>
-        <p>最後打破這個前提的，是《快打旋風6》的現代操作。而當初協助確立這個類型傳統規則的開發者之一岡本吉起，在自己的頻道上直白地說過：他不敢批准這件事。六鍵配置和它所依賴的指令輸入系統，都是他親手塑造出來的；他說自己對這套規則投入太深，做不了那個把它拆掉的人。照他的說法，這個決定的功勞屬於卡普空更年輕的一代開發者——他們是在《快打旋風II》熱潮已經成為歷史之後才進公司的，年輕到沒有背著那個年代的成規，也願意去打破岡本氏那一代從來沒有認真質疑過的規則。</p>
-
-        <h2>現代操作實際上改變了什麼？</h2>
-        <p>這套重新設計在紙面上很單純：六個按鍵收成三個攻擊鍵，再加一個專用的必殺技鍵，玩家按一下就能打出波動拳或昇龍拳，不必再輸入搖桿指令。另外有一個輔助選項，讓玩家只要連打攻擊鍵，連段就會自動接上，而不需要經典操作所要求的精準時機。這兩項改變加起來，讓實力差距很大的兩個人也能打出一場有來有往、看得下去的對戰，而不必先花上好幾年練習。</p>
-
-        <h2>現代操作真正的弱點在哪裡？</h2>
-        <p>岡本氏並不把現代操作當成純粹給新手的作弊碼，他在頻道上也具體講過它的代價。六個按鍵收成三個，等於把一個角色能打出來的普通技和必殺技數量大致砍半，選項一少，高手就更容易讀出並反制你的套路。另外，像春麗這種依靠「先壓住一個方向再放開」來發動必殺技的蓄力型角色，也不太適合這套系統——用他的話說，在現代操作下玩起來是真的很難受。</p>
-
-        <h2>在最高層級上，現代操作有機會贏過經典操作的地方是哪裡？</h2>
-        <p>岡本氏預期在競技的頂端，經典操作仍會是主流，照他的估計會佔高階對戰的80～90%。但他看到一種情況，就算在世界大賽的層級上，現代操作也可能翻轉一場比賽：像桑吉爾夫和E·本田這樣的角色，他們的招牌技傳統上要轉一整圈360度、甚至轉兩圈搖桿才打得出來。在現代操作下，同樣一招按一個鍵就立刻發動，省掉了轉一整圈所花的那零點幾秒，也省掉了隨之而來的輸入失誤——在舊系統最難於壓力下確實打出的那些對局裡，這就是實實在在的競技優勢。</p>
-        <p>岡本氏把他對這個模式的期待講得很簡單：把玩得起格鬥遊戲的人口基數拉寬，頂端那群真正厲害的玩家自然也會變得更厚。他說自己個人還是偏好用難的方式、手動把連段打進去的手感，那是他那一代人一路玩過來的方式——但他也說，這份偏好可能只是這個類型已經不再需要的舊習慣；而如果幾十年後，新一代玩家把《快打旋風》大賽的場館擠滿，其中有人願意停下來想一想「這款遊戲當初到底是誰做的」，他就心滿意足了。</p>
-
-        <p><strong>Street Fighter 6</strong> &middot; <span class="jp">ストリートファイター6</span> &middot; PlayStation 5 &middot; 2023 &middot; Capcom &middot; product code <code>ELJM-30264</code></p>
-        <p><strong>購買方式：</strong>
-          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3DELJM-30264%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp（依商品編號）</a> &middot;
-          <a target="_blank" rel="sponsored nofollow noopener" href="https://i0c.xyz/6a6994d1e0b3f?url=https%3A%2F%2Fbuyee.jp%2Fitem%2Fsearch%2Fquery%2FSTREET%2520FIGHTER%25206%2520%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B35%3Flang%3Den">Buyee</a></p>
-
-        <div class="kataban-search-cta">
-          <p><a href="/?q=STREET%20FIGHTER%206">在Kataban目錄中查詢 <span class="jp">STREET FIGHTER 6</span> &rarr;</a></p>
-        </div>
-
-        <div class="official-sources">
-          <p><strong>資料來源</strong></p>
-          <ul>
-            <li>岡本吉起（岡本吉起ゲームch），<a href="https://www.youtube.com/watch?v=lxCadd9DWiQ">"How fighting games change with Street Fighter 6's new Modern controls"</a></li>
-            <li>岡本吉起（岡本吉起ゲームch），<a href="https://www.youtube.com/watch?v=GMp5x7-FAiU">talk with the creators of Street Fighter and Fatal Fury</a></li>
-            <li>岡本吉起（岡本吉起ゲームch），<a href="https://www.youtube.com/watch?v=8vOsRyCZPtk">talk with Street Fighter II co-creator Ryo Nishitani (Arika)</a></li>
-            <li>岡本吉起（岡本吉起ゲームch），<a href="https://www.youtube.com/watch?v=vl8Lnvm5JN0">talk with a former Street Fighter II team member on life after Capcom</a></li>
-          </ul>
-        </div>
-
-        <p><em>本文為系列「快打旋風開發史」五部曲的第5回，也是最終回，配合2026年10月電影上映推出。如果錯過了，歡迎<a href="/blog/zh/2026-09-22-street-fighter-development-history-4.html">補看第4回</a>，或是<a href="/blog/zh/2026-09-02-street-fighter-development-history-1.html">從第1回開始讀起</a>。</em></p>
+        <p>本文預定於 <strong>2026年9月29日</strong> 發布。先前曾提前短暫公開，現已撤下，將於該日再行刊出。</p>
+        <p><a href="/blog/zh/2026-09-08-street-fighter-development-history-2.html">在此之前，歡迎閱讀第2回 &rarr;</a></p>
+        <p><a href="/blog/zh/">全部文章 &rarr;</a></p>
       </div>
     </article>
-
-    <div class="cta">
-      <h2>知道編號，找到遊戲</h2>
-      <p>輸入英文標題，就能得到日文名稱、印在卡帶側邊的編號，以及有貨的商店連結。</p>
-      <a class="ctabtn" href="/">搜尋遊戲</a>
-    </div>
 
   </main>
 
@@ -141,7 +81,6 @@
       </span>
     </div>
   </footer>
-
 </div>
 
 <script src="/kataban.js"></script>

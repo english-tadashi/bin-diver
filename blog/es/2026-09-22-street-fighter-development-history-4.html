@@ -3,27 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Historia del desarrollo de Street Fighter, parte 4: la fuga a SNK, una filtración y el enfado de Marvel — Kataban</title>
-<meta name="description" content="Street Fighter Zero se hizo en tres meses para vaciar un almacén, un interruptor DIP olvidado filtró la detección de impactos de Capcom, un tercio del equipo se marchó a SNK y un personaje de humor televisivo enfureció a Marvel. Parte 4 en cinco entregas.">
-<meta property="og:title" content="Historia del desarrollo de Street Fighter, parte 4: la fuga a SNK, una filtración y el enfado de Marvel">
-<meta property="og:description" content="Street Fighter Zero se hizo en tres meses para vaciar un almacén, un interruptor DIP olvidado filtró la detección de impactos de Capcom, un tercio del equipo se marchó a SNK y un personaje de humor televisivo enfureció a Marvel. Parte 4 en cinco entregas.">
-<meta property="og:url" content="https://gamekataban.com/blog/es/2026-09-22-street-fighter-development-history-4.html">
-<meta property="og:type" content="article">
-<meta property="og:locale" content="es_ES">
-<meta property="og:image" content="https://gamekataban.com/og.png">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
-<meta name="twitter:card" content="summary_large_image">
+<title>Todavía no publicado — Kataban</title>
+<!-- 予告スタブ。2026-09-22-street-fighter-development-history-4.html は 2026-09-22 公開予定の記事。
+     2026-09-08 に誤って予定日より前に公開してしまったので、公開日まで取り下げている。
+     記事の本体は blog/_pending/ に置いてある（配信しない）。公開日に差し戻す。
+     GitHub Pages は 301/410 を返せないので、404 にせずこの案内ページを置く。
+     ★下の robots の行（noindex）が build_feeds.py の除外スイッチ
+       （collect() が英語版のこの行を見て sitemap / RSS 6本から落とす）。
+     ★一覧カードは別経路。英語一覧は台帳の全カードを出すので、
+       blog/_parts/cards.html から外さないと消えない。 -->
+<meta name="robots" content="noindex">
 <link rel="canonical" href="https://gamekataban.com/blog/es/2026-09-22-street-fighter-development-history-4.html">
-<link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-09-22-street-fighter-development-history-4.html">
-<link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-09-22-street-fighter-development-history-4.html">
-<link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-09-22-street-fighter-development-history-4.html">
-<link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-09-22-street-fighter-development-history-4.html">
-<link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-09-22-street-fighter-development-history-4.html">
-<link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-09-22-street-fighter-development-history-4.html">
-<link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-09-22-street-fighter-development-history-4.html">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -33,7 +23,7 @@
 <link rel="stylesheet" href="/kataban.css">
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main">Saltar al contenido</a>
 
 <div class="wrap">
 
@@ -61,78 +51,20 @@
       </ul>
     </div>
   </header>
-
   <main id="main">
 
     <article>
       <div class="pagehead">
         <p class="kicker">Blog de Kataban</p>
-        <h1>Historia del desarrollo de Street Fighter, parte 4: la fuga a SNK, una filtración y el enfado de Marvel</h1>
-        <p class="postmeta">2026-09-22</p>
+        <h1>Este artículo todavía no está publicado</h1>
       </div>
 
       <div class="prose">
-        <p>En la <a href="/blog/es/2026-09-15-street-fighter-development-history-3.html">parte 3</a> contamos una placa pirata de la que acabaron aprendiendo los propios ingenieros de Capcom, un plan de ventas en Estados Unidos que salió al revés y un pago secreto de Panasonic que mandó el mejor juego de lucha de Capcom a una consola que no compraba nadie. La parte 4 trata de lo que pasa cuando una empresa lleva demasiado tiempo funcionando por encima de sus posibilidades: un juego querido construido únicamente para vaciar un almacén, un error de fabricación que entregó de golpe la tecnología central de Capcom a todos sus rivales, una fuga de talento que se llevó por delante a un tercio del equipo de desarrollo, y un personaje de humor salido de un programa de televisión que estuvo a punto de provocar un incidente internacional con Marvel.</p>
-
-        <ul>
-          <li>Street Fighter Zero existe porque Capcom necesitaba dar salida a 50.000 placas recreativas de la generación anterior acumuladas sin vender en un almacén — se construyó en tres meses con personal recuperado de sus propias dimisiones</li>
-          <li>Un interruptor DIP olvidado en las placas recreativas que salieron a la venta permitía a cualquier competidor ver funcionando el código de detección de impactos de Capcom</li>
-          <li>Alrededor de un tercio del personal de desarrollo de Capcom siguió a Takashi Nishiyama, cocreador de Street Fighter, hasta su rival SNK en una sola oleada</li>
-          <li>Un personaje de humor creado para un programa de variedades japonés llegó a Marvel vs. Capcom y enfureció a la central de Marvel</li>
-        </ul>
-
-        <h2>¿Por qué se construyó Street Fighter Zero en solo tres meses?</h2>
-        <p>Street Fighter Zero se recuerda por su estética de anime y sus controles precisos, pero la razón de que exista no tuvo nada que ver con la ambición creativa. Los salones de Capcom habían pasado ya a las nuevas placas CP System II, y una comprobación rutinaria destapó un problema: unas 50.000 placas CP System I sin vender, las de la generación anterior, seguían en un almacén. Según las normas contables japonesas, el inventario no vendido cuenta como activo y tributa en consecuencia, así que Capcom necesitaba un juego construido específicamente para dar salida a aquel hardware viejo — un paso atrás en especificaciones justo cuando la industria ya había seguido adelante.</p>
-        <p>Al equipo se le dieron tres meses, una fracción del año o dos que normalmente habría llevado un juego de esta escala, y el calendario no podía pasarse del cierre del ejercicio. A varios diseñadores que ya habían dimitido y estaban cumpliendo el preaviso se les pidió que volvieran a entrar a dibujar para el juego en lugar de tomarse las vacaciones pagadas que ya se habían ganado. Al mismo tiempo, los artistas de un proyecto aparte de Marvel Super Heroes se pasaban semanas esperando las notas de aprobación de la oficina de Marvel en Estados Unidos para cada diseño; Capcom los metía en Street Fighter Zero cada vez que se quedaban esperando, con lo que en la práctica sacaba adelante dos producciones con el mismo personal ya al límite.</p>
-
-        <h2>¿Cómo salieron dos personajes nuevos de una queja de los usuarios y de un artista insistente?</h2>
-        <p>Dos de las incorporaciones más memorables del plantel salieron de la misma producción atropellada, por razones opuestas. Dan, una autoparodia de las series de SNK Fatal Fury y Art of Fighting, se construyó para responder a una petición concreta y algo mezquina de los jugadores más entregados: querían un personaje lo bastante débil como para que ganar a alguien con él fuera una forma de burla en sí misma. Sin tiempo para dibujar un personaje nuevo desde cero, el equipo reutilizó los datos de cuerpo de Ryu y Ken con una cara nueva y un trasfondo improvisado — un antiguo condiscípulo caído en desgracia que solo alcanzaba versiones a medio hacer de sus movimientos.</p>
-        <p>Akuma, el jefe oculto más fuerte de la serie, existe porque un artista gráfico llamado Kimoto le presentó un diseño de personaje directamente a Yoshiki Okamoto, el responsable de desarrollo, algo inusual porque los conceptos de personaje eran normalmente trabajo de un planificador, no de un artista. A Okamoto le gustó lo bastante como para pasárselo en el acto al director Noritaka Funamizu con una instrucción de una sola línea: que lo metiera en el juego sin más. Funamizu, con un personaje ya terminado y el visto bueno de su jefe puesto encima, tenía poco margen para decir que no — y el equipo acabó construyendo un jefe oculto tan abrumadoramente fuerte que esa fuerza se convirtió en su rasgo definitorio.</p>
-
-        <h2>¿Cómo filtró un interruptor olvidado la tecnología central de Capcom?</h2>
-        <p>El sistema de detección de impactos de Capcom — cómo decidía el juego que un ataque había conectado de verdad — era una de las tecnologías que la empresa guardaba con más celo. Las placas de desarrollo tenían un modo de depuración, que se activaba con una secuencia concreta de interruptores DIP, que dibujaba en pantalla las cajas de golpeo y las cajas de daño de cada personaje con contornos rojos y azules para facilitar las pruebas de equilibrio. Ese modo debía eliminarse o desactivarse físicamente antes de que ninguna placa saliera de fábrica.</p>
-        <p>No fue así. Las placas recreativas que salieron a la venta conservaban activo el interruptor de depuración, y cualquiera que conociera la secuencia — desarrolladores rivales, personal de los salones, cualquiera con la placa adecuada en la mano — podía ver funcionando el sistema de colisiones de Capcom y hacer ingeniería inversa, gratis, de años de conocimiento de ajuste. Según se cuenta, desarrolladores de la competencia dieron las gracias a Capcom, medio en serio, por haberles puesto mucho más fácil construir sus propios juegos de lucha. Un solo descuido en la fabricación le regaló en silencio al resto del género un atajo que a Capcom le había costado años ganarse.</p>
-
-        <h2>¿Por qué un tercio del equipo de Capcom se fue a SNK — y acabó aliándose con ellos?</h2>
-        <p>Takashi Nishiyama, cocreador de Street Fighter, dejó Capcom para irse a su rival SNK, y decenas de creadores del estudio de desarrollo de Capcom — según algunos relatos, entre el 70 y el 80 por ciento de aquella división — salieron por la misma puerta poco después. Perder de golpe alrededor de un tercio de su personal clave de desarrollo fue un golpe casi existencial, y la relación entre las dos empresas, ambas con sede en Osaka, se vino abajo. Okamoto, fiel a su estilo, planteó las consecuencias como competencia sana y no como traición: una rivalidad que merecía la pena tener, entre empresas que se respetaban incluso mientras se robaban el talento.</p>
-        <p>Años después, esa rivalidad dio lugar a uno de los cruces más improbables de los juegos de lucha. El rencor venía de más atrás que la propia fuga, de una ruptura personal entre el presidente de Capcom, Kenzo Tsujimoto, y la cúpula de SNK. Entonces, de la nada, Nishiyama invitó a cenar a Okamoto. Lo que siguió fue una propuesta que nadie esperaba: una licencia cruzada que permitiera a cada empresa usar los personajes de la otra. El motivo quedó claro más tarde — SNK, muy tocada por el fracaso de su portátil Neo Geo Pocket, se estaba quedando sin dinero en silencio, y Nishiyama veía en el tirón del nombre de Street Fighter un salvavidas que su propia empresa necesitaba con urgencia. Okamoto, convencido de que el plantel combinado sería imbatible, dedicó un esfuerzo considerable (según él mismo, estirando la verdad más de una vez) a convencer al presidente de Capcom de cerrar un acuerdo con la empresa que años antes le había vaciado el equipo de desarrollo. Capcom vs. SNK fue un éxito real tanto en los salones como en consola — aunque no lo bastante para salvar a SNK, que se acogió a la protección judicial poco después de que saliera su secuela.</p>
-
-        <h2>¿Cómo estuvo un personaje de humor a punto de provocar un incidente internacional?</h2>
-        <p>En 1997, mientras Capcom estaba metida de lleno en una colaboración con Marvel para Marvel Super Heroes, un programa de variedades japonés propuso algo a lo que nadie en Capcom esperaba decir que sí: incluir un personaje de humor diseñado por el presentador Noritake Kinashi, creado en directo en antena, como luchador jugable en el inminente Marvel vs. Capcom. Okamoto, entonces responsable de desarrollo de Capcom con 35 años, aceptó grabar el segmento en directo y sin ensayo, con las cámaras del programa presentándose en las oficinas de Capcom sin avisar.</p>
-        <p>El proceso de diseño de Norimaro tuvo por el camino al menos un susto: una versión de broma temprana era tan gruesa que Okamoto, mirando por encima del hombro del artista, le pidió en voz baja que la suavizara antes de que llegara al juego final. La central de Marvel, en cuanto vio el producto terminado, fue bastante menos indulgente. Su objeción fue tajante: personajes como Spider-Man, Wolverine y Captain America iban a enfrentarse de tú a tú con un estudiante de instituto japonés desconocido con un repertorio de chiste construido sobre gags de payasada. Para mantener el acuerdo en pie, Capcom aceptó que Norimaro saliera solo en la edición japonesa y no apareciera en ninguna versión vendida en el extranjero. En Japón el personaje fue un éxito de todos modos — el juego vendió más de 200.000 copias en el país gracias al tirón televisivo, y la propia dirección de Capcom atribuyó a aquella exposición varios cientos de millones de yenes en publicidad gratuita.</p>
-
-        <p><strong>Marvel Super Heroes vs. Street Fighter</strong> &middot; <span class="jp">マーヴル・スーパーヒーローズ VS. ストリートファイター</span> &middot; Sega Saturn &middot; 1998 &middot; Capcom &middot; no product code on record</p>
-        <p><strong>Una nota sobre cómo encontrarlo:</strong> Kataban tiene este lanzamiento en su catálogo, pero los datos de origen no incluyen código de producto — el campo está vacío, así que no hay código con el que buscar en una tienda, ni un enlace de compra por código que ofrecerte. Búscalo por su nombre japonés: <span class="jp">マーヴル・スーパーヒーローズ VS. ストリートファイター</span>. Añade la plataforma — <span class="jp">セガサターン</span> — o la búsqueda te devolverá también la EX Edition de PlayStation y una ficha de instrucciones de recreativa.</p>
-        <p><strong>Dónde comprarlo:</strong>
-          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3D%25E3%2583%259E%25E3%2583%25BC%25E3%2583%25B4%25E3%2583%25AB%25E3%2583%25BB%25E3%2582%25B9%25E3%2583%25BC%25E3%2583%2591%25E3%2583%25BC%25E3%2583%2592%25E3%2583%25BC%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25BA%2520VS.%2520%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2582%25BF%25E3%2583%25BC%2520%25E3%2582%25BB%25E3%2582%25AC%25E3%2582%25B5%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp (por título en japonés)</a> &middot;
-          <a target="_blank" rel="sponsored nofollow noopener" href="https://i0c.xyz/6a6994d1e0b3f?url=https%3A%2F%2Fbuyee.jp%2Fitem%2Fsearch%2Fquery%2F%25E3%2583%259E%25E3%2583%25BC%25E3%2583%25B4%25E3%2583%25AB%25E3%2583%25BB%25E3%2582%25B9%25E3%2583%25BC%25E3%2583%2591%25E3%2583%25BC%25E3%2583%2592%25E3%2583%25BC%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25BA%2520VS.%2520%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2582%25BF%25E3%2583%25BC%2520%25E3%2582%25BB%25E3%2582%25AC%25E3%2582%25B5%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%3Flang%3Den">Buyee</a></p>
-
-        <div class="kataban-search-cta">
-          <p><a href="/?q=%E3%83%9E%E3%83%BC%E3%83%B4%E3%83%AB%E3%83%BB%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%BA%20VS.%20%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%88%E3%83%95%E3%82%A1%E3%82%A4%E3%82%BF%E3%83%BC">Consulta <span class="jp">マーヴル・スーパーヒーローズ VS. ストリートファイター</span> en el catálogo de Kataban &rarr;</a></p>
-        </div>
-
-        <div class="official-sources">
-          <p><strong>Fuentes</strong></p>
-          <ul>
-            <li>Yoshiki Okamoto (岡本吉起ゲームch), <a href="https://www.youtube.com/watch?v=ekP3LjfNg4c">"There's actually a quality problem with Street Fighter Zero"</a></li>
-            <li>Yoshiki Okamoto (岡本吉起ゲームch), <a href="https://www.youtube.com/watch?v=X9iNuF6W3e0">"Why did they make Akuma so strong?"</a></li>
-            <li>Yoshiki Okamoto (岡本吉起ゲームch), <a href="https://www.youtube.com/watch?v=c-b5ce0LZ7w">"On the Fighter's History lawsuit rumors"</a></li>
-            <li>Yoshiki Okamoto (岡本吉起ゲームch), <a href="https://www.youtube.com/watch?v=cAMkj6kjs5s">"Why the legendary creator of the original Street Fighter left Capcom"</a></li>
-            <li>Yoshiki Okamoto (岡本吉起ゲームch), <a href="https://www.youtube.com/watch?v=l40SEDFW9Fg">"Telling you everything about the making of Capcom vs. SNK"</a></li>
-            <li>Yoshiki Okamoto (岡本吉起ゲームch), <a href="https://www.youtube.com/watch?v=ED0WZTtcKIs">"How Norimaro came to be"</a></li>
-            <li>Yoshiki Okamoto (岡本吉起ゲームch), <a href="https://www.youtube.com/watch?v=BO21D7kVPYk">"Was Norimaro's return real? Reflecting on a prediction I got wrong"</a></li>
-          </ul>
-        </div>
-
-        <p><em>Esta es la parte 4 de una serie en cinco entregas que repasa la historia del desarrollo de Street Fighter, coincidiendo con el estreno de la película en octubre de 2026. Si te la perdiste, <a href="/blog/es/2026-09-15-street-fighter-development-history-3.html">ponte al día con la parte 3</a>. La <a href="/blog/es/2026-09-29-street-fighter-development-history-5.html">parte 5</a> llega la semana que viene.</em></p>
+        <p>Este artículo se publicará el <strong>22 de septiembre de 2026</strong>. Estuvo accesible aquí antes de tiempo; volverá en esa fecha.</p>
+        <p><a href="/blog/es/2026-09-08-street-fighter-development-history-2.html">Mientras tanto, lee la Parte 2 &rarr;</a></p>
+        <p><a href="/blog/es/">Todas las entradas &rarr;</a></p>
       </div>
     </article>
-
-    <div class="cta">
-      <h2>Conoce el código, encuentra el juego</h2>
-      <p>Escribe un título occidental. Obtén el nombre en japonés, el código impreso en el lomo del cartucho y enlaces a las tiendas que lo tienen.</p>
-      <a class="ctabtn" href="/">Buscar un juego</a>
-    </div>
 
   </main>
 
@@ -149,7 +81,6 @@
       </span>
     </div>
   </footer>
-
 </div>
 
 <script src="/kataban.js"></script>

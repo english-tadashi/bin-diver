@@ -3,27 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>스트리트 파이터 개발사 제5화: 옛 세대가 깨지 못한 규칙, 그리고 모던 컨트롤 — Kataban</title>
-<meta name="description" content="격투 게임은 30년 넘게 6개의 버튼과 정확한 커맨드 입력을 당연하게 여겼습니다. 스트리트 파이터 6의 모던 컨트롤은 그 문턱을 걷어냈고, 그 규칙을 만든 당사자인 오카모토 요시키는 자신이었다면 승인하지 못했을 것이라고 말합니다. 개발사 5부작 제5화.">
-<meta property="og:title" content="스트리트 파이터 개발사 제5화: 옛 세대가 깨지 못한 규칙, 그리고 모던 컨트롤">
-<meta property="og:description" content="격투 게임은 30년 넘게 6개의 버튼과 정확한 커맨드 입력을 당연하게 여겼습니다. 스트리트 파이터 6의 모던 컨트롤은 그 문턱을 걷어냈고, 그 규칙을 만든 당사자인 오카모토 요시키는 자신이었다면 승인하지 못했을 것이라고 말합니다. 개발사 5부작 제5화.">
-<meta property="og:url" content="https://gamekataban.com/blog/ko/2026-09-29-street-fighter-development-history-5.html">
-<meta property="og:type" content="article">
-<meta property="og:locale" content="ko_KR">
-<meta property="og:image" content="https://gamekataban.com/og.png">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
-<meta name="twitter:card" content="summary_large_image">
+<title>아직 공개되지 않았습니다 — Kataban</title>
+<!-- 予告スタブ。2026-09-29-street-fighter-development-history-5.html は 2026-09-29 公開予定の記事。
+     2026-09-08 に誤って予定日より前に公開してしまったので、公開日まで取り下げている。
+     記事の本体は blog/_pending/ に置いてある（配信しない）。公開日に差し戻す。
+     GitHub Pages は 301/410 を返せないので、404 にせずこの案内ページを置く。
+     ★下の robots の行（noindex）が build_feeds.py の除外スイッチ
+       （collect() が英語版のこの行を見て sitemap / RSS 6本から落とす）。
+     ★一覧カードは別経路。英語一覧は台帳の全カードを出すので、
+       blog/_parts/cards.html から外さないと消えない。 -->
+<meta name="robots" content="noindex">
 <link rel="canonical" href="https://gamekataban.com/blog/ko/2026-09-29-street-fighter-development-history-5.html">
-<link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-09-29-street-fighter-development-history-5.html">
-<link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-09-29-street-fighter-development-history-5.html">
-<link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-09-29-street-fighter-development-history-5.html">
-<link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-09-29-street-fighter-development-history-5.html">
-<link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-09-29-street-fighter-development-history-5.html">
-<link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-09-29-street-fighter-development-history-5.html">
-<link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-09-29-street-fighter-development-history-5.html">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -33,7 +23,7 @@
 <link rel="stylesheet" href="/kataban.css">
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
 
 <div class="wrap">
 
@@ -61,70 +51,20 @@
       </ul>
     </div>
   </header>
-
   <main id="main">
 
     <article>
       <div class="pagehead">
         <p class="kicker">Kataban 블로그</p>
-        <h1>스트리트 파이터 개발사 제5화: 옛 세대가 깨지 못한 규칙, 그리고 모던 컨트롤</h1>
-        <p class="postmeta">2026-09-29</p>
+        <h1>아직 공개되지 않은 글입니다</h1>
       </div>
 
       <div class="prose">
-        <p><a href="/blog/ko/2026-09-22-street-fighter-development-history-4.html">제4화</a>에서는 재고를 털기 위한 급조된 작품, 유출된 기술 기밀, 경쟁사로의 집단 이적, 그리고 마블과 하마터면 국제적인 분쟁으로 번질 뻔했던 개그 캐릭터를 다뤘습니다. 2026년 10월 영화 개봉에 맞춘 이 시리즈의 마지막 회에서는 30년을 건너뛰어, 시리즈의 최신작인 스트리트 파이터 6과, 그것을 만든 사람들 스스로 "나였다면 그럴 배짱이 없었다"고 말하는 하나의 변화를 살펴봅니다.</p>
-
-        <ul>
-          <li>30년이 넘도록 격투 게임은 6개의 버튼과 정확하게 외운 커맨드 입력을 요구해 왔고, 이 문턱 때문에 장르의 팬층은 그 자리에서 함께 나이를 먹었다</li>
-          <li>그 규칙을 만든 당사자 가운데 한 명인 오카모토 요시키는, 자신이 캡콤에 남아 있었다면 그것을 깨는 일을 결코 승인하지 못했을 것이라고 말한다</li>
-          <li>스트리트 파이터 6의 모던 컨트롤은 버튼을 4개로 줄이고, 한 버튼으로 나가는 필살기와 어시스트 콤보를 더했다</li>
-          <li>오카모토는 최고 수준의 경기에서 모던 컨트롤이 오히려 특정 고전 캐릭터에게 유리하다고 본다</li>
-        </ul>
-
-        <h2>격투 게임이 30년 동안 지켜 온, 아무도 말하지 않은 규칙은 무엇이었을까?</h2>
-        <p>스트리트 파이터 6이 개발되던 무렵, 격투 게임이라는 장르는 아무도 의심하지 않는 하나의 전제 위에 조용히 자리를 잡고 있었습니다. 격투 게임이라면 펀치와 킥으로 나뉜 6개의 버튼이 있어야 하고, 콤보는 정확하게 외운 커맨드 입력 위에 쌓이며 실제로 연습해야만 나온다는 것이었습니다. 이 전제는 수십 년 동안 몸에 익혀 온 플레이어에게 보상을 주는 대신, 새로 들어오려는 사람에게는 뚫기 어려운 장르로 만들었습니다. 새 플레이어들이 학습 곡선 앞에서 튕겨 나가면서, 경기 현장의 연령대는 점점 올라갔습니다.</p>
-
-        <h2>오카모토는 왜 이 변화를 자신은 만들지 못했을 것이라고 말할까?</h2>
-        <p>그 전제를 끝내 깨뜨린 것이 스트리트 파이터 6의 모던 컨트롤입니다. 그리고 애초에 이 장르의 전통적인 규칙을 세우는 데 관여한 개발자 가운데 한 명인 오카모토 요시키는, 자신의 채널에서 자신에게는 이것을 승인할 배짱이 없었을 것이라고 분명하게 말했습니다. 6버튼 배치와 그것이 기대고 있던 커맨드 입력 체계를 직접 만든 사람으로서, 자신은 스스로 세운 규칙에 너무 깊이 발을 담그고 있어서 그것을 허무는 쪽이 될 수는 없었다는 것입니다. 그의 말에 따르면 이 결정의 공은 캡콤의 더 젊은 세대 개발자들에게 돌아갑니다. 스트리트 파이터 II 열풍이 이미 역사가 된 뒤에 입사한 사람들, 그 시대의 관습을 짊어지지 않을 만큼 젊고, 오카모토 세대가 한 번도 진지하게 의심해 본 적 없는 규칙을 기꺼이 깨뜨릴 수 있었던 사람들입니다.</p>
-
-        <h2>모던 컨트롤은 실제로 무엇을 바꿨을까?</h2>
-        <p>이 재설계는 종이 위에서는 단순합니다. 6개의 버튼이 3개의 공격 버튼과 필살기 전용 버튼 1개로 접히고, 플레이어는 조작 방향을 입력하는 대신 한 번 눌러서 파동권이나 승룡권을 내보낼 수 있습니다. 어시스트 옵션은 클래식 컨트롤이 요구하는 정확한 타이밍 대신, 공격 버튼을 연타하는 것만으로 콤보가 자동으로 이어지게 해 줍니다. 이 두 가지를 합치면, 실력 차이가 크게 나는 두 사람도 먼저 몇 년씩 연습하지 않고 겨룰 만하고 볼 만한 대전을 할 수 있게 됩니다.</p>
-
-        <h2>모던 컨트롤의 진짜 약점은 무엇일까?</h2>
-        <p>오카모토는 모던 컨트롤을 초보자용 치트키로만 취급하지 않으며, 자신의 채널에서 그 대가를 구체적으로 이야기했습니다. 6개의 버튼을 3개로 접는다는 것은 한 캐릭터가 내보낼 수 있는 기본기와 필살기의 가짓수가 대략 절반으로 줄어든다는 뜻이고, 선택지가 그만큼 좁아지면 높은 수준의 상대는 패턴을 더 쉽게 읽고 받아칠 수 있습니다. 또한 한 방향을 누르고 있다가 떼면서 필살기를 내는 춘리 같은 차지 캐릭터는 이 방식과 잘 맞지 않아, 그의 표현을 빌리면 모던 컨트롤로 플레이하기에는 정말로 힘든 캐릭터입니다.</p>
-
-        <h2>최고 수준에서 모던 컨트롤이 클래식을 이길 수 있는 지점은 어디일까?</h2>
-        <p>오카모토는 경기의 정점에서는 클래식 컨트롤이 계속 주류일 것으로 보며, 그의 추정으로는 높은 수준의 대전 가운데 80~90%가 여기에 해당합니다. 다만 그는 세계 대회 수준에서도 모던 컨트롤이 한 판을 뒤집을 수 있는 상황을 하나 봅니다. 자기에프나 E. 혼다처럼, 대표 기술을 내려면 전통적으로 레버를 360도 한 바퀴, 혹은 두 바퀴 돌려야 하는 캐릭터들입니다. 모던 컨트롤에서는 같은 기술이 버튼 하나로 즉시 나가면서, 한 바퀴 돌리는 데 드는 몇 분의 일 초와 그에 따라오는 입력 실수가 사라집니다. 옛 방식으로는 압박 속에서 확실하게 내기가 가장 어려웠던 바로 그 대진에서, 이것은 실질적인 경기력의 우위입니다.</p>
-        <p>오카모토는 이 모드에 거는 기대를 간단하게 정리합니다. 격투 게임에 들어올 수 있는 플레이어의 저변을 넓히면, 정점에 있는 진짜 뛰어난 플레이어의 층도 함께 두꺼워진다는 것입니다. 그는 자신은 여전히 어려운 방식으로 콤보를 직접 맞춰 넣는 손맛을 더 좋아한다고, 자기 세대가 자라며 플레이해 온 방식이 그렇다고 말합니다. 다만 그 취향은 이제 이 장르에 더 이상 필요하지 않은 오래된 습관일지도 모른다고도 말했습니다. 그리고 수십 년 뒤 새로운 세대의 플레이어들이 스트리트 파이터 대회장을 가득 채우고, 그중 누군가가 잠시 멈춰 서서 "이 게임을 애초에 만든 사람은 누구였을까"를 궁금해해 준다면 그것으로 만족한다고 했습니다.</p>
-
-        <p><strong>Street Fighter 6</strong> &middot; <span class="jp">ストリートファイター6</span> &middot; PlayStation 5 &middot; 2023 &middot; Capcom &middot; product code <code>ELJM-30264</code></p>
-        <p><strong>구매처:</strong>
-          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3DELJM-30264%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp (상품 코드로 검색)</a> &middot;
-          <a target="_blank" rel="sponsored nofollow noopener" href="https://i0c.xyz/6a6994d1e0b3f?url=https%3A%2F%2Fbuyee.jp%2Fitem%2Fsearch%2Fquery%2FSTREET%2520FIGHTER%25206%2520%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B35%3Flang%3Den">Buyee</a></p>
-
-        <div class="kataban-search-cta">
-          <p><a href="/?q=STREET%20FIGHTER%206">Kataban 카탈로그에서 <span class="jp">STREET FIGHTER 6</span> 찾아보기 &rarr;</a></p>
-        </div>
-
-        <div class="official-sources">
-          <p><strong>출처</strong></p>
-          <ul>
-            <li>오카모토 요시키 (岡本吉起ゲームch), <a href="https://www.youtube.com/watch?v=lxCadd9DWiQ">"How fighting games change with Street Fighter 6's new Modern controls"</a></li>
-            <li>오카모토 요시키 (岡本吉起ゲームch), <a href="https://www.youtube.com/watch?v=GMp5x7-FAiU">talk with the creators of Street Fighter and Fatal Fury</a></li>
-            <li>오카모토 요시키 (岡本吉起ゲームch), <a href="https://www.youtube.com/watch?v=8vOsRyCZPtk">talk with Street Fighter II co-creator Ryo Nishitani (Arika)</a></li>
-            <li>오카모토 요시키 (岡本吉起ゲームch), <a href="https://www.youtube.com/watch?v=vl8Lnvm5JN0">talk with a former Street Fighter II team member on life after Capcom</a></li>
-          </ul>
-        </div>
-
-        <p><em>이 글은 2026년 10월 영화 개봉에 맞춰 스트리트 파이터 개발사를 되짚는 5부작 시리즈의 마지막 제5화입니다. 놓치셨다면 <a href="/blog/ko/2026-09-22-street-fighter-development-history-4.html">제4화</a>도 함께 읽어보시고, 처음부터 읽고 싶으시다면 <a href="/blog/ko/2026-09-02-street-fighter-development-history-1.html">제1화</a>로 돌아가 보세요.</em></p>
+        <p>이 글은 <strong>2026년 9월 29일</strong>에 공개될 예정입니다. 예정보다 먼저 잠시 공개되었으나, 그날까지 다시 비공개로 전환했습니다.</p>
+        <p><a href="/blog/ko/2026-09-08-street-fighter-development-history-2.html">그동안 2편을 읽어보세요 &rarr;</a></p>
+        <p><a href="/blog/ko/">전체 글 &rarr;</a></p>
       </div>
     </article>
-
-    <div class="cta">
-      <h2>코드를 알면, 게임을 찾는다</h2>
-      <p>서양 제목을 입력하면 일본어 이름, 카트리지 옆면에 인쇄된 코드, 그리고 재고가 있는 상점 링크까지 확인할 수 있습니다.</p>
-      <a class="ctabtn" href="/">게임 검색하기</a>
-    </div>
 
   </main>
 
@@ -141,7 +81,6 @@
       </span>
     </div>
   </footer>
-
 </div>
 
 <script src="/kataban.js"></script>

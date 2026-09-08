@@ -3,26 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Street Fighter Development History, Part 3: Bootlegs, Losses, and a Secret 3DO Deal — Kataban</title>
-<meta name="description" content="Capcom reverse-engineered a Hong Kong bootleg to build Street Fighter II Turbo, lost money in the US on a return-guarantee loophole, then took a secret Panasonic deal that sent Super SF2 X exclusively to the failing 3DO.">
-<meta property="og:title" content="Street Fighter Development History, Part 3: Bootlegs, Losses, and a Secret 3DO Deal">
-<meta property="og:description" content="Capcom reverse-engineered a Hong Kong bootleg to build Street Fighter II Turbo, lost money in the US on a return-guarantee loophole, then took a secret Panasonic deal that sent Super SF2 X exclusively to the failing 3DO.">
-<meta property="og:url" content="https://gamekataban.com/blog/2026-09-15-street-fighter-development-history-3.html">
-<meta property="og:type" content="article">
-<meta property="og:image" content="https://gamekataban.com/og.png">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
-<meta name="twitter:card" content="summary_large_image">
+<title>Not published yet — Kataban</title>
+<!-- 予告スタブ。2026-09-15-street-fighter-development-history-3.html は 2026-09-15 公開予定の記事。
+     2026-09-08 に誤って予定日より前に公開してしまったので、公開日まで取り下げている。
+     記事の本体は blog/_pending/ に置いてある（配信しない）。公開日に差し戻す。
+     GitHub Pages は 301/410 を返せないので、404 にせずこの案内ページを置く。
+     ★下の robots の行（noindex）が build_feeds.py の除外スイッチ
+       （collect() が英語版のこの行を見て sitemap / RSS 6本から落とす）。
+     ★一覧カードは別経路。英語一覧は台帳の全カードを出すので、
+       blog/_parts/cards.html から外さないと消えない。 -->
+<meta name="robots" content="noindex">
 <link rel="canonical" href="https://gamekataban.com/blog/2026-09-15-street-fighter-development-history-3.html">
-<link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-09-15-street-fighter-development-history-3.html">
-<link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-09-15-street-fighter-development-history-3.html">
-<link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-09-15-street-fighter-development-history-3.html">
-<link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-09-15-street-fighter-development-history-3.html">
-<link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-09-15-street-fighter-development-history-3.html">
-<link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-09-15-street-fighter-development-history-3.html">
-<link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-09-15-street-fighter-development-history-3.html">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -60,76 +51,20 @@
       </ul>
     </div>
   </header>
-
   <main id="main">
 
     <article>
       <div class="pagehead">
         <p class="kicker">Kataban Blog</p>
-        <h1>Street Fighter Development History, Part 3: Bootlegs, Losses, and a Secret 3DO Deal</h1>
-        <p class="postmeta">2026-09-15</p>
+        <h1>This article isn&rsquo;t published yet</h1>
       </div>
 
       <div class="prose">
-        <p>In <a href="/blog/2026-09-08-street-fighter-development-history-2.html">Part 2</a>, we covered the chaos of Street Fighter II's sudden success and the fire that nearly took out its soundtrack. Part 3 is about what happened once that success collided with money and piracy: a bootleg board out of Hong Kong that Capcom's own programmers ended up learning from, a US sales scheme that turned a record-breaking hit into a financial disaster, and a secret payout from Panasonic that sent Capcom's proudest fighting game to a console nobody was buying.</p>
-
-        <ul>
-          <li>A Hong Kong bootleg called "Rainbow" hacked the game's speed, and Capcom reverse-engineered it to build the official Street Fighter II Turbo in about two weeks</li>
-          <li>A US test cabinet hit a record 650 coins a day &mdash; then a return-guarantee scheme buried Capcom USA in discounts and refunds</li>
-          <li>Super Street Fighter II X went exclusive to the failing 3DO console after Panasonic guaranteed Capcom a minimum payout regardless of sales</li>
-          <li>Internal testers hated the 3DO port's 30fps &mdash; players called it the best conversion the console ever had</li>
-        </ul>
-
-        <h2>How Did a Hong Kong Bootleg Lead to Street Fighter II Turbo?</h2>
-        <p>While Street Fighter II was selling around the world, Capcom's developers had a growing problem: illegal bootleg boards circulating through Asian and American gray markets. One in particular, a modified board out of Hong Kong known as "Rainbow," stood out. Capcom's hardware security at the time was weak enough that the program could be easily cracked and rewritten, and whoever built Rainbow had done exactly that &mdash; characters threw fireballs from midair, multiple fireballs of different speeds filled the screen at once, and players could stroll behind a slow-moving fireball to string combos off it. It ignored every rule of the game's balance.</p>
-        <p>Capcom's own programmers dismissed it at first, then ordered a board to test it themselves. What they found surprised them: buried in the mess was a genuinely clever trick. Standard practice at the time was for a game to signal "wait" once its per-frame processing finished early, to keep the display from glitching. Rainbow's creators had figured out how to skip that wait signal and force the whole game to run faster &mdash; something Capcom's own team hadn't accounted for. After disassembling the bootleg's code to understand exactly how it worked, Capcom folded that speed trick into an official high-speed release, built in roughly two weeks: Street Fighter II' Turbo. One of the most beloved versions of the game exists because Capcom's engineers studied a piece of contraband hardware to learn from it.</p>
-
-        <h2>Why Did a Record US Arcade Hit Turn Into a Financial Disaster?</h2>
-        <p>Turbo went on to set a Capcom sales record in US location tests: 650 coins a day on a quarter-operated cabinet, roughly 65,000 yen, an unheard-of number for an arcade machine at the time. The team was certain they had a hit on their hands.</p>
-        <p>What followed was a costly miscalculation by Capcom USA's local management. With huge numbers of Street Fighter II and Dash cabinets already in the American market, the president of Capcom USA proposed a cheap upgrade path: since the graphics ROM could stay the same, just ship the program ROM on its own as a low-cost upgrade kit, priced around 20,000 yen, and every operator in the country would snap it up. It ignored a defining feature of US retail: distributors could return unsold stock and discount slow-moving inventory at will, with the manufacturer &mdash; Capcom USA &mdash; on the hook to cover every dollar of those markdowns and returns. The upgrade ROMs flooded the market, discounts and returns poured back in, and Capcom USA ended up sitting on a mountain of reserve liabilities for a product that had, by every account, sold extremely well. Okamoto later described the local president's business sense bluntly: he simply didn't trust the decisions being made.</p>
-
-        <h2>Why Was Super Street Fighter II X Locked to the Failing 3DO?</h2>
-        <p>Several revisions later, Capcom's development team believed they had finally built the definitive version of the fighting game genre: Super Street Fighter II X. It should have gone, in close to perfect form, to the Super Famicom, the Sega Saturn, and the newly arriving PlayStation. Instead, management made a decision the development floor could barely believe: the home version would be exclusive to Panasonic's 3DO, a console that, thanks to its high price, was already known in the market as one that simply wasn't selling. Okamoto and his team pushed back hard, and were told flatly by a transferred-in executive that the decision was final and theirs was just to build it.</p>
-        <p>The reason traced back to money Capcom's developers never saw directly. Panasonic wanted the exclusive rights to Capcom's biggest fighting game badly enough to guarantee a royalty of 2,200 yen per copy sold, with a minimum guarantee of 200,000 units &mdash; a payout of at least 440 million yen to Capcom whether or not the game sold a single copy at retail. It was, for Capcom, close to a risk-free deal (Namco reportedly struck a similar arrangement for Star Blade at 1,800 yen per unit and a 200,000-unit minimum, well above the roughly 30,000-unit minimums typical of other publishers' 3DO deals at the time).</p>
-
-        <h2>How Did a 30fps Compromise Become a "Perfect Port"?</h2>
-        <p>The deal that thrilled Capcom's management devastated the team building the game. The arcade original and every prior home conversion of Street Fighter II ran at a smooth 60 frames per second. The 3DO's hardware couldn't keep up: the port ran at 30fps, with beautiful still graphics but visibly choppier motion. Okamoto has described watching an early 30fps build with real dismay &mdash; to him, this was the game the team considered the true, complete version of Street Fighter II, and a 30fps build felt unfinished, a disappointment as a fighting game.</p>
-        <p>Internal reviews were unsparing before launch, and the team shipped the 3DO version under a cloud of doubt. Then it released, and the reaction was the opposite of everything they'd braced for: players called it a perfect port, the best-looking, best-sounding version of Street Fighter II the failing console ever received, arcade-accurate graphics and music included. Aside from some complaints about the controller, there was almost no criticism of the conversion itself. The 3DO version went on to clear its 200,000-unit guarantee easily, sending Capcom a stream of additional royalties on top of the guaranteed payout. Looking back on it years later, Okamoto has said the gap between what the developers considered acceptable quality and what players actually valued left him genuinely relieved once the reviews came in.</p>
-
-        <h2>What Did Okamoto Learn From Being Left Out of the Decision?</h2>
-        <p>Being shut out of a decision as consequential as the 3DO exclusivity deal left a mark on Okamoto that never faded. Major calls, he later said, were being made between Capcom's executives and Panasonic in places he never saw &mdash; golf courses, private clubs &mdash; with no input from the people who'd actually have to build the thing. However hard he argued that a decision was wrong, without formal authority he had no way to reverse it.</p>
-        <p>He drew a direct lesson from it: he couldn't protect the junior staff who trusted him and worked themselves to exhaustion on his projects from decisions like this one unless he had the authority to be in the room where they were made. The only way to actually shield them was to climb as high in the company as he could. The 3DO episode is the one Okamoto credits with turning him into what he calls, half-joking, "obsessed with promotion" &mdash; a drive that eventually carried him to Capcom's board of directors and to the top of its development organization.</p>
-
-        <p><strong>Street Fighter II Turbo</strong> &middot; <span class="jp">ストリートファイターII' TURBO</span> &middot; Super Famicom &middot; 1993 &middot; Capcom &middot; product code <code>SHVC-TI</code></p>
-        <p><strong>Where to buy:</strong>
-          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3DSHVC-TI%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp (by product code)</a> &middot;
-          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3D%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2582%25BF%25E3%2583%25BCII%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259C%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp (by Japanese title)</a> &middot;
-          <a target="_blank" rel="sponsored nofollow noopener" href="https://i0c.xyz/6a6994d1e0b3f?url=https%3A%2F%2Fbuyee.jp%2Fitem%2Fsearch%2Fquery%2F%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2582%25BF%25E3%2583%25BCII%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259C%2520%25E3%2582%25B9%25E3%2583%25BC%25E3%2583%2591%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A1%25E3%2583%259F%25E3%2582%25B3%25E3%2583%25B3%3Flang%3Den">Buyee</a></p>
-
-        <div class="kataban-search-cta">
-          <p><a href="/?q=&#12473;&#12488;&#12522;&#12540;&#12488;&#12501;&#12449;&#12452;&#12479;&#12540;">Browse the Japanese Street Fighter releases in the Kataban catalog &rarr;</a></p>
-        </div>
-
-        <div class="official-sources">
-          <p><strong>Sources</strong></p>
-          <ul>
-            <li>Yoshiki Okamoto (岡本吉起ゲームch), <a href="https://www.youtube.com/watch?v=SLDhR3E87Jw">"On the wildly popular bootleg 'Street Fighter II' Rainbow"</a></li>
-            <li>Yoshiki Okamoto (岡本吉起ゲームch), <a href="https://www.youtube.com/watch?v=lAEoMLGRoig">"Why did the Street Fighter IP end up back with Capcom Japan?"</a></li>
-            <li>Yoshiki Okamoto (岡本吉起ゲームch), <a href="https://www.youtube.com/watch?v=cEcFYI9Hi4U">"Panasonic's real commitment: the story behind the Super Street Fighter II X port"</a></li>
-            <li>Yoshiki Okamoto (岡本吉起ゲームch), <a href="https://www.youtube.com/watch?v=n2Jwf2k0ulg">"Why was it a 3DO exclusive? The story behind Super Street Fighter II X"</a></li>
-            <li>Yoshiki Okamoto (岡本吉起ゲームch), <a href="https://www.youtube.com/watch?v=urPcCiiNjzk">"Still not over that Chun-Li art: why climbing the ladder fast matters"</a></li>
-          </ul>
-        </div>
-
-        <p><em>This is Part 3 of a five-part series revisiting Street Fighter's development history, timed alongside the October 2026 movie release. <a href="/blog/2026-09-08-street-fighter-development-history-2.html">Catch up on Part 2</a> if you missed it. <a href="/blog/2026-09-22-street-fighter-development-history-4.html">Part 4</a> arrives next week.</em></p>
+        <p>This article is scheduled for <strong>15 September 2026</strong>. It was briefly reachable here ahead of schedule; it will be back on that date.</p>
+        <p><a href="/blog/2026-09-08-street-fighter-development-history-2.html">In the meantime, read Part 2 &rarr;</a></p>
+        <p><a href="/blog/">All posts &rarr;</a></p>
       </div>
     </article>
-
-    <div class="cta">
-      <h2>Know the code, find the game</h2>
-      <p>Type a Western title. Get the Japanese name, the cartridge code printed on the spine, and links to the shops that have it.</p>
-      <a class="ctabtn" href="/">Search a game</a>
-    </div>
 
   </main>
 
@@ -146,7 +81,6 @@
       </span>
     </div>
   </footer>
-
 </div>
 
 <script src="/kataban.js"></script>

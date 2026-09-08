@@ -3,27 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>快打旋風開發史 第3回：盜版基板、虧損，與一紙3DO密約 — Kataban</title>
-<meta name="description" content="卡普空逆向工程香港的盜版基板，做出《快打旋風II Turbo》；在美國因退貨保證的漏洞而虧損；接著一紙密約，把《超級快打旋風II X》獨佔給了賣不動的3DO。系列開發史五部曲第3回。">
-<meta property="og:title" content="快打旋風開發史 第3回：盜版基板、虧損，與一紙3DO密約">
-<meta property="og:description" content="卡普空逆向工程香港的盜版基板，做出《快打旋風II Turbo》；在美國因退貨保證的漏洞而虧損；接著一紙密約，把《超級快打旋風II X》獨佔給了賣不動的3DO。系列開發史五部曲第3回。">
-<meta property="og:url" content="https://gamekataban.com/blog/zh/2026-09-15-street-fighter-development-history-3.html">
-<meta property="og:type" content="article">
-<meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://gamekataban.com/og.png">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
-<meta name="twitter:card" content="summary_large_image">
+<title>尚未發布 — Kataban</title>
+<!-- 予告スタブ。2026-09-15-street-fighter-development-history-3.html は 2026-09-15 公開予定の記事。
+     2026-09-08 に誤って予定日より前に公開してしまったので、公開日まで取り下げている。
+     記事の本体は blog/_pending/ に置いてある（配信しない）。公開日に差し戻す。
+     GitHub Pages は 301/410 を返せないので、404 にせずこの案内ページを置く。
+     ★下の robots の行（noindex）が build_feeds.py の除外スイッチ
+       （collect() が英語版のこの行を見て sitemap / RSS 6本から落とす）。
+     ★一覧カードは別経路。英語一覧は台帳の全カードを出すので、
+       blog/_parts/cards.html から外さないと消えない。 -->
+<meta name="robots" content="noindex">
 <link rel="canonical" href="https://gamekataban.com/blog/zh/2026-09-15-street-fighter-development-history-3.html">
-<link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-09-15-street-fighter-development-history-3.html">
-<link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-09-15-street-fighter-development-history-3.html">
-<link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-09-15-street-fighter-development-history-3.html">
-<link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-09-15-street-fighter-development-history-3.html">
-<link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-09-15-street-fighter-development-history-3.html">
-<link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-09-15-street-fighter-development-history-3.html">
-<link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-09-15-street-fighter-development-history-3.html">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -33,7 +23,7 @@
 <link rel="stylesheet" href="/kataban.css">
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main">跳至內容</a>
 
 <div class="wrap">
 
@@ -61,76 +51,20 @@
       </ul>
     </div>
   </header>
-
   <main id="main">
 
     <article>
       <div class="pagehead">
         <p class="kicker">Kataban 部落格</p>
-        <h1>快打旋風開發史 第3回：盜版基板、虧損，與一紙3DO密約</h1>
-        <p class="postmeta">2026-09-15</p>
+        <h1>本文尚未發布</h1>
       </div>
 
       <div class="prose">
-        <p>在<a href="/blog/zh/2026-09-08-street-fighter-development-history-2.html">第2回</a>中，我們談到《快打旋風II》突如其來的成功所帶來的混亂，以及那場差點燒掉配樂的火災。第3回要講的，是這份成功撞上金錢與盜版之後發生的事：一塊來自香港、最後反倒讓卡普空自家程式設計師學到東西的盜版基板；一套把破紀錄的熱賣變成財務災難的美國銷售方案；以及Panasonic一筆祕密的保證金，把卡普空最引以為傲的格鬥遊戲送上了一台沒人在買的主機。</p>
-
-        <ul>
-          <li>一塊名為「Rainbow」的香港盜版基板破解了遊戲的執行速度，卡普空反過來對它進行逆向工程，約兩週就做出官方的《快打旋風II Turbo》</li>
-          <li>美國的測試機台創下一天650枚投幣的紀錄——接著一套退貨保證制度，讓Capcom USA被折扣與退貨淹沒</li>
-          <li>在Panasonic保證無論銷量如何都會支付最低金額之後，《超級快打旋風II X》成了賣不動的3DO主機的獨佔作品</li>
-          <li>公司內部試玩者厭惡3DO版的30fps——玩家卻稱它是這台主機史上最好的移植版</li>
-        </ul>
-
-        <h2>香港的盜版基板如何催生出《快打旋風II Turbo》？</h2>
-        <p>就在《快打旋風II》熱賣全球的同時，卡普空的開發團隊面對一個愈來愈嚴重的問題：非法的盜版基板正在亞洲與美國的水貨市場流通。其中特別顯眼的一塊，是來自香港、被稱為「Rainbow」的改造基板。當時卡普空的硬體防護薄弱到程式可以輕易被破解與改寫，而做出Rainbow的人正是這麼做了——角色可以在空中發波動拳，畫面上同時擠滿好幾發速度不同的火球，玩家還能跟在一發慢速火球後面走，接著串出連段。它無視了這款遊戲平衡上的每一條規則。</p>
-        <p>卡普空自家的程式設計師起初不以為意，後來還是訂了一塊基板回來親自測試。結果讓他們意外：在那一團混亂之中，藏著一個真正聰明的技巧。當時的標準做法是，遊戲每一格的運算若提早結束，就送出一個「等待」訊號，以免畫面出錯。Rainbow的作者想出了跳過這個等待訊號、強制讓整套遊戲跑得更快的方法——這是卡普空自己的團隊沒有考慮到的。在把盜版的程式碼反組譯、徹底弄清楚它的運作方式之後，卡普空把這個加速技巧收進了一款官方的高速版本，前後大約兩週就做完：《快打旋風II' Turbo》。這款遊戲最受喜愛的版本之一之所以存在，是因為卡普空的工程師研究了一塊違法的硬體，並從中學到了東西。</p>
-
-        <h2>為什麼在美國創紀錄的街機熱賣，最後變成財務災難？</h2>
-        <p>Turbo後來在美國的實地測試中創下卡普空的營收紀錄：一台以25美分投幣的機台，一天650枚投幣，約合6萬5千日圓，以當時的街機來說是聞所未聞的數字。團隊確信自己手上有一款熱門作品。</p>
-        <p>接下來發生的，是Capcom USA當地管理層一次代價高昂的誤判。當時美國市場上已經有大量的《快打旋風II》與Dash機台，Capcom USA的總裁提出了一條便宜的升級路線：既然圖形ROM可以沿用，那就只出貨程式ROM，當作低價的升級套件，定價約2萬日圓，全美國的營運商一定會搶著要。這個想法忽略了美國零售業的一個根本特徵：經銷商可以退回賣不掉的貨，也可以隨意對滯銷庫存打折，而製造商——也就是Capcom USA——必須為這些折價與退貨的每一分錢負責。升級用的ROM淹沒了市場，折扣與退貨接著湧了回來，Capcom USA最後為一款按各方說法都賣得極好的產品，背上了一大堆準備金負債。岡本氏後來對這位當地總裁的經營判斷說得很直白：他就是不信任那些決策。</p>
-
-        <h2>《超級快打旋風II X》為什麼被綁在賣不動的3DO上？</h2>
-        <p>又經過幾次改版之後，卡普空的開發團隊相信他們終於做出了格鬥遊戲類型的決定版：《超級快打旋風II X》。它本來應該以接近完美的形式，登上超級任天堂、Sega Saturn，以及剛剛問世的PlayStation。結果經營層做出了一個開發現場幾乎不敢相信的決定：家用版將獨佔Panasonic的3DO——一台因為售價太高、在市場上早已被認定賣不動的主機。岡本氏和他的團隊強烈反對，卻被一位空降的高層直接告知：決定不會改，你們只要把東西做出來就好。</p>
-        <p>原因要追溯到一筆卡普空的開發者從未直接看見的錢。Panasonic太想拿到卡普空最大格鬥遊戲的獨佔權，因此保證每賣出一套支付2,200日圓權利金，並保證最低20萬套——也就是無論這款遊戲在零售端賣不賣得掉一套，卡普空都至少能拿到4億4千萬日圓。對卡普空而言，這幾乎是一筆沒有風險的交易（據說Namco也為《Star Blade》談成了類似的條件，每套1,800日圓、最低20萬套，遠高於當時其他發行商在3DO上約3萬套的一般最低保證）。</p>
-
-        <h2>30fps的妥協，為什麼反而被稱為「完美移植」？</h2>
-        <p>這筆讓卡普空經營層興奮不已的交易，卻擊垮了做這款遊戲的團隊。街機原版以及《快打旋風II》先前的每一個家用移植版，都跑在流暢的每秒60格。3DO的硬體跟不上：移植版只有30fps，靜態畫面很漂亮，動作卻明顯卡頓。岡本氏形容自己看到早期的30fps版本時是真的沮喪——對他來說，這是團隊心目中《快打旋風II》真正完整的決定版，而一個30fps的版本感覺就是沒做完，作為一款格鬥遊戲令人失望。</p>
-        <p>上市前的內部評價毫不留情，團隊是在一片疑慮之中把3DO版送出去的。然後它上市了，反應和他們預想的完全相反：玩家稱它是完美移植，是這台賣不動的主機所拿到過畫面最好、聲音最好的《快打旋風II》，忠於街機的圖像與音樂都包含在內。除了對手把有些抱怨之外，移植本身幾乎沒有受到任何批評。3DO版後來輕鬆超過了20萬套的保證數量，讓卡普空在保證金額之上又收到一筆接一筆的額外權利金。多年後回頭看，岡本氏說，開發者認為可以接受的品質，和玩家實際重視的東西之間的落差，讓他在評價出來之後真的鬆了一口氣。</p>
-
-        <h2>被排除在決策之外，岡本氏學到了什麼？</h2>
-        <p>被排除在3DO獨佔這種影響重大的決策之外，在岡本氏身上留下了一道從未褪去的印記。他後來說，重要的決定是在他從來看不到的地方——高爾夫球場、私人俱樂部——由卡普空的高層與Panasonic談成的，而真正要動手把東西做出來的人完全沒有發言權。無論他多用力主張某個決定是錯的，沒有正式的職權，他就沒有辦法推翻它。</p>
-        <p>他從中得到一個直接的教訓：除非他有職權坐進做決定的那個房間，否則他保護不了那些信任他、在他的專案上把自己累垮的年輕員工。真正能保護他們的唯一辦法，就是在公司裡爬得愈高愈好。岡本氏把自己變成他半開玩笑稱之為「升官狂」的那種人，起點正是3DO這件事——這股動力最後把他送進了卡普空的董事會，以及開發組織的最高位置。</p>
-
-        <p><strong>Street Fighter II Turbo</strong> &middot; <span class="jp">ストリートファイターII' TURBO</span> &middot; Super Famicom &middot; 1993 &middot; Capcom &middot; product code <code>SHVC-TI</code></p>
-        <p><strong>購買方式：</strong>
-          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3DSHVC-TI%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp（依商品編號）</a> &middot;
-          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3D%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2582%25BF%25E3%2583%25BCII%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259C%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp（依日文商品名）</a> &middot;
-          <a target="_blank" rel="sponsored nofollow noopener" href="https://i0c.xyz/6a6994d1e0b3f?url=https%3A%2F%2Fbuyee.jp%2Fitem%2Fsearch%2Fquery%2F%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2582%25BF%25E3%2583%25BCII%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259C%2520%25E3%2582%25B9%25E3%2583%25BC%25E3%2583%2591%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A1%25E3%2583%259F%25E3%2582%25B3%25E3%2583%25B3%3Flang%3Den">Buyee</a></p>
-
-        <div class="kataban-search-cta">
-          <p><a href="/?q=&#12473;&#12488;&#12522;&#12540;&#12488;&#12501;&#12449;&#12452;&#12479;&#12540;">在Kataban目錄中瀏覽日版快打旋風全系列 &rarr;</a></p>
-        </div>
-
-        <div class="official-sources">
-          <p><strong>資料來源</strong></p>
-          <ul>
-            <li>岡本吉起（岡本吉起ゲームch），<a href="https://www.youtube.com/watch?v=SLDhR3E87Jw">"On the wildly popular bootleg 'Street Fighter II' Rainbow"</a></li>
-            <li>岡本吉起（岡本吉起ゲームch），<a href="https://www.youtube.com/watch?v=lAEoMLGRoig">"Why did the Street Fighter IP end up back with Capcom Japan?"</a></li>
-            <li>岡本吉起（岡本吉起ゲームch），<a href="https://www.youtube.com/watch?v=cEcFYI9Hi4U">"Panasonic's real commitment: the story behind the Super Street Fighter II X port"</a></li>
-            <li>岡本吉起（岡本吉起ゲームch），<a href="https://www.youtube.com/watch?v=n2Jwf2k0ulg">"Why was it a 3DO exclusive? The story behind Super Street Fighter II X"</a></li>
-            <li>岡本吉起（岡本吉起ゲームch），<a href="https://www.youtube.com/watch?v=urPcCiiNjzk">"Still not over that Chun-Li art: why climbing the ladder fast matters"</a></li>
-          </ul>
-        </div>
-
-        <p><em>本文為系列「快打旋風開發史」五部曲的第3回，配合2026年10月電影上映推出。如果錯過了，歡迎<a href="/blog/zh/2026-09-08-street-fighter-development-history-2.html">補看第2回</a>。<a href="/blog/zh/2026-09-22-street-fighter-development-history-4.html">第4回</a>將於下週刊出。</em></p>
+        <p>本文預定於 <strong>2026年9月15日</strong> 發布。先前曾提前短暫公開，現已撤下，將於該日再行刊出。</p>
+        <p><a href="/blog/zh/2026-09-08-street-fighter-development-history-2.html">在此之前，歡迎閱讀第2回 &rarr;</a></p>
+        <p><a href="/blog/zh/">全部文章 &rarr;</a></p>
       </div>
     </article>
-
-    <div class="cta">
-      <h2>知道編號，找到遊戲</h2>
-      <p>輸入英文標題，就能得到日文名稱、印在卡帶側邊的編號，以及有貨的商店連結。</p>
-      <a class="ctabtn" href="/">搜尋遊戲</a>
-    </div>
 
   </main>
 
@@ -147,7 +81,6 @@
       </span>
     </div>
   </footer>
-
 </div>
 
 <script src="/kataban.js"></script>
