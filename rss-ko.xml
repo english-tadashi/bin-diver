@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>해외 컬렉터를 위한 일본 레트로 게임 블로그 — 매장 가이드, 수입 방법, 그리고 타이틀 뒤에 숨은 이야기.</description>
     <language>ko-kr</language>
-    <lastBuildDate>Tue, 08 Sep 2026 09:49:30 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2026 11:36:48 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-ko.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>스트리트 파이터 개발사 제3화: 해적판 기판, 손실, 그리고 3DO 밀약</title>
+      <link>https://gamekataban.com/blog/ko/2026-09-15-street-fighter-development-history-3.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-09-15-street-fighter-development-history-3.html</guid>
+      <description>캡콤은 홍콩산 해적판 기판을 역설계해 스트리트 파이터 II 터보를 만들었고, 미국에서는 반품 보증의 허점 때문에 손실을 봤으며, 이어서 밀약을 맺고 슈퍼 스트리트 파이터 II X를 팔리지 않던 3DO에 독점 공급했습니다. 개발사 5부작 제3화.</description>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>스트리트 파이터 개발사 제2화: 1991년 열풍 뒤의 개조와 화재</title>
       <link>https://gamekataban.com/blog/ko/2026-09-08-street-fighter-development-history-2.html</link>

@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog pour les collectionneurs à l'étranger en quête de jeux rétro japonais — guides boutiques, tutoriels d'importation, et les histoires derrière les titres.</description>
     <language>fr-fr</language>
-    <lastBuildDate>Tue, 08 Sep 2026 09:49:30 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2026 11:36:48 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-fr.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Histoire du développement de Street Fighter, partie 3 : cartes pirates, pertes et un pacte secret avec 3DO</title>
+      <link>https://gamekataban.com/blog/fr/2026-09-15-street-fighter-development-history-3.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-09-15-street-fighter-development-history-3.html</guid>
+      <description>Capcom a rétro-conçu une carte pirate de Hong Kong pour construire Street Fighter II Turbo, a perdu de l'argent aux États-Unis à cause d'une faille des garanties de reprise, puis a envoyé Super SF2 X en exclusivité sur la 3DO en perdition. Partie 3 d'une série en cinq volets.</description>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Histoire du développement de Street Fighter, partie 2 : le bricolage et l'incendie derrière le boom de 1991</title>
       <link>https://gamekataban.com/blog/fr/2026-09-08-street-fighter-development-history-2.html</link>

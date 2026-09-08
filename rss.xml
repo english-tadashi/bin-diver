@@ -5,14 +5,22 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 08 Sep 2026 09:49:30 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2026 11:36:48 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Street Fighter Development History, Part 3: Bootlegs, Losses, and a Secret 3DO Deal</title>
+      <link>https://gamekataban.com/blog/2026-09-15-street-fighter-development-history-3.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-15-street-fighter-development-history-3.html</guid>
+      <description>Capcom reverse-engineered a Hong Kong bootleg to build Street Fighter II Turbo, lost money in the US on a return-guarantee loophole, then took a secret Panasonic deal that sent Super SF2 X exclusively to the failing 3DO.</description>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Street Fighter Development History, Part 2: The Fire and the Hack Behind the 1991 Boom</title>
       <link>https://gamekataban.com/blog/2026-09-08-street-fighter-development-history-2.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-08-street-fighter-development-history-2.html</guid>
-      <description>Street Fighter II barely cleared 100 yen a day in early tests. A hacked arcade cabinet, an unbeatable player, and a sound-room fire shaped the biggest fighting game boom of the 1990s. Part 2 of a five-part series.</description>
+      <description>Street Fighter II barely cleared 100 yen a day in early tests. A hacked arcade cabinet, an unbeatable player, and a sound-room fire shaped the biggest fighting game boom of the 1990s.</description>
       <pubDate>Tue, 08 Sep 2026 00:00:00 +0900</pubDate>
     </item>
 
@@ -68,7 +76,7 @@
       <title>Street Fighter Development History, Part 1: The Boring Meeting That Started a Genre (1987)</title>
       <link>https://gamekataban.com/blog/2026-09-02-street-fighter-development-history-1.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-02-street-fighter-development-history-1.html</guid>
-      <description>Before Street Fighter II, there was a doodle at a dull meeting, a bug that made fireballs nearly impossible to throw, and a warehouse of unsold cabinets. Part 1 of a five-part series on how the 1987 arcade original was made.</description>
+      <description>Before Street Fighter II, there was a doodle at a dull meeting, a bug that made fireballs nearly impossible to throw, and a warehouse of unsold cabinets. How the 1987 arcade original was made.</description>
       <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
     </item>
 
