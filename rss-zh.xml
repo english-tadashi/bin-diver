@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>為海外收藏家打造的日本復古遊戲部落格——商店指南、進口教學，以及遊戲背後的故事。</description>
     <language>zh-tw</language>
-    <lastBuildDate>Mon, 07 Sep 2026 06:33:30 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2026 09:49:30 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-zh.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>快打旋風開發史 第2回：1991年熱潮背後的改機與火災</title>
+      <link>https://gamekataban.com/blog/zh/2026-09-08-street-fighter-development-history-2.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-08-street-fighter-development-history-2.html</guid>
+      <description>《快打旋風II》早期測試一天的投幣收入還不到100日圓。一台違規改裝的街機、一位無人能敵的玩家，以及一場音效室火災，造就了1990年代最大的格鬥遊戲熱潮。系列開發史五部曲第2回。</description>
+      <pubDate>Tue, 08 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>《Surging Aura》等了三十年的英文翻譯，終於來了</title>
       <link>https://gamekataban.com/blog/zh/2026-09-07-surging-aura-fan-translation.html</link>

@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Mon, 07 Sep 2026 06:33:30 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2026 09:49:30 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Historia del desarrollo de Street Fighter, parte 2: el apaño y el incendio detrás del boom de 1991</title>
+      <link>https://gamekataban.com/blog/es/2026-09-08-street-fighter-development-history-2.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-09-08-street-fighter-development-history-2.html</guid>
+      <description>Street Fighter II apenas llegaba a 100 yenes al día en sus primeras pruebas. Un mueble modificado sin permiso, un jugador invencible y un incendio en la sala de sonido dieron forma al mayor boom de los juegos de lucha de los noventa. Parte 2 en cinco entregas.</description>
+      <pubDate>Tue, 08 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>La espera de 30 años de Surging Aura por una traducción al inglés ha terminado</title>
       <link>https://gamekataban.com/blog/es/2026-09-07-surging-aura-fan-translation.html</link>
