@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Tue, 08 Sep 2026 11:36:48 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2026 12:36:05 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Historia del desarrollo de Street Fighter, parte 4: la fuga a SNK, una filtración y el enfado de Marvel</title>
+      <link>https://gamekataban.com/blog/es/2026-09-22-street-fighter-development-history-4.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-09-22-street-fighter-development-history-4.html</guid>
+      <description>Street Fighter Zero se hizo en tres meses para vaciar un almacén, un interruptor DIP olvidado filtró la detección de impactos de Capcom, un tercio del equipo se marchó a SNK y un personaje de humor televisivo enfureció a Marvel. Parte 4 en cinco entregas.</description>
+      <pubDate>Tue, 22 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Historia del desarrollo de Street Fighter, parte 3: placas piratas, pérdidas y un pacto secreto con 3DO</title>
       <link>https://gamekataban.com/blog/es/2026-09-15-street-fighter-development-history-3.html</link>

@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>為海外收藏家打造的日本復古遊戲部落格——商店指南、進口教學，以及遊戲背後的故事。</description>
     <language>zh-tw</language>
-    <lastBuildDate>Tue, 08 Sep 2026 11:36:48 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2026 12:36:05 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-zh.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>快打旋風開發史 第4回：跳槽、外流，與惹惱Marvel的搞笑角色</title>
+      <link>https://gamekataban.com/blog/zh/2026-09-22-street-fighter-development-history-4.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-22-street-fighter-development-history-4.html</guid>
+      <description>《快打旋風ZERO》是為了清庫存趕工三個月的產物；一個忘了關的DIP開關洩漏了卡普空的判定技術；三分之一的團隊跳槽SNK；一個綜藝節目的搞笑角色惹惱了Marvel。系列開發史五部曲第4回。</description>
+      <pubDate>Tue, 22 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>快打旋風開發史 第3回：盜版基板、虧損，與一紙3DO密約</title>
       <link>https://gamekataban.com/blog/zh/2026-09-15-street-fighter-development-history-3.html</link>

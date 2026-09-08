@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 08 Sep 2026 11:36:48 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2026 12:36:05 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Street Fighter Development History, Part 4: A Defection, a Leak, and a Marvel Meltdown</title>
+      <link>https://gamekataban.com/blog/2026-09-22-street-fighter-development-history-4.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-22-street-fighter-development-history-4.html</guid>
+      <description>Street Fighter Zero was a stock-clearance rush job, a leaked dip switch handed rivals Capcom's hit-detection secrets, a third of the team defected to SNK, and a variety-show gag character enraged Marvel.</description>
+      <pubDate>Tue, 22 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Street Fighter Development History, Part 3: Bootlegs, Losses, and a Secret 3DO Deal</title>
