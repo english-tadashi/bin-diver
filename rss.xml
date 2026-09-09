@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 09 Sep 2026 08:35:13 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 09 Sep 2026 09:12:12 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Castlevania Development History, Part 1: The Disk That Vanished and the Cartridge That Replaced It</title>
+      <link>https://gamekataban.com/blog/2026-09-17-castlevania-development-history-1.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-17-castlevania-development-history-1.html</guid>
+      <description>Shops overwrote Famicom Disk System disks for 500 yen, so the first Castlevania that actually circulates today is Konami's 1993 ROM cartridge, RV003. The Japanese Castlevania III cartridge also carries a VRC6 sound chip the NES could not use.</description>
+      <pubDate>Thu, 17 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Street Fighter Development History, Part 2: The Fire and the Hack Behind the 1991 Boom</title>

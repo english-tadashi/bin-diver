@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Ein Blog für Sammler außerhalb Japans, die japanische Retro-Spiele suchen — Shop-Guides, Import-Anleitungen und die Geschichten hinter den Titeln.</description>
     <language>de-de</language>
-    <lastBuildDate>Wed, 09 Sep 2026 08:35:13 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 09 Sep 2026 09:12:12 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-de.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Castlevania-Entwicklungsgeschichte, Teil 1: Die verschwundene Diskette und die Cartridge, die sie ersetzte</title>
+      <link>https://gamekataban.com/blog/de/2026-09-17-castlevania-development-history-1.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-09-17-castlevania-development-history-1.html</guid>
+      <description>Läden überschrieben Famicom-Disk-System-Disketten für 500 Yen, deshalb ist die Fassung des ersten Castlevania, die tatsächlich zirkuliert, Konamis ROM-Cartridge von 1993, RV003. Die japanische Castlevania-III-Cartridge trägt einen VRC6-Chip, den die NES nicht nutzen konnte.</description>
+      <pubDate>Thu, 17 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Street-Fighter-Entwicklungsgeschichte, Teil 2: Der Umbau und das Feuer hinter dem Boom von 1991</title>
       <link>https://gamekataban.com/blog/de/2026-09-08-street-fighter-development-history-2.html</link>

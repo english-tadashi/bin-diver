@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>為海外收藏家打造的日本復古遊戲部落格——商店指南、進口教學，以及遊戲背後的故事。</description>
     <language>zh-tw</language>
-    <lastBuildDate>Wed, 09 Sep 2026 08:35:13 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 09 Sep 2026 09:12:12 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-zh.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>惡魔城開發史 第1回：消失的磁碟，與取而代之的卡帶</title>
+      <link>https://gamekataban.com/blog/zh/2026-09-17-castlevania-development-history-1.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-17-castlevania-development-history-1.html</guid>
+      <description>店家以500日圓改寫紅白機磁碟機的磁碟，因此今天實際在市面流通的初代惡魔城，是科樂美1993年的ROM卡帶RV003。日版《惡魔城傳說》卡帶還內建了NES無法使用的VRC6音源晶片。系列開發史五部曲第1回。</description>
+      <pubDate>Thu, 17 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>快打旋風開發史 第2回：1991年熱潮背後的改機與火災</title>
       <link>https://gamekataban.com/blog/zh/2026-09-08-street-fighter-development-history-2.html</link>
