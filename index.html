@@ -1258,6 +1258,80 @@ header .lede .lede-sub{ font-weight:400; }
 .mycost a:hover,.mycost a:focus-visible{color:#ffffff;}
 
 /* ============================================================
+   My List の印刷／PDF 保存（2026-09-11）
+   店内で電波が無くても・電池が切れても持ち歩ける紙のチートシート。PC は印刷、スマホは「PDF として保存」。
+   ★画面のカードを印刷CSSで作り変えるのではなく、刷る直前に専用のシート #mylistPrint を組む（JS は mylistPrintSheet）。
+     画面のカードは暗い地・白文字・操作ボタン込みで、紙に要る中身（店員向けの枠・付録）とも違うため。
+   ★印刷の規則は body.printing-mylist のときだけ効く。Print ボタンでクラスを付けて window.print()、
+     afterprint で外す。付いていないとき（My List を開かずに Cmd+P）は今までどおりの印刷になる。
+   ★書体は変数ではなく字面で書く。--f-display 等は .card{} / #mylist の中でしか定義されていない（罠#132）。
+     #clerk（店員画面・白地 #111）と同じ書き方。
+   ============================================================ */
+.mylist-btns{display:flex; align-items:center; gap:8px; flex-shrink:0;}
+/* 見た目は Close と同じ段（どちらも「画面を離れる」補助操作。紫・シアンは予約済みなので使わない）。 */
+#mylistPrintBtn{min-height:44px; padding:10px 14px; cursor:pointer;
+  border:1px solid var(--edge-input); border-radius:2px; background:var(--surface); color:var(--ink);
+  font:500 13px/1 var(--f-display);}
+#mylistPrintBtn:hover,#mylistPrintBtn:focus-visible{background:var(--edge); outline:none;}
+/* ★hidden 属性を明示的に効かせる。作者CSSが display を持つと UA の [hidden] が負ける（ノート 2026-09-11 続き 3節）。 */
+#mylistPrintBtn[hidden]{display:none;}
+#mylistPrint{display:none;}   /* 画面では出さない */
+
+@media print{
+  /* 紙は白。html / body の暗い地が「背景も印刷」設定で出ないように */
+  html:has(> body.printing-mylist), body.printing-mylist{background:#fff !important;}
+  /* mylistOpen() が body に直に書く overflow:hidden を、印刷のときだけ解く（残すと2ページ目以降が切れる） */
+  body.printing-mylist{overflow:visible !important; color:#111;}
+  body.printing-mylist > :not(#mylist){display:none !important;}
+  /* 全画面・自前スクロールの器を、紙の上では普通の流れに戻す（fixed のままだと1ページ分しか刷られない） */
+  body.printing-mylist #mylist{display:block !important; position:static; inset:auto; z-index:auto;
+    overflow:visible; padding:0; background:#fff; color:#111;}
+  /* 画面の帯（Close・Print）と画面のカード（Show clerk・Remove・着地コスト .mycost）は丸ごと出さない */
+  body.printing-mylist #mylist > :not(#mylistPrint){display:none !important;}
+  body.printing-mylist #mylistPrint{display:block;}
+
+  #mylistPrint{color:#111; font:400 10pt/1.45 'Space Grotesk',-apple-system,Helvetica,Arial,sans-serif;}
+  #mylistPrint .mlp-head{margin:0 0 3mm; padding:0 0 2mm; border-bottom:1.5pt solid #111;}
+  /* ★書体・行送り・字間を明示する。サイト全体の h1 はロゴ用（font-family:var(--f-pixel)・letter-spacing:-.02em・
+     line-height:.98）で、字の大きさだけ指定するとドット絵の書体のまま刷られる（2026-09-11 の PDF で確認）。 */
+  #mylistPrint .mlp-head h1{margin:0; font:600 16pt/1.2 'Space Grotesk',-apple-system,Helvetica,Arial,sans-serif; letter-spacing:normal;}
+  #mylistPrint .mlp-head h1 span{margin-left:6pt; font-size:9pt; font-weight:400; color:#555;}
+  #mylistPrint .mlp-head p{margin:1mm 0 0; font-size:9pt; color:#333;}
+  /* 1品＝1段。左が本人用（題名・読み・棚）、右が店員に見せる枠。段の途中で改ページしない。 */
+  #mylistPrint .mlp-item{display:grid; grid-template-columns:1fr 1fr; gap:5mm; padding:3.5mm 0;
+    border-bottom:0.75pt solid #999; break-inside:avoid; page-break-inside:avoid;}
+  #mylistPrint .mlp-num{display:inline-block; min-width:5mm; margin-right:2mm; padding:0 1mm;
+    border:0.75pt solid #111; font:600 9pt/1.5 'IBM Plex Mono',ui-monospace,Menlo,monospace; text-align:center; vertical-align:3pt;}
+  #mylistPrint .mlp-title{font:600 15pt/1.3 'IBM Plex Sans JP','Hiragino Sans','Noto Sans JP',sans-serif; word-break:break-word;}
+  #mylistPrint .mlp-romaji{margin-top:0.5mm; font:400 10pt/1.35 'IBM Plex Mono',ui-monospace,Menlo,monospace; color:#333;}
+  #mylistPrint .mlp-en{font-size:10pt; color:#333;}
+  #mylistPrint .mlp-meta{margin-top:1mm; font:400 9pt/1.4 'IBM Plex Mono',ui-monospace,Menlo,monospace; color:#333; word-break:break-all;}
+  #mylistPrint .mlp-code{font:500 13pt/1.3 'IBM Plex Mono',ui-monospace,Menlo,monospace; letter-spacing:.04em; word-break:break-all;}
+  #mylistPrint .mlp-shelf{display:flex; align-items:center; gap:2mm; margin-top:2mm; font-size:9.5pt;}
+  #mylistPrint .mlp-kana{flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center;
+    min-width:9mm; height:9mm; border:1pt solid #111; font:600 14pt/1 'IBM Plex Sans JP','Hiragino Sans','Noto Sans JP',sans-serif;}
+  #mylistPrint .mlp-genre, #mylistPrint .mlp-note{margin-top:1.5mm; font-size:9pt; color:#333;}
+  /* 店員に見せる枠。店員画面(#clerk)と同じ文言・同じ見出し。太い枠で「ここを見せる」を示す。 */
+  #mylistPrint .mlp-staff{align-self:start; border:1.5pt solid #111; padding:3mm 4mm;}
+  #mylistPrint .mlp-ask{margin:0 0 2mm; font:600 13pt/1.4 'IBM Plex Sans JP','Hiragino Sans','Noto Sans JP',sans-serif;}
+  #mylistPrint .mlp-staff dl{margin:0; display:grid; grid-template-columns:auto 1fr; gap:1mm 3mm; align-items:baseline;}
+  #mylistPrint .mlp-staff dt{font:500 8pt/1.5 'IBM Plex Sans JP','Hiragino Sans','Noto Sans JP',sans-serif; color:#555;}
+  #mylistPrint .mlp-staff dd{margin:0; font:500 11pt/1.35 'IBM Plex Sans JP','Hiragino Sans','Noto Sans JP',sans-serif; word-break:break-word;}
+  #mylistPrint .mlp-staff .mlp-s-code{font:500 12pt/1.3 'IBM Plex Mono',ui-monospace,Menlo,monospace; letter-spacing:.04em; word-break:break-all;}
+  /* 付録: ジャンル早見表（GENRE_GUIDE）。改ページは強制しない（1枚に収まるならそのまま続ける）。 */
+  #mylistPrint .mlp-appendix{margin-top:6mm;}
+  #mylistPrint .mlp-appendix h2{margin:0 0 1.5mm; font-size:13pt; font-weight:600;}
+  #mylistPrint .mlp-appendix h2 span{margin-left:4pt; font:500 11pt 'IBM Plex Sans JP','Hiragino Sans','Noto Sans JP',sans-serif; color:#333;}
+  #mylistPrint .mlp-appendix p{margin:0 0 2mm; font-size:9pt; color:#333;}
+  #mylistPrint .mlp-appendix table{width:100%; border-collapse:collapse; font-size:9pt;}
+  #mylistPrint .mlp-appendix th, #mylistPrint .mlp-appendix td{padding:1.2mm 2mm; border-bottom:0.5pt solid #bbb;
+    text-align:left; vertical-align:top;}
+  #mylistPrint .mlp-appendix th{font-size:8pt; font-weight:600; color:#555; border-bottom:1pt solid #111;}
+  #mylistPrint .mlp-appendix tr{break-inside:avoid; page-break-inside:avoid;}
+  #mylistPrint .mlp-sign{white-space:nowrap; font:600 11pt/1.3 'IBM Plex Sans JP','Hiragino Sans','Noto Sans JP',sans-serif;}
+}
+
+/* ============================================================
    マイリストからの店頭提示（2026-08-19・簡易版）
    器は既存の #clerk をそのまま使う（全画面・白・.on トグル・Escape・閉じるボタン）。
    足すのは「中身の段だけ差し替える」ための修飾クラス2つ（.brief / .over-mylist）で、
@@ -1773,9 +1847,14 @@ header .lede .lede-sub{ font-weight:400; }
 <div id="mylist" role="dialog" aria-modal="true" aria-labelledby="mylist-title">
   <div class="mylist-bar">
     <h2 id="mylist-title"><svg class="pu-icon" aria-hidden="true" focusable="false"><use href="#icon-powerup-on"></use></svg>My List<span class="n" id="mylistCount">0 saved</span></h2>
-    <button type="button" id="mylistClose">Close</button>
+    <div class="mylist-btns">
+      <button type="button" id="mylistPrintBtn" hidden>Print / Save PDF</button>
+      <button type="button" id="mylistClose">Close</button>
+    </div>
   </div>
   <div id="mylistBody"></div>
+  <!-- 印刷／PDF 保存用のシート（2026-09-11）。画面では出さない。Print を押したときに mylistPrintSheet() が中身を組む。 -->
+  <div id="mylistPrint"></div>
 </div>
 
 
@@ -2188,6 +2267,31 @@ function shelfNote(r){
           Look under <b class="gyo">${esc(kana)}</b>${gyo?` — or the <b class="gyo">${esc(gyo)}</b> group where shelves are split by row`:''}.</span>
       </div>
     </div>`;
+}
+
+// 棚の目安の「値」だけ（2026-09-11・印刷シート用）。shelfNote() と同じ入力（row[11] と GYO）から、
+// 英文の説明を付けずに { kana, gyo } を返す。出せない行（配信専用・読み無し）は null。
+function shelfKana(r){
+  if(r[12]) return null;
+  const kana = r[11] || '';
+  if(!kana) return null;
+  return { kana, gyo: GYO[kana] || '' };
+}
+
+/* ローマ字読み（row[9]）を出すかどうか。2026-09-11 に card() から切り出した（印刷シートと共用）。
+   ★式とコメントは card() にあったものをそのまま移した。全行で card() の出力が変わらないことを実測で確認済み。
+   ★en / jp / jpMain は card() と同じ取り方（row[0] / row[1] / 空なら英題）。 */
+function romajiFor(r){
+  const en = r[0], jp = r[1];
+  const jpMain = jp||en;
+  // row[1](日本語名)にかな・カタカナ・漢字が1字も無い＝箱の表記自体がラテン文字（card() の jaLatin と同じ式）。
+  const jaLatin = !!jp && !/[぀-ヿ㐀-鿿]/.test(jp);
+  // ローマ字は「日本語名にかな/漢字があるとき」に加え、ラテン表記の行(jaLatin)でも出す(row[9]があれば)。
+  // row[9] が題名(jpMain または row[0])と正規化して同じ行では出さない(同じ語が2度続くのを止める)。
+  // 例) 題名 METAL GEAR SOLID INTEGRAL / row[9] 同文字列 → 出さない。metarugia... の読みは出る。
+  const romaji = (r[9] && (jaLatin || /[぀-ヿ㐀-鿿]/.test(jpMain))
+    && codeKey(r[9]) !== codeKey(jpMain) && codeKey(r[9]) !== codeKey(en)) ? r[9] : '';
+  return romaji;
 }
 
 /* 位置トグルの状態。'out'=海外在住（初期） / 'jp'=日本の店頭。
@@ -3256,11 +3360,8 @@ function card(r,idx){
   // ★ただし row[0] と row[1] が別表記(例 Resident Evil 4 / biohazard4)なら箱の背表紙照合に要るので消さない。
   //   codeKey(NFKC+大文字化+英数字以外除去=全角半角統一・空白/記号除去)で正規化して一致する行だけ消す。
   const hideJa = jaLatin && !!en && codeKey(en) === codeKey(jp);
-  // ローマ字は「日本語名にかな/漢字があるとき」に加え、ラテン表記の行(jaLatin)でも出す(row[9]があれば)。
-  // row[9] が題名(jpMain または row[0])と正規化して同じ行では出さない(同じ語が2度続くのを止める)。
-  // 例) 題名 METAL GEAR SOLID INTEGRAL / row[9] 同文字列 → 出さない。metarugia... の読みは出る。
-  const romaji = (r[9] && (jaLatin || /[぀-ヿ㐀-鿿]/.test(jpMain))
-    && codeKey(r[9]) !== codeKey(jpMain) && codeKey(r[9]) !== codeKey(en)) ? r[9] : '';
+  // ローマ字読みの判定は romajiFor() に切り出した（2026-09-11・印刷シートと共用）。式は元のまま。
+  const romaji = romajiFor(r);
   // スラブ表示。区切りの前後は「折り返せる普通の空白」にする(&nbsp; だと型番の内側でしか折れない)
   // 中黒の前は &nbsp;(前の型番にくっつける)、後ろは普通の空白(ここで折る)。
   // → 折り返しても行頭が「・」で始まらず、型番は必ず1つ丸ごと1行に載る。
@@ -3595,6 +3696,9 @@ function mylistRefresh(){
   if(badge) badge.textContent = '(' + n + ')';
   const head = document.getElementById('mylistCount');
   if(head) head.textContent = (n === 1) ? '1 saved' : n + ' saved';
+  // 印刷ボタンは中身があるときだけ（空のシートを刷らせない）。
+  const pb = document.getElementById('mylistPrintBtn');
+  if(pb) pb.hidden = (n === 0);
   const el = document.getElementById('mylist');
   if(el && el.classList.contains('on')) mylistRender();
 }
@@ -3747,6 +3851,7 @@ function mylistOpen(){
 }
 function mylistHide(){
   mylistEl.classList.remove('on');
+  document.body.classList.remove('printing-mylist');   // afterprint が来ない環境の後始末（印刷の規則はこのクラスでしか効かない）
   myListBtn.setAttribute('aria-expanded','false');
   document.body.style.overflow = '';
   myListBtn.focus();
@@ -3785,6 +3890,128 @@ mylistBody.addEventListener('click', e=>{
 
 mylistRefresh();   // 起動時のバッジ（保存済みの件数を帯に出す）
 
+/* ============================================================
+   My List の印刷／PDF 保存（2026-09-11）
+   ★刷る直前に #mylistPrint へシートを組み、body に printing-mylist を付けてから window.print()。
+     印刷の規則（@media print）はこのクラスのときだけ効き、afterprint で外す。
+     Print ボタンを使わず Cmd+P 等で刷ったときも、My List が開いていれば beforeprint で同じシートを組む。
+   ★中身は DATA から引き直す（mylistCard() と同じ。データを二重に持たない）。
+   ★1品＝左が本人用（題名・読み・型番・機種・棚）、右が店員に見せる枠。
+     棚は店員の枠に入れない（2026-08-04 / 08-19 の方針: 棚を探すのは本人。渡した面は本人が読めない）。
+   ★店員の枠の文言・見出し・値は店員画面と同じもの（CLERK_ASK_BRIEF / CLERK_LB / clerkFacts）。
+   ★配信専用(row[12])の行は棚も店員の枠も出さない（Show clerk と同じゲート）。
+   ============================================================ */
+
+// 店の棚が「ジャンル札 → その中で五十音」になりうる機種。品ごとのジャンルは持たない（罠#130）ので、
+// これらの機種には「まずジャンル札」の一文を添えて、末尾の付録（GENRE_GUIDE）へ案内する。
+// ★列挙はノート 2026-07-31「棚のルール確定（フィールド写真）」のディスク側（DS/3DS は店の扱いがディスク側）。
+//   ブックオフのディスク機はジャンル＋読み五十音、駿河屋は全機種五十音（ノートの店別表）なので、
+//   文面は「そうする店もある」に留める。未観測の機種（PS5 / Switch / Wii U 等）は足していない（罠#129）。
+const GENRE_SHELF_PLATFORMS = new Set(['PlayStation', 'PlayStation 2', 'PlayStation 3', 'PlayStation 4', 'PSP',
+  'PlayStation Vita', 'Sega Saturn', 'Dreamcast', 'GameCube', 'Wii', 'Xbox', 'Xbox 360', 'Xbox One',
+  'Nintendo DS', 'Nintendo 3DS']);
+// その品に「まずジャンル札」の一文を付けるか。付録（ジャンル札の表）を刷るかの判定も同じ関数で見る
+// ＝「see the table at the end」と案内したのに付録が無い、というずれを構造的に起こさない。
+function mylistGenreShelf(r){ return !!r && !r[12] && GENRE_SHELF_PLATFORMS.has(r[2]); }
+
+// 店員に見せる枠。f は clerkFacts(r)、DATA から引けなかった型番では null（型番と一言だけ出す）。
+function mylistPrintStaff(codes, f){
+  const rows = [];
+  if(codes.length) rows.push([CLERK_LB.code, `<span class="mlp-s-code">${codes.map(esc).join('<br>')}</span>`]);
+  if(f){
+    rows.push([CLERK_LB.title, esc(f.jpMain)]);
+    if(f.platShow) rows.push([CLERK_LB.plat, esc(f.platShow)]);
+    if(f.pubShow) rows.push([CLERK_LB.pub, esc(f.pubShow)]);
+    if(f.year) rows.push([CLERK_LB.year, esc(f.year)]);
+  }
+  return `<div class="mlp-staff">
+      <p class="mlp-ask">${CLERK_ASK_BRIEF}</p>
+      <dl>${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
+    </div>`;
+}
+
+function mylistPrintItem(code, i){
+  const r = DATA.find(row => row[3] === code);
+  const num = `<span class="mlp-num">${i + 1}</span>`;
+  if(!r){
+    const codes = code.split(';').map(s=>s.trim()).filter(Boolean);
+    return `<article class="mlp-item">
+      <div class="mlp-you">
+        <div class="mlp-code">${num}${codes.map(esc).join(' &middot; ')}</div>
+        <div class="mlp-note">This code is no longer in the database.</div>
+      </div>
+      ${mylistPrintStaff(codes, null)}
+    </article>`;
+  }
+  const f = clerkFacts(r);
+  const romaji = romajiFor(r);
+  // 英題は日本語タイトルと別物のときだけ（mylistCard() と同じ判定）。
+  const enSub = (r[0] && strong(r[0]) !== strong(f.jpMain)) ? r[0] : '';
+  const meta = [f.codes.map(esc).join(' &middot; '), esc(r[2] || ''), esc(r[4] || '')].filter(Boolean).join(' &middot; ');
+  let shelf = '';
+  if(r[12]){
+    shelf = `<div class="mlp-note">Download-only &mdash; there is no disc or cartridge to find in a store.</div>`;
+  } else {
+    const k = shelfKana(r);
+    if(k){
+      shelf = `<div class="mlp-shelf"><span class="mlp-kana">${esc(k.kana)}</span>${k.gyo ? `<span class="mlp-kana">${esc(k.gyo.charAt(0))}</span>` : ''}
+        <span>Kana order: look under <b>${esc(k.kana)}</b>${k.gyo ? ` &mdash; or the <b>${esc(k.gyo)}</b> group` : ''}.</span></div>`;
+    } else {
+      shelf = `<div class="mlp-note">No shelf hint &mdash; we don't have a reading for this title.</div>`;
+    }
+    if(mylistGenreShelf(r)){
+      shelf += `<div class="mlp-genre">Some stores (Book-Off, for one) shelve ${esc(r[2])} games by genre: find the genre sign first &mdash; see the table at the end${k ? ` &mdash; then look under <b>${esc(k.kana)}</b> inside it` : ''}.</div>`;
+    }
+  }
+  return `<article class="mlp-item">
+      <div class="mlp-you">
+        <div class="mlp-title">${num}${esc(f.jpMain)}</div>
+        ${romaji ? `<div class="mlp-romaji">${esc(romaji)}</div>` : ''}
+        ${enSub ? `<div class="mlp-en">${esc(enSub)}</div>` : ''}
+        <div class="mlp-meta">${meta}</div>
+        ${shelf}
+      </div>
+      ${r[12] ? '' : mylistPrintStaff(f.codes, f)}
+    </article>`;
+}
+
+function mylistPrintSheet(){
+  const codes = [...listSet];
+  const d = new Date(), p2 = n => String(n).padStart(2, '0');
+  const date = `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}`;
+  const head = `<header class="mlp-head">
+      <h1>My List<span>Kataban &middot; gamekataban.com</span></h1>
+      <p>${codes.length} item${codes.length === 1 ? '' : 's'} &middot; printed ${date}. Left: for you (where to look). Right: show the boxed part to the staff.</p>
+    </header>`;
+  // 付録。文面はジャンル早見表の冒頭の一文と同じ趣旨（棚札を英語から引く）。
+  const appendix = `<section class="mlp-appendix">
+      <h2>Genre signs<span>ジャンル札</span></h2>
+      <p>Find your genre in English, then look for the Japanese shelf sign. Disc-era shelves are usually split by genre, not by kana.</p>
+      <table>
+        <thead><tr><th>Genre</th><th>Sign</th><th>Also covers</th></tr></thead>
+        <tbody>${GENRE_GUIDE.map(g => `<tr><td>${esc(g.en)}</td><td class="mlp-sign">${esc(g.jp)}</td><td>${g.terms.map(esc).join(', ')}</td></tr>`).join('')}</tbody>
+      </table>
+    </section>`;
+  // 付録は、ジャンル札の一文が付く品が1件以上あるときだけ（2026-09-11）。カートリッジ機だけのリストでは
+  // 付録へ案内する品が無いので省き、ページを減らす（6品で A4 2ページのうち、付録が半分以上を占めていた）。
+  const needsGenre = codes.some(c => mylistGenreShelf(DATA.find(row => row[3] === c)));
+  return head + codes.map(mylistPrintItem).join('') + (needsGenre ? appendix : '');
+}
+
+const mylistPrintEl = $('#mylistPrint'), mylistPrintBtn = $('#mylistPrintBtn');
+function mylistPrintPrepare(){
+  if(!listSet.size) return false;
+  mylistPrintEl.innerHTML = mylistPrintSheet();
+  document.body.classList.add('printing-mylist');
+  return true;
+}
+mylistPrintBtn.addEventListener('click', ()=>{ if(mylistPrintPrepare()) window.print(); });
+window.addEventListener('beforeprint', ()=>{
+  if(document.body.classList.contains('printing-mylist')) return;   // Print ボタンから来た＝組み済み
+  if(mylistEl.classList.contains('on')) mylistPrintPrepare();        // Cmd+P 等。My List が開いているときだけ
+});
+window.addEventListener('afterprint', ()=>{ document.body.classList.remove('printing-mylist'); });
+
 
 
 // ============================================================
@@ -3802,11 +4029,14 @@ mylistRefresh();   // 起動時のバッジ（保存済みの件数を帯に出�
 // ============================================================
 const clerkEl=$('#clerk'), clerkBody=$('#clerkBody'), clerkClose=$('#clerkClose');
 
-// ★前提: この関数には配信専用の行（row[12]）は来ない。
-//   唯一の入口である「店員に見せる」ボタンを row[12] の行では出していないため（card() 内）。
-//   ボタン側の条件を変えるなら、ここも見直すこと。
-//   配信専用の行を渡すと「在庫はありますか？」と店員に聞かせることになる。
-function clerkOpen(r){
+// 店員に見せる面の固定文言と見出し（2026-09-11 に定数化）。
+// clerkOpen() / clerkOpenBrief() / My List の印刷シートで同じものを使う ―― 片方だけ直して食い違うのを防ぐ。
+const CLERK_ASK_BRIEF = 'これはありますか？';
+const CLERK_LB = { title:'タイトル', code:'型番', plat:'機種', pub:'発売元', year:'発売年' };
+
+// 店員に見せる値。clerkOpen() と印刷シートで共用する（式を2か所に書くと、片方だけ直したときに黙ってずれる）。
+// ★中身は clerkOpen() の冒頭にあった式と注意書きをそのまま移したもの。
+function clerkFacts(r){
   const jpMain = r[1] || r[0];
   const codes  = (r[3]||'').split(';').map(s=>s.trim()).filter(Boolean);
   // 発売元は日本語(row[5])を優先。読むのは日本の店員なので、card() とは優先順が逆。
@@ -3823,6 +4053,16 @@ function clerkOpen(r){
   // ★1つの const にまとめてある。下の「出すかどうかの判定」と「出す値」で別々の式を
   //   書くと、片方だけ直したときに黙ってずれる（空ラベルだけ残る等）。
   const platShow = r[13] || r[2];
+  return { jpMain, codes, pubShow, platShow, year: r[4] || '' };
+}
+
+// ★前提: この関数には配信専用の行（row[12]）は来ない。
+//   唯一の入口である「店員に見せる」ボタンを row[12] の行では出していないため（card() 内）。
+//   ボタン側の条件を変えるなら、ここも見直すこと。
+//   配信専用の行を渡すと「在庫はありますか？」と店員に聞かせることになる。
+function clerkOpen(r){
+  // 値の出し方は clerkFacts()（2026-09-11 切り出し・印刷シートと共用）。式と注意書きはあちらへ移した。
+  const { jpMain, codes, pubShow, platShow } = clerkFacts(r);
   const parts  = [];
 
   parts.push(`<p class="clerk-ask">すみません、このゲームを探しています。<br>在庫はありますか？</p>`);
@@ -3841,20 +4081,20 @@ function clerkOpen(r){
     <b>What the staff are reading:</b> “Excuse me, I'm looking for this game — do you have it in stock?”, then ${fieldList}.
   </div>`);
 
-  parts.push(`<div class="clerk-row"><span class="lb">タイトル</span>
+  parts.push(`<div class="clerk-row"><span class="lb">${CLERK_LB.title}</span>
     <div class="clerk-title">${esc(jpMain)}</div></div>`);
 
-  if(codes.length) parts.push(`<div class="clerk-row"><span class="lb">型番</span>
+  if(codes.length) parts.push(`<div class="clerk-row"><span class="lb">${CLERK_LB.code}</span>
     <div class="clerk-code">${codes.map(esc).join('<br>')}</div></div>`);
 
-  if(platShow) parts.push(`<div class="clerk-row"><span class="lb">機種</span>
+  if(platShow) parts.push(`<div class="clerk-row"><span class="lb">${CLERK_LB.plat}</span>
     <div class="clerk-plat">${esc(platShow)}</div></div>`);
 
   // 発売元・発売年。機種と同じ体裁。空なら行ごと出さない（空ラベルを残さない）。
-  if(pubShow) parts.push(`<div class="clerk-row"><span class="lb">発売元</span>
+  if(pubShow) parts.push(`<div class="clerk-row"><span class="lb">${CLERK_LB.pub}</span>
     <div class="clerk-plat">${esc(pubShow)}</div></div>`);
 
-  if(r[4]) parts.push(`<div class="clerk-row"><span class="lb">発売年</span>
+  if(r[4]) parts.push(`<div class="clerk-row"><span class="lb">${CLERK_LB.year}</span>
     <div class="clerk-plat">${esc(r[4])}</div></div>`);
 
   clerkBody.innerHTML = parts.join('');
@@ -3903,17 +4143,17 @@ function clerkOpenBrief(code, opener){
   const parts = [];
 
   // 1. 型番 = この画面の主役。店員が在庫システムに打つ値。
-  parts.push(`<div class="clerk-row clerk-brief-first"><span class="lb">型番</span>
+  parts.push(`<div class="clerk-row clerk-brief-first"><span class="lb">${CLERK_LB.code}</span>
     <div class="clerk-code">${codes.map(esc).join('<br>')}</div></div>`);
 
   if(r){
     // 2. 日本語タイトル
-    parts.push(`<div class="clerk-row"><span class="lb">タイトル</span>
+    parts.push(`<div class="clerk-row"><span class="lb">${CLERK_LB.title}</span>
       <div class="clerk-title">${esc(r[1] || r[0])}</div></div>`);
   }
 
   // 3. 店員に見せる1行。
-  parts.push(`<p class="clerk-ask clerk-brief-ask">これはありますか？</p>`);
+  parts.push(`<p class="clerk-ask clerk-brief-ask">${CLERK_ASK_BRIEF}</p>`);
 
   clerkBody.innerHTML = parts.join('');
   clerkOpener = opener || null;
