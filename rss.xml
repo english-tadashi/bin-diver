@@ -5,16 +5,8 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Thu, 10 Sep 2026 11:11:33 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2026 11:25:56 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
-
-    <item>
-      <title>Castlevania Development History, Part 1: The Disk That Vanished and the Cartridge That Replaced It</title>
-      <link>https://gamekataban.com/blog/2026-09-09-castlevania-development-history-1.html</link>
-      <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-09-castlevania-development-history-1.html</guid>
-      <description>Shops overwrote Famicom Disk System disks for 500 yen, so the first Castlevania that actually circulates today is Konami's 1993 ROM cartridge, RV003. The Japanese Castlevania III cartridge also carries a VRC6 sound chip the NES could not use.</description>
-      <pubDate>Wed, 09 Sep 2026 00:00:00 +0900</pubDate>
-    </item>
 
     <item>
       <title>Yo! Noid Was a Ninja in a Red Mask First: Buying 仮面の忍者 花丸</title>
@@ -22,6 +14,14 @@
       <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-10-kamen-no-ninja-hanamaru-yo-noid.html</guid>
       <description>Yo! Noid is a reskin of Kamen no Ninja Hanamaru, a 1990 Capcom Famicom game developed by Now Production. The Kataban catalog holds it as M878494 with no product code at all, which leaves the Japanese title as the only working query. Measured hit counts for Suruga-ya and Buyee are below.</description>
       <pubDate>Thu, 10 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>Castlevania Development History, Part 1: The Disk That Vanished and the Cartridge That Replaced It</title>
+      <link>https://gamekataban.com/blog/2026-09-09-castlevania-development-history-1.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-09-castlevania-development-history-1.html</guid>
+      <description>Shops overwrote Famicom Disk System disks for 500 yen, so the first Castlevania that actually circulates today is Konami's 1993 ROM cartridge, RV003. The Japanese Castlevania III cartridge also carries a VRC6 sound chip the NES could not use.</description>
+      <pubDate>Wed, 09 Sep 2026 00:00:00 +0900</pubDate>
     </item>
 
     <item>

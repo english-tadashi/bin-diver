@@ -5,22 +5,22 @@
     <link>https://gamekataban.com/blog/</link>
     <description>해외 컬렉터를 위한 일본 레트로 게임 블로그 — 매장 가이드, 수입 방법, 그리고 타이틀 뒤에 숨은 이야기.</description>
     <language>ko-kr</language>
-    <lastBuildDate>Thu, 10 Sep 2026 11:11:33 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2026 11:25:56 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-ko.xml" rel="self" type="application/rss+xml"/>
 
-    <item>
-      <title>악마성 드라큘라 개발사 제1화: 사라진 디스크, 그리고 그 자리를 대신한 카트리지</title>
-      <link>https://gamekataban.com/blog/ko/2026-09-09-castlevania-development-history-1.html</link>
-      <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-09-09-castlevania-development-history-1.html</guid>
-      <description>가게에서 500엔에 패미컴 디스크 시스템 디스크를 덮어썼기 때문에, 오늘 실제로 유통되는 초대 악마성 드라큘라는 코나미가 1993년에 낸 ROM 카트리지 RV003입니다. 일본판 악마성 전설 카트리지에는 NES가 쓸 수 없던 VRC6 음원 칩이 들어 있습니다.</description>
-      <pubDate>Wed, 09 Sep 2026 00:00:00 +0900</pubDate>
-    </item>
     <item>
       <title>《Yo! Noid》는 원래 붉은 가면을 쓴 닌자였습니다: 《仮面の忍者 花丸》 구입 안내</title>
       <link>https://gamekataban.com/blog/ko/2026-09-10-kamen-no-ninja-hanamaru-yo-noid.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-09-10-kamen-no-ninja-hanamaru-yo-noid.html</guid>
       <description>《Yo! Noid》는 《仮面の忍者 花丸》의 겉모습만 바꾼 게임입니다. 1990년 Now Production이 개발하고 캡콤이 발매한 패미컴 작품입니다. Kataban 카탈로그는 이 게임을 M878494로 담고 있으며 상품 코드가 아예 없습니다. 그래서 일본어 원제가 유일하게 작동하는 검색어입니다. 스루가야와 Buyee의 실측 건수를 아래에 실었습니다.</description>
       <pubDate>Thu, 10 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>악마성 드라큘라 개발사 제1화: 사라진 디스크, 그리고 그 자리를 대신한 카트리지</title>
+      <link>https://gamekataban.com/blog/ko/2026-09-09-castlevania-development-history-1.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-09-09-castlevania-development-history-1.html</guid>
+      <description>가게에서 500엔에 패미컴 디스크 시스템 디스크를 덮어썼기 때문에, 오늘 실제로 유통되는 초대 악마성 드라큘라는 코나미가 1993년에 낸 ROM 카트리지 RV003입니다. 일본판 악마성 전설 카트리지에는 NES가 쓸 수 없던 VRC6 음원 칩이 들어 있습니다.</description>
+      <pubDate>Wed, 09 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
       <title>스트리트 파이터 개발사 제2화: 1991년 열풍 뒤의 개조와 화재</title>

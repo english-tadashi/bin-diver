@@ -5,22 +5,22 @@
     <link>https://gamekataban.com/blog/</link>
     <description>為海外收藏家打造的日本復古遊戲部落格——商店指南、進口教學，以及遊戲背後的故事。</description>
     <language>zh-tw</language>
-    <lastBuildDate>Thu, 10 Sep 2026 11:11:33 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2026 11:25:56 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-zh.xml" rel="self" type="application/rss+xml"/>
 
-    <item>
-      <title>惡魔城開發史 第1回：消失的磁碟，與取而代之的卡帶</title>
-      <link>https://gamekataban.com/blog/zh/2026-09-09-castlevania-development-history-1.html</link>
-      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-09-castlevania-development-history-1.html</guid>
-      <description>店家以500日圓改寫紅白機磁碟機的磁碟，因此今天實際在市面流通的初代惡魔城，是科樂美1993年的ROM卡帶RV003。日版《惡魔城傳說》卡帶還內建了NES無法使用的VRC6音源晶片。系列開發史五部曲第1回。</description>
-      <pubDate>Wed, 09 Sep 2026 00:00:00 +0900</pubDate>
-    </item>
     <item>
       <title>《Yo! Noid》原本是個戴紅面具的忍者：怎麼買到《仮面の忍者 花丸》</title>
       <link>https://gamekataban.com/blog/zh/2026-09-10-kamen-no-ninja-hanamaru-yo-noid.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-10-kamen-no-ninja-hanamaru-yo-noid.html</guid>
       <description>《Yo! Noid》是《仮面の忍者 花丸》換皮而成——1990年由Now Production開發、卡普空發行的紅白機遊戲。Kataban目錄把它存成M878494，而且完全沒有商品編號，於是日文原名成了唯一能用的搜尋語。駿河屋與Buyee的實測筆數列在文內。</description>
       <pubDate>Thu, 10 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>惡魔城開發史 第1回：消失的磁碟，與取而代之的卡帶</title>
+      <link>https://gamekataban.com/blog/zh/2026-09-09-castlevania-development-history-1.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-09-castlevania-development-history-1.html</guid>
+      <description>店家以500日圓改寫紅白機磁碟機的磁碟，因此今天實際在市面流通的初代惡魔城，是科樂美1993年的ROM卡帶RV003。日版《惡魔城傳說》卡帶還內建了NES無法使用的VRC6音源晶片。系列開發史五部曲第1回。</description>
+      <pubDate>Wed, 09 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
       <title>快打旋風開發史 第2回：1991年熱潮背後的改機與火災</title>
