@@ -994,6 +994,11 @@ header .lede .lede-sub{ font-weight:400; }
   border-top:1px solid var(--line); border-bottom:1px solid var(--line);
   border-left:3px solid var(--accent);}
 .genre-section-h .jp{display:block; font:400 13px/1.4 var(--f-jp); color:var(--muted);}
+/* 帯の直下の説明文（状態表記の段・2026-09-11）。本体は冒頭と同じ .genre-intro で、足すのは上の余白だけ。
+   ★帯は margin:0 -18px で端まで伸びた面なので、margin-top 0 のままだと字が帯の下罫に貼り付く。
+     12px は下の .genre-row の上 padding(14px) に寄せた値。
+   ★書体は #genre-modal が --f-display / --f-jp を定義し直しているので、この中なら解決する（罠#132）。 */
+.genre-section-h + .genre-intro{margin:12px 0 4px;}
 
 /* 1グループ＝1行。左が主(英語)・右が従(日本語の棚札)。
    ★align-items:stretch にしない。札は内容の長さで伸びるので、左の高さに引き伸ばすと
@@ -3997,6 +4002,12 @@ $('#genre-modal-body').innerHTML =
    Disc-era shelves are usually split by genre, not by kana.</p>` +
   GENRE_GUIDE.map(guideRow).join('') +
   `<h3 class="genre-section-h">Condition terms<span class="jp">状態表記</span></h3>` +
+  // 5項目を「ゲームの5段階評価」と読ませないための一文（2026-09-11・ノート 2026-08-03 続き6 の未解決#2）。
+  // ★出典 suruga-ya.jp/man/customer_guide/used_item_policy.html を 2026-09-11 に取り直して節の帰属を再確認した:
+  //   未開封品・帯付き・美品＝冒頭「コンディション表記について」、ジャンク＝冒頭の共通記述。
+  //   ランクＢは冒頭に「ランクB（状態難あり）」として出て、書籍・CD/DVD・ゲームソフト・フィギュア等の各節に個別の定義がある
+  //   ＝ゲームソフト専用のラベルではない。ゲームソフト節が定める表記が5項目のうちランクＢだけ、というのが正確。
+  `<p class="genre-intro">These are Suruga-ya listing labels used across all item types, not a grading scale for games&nbsp;&mdash; of the five, only <b>Rank B</b> has a game-specific definition (worn, but complete and plays fine).</p>` +
   CONDITION_GUIDE.map(guideRow).join('');
 function genreShow(){
   genreEl.classList.add('on');
