@@ -1238,6 +1238,20 @@ header .lede .lede-sub{ font-weight:400; }
   font:500 14px/1.2 var(--f-display);}
 .mycard .btn-remove:hover,.mycard .btn-remove:focus-visible{border-color:var(--ink-2); color:var(--ink); outline:none;}
 
+/* 着地コスト目安（2026-09-11）。一覧の末尾に置く1枚。.card を付けるのは .mycard と同じく
+   色・書体のトークンがそこにしか無いため。
+   ★番号バッジを外す。.card には counter と ::before のタブ（739行・シアン地）が付くので、
+     そのままだと「N+1 件目の品」に見える。どちらも同じ特異度で後段にあるので source order で勝つ。
+   ★--signal(紫)も --tag(シアン)も使わない（予約済み）。リンクも .note-link（シアン）ではなく、
+     下線＋本文色で示す。 */
+.mycost{counter-increment:none;}
+.mycost::before{content:none;}
+.mycost .my-cost-sum{font:500 clamp(26px,6.6vw,34px)/1.15 var(--f-mono); color:#ffffff;}
+.mycost .my-cost-status{font:400 13px/1.5 var(--f-display); color:var(--muted);}
+.mycost .my-cost-note{margin:0; font:400 13px/1.5 var(--f-display); color:var(--ink-2);}
+.mycost a{color:var(--ink); text-decoration:underline;}
+.mycost a:hover,.mycost a:focus-visible{color:#ffffff;}
+
 /* ============================================================
    マイリストからの店頭提示（2026-08-19・簡易版）
    器は既存の #clerk をそのまま使う（全画面・白・.on トグル・Escape・閉じるボタン）。
@@ -3629,11 +3643,93 @@ function mylistCard(code){
     </article>`;
 }
 
+/* ============================================================
+   着地コスト目安 ＋ まとめ買い提案（2026-09-11）
+   一覧の末尾に「楽天の中央値を足した商品代金の目安」を1枚置く。
+   ★海外モード(LOC==='out')だけ。buyBlock() の buyeeNote と同じ条件 ―― 国内の買い手は
+     Buyee を経由しないので、送料・手数料の話は要らない。
+   ★足すのは各行の medianPrice（カードの「Used on Rakuten: ~¥」と同じ値）。hit.price は
+     使わない: 在庫ありが無いと在庫切れの最安に落ちる（_rakFetch）うえ、あちらは (PR) の
+     広告行の数字で、リンクでないこの合計に混ぜると広告と非広告の区別が崩れる。
+   ★取得は IntersectionObserver を通さず rakutenLookup() を直に呼ぶ ―― 画面外の行も
+     合計に要るため。直列・1.6秒間隔・JAN キャッシュは rakutenLookup 側がそのまま守る。
+   ★1件取れるたびに合計を書き直す（全件は待たない）。未取得が残る間は calculating… を出す。
+   ★JAN の無い行・DATA から消えた行(!r)・楽天で取れなかった行は合計から外し、件数だけ注記する。
+   ★rakutenLookup は楽天レイヤー（このファイルの末尾）にある。レイヤーごと消されても
+     落ちないよう typeof で確かめてから使う＝消されたらこの1枚が出なくなるだけ。
+   ============================================================ */
+
+// 型番1件の JAN。card() の .rak-slot と同じ条件（13桁の数字だけ）。引けなければ ''。
+function mylistJan(code){
+  const r = DATA.find(row => row[3] === code);
+  return (r && /^\d{13}$/.test(r[10]||'')) ? r[10] : '';
+}
+
+// 器だけ返す。数字は mylistCostFill() が後から書く（楽天は非同期）。
+// 外部リンクは広告ではないので sponsored は付けない。
+function mylistCostBlock(n){
+  return `<section class="card mycost" id="mylistCost" aria-labelledby="mylistCostHead">
+      <div class="field">
+        <span class="micro plain" id="mylistCostHead">Estimated item total</span>
+        <div class="my-cost-sum" data-cost-sum>\u2014</div>
+        <div class="my-cost-status" data-cost-status>calculating\u2026</div>
+      </div>
+      <p class="my-cost-note">Item prices only \u2014 international shipping and Buyee\u2019s fees are not included. <a href="https://bc.help.buyee.jp/en/shipping-fees" target="_blank" rel="noopener">Check Buyee\u2019s shipping fees</a></p>
+      <p class="my-cost-note">Prices are Rakuten reference prices (the \u201cUsed on Rakuten\u201d median), a different source from where the store links go \u2014 Buyee mostly searches Yahoo! Auctions, so what you pay will differ.</p>
+      ${n >= 2 ? `<p class="my-cost-note">Buying these together in one shipment can reduce your shipping cost. <a href="https://faq.buyee.jp/article/125?lang=en" target="_blank" rel="noopener">How Buyee combines packages</a></p>` : ''}
+    </section>`;
+}
+
+// jans は一覧の並びどおり（JAN の無い行は ''）。
+function mylistCostFill(jans){
+  const box = document.getElementById('mylistCost');
+  if(!box) return;
+  const sumEl = box.querySelector('[data-cost-sum]'), statusEl = box.querySelector('[data-cost-status]');
+  const lookups = jans.filter(Boolean).length;
+  const noJan = jans.length - lookups;
+  let settled = 0, priced = 0, failed = 0, sum = 0;
+  // 金額は「有限かつ正」だけ（attachRakutenImage と同じ判定・同じ書式）。
+  const money = v => { const n = Number(v); return (Number.isFinite(n) && n > 0) ? n : null; };
+  const yen = n => `¥${Math.round(n).toLocaleString('ja-JP')}`;
+  const items = n => n + (n === 1 ? ' item' : ' items');
+  const paintCost = () => {
+    // 待っている間に mylistRender() で組み直された（削除・閉じて開き直し）なら書かない
+    if(!box.isConnected) return;
+    const pending = lookups - settled;
+    // 全件取れなかった＝足せる数字が1つも無い。楽天レイヤーの方針どおり何も出さない。
+    // ★hidden 属性ではなく remove()。.card{display:flex} が UA の [hidden]{display:none} に勝つので隠れない。
+    if(!pending && !priced){ box.remove(); return; }
+    sumEl.textContent = priced ? '~' + yen(sum) : '\u2014';
+    const unknown = noJan + failed;
+    const parts = [];
+    if(priced) parts.push('for ' + items(priced));
+    if(pending) parts.push('calculating\u2026 ' + settled + ' of ' + lookups + ' checked');
+    if(unknown) parts.push(items(unknown) + (unknown === 1 ? ' is' : ' are') + ' not included \u2014 price unknown');
+    statusEl.textContent = parts.join(' · ');
+  };
+  paintCost();
+  const asked = new Map();   // 同じ JAN を2度並ばせない（キャッシュは取得が終わるまで効かないため）
+  jans.forEach(jan => {
+    if(!jan) return;
+    if(!asked.has(jan)) asked.set(jan, rakutenLookup(jan));
+    const done = hit => {
+      const mid = money(hit && hit.medianPrice);
+      if(mid){ priced++; sum += mid; } else failed++;
+      settled++;
+      paintCost();
+    };
+    asked.get(jan).then(done, () => done(null));
+  });
+}
+
 function mylistRender(){
   const codes = [...listSet];
+  const jans = (codes.length && LOC === 'out') ? codes.map(mylistJan) : [];
+  const withCost = jans.some(Boolean) && typeof rakutenLookup === 'function';
   mylistBody.innerHTML = codes.length
-    ? codes.map(mylistCard).join('')
+    ? codes.map(mylistCard).join('') + (withCost ? mylistCostBlock(codes.length) : '')
     : '<div class="state"><b>Nothing saved yet.</b>Your list is empty \u2014 tap the <svg class="pu-icon" aria-hidden="true" focusable="false"><use href="#icon-powerup-off"></use></svg> beside a title in your search results to keep its product code here.</div>';
+  if(withCost) mylistCostFill(jans);
 }
 
 function mylistOpen(){
@@ -4056,6 +4152,10 @@ scanJan.addEventListener('keydown',e=>{ if(e.key==='Enter' && showByJan(scanJan.
 // 出品が無い / API が落ちている / 鍵が空 -> 何も出さない(エラーも出さない)。
 // このブロックと paint() 内の attachRakutenSlots(results) と .rak-* の CSS、
 // 計3か所を消せばレイヤーごと消える。
+// ★2026-09-11: マイリストの着地コスト目安（mylistCostFill）も rakutenLookup() を直に呼ぶ＝4か所目。
+//   あちらは typeof rakutenLookup で存在を確かめてから使うので、このブロックだけ消しても
+//   マイリストは落ちない（合計の1枚が出なくなるだけ）。レイヤーを丸ごと外すなら
+//   mylistJan / mylistCostBlock / mylistCostFill と mylistRender() 内の呼び出し、.mycost の CSS も併せて外すこと。
 // ============================================================
 const RAKUTEN = {
   appId:       '5b26b9e3-07e5-4cc0-9175-d7c4e2afab03',
