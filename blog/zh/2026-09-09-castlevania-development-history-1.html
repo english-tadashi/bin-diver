@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>惡魔城開發史 第1回：消失的磁碟，與取而代之的卡帶 &mdash; Kataban</title>
+<meta name="description" content="店家以500日圓改寫紅白機磁碟機的磁碟，因此今天實際在市面流通的初代惡魔城，是科樂美1993年的ROM卡帶RV003。日版《惡魔城傳說》卡帶還內建了NES無法使用的VRC6音源晶片。系列開發史五部曲第1回。">
+<meta property="og:title" content="惡魔城開發史 第1回：消失的磁碟，與取而代之的卡帶">
+<meta property="og:description" content="店家以500日圓改寫紅白機磁碟機的磁碟，因此今天實際在市面流通的初代惡魔城，是科樂美1993年的ROM卡帶RV003。日版《惡魔城傳說》卡帶還內建了NES無法使用的VRC6音源晶片。系列開發史五部曲第1回。">
+<meta property="og:url" content="https://gamekataban.com/blog/zh/2026-09-09-castlevania-development-history-1.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://gamekataban.com/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://gamekataban.com/blog/zh/2026-09-09-castlevania-development-history-1.html">
+<link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-09-09-castlevania-development-history-1.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-09-09-castlevania-development-history-1.html">
+<link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-09-09-castlevania-development-history-1.html">
+<link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-09-09-castlevania-development-history-1.html">
+<link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-09-09-castlevania-development-history-1.html">
+<link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-09-09-castlevania-development-history-1.html">
+<link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-09-09-castlevania-development-history-1.html">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=IBM+Plex+Sans+JP:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/kataban.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+
+  <header class="sitehead">
+    <a class="sitehead-brand" href="/" aria-label="Kataban — back to the search tool">
+      <span class="kb-word">
+        <span class="kb-ghost" aria-hidden="true"><span class="kb-grid" id="kbGridCyan"></span></span>
+        <span class="kb-grid kb-top" id="kbGridPink" aria-hidden="true"></span>
+      </span>
+      <span class="sitehead-badge">&#22411;&#30058;</span>
+    </a>
+    <a class="backlink" href="/blog/zh/"><span class="arrow" aria-hidden="true">&#8592;</span> &#20840;&#37096;&#25991;&#31456;</a>
+    <div class="langswitch">
+      <button class="langswitch-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langswitch-menu">
+        <span class="langswitch-current">&#20013;&#25991; &mdash; &#32321;&#39636;&#20013;&#25991;</span>
+        <span class="langswitch-caret" aria-hidden="true">&#9662;</span>
+      </button>
+      <ul class="langswitch-menu" id="langswitch-menu" role="menu" hidden>
+      <li role="none"><a role="menuitem" href="/blog/2026-09-09-castlevania-development-history-1.html" hreflang="en" lang="en" data-lang="en">English</a></li>
+      <li role="none"><a role="menuitem" href="/blog/zh/2026-09-09-castlevania-development-history-1.html" hreflang="zh-Hant" lang="zh-Hant" data-lang="zh" aria-current="page">&#20013;&#25991;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/ko/2026-09-09-castlevania-development-history-1.html" hreflang="ko" lang="ko" data-lang="ko">&#54620;&#44397;&#50612;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/es/2026-09-09-castlevania-development-history-1.html" hreflang="es" lang="es" data-lang="es">Espa&ntilde;ol</a></li>
+      <li role="none"><a role="menuitem" href="/blog/de/2026-09-09-castlevania-development-history-1.html" hreflang="de" lang="de" data-lang="de">Deutsch</a></li>
+      <li role="none"><a role="menuitem" href="/blog/fr/2026-09-09-castlevania-development-history-1.html" hreflang="fr" lang="fr" data-lang="fr">Français</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <article>
+      <div class="pagehead">
+        <p class="kicker">Kataban 部落格</p>
+        <h1>惡魔城開發史 第1回：消失的磁碟，與取而代之的卡帶</h1>
+        <p class="postmeta">2026-09-09</p>
+      </div>
+
+      <div class="prose">
+        <p>惡魔城系列於1986年誕生於一種如今已難有良好存世品的載體：紅白機磁碟機（Famicom Disk System）。科樂美的初代《惡魔城》發行在可重複改寫的磁性磁碟上，而這些磁碟當年的販售方式——以及被反覆覆寫的方式——正是今天日本玩家實際會買到的，並不是1986年的初版，而是科樂美七年後推出的一款卡帶的原因。第1回談紅白機與Game Boy的年代，以及為什麼在這個系列裡，盒子上的商品編號比在其他系列都更重要。</p>
+
+        <ul>
+          <li>1986年的初版是紅白機磁碟機作品，磁碟可重複改寫，顧客花500日圓就能把它覆寫成別的遊戲</li>
+          <li>科樂美於1993年以標準ROM卡帶重新發行，商品編號<code>RV003</code>——這才是實際在二手市場流通的版本</li>
+          <li>《惡魔城2 詛咒的封印》（<code>KDS-DRK</code>，1987）仍是磁碟；《惡魔城傳說》（<code>RC845</code>，1989）改用卡帶，並內建了自訂音源晶片</li>
+          <li>日版《惡魔城傳說》卡帶內含科樂美的VRC6音源晶片，歐美NES版沒有——同一款遊戲，會因為你手上是哪個地區的卡帶而聽起來不同</li>
+          <li>Game Boy上另有兩作：<code>DMG-CVJ</code>（1989）與<code>DMG-CWJ</code>（1991）</li>
+        </ul>
+
+        <h2>為什麼1986年的初版如今難以找到品相良好的？</h2>
+        <p>《惡魔城》於1986年9月26日以紅白機磁碟機作品的形式問世。磁碟機是任天堂對卡帶成本的解方：遊戲發行在專用的可改寫磁性磁碟上，顧客不必另外買一份新的，而是可以把手上已有的磁碟帶到店裡的改寫機（Disk Writer）前，以500日圓改寫成另一款遊戲。這對當年昂貴的成本問題是個漂亮的解法，對長期保存卻是毀滅性的。每一片被覆寫成新遊戲的磁碟，都意味著原本那款遊戲少了一份存世品。任天堂的改寫服務一直營運到2003年9月30日，也就是說，這樣的覆寫持續了十七年。</p>
+        <p>這個載體還從第二個方向對這款遊戲不利：磁性媒體會劣化。今天仍在流通的磁碟機磁碟，早已過了可以假定它讀得出來的年限，在店裡開得起來的磁碟，明年未必還開得起來。原本的標籤會磨損，而被改寫過的磁碟不會留下可靠的痕跡告訴你它原本是什麼。所以對買家而言，實際狀況是這樣的：1986年的版本確實存在，價格不便宜，而品相的不確定性，與前一位持有者是否愛惜完全無關。</p>
+        <p>這也是為什麼Kataban的目錄裡，1986年這一版沒有商品編號。磁碟機作品並未被賦予後來作品所帶有的那種卡帶商品編號，因此1986年初版那一列在該欄位上就是空白的。</p>
+
+        <h2>RV003是什麼？為什麼它重要？</h2>
+        <p>1993年2月5日，科樂美把《惡魔城》以標準ROM卡帶的形式在紅白機上重新發行，商品編號為<code>RV003</code>。距初版將近七年，在一台早已被後繼機種取代的主機上，初代惡魔城成了一款你可以擺在架上、並且可以期待它還跑得動的普通卡帶。</p>
+        <p>二手市場實際上就是由這款卡帶構成的。在駿河屋以<code>RV003</code>搜尋，回來的商品會被明確標示為ROM卡帶版——店家自己就把它和磁碟區分開來。如果你想要一份開得起來的初代惡魔城，那就是要找的那一款；而用商品編號搜尋，是避免誤點進磁碟商品頁最快的方法。</p>
+        <p>不過還是要說清楚你買到的是什麼。<code>RV003</code>是1993年的重新發行版。如果你要的是那件實物本身——1986年出貨的那個東西，連同它當年的包裝——那麼這款卡帶並不能取代它。它是實用的那一份，不是歷史的那一份。</p>
+
+        <h2>《惡魔城2》與《惡魔城傳說》如何分屬兩種載體？</h2>
+        <p>《惡魔城2 詛咒的封印》於1987年推出，商品編號<code>KDS-DRK</code>，仍留在磁碟機上。它的結構與前作不同：不是固定順序的關卡，而是由城鎮與宅邸串連起來的地圖，玩家可以雙向來回移動。晝夜循環依計時器運作，會改變敵人的配置，並讓城鎮的建築物關閉到天亮為止。和村民對話時，村民會以文字提供進度資訊。由於它是磁碟機作品，存檔直接寫在磁碟上，也因此帶有與初版相同的、源自載體的品相問題。</p>
+        <p>《惡魔城傳說》於1989年問世，編號<code>RC845</code>，這次是卡帶。它讓遊戲的路線變成非線性：在特定地點，玩家要在兩條路徑之間做選擇，全作共有三個岔路口、六條可能的路線。主角Trevor Belmont還可以有三名同伴之一同行——Sypha Belnades、Grant Danasty或Alucard——一次一位。不過玩家之所以特別在意日版卡帶，原因在它裡面的硬體。</p>
+
+        <h2>為什麼日版《惡魔城傳說》聽起來不一樣？</h2>
+        <p><code>RC845</code>卡帶內含科樂美的VRC VI（VRC6），這顆自訂晶片在紅白機標準的五個聲道之外，再加上兩個矩形波聲道與一個鋸齒波聲道，合計八個。同一款遊戲的歐美NES版無法使用它，原因就出在卡帶接腳本身。</p>
+        <p>紅白機的卡帶端子是60針，其中有兩條專供卡帶內建音源使用的線路。NES的端子是72針，體積較大且互不相容，而那兩條音源線路被移除了。這些接腳被重新分配——十條給標準卡帶配線，四條給名為10NES的防盜版晶片。既然沒有讓卡帶把聲音送回主機的路徑，科樂美的晶片也就無處輸出。歐美版改用任天堂的MMC5，配樂也隨之重寫。</p>
+        <p>結果是，《惡魔城傳說》確實會因為機器裡插的是哪個地區的卡帶而成為不同的聆聽體驗，而日版是配樂較為完整的那一版。對一個音樂本身就是招牌的系列來說，這不是註腳。在紅白機的遊戲庫裡，這是標籤上的商品編號最能明確告訴你「你實際會聽到什麼」的例子之一。</p>
+
+        <h2>Game Boy上的那兩作呢？</h2>
+        <p>科樂美在這段期間兩度把系列帶上Game Boy。《德古拉傳說》（<code>DMG-CVJ</code>，1989）在先，它捨棄了紅白機作品所使用的副武器系統。鞭子是唯一的武器：打破燭台掉出的寶珠會把它升級成更長的鎖鏈鞭，再拿到一顆則會為鞭子加上火球攻擊。在紅白機作品中作為副武器彈藥的心，在這裡改為恢復體力。《德古拉傳說2》（<code>DMG-CWJ</code>，1991）讓副武器系統回歸，並改變了結構：最初的四個關卡可以任意順序遊玩，全作共有五座城。</p>
+        <p>兩款都是卡帶作品，也就是說，兩款都能直接買到可正常運作的個體——與那兩款磁碟機作品的處境正好相反。如果你要收齊這個系列的紅白機與Game Boy年代，Game Boy這一半是容易的那一半。</p>
+
+        <p><strong>Castlevania</strong> &middot; <span class="jp">悪魔城ドラキュラ</span> &middot; Famicom &middot; 1993 (ROM cartridge re-release) &middot; Konami &middot; product code <code>RV003</code></p>
+        <p><strong>購買方式：</strong>
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3DRV003%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp（依商品編號）</a> &middot;
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3D%25E6%2582%25AA%25E9%25AD%2594%25E5%259F%258E%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A9%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp（依日文商品名）</a> &middot;
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://i0c.xyz/6a6994d1e0b3f?url=https%3A%2F%2Fbuyee.jp%2Fitem%2Fsearch%2Fquery%2F%25E6%2582%25AA%25E9%25AD%2594%25E5%259F%258E%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A9%2520%25E3%2583%2595%25E3%2582%25A1%25E3%2583%259F%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2594%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25BF%3Flang%3Den">Buyee</a></p>
+
+        <div class="kataban-search-cta">
+          <p><a href="/?q=&#24746;&#39764;&#22478;&#12489;&#12521;&#12461;&#12517;&#12521;">在Kataban目錄中瀏覽日版惡魔城全系列 &rarr;</a></p>
+        </div>
+
+        <div class="official-sources">
+          <p><strong>資料來源</strong></p>
+          <ul>
+            <li>任天堂，<a href="https://www.nintendo.com/jp/famicom/hardware/disksystem.html">「ファミリーコンピュータ ディスクシステムとは？」</a>——載明500日圓的改寫費用，以及改寫服務於2003年9月30日結束</li>
+            <li>維基百科（日文版），<a href="https://ja.wikipedia.org/wiki/Nintendo_Entertainment_System">「Nintendo Entertainment System」</a>——紅白機的60針端子有兩條卡帶音源線路；NES的72針端子移除了它們，並把四條接腳分配給10NES防盜版晶片</li>
+            <li>維基百科（日文版），<a href="https://ja.wikipedia.org/wiki/%E6%82%AA%E9%AD%94%E5%9F%8E%E4%BC%9D%E8%AA%AC">「悪魔城伝説」</a>——VRC VI加上兩個矩形波與一個鋸齒波聲道，合計八個；NES沒有卡帶音源輸出入，因此歐美版改用MMC5並重寫配樂</li>
+            <li>Weblio／維基百科（日文版），<a href="https://www.weblio.jp/content/%E6%82%AA%E9%AD%94%E5%9F%8E%E3%83%89%E3%83%A9%E3%82%AD%E3%83%A5%E3%83%A9">「悪魔城ドラキュラ」</a>——磁碟機版1986年9月26日發行；紅白機ROM卡帶版1993年2月5日發行</li>
+            <li>Giant Bomb，<a href="https://www.giantbomb.com/castlevania-the-adventure/3030-8654/">"Castlevania: The Adventure"</a>——取消副武器系統；心改為恢復體力而非作為彈藥；寶珠將鞭子升級為鎖鏈鞭，再一顆則加上火球攻擊</li>
+            <li>Giant Bomb，<a href="https://www.giantbomb.com/castlevania-ii-belmonts-revenge/3030-16921/">"Castlevania II: Belmont's Revenge"</a>——副武器系統回歸，最初四關可任意順序遊玩；全作共五座城</li>
+            <li>Giant Bomb，<a href="https://www.giantbomb.com/castlevania-iii-draculas-curse/3030-19328/">"Castlevania III: Dracula's Curse"</a>——三個岔路口、六條可能路線；Trevor可由三名同伴之一協助（Sypha Belnades、Grant Danasty、Alucard）</li>
+          </ul>
+        </div>
+
+        <p><em>本文為系列「惡魔城開發史」五部曲的第1回，配合10月15日新作發售推出。第2回將於2026年9月24日刊出。</em></p>
+      </div>
+    </article>
+
+    <div class="cta">
+      <h2>知道編號，找到遊戲</h2>
+      <p>輸入英文標題，就能得到日文名稱、印在卡帶側邊的編號，以及有貨的商店連結。</p>
+      <a class="ctabtn" href="/">搜尋遊戲</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Kataban &middot; 資料來自文化廳 Media Arts Database。英文標題比對自 Wikidata (CC0)。
+    <br>本站部分連結為聯盟行銷連結，Kataban 可能因此獲得佣金，包括作為 eBay Partner Network 聯盟會員（廣告）。
+    <br><a href="/blog/zh/">全部文章</a> &middot; <a href="/">回到搜尋工具</a> &middot; <a href="/privacy.html">隱私政策</a>
+    <div class="foot-brand">
+      <p class="foot-stars" aria-hidden="true">★★★</p>
+      <p class="foot-tagline">讓實體媒介長存。</p>
+      <span class="kb-word" aria-hidden="true">
+        <span class="kb-ghost"><span class="kb-grid" data-kb="kb-on-cyan"></span></span>
+        <span class="kb-grid kb-top" data-kb="kb-on-pink"></span>
+      </span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="/kataban.js"></script>
+</body>
+</html>

@@ -5,15 +5,22 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog pour les collectionneurs à l'étranger en quête de jeux rétro japonais — guides boutiques, tutoriels d'importation, et les histoires derrière les titres.</description>
     <language>fr-fr</language>
-    <lastBuildDate>Wed, 09 Sep 2026 09:12:12 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2026 11:11:33 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-fr.xml" rel="self" type="application/rss+xml"/>
 
     <item>
       <title>Histoire du développement de Castlevania, partie 1 : la disquette disparue et la cartouche qui l'a remplacée</title>
-      <link>https://gamekataban.com/blog/fr/2026-09-17-castlevania-development-history-1.html</link>
-      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-09-17-castlevania-development-history-1.html</guid>
+      <link>https://gamekataban.com/blog/fr/2026-09-09-castlevania-development-history-1.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-09-09-castlevania-development-history-1.html</guid>
       <description>Les boutiques réécrivaient les disquettes du Famicom Disk System pour 500 yens : l'exemplaire du premier Castlevania qui circule vraiment est donc la cartouche ROM de Konami de 1993, RV003. La cartouche japonaise de Castlevania III embarque une puce VRC6 inutilisable sur NES.</description>
-      <pubDate>Thu, 17 Sep 2026 00:00:00 +0900</pubDate>
+      <pubDate>Wed, 09 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>Yo! Noid était d'abord un ninja au masque rouge : acheter 仮面の忍者 花丸</title>
+      <link>https://gamekataban.com/blog/fr/2026-09-10-kamen-no-ninja-hanamaru-yo-noid.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-09-10-kamen-no-ninja-hanamaru-yo-noid.html</guid>
+      <description>Yo! Noid est un habillage de Kamen no Ninja Hanamaru, un jeu Famicom de 1990 développé par Now Production et édité par Capcom. Le catalogue Kataban le conserve sous M878494 et sans aucun code produit, ce qui laisse le titre japonais comme seule recherche qui fonctionne. Les chiffres mesurés chez Suruga-ya et Buyee sont plus bas.</description>
+      <pubDate>Thu, 10 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
       <title>Histoire du développement de Street Fighter, partie 2 : le bricolage et l'incendie derrière le boom de 1991</title>
