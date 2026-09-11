@@ -38,6 +38,7 @@ import json
 import os
 import re
 import sys
+import unicodedata
 from collections import Counter, defaultdict
 
 # ---------------------------------------------------------------
@@ -911,6 +912,179 @@ MANUAL_JAN_FILL = {
     "M878214": "4960641000035",
 }
 
+# ---------------------------------------------------------------
+# MANUAL_NEW_ROWS: MADB に**レコードそのものが無い**タイトルを、外部裏取りで1行ずつ足す表。
+# 2026-09-11 新設。最初の1行は『学校であった怖い話と晦-つきこもり』（Switch・2026-09-10 発売）。
+#
+# 【他の MANUAL_* との違い】MANUAL_KATABAN_FILL / MANUAL_JAN_FILL は「MADB に在る行の空欄」を
+#   埋める表で、キーは M番号。この表は**行ごと**足す。MADB に行が無いので M番号も無い。
+#   キーは M番号と衝突しない `X` + 4桁（X0001〜）。★使った番号は再利用しない。
+#
+# 【作法】MANUAL_KATABAN_FILL と同じ格（原典に無い値を外から足す）で、さらに厳しい:
+#   (a) MADB（metadata301.ttl）に本当に無いことを確認し、行のコメントに書く。
+#   (b) 外から持ち込む値ごとに、独立した出典を2つ以上 `sources` に書く。
+#       `sources` は (その出典が裏付ける列名を空白区切り, 出典の説明) のリスト。
+#       ビルドが列ごとに数える ―― _NEW_ROW_SOURCED の列のうち値が入っているものは、
+#       1つでも出典が2つに満たなければ**ビルドを止める**。
+#   (c) 出典には確認日を書く。
+#   ★英題（title_en）は公式に無ければ空のまま。推測で埋めない（罠#141）。
+#   ★読み（reading）はカタカナで書く。row[9] ローマ字と row[11] 五十音初字は、MADB 行と同じ
+#     romaji() / gojuon_initial() で読みから作る。手で写経しない。
+#   ★row[2] 機種・row[7] Buyee語・row[13] 機種(日本語) も MADB 行と同じ表・関数から作る。
+#     表に書くのは MADB の機種ラベル（platform_ja。master_final.csv の同名列の値）だけ。
+#
+# 【効かせる範囲】data_line.js の**末尾**に足すだけ。master_final.csv(=rows) には入れない
+#   （master は MADB の写し）。末尾なので既存行の添字は1つも動かない。
+#
+# 【上流を優先】MADB 側に同じ型番の行、または同じ（題名, 機種）の行が現れたら、表の行は
+#   使わず ★ を印字する。表から外す合図（MANUAL_KATABAN_FILL の「上書きしない」と同じ線）。
+#
+# 【ビルド時の検査（1つでも違反すれば data_line.js を書かずに止める）】
+#   キーが X+4桁 / 14列・全て文字列 / 機種が KEEP_PLATFORMS に在る / 年が4桁 / 題名と読みが有る /
+#   不可視文字（異体字セレクタ U+FE00–FE0F・U+E0100–E01EF、ゼロ幅・書式・制御文字）が無い /
+#   前後に空白が無い / 出典が足りている。
+#   ★不可視文字: D3P 公式サイトと PR TIMES の「晦」には U+E0100 が付いている箇所がある
+#     （2026-09-11 に生 HTML で実測。同じページ内でも付く所と付かない所が混在）。
+#     コピペで入ると `晦` と `-` の間に見えない文字が挟まり、「晦-」の検索が当たらなくなる。
+#
+# 【注入】swap_data.py は `--allow-rowcount-change` で通す（追加だけなら [0]〜[6] の lost は 0）。
+#   増えた行が表の行数と一致するかは人の目で確かめる。専用の承認フラグは作っていない
+#   （2026-09-11 の判断。同様の追加が続くようならその時点で検討する）。
+# ---------------------------------------------------------------
+MANUAL_NEW_ROWS = {
+    # 学校であった怖い話と晦-つきこもり（パッケージ通常版 / Nintendo Switch）— 2026-09-11 追加。
+    # (a) metadata301.ttl に `BVJ5A` も `学校であった怖い話と` も無い（grep 0件・2026-09-11）。
+    #     同 TTL の「晦-つきこもり」は SFC 版と Wii の配信版だけ。
+    # 限定版2種（D3P-SW-009 / D3P-SW-010）は足していない（利用者判断・2026-09-11）。
+    # ダウンロード版の単品2本（各2,970円）も足していない。
+    "X0001": {
+        "title_en": "",
+        "title_ja": "学校であった怖い話と晦-つきこもり",
+        "platform_ja": "Nintendo Switch",
+        "product_code": "HAC-P-BVJ5A",
+        "year": "2026",
+        "publisher": "ディースリー・パブリッシャー",
+        "publisher_en": "D3 Publisher",
+        "title_ja_kana": "",
+        "reading": "ガッコウ デ アッタ コワイ ハナシ ト ツキコモリ",
+        "jan": "",
+        "online": "",
+        "sources": [
+            ("title_ja platform_ja year publisher",
+             "公式サイト https://www.d3p.co.jp/gakko_tsukikomori/ ―― 「好評発売中（2026年9月10日発売）」"
+             "・Nintendo Switch・Published by D3PUBLISHER（2026-09-11 確認）"),
+            ("title_ja platform_ja year publisher",
+             "PR TIMES https://prtimes.jp/main/html/rd/p/000000048.000096322.html "
+             "（株式会社ディースリー・パブリッシャー・2026-05-28）の商品概要 ―― "
+             "『学校であった怖い話と晦-つきこもり』パッケージ通常版・発売日 2026年9月10日・"
+             "対応機種 Nintendo Switch（2026-09-11 確認）"),
+            ("product_code",
+             "Amazon.co.jp 通常版の商品 URL に HAC-P-BVJ5A（/dp/B0H31ZBBRH・2026-09-11 確認）"),
+            ("product_code",
+             "駿河屋 search?category=2&search_word=HAC-P-BVJ5A&inStock=On → 1件"
+             "「学校であった怖い話と晦-つきこもり [通常版]」ディースリーパブリッシャー・"
+             "発売日 2026/09/10（2026-09-11 実測。HAC-BVJ5A でも同じ1件）"),
+        ],
+    },
+}
+
+_NEW_ROW_ID = re.compile(r"X\d{4}")
+# 出典が2つ以上要る列。値が空の列は数えない（英題・型番・JAN は空なら出典も要らない）。
+_NEW_ROW_SOURCED = ("title_en", "title_ja", "platform_ja", "product_code", "year",
+                    "publisher", "jan")
+
+
+def _invisible_chars(s):
+    """異体字セレクタ・ゼロ幅・書式/制御文字を [(位置, 'U+XXXX')] で返す。空なら問題なし。"""
+    out = []
+    for i, ch in enumerate(s):
+        o = ord(ch)
+        if (0xFE00 <= o <= 0xFE0F or 0xE0100 <= o <= 0xE01EF
+                or unicodedata.category(ch) in ("Cf", "Cc", "Co", "Cs")):
+            out.append((i, f"U+{o:04X}"))
+    return out
+
+
+def _code_key(c):
+    """型番の照合キー。英大文字と数字以外を落とす（HAC-P-BVJ5A → HACPBVJ5A）。"""
+    return re.sub(r"[^0-9A-Z]", "", c.upper())
+
+
+def _code_tokens(c):
+    """型番の識別トークン＝英数字の連なりのうち4文字以上（HAC-P-BVJ5A → {'BVJ5A'}）。
+    接頭辞（HAC / LA / H / P）や地域（JPN）は3文字以下なので落ちる。
+    ★完全一致だけだと、MADB が同じソフトを `HAC-P-BVJ5A-JPN` や `LA-H-BVJ5A-JPN` で持ったとき
+      「上流に現れた」ことに気付けない（2026-09-11 の検査で実際に素通りした）。"""
+    return {t for t in re.findall(r"[0-9A-Z]+", c.upper()) if len(t) >= 4}
+
+
+def append_manual_new_rows(data, rows, keep_platforms, platform_rename, canon_pub):
+    """MANUAL_NEW_ROWS を data（data_line.js の行リスト）の末尾に足す。
+    返り値: (足した [(id, 題名)], 上流に現れたので使わなかった [(id, 理由)], 検査違反 [文])。
+    検査違反が1つでもあれば1行も足さない（呼び出し側がビルドを止める）。"""
+    superseded, errors, pending = [], [], []
+    madb_codes = {_code_key(c) for r in rows for c in r["product_code"].split(";") if c.strip()}
+    madb_tokens = defaultdict(set)          # 機種 -> その機種の MADB 型番の識別トークン
+    for r in rows:
+        p = platform_rename.get(r["platform_en"], r["platform_en"])
+        for c in r["product_code"].split(";"):
+            madb_tokens[p] |= _code_tokens(c)
+    madb_title_plat = {(r["title_ja"], platform_rename.get(r["platform_en"], r["platform_en"]))
+                       for r in rows}
+    width = len(data[0]) if data else 14
+    for xid, m in MANUAL_NEW_ROWS.items():
+        if not _NEW_ROW_ID.fullmatch(xid):
+            errors.append(f"{xid}: キーは X+4桁（M番号と衝突させない）")
+        # 機種まわりは MADB 行と同じ経路で作る（main() の rows 構築と data ループを見ること）
+        platform_en = PLATFORM_EN.get(m["platform_ja"], m["platform_ja"])
+        plat = platform_rename.get(platform_en, platform_en)
+        row = [m["title_en"], m["title_ja"], plat, m["product_code"], m["year"],
+               m["publisher"], canon_pub(m["publisher_en"]), buyee_keyword(m["platform_ja"]),
+               m["title_ja_kana"], romaji(m["reading"]), m["jan"], gojuon_initial(m["reading"]),
+               m["online"], PLATFORM_JA.get(plat, "")]
+        if len(row) != width:
+            errors.append(f"{xid}: 列数 {len(row)}（DATA は {width} 列）")
+        if not all(isinstance(v, str) for v in row):
+            errors.append(f"{xid}: 文字列でない値がある")
+        if plat not in keep_platforms:
+            errors.append(f"{xid}: 機種 {plat!r} がアプリの機種一覧(KEEP_PLATFORMS)に無い")
+        if not re.fullmatch(r"\d{4}", m["year"]):
+            errors.append(f"{xid}: 年 {m['year']!r} が4桁でない")
+        if not m["title_ja"] or not m["reading"]:
+            errors.append(f"{xid}: 題名(title_ja)と読み(reading)は必須")
+        for k, v in m.items():
+            if not isinstance(v, str):
+                continue
+            bad = _invisible_chars(v)
+            if bad:
+                errors.append(f"{xid}: {k} に不可視文字 {bad}（公式サイトからのコピペを疑う）")
+            if v != v.strip():
+                errors.append(f"{xid}: {k} の前後に空白がある")
+        for k in _NEW_ROW_SOURCED:
+            if m.get(k):
+                n = len({ref for fields, ref in m["sources"] if k in fields.split()})
+                if n < 2:
+                    errors.append(f"{xid}: {k}={m[k]!r} の出典が {n} 件（2件以上要る）")
+        # 上流を優先: MADB に同じ型番か、同じ（題名, 機種）の行が現れたら使わない。
+        # 型番は「全体が一致」か「同じ機種で識別トークンが一致」のどちらかで当たりとする。
+        # ★誤って当たる側に倒してある ―― 当たれば表の行は落ちて ★ が出る（1/1 が 0/1 になる）ので、
+        #   黙って重複するより必ず目に入る。
+        hit = [c for c in m["product_code"].split(";") if c.strip()
+               and (_code_key(c) in madb_codes or _code_tokens(c) & madb_tokens[plat])]
+        if hit:
+            superseded.append((xid, f"同じ型番 {hit} の行がある"))
+            continue
+        if (m["title_ja"], plat) in madb_title_plat:
+            superseded.append((xid, f"同じ題名・機種 {(m['title_ja'], plat)!r} の行がある"))
+            continue
+        pending.append((xid, row))
+    if errors:
+        return [], superseded, errors
+    for xid, row in pending:
+        data.append(row)
+    return [(xid, row[1]) for xid, row in pending], superseded, errors
+
+
 TITLE_KANA_OVERRIDE = {
     # ---- 120円の春 ---- 1行 / row[1]検索の件数 1件
     "M736961": "",  # idx11458  プレイステーション2 / 2005  元row[8]「120円の春 \120Stories」→ 1位
@@ -1413,6 +1587,21 @@ TITLE_EN = {
     #   無いため row[0] は空のままだった。北米では 1990 年に Vic Tokai が
     #   NES 版を同じ 'Terra Cresta' で出しており、英題は箱の印字ではなく実在する。
     "M878214": "Terra Cresta",                         # テラクレスタ (ファミコン/1986/日本物産)
+    # ★2026-09-11 追加。MADB は英題を持たず（"Tokkyu Shirei Solbrain"@ja-latn は読みの転写で、
+    #   row[9] 側へ 'tokkyuushireisoruburein' として入る）、Wikidata にもこのM番号の英題が無い。
+    #   北米では 1991-12 に Jaleco が NES 版を 'Shatterhand' で出している（欧州 1992-11）。
+    #   ★テラクレスタと違い**同名ではない**。日本版は東映『特救指令ソルブレイン』のタイアップ（開発ナツメ・発売エンジェル）。
+    #   ★（2026-09-11 訂正）どちらが「元の姿」かは**出典で割れる**。Wikipedia(en)・Metal Heroes Wiki・
+    #     GameSpark(2026-08-07) はソルブレインが先に作られ Shatterhand はその改変版とする。
+    #     「Shatterhand がオリジナルで、日本版はキャラを差し替えた」とするのはイマダファミコンboom（個人ブログ・2016）だけ。
+    #     「バンダイ(エンジェル)の意向で差し替えた」は確認した5出典のどれにも無い＝**出典なし**。
+    #     当初この欄に後者2つを事実として書いていた（利用者の報告をそのまま写した）。英題の値そのものには影響しない。
+    #   NES の箱の印字は 'SHATTERHAND'（全部大文字）だが、上の作法どおり Title Case で入れる。
+    #   ★入れる前に実測した（2026-09-11・実 Chrome + CDP・日本 IP）: カードの eBay リンク
+    #     `_nkw=Shatterhand famicom` は完全一致2件で2件ともFC版（出品者が北米題を併記）、NES 版は0件。
+    #     駿河屋.com リンクは英題に関係なく0件 ―― .com はファミコンを NES に分類し、keyword に
+    #     'Famicom' を足すと当たらない（Famicom 行共通の既存問題。この表の範囲外）。
+    "M878606": "Shatterhand",                          # 特救指令ソルブレイン (ファミコン/1991/エンジェル)
     # ★英題なしを名指しした唯一の行（出所が違うので、上の6件とはコメントで区別する）。
     #   ドラゴンバスターII 闇の封印 / ファミコン / 1989-04-27 / ナムコ / gtin 4907892000568。
     #   MADB(metadata301.ttl) は全項目が整合していて **英題を持っていない**。誤っているのは
@@ -2353,6 +2542,15 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
                      r["year"], r["publisher"], _canon_pub_final(r["publisher_en"]), r["buyee_kw"],
                      kana, r["title_romaji"], jan, r["kana_row"],
                      r["online"], PLATFORM_JA.get(plat, "")])
+    # ---- MANUAL_NEW_ROWS: MADB にレコードが無いタイトルを末尾に足す（表の説明を見ること）----
+    # ★ループの**後**で足す＝DATA の末尾。既存行の添字は1つも動かない。rows(=master) には入れない。
+    _new_added, _new_superseded, _new_errors = append_manual_new_rows(
+        data, rows, KEEP_PLATFORMS, PLATFORM_RENAME, _canon_pub_final)
+    if _new_errors:
+        print("★ MANUAL_NEW_ROWS の検査に落ちた。data_line.js は書かずに中止する:")
+        for e in _new_errors:
+            print(f"  - {e}")
+        sys.exit(1)
     js_path = os.path.join(os.path.dirname(out_path) or ".", "data_line.js")
     with open(js_path, "w", encoding="utf-8") as f:
         f.write("const DATA = " + json.dumps(data, ensure_ascii=False,
@@ -2487,6 +2685,14 @@ def main(ttl_path, out_path, wd_path=None, pub_path=None, ja_path=None):
     for mid in sorted(set(MANUAL_JAN_FILL) - _jan_seen):
         print(f"  ★ MANUAL_JAN_FILL: {mid} が DATA に現れない"
               f"（master から消えた / 機種フィルタや罠#16 で落ちた）")
+    # 手書きの新規行も毎回実数を出す。★MADB に無い行を丸ごと足しているので、黙って入れない。
+    print(f"手書きの新規行         : {len(_new_added)}/{len(MANUAL_NEW_ROWS)} 行  "
+          f"(MANUAL_NEW_ROWS。data_line.js の末尾だけ。master_final.csv には入れない)")
+    for xid, title in _new_added:
+        print(f"  + {xid}  {title}")
+    for xid, why in _new_superseded:                       # 上流が持つようになった＝表から外す判断が要る
+        print(f"  ★ MANUAL_NEW_ROWS: {xid} は MADB 側に{why}。表の行は使わなかった"
+              f"（表から外せるか確認すること）")
     print()
     for k, v in stats.most_common():
         print(f"  {k:22} {v:6,}")
