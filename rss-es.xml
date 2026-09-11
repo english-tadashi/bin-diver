@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Fri, 11 Sep 2026 06:41:22 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 12 Sep 2026 05:52:59 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>La ruta de Nakano Broadway: videojuegos retro sin las multitudes de Akihabara</title>
+      <link>https://gamekataban.com/blog/es/2026-09-12-nakano-broadway-route.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-09-12-nakano-broadway-route.html</guid>
+      <description>Mandarake Galaxy, la Sala Audiovisual de Lashinbang y Janpara están en un mismo centro comercial de cinco plantas, a cinco minutos de la estación de Nakano. La ruta, lo que vende cada tienda y las dos plantas de Mandarake que merecen el desvío.</description>
+      <pubDate>Sat, 12 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Rainbow Parasol Collection reúne tres originales de Taito: solo uno tiene código de producto</title>
       <link>https://gamekataban.com/blog/es/2026-09-11-rainbow-parasol-collection-originals.html</link>
