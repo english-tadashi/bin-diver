@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Sat, 12 Sep 2026 05:52:59 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 13 Sep 2026 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Mandarake en Nakano Broadway: diecinueve tiendas, planta por planta</title>
+      <link>https://gamekataban.com/blog/es/2026-09-13-mandarake-nakano-shop-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-09-13-mandarake-nakano-shop-guide.html</guid>
+      <description>Mandarake no tiene una tienda en Nakano Broadway. Tiene más de treinta, un tema por persiana. Un recorrido fotográfico por diecinueve de ellas en tres plantas: qué puerta vende videojuegos, cuál vende doujinshi y cuál está construida como un torii.</description>
+      <pubDate>Sun, 13 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>La ruta de Nakano Broadway: videojuegos retro sin las multitudes de Akihabara</title>
       <link>https://gamekataban.com/blog/es/2026-09-12-nakano-broadway-route.html</link>
