@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog pour les collectionneurs à l'étranger en quête de jeux rétro japonais — guides boutiques, tutoriels d'importation, et les histoires derrière les titres.</description>
     <language>fr-fr</language>
-    <lastBuildDate>Sun, 13 Sep 2026 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 14 Sep 2026 09:30:08 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-fr.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Avant d'être Shatterhand, c'était Solbrain : le jeu Famicom sous licence tokusatsu sorti en premier</title>
+      <link>https://gamekataban.com/blog/fr/2026-09-14-shatterhand-solbrain-famicom-import-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-09-14-shatterhand-solbrain-famicom-import-guide.html</guid>
+      <description>Le jeu d'action NES Shatterhand de Jaleco est arrivé deux mois plus tôt dans les rayons japonais sous le nom de Tokkyuu Shirei Solbrain, adaptation Famicom d'une série de super-héros Toei. Ce qui a changé, quelle version les sources désignent comme l'originale, et comment trouver la cartouche japonaise.</description>
+      <pubDate>Mon, 14 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Mandarake à Nakano Broadway : dix-neuf boutiques, étage par étage</title>
       <link>https://gamekataban.com/blog/fr/2026-09-13-mandarake-nakano-shop-guide.html</link>
