@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>為海外收藏家打造的日本復古遊戲部落格——商店指南、進口教學，以及遊戲背後的故事。</description>
     <language>zh-tw</language>
-    <lastBuildDate>Mon, 14 Sep 2026 09:30:08 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 15 Sep 2026 06:41:10 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-zh.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>快打旋風開發史 第3回：盜版基板、虧損，與一紙3DO密約</title>
+      <link>https://gamekataban.com/blog/zh/2026-09-15-street-fighter-development-history-3.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-15-street-fighter-development-history-3.html</guid>
+      <description>卡普空逆向工程香港的盜版基板，做出《快打旋風II Turbo》；在美國因退貨保證的漏洞而虧損；接著一紙密約，把《超級快打旋風II X》獨佔給了賣不動的3DO。系列開發史五部曲第3回。</description>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>在成為《Shatterhand》之前，它叫《特救指令ソルブレイン》：比北美版更早上市的紅白機特攝授權作</title>
       <link>https://gamekataban.com/blog/zh/2026-09-14-shatterhand-solbrain-famicom-import-guide.html</link>

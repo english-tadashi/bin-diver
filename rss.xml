@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Mon, 14 Sep 2026 09:30:08 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 15 Sep 2026 06:41:10 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Street Fighter Development History, Part 3: Bootlegs, Losses, and a Secret 3DO Deal</title>
+      <link>https://gamekataban.com/blog/2026-09-15-street-fighter-development-history-3.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-15-street-fighter-development-history-3.html</guid>
+      <description>Capcom reverse-engineered a Hong Kong bootleg to build Street Fighter II Turbo, lost money in the US on a return-guarantee loophole, then took a secret Panasonic deal that sent Super SF2 X exclusively to the failing 3DO.</description>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Before It Was Shatterhand, It Was Solbrain: The Famicom Tie-In That Shipped First</title>
