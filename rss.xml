@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 15 Sep 2026 06:41:10 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 16 Sep 2026 06:20:02 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>The Seventh Storyteller Never Comes: Gakkou de Atta Kowai Hanashi and Japan’s Seven Wonders of the School</title>
+      <link>https://gamekataban.com/blog/2026-09-16-gakkou-de-atta-kowai-hanashi-school-ghost-stories-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-16-gakkou-de-atta-kowai-hanashi-school-ghost-stories-guide.html</guid>
+      <description>Banpresto's 1995 Super Famicom sound novel is built on a Japanese schoolyard format, not a single legend: every school has its seven wonders. What the format is, how the game uses it, how the PlayStation remake differs, and how to find each version by its product code.</description>
+      <pubDate>Wed, 16 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Street Fighter Development History, Part 3: Bootlegs, Losses, and a Secret 3DO Deal</title>

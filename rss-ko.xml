@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>해외 컬렉터를 위한 일본 레트로 게임 블로그 — 매장 가이드, 수입 방법, 그리고 타이틀 뒤에 숨은 이야기.</description>
     <language>ko-kr</language>
-    <lastBuildDate>Tue, 15 Sep 2026 06:41:10 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 16 Sep 2026 06:20:02 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-ko.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>일곱 번째 이야기꾼은 오지 않는다: 《学校であった怖い話》와 일본의 「학교 7대 불가사의」</title>
+      <link>https://gamekataban.com/blog/ko/2026-09-16-gakkou-de-atta-kowai-hanashi-school-ghost-stories-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-09-16-gakkou-de-atta-kowai-hanashi-school-ghost-stories-guide.html</guid>
+      <description>반프레스토의 1995년 슈퍼 패미컴 사운드 노벨은 하나의 전설이 아니라 일본 학교의 한 가지 형식 위에 세워져 있습니다. 모든 학교에는 저마다의 7대 불가사의가 있다는 것. 그 형식이 무엇인지, 게임이 그것을 어떻게 쓰는지, 플레이스테이션 리메이크판은 무엇이 다른지, 그리고 각 버전을 상품 코드로 찾는 법.</description>
+      <pubDate>Wed, 16 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>스트리트 파이터 개발사 제3화: 해적판 기판, 손실, 그리고 3DO 밀약</title>
       <link>https://gamekataban.com/blog/ko/2026-09-15-street-fighter-development-history-3.html</link>

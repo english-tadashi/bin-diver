@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog pour les collectionneurs à l'étranger en quête de jeux rétro japonais — guides boutiques, tutoriels d'importation, et les histoires derrière les titres.</description>
     <language>fr-fr</language>
-    <lastBuildDate>Tue, 15 Sep 2026 06:41:10 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 16 Sep 2026 06:20:02 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-fr.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Le septième conteur ne vient jamais : Gakkou de Atta Kowai Hanashi et les sept mystères de l'école japonaise</title>
+      <link>https://gamekataban.com/blog/fr/2026-09-16-gakkou-de-atta-kowai-hanashi-school-ghost-stories-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-09-16-gakkou-de-atta-kowai-hanashi-school-ghost-stories-guide.html</guid>
+      <description>Le sound novel de Banpresto sur Super Famicom (1995) ne repose pas sur une légende précise, mais sur un format scolaire japonais : chaque école a ses sept mystères. Ce qu'est ce format, comment le jeu l'utilise, ce que change le remake PlayStation, et comment trouver chaque version par son code produit.</description>
+      <pubDate>Wed, 16 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Histoire du développement de Street Fighter, partie 3 : cartes pirates, pertes et un pacte secret avec 3DO</title>
       <link>https://gamekataban.com/blog/fr/2026-09-15-street-fighter-development-history-3.html</link>
