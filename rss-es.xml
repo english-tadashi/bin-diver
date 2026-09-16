@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Wed, 16 Sep 2026 06:20:02 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 16 Sep 2026 12:08:50 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>¿Qué significan "ランクB", "未開封品" y "美品" al comprar videojuegos usados en Japón?</title>
+      <link>https://gamekataban.com/blog/es/2026-09-16-glossary-condition-rank.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-09-16-glossary-condition-rank.html</guid>
+      <description>Las etiquetas ランクB, 未開封品 y 美品 de Suruga-ya garantizan cada una algo muy concreto. Qué prometen de verdad el rango B, lo precintado y lo casi nuevo, y cómo aparece cada una en un listado.</description>
+      <pubDate>Wed, 16 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>El séptimo narrador nunca llega: Gakkou de Atta Kowai Hanashi y las siete maravillas de la escuela japonesa</title>
       <link>https://gamekataban.com/blog/es/2026-09-16-gakkou-de-atta-kowai-hanashi-school-ghost-stories-guide.html</link>

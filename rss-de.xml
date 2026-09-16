@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Ein Blog für Sammler außerhalb Japans, die japanische Retro-Spiele suchen — Shop-Guides, Import-Anleitungen und die Geschichten hinter den Titeln.</description>
     <language>de-de</language>
-    <lastBuildDate>Wed, 16 Sep 2026 06:20:02 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 16 Sep 2026 12:08:50 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-de.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Was bedeuten "ランクB", "未開封品" und "美品" beim Kauf gebrauchter Spiele in Japan?</title>
+      <link>https://gamekataban.com/blog/de/2026-09-16-glossary-condition-rank.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-09-16-glossary-condition-rank.html</guid>
+      <description>Die Kennzeichnungen ランクB, 未開封品 und 美品 bei Suruga-ya sichern jeweils genau eine Sache zu. Was Klasse B, originalverpackt und neuwertig wirklich versprechen, und wie sie im Angebot aussehen.</description>
+      <pubDate>Wed, 16 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Der siebte Erzähler kommt nie: Gakkou de Atta Kowai Hanashi und die sieben Wunder der japanischen Schule</title>
       <link>https://gamekataban.com/blog/de/2026-09-16-gakkou-de-atta-kowai-hanashi-school-ghost-stories-guide.html</link>
