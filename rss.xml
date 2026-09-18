@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 18 Sep 2026 08:19:08 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 18 Sep 2026 11:36:50 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Neo Turf Masters on Neo Geo AES: Nazca’s Other 1996 Debut and the Sequel That Never Came</title>
+      <link>https://gamekataban.com/blog/2026-09-18-neo-turf-masters-neo-geo-aes-ngh-200.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-18-neo-turf-masters-neo-geo-aes-ngh-200.html</guid>
+      <description>Nazca shipped two games in 1996: Metal Slug and this golf game. By October the studio had been absorbed into SNK, and no sequel ever followed. What the AES cartridge is, why its code NGH-200 is useless in the shops, and how to find it by its Japanese name instead.</description>
+      <pubDate>Fri, 18 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Rod Land on Famicom and Game Boy: The Japanese Cartridges and Their Product Codes</title>
