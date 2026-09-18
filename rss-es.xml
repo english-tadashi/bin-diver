@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Fri, 18 Sep 2026 11:36:50 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 19 Sep 2026 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Mutation Nation en Neo Geo AES: el yo contra el barrio de SNK de 1992 que nunca tuvo secuela</title>
+      <link>https://gamekataban.com/blog/es/2026-09-19-mutation-nation-neo-geo-aes-ngh-014.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-09-19-mutation-nation-neo-geo-aes-ngh-014.html</guid>
+      <description>SNK llevó Mutation Nation de los recreativos a casa en abril de 1992 como cartucho de Neo Geo AES NGH-014, a 21.800 yenes sin impuestos. Qué hacen las cuatro esferas elementales, por qué los suburbios mutantes no tuvieron segunda parte y qué grafía del código acepta cada tienda.</description>
+      <pubDate>Sat, 19 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Neo Turf Masters en Neo Geo AES: el otro debut de Nazca en 1996 y la secuela que nunca llegó</title>
       <link>https://gamekataban.com/blog/es/2026-09-18-neo-turf-masters-neo-geo-aes-ngh-200.html</link>
