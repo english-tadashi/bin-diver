@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Ein Blog für Sammler außerhalb Japans, die japanische Retro-Spiele suchen — Shop-Guides, Import-Anleitungen und die Geschichten hinter den Titeln.</description>
     <language>de-de</language>
-    <lastBuildDate>Sat, 19 Sep 2026 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2026 06:28:28 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-de.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Top Hunter auf Neo Geo AES: SNKs Zwei-Bahnen-Prügler von 1994, und warum das Modul fehlt</title>
+      <link>https://gamekataban.com/blog/de/2026-09-20-top-hunter-neo-geo-aes-ngh-046.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-09-20-top-hunter-neo-geo-aes-ngh-046.html</guid>
+      <description>SNK brachte Top Hunter im Mai 1994 in die Spielhallen und im Juni als Neo-Geo-AES-Modul NGH-046 nach Hause, für 28.000 Yen ohne Steuer. Was das Zwei-Bahnen-System leistet, warum es nie einen zweiten Teil gab, warum das Modul heute kaum zu bekommen ist und weshalb die Disc der Weg ist.</description>
+      <pubDate>Sun, 20 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Mutation Nation auf Neo Geo AES: SNKs Prügler von 1992, der nie einen Nachfolger bekam</title>
       <link>https://gamekataban.com/blog/de/2026-09-19-mutation-nation-neo-geo-aes-ngh-014.html</link>

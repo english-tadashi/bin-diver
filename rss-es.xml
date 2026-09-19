@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Sat, 19 Sep 2026 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2026 06:28:28 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Top Hunter en Neo Geo AES: el yo contra el barrio de dos carriles de SNK, de 1994</title>
+      <link>https://gamekataban.com/blog/es/2026-09-20-top-hunter-neo-geo-aes-ngh-046.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-09-20-top-hunter-neo-geo-aes-ngh-046.html</guid>
+      <description>SNK llevó Top Hunter de los recreativos a las casas en junio de 1994 como cartucho de Neo Geo AES NGH-046, a 28.000 yenes sin impuestos. Qué hace su sistema de dos carriles, por qué nunca hubo una segunda parte y por qué hoy casi no se puede comprar el cartucho, solo el disco.</description>
+      <pubDate>Sun, 20 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Mutation Nation en Neo Geo AES: el yo contra el barrio de SNK de 1992 que nunca tuvo secuela</title>
       <link>https://gamekataban.com/blog/es/2026-09-19-mutation-nation-neo-geo-aes-ngh-014.html</link>
