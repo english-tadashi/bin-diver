@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Sun, 20 Sep 2026 06:28:28 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 21 Sep 2026 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Voltage Fighter Gowcaizer en Neo Geo AES: el último juego de lucha de Technōs Japan y la secuela que nunca llegó</title>
+      <link>https://gamekataban.com/blog/es/2026-09-21-gowcaizer-neo-geo-aes-ngh-094.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-09-21-gowcaizer-neo-geo-aes-ngh-094.html</guid>
+      <description>El juego de lucha de superhéroes de Technōs Japan llegó a las casas japonesas el 20 de octubre de 1995 como NGH-094, un año antes de la quiebra de la empresa. Por qué nunca hubo secuela, por qué el OVA y el manga no lo son, y cómo el código encuentra el cartucho entre los acetatos.</description>
+      <pubDate>Mon, 21 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Top Hunter en Neo Geo AES: el yo contra el barrio de dos carriles de SNK, de 1994</title>
       <link>https://gamekataban.com/blog/es/2026-09-20-top-hunter-neo-geo-aes-ngh-046.html</link>
