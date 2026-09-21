@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Mon, 21 Sep 2026 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 22 Sep 2026 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Street Fighter Development History, Part 4: A Defection, a Leak, and a Marvel Meltdown</title>
+      <link>https://gamekataban.com/blog/2026-09-22-street-fighter-development-history-4.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-22-street-fighter-development-history-4.html</guid>
+      <description>Street Fighter Zero was a stock-clearance rush job, a leaked dip switch handed rivals Capcom's hit-detection secrets, a third of the team defected to SNK, and a variety-show gag character enraged Marvel.</description>
+      <pubDate>Tue, 22 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Voltage Fighter Gowcaizer on Neo Geo AES: Technōs Japan’s Last Fighter and the Sequel That Never Came</title>
