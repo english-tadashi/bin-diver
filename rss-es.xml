@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Tue, 22 Sep 2026 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 23 Sep 2026 07:14:31 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Biohazard en GameCube y Game Boy Color: los cartuchos japoneses de la primavera de 2002</title>
+      <link>https://gamekataban.com/blog/es/2026-09-23-biohazard-gamecube-gaiden-import-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-09-23-biohazard-gamecube-gaiden-import-guide.html</guid>
+      <description>Capcom puso dos juegos de biohazard en las tiendas japonesas con una semana de diferencia en marzo de 2002: el remake de GameCube (DOL-R-GBIJ) y el spin-off de Game Boy Color BIOHAZARD GAIDEN (CGB-BIOJ). Qué es cada uno y cómo encontrar los cartuchos por su código de producto.</description>
+      <pubDate>Wed, 23 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Historia del desarrollo de Street Fighter, parte 4: la fuga a SNK, una filtración y el enfado de Marvel</title>
       <link>https://gamekataban.com/blog/es/2026-09-22-street-fighter-development-history-4.html</link>
@@ -15,7 +22,6 @@
       <description>Street Fighter Zero se hizo en tres meses para vaciar un almacén, un interruptor DIP olvidado filtró la detección de impactos de Capcom, un tercio del equipo se marchó a SNK y un personaje de humor televisivo enfureció a Marvel. Parte 4 en cinco entregas.</description>
       <pubDate>Tue, 22 Sep 2026 00:00:00 +0900</pubDate>
     </item>
-
     <item>
       <title>Voltage Fighter Gowcaizer en Neo Geo AES: el último juego de lucha de Technōs Japan y la secuela que nunca llegó</title>
       <link>https://gamekataban.com/blog/es/2026-09-21-gowcaizer-neo-geo-aes-ngh-094.html</link>
