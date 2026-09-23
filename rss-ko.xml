@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>해외 컬렉터를 위한 일본 레트로 게임 블로그 — 매장 가이드, 수입 방법, 그리고 타이틀 뒤에 숨은 이야기.</description>
     <language>ko-kr</language>
-    <lastBuildDate>Wed, 23 Sep 2026 07:14:31 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 24 Sep 2026 06:38:15 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-ko.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>악마성 드라큘라 개발사 제2화: 일본이 내보내지 않은 한 편, 그리고 이름을 공유하는 두 편</title>
+      <link>https://gamekataban.com/blog/ko/2026-09-24-castlevania-development-history-2.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-09-24-castlevania-development-history-2.html</guid>
+      <description>《피의 론도》(KMCD3005)는 일본을 떠난 적이 없어 일본판 디스크가 유일한 판본입니다. 슈퍼 패미컴의 서로 다른 두 게임은 패미컴 원판과 같은 일본어 원제를 공유하며, 이를 구별해 주는 것은 상품 코드뿐입니다.</description>
+      <pubDate>Thu, 24 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>게임큐브판과 게임보이 컬러판 《biohazard》: 2002년 봄의 일본판 카트리지</title>
       <link>https://gamekataban.com/blog/ko/2026-09-23-biohazard-gamecube-gaiden-import-guide.html</link>

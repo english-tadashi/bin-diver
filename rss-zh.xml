@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>為海外收藏家打造的日本復古遊戲部落格——商店指南、進口教學，以及遊戲背後的故事。</description>
     <language>zh-tw</language>
-    <lastBuildDate>Wed, 23 Sep 2026 07:14:31 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 24 Sep 2026 06:38:15 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-zh.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>惡魔城開發史 第2回：日本沒有放出去的那一款，與共用同一個名字的兩款</title>
+      <link>https://gamekataban.com/blog/zh/2026-09-24-castlevania-development-history-2.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-24-castlevania-development-history-2.html</guid>
+      <description>《血之輪迴》（KMCD3005）從未離開日本，所以日版光碟就是唯一的版本。而超級任天堂上兩款不同的遊戲與紅白機初版共用同一個日文原名，能分辨它們的只有商品編號。系列開發史五部曲第2回。</description>
+      <pubDate>Thu, 24 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>GameCube 版與 Game Boy Color 版《biohazard》：2002 年春天的日版卡帶</title>
       <link>https://gamekataban.com/blog/zh/2026-09-23-biohazard-gamecube-gaiden-import-guide.html</link>

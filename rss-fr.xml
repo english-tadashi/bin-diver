@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog pour les collectionneurs à l'étranger en quête de jeux rétro japonais — guides boutiques, tutoriels d'importation, et les histoires derrière les titres.</description>
     <language>fr-fr</language>
-    <lastBuildDate>Wed, 23 Sep 2026 07:14:31 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 24 Sep 2026 06:38:16 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-fr.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Histoire du développement de Castlevania, partie 2 : le jeu que le Japon a gardé et les deux qui partagent un nom</title>
+      <link>https://gamekataban.com/blog/fr/2026-09-24-castlevania-development-history-2.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-09-24-castlevania-development-history-2.html</guid>
+      <description>Rondo of Blood (KMCD3005) n'a jamais quitté le Japon : le disque japonais est donc le seul exemplaire qui existe. Deux jeux Super Famicom distincts partagent un titre japonais avec l'original Famicom, et seul le code produit les distingue.</description>
+      <pubDate>Thu, 24 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Biohazard sur GameCube et Game Boy Color : les cartouches japonaises du printemps 2002</title>
       <link>https://gamekataban.com/blog/fr/2026-09-23-biohazard-gamecube-gaiden-import-guide.html</link>
