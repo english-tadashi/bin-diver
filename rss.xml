@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Thu, 24 Sep 2026 06:38:15 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 25 Sep 2026 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Magic John on Famicom: The Japanese Cartridge Behind Totally Rad, and Its Product Code JF-30</title>
+      <link>https://gamekataban.com/blog/2026-09-25-magic-john-totally-rad-famicom-import-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-25-magic-john-totally-rad-famicom-import-guide.html</guid>
+      <description>Jaleco's Magic John came out on the Famicom in Japan on 28 September 1990 (product code JF-30) and reached North America as Totally Rad in March 1991. What changed, why the Switch release is not the cartridge, and why searching by JF-30 finds the Japanese original faster than the title.</description>
+      <pubDate>Fri, 25 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Castlevania Development History, Part 2: The Game Japan Kept and the Two That Share a Name</title>

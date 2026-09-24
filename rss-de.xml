@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Ein Blog für Sammler außerhalb Japans, die japanische Retro-Spiele suchen — Shop-Guides, Import-Anleitungen und die Geschichten hinter den Titeln.</description>
     <language>de-de</language>
-    <lastBuildDate>Thu, 24 Sep 2026 06:38:15 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 25 Sep 2026 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-de.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Magic John auf dem Famicom: das japanische Modul hinter Totally Rad und sein Produktcode JF-30</title>
+      <link>https://gamekataban.com/blog/de/2026-09-25-magic-john-totally-rad-famicom-import-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-09-25-magic-john-totally-rad-famicom-import-guide.html</guid>
+      <description>Jalecos Magic John erschien in Japan am 28. September 1990 für das Famicom (Produktcode JF-30) und kam im März 1991 als Totally Rad nach Nordamerika. Was sich geändert hat, warum die Switch-Fassung kein Modul ist und warum du mit JF-30 das japanische Original schneller findest als mit dem Titel.</description>
+      <pubDate>Fri, 25 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Castlevania-Entwicklungsgeschichte, Teil 2: Das Spiel, das Japan behielt, und die zwei, die sich einen Namen teilen</title>
       <link>https://gamekataban.com/blog/de/2026-09-24-castlevania-development-history-2.html</link>
