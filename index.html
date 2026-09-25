@@ -2057,6 +2057,46 @@ const CODEKEYS = DATA.map(r => r[3].split(';').map(codeKey).filter(Boolean));
 // (keying by the Japanese value would leave them split and miss those rows).
 const PUBS = DATA.map(r => r[6].split(';').map(s=>s.trim()).filter(Boolean));
 
+// ============================================================
+// 検索結果の並び順（案F・2026-09-26）。当たり外れは run() の5経路のまま変えず、当たった行の順番だけを決める。
+// 段（小さいほど上）。見るのは題名の4列＝英題・和題・読み・ローマ字（HAY と同じ畳み方の値を HAY から取り出して使う）と型番:
+//   0 完全一致（題名4列のどれか・スペースを消した英題/和題・ローマ字の長音畳み・型番）
+//   1 前方一致で語の切れ目で終わる（final fantasy → final fantasy 7）・型番の前方一致
+//   2 語として含む（record of radia war の radia）
+//   3 前方一致で語の途中で終わる（radia → radiant）
+//   4 題名のどこかに含む・揺れを吸う経路（第2・第4・第5レーン）で当たった
+//   5 題名以外（機種・発売元）にだけ当たった
+// ★段0の中だけ発売年の古い順（同じ題名の原作を先に。悪魔城ドラキュラ→FC、トップハンター→AES）。他の段の中は DATA の順。
+// ★日本語の題名（和題・読みのうち、かな・漢字を含む値）は段1と段3を区別しない（前方一致なら段1）。
+//   和題はスペースの有無が行ごとにばらばらで、「ファイアーエムブレム 蒼炎の軌跡」のようにスペースがある行だけが上がってしまうため。
+//   英題・ローマ字、かな・漢字を含まない和題（Castlevania 等）は区別する。
+// ★試算は scratchpad/kataban_rank_sim.js（rank.G）。件数は変わらない（並べ替えるだけ）。
+const JP_SCRIPT = /[\u3040-\u30ff\u3400-\u9fff\uf900-\ufaff]/;
+const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+function rankTier(i, lane, lo, qk, sq, r5, wbRe, wwRe){
+  const f = HAY[i].split('\n');
+  const T = [f[0], f[1], f[6], f[7]].filter(Boolean);     // 英題・和題・読み・ローマ字（畳み済み）
+  const codes = CODEKEYS[i];
+  if(T.includes(lo) || (qk.length >= 3 && codes.includes(qk))
+     || (sq && HAY4[i].split('\n').includes(sq)) || (r5.length >= 5 && RJ5[i] === r5)) return 0;
+  if(T.some(t => wbRe.test(t)) || (qk.length >= 4 && codes.some(c => c.startsWith(qk)))) return 1;
+  if([f[1], f[6]].some(t => t && JP_SCRIPT.test(t) && t.startsWith(lo))) return 1;   // 日本語の題名は段1と段3を分けない
+  if(T.some(t => wwRe.test(t))) return 2;
+  if(T.some(t => t.startsWith(lo))) return 3;
+  if(T.some(t => t.includes(lo)) || lane === 2 || lane === 4 || lane === 5) return 4;
+  return 5;
+}
+function rankHits(idx, lanes, lo, qk, sq, r5){
+  const wbRe = new RegExp('^' + reEsc(lo) + '(\\s|$)');
+  const wwRe = new RegExp('(^|\\s)' + reEsc(lo) + '(\\s|$)');
+  const keyed = idx.map((i, n) => {
+    const t = rankTier(i, lanes[n], lo, qk, sq, r5, wbRe, wwRe);
+    return { n, k: t === 0 ? (parseInt(DATA[i][4], 10) || 9999) - 10000 : t };   // 段0だけ発売年（年が無い行は段0の最後）
+  });
+  keyed.sort((a, b) => a.k - b.k || a.n - b.n);            // 同じ鍵は元の順（DATA の順）を保つ
+  return keyed.map(x => x.n);
+}
+
 // 英題の曖昧さ判定。strong = NFKC → 小文字化 → 空白・中黒・約物(P)・記号(S)を全除去
 // （前回の集計と同一の関数）。起動時に一度だけ、strong(row0) が 2種類以上の異なる
 // strong(row1) に付いている英題キーの集合を作る。card() はこれを参照して注記を出す。
@@ -3523,33 +3563,37 @@ function run(){
     results.innerHTML='';
     return;
   }
-  const res=[];
+  const res=[], resIdx=[], resLane=[];
   for(let i=0;i<DATA.length;i++){
     const r=DATA[i];
     if(pf!=='All' && r[2]!==pf) continue;
     if(yv!=='All' && r[4]!==yv) continue;
     if(pv!=='All' && !PUBS[i].includes(pv)) continue;
+    let lane = 0;   // 並び順（rankHits）用に、どの経路で当たったかだけ記録する。判定式は変えない
     if(lo){
-      let hit = HAY[i].includes(lo);
-      if(!hit && lane2) hit = RJ[i].includes(loc);   // 第2レーン: ローマ字だけ長音を潰して照合
-      if(!hit && qk.length >= 4) hit = CODEKEYS[i].some(c => c.includes(qk));  // 4文字未満はJPN等が数千件に当たるので床
-      if(!hit && sq.length >= 5) hit = HAY4[i].includes(sq);  // 床5: halo5(5)を残す上限と star/gear(4)を弾く下限の唯一解
-      if(!hit && r5.length >= 8) hit = RJ5[i].includes(r5);   // 第5レーン: 床8（5〜7文字は語の境目をまたいで乱射する）
+      let hit = HAY[i].includes(lo); lane = 1;
+      if(!hit && lane2){ hit = RJ[i].includes(loc); lane = 2; }   // 第2レーン: ローマ字だけ長音を潰して照合
+      if(!hit && qk.length >= 4){ hit = CODEKEYS[i].some(c => c.includes(qk)); lane = 3; }  // 4文字未満はJPN等が数千件に当たるので床
+      if(!hit && sq.length >= 5){ hit = HAY4[i].includes(sq); lane = 4; }  // 床5: halo5(5)を残す上限と star/gear(4)を弾く下限の唯一解
+      if(!hit && r5.length >= 8){ hit = RJ5[i].includes(r5); lane = 5; }   // 第5レーン: 床8（5〜7文字は語の境目をまたいで乱射する）
       if(!hit) continue;
     }
-    res.push(r);
+    res.push(r); resIdx.push(i); resLane.push(lane);
   }
   // 完全重複（row[0]〜row[12] の13列が「すべて」一致）を描画直前に1枚へ畳む。
   // DATA には触らず、ヒット配列 res だけを縮める。鍵は13列を JSON で連結（列境界を跨いだ偶然一致を防ぐ）。
   // 最初に現れた行を残す＝並び順は不変。1列でも違えば残す＝発売年(row[4])違い・型番(row[3])違いは別レコードのまま。
-  const seenKey=new Set(), res2=[];
-  for(const r of res){ const k=JSON.stringify(r.slice(0,13)); if(seenKey.has(k)) continue; seenKey.add(k); res2.push(r); }
+  const seenKey=new Set(), res2=[], idx2=[], lane2s=[];
+  for(let j=0;j<res.length;j++){ const r=res[j]; const k=JSON.stringify(r.slice(0,13)); if(seenKey.has(k)) continue; seenKey.add(k); res2.push(r); idx2.push(resIdx[j]); lane2s.push(resLane[j]); }
   if(!res2.length){
     current=[]; shown=0; more.innerHTML=''; count.textContent='0 results';
     results.innerHTML='<div class="state"><b>No match.</b>Try part of the title, the Japanese name, a cartridge code, or a publisher.</div>';
     return;
   }
-  current=res2; shown=Math.min(MAX,res2.length);   // a new search always resets to the first page（畳んだ後の件数で数える）
+  // 並び順（案F）。検索語があるときだけ。機種・年・発売元の絞り込みだけのときは DATA の順のまま。
+  // ★current に入れる前に並べる（店員ボタンの data-clerk は current[] の添字なので、入れた後に並べ替えると別の作品を指す）。
+  const sorted = lo ? rankHits(idx2, lane2s, lo, qk, sq, r5).map(n => res2[n]) : res2;
+  current=sorted; shown=Math.min(MAX,sorted.length);   // a new search always resets to the first page（畳んだ後の件数で数える）
   paint();
 }
 
