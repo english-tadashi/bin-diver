@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 26 Sep 2026 10:30:02 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 26 Sep 2026 13:22:43 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Saiyuki World 2 on Famicom: The Japanese Cartridge Behind Whomp 'Em, and Its Product Code JF-31</title>
+      <link>https://gamekataban.com/blog/2026-09-27-saiyuki-world-2-famicom-whomp-em-import-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-27-saiyuki-world-2-famicom-whomp-em-import-guide.html</guid>
+      <description>Jaleco's Saiyuki World 2: Tenjokai no Majin (Famicom, 7 December 1990, product code JF-31) reached North America as Whomp 'Em in March 1991. How it relates to the first Saiyuki World, what the NES version changed, and why JF-31 finds the Japanese cartridge faster than the title.</description>
+      <pubDate>Sun, 27 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Saiyuki World on Famicom: The Wonder Boy in Monster Land Port and Its Product Code NMK-KW</title>

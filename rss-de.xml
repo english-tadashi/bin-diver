@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Ein Blog für Sammler außerhalb Japans, die japanische Retro-Spiele suchen — Shop-Guides, Import-Anleitungen und die Geschichten hinter den Titeln.</description>
     <language>de-de</language>
-    <lastBuildDate>Sat, 26 Sep 2026 10:30:03 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 26 Sep 2026 13:22:43 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-de.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Saiyūki World 2 auf dem Famicom: das japanische Modul hinter Whomp ’Em und sein Produktcode JF-31</title>
+      <link>https://gamekataban.com/blog/de/2026-09-27-saiyuki-world-2-famicom-whomp-em-import-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-09-27-saiyuki-world-2-famicom-whomp-em-import-guide.html</guid>
+      <description>Jalecos Saiyūki World 2 erschien in Japan am 7. Dezember 1990 für das Famicom (Produktcode JF-31) und kam im März 1991 als Whomp ’Em nach Nordamerika. Was es mit dem ersten Saiyūki World zu tun hat, was sich in Whomp ’Em geändert hat und wie du das japanische Modul über JF-31 findest.</description>
+      <pubDate>Sun, 27 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Saiyūki World auf dem Famicom: die Umsetzung von Wonder Boy in Monster Land und ihr Produktcode NMK-KW</title>
       <link>https://gamekataban.com/blog/de/2026-09-26-saiyuki-world-famicom-wonder-boy-monster-land-import-guide.html</link>
