@@ -736,6 +736,15 @@ footer a:hover,footer a:focus{color:var(--accent)}
 
 /* 3. 番号バッジ（CSS counter・HTML/JS 不変）。シアン地・暗い文字の小さなタブを枠上端に重ねる */
 #results{ counter-reset:cardnum; }
+/* 画面外のカードは配置と描画を後回しにする（2026-09-26）。カードは 375px 幅で1枚 約1,800px と縦長で、スマホで見えるのは1枚目だけ。
+   ・contain-intrinsic-size は実測の中央値（1,650〜1,900px）から 1800px。auto なので一度描いたカードは実際の高さを覚える。
+   ・content-visibility:auto は paint containment を伴い、枠の上端に半分はみ出す番号タブ（.card::before）を切り取る。
+     overflow-clip-margin で切り取り線を枠の外 24px まで広げる。★これに対応しないブラウザ（Safari 等）では番号が切れるので、
+     @supports で丸ごと外す（その場合は MAX=20 だけが効く）。
+   ・スクロールで見ているカードが動かないこと（400px ずつ 94 歩で飛び0）と、番号・店員ボタン・My List が正しいことを確認済み。 */
+@supports (overflow-clip-margin: 1px){
+  #results > article.card{ content-visibility:auto; contain-intrinsic-size:auto 1800px; overflow-clip-margin:24px; }
+}
 .card{ border-radius:2px; counter-increment:cardnum; position:relative; }
 .card::before{ content:counter(cardnum); position:absolute; top:0; left:0;
   transform:translateY(-50%); z-index:3;
@@ -1882,7 +1891,7 @@ function codeKey(s){ return (s||'').normalize('NFKC').toUpperCase().replace(/[^A
 
 const q=$('#q'), plat=$('#plat'), pub=$('#pub'), year=$('#year'),
       results=$('#results'), count=$('#count'), more=$('#more');
-const MAX=60;
+const MAX=20;   // 最初に描く枚数＝Load more で増やす枚数（2026-09-26: 60→20。375px・CPU4倍遅くで1枚目が出るまで final fantasy 約2.3秒→約0.6秒）
 
 /* ============================================================
    マイリスト（保存だけ・2026-08-19）
