@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Ein Blog für Sammler außerhalb Japans, die japanische Retro-Spiele suchen — Shop-Guides, Import-Anleitungen und die Geschichten hinter den Titeln.</description>
     <language>de-de</language>
-    <lastBuildDate>Fri, 25 Sep 2026 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 26 Sep 2026 10:30:03 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-de.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Saiyūki World auf dem Famicom: die Umsetzung von Wonder Boy in Monster Land und ihr Produktcode NMK-KW</title>
+      <link>https://gamekataban.com/blog/de/2026-09-26-saiyuki-world-famicom-wonder-boy-monster-land-import-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-09-26-saiyuki-world-famicom-wonder-boy-monster-land-import-guide.html</guid>
+      <description>Jalecos Saiyūki World (Famicom, 11. November 1988, Produktcode NMK-KW) ist Wonder Boy in Monster Land mit den Figuren aus der Reise nach Westen, und das Modul hat Japan nie verlassen. Was es mit Wonder Boy zu tun hat, warum ein Jaleco-Spiel einen NMK-Code trägt, der Tippfehler MNK-KW und wie du das Modul findest.</description>
+      <pubDate>Sat, 26 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Magic John auf dem Famicom: das japanische Modul hinter Totally Rad und sein Produktcode JF-30</title>
       <link>https://gamekataban.com/blog/de/2026-09-25-magic-john-totally-rad-famicom-import-guide.html</link>

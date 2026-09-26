@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog pour les collectionneurs à l'étranger en quête de jeux rétro japonais — guides boutiques, tutoriels d'importation, et les histoires derrière les titres.</description>
     <language>fr-fr</language>
-    <lastBuildDate>Fri, 25 Sep 2026 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 26 Sep 2026 10:30:03 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-fr.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Saiyūki World sur Famicom : le portage de Wonder Boy in Monster Land et son code produit NMK-KW</title>
+      <link>https://gamekataban.com/blog/fr/2026-09-26-saiyuki-world-famicom-wonder-boy-monster-land-import-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-09-26-saiyuki-world-famicom-wonder-boy-monster-land-import-guide.html</guid>
+      <description>Le Saiyūki World de Jaleco (Famicom, 11 novembre 1988, code produit NMK-KW) est Wonder Boy in Monster Land avec les personnages de La Pérégrination vers l'Ouest, et la cartouche n'a jamais quitté le Japon. Son lien avec Wonder Boy, pourquoi un jeu Jaleco porte un code NMK, la coquille MNK-KW et comment trouver la cartouche.</description>
+      <pubDate>Sat, 26 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Magic John sur Famicom : la cartouche japonaise derrière Totally Rad et son code produit JF-30</title>
       <link>https://gamekataban.com/blog/fr/2026-09-25-magic-john-totally-rad-famicom-import-guide.html</link>
