@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>해외 컬렉터를 위한 일본 레트로 게임 블로그 — 매장 가이드, 수입 방법, 그리고 타이틀 뒤에 숨은 이야기.</description>
     <language>ko-kr</language>
-    <lastBuildDate>Sat, 26 Sep 2026 13:22:43 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 27 Sep 2026 18:42:22 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-ko.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>《데드 문》: TSS의 세 번째이자 마지막 게임, 뼈로 된 보스들, 그리고 없었던 속편</title>
+      <link>https://gamekataban.com/blog/ko/2026-09-28-dead-moon-pc-engine-ts91001.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-09-28-dead-moon-pc-engine-ts91001.html</guid>
+      <description>TSS는 14개월 동안 세 작품만 내놓았고, 1991년의 이 HuCARD(코드 TS91001)가 마지막이었습니다. 어떤 게임인지, 왜 보스가 전부 뼈인지, 실제 개발사는 어디인지, 그리고 왜 가타카나 제목으로 검색하면 안 되는지.</description>
+      <pubDate>Mon, 28 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>패미컴판 《서유기 월드2》: 《Whomp ’Em》의 바탕이 된 일본판 카트리지와 상품 코드 JF-31</title>
       <link>https://gamekataban.com/blog/ko/2026-09-27-saiyuki-world-2-famicom-whomp-em-import-guide.html</link>

@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog pour les collectionneurs à l'étranger en quête de jeux rétro japonais — guides boutiques, tutoriels d'importation, et les histoires derrière les titres.</description>
     <language>fr-fr</language>
-    <lastBuildDate>Sat, 26 Sep 2026 13:22:44 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 27 Sep 2026 18:42:22 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-fr.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Dead Moon sur PC Engine : le troisième et dernier jeu de T.S.S., ses boss en os et la suite qui n’est jamais venue</title>
+      <link>https://gamekataban.com/blog/fr/2026-09-28-dead-moon-pc-engine-ts91001.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-09-28-dead-moon-pc-engine-ts91001.html</guid>
+      <description>T.S.S. a publié trois jeux en quatorze mois, et cette HuCARD de 1991 au code TS91001 est le dernier. Ce qu’est le jeu, pourquoi tous les boss sont des squelettes, qui l’a réellement développé, et pourquoi le titre en katakana renvoie des centaines d’annonces dont un seul exemplaire du jeu sur les cent premières.</description>
+      <pubDate>Mon, 28 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Saiyūki World 2 sur Famicom : la cartouche japonaise derrière Whomp 'Em et son code produit JF-31</title>
       <link>https://gamekataban.com/blog/fr/2026-09-27-saiyuki-world-2-famicom-whomp-em-import-guide.html</link>
