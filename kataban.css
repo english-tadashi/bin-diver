@@ -409,6 +409,62 @@ a.pagenav-item:focus-visible{ outline:3px solid var(--accent); outline-offset:2p
 .postmeta{ margin:14px 0 0; font-family:var(--f-vt); font-size:19px;
   letter-spacing:.5px; color:var(--faint); }
 
+/* 記事のタグ（機種・発売元・シリーズ）。押すとタグ別一覧 /blog[/<lang>]/tag/<軸>/<key>/ へ。
+   build_articles.py が postmeta の直後に出す（taxonomy.json の表示名。CJK も混ざるので
+   Press Start 2P / VT323 は当てない）。 */
+.posttags{ list-style:none; margin:14px 0 0; padding:0;
+  display:flex; flex-wrap:wrap; gap:8px; }
+.posttags a{ display:inline-block; padding:7px 12px; border:1px solid var(--edge-input);
+  background:var(--surface); color:var(--ink); text-decoration:none;
+  font-family:"Space Mono","IBM Plex Sans JP",ui-monospace,monospace; font-size:12px; line-height:1.3;
+  transition:border-color .12s,color .12s; }
+.posttags a:hover,.posttags a:focus{ border-color:var(--tag); color:var(--tag); outline:none; }
+.posttags a:focus-visible{ outline:3px solid var(--accent); outline-offset:2px; }
+
+/* ============================================================
+   タグから探す（一覧1ページ目）と全タグ一覧（/blog/tags/）。build_feeds.py の生成物。
+   ボタン＝表示名＋公開済み記事数。見た目は記事ページの .posttags に揃える。
+   ★スマホ幅では「タグから探す」の各軸を1行の横スワイプにして、縦は4行ぶんに収める
+     （機種だけで十数個あり、折り返すと記事リストが画面の下へ押し出されるため）。
+     右端をぼかして続きがあることを見せる。全タグ一覧は折り返す（そのページの本題なので）。
+   ============================================================ */
+.tagfinder{ margin:26px 0 0; padding:16px 0 6px; border-top:1px solid var(--line); }
+.tagfinder-h{ margin:0 0 12px; font-family:var(--f-pixel); font-size:11px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--accent); font-weight:400; }
+.tagrow{ display:flex; align-items:flex-start; gap:12px; margin:0 0 10px; }
+.tagrow-axis{ flex:0 0 7.5em; padding-top:7px; font-size:12px; color:var(--muted); margin:0; font-weight:400; }
+.tagchips{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px; min-width:0; }
+.tagchips a{ position:relative; display:inline-flex; align-items:baseline; gap:7px; padding:6px 10px;
+  border:1px solid var(--edge-input); background:var(--surface); color:var(--ink); text-decoration:none;
+  font-family:"Space Mono","IBM Plex Sans JP",ui-monospace,monospace; font-size:12px; line-height:1.3;
+  white-space:nowrap; transition:border-color .12s,color .12s; }
+.tagchips a:hover,.tagchips a:focus{ border-color:var(--tag); color:var(--tag); outline:none; }
+.tagchips a:focus-visible{ outline:3px solid var(--accent); outline-offset:2px; }
+/* 記事数はバッジ。★名前の続き（「PlayStation 3」）に見えないよう、枠と地色で名前から切り離す。 */
+.tagchip-n{ align-self:center; min-width:1.9em; padding:1px 5px; text-align:center;
+  background:var(--field); border:1px solid var(--line); color:var(--muted); font-size:10.5px; line-height:1.35; }
+.tagchips a:hover .tagchip-n,.tagchips a:focus .tagchip-n{ color:inherit; border-color:currentColor; }
+/* 読み上げ専用（画面には出さない）。★position:absolute なので、親に position を持たせること
+   （無いとページ全体が基準になり、横スワイプ欄の外へはみ出してページが横に伸びる。.tagchips a で実測）。 */
+.vh{ position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden;
+  clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; border:0; }
+.tagfinder-all{ margin:4px 0 0; font-size:12px; }
+.tagfinder-all a{ color:var(--tag); }
+.tagindex{ margin:26px 0 0; }
+.tagindex .tagrow{ padding:14px 0; margin:0; border-top:1px solid var(--line); }
+.tagindex .tagrow:last-child{ border-bottom:1px solid var(--line); }
+.tagindex .tagrow-axis{ font-size:13px; color:var(--ink); }
+@media (max-width:640px){
+  .tagrow{ display:block; }
+  .tagrow-axis{ display:block; padding:0; margin:0 0 6px; }
+  .tagfinder .tagchips{ flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none;
+    -webkit-overflow-scrolling:touch; padding:0 24px 2px 0;
+    -webkit-mask-image:linear-gradient(to right,#000 82%,transparent);
+            mask-image:linear-gradient(to right,#000 82%,transparent); }
+  .tagfinder .tagchips::-webkit-scrollbar{ display:none; }
+  .tagfinder .tagchips li{ flex:0 0 auto; }
+}
+
 /* ============================================================
    CTA — ツール本体への導線。記事の本文下と 404 で使う。
    ============================================================ */

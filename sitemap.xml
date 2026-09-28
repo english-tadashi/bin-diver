@@ -4167,6 +4167,84 @@
   <!-- ===== タグページ（build_feeds.py の生成物。記事 2 本以上のタグだけ） ===== -->
 
   <url>
+    <loc>https://gamekataban.com/blog/tags/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tags/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tags/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tags/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tags/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tags/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tags/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tags/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/zh/tags/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tags/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tags/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tags/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tags/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tags/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tags/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tags/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/ko/tags/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tags/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tags/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tags/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tags/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tags/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tags/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tags/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/es/tags/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tags/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tags/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tags/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tags/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tags/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tags/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tags/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/de/tags/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tags/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tags/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tags/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tags/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tags/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tags/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tags/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/fr/tags/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tags/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tags/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tags/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tags/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tags/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tags/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tags/"/>
+  </url>
+
+  <url>
     <loc>https://gamekataban.com/blog/tag/platform/famicom/</loc>
     <lastmod>2026-09-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -5337,6 +5415,864 @@
   </url>
 
   <url>
+    <loc>https://gamekataban.com/blog/tag/genre/action/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/action/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/zh/tag/genre/action/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/action/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/ko/tag/genre/action/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/action/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/es/tag/genre/action/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/action/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/de/tag/genre/action/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/action/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/fr/tag/genre/action/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/action/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/action/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/tag/genre/platformer/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/platformer/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/zh/tag/genre/platformer/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/platformer/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/ko/tag/genre/platformer/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/platformer/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/es/tag/genre/platformer/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/platformer/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/de/tag/genre/platformer/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/platformer/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/fr/tag/genre/platformer/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/platformer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/platformer/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/tag/genre/shmup/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/shmup/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/zh/tag/genre/shmup/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/shmup/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/ko/tag/genre/shmup/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/shmup/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/es/tag/genre/shmup/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/shmup/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/de/tag/genre/shmup/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/shmup/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/fr/tag/genre/shmup/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/shmup/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/shmup/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/tag/genre/beat-em-up/</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/beat-em-up/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/zh/tag/genre/beat-em-up/</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/beat-em-up/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/ko/tag/genre/beat-em-up/</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/beat-em-up/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/es/tag/genre/beat-em-up/</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/beat-em-up/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/de/tag/genre/beat-em-up/</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/beat-em-up/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/fr/tag/genre/beat-em-up/</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/beat-em-up/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/beat-em-up/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/tag/genre/fighting/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/fighting/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/zh/tag/genre/fighting/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/fighting/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/ko/tag/genre/fighting/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/fighting/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/es/tag/genre/fighting/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/fighting/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/de/tag/genre/fighting/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/fighting/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/fr/tag/genre/fighting/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/fighting/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/fighting/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/tag/genre/rpg/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/rpg/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/zh/tag/genre/rpg/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/rpg/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/ko/tag/genre/rpg/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/rpg/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/es/tag/genre/rpg/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/rpg/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/de/tag/genre/rpg/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/rpg/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/fr/tag/genre/rpg/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/rpg/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/rpg/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/tag/genre/strategy/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/strategy/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/zh/tag/genre/strategy/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/strategy/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/ko/tag/genre/strategy/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/strategy/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/es/tag/genre/strategy/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/strategy/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/de/tag/genre/strategy/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/strategy/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/fr/tag/genre/strategy/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/genre/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/genre/strategy/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/tag/decade/1980s/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/1980s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/zh/tag/decade/1980s/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/1980s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/ko/tag/decade/1980s/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/1980s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/es/tag/decade/1980s/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/1980s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/de/tag/decade/1980s/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/1980s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/fr/tag/decade/1980s/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/1980s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/1980s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/tag/decade/1990s/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/1990s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/zh/tag/decade/1990s/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/1990s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/ko/tag/decade/1990s/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/1990s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/es/tag/decade/1990s/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/1990s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/de/tag/decade/1990s/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/1990s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/fr/tag/decade/1990s/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/1990s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/1990s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/tag/decade/2000s/</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/2000s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/zh/tag/decade/2000s/</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/2000s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/ko/tag/decade/2000s/</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/2000s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/es/tag/decade/2000s/</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/2000s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/de/tag/decade/2000s/</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/2000s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/fr/tag/decade/2000s/</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/2000s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/2000s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/tag/decade/2010s/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/2010s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/zh/tag/decade/2010s/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/2010s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/ko/tag/decade/2010s/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/2010s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/es/tag/decade/2010s/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/2010s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/de/tag/decade/2010s/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/2010s/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/fr/tag/decade/2010s/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/decade/2010s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/decade/2010s/"/>
+  </url>
+
+  <url>
     <loc>https://gamekataban.com/blog/tag/publisher/capcom/</loc>
     <lastmod>2026-09-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -6348,6 +7284,84 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/series/castlevania/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/series/castlevania/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/series/castlevania/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/tag/release/japan-only/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/release/japan-only/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/zh/tag/release/japan-only/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/release/japan-only/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/ko/tag/release/japan-only/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/release/japan-only/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/es/tag/release/japan-only/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/release/japan-only/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/de/tag/release/japan-only/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/release/japan-only/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/fr/tag/release/japan-only/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/release/japan-only/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/release/japan-only/"/>
   </url>
   <!-- ===== タグページここまで ===== -->
 
