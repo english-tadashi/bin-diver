@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>為海外收藏家打造的日本復古遊戲部落格——商店指南、進口教學，以及遊戲背後的故事。</description>
     <language>zh-tw</language>
-    <lastBuildDate>Mon, 28 Sep 2026 10:36:27 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 29 Sep 2026 17:37:55 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-zh.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>《Magical Chase》：Quest 的1991年 PC Engine 卡帶，一天賣光，也從未有續作</title>
+      <link>https://gamekataban.com/blog/zh/2026-09-30-magical-chase-pc-engine-pl91001.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-30-magical-chase-pc-engine-pl91001.html</guid>
+      <description>Palsoft 在1991年11月15日只出了很少的量，當天就賣光。這捲 HuCARD 是什麼、為什麼再版是由雜誌而不是發行商做的、「發行商倒閉」的說法哪裡不對，以及編號 PL91001 怎麼把它找出來。</description>
+      <pubDate>Wed, 30 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>快打旋風開發史 第5回：老一輩不敢打破的那條規則，與現代操作</title>
       <link>https://gamekataban.com/blog/zh/2026-09-29-street-fighter-development-history-5.html</link>

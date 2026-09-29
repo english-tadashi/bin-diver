@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog pour les collectionneurs à l'étranger en quête de jeux rétro japonais — guides boutiques, tutoriels d'importation, et les histoires derrière les titres.</description>
     <language>fr-fr</language>
-    <lastBuildDate>Mon, 28 Sep 2026 10:36:27 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 29 Sep 2026 17:37:56 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-fr.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Magical Chase sur PC Engine : le shoot’em up de Quest de 1991, épuisé en un jour et resté sans suite</title>
+      <link>https://gamekataban.com/blog/fr/2026-09-30-magical-chase-pc-engine-pl91001.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-09-30-magical-chase-pc-engine-pl91001.html</guid>
+      <description>Palsoft l’a sorti le 15 novembre 1991 en petites quantités et il a été épuisé le jour même. Ce qu’est cette HuCARD, pourquoi la réédition est venue d’un magazine et non de l’éditeur, ce qui cloche dans l’histoire de la faillite, et comment le code PL91001, absent de cette base, la retrouve en boutique.</description>
+      <pubDate>Wed, 30 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Histoire du développement de Street Fighter, partie 5 : la règle que ses propres créateurs n'ont pas osé briser</title>
       <link>https://gamekataban.com/blog/fr/2026-09-29-street-fighter-development-history-5.html</link>

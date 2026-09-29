@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>해외 컬렉터를 위한 일본 레트로 게임 블로그 — 매장 가이드, 수입 방법, 그리고 타이틀 뒤에 숨은 이야기.</description>
     <language>ko-kr</language>
-    <lastBuildDate>Mon, 28 Sep 2026 10:36:27 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 29 Sep 2026 17:37:55 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-ko.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>《매지컬 체이스》: 발매 당일 매진된 Quest의 1991년 PC 엔진 슈팅, 그리고 없었던 속편</title>
+      <link>https://gamekataban.com/blog/ko/2026-09-30-magical-chase-pc-engine-pl91001.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-09-30-magical-chase-pc-engine-pl91001.html</guid>
+      <description>Palsoft는 1991년 11월 15일 아주 적은 수량만 출하했고 그날 바로 매진됐습니다. 이 HuCARD가 무엇인지, 재판을 왜 발매사가 아니라 잡지가 했는지, 도산설이 어디서 어긋나는지, 그리고 상품 코드 PL91001로 어떻게 찾는지.</description>
+      <pubDate>Wed, 30 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>스트리트 파이터 개발사 제5화: 옛 세대가 깨지 못한 규칙, 그리고 모던 컨트롤</title>
       <link>https://gamekataban.com/blog/ko/2026-09-29-street-fighter-development-history-5.html</link>
