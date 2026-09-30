@@ -724,9 +724,41 @@ footer a:hover,footer a:focus{color:var(--accent)}
    下にあったときは「ここから下は別の読み手」の区切りだったが、上に来ると
    その太さが日本語より目立ってしまう（この画面の主役は店員が読む日本語）。
    文字の大きさ・色は変えていない。 */
-.clerk-you{border-top:1px solid #ddd;margin-top:4px;padding:14px 0 2px;
-  font-family:"Space Grotesk",system-ui,sans-serif;font-size:13px;line-height:1.55;color:#555}
-.clerk-you b{color:#111}
+/* .clerk-you（店員が読んでいる内容の英語の説明）は 2026-09-28 に定型文カードの英訳（.staff-q-en）へ置き換えて削除。 */
+/* ---- 定型文カード（2026-09-28・staff-cards）。白地・黒字のまま（店の明るい照明で読める）。 ---- */
+/* 日本語は文節で折り返す（対応ブラウザのみ。非対応は今までどおりの折り返し）。 */
+.staff-q-ja,.staff-ans-ja,.staff-big-ja{word-break:auto-phrase}
+.staff-hint{font-family:"Space Grotesk",system-ui,sans-serif;font-size:13px;line-height:1.5;color:#555;margin:0 0 12px}
+.staff-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.staff-tab{font-family:"Space Grotesk",system-ui,sans-serif;font-size:14px;font-weight:600;padding:10px 12px;min-height:44px;
+  border:2px solid #111;background:#fff;color:#111;border-radius:0;cursor:pointer}
+.staff-tab[aria-pressed="true"]{background:#111;color:#fff}
+.staff-tab:focus-visible,.staff-ans:focus-visible,.staff-back:focus-visible{outline:3px solid #0a6cff;outline-offset:2px}
+.staff-q{margin:0 0 18px}
+.staff-q-ja{font-size:clamp(24px,6.6vw,32px);font-weight:600;line-height:1.45;margin:0 0 8px}
+.staff-q-en{font-family:"Space Grotesk",system-ui,sans-serif;font-size:13px;line-height:1.5;color:#666;margin:0}
+.staff-answers{display:flex;flex-direction:column;gap:10px;margin:0 0 22px}
+.staff-ans{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;min-height:56px;padding:12px 14px;
+  border:2px solid #111;background:#fff;color:#111;border-radius:0;cursor:pointer;text-align:left}
+.staff-ans:active{background:#111;color:#fff}
+.staff-ans-ja{font-family:'IBM Plex Sans JP','Hiragino Sans','Noto Sans JP',sans-serif;font-size:clamp(20px,5.8vw,24px);font-weight:600;line-height:1.35}
+.staff-ans-en{font-family:"Space Grotesk",system-ui,sans-serif;font-size:12px;line-height:1.4;color:#666}
+.staff-ans:active .staff-ans-en{color:#ddd}
+.staff-item{border-top:2px solid #111;border-bottom:2px solid #111;margin:0 0 18px}
+.staff-item .clerk-row{padding:12px 0}
+.staff-item .clerk-row:first-child{border-top:0}
+.staff-item.title-first .clerk-title{font-size:clamp(28px,7.4vw,40px)}
+.staff-item.title-first .clerk-code{font-size:clamp(22px,5.8vw,28px)}
+.staff-item.code-first .clerk-code{font-size:clamp(30px,8vw,48px)}
+.staff-item.code-first .clerk-title{font-size:clamp(22px,5.8vw,28px)}
+/* 機種はいちばん小さく（2番目の型番・題名より下）。 */
+.staff-item .clerk-plat{font-size:18px}
+.staff-big{padding:10vh 0 6vh}
+.staff-big-ja{font-family:'IBM Plex Sans JP','Hiragino Sans','Noto Sans JP',sans-serif;font-size:clamp(32px,9.5vw,52px);font-weight:700;line-height:1.3;margin:0 0 18px;word-break:break-word}
+.staff-big-en{font-family:"Space Grotesk",system-ui,sans-serif;font-size:clamp(22px,6vw,30px);font-weight:600;line-height:1.3;margin:0;color:#111}
+.staff-back{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%;min-height:56px;padding:12px;
+  font-family:"Space Grotesk",system-ui,sans-serif;font-size:16px;font-weight:600;border:2px solid #111;background:#fff;color:#111;border-radius:0;cursor:pointer}
+.staff-back span{font-family:'IBM Plex Sans JP','Hiragino Sans','Noto Sans JP',sans-serif;font-size:13px;font-weight:500;color:#555}
 
 /* ================= デザイン案に寄せる（2026-07-24 夕）=================
    変更は <style> 内のみ。既存ルールの後段に置き、同特異度は source order で勝たせる。
@@ -4230,50 +4262,139 @@ function clerkFacts(r){
 //   唯一の入口である「店員に見せる」ボタンを row[12] の行では出していないため（card() 内）。
 //   ボタン側の条件を変えるなら、ここも見直すこと。
 //   配信専用の行を渡すと「在庫はありますか？」と店員に聞かせることになる。
-function clerkOpen(r){
-  // 値の出し方は clerkFacts()（2026-09-11 切り出し・印刷シートと共用）。式と注意書きはあちらへ移した。
-  const { jpMain, codes, pubShow, platShow } = clerkFacts(r);
-  const parts  = [];
+/* ============================================================
+   店員に見せる定型文カード（2026-09-28・staff-cards）。
+   ★質問を1枚ずつ選んで見せ、店員さんが指させる答えを下に並べる。答えを押すと、
+     その答えを画面いっぱいに大きく出す（英語も大きく＝持ち主がその場で読める）。
+   ★答えはカードごとに選んである（全カード共通にしない）。文言は 2026-09-28 こはさん承認。
+   ★免税（tax）は作品と関係ないので題名・型番・機種を出さない（item:false）。
+     金額・手数料は書かない ―― 2026-11-01 から国の制度がリファンド方式に変わり、数字が古くなるため。
+     「パスポートを見せてください」は新制度でも店頭で旅券を確認する（観光庁「手続の変更点（比較表）」の
+     販売時「旅券を確認 変更無」・観光庁「免税購入対象者一覧（リファンド方式）」・BOOKOFF Tax free shop）。
+   ★ja は手書きの HTML 定数（<br> を含む）なので esc() しない。外部の値を入れないこと。
+   ★全部 index.html の中にある＝sw.js がキャッシュするページ本体に入る＝圏外でも使える。
+   ============================================================ */
+const STAFF_CARDS = [
+  { id:'stock', label:'In stock?', item:true,
+    ja:'すみません、このゲームを探しています。<br>在庫はありますか？',
+    en:"Excuse me, I'm looking for this game. Do you have it in stock?",
+    answers:[['はい、あります','Yes, we have it'],['売り場にご案内します',"I'll show you where it is"],
+             ['少々お待ちください（調べます）',"One moment, I'll check"],['在庫はありません','Out of stock']] },
+  { id:'case', label:'Glass case', item:true,
+    ja:'ショーケースの中のこの商品を<br>見せていただけますか？',
+    en:'Could I see this one in the glass case?',
+    answers:[['はい、少々お待ちください','Yes, one moment'],['担当の者を呼びます',"I'll get a colleague"],
+             ['今はお出しできません','Not possible right now']] },
+  { id:'box', label:'Box & manual?', item:true,
+    ja:'箱と説明書は付いていますか？',
+    en:'Does it come with the box and manual?',
+    answers:[['箱・説明書あり','Box and manual included'],['箱のみ（説明書なし）','Box only, no manual'],
+             ['説明書のみ（箱なし）','Manual only, no box'],['ソフトのみ','Game only'],['確認します','Let me check']] },
+  { id:'test', label:'Test it?', item:true,
+    ja:'動作の確認はできますか？',
+    en:'Can I check that it works?',
+    answers:[['はい、できます','Yes, you can'],['いいえ、できません','No, sorry'],['動作確認済みです','Already tested']] },
+  { id:'tax', label:'Tax-free?', item:false,
+    ja:'免税の手続きはできますか？',
+    en:'Can I buy this tax-free?',
+    answers:[['はい、できます','Yes'],['パスポートを見せてください','Please show your passport'],
+             ['免税の対象金額に達していません','Below the tax-free minimum'],['当店では対応していません','Not available at this store']] },
+  { id:'other', label:'Other stores?', item:true, codeFirst:true,
+    ja:'ほかの店舗に在庫はありますか？',
+    en:'Is it in stock at another store?',
+    answers:[['ほかの店舗にあります','Another store has it'],['どの店舗にもありません','No store has it'],
+             ['当店の在庫しかお調べできません','I can only check this store'],['少々お待ちください（調べます）',"One moment, I'll check"]] },
+];
+let staffRow = null, staffCard = 0;
 
-  parts.push(`<p class="clerk-ask">すみません、このゲームを探しています。<br>在庫はありますか？</p>`);
+// 画面を消さない（見せている間に暗くなって消えるのを防ぐ）。使えないブラウザでは何もしない。
+// ★例外もエラーも外へ出さない。これが無くてもカードは使える（上乗せ）。
+let staffWakeLock = null;
+async function staffWake(){
+  try{
+    if(!('wakeLock' in navigator) || staffWakeLock) return;
+    staffWakeLock = await navigator.wakeLock.request('screen');
+    staffWakeLock.addEventListener('release', ()=>{ staffWakeLock = null; });
+  }catch(e){ staffWakeLock = null; }
+}
+function staffSleep(){
+  try{ if(staffWakeLock) staffWakeLock.release(); }catch(e){}
+  staffWakeLock = null;
+}
+// タブを離れると wake lock は自動で外れる。店員画面を開いたまま戻ってきたら取り直す。
+document.addEventListener('visibilitychange', ()=>{
+  if(document.visibilityState === 'visible' && clerkEl.classList.contains('on')) staffWake();
+});
 
-  // 画面の持ち主(英語話者)向けの説明。挨拶の直下に置く＝渡す前に自分が何を見せるか読める。
-  // 日本語より小さく・グレーのまま（この画面の主役は店員が読む日本語）。
-  const fields = ['the Japanese title'];
-  if(codes.length) fields.push('the product code');
-  if(platShow) fields.push('the console');
-  if(pubShow) fields.push('the publisher');
-  if(r[4]) fields.push('the release year');
-  const fieldList = fields.length > 1
-    ? fields.slice(0,-1).join(', ') + ' and ' + fields[fields.length-1]
-    : fields[0];
-  parts.push(`<div class="clerk-you">
-    <b>What the staff are reading:</b> “Excuse me, I'm looking for this game — do you have it in stock?”, then ${fieldList}.
-  </div>`);
+// 作品の段。質問のすぐ下・答えの上に置く（店員が「どのゲームの話か」を先に読めるように）。
+// ★大きさの順はカードで変える（2026-09-28 こはさん決定）。
+//   在庫・ショーケース・箱と説明書・動作確認 … 題名がいちばん大きく、型番は2番目（棚や現物と題名で照合する場面）。
+//   ほかの店舗（codeFirst）… 型番がいちばん大きく、題名は2番目（店員がシステムで型番を打って調べる場面）。
+//   機種は日本語名。発売元・発売年は出さない。免税カードは item:false で段ごと出さない。
+function staffItemHtml(r, codeFirst){
+  const { jpMain, codes, platShow } = clerkFacts(r);
+  const code  = codes.length ? `<div class="clerk-row"><span class="lb">${CLERK_LB.code}</span>
+    <div class="clerk-code">${codes.map(esc).join('<br>')}</div></div>` : '';
+  const title = `<div class="clerk-row"><span class="lb">${CLERK_LB.title}</span>
+    <div class="clerk-title">${esc(jpMain)}</div></div>`;
+  const plat  = platShow ? `<div class="clerk-row"><span class="lb">${CLERK_LB.plat}</span>
+    <div class="clerk-plat">${esc(platShow)}</div></div>` : '';
+  return `<div class="staff-item ${codeFirst?'code-first':'title-first'}">${codeFirst ? code+title : title+code}${plat}</div>`;
+}
 
-  parts.push(`<div class="clerk-row"><span class="lb">${CLERK_LB.title}</span>
-    <div class="clerk-title">${esc(jpMain)}</div></div>`);
-
-  if(codes.length) parts.push(`<div class="clerk-row"><span class="lb">${CLERK_LB.code}</span>
-    <div class="clerk-code">${codes.map(esc).join('<br>')}</div></div>`);
-
-  if(platShow) parts.push(`<div class="clerk-row"><span class="lb">${CLERK_LB.plat}</span>
-    <div class="clerk-plat">${esc(platShow)}</div></div>`);
-
-  // 発売元・発売年。機種と同じ体裁。空なら行ごと出さない（空ラベルを残さない）。
-  if(pubShow) parts.push(`<div class="clerk-row"><span class="lb">${CLERK_LB.pub}</span>
-    <div class="clerk-plat">${esc(pubShow)}</div></div>`);
-
-  if(r[4]) parts.push(`<div class="clerk-row"><span class="lb">${CLERK_LB.year}</span>
-    <div class="clerk-plat">${esc(r[4])}</div></div>`);
-
-  clerkBody.innerHTML = parts.join('');
-  clerkEl.classList.add('on');
+function staffRender(){
+  const c = STAFF_CARDS[staffCard];
+  const tabs = STAFF_CARDS.map((x,i)=>`<button type="button" class="staff-tab" data-scard="${i}" aria-pressed="${i===staffCard?'true':'false'}">${esc(x.label)}</button>`).join('');
+  const answers = c.answers.map(([ja,en],i)=>`<button type="button" class="staff-ans" data-sans="${i}">
+      <span class="staff-ans-ja" lang="ja">${esc(ja)}</span><span class="staff-ans-en">${esc(en)}</span></button>`).join('');
+  clerkBody.innerHTML = `
+    <p class="staff-hint">Pick a question, then show the screen. The staff can tap an answer.</p>
+    <div class="staff-tabs" role="group" aria-label="Questions">${tabs}</div>
+    <div class="staff-q">
+      <p class="clerk-ask staff-q-ja" lang="ja">${c.ja}</p>
+      <p class="staff-q-en">${esc(c.en)}</p>
+    </div>
+    ${c.item && staffRow ? staffItemHtml(staffRow, !!c.codeFirst) : ''}
+    <div class="staff-answers" role="group" aria-label="Answers for the staff" lang="ja">${answers}</div>`;
+  clerkEl.classList.remove('staff-answered');
   clerkEl.scrollTop = 0;
+}
+
+// 答えを大きく出す。持ち主が読む英語も大きくする。
+function staffAnswer(i){
+  const [ja,en] = STAFF_CARDS[staffCard].answers[i];
+  clerkBody.innerHTML = `
+    <div class="staff-big" role="status">
+      <p class="staff-big-ja" lang="ja">${esc(ja)}</p>
+      <p class="staff-big-en">${esc(en)}</p>
+    </div>
+    <button type="button" class="staff-back" data-sback="1">Ask again<span lang="ja">もう一度</span></button>`;
+  clerkEl.classList.add('staff-answered');
+  clerkEl.scrollTop = 0;
+  const back = clerkBody.querySelector('.staff-back'); if(back) back.focus();
+}
+
+clerkBody.addEventListener('click', e=>{
+  const t = e.target.closest('[data-scard],[data-sans],[data-sback]');
+  if(!t) return;
+  if(t.hasAttribute('data-scard')){ staffCard = +t.dataset.scard; staffRender(); const b=clerkBody.querySelector(`[data-scard="${staffCard}"]`); if(b) b.focus(); }
+  else if(t.hasAttribute('data-sans')){ staffAnswer(+t.dataset.sans); }
+  else { staffRender(); const b=clerkBody.querySelector(`[data-scard="${staffCard}"]`); if(b) b.focus(); }
+});
+
+function clerkOpen(r){
+  // 最初は在庫のカード（今までの店員画面と同じ一言）から開く。
+  staffRow = r; staffCard = 0;
+  staffRender();
+  clerkEl.classList.add('on');
   document.body.style.overflow = 'hidden';   // 背後のページが動くと、見せている間に迷子になる
   clerkClose.focus();
+  staffWake();
 }
 function clerkHide(){
+  staffSleep();
+  // 答えを大きく出した状態の修飾も外す（次に開いたときに持ち越さない）。
+  clerkEl.classList.remove('staff-answered');
   // .brief / .over-mylist はマイリストから開いたときだけ付く修飾。閉じるときに必ず外す
   // ―― 残すと次に検索結果から開いた店員画面が簡易表示の字組みのまま出る。
   clerkEl.classList.remove('on','brief','over-mylist');
@@ -4328,6 +4449,7 @@ function clerkOpenBrief(code, opener){
   clerkBody.innerHTML = parts.join('');
   clerkOpener = opener || null;
   clerkEl.classList.add('on','brief','over-mylist');
+  staffWake();
   clerkEl.scrollTop = 0;
   document.body.style.overflow = 'hidden';
   clerkClose.focus();
