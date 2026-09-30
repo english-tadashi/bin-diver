@@ -41,6 +41,12 @@ const SHELL = './index.html';
    SW が有効にならないので、**落ちて困るものだけ**を入れる。 */
 const PRECACHE_CRITICAL = [SHELL];
 
+/* 検索ツールからブログへの導線（build_feeds.py の生成物）。fetch の (1b) で network-first にする。
+   ★install では入れない。無くてもページは動く（リンクと Japan only の印が出ないだけ）ので、
+     落ちて困るもの（PRECACHE_CRITICAL）には入れない。1回目に取れたときに拾う。
+   ★相対パス（SHELL と同じ理由）。 */
+const LINKS = './blog/links.json';
+
 /* あると嬉しいが、無くてもページは出るもの（アイコン類）。
    ★individually に put して個別に catch する。addAll に混ぜると、1つ消えただけで
      オフライン対応そのものが死ぬ ―― favicon のためにページを失うのは割に合わない。
@@ -121,6 +127,29 @@ self.addEventListener('fetch', event => {
     return;
   }
 
+  // (1b) /blog/links.json = network-first（2026-09-28）。記事を公開するたびに中身が変わる
+  //      生成物なので、(2) の cache-first に落とすと一度来た人には古いまま出続ける
+  //      （VERSION を上げない限り）。オンラインなら常に最新を取り、取れたらキャッシュも上書きする。
+  //      オフラインのときだけ前回の中身に落ちる。一度も取れていなければ失敗させる
+  //      ＝index.html 側の .catch で BLOG_LINKS が null のまま＝リンクと印が出ないだけで、検索は動く。
+  //      ★キーは LINKS（クエリを外した固定URL）。?v= などが付いても1件だけ持つ。
+  if (url.origin === self.location.origin && url.pathname === new URL(LINKS, self.location).pathname) {
+    event.respondWith((async () => {
+      try {
+        const res = await fetch(req);
+        if (res && res.ok) {
+          const copy = res.clone();
+          event.waitUntil(caches.open(CACHE).then(c => c.put(LINKS, copy)));
+        }
+        return res;
+      } catch (e) {
+        const hit = await caches.match(LINKS);
+        if (hit) return hit;
+        throw e;
+      }
+    })());
+    return;
+  }
   // (2) 同一オリジンのその他 = cache-first。アイコンなど、変わらないものだけが来る。
   if (url.origin === self.location.origin) {
     event.respondWith((async () => {
