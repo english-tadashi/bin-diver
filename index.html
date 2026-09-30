@@ -561,6 +561,15 @@ body.in-jp #klookbar{display:block}
 /* states */
 .state{padding:48px 6px;text-align:center;color:var(--muted)}
 .state b{display:block;color:var(--ink);font-size:18px;font-weight:600;margin-bottom:6px}
+/* JAN の補い（2026-09-28）。確定は枠を太く、候補は点線。どちらも「これです」とは言わない。 */
+.janfb{margin:0 0 18px;padding:14px 16px;border:2px solid var(--tag);color:var(--muted);font-size:14px;line-height:1.55}
+.janfb-maybe{border-style:dashed;border-color:var(--rare)}
+.janfb p{margin:0 0 6px}
+.janfb .janfb-head{margin:8px 0 0;color:var(--ink);font-size:16px}
+.janfb .janfb-head b{color:var(--ink)}
+.janfb-jan{font-family:'Space Mono',ui-monospace,monospace;color:var(--ink)}
+.janfb-name{word-break:break-word}
+.state .janfb-wait,.state .janfb-name{margin:14px 0 0;font-size:14px}
 /* How-to / About section (readable prose, NOT the pixel font) */
 .howto{ margin:36px 0 8px; padding-top:24px; border-top:1px solid var(--line); line-height:1.6; }
 .howto h2{ font-family:inherit; font-size:1.15rem; margin:22px 0 8px; }
@@ -4582,6 +4591,8 @@ run();
 // Android/Chrome : ネイティブ BarcodeDetector(速い、外部読み込みなし = 1ファイル完結を保つ)。
 // iOS/Safari     : BarcodeDetector 非対応(WebKit未実装, 2026時点)。ZXing-js を動的に読み込む。
 //                  ここで「1ファイル完結」は崩れる。崩す価値がある(バーコードは実際に読める)。
+//                  ★2026-09-28: jsDelivr から直接ではなく、同じサイトの /vendor/zxing/ から読む
+//                    （sw.js が事前キャッシュする＝圏外の店内でも読める）。版と出典は vendor/zxing/README.txt。
 //                  ※このフォールバック経路は実機(iPhone)での検証がまだ。要・通しテスト。
 // どちらの経路も最後は onDetected(text) に集約。手入力欄も同じ入口に落ちる(PC/検証用)。
 // ============================================================
@@ -4610,7 +4621,165 @@ function showByJan(raw){
     +'<span style="font-family:monospace">SHVC-</span>) in the search above — '
     +'it often matches even when the barcode doesn\'t.</div>';
   lastScanHit=false;
+  janFallback(jan);   // 2026-09-28: 楽天の商品名から作品を当てる（当たらなくても上の案内はそのまま残る）
   return false;
+}
+
+// ============================================================
+// JAN が DATA に無いときの補い（2026-09-28・jan-fallback）
+// ★DATA の JAN 列は物理版の 38% しか埋まっていない（2026-09-28 実測）。外れた JAN で楽天を引き、
+//   返ってきた商品名（最大10件）の中に DATA の題名がそのまま含まれているかを探して、作品を当てる。
+// ★見せ方は3段階。誤った作品を「これです」と言わない:
+//   確定（sure）… 2件以上の商品名が同じ作品を指し、かつ半分以上 →「Probably this game — check the box」
+//   候補（maybe）… それ未満 →「Possible matches」最大3作品
+//   見つからない（none）… 今までの案内だけ（機種の手がかりがある商品名なら、その名前も添える）
+// ★実測（2026-09-28・本番のページの中で36件・15機種）: 確定 23件のうち別の作品は 0件（21件が正しい作品、2件が同じ作品の別の版）。
+//   候補 12件（10件は1位が正しい作品、1件は3候補の中に正しい作品、1件は別の作品）、見つからない 1件。
+// ★純粋な関数は JANFB_BEGIN〜JANFB_END の間だけに置く。本番のページで測るときにこの範囲を切り出して eval する。
+// ============================================================
+/* JANFB_BEGIN */
+const JANFB_NOISE = /中古|新品|未開封|送料無料|箱説明書なし|表紙説明書なし|箱説なし|説明書なし|箱なし|ソフトのみ|ソフト単品|単品|video game|宅配便出荷|メール便OK|メール便|お取寄せ品|お取り寄せ|ネコポス|ゆうパケット|初回限定版|限定版|PlayStation the Best|the Best|ROMカートリッジ|ロムカセット|カートリッジ|ゲームソフト|ソフト|動作確認済み?|即納|あす楽/gi;
+// 商品名から機種を推定する。順番が大事（PS2 を PS より先、GBA を GB より先）。値は DATA の row[2]。
+const JANFB_PLAT = [
+  ['Famicom', /\[FC\]|ファミコン|ファミリーコンピュータ|\bFC\b/],
+  ['Super Famicom', /\[SFC\]|スーパーファミコン|\bSFC\b|スーファミ/],
+  ['Game Boy Advance', /\[GBA\]|ゲームボーイアドバンス|\bGBA\b/],
+  ['Game Boy', /\[GB\]|\bGBC?\b|ゲームボーイ(?!アドバンス)/],
+  ['Mega Drive', /\[MD\]|メガドライブ|\bMD\b/],
+  ['PC Engine', /\[PCE\]|PCエンジン|\bPCE\b|\bPCD\b|CDロムロム/],
+  ['PlayStation 2', /\[PS2\]|\bPS2\b|プレイステーション2|PlayStation 2/],
+  ['PSP', /\[PSP\]|\bPSP\b/],
+  ['PlayStation', /\[PS\]|\bPS\b|プレイステーション(?!2)|PlayStation(?! ?[2-5])/],
+  ['Sega Saturn', /\[SS\]|セガサターン|\bSS\b/],
+  ['Nintendo 64', /\bN64\b|NINTENDO ?64|任天堂64|ニンテンドー64/i],
+  ['Nintendo DS', /\[NDS\]|\[DS\]|【DS】|\bNDS\b|ニンテンドーDS/],
+  ['Dreamcast', /\[DC\]|ドリームキャスト|\bDC\b/],
+  ['GameCube', /\[GC\]|ゲームキューブ|\bGC\b/],
+  ['Wii', /\[Wii\]|\bWii\b(?! ?U)/],
+];
+function janfbNorm(s){
+  return String(s||'').normalize('NFKC').toLowerCase()
+    .replace(/[\s・\-‐―ー〜～~:：!！?？,，.。/／&＆'’"“”()（）\[\]【】「」『』+＝=]/g,'');
+}
+function janfbClean(name){
+  return String(name||'').normalize('NFKC').replace(/\(\d{8}\)/g,'').replace(JANFB_NOISE,' ')
+    .replace(/【[^】]*】|\[[^\]]*\]/g,'');
+}
+function janfbPlatHint(name){
+  const n=String(name||'').normalize('NFKC');
+  for(const [p,rx] of JANFB_PLAT) if(rx.test(n)) return p;
+  return null;
+}
+let _janfbIdx=null, _janfbIdxSrc=null;
+function janfbIndex(rows){
+  if(_janfbIdxSrc===rows && _janfbIdx) return _janfbIdx;
+  _janfbIdx = rows.filter(r=>!r[12]).map(r=>({ tj:janfbNorm(r[1]), te:janfbNorm(r[0]), pf:r[2], key:r[2]+'\t'+r[1] }));
+  _janfbIdxSrc = rows;
+  return _janfbIdx;
+}
+const janfbBigram = s=>{ const b=new Set(); for(let i=0;i<s.length-1;i++) b.add(s.slice(i,i+2)); return b; };
+// names: 楽天の商品名（最大10件）。rows: DATA。戻り値 {verdict:'sure'|'maybe'|'none', keys:[…], hint, votes, n}
+function janfbMatch(names, rows){
+  const idx=janfbIndex(rows), list=(names||[]).slice(0,10), votes=new Map(), hints=new Map();
+  for(const nm of list){
+    const hint=janfbPlatHint(nm), c=janfbNorm(janfbClean(nm));
+    if(hint) hints.set(hint,(hints.get(hint)||0)+1);
+    let best=0, keys=new Set();
+    for(const t of idx){
+      if(hint && t.pf!==hint) continue;
+      let L=0;
+      if(t.tj.length>=3 && c.includes(t.tj)) L=t.tj.length;
+      if(t.te.length>=5 && c.includes(t.te)) L=Math.max(L,t.te.length);
+      if(!L) continue;
+      if(L>best){ best=L; keys=new Set([t.key]); } else if(L===best) keys.add(t.key);
+    }
+    if(keys.size===1){ const k=[...keys][0]; votes.set(k,(votes.get(k)||0)+1); }   // 同じ長さで2作品が並ぶ＝あいまい＝票にしない
+  }
+  const n=list.length, ranked=[...votes.entries()].sort((a,b)=>b[1]-a[1]);
+  const hint=[...hints.entries()].sort((a,b)=>b[1]-a[1])[0]?.[0]||null;
+  if(ranked.length){
+    const [k,v]=ranked[0];
+    if(v>=2 && v/n>=0.5) return { verdict:'sure', keys:[k], hint, votes:v, n };
+    return { verdict:'maybe', keys:ranked.slice(0,3).map(x=>x[0]), hint, votes:v, n };
+  }
+  // 題名がそのまま含まれない（表記ゆれ）。機種の手がかりがあるときだけ、似ている度合いで候補を出す。
+  if(hint && list.length){
+    const cb=janfbBigram(janfbNorm(janfbClean(list[0]))), sc=[];
+    for(const t of idx){
+      if(t.pf!==hint || t.tj.length<3) continue;
+      const b=janfbBigram(t.tj); let hit=0; for(const x of b) if(cb.has(x)) hit++;
+      const r=hit/b.size; if(r>=0.6) sc.push([r,t.key]);
+    }
+    sc.sort((a,b)=>b[0]-a[0]);
+    const keys=[...new Set(sc.map(x=>x[1]))].slice(0,3);
+    if(keys.length) return { verdict:'maybe', keys, hint, votes:0, n };
+  }
+  return { verdict:'none', keys:[], hint, votes:0, n };
+}
+/* JANFB_END */
+
+// 当てた作品の行。確定のときは、同じ機種で英題が同じ行（廉価版・再販など別の版）も一緒に出す。
+function janfbRows(m){
+  const out=[], seen=new Set();
+  const add=r=>{ if(!seen.has(r)){ seen.add(r); out.push(r); } };
+  for(const k of m.keys) for(const r of DATA) if(!r[12] && r[2]+'\t'+r[1]===k) add(r);
+  if(m.verdict==='sure'){
+    const base=out.slice();
+    for(const b of base) if(b[0]) for(const r of DATA) if(!r[12] && r[2]===b[2] && r[0]===b[0]) add(r);
+  }
+  return out.slice(0,6);
+}
+// GA4 に「DATA に無い JAN」を記録する（2026-09-28）。あとで DATA の JAN を補う候補にする（自動では補わない）。
+// ★送るのは JAN（商品の番号）・楽天で見つかったか・判定・当てた行の型番だけ。個人に関するものは送らない。
+// ★DATA に有る JAN（当たり）は送らない。privacy.html の Analytics の節と揃えること。
+function janfbLog(jan, result, names, m){
+  try{
+    if(typeof gtag !== 'function') return;
+    // 当てた作品は機種・和題・型番で残す（型番の無い作品もあるため、行を特定できるように3つとも）。
+    let code='', title='', platform='';
+    if(m && m.keys && m.keys[0]){
+      const r=DATA.find(x=>!x[12] && x[2]+'\t'+x[1]===m.keys[0]);
+      if(r){ code=(r[3]||'').split(';')[0].trim(); title=r[1]||''; platform=r[2]||''; }
+    }
+    gtag('event', 'jan_miss', { jan: String(jan), rakuten_hit: (names && names.length) ? 'yes' : 'no', result: result,
+      matched_platform: platform, matched_title: title, matched_code: code });
+  }catch(e){}
+}
+let janfbToken=0;
+async function janFallback(jan){
+  const tok=++janfbToken;
+  if(!/^\d{8,13}$/.test(jan)) return 'invalid';
+  if(typeof rakutenLookup!=='function' || navigator.onLine===false){ janfbLog(jan,'offline',[],null); return 'offline'; }
+  const st=results.querySelector('.state');
+  if(st) st.insertAdjacentHTML('beforeend','<p class="janfb-wait">Checking this barcode on Rakuten…</p>');
+  try{ await rakutenLookup(jan); }catch(e){}
+  if(tok!==janfbToken) return 'stale';                 // 待っている間に別の JAN を読んだ
+  const names=(typeof _rakNames!=='undefined' && _rakNames.get(jan)) || [];
+  const m=janfbMatch(names, DATA);
+  janfbLog(jan, m.verdict, names, m);
+  const wait=results.querySelector('.janfb-wait');
+  if(m.verdict==='none'){
+    // 機種の手がかりがある商品名だけ見せる（ゲーム以外の商品＝例: ビデオ は出さない）。
+    if(wait) wait.outerHTML = (names.length && m.hint)
+      ? `<p class="janfb-name">Rakuten lists this barcode as “${esc(names[0])}”, but we couldn't match it to a game in our catalog.</p>` : '';
+    if(overlay.classList.contains('on')) scanMsg.textContent='Scanned '+jan+' — not in catalog, and no match on Rakuten. Keep scanning, or close.';
+    return 'none';
+  }
+  const rows=janfbRows(m);
+  if(!rows.length){ if(wait) wait.remove(); return 'none'; }
+  current=rows; shown=rows.length; paint();
+  const head = m.verdict==='sure'
+    ? `<b>Probably this game</b> — check the title and code on the box before you buy.`
+    : `<b>Possible matches</b> — we're not sure. Compare the title with the box.`;
+  results.insertAdjacentHTML('afterbegin', `<div class="janfb janfb-${m.verdict}" role="status">
+      <p class="janfb-scan">Scanned <span class="janfb-jan">${esc(jan)}</span> — this barcode isn't in our catalog.</p>
+      <p class="janfb-name">Rakuten lists it as “${esc(names[0]||'')}”.</p>
+      <p class="janfb-head">${head}</p>
+    </div>`);
+  lastScanHit=true;                                    // 閉じたときに検索欄へフォーカスを移さない
+  if(overlay.classList.contains('on')) closeScan();
+  results.scrollIntoView({behavior:'smooth',block:'start'});
+  return m.verdict;
 }
 
 const scanBtn=$('#scanBtn'), overlay=$('#scanOverlay'), video=$('#scanVideo'),
@@ -4631,22 +4800,26 @@ async function getDecoder(){
   }
   if(!zxingReader){                        // iOS/Safari フォールバック(要・実機検証)
     scanMsg.textContent='Loading scanner…';
-    const zx=await import('https://cdn.jsdelivr.net/npm/@zxing/browser@0.1.5/+esm');
+    const zx=await import('/vendor/zxing/zxing-browser-0.1.5.min.js');
     zxingReader=new zx.BrowserMultiFormatReader();
   }
   return 'zxing';
 }
 
 // 見つかれば true(呼び出し側がループを止める/閉じる)。見つからなければ false(スキャン継続)。
+let lastMissJan='';   // 直前に外れた JAN。同じ値が毎フレーム来ても描き直さない（補いの表示が消えるため）
 function onDetected(text){
+  const j=String(text).replace(/\D/g,'');
+  if(j && j===lastMissJan) return false;
   const found=showByJan(text);
+  if(!found) lastMissJan=j;
   if(found){ closeScan(); }
   else { scanMsg.textContent='Scanned '+String(text).replace(/\D/g,'')+' — not in catalog. Keep scanning, or close.'; }
   return found;
 }
 
 async function openScan(){
-  overlay.classList.add('on'); scanMsg.textContent=''; closing=false; lastScanHit=null;
+  overlay.classList.add('on'); scanMsg.textContent=''; closing=false; lastScanHit=null; lastMissJan='';
   try{
     stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
     video.srcObject=stream; await video.play();
@@ -4707,6 +4880,7 @@ const RAKUTEN = {
   endpoint: 'https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260401',
 };
 const _rakCache = new Map();            // jan -> {img,url,name,price} | null(null も覚える=再取得しない)
+const _rakNames = new Map();            // jan -> 商品名の配列（最大10件）。JAN の補い（janFallback）が使う。取れなければ入れない
 let   _rakChain = Promise.resolve();    // 直列化 = レート制限(約1.6秒/回)を守る
 
 // 中央値: 数値を昇順に並べ、奇数件なら真ん中の1つ、偶数件なら中央2つの平均。
@@ -4728,6 +4902,7 @@ async function _rakFetch(jan) {
     const res = await fetch(`${RAKUTEN.endpoint}?${p}`);
     if (res.ok) {
       const items = (await res.json())?.Items ?? [];
+      _rakNames.set(jan, items.slice(0, 10).map(x => x?.Item?.itemName).filter(Boolean));
       // 画像・URL・価格に使う1件は「在庫あり(availability=1)の中の最安」。
       // availability:'0' で在庫切れ込みで取っているので、ここで在庫ありだけを選び直す。
       // sort:'+itemPrice' で安い順に並んでいる = 最初に見つかった在庫あり品が最安。
