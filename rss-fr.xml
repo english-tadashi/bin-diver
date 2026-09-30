@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog pour les collectionneurs à l'étranger en quête de jeux rétro japonais — guides boutiques, tutoriels d'importation, et les histoires derrière les titres.</description>
     <language>fr-fr</language>
-    <lastBuildDate>Tue, 29 Sep 2026 17:37:56 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 30 Sep 2026 06:35:04 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-fr.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Histoire du développement de Castlevania, partie 3 : un titre, deux codes, et la paire N64 que le code ne sépare pas</title>
+      <link>https://gamekataban.com/blog/fr/2026-10-01-castlevania-development-history-3.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-10-01-castlevania-development-history-3.html</guid>
+      <description>Symphony of the Night porte deux codes produit sur PlayStation, SLPM86023 (1997) et SLPM86073 (1998), et la recherche par le seul titre japonais renvoie six annonces couvrant trois éditions. Sur Nintendo 64, aucun des deux codes de Konami de 1999 n'est indexé par la boutique.</description>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Magical Chase sur PC Engine : le shoot’em up de Quest de 1991, épuisé en un jour et resté sans suite</title>
       <link>https://gamekataban.com/blog/fr/2026-09-30-magical-chase-pc-engine-pl91001.html</link>
