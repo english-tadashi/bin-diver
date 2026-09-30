@@ -42,7 +42,7 @@
 
       <h2>Analytics</h2>
       <p>The search tool (the home page) uses Google Analytics 4 to count visits and to see what people search for. When you type a search, the text you typed and the number of results are sent to Google Analytics about a second after you stop typing. Google Analytics also records the page address (which can include a search, such as <code>?q=SLPS-02040</code>), your approximate location, and your device and browser type. Blog posts and this page don't load Google Analytics.</p>
-      <p>Kataban doesn't send your name, email address, or the contents of My List. Barcodes you scan aren't sent to Google Analytics. Please don't type personal information into the search box.</p>
+      <p>If you scan a barcode that isn't in the catalog, the barcode number, whether Rakuten knew it, and which game we matched (if any) are sent to Google Analytics, so we can add missing games. Barcodes that are already in the catalog aren't sent. Kataban doesn't send your name, email address, or the contents of My List. Please don't type personal information into the search box.</p>
       <p>To opt out, block cookies or scripts from Google Analytics in your browser's settings, or install the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-out Browser Add-on</a>. See <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">how Google uses information from sites that use its services</a>.</p>
 
       <h2>Advertising</h2>
@@ -55,10 +55,10 @@
       <p>This site loads fonts from Google Fonts, which may log IP addresses as part of serving font files.</p>
 
       <h2>Product photos and prices</h2>
-      <p>When a search result has a barcode number (JAN) on record, your browser asks Rakuten's product search service about that barcode to show a product photo and the "Used on Rakuten" price guide, and loads the photo from Rakuten's servers. The request contains the barcode number, not anything about you, but like any web request it shows Rakuten your IP address and the page it came from. See <a href="https://privacy.rakuten.co.jp/english/" target="_blank" rel="noopener">Rakuten's privacy policy</a>.</p>
+      <p>When a search result has a barcode number (JAN) on record, your browser asks Rakuten's product search service about that barcode to show a product photo and the "Used on Rakuten" price guide, and loads the photo from Rakuten's servers. When you scan a barcode that isn't in the catalog, your browser also asks Rakuten about that barcode and uses the product names it returns to suggest which game it might be. These requests contain the barcode number, not anything about you, but like any web request they show Rakuten your IP address and the page it came from. See <a href="https://privacy.rakuten.co.jp/english/" target="_blank" rel="noopener">Rakuten's privacy policy</a>.</p>
 
       <h2>Barcode scanner</h2>
-      <p>The camera is used only while the scanner is open, and the video is processed on your device — nothing is uploaded. On browsers without a built-in barcode reader (such as Safari on iPhone), the scanner loads a reader library from cdn.jsdelivr.net when you open it.</p>
+      <p>The camera is used only while the scanner is open, and the video is processed on your device — nothing is uploaded. On browsers without a built-in barcode reader (such as Safari on iPhone), the scanner uses a reader library served from this site, saved with the page so it works without a signal.</p>
 
       <h2>Stored on your device</h2>
       <p>Kataban saves a few settings in your browser — whether you're shopping in or outside Japan, the blog language you chose, and your My List — plus a copy of the search page so it opens without a signal. These stay on your device. Clearing this site's data in your browser removes them.</p>

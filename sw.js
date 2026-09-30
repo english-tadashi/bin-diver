@@ -54,7 +54,12 @@ const LINKS = './blog/links.json';
      ここの './favicon.ico' と同じURLに解決されるので一致する。プロジェクトページに
      置くなら index.html 側の絶対パスを先に直すこと（SW の問題ではなく、その場合は
      オフライン以前に通常表示でも 404 になる）。 */
-const PRECACHE_OPTIONAL = ['./favicon.ico', './favicon.svg', './apple-touch-icon.png'];
+const PRECACHE_OPTIONAL = ['./favicon.ico', './favicon.svg', './apple-touch-icon.png',
+  /* iPhone（BarcodeDetector の無いブラウザ）用のバーコード読み取りライブラリ（2026-09-28）。
+     一度も読み取りを使っていない人でも圏外で読めるように、install で先に入れる（計 約 446KB）。
+     ★ファイル名に版番号が入っている＝(2) の cache-first でも古い版が残らない。版を上げるときは名前ごと変える。 */
+  './vendor/zxing/zxing-browser-0.1.5.min.js', './vendor/zxing/zxing-library-0.21.0.min.js',
+  './vendor/zxing/ts-custom-error-3.3.1.min.js'];
 
 /* ランタイムでキャッシュする外部ホスト。**この2つだけ**。
    ・fonts.googleapis.com … 書体の CSS（index.html が読む唯一の外部 CSS）
@@ -67,7 +72,7 @@ const PRECACHE_OPTIONAL = ['./favicon.ico', './favicon.svg', './apple-touch-icon
      なので、取れなければ端末の既定書体で出るだけ。
    ★ここに載せていない外部は**一切触らない**（素通し）:
      ・googletagmanager（計測）… 通信の有無を書き換えると計測値が実態とずれる
-     ・cdn.jsdelivr.net（@zxing／バーコード）… 遅延 import で、失敗はスキャナ側で扱う
+     ・（2026-09-28 まで）cdn.jsdelivr.net の @zxing … 今は同じサイトの vendor/zxing/ に置き、PRECACHE_OPTIONAL で持つ
      ・楽天API … 在庫と価格の生データ。古い値をオフラインで出すのは「無い」より悪い */
 const FONT_ORIGINS = ['https://fonts.googleapis.com', 'https://fonts.gstatic.com'];
 
@@ -181,5 +186,5 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // (4) それ以外（計測・CDN・楽天API）は respondWith を呼ばない＝ブラウザ既定のまま。
+  // (4) それ以外（計測・楽天API）は respondWith を呼ばない＝ブラウザ既定のまま。
 });
