@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Wed, 30 Sep 2026 06:35:03 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2026 08:23:08 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Eternal Arcadia e Illbleed: dos discos japoneses de Dreamcast, dos formas de buscarlos</title>
+      <link>https://gamekataban.com/blog/es/2026-10-02-eternal-arcadia-illbleed-dreamcast-import-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-10-02-eternal-arcadia-illbleed-dreamcast-import-guide.html</guid>
+      <description>ETERNAL ARCADIA, el Skies of Arcadia japonés de Sega, y el juego de terror ILLBLEED son discos japoneses de Dreamcast. En las subastas japonesas, el código HDR-0076 encuentra Eternal Arcadia mejor que su título; ILLBLEED no tiene código en el catálogo de Kataban, así que se busca por su título.</description>
+      <pubDate>Fri, 02 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Historia del desarrollo de Castlevania, parte 3: un título con dos códigos y los dos juegos de N64 que el código no separa</title>
       <link>https://gamekataban.com/blog/es/2026-10-01-castlevania-development-history-3.html</link>
