@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Thu, 01 Oct 2026 08:23:08 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 02 Oct 2026 07:59:44 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Blue Stinger en Dreamcast: el juego de 1999 de Climax Graphics en una isla de monstruos</title>
+      <link>https://gamekataban.com/blog/es/2026-10-03-blue-stinger-dreamcast-hdr-0003.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-10-03-blue-stinger-dreamcast-hdr-0003.html</guid>
+      <description>El juego de acción y supervivencia de Sega para Dreamcast de 1999, código HDR-0003, vendió poco en Japón y bien en Estados Unidos. Por qué la secuela que pidió Sega llegó tarde, qué pasó con la Premium Cut de Xbox y por qué buscar solo el título en inglés encuentra discos de otra región.</description>
+      <pubDate>Sat, 03 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Eternal Arcadia e Illbleed: dos discos japoneses de Dreamcast, dos formas de buscarlos</title>
       <link>https://gamekataban.com/blog/es/2026-10-02-eternal-arcadia-illbleed-dreamcast-import-guide.html</link>
