@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Ein Blog für Sammler außerhalb Japans, die japanische Retro-Spiele suchen — Shop-Guides, Import-Anleitungen und die Geschichten hinter den Titeln.</description>
     <language>de-de</language>
-    <lastBuildDate>Sun, 04 Oct 2026 08:10:04 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 05 Oct 2026 06:35:42 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-de.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Garou Densetsu, das erste Fatal Fury: vier japanische Heimfassungen und der Code SHVC-GN</title>
+      <link>https://gamekataban.com/blog/de/2026-10-06-garou-densetsu-fatal-fury-import-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-10-06-garou-densetsu-fatal-fury-import-guide.html</guid>
+      <description>SNKs erstes Fatal Fury, das Neo-Geo-Kampfspiel von 1991, erschien in Japan für Neo Geo (NGH-033), Super Famicom (SHVC-GN), Mega Drive (G-4100) und Neo Geo CD (NGCD-033). Welche Fassung am günstigsten ist und warum der Code des Takara-Moduls es schneller findet als der Titel.</description>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Eternal Arcadia auf Dreamcast: das japanische Skies of Arcadia und die @barai-Disc, die Sie meiden sollten</title>
       <link>https://gamekataban.com/blog/de/2026-10-05-eternal-arcadia-dreamcast-hdr-0076.html</link>
