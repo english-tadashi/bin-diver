@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog pour les collectionneurs à l'étranger en quête de jeux rétro japonais — guides boutiques, tutoriels d'importation, et les histoires derrière les titres.</description>
     <language>fr-fr</language>
-    <lastBuildDate>Tue, 06 Oct 2026 07:45:41 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 07 Oct 2026 08:09:13 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-fr.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Histoire du développement de Castlevania, partie 4 : les codes portables auxquels il reste un suffixe de trop</title>
+      <link>https://gamekataban.com/blog/fr/2026-10-08-castlevania-development-history-4.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-10-08-castlevania-development-history-4.html</guid>
+      <description>Sur Game Boy Advance et Nintendo DS, le catalogue Kataban stocke des codes produit comme AGB-A2CJ-JPN-1 et NTR-ACVJ-JPN-2. Quatre des cinq renvoient HTTP 404 et zéro résultat tels qu'ils sont écrits ; couper le suffixe -JPN en fait des recherches qui fonctionnent, et Buyee ne répond à aucun des deux codes. Quatrième partie de la série sur l'histoire du développement.</description>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Ax Battler sur Game Gear : le spin-off de Golden Axe de 1991 et le code produit que la liste de Sega donne faux</title>
       <link>https://gamekataban.com/blog/fr/2026-10-07-ax-battler-game-gear-g-3304.html</link>

@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>해외 컬렉터를 위한 일본 레트로 게임 블로그 — 매장 가이드, 수입 방법, 그리고 타이틀 뒤에 숨은 이야기.</description>
     <language>ko-kr</language>
-    <lastBuildDate>Tue, 06 Oct 2026 07:45:41 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 07 Oct 2026 08:09:13 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-ko.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>악마성 드라큘라 개발사 제4화: 휴대기 시대, 카탈로그의 상품 코드는 한 마디가 길다</title>
+      <link>https://gamekataban.com/blog/ko/2026-10-08-castlevania-development-history-4.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-10-08-castlevania-development-history-4.html</guid>
+      <description>게임보이 어드밴스와 닌텐도 DS에서 Kataban 카탈로그는 AGB-A2CJ-JPN-1, NTR-ACVJ-JPN-2 같은 형태로 상품 코드를 저장합니다. 다섯 중 넷은 적힌 그대로는 HTTP 404와 0건을 돌려주고, -JPN 부분을 잘라내면 작동하는 검색어가 됩니다. 그리고 Buyee는 두 코드 어느 쪽에도 답하지 않습니다. 개발사 5부작 제4화.</description>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>《Ax Battler》: 1991년 게임기어의 《Golden Axe》 외전과, 세가 목록이 틀리게 적은 상품 코드</title>
       <link>https://gamekataban.com/blog/ko/2026-10-07-ax-battler-game-gear-g-3304.html</link>

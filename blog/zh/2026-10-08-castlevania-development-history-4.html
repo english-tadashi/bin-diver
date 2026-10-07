@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>惡魔城開發史 第4回：掌機世代——目錄裡的商品編號多了一截 &mdash; Kataban</title>
+<meta name="description" content="在Game Boy Advance與Nintendo DS上，Kataban目錄存的商品編號是AGB-A2CJ-JPN-1與NTR-ACVJ-JPN-2這樣的形式。五個裡有四個照原樣搜會回來HTTP 404與零筆；把-JPN那一段切掉就變成有效的搜尋語，而Buyee對這兩個編號完全不回應。系列開發史五部曲第4回。">
+<meta property="og:title" content="惡魔城開發史 第4回：掌機世代——目錄裡的商品編號多了一截">
+<meta property="og:description" content="在Game Boy Advance與Nintendo DS上，Kataban目錄存的商品編號是AGB-A2CJ-JPN-1與NTR-ACVJ-JPN-2這樣的形式。五個裡有四個照原樣搜會回來HTTP 404與零筆；把-JPN那一段切掉就變成有效的搜尋語，而Buyee對這兩個編號完全不回應。系列開發史五部曲第4回。">
+<meta property="og:url" content="https://gamekataban.com/blog/zh/2026-10-08-castlevania-development-history-4.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://gamekataban.com/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://gamekataban.com/blog/zh/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-10-08-castlevania-development-history-4.html">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=IBM+Plex+Sans+JP:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/kataban.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+
+  <header class="sitehead">
+    <a class="sitehead-brand" href="/" aria-label="Kataban — back to the search tool">
+      <span class="kb-word">
+        <span class="kb-ghost" aria-hidden="true"><span class="kb-grid" id="kbGridCyan"></span></span>
+        <span class="kb-grid kb-top" id="kbGridPink" aria-hidden="true"></span>
+      </span>
+      <span class="sitehead-badge">&#22411;&#30058;</span>
+    </a>
+    <a class="backlink" href="/blog/zh/"><span class="arrow" aria-hidden="true">&#8592;</span> &#20840;&#37096;&#25991;&#31456;</a>
+    <div class="langswitch">
+      <button class="langswitch-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langswitch-menu">
+        <span class="langswitch-current">&#20013;&#25991; &mdash; &#32321;&#39636;&#20013;&#25991;</span>
+        <span class="langswitch-caret" aria-hidden="true">&#9662;</span>
+      </button>
+      <ul class="langswitch-menu" id="langswitch-menu" role="menu" hidden>
+      <li role="none"><a role="menuitem" href="/blog/2026-10-08-castlevania-development-history-4.html" hreflang="en" lang="en" data-lang="en">English</a></li>
+      <li role="none"><a role="menuitem" href="/blog/zh/2026-10-08-castlevania-development-history-4.html" hreflang="zh-Hant" lang="zh-Hant" data-lang="zh" aria-current="page">&#20013;&#25991;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/ko/2026-10-08-castlevania-development-history-4.html" hreflang="ko" lang="ko" data-lang="ko">&#54620;&#44397;&#50612;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/es/2026-10-08-castlevania-development-history-4.html" hreflang="es" lang="es" data-lang="es">Espa&ntilde;ol</a></li>
+      <li role="none"><a role="menuitem" href="/blog/de/2026-10-08-castlevania-development-history-4.html" hreflang="de" lang="de" data-lang="de">Deutsch</a></li>
+      <li role="none"><a role="menuitem" href="/blog/fr/2026-10-08-castlevania-development-history-4.html" hreflang="fr" lang="fr" data-lang="fr">Français</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <article>
+      <div class="pagehead">
+        <p class="kicker">Kataban 部落格</p>
+        <h1>惡魔城開發史 第4回：掌機世代——目錄裡的商品編號多了一截</h1>
+        <p class="postmeta">2026-10-08</p>
+        <ul class="posttags" aria-label="標籤">
+          <li><a href="/blog/zh/tag/platform/gba/">Game Boy Advance</a></li>
+          <li><a href="/blog/zh/tag/platform/nintendo-ds/">任天堂DS</a></li>
+          <li><a href="/blog/zh/tag/genre/metroidvania/">銀河惡魔城</a></li>
+          <li><a href="/blog/zh/tag/decade/2000s/">2000年代</a></li>
+          <li><a href="/blog/zh/tag/publisher/konami/">科樂美</a></li>
+          <li><a href="/blog/zh/tag/series/castlevania/">Castlevania</a></li>
+        </ul>
+      </div>
+
+      <div class="prose">
+        <p>在<a href="/blog/zh/2026-10-01-castlevania-development-history-3.html">第3回</a>裡，PlayStation的商品編號有效，Nintendo 64的商品編號則回來HTTP 404。掌機世代壞在第三種方式，而這種最花買家的時間：編號在那裡，編號也是對的，但<em>照目錄存的樣子</em>去搜什麼都搜不到。把最後幾個字刪掉，其中大部分就會開始有效。Game Boy Advance與Nintendo DS這批列，也正是目錄把系列名寫成三種不同寫法的地方；而且同一列上的年份與JAN，指向的版本跟同一列上的編號並不一樣。</p>
+
+        <ul>
+          <li>Kataban目錄在Game Boy Advance與Nintendo DS上共有14列惡魔城，其中只有5列帶著商品編號</li>
+          <li>《曉月圓舞曲》在目錄裡存成<code>AGB-A2CJ-JPN-1</code>，回來HTTP 404與零筆；<code>AGB-A2CJ</code>則回來兩筆</li>
+          <li>《蒼月十字架》在目錄裡存成<code>NTR-ACVJ-JPN-2</code>，回來HTTP 404與零筆；<code>NTR-ACVJ</code>則回來四筆</li>
+          <li>《蒼月十字架》在日本前後發行過四次——2005年8月25日，以及2006、2009、2010年的三次廉價版——而目錄的四列帶的正好是這四個年份，編號與JAN都在2010年那一列上</li>
+          <li>《曉月圓舞曲》那一列的日文原名是用拉丁字母寫的<code>Castlevania 暁月の円舞曲</code>；拿它去搜會回來四筆，沒有一筆是Game Boy Advance卡帶</li>
+          <li>兩家店要的搜尋語不一樣：駿河屋認商品編號，而Buyee對<code>AGB-A2CJ</code>與<code>NTR-ACVJ</code>什麼都不回——實測數字在後面</li>
+        </ul>
+
+        <h2>掌機世代在目錄裡有些什麼？</h2>
+        <p>Game Boy Advance與Nintendo DS上共有14列掛著惡魔城的名字。其中5列帶商品編號：<code>AGB-AAMJ-JPN-1</code>（Circle of the Moon）、<code>AGB-ACHJ-JPN-1</code>（白夜協奏曲）、<code>AGB-A2CJ-JPN-1</code>（曉月圓舞曲）、<code>AGB-FADJ-JPN</code>（第3回提過的、2004年由任天堂發行的「悪魔城ドラキュラ」）以及<code>NTR-ACVJ-JPN-2</code>（蒼月十字架）。另外9列的商品編號欄是空的，其中包括《被奪走的刻印》、兩列《迷宮迴廊》，以及四列《蒼月十字架》中的三列。</p>
+        <p>空著的是目錄的欄位，而不是遊戲本身沒有編號。兩款的外盒上都印著編號：《被奪走的刻印》印的是<code>NTR-YR9J-JPN</code>，《迷宮迴廊》除了<code>NTR-ACBJ-JPN</code>之外，還另印著一組<code>RY024-J1</code>，見下方照片。</p>
+        <figure>
+          <img src="/blog/images/2026-10-08-castlevania-development-history-4/order-of-ecclesia-box-ntr-yr9j-jpn.jpg"
+               alt="Nintendo DS版《被奪走的刻印》（悪魔城ドラキュラ 奪われた刻印）的外盒，封面右下角印著NTR-YR9J-JPN"
+               width="760" height="1347" loading="lazy"
+               style="width:100%;max-width:720px;margin:0;border-radius:8px">
+          <figcaption>Nintendo DS版《被奪走的刻印》。封面右下角印著<code>NTR-YR9J-JPN</code>。</figcaption>
+        </figure>
+        <figure>
+          <img src="/blog/images/2026-10-08-castlevania-development-history-4/gallery-of-labyrinth-box-ntr-acbj-jpn.jpg"
+               alt="Nintendo DS版《迷宮迴廊》（悪魔城ドラキュラ ギャラリー オブ ラビリンス）的外盒，封面右下角印著RY024-J1與NTR-ACBJ-JPN"
+               width="760" height="1347" loading="lazy"
+               style="width:100%;max-width:720px;margin:0;border-radius:8px">
+          <figcaption>Nintendo DS版《迷宮迴廊》。封面右下角印著<code>RY024-J1</code>與<code>NTR-ACBJ-JPN</code>。</figcaption>
+        </figure>
+        <p>系列名在這批列上並不是同一種寫法。同一個世代的日文原名欄裡出現了三種形式：漢字的「悪魔城ドラキュラ」（Circle of the Moon、2004年那款任天堂發行版、所有DS列）、片假名的「キャッスルヴァニア」（沒有編號的曉月與白夜兩列），以及拉丁字母的<code>Castlevania</code>（有編號的曉月與白夜兩列）。同一款遊戲會因為你看的是它兩列中的哪一列而有兩種寫法：<code>M720055</code>這一列寫的是<code>Castlevania 暁月の円舞曲</code>，<code>M747166</code>這一列寫的是<code>キャッスルヴァニア -暁月の円舞曲-</code>。你抄走哪一個，決定了商店搜尋會回來什麼。</p>
+
+        <h2>為什麼商品編號什麼都搜不到？</h2>
+        <p>五個存著的編號裡，有四個照原樣拿去駿河屋會回來HTTP 404與零筆：<code>AGB-A2CJ-JPN-1</code>、<code>NTR-ACVJ-JPN-2</code>、<code>AGB-AAMJ-JPN-1</code>與<code>AGB-FADJ-JPN</code>。把結尾那一段地區與數字切掉，這四個全都變成有效的搜尋語。<code>AGB-A2CJ</code>回來兩筆、<code>NTR-ACVJ</code>回來四筆、<code>AGB-AAMJ</code>回來一筆、<code>AGB-FADJ</code>回來一筆。只切掉一部分是不夠的：<code>AGB-A2CJ-JPN</code>仍然回來HTTP 404與零筆。斷點是<code>JPN</code>前面那個連字號。</p>
+        <p>本文沒有找到任何一份說明那個結尾段落是什麼意思的第一手資料。任天堂並未公開這套編號格式，而描述它的收藏者資料並不是文件。所以本文對<code>-JPN-1</code>與<code>-JPN-2</code>編碼了什麼不作任何主張。實測到的只有這一件事：店家的搜尋索引認的是字幹，不認完整字串。</p>
+        <p>第五個編號是例外，這件事值得講精確，而不是四捨五入帶過。<code>AGB-ACHJ-JPN-1</code>回來的是HTTP 200與兩筆，而且兩筆都是廉價再發行版：「キャッスルヴァニア ～白夜の協奏曲～ [コナミ ザ ベスト]」與「キャッスルヴァニア～白夜の協奏曲～ [廉価版] (箱説なし)」。切短後的<code>AGB-ACHJ</code>回來四筆，是上面那兩筆再加上「キャッスルヴァニア～白夜の協奏曲～（美品）」與「キャッスルヴァニア～白夜の協奏曲～ (箱説なし)」。所以完整編號在這裡並不是單純壞掉，而是比較窄。它能搜到東西的時候，搜到的是後來的版本，漏掉的是早期的。</p>
+
+        <h2>《曉月圓舞曲》那一列上，各個欄位分別指向哪裡？</h2>
+        <p>「キャッスルヴァニア 〜暁月の円舞曲〜」於2003年5月8日在日本登上Game Boy Advance，發行商為科樂美；北美早兩天在2003年5月6日，歐洲晚一天在2003年5月9日。</p>
+        <p>目錄收了它兩次。<code>M747166</code>這一列的名字是<code>キャッスルヴァニア -暁月の円舞曲-</code>，年份<code>2003</code>，沒有商品編號也沒有JAN。<code>M720055</code>這一列的名字是<code>Castlevania 暁月の円舞曲</code>，平台ゲームボーイアドバンス，商品編號<code>AGB-A2CJ-JPN-1</code>，發行商コナミ，年份<code>2005</code>，JAN <code>4988602126327</code>。帶著編號的那一列，並不是帶著發售年份的那一列。</p>
+        <p>2005年那一列的各欄位能搜到什麼，實測說了算。用JAN <code>4988602126327</code>搜尋會回來兩筆，兩筆都標著[コナミ ザ ベスト]：「キャッスルヴァニア ～暁月の円舞曲～ [コナミ ザ ベスト]」與「[外箱のみ] キャッスルヴァニア ～暁月の円舞曲～ [コナミ ザ ベスト]」。這個JAN完全搜不到普通那一筆。改用切短後的編號<code>AGB-A2CJ</code>搜尋，回來的是另外兩筆：「キャッスルヴァニア～暁月の円舞曲～」與「キャッスルヴァニア ～暁月の円舞曲～ [コナミ ザ ベスト]」。也就是說，在同一列上，JAN只找得到廉價版，而編號找得到廉價版與更早的那一版。</p>
+        <p>有一件事要講精確：本文查到的資料來源，沒有任何一份寫出這款遊戲コナミ ザ ベスト版的發行日期。日文維基百科的條目列出了Game Boy Advance版、Wii U虛擬主機版與Advance Collection，沒有列出任何廉價版。實測到的是：2005年那一列的JAN只回來標著[コナミ ザ ベスト]的商品，而那一列的年份是2005。這兩件事彼此對得起來；但對得起來與有一份出處並不是同一件事，本文也不打算把前者當成後者。</p>
+        <p>下單前要讀的一個標示：「外箱のみ」是只有外盒、沒有卡帶。它是那個JAN回來的兩筆之一，而且跟完整品帶著同一個JAN。光用JAN搜尋，不會告訴你它兩筆結果中有一筆並不是遊戲。</p>
+
+        <h2>直接把目錄那一列的日文原名貼過去會怎樣？</h2>
+        <p>拿<code>Castlevania 暁月の円舞曲</code>——也就是<code>M720055</code>那一列的名字欄，原樣照抄——去駿河屋搜尋，回來的是HTTP 200與四筆。沒有一筆是Game Boy Advance卡帶。四筆的名字都是<code>Castlevania Advance Collection</code>，分成[通常版]與DELUXE EDITION兩種形式。</p>
+        <p>這四筆會存在，是因為那套合輯確實在架上。<em>Castlevania Advance Collection</em>於2021年9月24日在Nintendo Switch、PlayStation 4、Xbox One與PC上以下載形式推出，由M2開發、Konami Digital Entertainment發行，實體包裝版則在2025年7月31日跟進。《曉月圓舞曲》是其收錄作品之一。所以拉丁字母那個搜尋語回來的並不是雜訊——它回來的是另一個當前在售、而且日文名字裡確實帶著<code>Castlevania</code>這個字的商品。</p>
+        <p>改用片假名形式就搜得到卡帶。<code>キャッスルヴァニア 暁月の円舞曲</code>回來八筆：四筆Game Boy Advance的（「キャッスルヴァニア～暁月の円舞曲～」、[コナミ ザ ベスト]再發行版、一筆(箱説なし)，以及那筆[外箱のみ]），加上同樣那四筆Advance Collection。把系列名整個拿掉、只搜<code>暁月の円舞曲</code>，回來的也是同樣八筆。</p>
+        <p>這與第3回記錄的<code>LEGEND OF CORNELL</code>是同一種失敗，只是換了一列、換了一個欄位：目錄把日文原名寫成拉丁字母，店家寫的是片假名，而把目錄的字串原樣照抄過去組成的搜尋語，回來的不是零筆就是錯的商品。這裡回來的是四筆，而那是比較糟的情況——回來零筆的搜尋語會自己宣告失敗，回來四筆錯誤機種商品的則不會。★也因為這一回的重點就是字形本身，本文所有要貼進商店的字串都保持日文原樣：請不要把「暁月の円舞曲」換成「曉月圓舞曲」再去搜，駿河屋的索引裡沒有那個寫法。</p>
+
+        <h2>DS上的《蒼月十字架》呢？</h2>
+        <p>「悪魔城ドラキュラ 蒼月の十字架」於2005年8月25日在日本登上Nintendo DS，之後在日本又發行了三次：2006年6月29日的コナミ ザ・ベスト 廉価版、2009年10月29日的コナミ殿堂セレクション 廉価版，以及2010年12月9日的ベストセレクション 廉価版。歐洲是2005年9月30日，北美是2005年10月4日。</p>
+        <p>目錄為它收了四列，年份是2005、2006、2009與2010——依序對應上面那四次日本發行，一次一列。只有2010年那一列<code>M720996</code>帶著商品編號（<code>NTR-ACVJ-JPN-2</code>）與JAN <code>4988602156287</code>。另外三列帶著JAN（<code>4988602121568</code>、<code>4988602129977</code>、<code>4988602149067</code>）而沒有編號。所以這一組裡唯一有編號的那一列，是遊戲問世五年之後的最後一次廉價版，而不是2005年的原版。四列的名字都用漢字寫系列名。</p>
+        <p>下方照片中的這一盒，封面右上角印著CERO的舊式標誌「12才以上対象」。CERO從2006年3月以後審查的作品起改用新的分級區分，所以這一盒是在改制之前完成分級的。因此它最有可能是2005年8月25日的初版，也就是目錄裡沒有編號的2005年那一列；不過光憑外盒，無法排除廉價版沿用舊標誌印製的可能。</p>
+        <figure>
+          <img src="/blog/images/2026-10-08-castlevania-development-history-4/dawn-of-sorrow-box-cero-12.jpg"
+               alt="Nintendo DS版《蒼月十字架》（悪魔城ドラキュラ 蒼月の十字架）的外盒，封面右上角是CERO舊式標誌「12才以上対象」"
+               width="760" height="1347" loading="lazy"
+               style="width:100%;max-width:720px;margin:0;border-radius:8px">
+          <figcaption>Nintendo DS版《蒼月十字架》。封面右上角是CERO舊式標誌「12才以上対象」。</figcaption>
+        </figure>
+        <p>用<code>NTR-ACVJ</code>搜尋回來四筆：「悪魔城ドラキュラ ～蒼月の十字架～」、「悪魔城ドラキュラ ～蒼月の十字架～ (箱説なし)」、「悪魔城ドラキュラ ～蒼月の十字架～[コナミ ザ・ベスト]」與「悪魔城ドラキュラ ～蒼月の十字架～[コナミ殿堂コレクション]」。改用名字「蒼月の十字架」搜尋回來五筆：上面那四筆，再加上「悪魔城ドラキュラ～蒼月の十字架～[廉価版]」。連系列名一起搜「悪魔城ドラキュラ 蒼月の十字架」回來的也是同樣五筆。</p>
+        <p>第五筆正是編號搆不到的那一筆，而同一列上的JAN除了它以外什麼也搆不到。搜尋<code>4988602156287</code>剛好回來一筆：「悪魔城ドラキュラ～蒼月の十字架～[廉価版]」。也就是說，在<code>M720996</code>這一列上，編號回來四筆、JAN回來一筆，而這兩個集合沒有任何重疊。</p>
+        <p>店家的版本標示與有記載的版本名稱，字串也不是同一個。2009年那次發行在文獻上寫的是「コナミ殿堂<strong>セレクション</strong>」，店家的商品名寫的是「[コナミ殿堂<strong>コレクション</strong>]」。四次有記載的發行裡有兩次名稱本身就帶「廉価版」，而店家把[廉価版]只當成其中一筆的標示。所以把店家的標示對應到某一次有記載的發行，是一種猜測，本文不作這個猜測——本文報告的是哪個搜尋語回來哪些商品。</p>
+        <p>這裡要讀的狀態標示是「箱説なし」，意思是不含外盒與說明書，只有卡帶本身。它在編號的結果與名字的結果裡都出現，所以這兩種搜尋語都不會幫你把它濾掉。</p>
+
+        <h2>那到底該用哪個搜尋語？</h2>
+        <p>以下是實測結果，不是推測。駿河屋是用原始搜尋網址測的；Buyee則是在真實瀏覽器裡對原始搜尋網址測的，因為Buyee對命令列送出的請求只會回HTTP 202與空白內容。</p>
+        <p>兩家店要的搜尋語並不一樣。在駿河屋，商品編號是精準的工具：<code>AGB-A2CJ</code>回來兩筆、<code>NTR-ACVJ</code>回來四筆，而且全都是對的遊戲。在Buyee，同樣這兩個編號什麼都不回——頁面會開，但上面沒有件數也沒有結果清單。Buyee認的是日文原名後面接上機種名：キャッスルヴァニア 暁月の円舞曲 ゲームボーイアドバンス回來47筆，而且卡帶就排在清單最前面；悪魔城ドラキュラ 蒼月の十字架 ニンテンドーDS回來91筆。</p>
+        <p>Game Boy Advance上的《曉月圓舞曲》：在駿河屋用<code>AGB-A2CJ</code>可以找到兩種版本的卡帶，或者用「キャッスルヴァニア 暁月の円舞曲」看到全部、包括那筆只有外盒的。不要照目錄原樣用<code>AGB-A2CJ-JPN-1</code>，也不要把<code>Castlevania 暁月の円舞曲</code>貼進商店。</p>
+        <p>Nintendo DS上的《蒼月十字架》：用「悪魔城ドラキュラ 蒼月の十字架」可以看到全部五筆，或者用<code>NTR-ACVJ</code>看到其中四筆。不要用<code>NTR-ACVJ-JPN-2</code>。</p>
+        <p>掌機世代替這個系列添上的通則，就是一個編輯動作：當目錄裡的編號以<code>-JPN</code>、<code>-JPN-1</code>或<code>-JPN-2</code>結尾時，從<code>JPN</code>前面那個連字號切掉，改搜字幹——在駿河屋。第2回找到的是一個正確、但店家根本沒有索引的Super Famicom編號，第3回在Nintendo 64上找到同樣的情形。這一回是夾在中間的那種：編號有被索引，只是索引的形式比那一列上寫的更短。</p>
+
+        <p><strong>Castlevania: Aria of Sorrow</strong> &middot; <span class="jp">キャッスルヴァニア 暁月の円舞曲</span> &middot; Game Boy Advance &middot; 2003 &middot; Konami &middot; product code <code>AGB-A2CJ</code></p>
+        <p><strong>購買方式：</strong>
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3DAGB-A2CJ%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp（依商品編號）</a> &middot;
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3D%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B9%25E3%2583%25AB%25E3%2583%25B4%25E3%2582%25A1%25E3%2583%258B%25E3%2582%25A2%2520%25E6%259A%2581%25E6%259C%2588%25E3%2581%25AE%25E5%2586%2586%25E8%2588%259E%25E6%259B%25B2%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp（依日文商品名）</a> &middot;
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://i0c.xyz/6a6994d1e0b3f?url=https%3A%2F%2Fbuyee.jp%2Fitem%2Fsearch%2Fquery%2F%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B9%25E3%2583%25AB%25E3%2583%25B4%25E3%2582%25A1%25E3%2583%258B%25E3%2582%25A2%2520%25E6%259A%2581%25E6%259C%2588%25E3%2581%25AE%25E5%2586%2586%25E8%2588%259E%25E6%259B%25B2%2520%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%259C%25E3%2583%25BC%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%2589%25E3%2583%2590%25E3%2583%25B3%25E3%2582%25B9%3Flang%3Den">Buyee</a></p>
+
+        <div class="kataban-search-cta">
+          <p><a href="/?q=&#24746;&#39764;&#22478;&#12489;&#12521;&#12461;&#12517;&#12521;">在Kataban目錄中瀏覽日版惡魔城全系列 &rarr;</a></p>
+        </div>
+
+        <div class="official-sources">
+          <p><strong>資料來源</strong></p>
+          <ul>
+            <li>維基百科（日文版），<a href="https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B9%E3%83%AB%E3%83%B4%E3%82%A1%E3%83%8B%E3%82%A2_%E3%80%9C%E6%9A%81%E6%9C%88%E3%81%AE%E5%86%86%E8%88%9E%E6%9B%B2%E3%80%9C">&#12300;&#12461;&#12515;&#12483;&#12473;&#12523;&#12532;&#12449;&#12491;&#12450; &#12316;&#26241;&#26376;&#12398;&#20870;&#33310;&#26354;&#12316;&#12301;</a>——Game Boy Advance，日本2003年5月8日、北美2003年5月6日、歐洲2003年5月9日；科樂美發行，Konami Computer Entertainment Tokyo開發；Wii U虛擬主機日本2015年8月26日；<em>Castlevania Advance Collection</em> 2021年9月24日在Nintendo Switch、PlayStation 4、Xbox One與PC上配信，M2開發、Konami Digital Entertainment發行，實體包裝版2025年7月31日（引自Fami通.com，2025年3月29日）。&#9733;該條目沒有列出Game Boy Advance版的任何廉價版</li>
+            <li>電擊Online（電撃オンライン，KADOKAWA Game Linkage），<a href="https://dengekionline.com/articles/131224/">&#12302;Castlevania &#26241;&#26376;&#12398;&#20870;&#33310;&#26354;&#12303;&#12398;&#30330;&#22770;&#26085;&#12290;&#26085;&#26412;&#12434;&#33310;&#21488;&#12395;&#12375;&#12383;&#12302;&#24746;&#39764;&#22478;&#12489;&#12521;&#12461;&#12517;&#12521;&#12303;&#12304;&#20170;&#26085;&#12399;&#20309;&#12398;&#26085;&#65306;5&#26376;8&#26085;&#12305;</a>（2022年5月8日）——「2003年5月8日にゲームボーイアドバンス（GBA）用ソフト『Castlevania 暁月の円舞曲』が発売されました。」請注意這篇報導寫這個名字時，用的正是與目錄相同的拉丁字母形式</li>
+            <li>維基百科（日文版），<a href="https://ja.wikipedia.org/wiki/%E6%82%AA%E9%AD%94%E5%9F%8E%E3%83%89%E3%83%A9%E3%82%AD%E3%83%A5%E3%83%A9_%E8%92%BC%E6%9C%88%E3%81%AE%E5%8D%81%E5%AD%97%E6%9E%B6">&#12300;&#24746;&#39764;&#22478;&#12489;&#12521;&#12461;&#12517;&#12521; &#33980;&#26376;&#12398;&#21313;&#23383;&#26550;&#12301;</a>——Nintendo DS，日本2005年8月25日；コナミ ザ・ベスト 廉価版 2006年6月29日；コナミ殿堂セレクション 廉価版 2009年10月29日；ベストセレクション 廉価版 2010年12月9日；北美2005年10月4日；歐洲2005年9月30日</li>
+            <li>&#32173;&#22522;&#30334;&#31185;&#65288;&#26085;&#25991;&#29256;&#65289;&#65292;<a href="https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%82%A8%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%86%E3%82%A4%E3%83%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E6%A9%9F%E6%A7%8B">&#12300;&#12467;&#12531;&#12500;&#12517;&#12540;&#12479;&#12456;&#12531;&#12479;&#12540;&#12486;&#12452;&#12531;&#12513;&#12531;&#12488;&#12524;&#12540;&#12486;&#12451;&#12531;&#12464;&#27231;&#27083;&#12301;</a>&#8212;&#8212;&#12300;12&#25165;&#20197;&#19978;&#23550;&#35937;&#12301;&#26159;CERO&#35373;&#31435;&#30070;&#21021;&#30340;&#24180;&#40801;&#21312;&#20998;&#20043;&#19968;&#65307;&#33258;2006&#24180;3&#26376;&#20197;&#24460;&#23529;&#26597;&#30340;&#20316;&#21697;&#36215;&#25913;&#29992;&#26032;&#30340;&#21312;&#20998;&#65288;2006&#24180;2&#26376;17&#26085;&#20844;&#24067;&#65289;</li>
+            <li>&#9733;TODO——Game Boy Advance版《曉月圓舞曲》[コナミ ザ ベスト]的發行日期。未取得。日文維基百科的條目沒有列出任何廉價版；某個比價網站有一個對應頁面，但那個頁面自己的商品名把這款遊戲與另一款混在一起，因此本文不予採用。本文只寫出目錄那一列的年份是2005，以及它的JAN回來的是[コナミ ザ ベスト]的商品</li>
+            <li>&#9733;TODO——<code>AGB-</code>／<code>NTR-</code>編號格式及其結尾<code>-JPN-1</code>／<code>-JPN-2</code>段落的第一手文件。未取得；任天堂並未公開此格式，而描述它的收藏者資料並不是文件。本文對該段落編碼了什麼不作任何主張</li>
+            <li>&#9733;TODO——任天堂自己的Wii U虛擬主機版說明書就放在<a href="https://www.nintendo.co.jp/data/software/manual/manual_pbjj_00.pdf">nintendo.co.jp</a>（HTTP 200，2,836,916位元組，最後修改於2015年12月22日），維基百科引用它時用的標題是拉丁字母的<em>Castlevania 暁月の円舞曲</em>。本文並未讀過這份PDF本身，因此不從它導出任何主張</li>
+            <li>Kataban目錄（<code>data/master_final.csv</code>）——Game Boy Advance與Nintendo DS上共有14列掛著惡魔城的名字；5列帶商品編號（<code>AGB-AAMJ-JPN-1</code>、<code>AGB-ACHJ-JPN-1</code>、<code>AGB-A2CJ-JPN-1</code>、<code>AGB-FADJ-JPN</code>、<code>NTR-ACVJ-JPN-2</code>），9列沒有；曉月圓舞曲收在<code>M720055</code>（拉丁字母名、2005、JAN <code>4988602126327</code>）與<code>M747166</code>（片假名名、2003、無編號無JAN）；蒼月十字架收成四列，年份2005（<code>M759622</code>）、2006（<code>M759608</code>）、2009（<code>M759609</code>）與2010（<code>M720996</code>），其中只有2010那一列帶商品編號</li>
+            <li>駿河屋搜尋實測，2026年9月9日，<code>category=2</code>，原始網址，件數取自頁面本身的「該当件数」——<code>AGB-A2CJ-JPN-1</code>、<code>AGB-A2CJ-JPN</code>、<code>NTR-ACVJ-JPN-2</code>、<code>AGB-AAMJ-JPN-1</code>、<code>AGB-FADJ-JPN</code>：HTTP 404與0筆；<code>AGB-A2CJ</code>：2筆；<code>NTR-ACVJ</code>：4筆；<code>AGB-AAMJ</code>：1筆；<code>AGB-FADJ</code>：1筆；<code>AGB-ACHJ-JPN-1</code>：2筆（都是廉價版）；<code>AGB-ACHJ</code>：4筆；<code>Castlevania 暁月の円舞曲</code>：4筆，全部是Advance Collection；キャッスルヴァニア 暁月の円舞曲與暁月の円舞曲：各8筆；<code>4988602126327</code>：2筆，都標著[コナミ ザ ベスト]，其中一筆是[外箱のみ]；蒼月の十字架與悪魔城ドラキュラ 蒼月の十字架：各5筆；<code>4988602156287</code>：1筆，即[廉価版]</li>
+            <li>Buyee搜尋實測，2026年9月9日，在真實瀏覽器中對原始<code>buyee.jp/item/search/query/</code>網址測得（Buyee對命令列請求只回HTTP 202與空白內容），件數取自頁面本身的「N hits」——キャッスルヴァニア 暁月の円舞曲 ゲームボーイアドバンス：47 hits；キャッスルヴァニア 暁月の円舞曲：67；暁月の円舞曲：68；悪魔城ドラキュラ 蒼月の十字架 ニンテンドーDS：91；<code>AGB-A2CJ</code>與<code>NTR-ACVJ</code>：搜尋頁面會開啟，但沒有件數也沒有結果清單</li>
+          </ul>
+        </div>
+
+        <p><em>本文為系列「惡魔城開發史」五部曲的第4回，配合10月15日新作發售推出。<a href="/blog/zh/2026-09-09-castlevania-development-history-1.html">第1回</a>、<a href="/blog/zh/2026-09-24-castlevania-development-history-2.html">第2回</a>與<a href="/blog/zh/2026-10-01-castlevania-development-history-3.html">第3回</a>都已經刊出。第5回將於2026年10月15日刊出。</em></p>
+      </div>
+    </article>
+
+    <div class="cta">
+      <h2>知道編號，找到遊戲</h2>
+      <p>輸入英文標題，就能得到日文名稱、印在卡帶側邊的編號，以及有貨的商店連結。</p>
+      <a class="ctabtn" href="/">搜尋遊戲</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Kataban &middot; 資料來自文化廳 Media Arts Database。英文標題比對自 Wikidata (CC0)。
+    <br>本站部分連結為聯盟行銷連結，Kataban 可能因此獲得佣金，包括作為 eBay Partner Network 聯盟會員（廣告）。
+    <br><a href="/blog/zh/">全部文章</a> &middot; <a href="/">回到搜尋工具</a> &middot; <a href="/privacy.html">隱私政策</a>
+    <div class="foot-brand">
+      <p class="foot-stars" aria-hidden="true">★★★</p>
+      <p class="foot-tagline">讓實體媒介長存。</p>
+      <span class="kb-word" aria-hidden="true">
+        <span class="kb-ghost"><span class="kb-grid" data-kb="kb-on-cyan"></span></span>
+        <span class="kb-grid kb-top" data-kb="kb-on-pink"></span>
+      </span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="/kataban.js"></script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>악마성 드라큘라 개발사 제4화: 휴대기 시대, 카탈로그의 상품 코드는 한 마디가 길다 &mdash; Kataban</title>
+<meta name="description" content="게임보이 어드밴스와 닌텐도 DS에서 Kataban 카탈로그는 AGB-A2CJ-JPN-1, NTR-ACVJ-JPN-2 같은 형태로 상품 코드를 저장합니다. 다섯 중 넷은 적힌 그대로는 HTTP 404와 0건을 돌려주고, -JPN 부분을 잘라내면 작동하는 검색어가 됩니다. 그리고 Buyee는 두 코드 어느 쪽에도 답하지 않습니다. 개발사 5부작 제4화.">
+<meta property="og:title" content="악마성 드라큘라 개발사 제4화: 휴대기 시대, 카탈로그의 상품 코드는 한 마디가 길다">
+<meta property="og:description" content="게임보이 어드밴스와 닌텐도 DS에서 Kataban 카탈로그는 AGB-A2CJ-JPN-1, NTR-ACVJ-JPN-2 같은 형태로 상품 코드를 저장합니다. 다섯 중 넷은 적힌 그대로는 HTTP 404와 0건을 돌려주고, -JPN 부분을 잘라내면 작동하는 검색어가 됩니다. 그리고 Buyee는 두 코드 어느 쪽에도 답하지 않습니다. 개발사 5부작 제4화.">
+<meta property="og:url" content="https://gamekataban.com/blog/ko/2026-10-08-castlevania-development-history-4.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://gamekataban.com/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://gamekataban.com/blog/ko/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-10-08-castlevania-development-history-4.html">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=IBM+Plex+Sans+JP:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/kataban.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+
+  <header class="sitehead">
+    <a class="sitehead-brand" href="/" aria-label="Kataban — back to the search tool">
+      <span class="kb-word">
+        <span class="kb-ghost" aria-hidden="true"><span class="kb-grid" id="kbGridCyan"></span></span>
+        <span class="kb-grid kb-top" id="kbGridPink" aria-hidden="true"></span>
+      </span>
+      <span class="sitehead-badge">&#22411;&#30058;</span>
+    </a>
+    <a class="backlink" href="/blog/ko/"><span class="arrow" aria-hidden="true">&#8592;</span> &#51204;&#52404; &#44544;</a>
+    <div class="langswitch">
+      <button class="langswitch-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langswitch-menu">
+        <span class="langswitch-current">&#54620;&#44397;&#50612;</span>
+        <span class="langswitch-caret" aria-hidden="true">&#9662;</span>
+      </button>
+      <ul class="langswitch-menu" id="langswitch-menu" role="menu" hidden>
+      <li role="none"><a role="menuitem" href="/blog/2026-10-08-castlevania-development-history-4.html" hreflang="en" lang="en" data-lang="en">English</a></li>
+      <li role="none"><a role="menuitem" href="/blog/zh/2026-10-08-castlevania-development-history-4.html" hreflang="zh-Hant" lang="zh-Hant" data-lang="zh">&#20013;&#25991;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/ko/2026-10-08-castlevania-development-history-4.html" hreflang="ko" lang="ko" data-lang="ko" aria-current="page">&#54620;&#44397;&#50612;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/es/2026-10-08-castlevania-development-history-4.html" hreflang="es" lang="es" data-lang="es">Espa&ntilde;ol</a></li>
+      <li role="none"><a role="menuitem" href="/blog/de/2026-10-08-castlevania-development-history-4.html" hreflang="de" lang="de" data-lang="de">Deutsch</a></li>
+      <li role="none"><a role="menuitem" href="/blog/fr/2026-10-08-castlevania-development-history-4.html" hreflang="fr" lang="fr" data-lang="fr">Français</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <article>
+      <div class="pagehead">
+        <p class="kicker">Kataban 블로그</p>
+        <h1>악마성 드라큘라 개발사 제4화: 휴대기 시대, 카탈로그의 상품 코드는 한 마디가 길다</h1>
+        <p class="postmeta">2026-10-08</p>
+        <ul class="posttags" aria-label="태그">
+          <li><a href="/blog/ko/tag/platform/gba/">게임보이 어드밴스</a></li>
+          <li><a href="/blog/ko/tag/platform/nintendo-ds/">닌텐도 DS</a></li>
+          <li><a href="/blog/ko/tag/genre/metroidvania/">메트로이드배니아</a></li>
+          <li><a href="/blog/ko/tag/decade/2000s/">2000년대</a></li>
+          <li><a href="/blog/ko/tag/publisher/konami/">코나미</a></li>
+          <li><a href="/blog/ko/tag/series/castlevania/">Castlevania</a></li>
+        </ul>
+      </div>
+
+      <div class="prose">
+        <p><a href="/blog/ko/2026-10-01-castlevania-development-history-3.html">제3화</a>에서는 플레이스테이션의 상품 코드가 작동했고, 닌텐도 64의 상품 코드는 HTTP 404를 돌려주었습니다. 휴대기 시대는 세 번째 방식으로 실패하는데, 이것이 구매자의 시간을 가장 많이 잡아먹는 유형입니다. 코드는 거기 있고, 코드는 정확하며, 그런데도 <em>카탈로그가 저장한 그대로는</em> 아무것도 나오지 않습니다. 뒤의 몇 글자를 지우면 대부분이 작동하기 시작합니다. 게임보이 어드밴스와 닌텐도 DS의 행들은 카탈로그가 시리즈 이름을 세 가지로 다르게 적어 놓은 자리이기도 하고, 한 행에 놓인 연도와 JAN이 같은 행의 코드와는 다른 판본을 가리키는 자리이기도 합니다.</p>
+
+        <ul>
+          <li>Kataban 카탈로그에는 게임보이 어드밴스와 닌텐도 DS의 악마성 드라큘라 행이 14개 있고, 그중 상품 코드를 가진 것은 5개뿐입니다</li>
+          <li>《효월의 원무곡》은 <code>AGB-A2CJ-JPN-1</code>로 저장되어 있으며 HTTP 404와 0건을 돌려줍니다. <code>AGB-A2CJ</code>는 두 건을 돌려줍니다</li>
+          <li>《창월의 십자가》는 <code>NTR-ACVJ-JPN-2</code>로 저장되어 있으며 HTTP 404와 0건을 돌려줍니다. <code>NTR-ACVJ</code>는 네 건을 돌려줍니다</li>
+          <li>《창월의 십자가》는 일본에서 네 번 발매되었습니다. 2005년 8월 25일, 그리고 2006년·2009년·2010년의 염가판 세 종입니다. 카탈로그의 네 행이 정확히 그 네 해를 달고 있으며, 코드와 JAN은 2010년 행에 붙어 있습니다</li>
+          <li>《효월의 원무곡》 행의 일본어 원제는 라틴 문자로 <code>Castlevania 暁月の円舞曲</code>라고 적혀 있습니다. 이것으로 검색하면 네 건이 나오는데, 그중 게임보이 어드밴스 카트리지는 하나도 없습니다</li>
+          <li>두 상점이 원하는 검색어는 서로 다릅니다. 스루가야는 상품 코드에 답하지만, Buyee는 <code>AGB-A2CJ</code>에도 <code>NTR-ACVJ</code>에도 아무것도 돌려주지 않습니다 — 실측 수치는 뒤에 있습니다</li>
+        </ul>
+
+        <h2>휴대기 시대에 카탈로그는 무엇을 담고 있을까요?</h2>
+        <p>게임보이 어드밴스 또는 닌텐도 DS에서 악마성 드라큘라 제목을 가진 행은 14개입니다. 그중 5개가 상품 코드를 가지고 있습니다. <code>AGB-AAMJ-JPN-1</code>(Circle of the Moon), <code>AGB-ACHJ-JPN-1</code>(백야의 협주곡), <code>AGB-A2CJ-JPN-1</code>(효월의 원무곡), <code>AGB-FADJ-JPN</code>(제3화에서 다룬, 2004년 닌텐도가 발매한 「悪魔城ドラキュラ」), 그리고 <code>NTR-ACVJ-JPN-2</code>(창월의 십자가)입니다. 나머지 9개는 상품 코드 항목이 비어 있으며, 여기에는 《빼앗긴 각인》, 《갤러리 오브 래버린스》 두 행, 그리고 네 개의 창월의 십자가 행 중 세 개가 포함됩니다.</p>
+        <p>비어 있는 것은 카탈로그의 항목이지, 게임에 코드가 없는 것이 아닙니다. 두 게임 모두 상자에 코드가 인쇄되어 있습니다. 《빼앗긴 각인》에는 <code>NTR-YR9J-JPN</code>이, 《갤러리 오브 래버린스》에는 <code>NTR-ACBJ-JPN</code>과 함께 또 하나의 번호 <code>RY024-J1</code>이 인쇄되어 있습니다(아래 사진).</p>
+        <figure>
+          <img src="/blog/images/2026-10-08-castlevania-development-history-4/order-of-ecclesia-box-ntr-yr9j-jpn.jpg"
+               alt="닌텐도 DS판 《빼앗긴 각인》(悪魔城ドラキュラ 奪われた刻印) 상자. 표지 오른쪽 아래에 NTR-YR9J-JPN이 인쇄되어 있음"
+               width="760" height="1347" loading="lazy"
+               style="width:100%;max-width:720px;margin:0;border-radius:8px">
+          <figcaption>닌텐도 DS판 《빼앗긴 각인》. 표지 오른쪽 아래에 <code>NTR-YR9J-JPN</code>이 인쇄되어 있습니다.</figcaption>
+        </figure>
+        <figure>
+          <img src="/blog/images/2026-10-08-castlevania-development-history-4/gallery-of-labyrinth-box-ntr-acbj-jpn.jpg"
+               alt="닌텐도 DS판 《갤러리 오브 래버린스》(悪魔城ドラキュラ ギャラリー オブ ラビリンス) 상자. 표지 오른쪽 아래에 RY024-J1과 NTR-ACBJ-JPN이 인쇄되어 있음"
+               width="760" height="1347" loading="lazy"
+               style="width:100%;max-width:720px;margin:0;border-radius:8px">
+          <figcaption>닌텐도 DS판 《갤러리 오브 래버린스》. 표지 오른쪽 아래에 <code>RY024-J1</code>과 <code>NTR-ACBJ-JPN</code>이 인쇄되어 있습니다.</figcaption>
+        </figure>
+        <p>시리즈 이름은 이 행들에서 한 가지로 적혀 있지 않습니다. 같은 시대의 일본어 원제 항목에 세 가지 형태가 나타납니다. 한자로 쓴 「悪魔城ドラキュラ」(Circle of the Moon, 2004년 닌텐도 발매판, 모든 DS 행), 가타카나로 쓴 「キャッスルヴァニア」(코드가 없는 효월과 백야 행), 그리고 라틴 문자로 쓴 <code>Castlevania</code>(코드가 있는 효월과 백야 행)입니다. 같은 게임이라도 두 행 중 어느 쪽을 보느냐에 따라 두 가지로 적혀 있습니다. <code>M720055</code> 행은 <code>Castlevania 暁月の円舞曲</code>라고 적고, <code>M747166</code> 행은 <code>キャッスルヴァニア -暁月の円舞曲-</code>라고 적습니다. 어느 쪽을 복사하느냐가 상점 검색 결과를 결정합니다.</p>
+
+        <h2>왜 상품 코드로는 아무것도 나오지 않을까요?</h2>
+        <p>저장된 다섯 코드 중 넷은 적힌 그대로 스루가야에 넣으면 HTTP 404와 0건을 돌려줍니다. <code>AGB-A2CJ-JPN-1</code>, <code>NTR-ACVJ-JPN-2</code>, <code>AGB-AAMJ-JPN-1</code>, <code>AGB-FADJ-JPN</code>입니다. 끝에 붙은 지역과 숫자 부분을 잘라내면 이 넷 모두가 작동하는 검색어가 됩니다. <code>AGB-A2CJ</code>는 두 건, <code>NTR-ACVJ</code>는 네 건, <code>AGB-AAMJ</code>는 한 건, <code>AGB-FADJ</code>는 한 건을 돌려줍니다. 일부만 잘라내는 것으로는 충분하지 않습니다. <code>AGB-A2CJ-JPN</code>은 여전히 HTTP 404와 0건입니다. 끊는 지점은 <code>JPN</code> 앞의 하이픈입니다.</p>
+        <p>그 끝부분이 무엇을 뜻하는지에 대한 1차 자료는 이 글을 위해 찾지 못했습니다. 닌텐도는 이 형식을 공개하지 않으며, 그것을 설명하는 수집가 자료는 문서가 아닙니다. 따라서 이 글은 <code>-JPN-1</code>과 <code>-JPN-2</code>가 무엇을 담고 있는지에 대해 어떤 주장도 하지 않습니다. 실측된 것은 이것뿐입니다. 상점의 검색 색인은 어간에는 답하고, 완전한 문자열에는 답하지 않습니다.</p>
+        <p>다섯 번째 코드는 예외이며, 이것은 대충 뭉뚱그리지 말고 정확하게 적어 둘 값어치가 있습니다. <code>AGB-ACHJ-JPN-1</code>은 HTTP 200과 두 건을 돌려주는데, 두 건 모두 염가 재발매판입니다. 「キャッスルヴァニア ～白夜の協奏曲～ [コナミ ザ ベスト]」와 「キャッスルヴァニア～白夜の協奏曲～ [廉価版] (箱説なし)」입니다. 잘라낸 <code>AGB-ACHJ</code>는 네 건을 돌려주는데, 앞의 두 건에 「キャッスルヴァニア～白夜の協奏曲～（美品）」와 「キャッスルヴァニア～白夜の協奏曲～ (箱説なし)」가 더해진 것입니다. 즉 완전한 코드가 여기서 그냥 망가진 것은 아니고, 더 좁을 뿐입니다. 그것이 무언가를 찾아낼 때, 찾아내는 것은 나중 판본이고 놓치는 것은 이른 판본입니다.</p>
+
+        <h2>《효월의 원무곡》 행의 각 항목은 어디를 가리킬까요?</h2>
+        <p>「キャッスルヴァニア 〜暁月の円舞曲〜」는 2003년 5월 8일 일본에서 게임보이 어드밴스로 발매되었고 발매사는 코나미입니다. 북미는 이틀 앞선 2003년 5월 6일, 유럽은 하루 뒤인 2003년 5월 9일이었습니다.</p>
+        <p>카탈로그는 이 게임을 두 번 담고 있습니다. <code>M747166</code> 행은 제목이 <code>キャッスルヴァニア -暁月の円舞曲-</code>, 연도는 <code>2003</code>이며 상품 코드도 JAN도 없습니다. <code>M720055</code> 행은 제목이 <code>Castlevania 暁月の円舞曲</code>, 기종은 ゲームボーイアドバンス, 상품 코드는 <code>AGB-A2CJ-JPN-1</code>, 발매사는 コナミ, 연도는 <code>2005</code>, JAN은 <code>4988602126327</code>입니다. 코드를 가진 행은 발매 연도를 가진 행이 아닙니다.</p>
+        <p>2005년 행의 항목들이 어디에 가 닿는지는 실측이 말해 줍니다. JAN <code>4988602126327</code>로 검색하면 두 건이 나오고, 둘 다 [コナミ ザ ベスト]라고 표시되어 있습니다. 「キャッスルヴァニア ～暁月の円舞曲～ [コナミ ザ ベスト]」와 「[外箱のみ] キャッスルヴァニア ～暁月の円舞曲～ [コナミ ザ ベスト]」입니다. 이 JAN은 평범한 쪽 물건을 아예 돌려주지 않습니다. 잘라낸 코드 <code>AGB-A2CJ</code>로 검색하면 다른 두 건이 나옵니다. 「キャッスルヴァニア～暁月の円舞曲～」와 「キャッスルヴァニア ～暁月の円舞曲～ [コナミ ザ ベスト]」입니다. 즉 한 행 안에서 JAN은 염가판만 찾아내고, 코드는 염가판과 그 이전 판본을 함께 찾아냅니다.</p>
+        <p>한 가지는 정확하게 말해 두겠습니다. 이 글을 위해 확인한 자료 중에 이 게임의 コナミ ザ ベスト판 발매일을 알려 주는 것은 하나도 없었습니다. 일본어 위키백과 문서는 게임보이 어드밴스판, Wii U 버추얼 콘솔판, 그리고 Advance Collection을 열거하지만 염가판은 하나도 열거하지 않습니다. 실측된 사실은 이렇습니다. 2005년 행의 JAN은 [コナミ ザ ベスト] 물건만 돌려주고, 그 행의 연도는 2005입니다. 이 둘은 서로 들어맞습니다. 그러나 들어맞는 것과 출처가 있는 것은 같은 일이 아니며, 이 글은 앞의 것을 뒤의 것으로 바꾸지 않습니다.</p>
+        <p>구매 전에 읽어야 할 표시가 하나 있습니다. 「外箱のみ」는 겉상자만 있고 카트리지는 없다는 뜻입니다. 그 JAN이 돌려주는 두 건 중 하나이며, 완전한 물건과 같은 JAN을 달고 있습니다. JAN 검색만으로는 두 결과 중 하나가 게임이 아니라는 사실을 알 수 없습니다.</p>
+
+        <h2>카탈로그 행의 일본어 원제를 그대로 붙여 넣으면 어떻게 될까요?</h2>
+        <p><code>Castlevania 暁月の円舞曲</code> — <code>M720055</code> 행의 제목 항목을 그대로 옮긴 것 — 으로 스루가야를 검색하면 HTTP 200과 네 건이 나옵니다. 그중 게임보이 어드밴스 카트리지는 하나도 없습니다. 네 건 모두 이름이 <code>Castlevania Advance Collection</code>이며 [通常版]과 DELUXE EDITION 형태로 나뉘어 있습니다.</p>
+        <p>이 네 건이 존재하는 것은 그 합본이 실제로 매대에 있기 때문입니다. <em>Castlevania Advance Collection</em>은 2021년 9월 24일 닌텐도 스위치, 플레이스테이션 4, Xbox One, PC에 다운로드로 출시되었고 개발은 M2, 발매는 Konami Digital Entertainment이며, 패키지판은 2025년 7월 31일에 나왔습니다. 《효월의 원무곡》은 그 수록작 중 하나입니다. 그러니 라틴 문자 검색어가 돌려주는 것은 잡음이 아닙니다. 일본어 이름에 <code>Castlevania</code>라는 단어를 정당하게 달고 있는, 지금 팔리는 다른 상품을 돌려주는 것입니다.</p>
+        <p>가타카나 형태로 바꾸면 카트리지가 나옵니다. <code>キャッスルヴァニア 暁月の円舞曲</code>는 여덟 건을 돌려줍니다. 게임보이 어드밴스 네 건(「キャッスルヴァニア～暁月の円舞曲～」, [コナミ ザ ベスト] 재발매판, (箱説なし) 한 건, 그리고 그 [外箱のみ] 물건)과 같은 Advance Collection 네 건입니다. 시리즈 이름을 아예 빼고 <code>暁月の円舞曲</code>만 검색해도 같은 여덟 건이 나옵니다.</p>
+        <p>이것은 제3화가 <code>LEGEND OF CORNELL</code>에서 기록한 것과 같은 실패이며, 다른 행의 다른 항목에서 일어났을 뿐입니다. 카탈로그는 일본어 원제를 라틴 문자로 적고, 상점은 가타카나로 적으며, 카탈로그를 그대로 옮겨 만든 검색어는 아무것도 아니거나 엉뚱한 상품을 돌려줍니다. 여기서는 네 건이 돌아오는데, 그쪽이 더 나쁜 경우입니다. 0건을 돌려주는 검색어는 스스로 실패를 알리지만, 엉뚱한 기종의 물건 네 건을 돌려주는 검색어는 그러지 않습니다. ★이번 회의 주제가 문자 형태 그 자체이므로, 이 글에서 상점에 붙여 넣을 문자열은 모두 일본어 원문 그대로 두었습니다. 「暁月の円舞曲」를 「효월의 원무곡」으로 바꿔 검색하지 마십시오. 스루가야의 색인에는 그런 표기가 없습니다.</p>
+
+        <h2>DS의 《창월의 십자가》는 어떨까요?</h2>
+        <p>「悪魔城ドラキュラ 蒼月の十字架」는 2005년 8월 25일 일본에서 닌텐도 DS로 발매되었고, 이후 일본에서 세 번 더 발매되었습니다. 2006년 6월 29일 コナミ ザ・ベスト 廉価版, 2009년 10월 29일 コナミ殿堂セレクション 廉価版, 그리고 2010년 12월 9일 ベストセレクション 廉価版입니다. 유럽은 2005년 9월 30일, 북미는 2005년 10월 4일이었습니다.</p>
+        <p>카탈로그는 이 게임을 네 행으로 담고 있으며 연도는 2005, 2006, 2009, 2010입니다. 위의 네 번의 일본 발매에 순서대로 하나씩 대응합니다. 그중 2010년 행인 <code>M720996</code>만이 상품 코드(<code>NTR-ACVJ-JPN-2</code>)와 JAN <code>4988602156287</code>을 가지고 있습니다. 나머지 세 행은 JAN(<code>4988602121568</code>, <code>4988602129977</code>, <code>4988602149067</code>)은 가졌지만 코드는 없습니다. 즉 이 묶음에서 코드를 가진 유일한 행은 게임이 나오고 5년 뒤의 마지막 염가판이며, 2005년 원판이 아닙니다. 네 행 모두 시리즈 이름을 한자로 적습니다.</p>
+        <p>아래 사진의 상자에는 표지 오른쪽 위에 CERO의 옛 등급 표시 「12才以上対象」가 붙어 있습니다. CERO는 2006년 3월 이후 심사분부터 등급 구분을 새로 바꿨으므로, 이 상자는 그 변경 전에 심사를 받은 판입니다. 따라서 2005년 8월 25일의 초판, 즉 카탈로그에서 코드가 없는 2005년 행일 가능성이 높습니다. 다만 염가판이 옛 표시 그대로 인쇄되었을 가능성은 상자만으로는 배제할 수 없습니다.</p>
+        <figure>
+          <img src="/blog/images/2026-10-08-castlevania-development-history-4/dawn-of-sorrow-box-cero-12.jpg"
+               alt="닌텐도 DS판 《창월의 십자가》(悪魔城ドラキュラ 蒼月の十字架) 상자. 표지 오른쪽 위에 CERO의 옛 표시 「12才以上対象」가 있음"
+               width="760" height="1347" loading="lazy"
+               style="width:100%;max-width:720px;margin:0;border-radius:8px">
+          <figcaption>닌텐도 DS판 《창월의 십자가》. 표지 오른쪽 위에 CERO의 옛 표시 「12才以上対象」가 있습니다.</figcaption>
+        </figure>
+        <p><code>NTR-ACVJ</code>로 검색하면 네 건이 나옵니다. 「悪魔城ドラキュラ ～蒼月の十字架～」, 「悪魔城ドラキュラ ～蒼月の十字架～ (箱説なし)」, 「悪魔城ドラキュラ ～蒼月の十字架～[コナミ ザ・ベスト]」, 「悪魔城ドラキュラ ～蒼月の十字架～[コナミ殿堂コレクション]」입니다. 제목 「蒼月の十字架」로 검색하면 다섯 건이 나옵니다. 앞의 네 건에 「悪魔城ドラキュラ～蒼月の十字架～[廉価版]」이 더해집니다. 시리즈 이름까지 붙여 「悪魔城ドラキュラ 蒼月の十字架」로 검색해도 같은 다섯 건입니다.</p>
+        <p>다섯 번째 물건이 바로 코드가 닿지 못하는 것이고, 같은 행의 JAN은 그 외에는 아무것도 닿지 못합니다. <code>4988602156287</code>로 검색하면 정확히 한 건, 「悪魔城ドラキュラ～蒼月の十字架～[廉価版]」이 나옵니다. 즉 <code>M720996</code> 행에서 코드는 네 건을, JAN은 한 건을 돌려주며, 두 집합은 전혀 겹치지 않습니다.</p>
+        <p>상점의 판본 표시와 자료에 기록된 판본 이름도 같은 문자열이 아닙니다. 2009년 발매는 자료에 「コナミ殿堂<strong>セレクション</strong>」으로 기록되어 있지만, 상점의 상품명은 「[コナミ殿堂<strong>コレクション</strong>]」입니다. 기록된 네 번의 발매 중 두 번은 이름 자체에 「廉価版」이 들어 있지만, 상점은 [廉価版]을 단 한 건의 표시로만 씁니다. 따라서 상점의 표시를 날짜가 있는 특정 판본에 대응시키는 것은 추측이며, 이 글은 그 추측을 하지 않습니다. 이 글이 보고하는 것은 어떤 검색어가 어떤 물건을 돌려주는가입니다.</p>
+        <p>여기서 읽어야 할 상태 표시는 「箱説なし」입니다. 상자와 설명서가 들어 있지 않다는 뜻이며, 카트리지만 있다는 말입니다. 코드 결과에도 제목 결과에도 나타나므로, 어느 검색어도 이것을 대신 걸러 주지 않습니다.</p>
+
+        <h2>그래서 어떤 검색어를 써야 할까요?</h2>
+        <p>아래는 실측 결과이며 추정이 아닙니다. 스루가야는 원본 검색 URL로 측정했고, Buyee는 실제 브라우저에서 원본 검색 URL로 측정했습니다. Buyee는 명령줄 요청에 HTTP 202와 빈 본문으로 답하기 때문입니다.</p>
+        <p>두 상점은 같은 검색어를 받지 않습니다. 스루가야에서는 상품 코드가 정밀한 도구입니다. <code>AGB-A2CJ</code>는 두 건, <code>NTR-ACVJ</code>는 네 건을 돌려주며 모두 맞는 게임입니다. Buyee에서는 같은 두 코드가 아무것도 돌려주지 않습니다. 페이지는 열리지만 그 위에 건수도 결과 목록도 없습니다. Buyee가 답하는 것은 일본어 원제 뒤에 기종 이름을 붙인 형태입니다. キャッスルヴァニア 暁月の円舞曲 ゲームボーイアドバンス는 47 hits를 돌려주며 카트리지가 목록 맨 위에 있고, 悪魔城ドラキュラ 蒼月の十字架 ニンテンドーDS는 91을 돌려줍니다.</p>
+        <p>게임보이 어드밴스의 《효월의 원무곡》은 스루가야에서 <code>AGB-A2CJ</code>로 두 판본의 카트리지를 찾거나, 「キャッスルヴァニア 暁月の円舞曲」로 겉상자만 있는 물건까지 포함해 전부를 보십시오. 카탈로그가 저장한 그대로의 <code>AGB-A2CJ-JPN-1</code>은 쓰지 마시고, <code>Castlevania 暁月の円舞曲</code>를 상점에 붙여 넣지 마십시오.</p>
+        <p>닌텐도 DS의 《창월의 십자가》는 「悪魔城ドラキュラ 蒼月の十字架」로 다섯 건 전부를 보거나, <code>NTR-ACVJ</code>로 그중 네 건을 보십시오. <code>NTR-ACVJ-JPN-2</code>는 쓰지 마십시오.</p>
+        <p>휴대기 시대가 이 시리즈에 더해 주는 일반 규칙은 한 번의 편집입니다. 카탈로그의 코드가 <code>-JPN</code>이나 <code>-JPN-1</code>, <code>-JPN-2</code>로 끝나면 <code>JPN</code> 앞의 하이픈에서 잘라내고 어간으로 검색하십시오 — 스루가야에서 말입니다. 제2화는 정확하지만 상점이 아예 색인하지 않는 슈퍼 패미컴 코드를 찾아냈고, 제3화는 닌텐도 64에서 같은 일을 찾아냈습니다. 이번은 그 중간에 놓인 경우입니다. 코드는 색인되어 있으며, 다만 그 행에 적힌 것보다 짧은 형태로 색인되어 있습니다.</p>
+
+        <p><strong>Castlevania: Aria of Sorrow</strong> &middot; <span class="jp">キャッスルヴァニア 暁月の円舞曲</span> &middot; Game Boy Advance &middot; 2003 &middot; Konami &middot; product code <code>AGB-A2CJ</code></p>
+        <p><strong>구매처:</strong>
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3DAGB-A2CJ%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp (상품 코드로 검색)</a> &middot;
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3D%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B9%25E3%2583%25AB%25E3%2583%25B4%25E3%2582%25A1%25E3%2583%258B%25E3%2582%25A2%2520%25E6%259A%2581%25E6%259C%2588%25E3%2581%25AE%25E5%2586%2586%25E8%2588%259E%25E6%259B%25B2%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp (일본어 제목으로 검색)</a> &middot;
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://i0c.xyz/6a6994d1e0b3f?url=https%3A%2F%2Fbuyee.jp%2Fitem%2Fsearch%2Fquery%2F%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B9%25E3%2583%25AB%25E3%2583%25B4%25E3%2582%25A1%25E3%2583%258B%25E3%2582%25A2%2520%25E6%259A%2581%25E6%259C%2588%25E3%2581%25AE%25E5%2586%2586%25E8%2588%259E%25E6%259B%25B2%2520%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%259C%25E3%2583%25BC%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%2589%25E3%2583%2590%25E3%2583%25B3%25E3%2582%25B9%3Flang%3Den">Buyee</a></p>
+
+        <div class="kataban-search-cta">
+          <p><a href="/?q=&#24746;&#39764;&#22478;&#12489;&#12521;&#12461;&#12517;&#12521;">Kataban 카탈로그에서 일본판 악마성 드라큘라 시리즈 둘러보기 &rarr;</a></p>
+        </div>
+
+        <div class="official-sources">
+          <p><strong>출처</strong></p>
+          <ul>
+            <li>위키백과(일본어판), <a href="https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B9%E3%83%AB%E3%83%B4%E3%82%A1%E3%83%8B%E3%82%A2_%E3%80%9C%E6%9A%81%E6%9C%88%E3%81%AE%E5%86%86%E8%88%9E%E6%9B%B2%E3%80%9C">&#12300;&#12461;&#12515;&#12483;&#12473;&#12523;&#12532;&#12449;&#12491;&#12450; &#12316;&#26241;&#26376;&#12398;&#20870;&#33310;&#26354;&#12316;&#12301;</a> &mdash; 게임보이 어드밴스, 일본 2003년 5월 8일, 북미 2003년 5월 6일, 유럽 2003년 5월 9일. 발매 코나미, 개발 Konami Computer Entertainment Tokyo. Wii U 버추얼 콘솔 일본 2015년 8월 26일. <em>Castlevania Advance Collection</em> 2021년 9월 24일 닌텐도 스위치·플레이스테이션 4·Xbox One·PC 배포, 개발 M2, 발매 Konami Digital Entertainment, 패키지판 2025년 7월 31일(파미통닷컴 2025년 3월 29일 기사 인용). &#9733;이 문서에는 게임보이 어드밴스판의 염가판이 하나도 열거되어 있지 않습니다</li>
+            <li>덴게키 온라인(電撃オンライン, KADOKAWA Game Linkage), <a href="https://dengekionline.com/articles/131224/">&#12302;Castlevania &#26241;&#26376;&#12398;&#20870;&#33310;&#26354;&#12303;&#12398;&#30330;&#22770;&#26085;&#12290;&#26085;&#26412;&#12434;&#33310;&#21488;&#12395;&#12375;&#12383;&#12302;&#24746;&#39764;&#22478;&#12489;&#12521;&#12461;&#12517;&#12521;&#12303;&#12304;&#20170;&#26085;&#12399;&#20309;&#12398;&#26085;&#65306;5&#26376;8&#26085;&#12305;</a> (2022년 5월 8일) &mdash; 「2003年5月8日にゲームボーイアドバンス（GBA）用ソフト『Castlevania 暁月の円舞曲』が発売されました。」 이 기사도 제목을 카탈로그와 같은 라틴 문자 형태로 적고 있다는 점에 주목하십시오</li>
+            <li>위키백과(일본어판), <a href="https://ja.wikipedia.org/wiki/%E6%82%AA%E9%AD%94%E5%9F%8E%E3%83%89%E3%83%A9%E3%82%AD%E3%83%A5%E3%83%A9_%E8%92%BC%E6%9C%88%E3%81%AE%E5%8D%81%E5%AD%97%E6%9E%B6">&#12300;&#24746;&#39764;&#22478;&#12489;&#12521;&#12461;&#12517;&#12521; &#33980;&#26376;&#12398;&#21313;&#23383;&#26550;&#12301;</a> &mdash; 닌텐도 DS, 일본 2005년 8월 25일. コナミ ザ・ベスト 廉価版 2006년 6월 29일, コナミ殿堂セレクション 廉価版 2009년 10월 29일, ベストセレクション 廉価版 2010년 12월 9일. 북미 2005년 10월 4일, 유럽 2005년 9월 30일</li>
+            <li>&#50948;&#53412;&#48177;&#44284;(&#51068;&#48376;&#50612;&#54032;), <a href="https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%82%A8%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%86%E3%82%A4%E3%83%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E6%A9%9F%E6%A7%8B">&#12300;&#12467;&#12531;&#12500;&#12517;&#12540;&#12479;&#12456;&#12531;&#12479;&#12540;&#12486;&#12452;&#12531;&#12513;&#12531;&#12488;&#12524;&#12540;&#12486;&#12451;&#12531;&#12464;&#27231;&#27083;&#12301;</a> &mdash; &#12300;12&#25165;&#20197;&#19978;&#23550;&#35937;&#12301;&#45716; CERO &#49444;&#47549; &#45817;&#52488;&#51032; &#50672;&#47161; &#44396;&#48516; &#51473; &#54616;&#45208;&#51060;&#47728;, 2006&#45380; 3&#50900; &#51060;&#54980; &#49900;&#49324;&#48516;&#48512;&#53552; &#44396;&#48516;&#51060; &#48320;&#44221;&#46120;(2006&#45380; 2&#50900; 17&#51068; &#48156;&#54364;)</li>
+            <li>&#9733;TODO &mdash; 게임보이 어드밴스판 《효월의 원무곡》 [コナミ ザ ベスト]의 발매일. 찾지 못했습니다. 일본어 위키백과 문서에는 염가판이 열거되어 있지 않고, 어느 가격 비교 사이트에 해당 페이지가 있으나 그 페이지의 상품명 자체가 이 게임과 다른 게임을 뒤섞고 있어 여기서는 쓰지 않았습니다. 이 글은 카탈로그 행의 연도가 2005이고 그 JAN이 [コナミ ザ ベスト] 물건을 돌려준다는 것만 적습니다</li>
+            <li>&#9733;TODO &mdash; <code>AGB-</code>/<code>NTR-</code> 코드 형식과 그 끝의 <code>-JPN-1</code> / <code>-JPN-2</code> 부분에 대한 1차 문서. 찾지 못했습니다. 닌텐도는 이 형식을 공개하지 않으며 그것을 설명하는 수집가 자료는 문서가 아닙니다. 이 글은 그 부분이 무엇을 담고 있는지에 대해 어떤 주장도 하지 않습니다</li>
+            <li>&#9733;TODO &mdash; 닌텐도 자신의 Wii U 버추얼 콘솔 설명서가 <a href="https://www.nintendo.co.jp/data/software/manual/manual_pbjj_00.pdf">nintendo.co.jp</a>에 올라와 있으며(HTTP 200, 2,836,916바이트, 최종 수정 2015년 12월 22일), 위키백과는 이를 라틴 문자 제목 <em>Castlevania 暁月の円舞曲</em>로 인용합니다. 이 초고에서는 PDF 자체를 읽지 않았으므로 여기서 어떤 주장도 이끌어 내지 않습니다</li>
+            <li>Kataban 카탈로그(<code>data/master_final.csv</code>) &mdash; 게임보이 어드밴스와 닌텐도 DS에 악마성 드라큘라 제목을 가진 행이 14개. 5개가 상품 코드를 가지고(<code>AGB-AAMJ-JPN-1</code>, <code>AGB-ACHJ-JPN-1</code>, <code>AGB-A2CJ-JPN-1</code>, <code>AGB-FADJ-JPN</code>, <code>NTR-ACVJ-JPN-2</code>) 9개는 없습니다. 효월의 원무곡은 <code>M720055</code>(라틴 문자 제목, 2005, JAN <code>4988602126327</code>)와 <code>M747166</code>(가타카나 제목, 2003, 코드·JAN 없음)로, 창월의 십자가는 2005(<code>M759622</code>), 2006(<code>M759608</code>), 2009(<code>M759609</code>), 2010(<code>M720996</code>) 네 행으로 담겨 있으며 그중 2010년 행만 상품 코드를 가집니다</li>
+            <li>스루가야 검색 실측, 2026년 9월 9일, <code>category=2</code>, 원본 URL, 건수는 페이지 자체의 「該当件数」 수치 &mdash; <code>AGB-A2CJ-JPN-1</code>, <code>AGB-A2CJ-JPN</code>, <code>NTR-ACVJ-JPN-2</code>, <code>AGB-AAMJ-JPN-1</code>, <code>AGB-FADJ-JPN</code>: HTTP 404와 0건. <code>AGB-A2CJ</code>: 2건. <code>NTR-ACVJ</code>: 4건. <code>AGB-AAMJ</code>: 1건. <code>AGB-FADJ</code>: 1건. <code>AGB-ACHJ-JPN-1</code>: 2건(둘 다 염가판). <code>AGB-ACHJ</code>: 4건. <code>Castlevania 暁月の円舞曲</code>: 4건, 모두 Advance Collection. キャッスルヴァニア 暁月の円舞曲와 暁月の円舞曲: 각 8건. <code>4988602126327</code>: 2건, 둘 다 [コナミ ザ ベスト], 그중 하나는 [外箱のみ]. 蒼月の十字架와 悪魔城ドラキュラ 蒼月の十字架: 각 5건. <code>4988602156287</code>: 1건, [廉価版]</li>
+            <li>Buyee 검색 실측, 2026년 9월 9일, 실제 브라우저에서 원본 <code>buyee.jp/item/search/query/</code> URL로 측정(Buyee는 명령줄 요청에 HTTP 202와 빈 본문으로 답합니다). 건수는 페이지 자체의 &#8220;N hits&#8221; 수치 &mdash; キャッスルヴァニア 暁月の円舞曲 ゲームボーイアドバンス: 47 hits. キャッスルヴァニア 暁月の円舞曲: 67. 暁月の円舞曲: 68. 悪魔城ドラキュラ 蒼月の十字架 ニンテンドーDS: 91. <code>AGB-A2CJ</code>와 <code>NTR-ACVJ</code>: 검색 페이지는 열리지만 건수도 결과 목록도 없습니다</li>
+          </ul>
+        </div>
+
+        <p><em>이 글은 10월 15일 신작 발매에 맞춰 악마성 드라큘라 개발사를 되짚는 5부작 시리즈의 제4화입니다. <a href="/blog/ko/2026-09-09-castlevania-development-history-1.html">제1화</a>, <a href="/blog/ko/2026-09-24-castlevania-development-history-2.html">제2화</a>, <a href="/blog/ko/2026-10-01-castlevania-development-history-3.html">제3화</a>는 이미 공개되어 있습니다. 제5화는 2026년 10월 15일에 공개됩니다.</em></p>
+      </div>
+    </article>
+
+    <div class="cta">
+      <h2>코드를 알면, 게임을 찾는다</h2>
+      <p>서양 제목을 입력하면 일본어 이름, 카트리지 옆면에 인쇄된 코드, 그리고 재고가 있는 상점 링크까지 확인할 수 있습니다.</p>
+      <a class="ctabtn" href="/">게임 검색하기</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Kataban &middot; 데이터 출처: 문화청 Media Arts Database. 영어 제목은 Wikidata(CC0)에서 매칭.
+    <br>이 사이트의 일부 링크는 제휴 링크이며, Kataban은 eBay Partner Network 제휴사를 포함해 이를 통해 수수료를 받을 수 있습니다(광고).
+    <br><a href="/blog/ko/">전체 글</a> &middot; <a href="/">검색 도구로 돌아가기</a> &middot; <a href="/privacy.html">개인정보처리방침</a>
+    <div class="foot-brand">
+      <p class="foot-stars" aria-hidden="true">★★★</p>
+      <p class="foot-tagline">피지컬 미디어여 영원하라.</p>
+      <span class="kb-word" aria-hidden="true">
+        <span class="kb-ghost"><span class="kb-grid" data-kb="kb-on-cyan"></span></span>
+        <span class="kb-grid kb-top" data-kb="kb-on-pink"></span>
+      </span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="/kataban.js"></script>
+</body>
+</html>

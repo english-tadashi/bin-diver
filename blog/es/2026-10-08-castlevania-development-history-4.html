@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Historia del desarrollo de Castlevania, parte 4: los códigos portátiles a los que les sobra un sufijo &mdash; Kataban</title>
+<meta name="description" content="En Game Boy Advance y Nintendo DS el catálogo de Kataban guarda códigos de producto como AGB-A2CJ-JPN-1 y NTR-ACVJ-JPN-2. Cuatro de los cinco devuelven HTTP 404 y cero resultados tal como están escritos; cortar el sufijo -JPN los convierte en búsquedas que funcionan, y Buyee no responde a ninguno de los dos códigos. Cuarta parte de la serie sobre la historia del desarrollo.">
+<meta property="og:title" content="Historia del desarrollo de Castlevania, parte 4: los códigos portátiles a los que les sobra un sufijo">
+<meta property="og:description" content="En Game Boy Advance y Nintendo DS el catálogo de Kataban guarda códigos de producto como AGB-A2CJ-JPN-1 y NTR-ACVJ-JPN-2. Cuatro de los cinco devuelven HTTP 404 y cero resultados tal como están escritos; cortar el sufijo -JPN los convierte en búsquedas que funcionan, y Buyee no responde a ninguno de los dos códigos. Cuarta parte de la serie sobre la historia del desarrollo.">
+<meta property="og:url" content="https://gamekataban.com/blog/es/2026-10-08-castlevania-development-history-4.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es_ES">
+<meta property="og:image" content="https://gamekataban.com/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://gamekataban.com/blog/es/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-10-08-castlevania-development-history-4.html">
+<link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-10-08-castlevania-development-history-4.html">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=IBM+Plex+Sans+JP:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/kataban.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+
+  <header class="sitehead">
+    <a class="sitehead-brand" href="/" aria-label="Kataban — back to the search tool">
+      <span class="kb-word">
+        <span class="kb-ghost" aria-hidden="true"><span class="kb-grid" id="kbGridCyan"></span></span>
+        <span class="kb-grid kb-top" id="kbGridPink" aria-hidden="true"></span>
+      </span>
+      <span class="sitehead-badge">&#22411;&#30058;</span>
+    </a>
+    <a class="backlink" href="/blog/es/"><span class="arrow" aria-hidden="true">&#8592;</span> Todas las entradas</a>
+    <div class="langswitch">
+      <button class="langswitch-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langswitch-menu">
+        <span class="langswitch-current">ES &mdash; Espa&ntilde;ol</span>
+        <span class="langswitch-caret" aria-hidden="true">&#9662;</span>
+      </button>
+      <ul class="langswitch-menu" id="langswitch-menu" role="menu" hidden>
+      <li role="none"><a role="menuitem" href="/blog/2026-10-08-castlevania-development-history-4.html" hreflang="en" lang="en" data-lang="en">English</a></li>
+      <li role="none"><a role="menuitem" href="/blog/zh/2026-10-08-castlevania-development-history-4.html" hreflang="zh-Hant" lang="zh-Hant" data-lang="zh">&#20013;&#25991;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/ko/2026-10-08-castlevania-development-history-4.html" hreflang="ko" lang="ko" data-lang="ko">&#54620;&#44397;&#50612;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/es/2026-10-08-castlevania-development-history-4.html" hreflang="es" lang="es" data-lang="es" aria-current="page">Espa&ntilde;ol</a></li>
+      <li role="none"><a role="menuitem" href="/blog/de/2026-10-08-castlevania-development-history-4.html" hreflang="de" lang="de" data-lang="de">Deutsch</a></li>
+      <li role="none"><a role="menuitem" href="/blog/fr/2026-10-08-castlevania-development-history-4.html" hreflang="fr" lang="fr" data-lang="fr">Français</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <article>
+      <div class="pagehead">
+        <p class="kicker">Blog de Kataban</p>
+        <h1>Historia del desarrollo de Castlevania, parte 4: los códigos portátiles a los que les sobra un sufijo</h1>
+        <p class="postmeta">2026-10-08</p>
+        <ul class="posttags" aria-label="Etiquetas">
+          <li><a href="/blog/es/tag/platform/gba/">Game Boy Advance</a></li>
+          <li><a href="/blog/es/tag/platform/nintendo-ds/">Nintendo DS</a></li>
+          <li><a href="/blog/es/tag/genre/metroidvania/">Metroidvania</a></li>
+          <li><a href="/blog/es/tag/decade/2000s/">Años 2000</a></li>
+          <li><a href="/blog/es/tag/publisher/konami/">Konami</a></li>
+          <li><a href="/blog/es/tag/series/castlevania/">Castlevania</a></li>
+        </ul>
+      </div>
+
+      <div class="prose">
+        <p>En la <a href="/blog/es/2026-10-01-castlevania-development-history-3.html">parte 3</a> el código de producto de PlayStation funcionaba y el de Nintendo 64 devolvía HTTP 404. La era portátil falla de una tercera manera, y es la que más tiempo le cuesta al comprador: los códigos están ahí, son correctos, y aun así no devuelven nada <em>tal como los guarda el catálogo</em>. Basta con borrar los últimos caracteres para que casi todos empiecen a funcionar. Las filas de Game Boy Advance y Nintendo DS son además el lugar donde el catálogo escribe el nombre de la serie de tres maneras distintas, y donde el año y el JAN de una fila apuntan a una edición distinta que el código de esa misma fila.</p>
+
+        <ul>
+          <li>El catálogo de Kataban tiene 14 filas de Castlevania en Game Boy Advance y Nintendo DS; solo 5 llevan código de producto</li>
+          <li>Akatsuki no Menuetto está guardado como <code>AGB-A2CJ-JPN-1</code>, que devuelve HTTP 404 y cero resultados; <code>AGB-A2CJ</code> devuelve dos</li>
+          <li>Sōgetsu no Jūjika está guardado como <code>NTR-ACVJ-JPN-2</code>, que devuelve HTTP 404 y cero resultados; <code>NTR-ACVJ</code> devuelve cuatro</li>
+          <li>Sōgetsu no Jūjika se publicó cuatro veces en Japón —el 25 de agosto de 2005 y tres ediciones económicas en 2006, 2009 y 2010— y las cuatro filas del catálogo llevan exactamente esos cuatro años, con el código y el JAN en la de 2010</li>
+          <li>El título japonés de la fila de Akatsuki no Menuetto está escrito en alfabeto latino, <code>Castlevania 暁月の円舞曲</code>; buscarlo devuelve cuatro anuncios y ninguno es el cartucho de Game Boy Advance</li>
+          <li>Las dos tiendas quieren búsquedas distintas: Suruga-ya responde al código de producto y Buyee no devuelve absolutamente nada para <code>AGB-A2CJ</code> ni para <code>NTR-ACVJ</code>. Las mediciones están más abajo</li>
+        </ul>
+
+        <h2>¿Qué contiene el catálogo de la era portátil?</h2>
+        <p>Catorce filas llevan un título de Castlevania en Game Boy Advance o Nintendo DS. Cinco de ellas llevan código de producto: <code>AGB-AAMJ-JPN-1</code> (Circle of the Moon), <code>AGB-ACHJ-JPN-1</code> (Byakuya no Kyōsōkyoku), <code>AGB-A2CJ-JPN-1</code> (Akatsuki no Menuetto), <code>AGB-FADJ-JPN</code> (el 悪魔城ドラキュラ de 2004 publicado por Nintendo del que hablaba la parte 3) y <code>NTR-ACVJ-JPN-2</code> (Sōgetsu no Jūjika). Las otras nueve tienen el campo del código vacío, entre ellas Ubawareta Kokuin, las dos filas de Gallery of Labyrinth y tres de las cuatro filas de Sōgetsu no Jūjika.</p>
+        <p>Lo que está vacío es el campo del catálogo, no el juego. Las dos cajas llevan un código impreso: Ubawareta Kokuin lleva <code>NTR-YR9J-JPN</code>, y Gallery of Labyrinth lleva <code>NTR-ACBJ-JPN</code> junto a un segundo número, <code>RY024-J1</code>, como muestran las fotos de abajo.</p>
+        <figure>
+          <img src="/blog/images/2026-10-08-castlevania-development-history-4/order-of-ecclesia-box-ntr-yr9j-jpn.jpg"
+               alt="Caja de Nintendo DS de Ubawareta Kokuin (悪魔城ドラキュラ 奪われた刻印), con el código NTR-YR9J-JPN impreso abajo a la derecha de la portada"
+               width="760" height="1347" loading="lazy"
+               style="width:100%;max-width:720px;margin:0;border-radius:8px">
+          <figcaption>Ubawareta Kokuin en Nintendo DS. <code>NTR-YR9J-JPN</code> está impreso abajo a la derecha de la portada.</figcaption>
+        </figure>
+        <figure>
+          <img src="/blog/images/2026-10-08-castlevania-development-history-4/gallery-of-labyrinth-box-ntr-acbj-jpn.jpg"
+               alt="Caja de Nintendo DS de Gallery of Labyrinth (悪魔城ドラキュラ ギャラリー オブ ラビリンス), con RY024-J1 y NTR-ACBJ-JPN impresos abajo a la derecha de la portada"
+               width="760" height="1347" loading="lazy"
+               style="width:100%;max-width:720px;margin:0;border-radius:8px">
+          <figcaption>Gallery of Labyrinth en Nintendo DS. <code>RY024-J1</code> y <code>NTR-ACBJ-JPN</code> están impresos abajo a la derecha de la portada.</figcaption>
+        </figure>
+        <p>El nombre de la serie no se escribe de una sola manera en esas filas. En el campo del título japonés de una misma era aparecen tres formas: 悪魔城ドラキュラ en kanji (Circle of the Moon, la edición de Nintendo de 2004, todas las filas de DS), キャッスルヴァニア en katakana (las filas sin código de Akatsuki no Menuetto y Byakuya no Kyōsōkyoku) y <code>Castlevania</code> en alfabeto latino (las filas con código de esos mismos dos juegos). El mismo juego aparece escrito de dos maneras según cuál de sus dos filas se mire: la fila <code>M720055</code> dice <code>Castlevania 暁月の円舞曲</code> y la fila <code>M747166</code> dice <code>キャッスルヴァニア -暁月の円舞曲-</code>. Cuál de las dos se copie decide lo que devuelve la búsqueda en la tienda.</p>
+
+        <h2>¿Por qué el código de producto no devuelve nada?</h2>
+        <p>Cuatro de los cinco códigos guardados devuelven HTTP 404 y cero resultados en Suruga-ya tal como están escritos: <code>AGB-A2CJ-JPN-1</code>, <code>NTR-ACVJ-JPN-2</code>, <code>AGB-AAMJ-JPN-1</code> y <code>AGB-FADJ-JPN</code>. Cortar el segmento final de región y número convierte los cuatro en búsquedas que funcionan. <code>AGB-A2CJ</code> devuelve dos anuncios, <code>NTR-ACVJ</code> cuatro, <code>AGB-AAMJ</code> uno y <code>AGB-FADJ</code> uno. Cortar solo una parte del sufijo no basta: <code>AGB-A2CJ-JPN</code> sigue devolviendo HTTP 404 y cero resultados. El punto de corte es el guion que va antes de <code>JPN</code>.</p>
+        <p>Para este artículo no se ha encontrado ninguna fuente primaria sobre lo que significa ese segmento final. Nintendo no publica el formato, y las referencias de coleccionistas que lo describen no son documentación. Así que este artículo no afirma nada sobre lo que codifican <code>-JPN-1</code> y <code>-JPN-2</code>. Lo único medido es esto: el índice de búsqueda de la tienda responde a la raíz y no responde a la cadena completa.</p>
+        <p>El quinto código es la excepción, y vale la pena decirlo con precisión en lugar de redondearlo. <code>AGB-ACHJ-JPN-1</code> devuelve HTTP 200 y dos anuncios, ambos reediciones económicas: キャッスルヴァニア ～白夜の協奏曲～ [コナミ ザ ベスト] y キャッスルヴァニア～白夜の協奏曲～ [廉価版] (箱説なし). El <code>AGB-ACHJ</code> recortado devuelve cuatro: esos dos más キャッスルヴァニア～白夜の協奏曲～（美品） y キャッスルヴァニア～白夜の協奏曲～ (箱説なし). Es decir, el código completo no está simplemente roto aquí; es más estrecho. Cuando encuentra algo, encuentra las ediciones posteriores y se deja las anteriores.</p>
+
+        <h2>¿A dónde apunta cada campo de la fila de Akatsuki no Menuetto?</h2>
+        <p>キャッスルヴァニア 〜暁月の円舞曲〜 salió para Game Boy Advance en Japón el 8 de mayo de 2003, publicado por Konami, dos días después del lanzamiento en Norteamérica del 6 de mayo de 2003 y un día antes del europeo del 9 de mayo de 2003.</p>
+        <p>El catálogo lo tiene dos veces. La fila <code>M747166</code> lleva el título <code>キャッスルヴァニア -暁月の円舞曲-</code>, el año <code>2003</code>, y ni código de producto ni JAN. La fila <code>M720055</code> lleva el título <code>Castlevania 暁月の円舞曲</code>, la plataforma ゲームボーイアドバンス, el código de producto <code>AGB-A2CJ-JPN-1</code>, la editora コナミ, el año <code>2005</code> y el JAN <code>4988602126327</code>. La fila que lleva el código no es la fila que lleva el año de lanzamiento.</p>
+        <p>Las mediciones dicen a dónde llegan los campos de la fila de 2005. Buscar el JAN <code>4988602126327</code> devuelve dos anuncios, y los dos están marcados como [コナミ ザ ベスト]: キャッスルヴァニア ～暁月の円舞曲～ [コナミ ザ ベスト] y [外箱のみ] キャッスルヴァニア ～暁月の円舞曲～ [コナミ ザ ベスト]. El JAN no devuelve en absoluto el anuncio sin marca. Buscar el código recortado <code>AGB-A2CJ</code> devuelve otros dos anuncios distintos: キャッスルヴァニア～暁月の円舞曲～ y キャッスルヴァニア ～暁月の円舞曲～ [コナミ ザ ベスト]. Es decir, en una misma fila, el JAN encuentra solo la edición económica y el código encuentra la económica y la anterior.</p>
+        <p>Conviene ser preciso en una cosa: ninguna de las fuentes consultadas para este artículo da una fecha de lanzamiento para la edición コナミ ザ ベスト de este juego. El artículo de la Wikipedia japonesa enumera la edición de Game Boy Advance, la de la Consola Virtual de Wii U y la Advance Collection, y ninguna edición económica. Lo medido es que el JAN de la fila de 2005 devuelve solo anuncios [コナミ ザ ベスト] y que el año de esa fila es 2005. Las dos cosas concuerdan entre sí; concordar no es lo mismo que tener una fuente, y este artículo no convierte lo uno en lo otro.</p>
+        <p>Una etiqueta que conviene leer antes de comprar: [外箱のみ] significa solo la caja exterior, sin cartucho. Es uno de los dos anuncios que devuelve el JAN, y lleva el mismo JAN que la copia completa. Buscar solo por JAN no avisa de que uno de sus dos resultados no es un juego.</p>
+
+        <h2>¿Qué pasa si se pega el título japonés tal cual está en la fila?</h2>
+        <p>Buscar <code>Castlevania 暁月の円舞曲</code> en Suruga-ya —el campo del título de la fila <code>M720055</code>, copiado literalmente— devuelve HTTP 200 y cuatro anuncios. Ninguno es el cartucho de Game Boy Advance. Los cuatro se llaman <code>Castlevania Advance Collection</code>, en las formas [通常版] y DELUXE EDITION.</p>
+        <p>Esos cuatro anuncios existen porque la recopilación existe en las estanterías. <em>Castlevania Advance Collection</em> se publicó el 24 de septiembre de 2021 para Nintendo Switch, PlayStation 4, Xbox One y PC como descarga, desarrollada por M2 y publicada por Konami Digital Entertainment, y la versión física llegó el 31 de julio de 2025. Akatsuki no Menuetto es uno de los títulos incluidos. Así que la búsqueda en alfabeto latino no devuelve ruido: devuelve un producto distinto y actual que lleva legítimamente la palabra <code>Castlevania</code> en su nombre japonés.</p>
+        <p>Buscar la forma en katakana sí devuelve el cartucho. <code>キャッスルヴァニア 暁月の円舞曲</code> devuelve ocho anuncios: los cuatro de Game Boy Advance (キャッスルヴァニア～暁月の円舞曲～, la reedición [コナミ ザ ベスト], una copia (箱説なし) y el lote [外箱のみ]) y los mismos cuatro de Advance Collection. Quitar del todo el nombre de la serie y buscar solo <code>暁月の円舞曲</code> devuelve esos mismos ocho.</p>
+        <p>Es el mismo fallo que la parte 3 registró con <code>LEGEND OF CORNELL</code>, en otro campo de otra fila: el catálogo escribe un título japonés en alfabeto latino, la tienda lo escribe en katakana, y una búsqueda hecha copiando el catálogo tal cual devuelve o nada o el producto equivocado. Aquí devuelve cuatro resultados, que es el caso peor: una búsqueda que devuelve cero anuncia su propio fracaso, y una que devuelve cuatro artículos de otro hardware no lo hace. ★Como el asunto de esta entrega son las formas de escritura en sí, todas las cadenas que hay que pegar en la tienda se dejan aquí en japonés original: no las transcriba antes de buscar.</p>
+
+        <h2>¿Y Sōgetsu no Jūjika en DS?</h2>
+        <p>悪魔城ドラキュラ 蒼月の十字架 salió para Nintendo DS en Japón el 25 de agosto de 2005, y después se publicó tres veces más en Japón: コナミ ザ・ベスト 廉価版 el 29 de junio de 2006, コナミ殿堂セレクション 廉価版 el 29 de octubre de 2009 y ベストセレクション 廉価版 el 9 de diciembre de 2010. En Europa salió el 30 de septiembre de 2005 y en Norteamérica el 4 de octubre de 2005.</p>
+        <p>El catálogo tiene cuatro filas para el juego, fechadas en 2005, 2006, 2009 y 2010: una por cada una de esas cuatro ediciones japonesas, en orden. Solo la fila de 2010, <code>M720996</code>, lleva código de producto (<code>NTR-ACVJ-JPN-2</code>) y el JAN <code>4988602156287</code>. Las otras tres llevan JAN (<code>4988602121568</code>, <code>4988602129977</code>, <code>4988602149067</code>) y ningún código. Así que la única fila con código de este grupo es la última edición económica, cinco años después de la salida del juego, y no el original de 2005. Las cuatro escriben el nombre de la serie en kanji.</p>
+        <p>La copia de la foto de abajo lleva en la esquina superior derecha de la portada la marca antigua de CERO, 12才以上対象. CERO cambió sus categorías por edades originales por otras nuevas para los títulos evaluados a partir de marzo de 2006, así que esta caja se clasificó antes de ese cambio. Por eso lo más probable es que sea la primera edición del 25 de agosto de 2005, que corresponde a la fila de 2005 sin código, aunque solo con la caja no se puede descartar una reedición económica impresa con la marca antigua.</p>
+        <figure>
+          <img src="/blog/images/2026-10-08-castlevania-development-history-4/dawn-of-sorrow-box-cero-12.jpg"
+               alt="Caja de Nintendo DS de Sōgetsu no Jūjika (悪魔城ドラキュラ 蒼月の十字架), con la marca antigua de CERO 12才以上対象 arriba a la derecha de la portada"
+               width="760" height="1347" loading="lazy"
+               style="width:100%;max-width:720px;margin:0;border-radius:8px">
+          <figcaption>Sōgetsu no Jūjika en Nintendo DS. La marca antigua de CERO, 12才以上対象, está arriba a la derecha de la portada.</figcaption>
+        </figure>
+        <p>Buscar <code>NTR-ACVJ</code> devuelve cuatro anuncios: 悪魔城ドラキュラ ～蒼月の十字架～, 悪魔城ドラキュラ ～蒼月の十字架～ (箱説なし), 悪魔城ドラキュラ ～蒼月の十字架～[コナミ ザ・ベスト] y 悪魔城ドラキュラ ～蒼月の十字架～[コナミ殿堂コレクション]. Buscar el título 蒼月の十字架 devuelve cinco: esos cuatro más 悪魔城ドラキュラ～蒼月の十字架～[廉価版]. Buscar 悪魔城ドラキュラ 蒼月の十字架 con el nombre de la serie devuelve esos mismos cinco.</p>
+        <p>El quinto anuncio es justo el que el código no alcanza, y el JAN de esa misma fila no alcanza ningún otro. Buscar <code>4988602156287</code> devuelve exactamente un anuncio: 悪魔城ドラキュラ～蒼月の十字架～[廉価版]. Es decir, en la fila <code>M720996</code> el código devuelve cuatro anuncios, el JAN devuelve uno, y los dos conjuntos no se solapan.</p>
+        <p>Las etiquetas de edición de la tienda y los nombres de edición documentados tampoco son las mismas cadenas. La edición de 2009 está documentada como コナミ殿堂<strong>セレクション</strong>; el anuncio de la tienda pone [コナミ殿堂<strong>コレクション</strong>]. Dos de las cuatro ediciones documentadas llevan 廉価版 en su propio nombre, mientras que la tienda usa [廉価版] como etiqueta de un solo anuncio. Emparejar una etiqueta de la tienda con una edición fechada es, por tanto, una conjetura, y este artículo no la hace: lo que informa es qué búsqueda devuelve qué anuncio.</p>
+        <p>(箱説なし) es la etiqueta de estado que hay que leer aquí. Significa que no se incluyen ni la caja ni el manual: solo el cartucho. Aparece tanto en el conjunto de resultados del código como en el del título, así que ninguna de las dos búsquedas lo filtra por usted.</p>
+
+        <h2>¿Qué búsqueda conviene usar entonces?</h2>
+        <p>Estos son resultados medidos, no suposiciones. Suruga-ya se midió con URLs de búsqueda sin intermediarios; Buyee se midió en un navegador real contra URLs de búsqueda sin intermediarios, porque Buyee responde a una petición desde la línea de órdenes con HTTP 202 y un cuerpo vacío.</p>
+        <p>Las dos tiendas no aceptan la misma búsqueda. En Suruga-ya el código de producto es el instrumento preciso: <code>AGB-A2CJ</code> devuelve dos anuncios y <code>NTR-ACVJ</code> cuatro, todos del juego correcto. En Buyee esos mismos dos códigos no devuelven nada: la página carga y no hay en ella ni recuento ni rejilla de resultados. Lo que Buyee sí responde es el título japonés con el nombre del hardware detrás: キャッスルヴァニア 暁月の円舞曲 ゲームボーイアドバンス devuelve 47 hits con el cartucho en lo alto de la lista, y 悪魔城ドラキュラ 蒼月の十字架 ニンテンドーDS devuelve 91.</p>
+        <p>Para Akatsuki no Menuetto en Game Boy Advance: use <code>AGB-A2CJ</code> en Suruga-ya para el cartucho en cualquiera de sus dos ediciones, o キャッスルヴァニア 暁月の円舞曲 para verlo todo, incluido el lote que es solo la caja. No use <code>AGB-A2CJ-JPN-1</code> tal como lo guarda el catálogo, y no pegue <code>Castlevania 暁月の円舞曲</code> en una tienda.</p>
+        <p>Para Sōgetsu no Jūjika en Nintendo DS: use 悪魔城ドラキュラ 蒼月の十字架 para ver los cinco anuncios, o <code>NTR-ACVJ</code> para cuatro de ellos. No use <code>NTR-ACVJ-JPN-2</code>.</p>
+        <p>La regla general que la era portátil añade a esta serie es una sola edición del texto: cuando un código del catálogo termina en <code>-JPN</code>, <code>-JPN-1</code> o <code>-JPN-2</code>, corte por el guion que va antes de <code>JPN</code> y busque la raíz —en Suruga-ya—. La parte 2 encontró un código correcto de Super Famicom que la tienda no indexa en absoluto, y la parte 3 encontró lo mismo en Nintendo 64. Este es el caso intermedio: el código sí está indexado, bajo una forma más corta que la escrita en la fila.</p>
+
+        <p><strong>Castlevania: Aria of Sorrow</strong> &middot; <span class="jp">キャッスルヴァニア 暁月の円舞曲</span> &middot; Game Boy Advance &middot; 2003 &middot; Konami &middot; product code <code>AGB-A2CJ</code></p>
+        <p><strong>Dónde comprarlo:</strong>
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3DAGB-A2CJ%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp (por código de producto)</a> &middot;
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3D%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B9%25E3%2583%25AB%25E3%2583%25B4%25E3%2582%25A1%25E3%2583%258B%25E3%2582%25A2%2520%25E6%259A%2581%25E6%259C%2588%25E3%2581%25AE%25E5%2586%2586%25E8%2588%259E%25E6%259B%25B2%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp (por título en japonés)</a> &middot;
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://i0c.xyz/6a6994d1e0b3f?url=https%3A%2F%2Fbuyee.jp%2Fitem%2Fsearch%2Fquery%2F%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B9%25E3%2583%25AB%25E3%2583%25B4%25E3%2582%25A1%25E3%2583%258B%25E3%2582%25A2%2520%25E6%259A%2581%25E6%259C%2588%25E3%2581%25AE%25E5%2586%2586%25E8%2588%259E%25E6%259B%25B2%2520%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%259C%25E3%2583%25BC%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%2589%25E3%2583%2590%25E3%2583%25B3%25E3%2582%25B9%3Flang%3Den">Buyee</a></p>
+
+        <div class="kataban-search-cta">
+          <p><a href="/?q=&#24746;&#39764;&#22478;&#12489;&#12521;&#12461;&#12517;&#12521;">Explora las ediciones japonesas de Castlevania en el catálogo de Kataban &rarr;</a></p>
+        </div>
+
+        <div class="official-sources">
+          <p><strong>Fuentes</strong></p>
+          <ul>
+            <li>Wikipedia (ja), <a href="https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B9%E3%83%AB%E3%83%B4%E3%82%A1%E3%83%8B%E3%82%A2_%E3%80%9C%E6%9A%81%E6%9C%88%E3%81%AE%E5%86%86%E8%88%9E%E6%9B%B2%E3%80%9C">&#12300;&#12461;&#12515;&#12483;&#12473;&#12523;&#12532;&#12449;&#12491;&#12450; &#12316;&#26241;&#26376;&#12398;&#20870;&#33310;&#26354;&#12316;&#12301;</a> &mdash; Game Boy Advance, Japón 8 de mayo de 2003, Norteamérica 6 de mayo de 2003, Europa 9 de mayo de 2003; publicado por Konami, desarrollado por Konami Computer Entertainment Tokyo; Consola Virtual de Wii U en Japón el 26 de agosto de 2015; <em>Castlevania Advance Collection</em> distribuida el 24 de septiembre de 2021 para Nintendo Switch, PlayStation 4, Xbox One y PC, desarrollada por M2 y publicada por Konami Digital Entertainment, con versión física el 31 de julio de 2025 (citando a Famitsu.com, 29 de marzo de 2025). &#9733;En ese artículo no se enumera ninguna edición económica de la versión de Game Boy Advance</li>
+            <li>Dengeki Online (電撃オンライン, KADOKAWA Game Linkage), <a href="https://dengekionline.com/articles/131224/">&#12302;Castlevania &#26241;&#26376;&#12398;&#20870;&#33310;&#26354;&#12303;&#12398;&#30330;&#22770;&#26085;&#12290;&#26085;&#26412;&#12434;&#33310;&#21488;&#12395;&#12375;&#12383;&#12302;&#24746;&#39764;&#22478;&#12489;&#12521;&#12461;&#12517;&#12521;&#12303;&#12304;&#20170;&#26085;&#12399;&#20309;&#12398;&#26085;&#65306;5&#26376;8&#26085;&#12305;</a> (8 de mayo de 2022) &mdash; 「2003年5月8日にゲームボーイアドバンス（GBA）用ソフト『Castlevania 暁月の円舞曲』が発売されました。」 Nótese que este artículo escribe el título en la misma forma en alfabeto latino que usa el catálogo</li>
+            <li>Wikipedia (ja), <a href="https://ja.wikipedia.org/wiki/%E6%82%AA%E9%AD%94%E5%9F%8E%E3%83%89%E3%83%A9%E3%82%AD%E3%83%A5%E3%83%A9_%E8%92%BC%E6%9C%88%E3%81%AE%E5%8D%81%E5%AD%97%E6%9E%B6">&#12300;&#24746;&#39764;&#22478;&#12489;&#12521;&#12461;&#12517;&#12521; &#33980;&#26376;&#12398;&#21313;&#23383;&#26550;&#12301;</a> &mdash; Nintendo DS, Japón 25 de agosto de 2005; コナミ ザ・ベスト 廉価版 el 29 de junio de 2006; コナミ殿堂セレクション 廉価版 el 29 de octubre de 2009; ベストセレクション 廉価版 el 9 de diciembre de 2010; Norteamérica 4 de octubre de 2005; Europa 30 de septiembre de 2005</li>
+            <li>Wikipedia (ja), <a href="https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%82%A8%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%86%E3%82%A4%E3%83%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%83%AC%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E6%A9%9F%E6%A7%8B">&#12300;&#12467;&#12531;&#12500;&#12517;&#12540;&#12479;&#12456;&#12531;&#12479;&#12540;&#12486;&#12452;&#12531;&#12513;&#12531;&#12488;&#12524;&#12540;&#12486;&#12451;&#12531;&#12464;&#27231;&#27083;&#12301;</a> &mdash; 12&#25165;&#20197;&#19978;&#23550;&#35937; es una de las categor&#237;as por edades originales de CERO; las categor&#237;as cambiaron para los t&#237;tulos evaluados a partir de marzo de 2006 (anunciado el 17 de febrero de 2006)</li>
+            <li>&#9733;TODO &mdash; una fecha de lanzamiento para la edición [コナミ ザ ベスト] de 暁月の円舞曲 en Game Boy Advance. No encontrada. El artículo de la Wikipedia japonesa no enumera ninguna edición económica; un sitio de comparación de precios tiene una página para una, pero el propio nombre de producto de esa página mezcla este juego con otro distinto, así que no se usa aquí. El artículo solo afirma que el año de la fila del catálogo es 2005 y que su JAN devuelve anuncios [コナミ ザ ベスト]</li>
+            <li>&#9733;TODO &mdash; documentación primaria del formato de códigos <code>AGB-</code>/<code>NTR-</code> y de su segmento final <code>-JPN-1</code> / <code>-JPN-2</code>. No encontrada; Nintendo no publica el formato y las referencias de coleccionistas que lo describen no son documentación. El artículo no afirma nada sobre lo que codifica ese segmento</li>
+            <li>&#9733;TODO &mdash; el propio manual de la Consola Virtual de Wii U de Nintendo para este juego está en línea en <a href="https://www.nintendo.co.jp/data/software/manual/manual_pbjj_00.pdf">nintendo.co.jp</a> (HTTP 200, 2.836.916 bytes, última modificación el 22 de diciembre de 2015) y Wikipedia lo cita bajo el título en alfabeto latino <em>Castlevania 暁月の円舞曲</em>. Este borrador no ha leído el PDF en sí, así que no se extrae de él ninguna afirmación</li>
+            <li>Catálogo de Kataban (<code>data/master_final.csv</code>) &mdash; 14 filas llevan un título de Castlevania en Game Boy Advance o Nintendo DS; 5 llevan código de producto (<code>AGB-AAMJ-JPN-1</code>, <code>AGB-ACHJ-JPN-1</code>, <code>AGB-A2CJ-JPN-1</code>, <code>AGB-FADJ-JPN</code>, <code>NTR-ACVJ-JPN-2</code>) y 9 no llevan ninguno; 暁月の円舞曲 está en <code>M720055</code> (título en alfabeto latino, 2005, JAN <code>4988602126327</code>) y <code>M747166</code> (título en katakana, 2003, sin código ni JAN); 蒼月の十字架 está en cuatro filas fechadas en 2005 (<code>M759622</code>), 2006 (<code>M759608</code>), 2009 (<code>M759609</code>) y 2010 (<code>M720996</code>), de las cuales solo la de 2010 lleva código de producto</li>
+            <li>Mediciones de búsqueda en Suruga-ya, 9 de septiembre de 2026, <code>category=2</code>, URLs sin intermediarios, recuentos leídos de la propia cifra 該当件数 de la página &mdash; <code>AGB-A2CJ-JPN-1</code>, <code>AGB-A2CJ-JPN</code>, <code>NTR-ACVJ-JPN-2</code>, <code>AGB-AAMJ-JPN-1</code>, <code>AGB-FADJ-JPN</code>: HTTP 404 y 0 anuncios; <code>AGB-A2CJ</code>: 2; <code>NTR-ACVJ</code>: 4; <code>AGB-AAMJ</code>: 1; <code>AGB-FADJ</code>: 1; <code>AGB-ACHJ-JPN-1</code>: 2 (las dos ediciones económicas); <code>AGB-ACHJ</code>: 4; <code>Castlevania 暁月の円舞曲</code>: 4, todos Advance Collection; キャッスルヴァニア 暁月の円舞曲 y 暁月の円舞曲: 8 cada uno; <code>4988602126327</code>: 2, los dos [コナミ ザ ベスト], uno de ellos [外箱のみ]; 蒼月の十字架 y 悪魔城ドラキュラ 蒼月の十字架: 5 cada uno; <code>4988602156287</code>: 1, el [廉価版]</li>
+            <li>Mediciones de búsqueda en Buyee, 9 de septiembre de 2026, URLs <code>buyee.jp/item/search/query/</code> sin intermediarios en un navegador real (Buyee responde a una petición desde la línea de órdenes con HTTP 202 y un cuerpo vacío), recuentos leídos de la propia cifra &#8220;N hits&#8221; de la página &mdash; キャッスルヴァニア 暁月の円舞曲 ゲームボーイアドバンス: 47 hits; キャッスルヴァニア 暁月の円舞曲: 67; 暁月の円舞曲: 68; 悪魔城ドラキュラ 蒼月の十字架 ニンテンドーDS: 91; <code>AGB-A2CJ</code> y <code>NTR-ACVJ</code>: la página de búsqueda carga sin recuento y sin rejilla de resultados</li>
+          </ul>
+        </div>
+
+        <p><em>Esta es la parte 4 de una serie de cinco sobre la historia del desarrollo de Castlevania, que acompaña al lanzamiento del nuevo juego el 15 de octubre. La <a href="/blog/es/2026-09-09-castlevania-development-history-1.html">parte 1</a>, la <a href="/blog/es/2026-09-24-castlevania-development-history-2.html">parte 2</a> y la <a href="/blog/es/2026-10-01-castlevania-development-history-3.html">parte 3</a> ya están publicadas. La parte 5 llega el 15 de octubre de 2026.</em></p>
+      </div>
+    </article>
+
+    <div class="cta">
+      <h2>Conoce el código, encuentra el juego</h2>
+      <p>Escribe un título occidental. Obtén el nombre en japonés, el código impreso en el lomo del cartucho y enlaces a las tiendas que lo tienen.</p>
+      <a class="ctabtn" href="/">Buscar un juego</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Kataban &middot; Datos de la Agencia de Asuntos Culturales, Media Arts Database. Títulos en inglés obtenidos de Wikidata (CC0).
+    <br>Algunos enlaces de este sitio son enlaces de afiliado, y Kataban puede recibir una comisión, incluso como afiliado de eBay Partner Network (publicidad).
+    <br><a href="/blog/es/">Todas las entradas</a> &middot; <a href="/">Volver a la herramienta de búsqueda</a> &middot; <a href="/privacy.html">Privacidad</a>
+    <div class="foot-brand">
+      <p class="foot-stars" aria-hidden="true">★★★</p>
+      <p class="foot-tagline">Larga vida a los medios físicos.</p>
+      <span class="kb-word" aria-hidden="true">
+        <span class="kb-ghost"><span class="kb-grid" data-kb="kb-on-cyan"></span></span>
+        <span class="kb-grid kb-top" data-kb="kb-on-pink"></span>
+      </span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="/kataban.js"></script>
+</body>
+</html>
