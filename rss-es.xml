@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Wed, 07 Oct 2026 08:09:13 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 08 Oct 2026 07:16:37 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Defenders of Oasis en Game Gear: el RPG de Las mil y una noches de Sega, de 1992</title>
+      <link>https://gamekataban.com/blog/es/2026-10-09-defenders-of-oasis-game-gear-g-3404.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-10-09-defenders-of-oasis-game-gear-g-3404.html</guid>
+      <description>Sega CS2 hizo en 1992 uno de los pocísimos RPG originales de Game Gear y le puso guardado automático. Tuvo buenas críticas, cuatro meses en listas y ninguna secuela. El cartucho japonés es G-3404, y el título en inglés no encuentra absolutamente nada en ninguna tienda japonesa.</description>
+      <pubDate>Fri, 09 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Historia del desarrollo de Castlevania, parte 4: los códigos portátiles a los que les sobra un sufijo</title>
       <link>https://gamekataban.com/blog/es/2026-10-08-castlevania-development-history-4.html</link>
