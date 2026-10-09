@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Thu, 08 Oct 2026 07:16:37 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 09 Oct 2026 06:57:04 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Sylvan Tale en Game Gear: el RPG de acción de Sega que solo salió en Japón</title>
+      <link>https://gamekataban.com/blog/es/2026-10-10-sylvan-tale-game-gear-g-3426.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-10-10-sylvan-tale-game-gear-g-3426.html</guid>
+      <description>Sega nunca lanzó Sylvan Tale fuera de Japón, y su cartucho lleva dos códigos: el que figura en los registros de la propia Sega no encuentra nada en una tienda. Es además el cartucho completo más barato de esta serie, y su música es de la compositora de Panzer Dragoon Saga.</description>
+      <pubDate>Sat, 10 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Defenders of Oasis en Game Gear: el RPG de Las mil y una noches de Sega, de 1992</title>
       <link>https://gamekataban.com/blog/es/2026-10-09-defenders-of-oasis-game-gear-g-3404.html</link>
