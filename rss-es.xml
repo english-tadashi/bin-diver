@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Sun, 11 Oct 2026 07:43:53 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 12 Oct 2026 08:02:24 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Gulliver Boy en PC Engine: el RPG que nació en una revista, reprodujo animación en celuloide y se quedó en uno</title>
+      <link>https://gamekataban.com/blog/es/2026-10-13-gulliver-boy-pc-engine-hcd5076.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-10-13-gulliver-boy-pc-engine-hcd5076.html</guid>
+      <description>El RPG de Hudson de 1995 para Super CD-ROM², código HCD5076, salió de un proyecto transmedia de una revista con Oji Hiroi y Toyoo Ashida. Qué hacía HuVIDEO, por qué el dinero se gana comerciando y por qué el título en katakana entierra el juego entre 229 anuncios de productos del anime.</description>
+      <pubDate>Tue, 13 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Baku Baku Animal en Game Gear: el puzle arcade de Sega en tu bolsillo</title>
       <link>https://gamekataban.com/blog/es/2026-10-12-baku-baku-animal-game-gear-g-3378.html</link>
