@@ -4975,7 +4975,7 @@ function janfbLog(jan, result, names, m){
       const r=DATA.find(x=>!x[12] && x[2]+'\t'+x[1]===m.keys[0]);
       if(r){ code=(r[3]||'').split(';')[0].trim(); title=r[1]||''; platform=r[2]||''; }
     }
-    gtag('event', 'jan_miss', { jan: String(jan), rakuten_hit: (names && names.length) ? 'yes' : 'no', result: result,
+    gtag('event', 'jan_miss', { jan: String(jan), method: scanMethod, rakuten_hit: (names && names.length) ? 'yes' : 'no', result: result,
       matched_platform: platform, matched_title: title, matched_code: code });
   }catch(e){}
 }
@@ -5022,6 +5022,13 @@ let stream=null, detector=null, zxingReader=null, rafId=0, closing=false;
 // 直近のスキャン結果。null=まだ読んでいない / true=カタログに有り / false=無し。
 // closeScan で false のときだけ検索欄にフォーカスを移す(外れた直後は型番手入力に進むため)。
 let lastScanHit=null;
+// GA4 の scan イベント（2026-10-13）。step＝open・camera_ok・camera_fail・decoder_fail・read。
+// source＝button（検索ページのボタン）・url（/?scan=1 を直接）・article（/?scan=1 に /blog/ の記事から来た）。
+// ★バーコードそのものは送らない（DATA に無いときだけ jan_miss が送る）。privacy.html の Analytics の節と揃えること。
+let scanSource='button', scanMethod='camera';
+function scanLog(step, extra){
+  try{ if(typeof gtag==='function') gtag('event','scan',Object.assign({step:step, source:scanSource}, extra||{})); }catch(e){}
+}
 
 async function getDecoder(){
   if('BarcodeDetector' in window){
@@ -5045,7 +5052,9 @@ let lastMissJan='';   // 直前に外れた JAN。同じ値が毎フレーム来
 function onDetected(text){
   const j=String(text).replace(/\D/g,'');
   if(j && j===lastMissJan) return false;
+  scanMethod='camera';
   const found=showByJan(text);
+  scanLog('read',{method:'camera', hit_count: found ? current.length : 0});
   if(!found) lastMissJan=j;
   if(found){ closeScan(); }
   else { scanMsg.textContent='Scanned '+String(text).replace(/\D/g,'')+' — not in catalog. Keep scanning, or close.'; }
@@ -5057,14 +5066,19 @@ function onDetected(text){
 async function openScan(opts){
   overlay.classList.add('on'); scanMsg.textContent=''; closing=false; lastScanHit=null; lastMissJan='';
   scanStart.hidden=true;
+  if(!(opts && opts.restart)){   // 「Start camera」から起動し直すときは open を数え直さない（source もそのまま）
+    scanSource = (opts && opts.source) || 'button';
+    scanLog('open');
+  }
   if(opts && opts.defer===true){ scanStart.hidden=false; scanMsg.textContent='Tap “Start camera” to scan.'; return; }
   try{
     stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
     video.srcObject=stream; await video.play();
-  }catch(e){ scanMsg.textContent='Camera unavailable — type the JAN below instead.'; if(opts && opts.fromUrl) scanStart.hidden=false; return; }
+  }catch(e){ scanLog('camera_fail',{error:String((e&&e.name)||'unknown').slice(0,40)}); scanMsg.textContent='Camera unavailable — type the JAN below instead.'; if(opts && opts.fromUrl) scanStart.hidden=false; return; }
   let mode;
   try{ mode=await getDecoder(); }
-  catch(e){ scanMsg.textContent='Scanner failed to load — type the JAN below.'; return; }
+  catch(e){ scanLog('decoder_fail',{error:String((e&&e.name)||'unknown').slice(0,40)}); scanMsg.textContent='Scanner failed to load — type the JAN below.'; return; }
+  scanLog('camera_ok',{mode: mode==='native' ? 'native' : 'zxing'});
   scanMsg.textContent='Point at the barcode…';
   if(mode==='native'){
     const tick=async()=>{
@@ -5095,18 +5109,26 @@ function closeScan(){
 }
 
 scanBtn.addEventListener('click',openScan);
-scanStart.addEventListener('click',()=>openScan());
+scanStart.addEventListener('click',()=>openScan({restart:true}));
 // /?scan=1 で開いたらスキャナー画面を開く（記事の案内から来た人向け・2026-10-13）。iPhone/iPad はタップでカメラ起動、それ以外は即起動（失敗したら「Start camera」を出す）。
 try{
   if(new URLSearchParams(location.search).get('scan')==='1'){
     const iOS=/iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
-    openScan(iOS ? {defer:true} : {fromUrl:true});
+    let src='url';
+    try{ const r=new URL(document.referrer); if(r.origin===location.origin && r.pathname.startsWith('/blog/')) src='article'; }catch(e){}
+    openScan(iOS ? {defer:true, source:src} : {fromUrl:true, source:src});
   }
 }catch(e){}
 scanClose.addEventListener('click',closeScan);
 overlay.addEventListener('click',e=>{ if(e.target===overlay) closeScan(); });
-scanGo.addEventListener('click',()=>{ if(showByJan(scanJan.value)) closeScan(); });
-scanJan.addEventListener('keydown',e=>{ if(e.key==='Enter' && showByJan(scanJan.value)) closeScan(); });
+function scanManual(){
+  scanMethod='manual';
+  const found=showByJan(scanJan.value);
+  scanLog('read',{method:'manual', hit_count: found ? current.length : 0});
+  if(found) closeScan();
+}
+scanGo.addEventListener('click',scanManual);
+scanJan.addEventListener('keydown',e=>{ if(e.key==='Enter') scanManual(); });
 
 // ============================================================
 // 楽天 商品画像レイヤー(任意層:失敗しても本体は無傷)
