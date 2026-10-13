@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Histoire du développement de Kirby, partie 1 : comment Twinkle Popo est devenu Kirby&#39;s Dream Land, et son code produit DMG-KYJ &mdash; Kataban</title>
+<meta name="description" content="Le premier Kirby est sorti sur Game Boy au Japon le 27 avril 1992 (Hoshi no Kirby, code DMG-KYJ). Né sous le nom de Twinkle Popo, que HAL Laboratory comptait éditer seul. Pourquoi Kirby était blanc en Amérique, et pourquoi le code trouve la cartouche japonaise avant le titre.">
+<meta property="og:title" content="Histoire du développement de Kirby, partie 1 : comment Twinkle Popo est devenu Kirby&#39;s Dream Land, et son code produit DMG-KYJ">
+<meta property="og:description" content="Le premier Kirby est sorti sur Game Boy au Japon le 27 avril 1992 (Hoshi no Kirby, code DMG-KYJ). Né sous le nom de Twinkle Popo, que HAL Laboratory comptait éditer seul. Pourquoi Kirby était blanc en Amérique, et pourquoi le code trouve la cartouche japonaise avant le titre.">
+<meta property="og:url" content="https://gamekataban.com/blog/fr/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:image" content="https://gamekataban.com/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://gamekataban.com/blog/fr/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html">
+<link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html">
+<link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html">
+<link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html">
+<link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html">
+<link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html">
+<link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=IBM+Plex+Sans+JP:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/kataban.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+
+  <header class="sitehead">
+    <a class="sitehead-brand" href="/" aria-label="Kataban — retour à l'outil de recherche">
+      <span class="kb-word">
+        <span class="kb-ghost" aria-hidden="true"><span class="kb-grid" id="kbGridCyan"></span></span>
+        <span class="kb-grid kb-top" id="kbGridPink" aria-hidden="true"></span>
+      </span>
+      <span class="sitehead-badge">&#22411;&#30058;</span>
+    </a>
+    <a class="backlink" href="/blog/fr/"><span class="arrow" aria-hidden="true">&#8592;</span> Tous les articles</a>
+    <div class="langswitch">
+      <button class="langswitch-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langswitch-menu">
+        <span class="langswitch-current">FR &mdash; Français</span>
+        <span class="langswitch-caret" aria-hidden="true">&#9662;</span>
+      </button>
+      <ul class="langswitch-menu" id="langswitch-menu" role="menu" hidden>
+      <li role="none"><a role="menuitem" href="/blog/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html" hreflang="en" lang="en" data-lang="en">English</a></li>
+      <li role="none"><a role="menuitem" href="/blog/zh/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html" hreflang="zh-Hant" lang="zh-Hant" data-lang="zh">&#20013;&#25991;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/ko/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html" hreflang="ko" lang="ko" data-lang="ko">&#54620;&#44397;&#50612;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/es/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html" hreflang="es" lang="es" data-lang="es">Espa&ntilde;ol</a></li>
+      <li role="none"><a role="menuitem" href="/blog/de/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html" hreflang="de" lang="de" data-lang="de">Deutsch</a></li>
+      <li role="none"><a role="menuitem" href="/blog/fr/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html" hreflang="fr" lang="fr" data-lang="fr" aria-current="page">Français</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <article>
+      <div class="pagehead">
+        <p class="kicker">Blog Kataban</p>
+        <h1>Histoire du développement de Kirby, partie 1 : comment Twinkle Popo est devenu Kirby&#39;s Dream Land, et son code produit DMG-KYJ</h1>
+        <p class="postmeta">2026-10-14</p>
+        <ul class="posttags" aria-label="Étiquettes">
+          <li><a href="/blog/fr/tag/platform/gb/">Game Boy</a></li>
+          <li><a href="/blog/fr/tag/genre/platformer/">Plates-formes</a></li>
+          <li><a href="/blog/fr/tag/decade/1990s/">Années 1990</a></li>
+          <li><a href="/blog/fr/tag/publisher/nintendo/">Nintendo</a></li>
+          <li><a href="/blog/fr/tag/series/kirby/">Kirby</a></li>
+        </ul>
+      </div>
+
+      <div class="prose">
+        <p>Kirby a fait ses débuts sur un écran monochrome. Son premier jeu, <span class="jp">星のカービィ</span> (<em>Hoshi no Kirby</em>), est sorti au Japon sur Game Boy le 27 avril 1992, édité par Nintendo et développé par HAL Laboratory, puis en Amérique du Nord en août 1992 sous le nom de <em>Kirby's Dream Land</em>. Il a bien failli sortir sous un autre nom, chez un autre éditeur. Ce guide raconte comment <span class="jp">ティンクルポポ</span> (<em>Twinkle Popo</em>), de HAL, est devenu un jeu Nintendo, pourquoi le premier Kirby était blanc en Amérique, et comment trouver la cartouche japonaise grâce au code imprimé sur son étiquette.</p>
+
+        <ul>
+          <li>Sortie japonaise : 27 avril 1992 sur Game Boy, code produit <code>DMG-KYJ</code> &mdash; édité par Nintendo, développé par HAL Laboratory</li>
+          <li>Le jeu est né sous le nom de <span class="jp">ティンクルポポ</span> (<em>Twinkle Popo</em>), que HAL comptait éditer lui-même</li>
+          <li>Masahiro Sakurai en a rédigé le projet vers mai 1990, à 19 ans ; c'était son premier jeu en tant que directeur</li>
+          <li>Kirby ne copie pas encore les pouvoirs de ses ennemis &mdash; cela viendra avec le jeu suivant</li>
+          <li>Le 14 septembre 2026, les exemplaires d'occasion vendus par Suruga-ya elle-même allaient de 320 à 4&nbsp;570 yens, et une recherche de <code>DMG-KYJ</code> sur Buyee ne renvoyait que ce jeu</li>
+        </ul>
+
+        <h2>Comment Twinkle Popo est-il devenu Kirby's Dream Land ?</h2>
+        <p>Sakurai a écrit qu'il avait conçu le jeu vers mai 1990, à 19 ans, et que le développement avait duré environ un an. Il a été réalisé sur ce que Sakurai appelle le &#171;&nbsp;Game Maker&nbsp;&#187; : une Twin Famicom équipée d'un trackball fabriqué par HAL, qui chargeait l'outil de développement maison de HAL depuis le Disk System. Faute de clavier, Sakurai saisissait des valeurs hexadécimales en déplaçant un curseur. Le cahier des charges : un jeu pour ceux qui découvrent le jeu vidéo. Au lieu de perdre une vie au premier coup, Kirby dispose d'une jauge de vitalité, et Sakurai a décrit l'objectif comme un jeu que n'importe qui pourrait terminer.</p>
+        <p>Son titre de travail était <span class="jp">ティンクルポポ</span>, <em>Twinkle Popo</em>. Satoru Iwata a raconté en 2005 au site japonais Hobonichi que HAL prévoyait de le sortir sous ce nom sur Game Boy, et avait déjà enregistré des commandes de 26&nbsp;000 exemplaires. Puis Shigeru Miyamoto a jugé que ce serait du gâchis de le sortir ainsi ; le jeu a été retravaillé et est devenu le <span class="jp">星のカービィ</span> de Nintendo. Sakurai, dans une interview de 1999, évaluait les commandes à environ 20&nbsp;000. Les deux récits divergent sur le chiffre, mais décrivent la même chose : seul, HAL ne trouvait guère de demande pour ce jeu.</p>
+        <p>Ce qui a changé quand Nintendo a pris le relais est moins important qu'on pourrait le croire. Sur X, en 2011, Sakurai a écrit qu'il était reconnaissant à Nintendo d'avoir sauvé un jeu pour lequel HAL n'obtenait pas assez de commandes, mais que les changements réels se résumaient à trois : la capacité de la ROM a doublé, ce qui a permis d'ajouter un deuxième tour, et le titre a changé. Nintendo n'a ni modifié le contenu du jeu ni donné de conseils sur son équilibrage. Le jeu achevé s'est vendu à plus de cinq millions d'exemplaires dans le monde, selon Sakurai comme selon Iwata.</p>
+
+        <h2>Pourquoi Kirby était-il blanc en Amérique ?</h2>
+        <p>Sur Game Boy, Kirby n'a aucune couleur : la boîte était donc le seul endroit où elle pouvait apparaître. Sakurai a choisi le rose, et sur la boîte japonaise, Kirby est rose. Pas sur la première boîte étrangère. Dans une interview de 2000 parue dans le magazine en ligne de Nintendo, Sakurai a fait remarquer que le Kirby dessiné sur l'emballage étranger du premier jeu est blanc, et en a deviné la raison : sur un jeu Game Boy, personne hors du Japon ne pouvait connaître sa couleur si le Japon ne la communiquait pas. Iwata a dit la même chose de la jaquette américaine dans une interview de 1993.</p>
+        <p>Le nom anglais a sa propre histoire, souvent résumée par &#171;&nbsp;baptisé d'après un avocat&nbsp;&#187; &mdash; John Kirby, qui a défendu Nintendo dans son procès contre Universal. Interrogé par Game Informer en 2011, Miyamoto a été plus prudent : le nom a été &#171;&nbsp;en partie choisi en lien avec lui, mais pas d'après lui&nbsp;&#187;. Kirby était un nom parmi d'autres sur une liste qu'ils examinaient.</p>
+
+        <h2>Qu'est-ce que DMG-KYJ et comment le rechercher ?</h2>
+        <p><code>DMG-KYJ</code> est imprimé sur l'étiquette de la cartouche, en haut à droite. La couverture de la notice porte une forme plus longue, <code>DMG-KYJ-JPN-2</code>. Une production ultérieure, avec des circuits datés de 1995 et 1996, porte toujours <code>DMG-KYJ</code> sur l'étiquette : le code vous dit donc quel jeu vous avez, pas de quel tirage il vient.</p>
+        <p>Sur Suruga-ya, cherchez la forme courte. Le 14 septembre 2026, <code>DMG-KYJ</code> renvoyait deux annonces, toutes deux le <span class="jp">星のカービィ</span> sur Game Boy, alors que <code>DMG-KYJ-JPN</code> ne renvoyait rien. Les exemplaires d'occasion vendus par Suruga-ya elle-même coûtaient de 320 à 4&nbsp;570 yens. Tous les exemplaires ne sont pas classés sous le code, cependant : ce jour-là, une cartouche seule, sans boîte ni notice, à 1&nbsp;500 yens, n'apparaissait qu'en cherchant par le titre japonais.</p>
+        <p>Sur Buyee aussi, le code fonctionne, ce qui n'est pas toujours le cas. Le même jour, <code>DMG-KYJ</code> renvoyait 30 annonces, et toutes étaient le <span class="jp">星のカービィ</span> original sur Game Boy (dont deux pour la notice seule). La recherche <span class="jp">星のカービィ ゲームボーイ</span> renvoyait quant à elle 716 annonces, surtout <em>Kirby's Dream Land 2</em> et des jeux Game Boy Advance ; environ une sur dix seulement était l'original seul. Les enchères changent tous les jours : ces chiffres valent pour ce jour-là.</p>
+
+        <h2>Qu'est-ce qui distingue le premier Kirby ?</h2>
+        <p>Kirby aspire les ennemis et les recrache &mdash; c'est tout. Copier les pouvoirs des ennemis, ce qui définira ensuite la série, n'est pas encore possible ; Sakurai a dit avoir imaginé ce principe pour le jeu suivant, <span class="jp">星のカービィ 夢の泉の物語</span> (<em>Kirby's Adventure</em>). L'aventure compte cinq niveaux. Selon la notice officielle, le dernier, Mt. DEDEDE, oblige Kirby à affronter de nouveau les boss déjà vaincus avant le combat contre le roi Dadidou &mdash; que l'article de Wikipédia consacré à ce jeu appelle le roi Dedede, nom devenu roi Dadidou dans la suite de la série.</p>
+        <p>C'est un jeu court et simple par choix, conçu pour que ceux qui n'avaient jamais fini un jeu puissent en voir la fin.</p>
+
+        <h2>La version Nintendo Power, est-ce la même chose ?</h2>
+        <p>Non. Avec le service Nintendo Power (<span class="jp">ニンテンドウパワー</span>), les supérettes japonaises inscrivaient des jeux sur une cartouche mémoire vierge. Le magazine en ligne de Nintendo d'octobre 1999 citait <span class="jp">星のカービィ</span> parmi les titres du lancement prévu du service Game Boy, le 1<sup>er</sup> novembre 1999. Nintendo a ensuite reporté le service Game Boy au 1<sup>er</sup> mars 2000, parce que le séisme du 21 septembre 1999 à Taïwan avait retardé la production des GB Memory Cartridge. Une cartouche mémoire réinscrite n'est pas <code>DMG-KYJ</code>. Le catalogue Kataban la répertorie comme une entrée distincte, datée de 1999 et sans code produit.</p>
+        <p>Le jeu a aussi été réédité en téléchargement : sur la console virtuelle de la Nintendo 3DS au Japon le 7 juin 2011 et en Europe le 30 juin 2011, en anglais, puis sur Game Boy &ndash; Nintendo Switch Online le 9 février 2023. Il faisait aussi partie des six jeux de la compilation Wii <span class="jp">星のカービィ 20周年スペシャルコレクション</span> (Japon, 19 juillet 2012 ; en Amérique du Nord, <em>Kirby's Dream Collection: Special Edition</em>), qui n'est jamais sortie en Europe. Chacune de ces versions est le moyen facile d'y jouer. Si c'est la cartouche de 1992 que vous voulez, cherchez <code>DMG-KYJ</code>.</p>
+
+        <p><strong>Kirby&#8217;s Dream Land</strong> &middot; <span class="jp">星のカービィ</span> &middot; Game Boy &middot; 1992 &middot; Nintendo (developed by HAL Laboratory) &middot; product code <code>DMG-KYJ</code></p>
+        <p><strong>Où l'acheter :</strong>
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&amp;goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3DDMG-KYJ%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp (par code produit)</a> &middot;
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&amp;goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3D%25E6%2598%259F%25E3%2581%25AE%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25A3%2520%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%259C%25E3%2583%25BC%25E3%2582%25A4%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp (par titre japonais)</a> &middot;
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://i0c.xyz/6a6994d1e0b3f?url=https%3A%2F%2Fbuyee.jp%2Fitem%2Fsearch%2Fquery%2FDMG-KYJ%3Flang%3Den">Buyee (par code produit)</a></p>
+
+        <div class="kataban-search-cta">
+          <p><a href="/?q=DMG-KYJ">Rechercher DMG-KYJ dans le catalogue Kataban &rarr;</a></p>
+        </div>
+
+        <div class="official-sources">
+          <p><strong>Sources</strong></p>
+          <ul>
+            <li>Nintendo, <a target="_blank" rel="noopener" href="https://www.nintendo.co.jp/n02/dmg/kyj/index.html">「星のカービィ」</a> &mdash; date de sortie japonaise, 27 avril 1992 ; boîte montrant un Kirby rose ; règles simples pour que les débutants voient la fin</li>
+            <li>Famitsu, <a target="_blank" rel="noopener" href="https://www.famitsu.com/news/201705/17132636.html">chronique de Masahiro Sakurai sur <span class="jp">星のカービィ</span> (2017)</a> &mdash; conçu vers mai 1990, quand Sakurai avait 19 ans ; environ un an de développement ; le &#171;&nbsp;Game Maker&nbsp;&#187; composé d'une Twin Famicom, d'un trackball HAL et d'un outil sur Disk System ; saisie hexadécimale sans clavier ; pensé pour les débutants ; pas de copie de pouvoirs, imaginée pour le jeu suivant ; plus de cinq millions d'exemplaires vendus dans le monde</li>
+            <li>Hobonichi, <a target="_blank" rel="noopener" href="https://www.1101.com/president/iwata07.html">entretien avec Satoru Iwata (9 mars 2005)</a> &mdash; prévu comme le jeu Game Boy <span class="jp">ティンクルポポ</span> ; commandes de 26&nbsp;000 exemplaires ; Shigeru Miyamoto a jugé dommage de le sortir ainsi, et il est devenu le <span class="jp">星のカービィ</span> de Nintendo ; plus de cinq millions vendus</li>
+            <li>Masahiro Sakurai sur X, <a target="_blank" rel="noopener" href="https://x.com/Sora_Sakurai/status/43005661247836160">2 mars 2011</a> et <a target="_blank" rel="noopener" href="https://x.com/Sora_Sakurai/status/43006034855464961">le message suivant</a> &mdash; HAL n'obtenait pas assez de commandes ; les changements apportés par Nintendo : une ROM doublée, le deuxième tour qu'elle a permis, et le titre</li>
+            <li>shmuplations, <a target="_blank" rel="noopener" href="https://shmuplations.com/smashbros/">interview de Sakurai de 1999 (traduction anglaise)</a> &mdash; HAL comptait d'abord éditer le jeu lui-même ; la demande était d'environ 20&nbsp;000 exemplaires</li>
+            <li>Nintendo Online Magazine, <a target="_blank" rel="noopener" href="https://web.archive.org/web/20051117031511/http://www.nintendo.co.jp/nom/0003/miryoku/page03.html">interview de Sakurai, mars 2000 (archivée)</a> &mdash; titre de travail <span class="jp">ティンクルポポ</span> ; Sakurai a choisi le rose ; le Kirby de la première boîte étrangère est blanc ; un jeu pour débutants avec une jauge de vitalité</li>
+            <li>shmuplations, <a target="_blank" rel="noopener" href="https://shmuplations.com/kirbysadventure/">entretiens d'un guide de 1993 (traduction anglaise)</a> &mdash; Iwata sur le Kirby blanc de la jaquette américaine</li>
+            <li>Game Informer, <a target="_blank" rel="noopener" href="https://www.gameinformer.com/b/features/archive/2011/06/17/miyamoto-wii-amp-wii-u-are-colored-white-for-all-ages-appeal.aspx">interview de Miyamoto (17 juin 2011)</a> &mdash; &#171;&nbsp;partially chosen in connection to him, but it wasn&#8217;t named after him&nbsp;&#187;</li>
+            <li>Nintendo of America, <a target="_blank" rel="noopener" href="https://web.archive.org/web/20160402190758/http://www.nintendo.com/consumer/downloads/dmg_games.pdf">liste des jeux Game Boy (PDF archivé)</a> &mdash; <em>Kirby's Dream Land</em>, août 1992</li>
+            <li>Site officiel de Kirby, <a target="_blank" rel="noopener" href="https://www.kirby.jp/history/">historique</a> &mdash; pas de copie de pouvoirs dans le premier jeu ; Kirby aspire les ennemis et les recrache ; <span class="jp">星のカービィ 20周年スペシャルコレクション</span> sorti le 19 juillet 2012 avec six jeux antérieurs</li>
+            <li>Nintendo, <a target="_blank" rel="noopener" href="https://www.nintendo.co.jp/data/software/manual/man_rafj.pdf">notice de la version console virtuelle Nintendo 3DS (PDF)</a> &mdash; cinq niveaux avant le roi ; au niveau 5, Mt. DEDEDE, Kirby affronte les boss précédents avant le roi</li>
+            <li>Nintendo Online Magazine, <a target="_blank" rel="noopener" href="https://web.archive.org/web/20001016000845/http://www.nintendo.co.jp/nom/9910/index.html">numéro d'octobre 1999 (archivé)</a> et <a target="_blank" rel="noopener" href="https://web.archive.org/web/20001015234321/http://www.nintendo.co.jp/nom/9910/gameboy/index.html">sa page sur la réinscription Game Boy</a> &mdash; <span class="jp">星のカービィ</span> parmi les titres du lancement prévu le 1<sup>er</sup> novembre 1999 ; service Game Boy reporté au 1<sup>er</sup> mars 2000, le séisme de Taïwan ayant retardé la production des GB Memory Cartridge</li>
+            <li>Nintendo, <a target="_blank" rel="noopener" href="https://www.nintendo.com/jp/titles/50010000006753.html">fiche de la version console virtuelle Nintendo 3DS (Japon)</a> &mdash; téléchargement disponible depuis le 7 juin 2011</li>
+            <li>Nintendo France, <a target="_blank" rel="noopener" href="https://www.nintendo.com/fr-fr/Jeux/Game-Boy/Kirby-s-Dream-Land-275682.html">fiche de <em>Kirby's Dream Land</em></a> &mdash; console virtuelle Nintendo 3DS en Europe depuis le 30 juin 2011, en anglais ; &#171;&nbsp;roi Dadidou&nbsp;&#187; et &#171;&nbsp;Mont Dadidou&nbsp;&#187;</li>
+            <li>Nintendo, <a target="_blank" rel="noopener" href="https://www.nintendo.com/jp/topics/article/40f195c8-f85c-41db-9184-f1155018011d">annonce de Game Boy &ndash; Nintendo Switch Online (9 février 2023)</a> &mdash; <span class="jp">星のカービィ</span> parmi les titres de lancement</li>
+            <li>Nintendo France, <a target="_blank" rel="noopener" href="https://www.nintendo.com/fr-fr/Jeux/NES/Kirby-s-Adventure-277754.html">fiche de <em>Kirby's Adventure</em></a> &mdash; titre européen de <span class="jp">星のカービィ 夢の泉の物語</span> ; <a target="_blank" rel="noopener" href="https://www.nintendo.com/fr-fr/Jeux/Jeux-Nintendo-Switch/Kirby-et-le-monde-oublie-2045110.html">fiche de <em>Kirby et le monde oublié</em></a> &mdash; la formulation &#171;&nbsp;copier leurs pouvoirs&nbsp;&#187;</li>
+            <li>Wikipédia (français), <a target="_blank" rel="noopener" href="https://fr.wikipedia.org/wiki/Kirby%27s_Dream_Land">&#171;&nbsp;Kirby's Dream Land&nbsp;&#187;</a> &mdash; nom utilisé dans cet article (article propre au premier jeu) ; &#171;&nbsp;le roi Dedede (roi Dadidou dans la suite de la série)&nbsp;&#187; ; et <a target="_blank" rel="noopener" href="https://fr.wikipedia.org/wiki/Kirby%27s_Dream_Collection:_Special_Edition">&#171;&nbsp;Kirby's Dream Collection: Special Edition&nbsp;&#187;</a> &mdash; &#171;&nbsp;Le jeu n'est jamais sorti en Europe&nbsp;&#187;</li>
+            <li>Game Boy hardware database (gbhwdb), <a target="_blank" rel="noopener" href="https://gbhwdb.gekkio.fi/cartridges/DMG-KYJ-0/kai-1.html">cartouche DMG-KYJ-0</a> &mdash; photo de l'étiquette portant <code>DMG-KYJ</code> ; une révision aux circuits datés de 1995 et 1996 garde le même code sur l'étiquette</li>
+            <li>Internet Archive, <a target="_blank" rel="noopener" href="https://archive.org/details/hoshi-no-kirby-dmg-kyj-gb-jp-manual-600-dpi">numérisation de la notice</a> &mdash; <code>DMG-KYJ-JPN-2</code> sur la couverture</li>
+            <li>Suruga-ya, résultats de recherche, 14 septembre 2026 &mdash; <code>DMG-KYJ</code> renvoie deux annonces, toutes deux le <span class="jp">星のカービィ</span> sur Game Boy, avec les exemplaires d'occasion de Suruga-ya elle-même à 320&ndash;4&nbsp;570 yens ; <code>DMG-KYJ-JPN</code> n'en renvoie aucune ; <span class="jp">星のカービィ ゲームボーイ</span> renvoie en plus <span class="jp">星のカービィ (箱説なし)</span> à 1&nbsp;500 yens, que la recherche par code ne montre pas</li>
+            <li>Résultats de recherche Buyee, mesurés le 14 septembre 2026 dans un navigateur de bureau : <code>DMG-KYJ</code>, 30 annonces, toutes le <span class="jp">星のカービィ</span> original sur Game Boy (dont 2 pour la notice seule) ; <span class="jp">星のカービィ ゲームボーイ</span>, 716 annonces, dont environ une sur dix parmi les 100 premières pour l'original seul</li>
+          </ul>
+        </div>
+
+        <p><em>Ceci est la partie 1 d'une série en cinq volets revenant sur l'histoire du développement de Kirby.</em></p>
+      </div>
+    </article>
+
+    <div class="cta">
+      <h2>Trouvez le code, trouvez le jeu</h2>
+      <p>Saisissez un titre occidental. Obtenez le nom japonais, le code produit imprimé sur la tranche de la cartouche, et des liens vers les boutiques qui l'ont en stock.</p>
+      <p class="ctascan">Ou scannez le code-barres au dos de la boîte ou du boîtier : <a href="/?scan=1">ouvrir le scanner</a></p>
+      <a class="ctabtn" href="/">Rechercher un jeu</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Kataban &middot; Données issues de la Media Arts Database de l'Agence japonaise pour les affaires culturelles. Titres anglais recoupés avec Wikidata (CC0).
+    <br>Certains liens sur ce site sont des liens d'affiliation ; Kataban peut percevoir une commission, notamment en tant qu'affilié du eBay Partner Network (publicité).
+    <br><a href="/blog/fr/">Tous les articles</a> &middot; <a href="/">Retour à l'outil de recherche</a> &middot; <a href="/privacy.html">Confidentialité</a>
+    <div class="foot-brand">
+      <p class="foot-stars" aria-hidden="true">★★★</p>
+      <p class="foot-tagline">Longue vie aux jeux physiques.</p>
+      <span class="kb-word" aria-hidden="true">
+        <span class="kb-ghost"><span class="kb-grid" data-kb="kb-on-cyan"></span></span>
+        <span class="kb-grid kb-top" data-kb="kb-on-pink"></span>
+      </span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="/kataban.js"></script>
+</body>
+</html>

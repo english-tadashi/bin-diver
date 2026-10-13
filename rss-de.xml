@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Ein Blog für Sammler außerhalb Japans, die japanische Retro-Spiele suchen — Shop-Guides, Import-Anleitungen und die Geschichten hinter den Titeln.</description>
     <language>de-de</language>
-    <lastBuildDate>Mon, 12 Oct 2026 08:02:24 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 14 Oct 2026 07:01:12 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-de.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Kirby-Entwicklungsgeschichte, Teil 1: Wie aus Twinkle Popo Kirby’s Dream Land wurde – und der Produktcode DMG-KYJ</title>
+      <link>https://gamekataban.com/blog/de/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html</guid>
+      <description>Kirbys erstes Spiel erschien am 27. April 1992 in Japan für den Game Boy als Hoshi no Kirby (DMG-KYJ). Es begann als Twinkle Popo, das HAL Laboratory selbst herausbringen wollte. Warum Kirby in Amerika weiß war und warum der Code die japanische Cartridge vor dem Titel findet.</description>
+      <pubDate>Wed, 14 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Gulliver Boy auf PC Engine: das RPG aus einem Zeitschriftenprojekt, das Zeichentrick abspielte — und bei einem blieb</title>
       <link>https://gamekataban.com/blog/de/2026-10-13-gulliver-boy-pc-engine-hcd5076.html</link>
