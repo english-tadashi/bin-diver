@@ -669,6 +669,8 @@ footer a:hover,footer a:focus{color:var(--accent)}
 #scanJan:focus{outline:3px solid var(--accent);outline-offset:1px}
 #scanJan::placeholder{color:var(--faint)}
 #scanGo{font-family:"Space Mono",monospace;font-size:13px;padding:9px 14px;border:2px solid var(--edge);background:var(--field);color:var(--ink);cursor:pointer}
+#scanStart{display:block;width:100%;margin-top:10px;font-family:"Space Mono",monospace;font-size:14px;font-weight:700;padding:12px;border:2px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer}
+#scanStart[hidden]{display:none}
 #scanGo:hover,#scanGo:focus{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);outline:none}
 
 /* 楽天 商品画像レイヤー(任意層)。切り抜かない・上に文字を乗せない = 規約側の要求。 */
@@ -1727,7 +1729,7 @@ header .lede .lede-sub{ font-weight:400; }
   <div class="search kb-panel">
     <div class="kb-fieldrow">
       <label class="kb-lab" for="q">Title <span class="kb-lab-jp">&#12479;&#12452;&#12488;&#12523;</span></label>
-      <input id="q" type="search" autocomplete="off" placeholder="Search a Western title… e.g. Chrono Trigger" aria-label="Search a Western game title">
+      <input id="q" type="search" autocomplete="off" placeholder="Title or 13-digit barcode…" aria-label="Search a Western game title, product code or 13-digit barcode">
     </div>
     <div class="kb-cols">
       <div class="kb-col">
@@ -1749,7 +1751,7 @@ header .lede .lede-sub{ font-weight:400; }
     </div>
     <div class="kb-divider"></div>
     <button type="button" id="scanBtn" class="scanbtn" aria-label="Scan a barcode"><svg class="kb-bars" width="22" height="16" viewBox="0 0 22 16" aria-hidden="true"><g fill="currentColor"><rect x="0" width="2" height="16"/><rect x="3" width="1" height="16"/><rect x="6" width="3" height="16"/><rect x="10" width="1" height="16"/><rect x="12" width="2" height="16"/><rect x="16" width="1" height="16"/><rect x="18" width="3" height="16"/></g></svg> SCAN BARCODE</button>
-    <p class="kb-scanhint">Point your camera at the JAN barcode on a disc case.</p>
+    <p class="kb-scanhint">Point your camera at the JAN barcode on a disc case or a cartridge box.</p>
   </div>
 
   <!-- 呼び戻しトグル。position:fixed なので DOM 上の位置は見た目に効かないが、
@@ -1897,8 +1899,9 @@ header .lede .lede-sub{ font-weight:400; }
   <div class="scanbox">
     <div class="scanhead"><b>Scan the barcode</b><button type="button" id="scanClose">Close</button></div>
     <div class="scanvidwrap"><video id="scanVideo" playsinline muted></video><div class="scanreticle"></div></div>
-    <p class="scanhint">Point at the JAN barcode on the <b>back</b> of a disc case — PS1–PS3, PSP, Saturn, Dreamcast, DS. The store's own price sticker won't work; use the printed one. Bare cartridges have no barcode — type the product code in the search box instead.</p>
+    <p class="scanhint">Point at the JAN barcode on the <b>back</b> of a disc case or a cartridge box — PlayStation, Saturn, Dreamcast, DS, and boxed Famicom, Super Famicom, Game Boy, Mega Drive and more. The store's own price sticker won't work; use the printed one. A bare cartridge with no box has no barcode — type its product code or title in the search box instead.</p>
     <div id="scanMsg"></div>
+    <button type="button" id="scanStart" hidden>Start camera</button>
     <div class="scanmanual">
       <input id="scanJan" inputmode="numeric" autocomplete="off" placeholder="…or type the 13-digit JAN">
       <button type="button" id="scanGo">Look up</button>
@@ -5013,7 +5016,7 @@ async function janFallback(jan){
   return m.verdict;
 }
 
-const scanBtn=$('#scanBtn'), overlay=$('#scanOverlay'), video=$('#scanVideo'),
+const scanBtn=$('#scanBtn'), scanStart=$('#scanStart'), overlay=$('#scanOverlay'), video=$('#scanVideo'),
       scanMsg=$('#scanMsg'), scanClose=$('#scanClose'), scanJan=$('#scanJan'), scanGo=$('#scanGo');
 let stream=null, detector=null, zxingReader=null, rafId=0, closing=false;
 // 直近のスキャン結果。null=まだ読んでいない / true=カタログに有り / false=無し。
@@ -5049,12 +5052,16 @@ function onDetected(text){
   return found;
 }
 
-async function openScan(){
+// opts.defer: 画面だけ開いてカメラはまだ起動しない（/?scan=1 で開いた iPhone 用。タップで起動＝ユーザー操作の中で getUserMedia を呼ぶ）。
+// クリックから呼ばれたときは opts がイベントになるが、defer を持たないので従来どおり即起動。
+async function openScan(opts){
   overlay.classList.add('on'); scanMsg.textContent=''; closing=false; lastScanHit=null; lastMissJan='';
+  scanStart.hidden=true;
+  if(opts && opts.defer===true){ scanStart.hidden=false; scanMsg.textContent='Tap “Start camera” to scan.'; return; }
   try{
     stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
     video.srcObject=stream; await video.play();
-  }catch(e){ scanMsg.textContent='Camera unavailable — type the JAN below instead.'; return; }
+  }catch(e){ scanMsg.textContent='Camera unavailable — type the JAN below instead.'; if(opts && opts.fromUrl) scanStart.hidden=false; return; }
   let mode;
   try{ mode=await getDecoder(); }
   catch(e){ scanMsg.textContent='Scanner failed to load — type the JAN below.'; return; }
@@ -5088,6 +5095,14 @@ function closeScan(){
 }
 
 scanBtn.addEventListener('click',openScan);
+scanStart.addEventListener('click',()=>openScan());
+// /?scan=1 で開いたらスキャナー画面を開く（記事の案内から来た人向け・2026-10-13）。iPhone/iPad はタップでカメラ起動、それ以外は即起動（失敗したら「Start camera」を出す）。
+try{
+  if(new URLSearchParams(location.search).get('scan')==='1'){
+    const iOS=/iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
+    openScan(iOS ? {defer:true} : {fromUrl:true});
+  }
+}catch(e){}
 scanClose.addEventListener('click',closeScan);
 overlay.addEventListener('click',e=>{ if(e.target===overlay) closeScan(); });
 scanGo.addEventListener('click',()=>{ if(showByJan(scanJan.value)) closeScan(); });
