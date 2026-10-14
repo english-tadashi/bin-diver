@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Ein Blog für Sammler außerhalb Japans, die japanische Retro-Spiele suchen — Shop-Guides, Import-Anleitungen und die Geschichten hinter den Titeln.</description>
     <language>de-de</language>
-    <lastBuildDate>Wed, 14 Oct 2026 07:01:12 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 14 Oct 2026 07:12:18 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-de.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Entwicklungsgeschichte von Castlevania, Teil 5: zwei Codes in einer Zeile, und der einzige Treffer ist die falsche Konsole</title>
+      <link>https://gamekataban.com/blog/de/2026-10-15-castlevania-development-history-5.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-10-15-castlevania-development-history-5.html</guid>
+      <description>Auf PlayStation 2 und PlayStation 3 speichert der Kataban-Katalog zwei Produktcodes durch ein Semikolon verbunden: BLJM60284;VT033-J1. Der erste funktioniert genau so, wie er dasteht, der zweite liefert HTTP 404. Jeder funktionierende Code erreicht genau eine Ausgabe, und der japanische Titel derselben Zeile liefert einen einzigen Treffer aus einer anderen Region und für eine andere Konsole.</description>
+      <pubDate>Thu, 15 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Kirby-Entwicklungsgeschichte, Teil 1: Wie aus Twinkle Popo Kirby’s Dream Land wurde – und der Produktcode DMG-KYJ</title>
       <link>https://gamekataban.com/blog/de/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html</link>

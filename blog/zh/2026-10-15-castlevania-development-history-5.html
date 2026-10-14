@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>惡魔城開發史 第5回：一列上兩個編號，而唯一搜到的那一筆是另一台主機 &mdash; Kataban</title>
+<meta name="description" content="在PlayStation 2與PlayStation 3上，Kataban目錄把兩個商品編號用分號串在同一欄：BLJM60284;VT033-J1。前半照原樣搜就有效，後半回來HTTP 404。能用的編號每一個都只搆得到一個版本；而那一列自己的日文原名搜出來的唯一一筆，是另一個地區、另一台主機的光碟。系列開發史五部曲第5回（完結）。">
+<meta property="og:title" content="惡魔城開發史 第5回：一列上兩個編號，而唯一搜到的那一筆是另一台主機">
+<meta property="og:description" content="在PlayStation 2與PlayStation 3上，Kataban目錄把兩個商品編號用分號串在同一欄：BLJM60284;VT033-J1。前半照原樣搜就有效，後半回來HTTP 404。能用的編號每一個都只搆得到一個版本；而那一列自己的日文原名搜出來的唯一一筆，是另一個地區、另一台主機的光碟。系列開發史五部曲第5回（完結）。">
+<meta property="og:url" content="https://gamekataban.com/blog/zh/2026-10-15-castlevania-development-history-5.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://gamekataban.com/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://gamekataban.com/blog/zh/2026-10-15-castlevania-development-history-5.html">
+<link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-10-15-castlevania-development-history-5.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-10-15-castlevania-development-history-5.html">
+<link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-10-15-castlevania-development-history-5.html">
+<link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-10-15-castlevania-development-history-5.html">
+<link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-10-15-castlevania-development-history-5.html">
+<link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-10-15-castlevania-development-history-5.html">
+<link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-10-15-castlevania-development-history-5.html">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=IBM+Plex+Sans+JP:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/kataban.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+
+  <header class="sitehead">
+    <a class="sitehead-brand" href="/" aria-label="Kataban — back to the search tool">
+      <span class="kb-word">
+        <span class="kb-ghost" aria-hidden="true"><span class="kb-grid" id="kbGridCyan"></span></span>
+        <span class="kb-grid kb-top" id="kbGridPink" aria-hidden="true"></span>
+      </span>
+      <span class="sitehead-badge">&#22411;&#30058;</span>
+    </a>
+    <a class="backlink" href="/blog/zh/"><span class="arrow" aria-hidden="true">&#8592;</span> &#20840;&#37096;&#25991;&#31456;</a>
+    <div class="langswitch">
+      <button class="langswitch-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langswitch-menu">
+        <span class="langswitch-current">&#20013;&#25991; &mdash; &#32321;&#39636;&#20013;&#25991;</span>
+        <span class="langswitch-caret" aria-hidden="true">&#9662;</span>
+      </button>
+      <ul class="langswitch-menu" id="langswitch-menu" role="menu" hidden>
+      <li role="none"><a role="menuitem" href="/blog/2026-10-15-castlevania-development-history-5.html" hreflang="en" lang="en" data-lang="en">English</a></li>
+      <li role="none"><a role="menuitem" href="/blog/zh/2026-10-15-castlevania-development-history-5.html" hreflang="zh-Hant" lang="zh-Hant" data-lang="zh" aria-current="page">&#20013;&#25991;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/ko/2026-10-15-castlevania-development-history-5.html" hreflang="ko" lang="ko" data-lang="ko">&#54620;&#44397;&#50612;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/es/2026-10-15-castlevania-development-history-5.html" hreflang="es" lang="es" data-lang="es">Espa&ntilde;ol</a></li>
+      <li role="none"><a role="menuitem" href="/blog/de/2026-10-15-castlevania-development-history-5.html" hreflang="de" lang="de" data-lang="de">Deutsch</a></li>
+      <li role="none"><a role="menuitem" href="/blog/fr/2026-10-15-castlevania-development-history-5.html" hreflang="fr" lang="fr" data-lang="fr">Français</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <article>
+      <div class="pagehead">
+        <p class="kicker">Kataban 部落格</p>
+        <h1>惡魔城開發史 第5回：一列上兩個編號，而唯一搜到的那一筆是另一台主機</h1>
+        <p class="postmeta">2026-10-15</p>
+        <ul class="posttags" aria-label="標籤">
+          <li><a href="/blog/zh/tag/platform/ps3/">PlayStation 3</a></li>
+          <li><a href="/blog/zh/tag/platform/ps2/">PlayStation 2</a></li>
+          <li><a href="/blog/zh/tag/genre/action/">動作</a></li>
+          <li><a href="/blog/zh/tag/decade/2010s/">2010年代</a></li>
+          <li><a href="/blog/zh/tag/publisher/konami/">科樂美</a></li>
+          <li><a href="/blog/zh/tag/series/castlevania/">Castlevania</a></li>
+        </ul>
+      </div>
+
+      <div class="prose">
+        <p>在<a href="/blog/zh/2026-10-08-castlevania-development-history-4.html">第4回</a>裡，目錄存的每一個Game Boy Advance與Nintendo DS編號，都得先切短才有店家肯回應。光碟世代沒有這個問題。Kataban目錄在PlayStation 2與PlayStation 3上為惡魔城收的三個商品編號，照原樣拿去搜全都回來HTTP 200與真實的商品。這一回壞掉的地方不一樣，而且更安靜：每個編號都只搆得到一個版本就停住；欄位裡放著兩個編號，而只有前面那個有用；至於PlayStation 3那一列存的日文原名，搜出來剛好一筆——另一個地區、另一台主機的光碟。</p>
+
+        <ul>
+          <li>目錄在PlayStation 2與PlayStation 3上共有12列惡魔城，其中3列帶商品編號，而這3個照原樣拿去駿河屋全都有效——這是本系列第一次出現這種情形</li>
+          <li>這3列的編號欄都用分號串著兩個值，例如<code>BLJM60284;VT033-J1</code>；前半回來商品，後半回來HTTP 404與零筆</li>
+          <li><code>BLJM60284</code>剛好回來一筆，是PlayStation 3的[通常版]；[限定版]就在同一家店裡，而這個編號搆不到它</li>
+          <li>拿那一列自己的日文原名<code>Castlevania Lords of Shadow</code>去搜，剛好回來一筆：一片亞洲版的Xbox 360光碟</li>
+          <li>改用片假名形式會回來五筆，橫跨三台主機——PlayStation 3兩筆、Xbox 360兩筆、Nintendo 3DS一筆——而它們的名字都是同樣那幾個字的某種寫法</li>
+          <li>「闇の呪印」在目錄裡收成兩列：2007年那一列的編號只回來[ベスト版]，2005年那一列的JAN只回來原版，兩邊的結果沒有任何重疊</li>
+        </ul>
+
+        <h2>PlayStation 2與PlayStation 3世代在目錄裡有些什麼？</h2>
+        <p>PlayStation 2與PlayStation 3上共有12列掛著惡魔城的名字，兩台主機各6列。其中3列帶商品編號：<code>SLPM65444;VW148-J1</code>（「キャッスルヴァニア」，2003年的PlayStation 2作品，西方版名為<em>Lament of Innocence</em>）、<code>SLPM66668;VW295-J2</code>（「悪魔城ドラキュラ 闇の呪印」，在年份為2007的那一列上），以及<code>BLJM60284;VT033-J1</code>（「Castlevania Lords of Shadow」）。其餘9列的商品編號欄是空的。</p>
+        <p>12列裡有3列根本不是光碟。文化廳Media Arts Database把它們的載體類型記為「オンライン資料」——線上配信——而目錄把這個標記帶了過來：「キャッスルヴァニア Lords of Shadow 宿命の魔鏡 HD EDITION」（2013）、「悪魔城ドラキュラ Harmony of Despair」（2012），以及兩列「悪魔城ドラキュラ Lords of Shadow 2」中的一列（2014）。不管商店回來什麼，這幾款都沒有實體可買。</p>
+        <p>目錄裡沒有任何一列惡魔城掛在Xbox 360上，雖然目錄本身收了144列Xbox 360的作品。而駿河屋現在架上就有兩筆Xbox 360版的<em>Lords of Shadow</em>，日文名字與PlayStation 3那兩筆相同，發售日期也相同。目錄與貨架之間的這道縫，正是接下來兩節的主題。</p>
+        <p>兩列<em>Lords of Shadow</em>把欄位拆開的方式，和第4回那些掌機列一樣，而且又多走了一步。<code>M720598</code>這一列帶商品編號、帶JAN <code>4988602154269</code>、發行商欄寫著「コナミデジタルエンタテインメント」——但完全沒有年份。<code>M737910</code>這一列帶著年份2010，沒有編號也沒有JAN，而發行商欄裡放的是一行著作權標示而不是公司名：<code>&copy;2010 Konami Digital Entertainment Developed by Mercury Steam Entertainment</code>。2005年那一列「闇の呪印」也是同樣的情形，發行商欄的位置上放的是<code>&copy;1986 2005 KONAMI</code>。</p>
+
+        <h2>光碟世代的商品編號真的有效嗎？</h2>
+        <p>三個都有效，照原樣、不必動任何一個字。<code>BLJM60284</code>回來HTTP 200與一筆。<code>SLPM66668</code>回來200與一筆。<code>SLPM65444</code>回來200與三筆。第4回的規則——從<code>JPN</code>前面那個連字號切掉——在這裡無事可做，因為這些編號本來就沒有那種結尾。</p>
+        <p>要動的是分號。這三列的商品編號欄都存著兩個值，而只有前面那個是能拿去店裡用的搜尋語。<code>VT033-J1</code>、<code>VW295-J2</code>與<code>VW148-J1</code>在駿河屋各自回來HTTP 404與零筆。本文對這些第二個值是什麼不作任何主張；實測到的只是店家不認它們。連分號一起原樣貼過去，就是這一回要避開的失敗方式，而本站先前在一列Saturn作品上已經記錄過同一件事（<code>670-7238;GS-9041</code>，其中只有<code>GS-9041</code>是有效的搜尋語）。</p>
+        <p>編號寫不寫連字號，在這家店沒有差別。<code>BLJM-60284</code>回來的和<code>BLJM60284</code>是同樣那一筆，<code>SLPM-66668</code>回來的和<code>SLPM66668</code>也是同樣那一筆。連字號可有可無；分號不是。</p>
+        <p>但編號回來200，不代表編號回來全部。<code>BLJM60284</code>回來的是PlayStation 3的[通常版]，就只有這一筆；而PlayStation 3的[限定版]就在同一家店、同一組搜尋語底下。限定版的差別不只是外觀：它附了畫冊與原聲帶CD，還附了一組下載序號——PlayStation 3版是Game Archives的「悪魔城ドラキュラX 月下の夜想曲」，Xbox 360版是「悪魔城ドラキュラ ハーモニー オブ ディスペアー」。只用目錄存的編號去搜的買家，永遠不會在清單上看到它。</p>
+
+        <h2>直接把目錄那一列的日文原名貼過去會怎樣？</h2>
+        <p><code>M720598</code>這一列把日文原名寫成拉丁字母：<code>Castlevania Lords of Shadow</code>。拿它原樣去駿河屋搜，回來的是HTTP 200與剛好一筆：「アジア版 CASTLEVANIA： Lords of Shadow(国内版本体動作可)」，歸類在「XBOX360ソフト」底下。它是亞洲地區版，主機是目錄裡一列惡魔城都沒有的Xbox 360，而商品說明寫的是可在日本國內主機上運作。一筆結果，沒有錯誤訊息，頁面上也沒有任何東西告訴你這次搜尋落空了。</p>
+        <p>另一列<em>Lords of Shadow</em>把名字寫成<code>Castlevania -Lords of Shadow-</code>。這個字串回來27筆，大多是其他惡魔城作品的北美版，還有一整排<em>Dead Cells: Return to Castlevania</em>。目錄為這款遊戲收的兩個名字欄位，沒有一個搜得到日版PlayStation 3光碟。</p>
+        <p>真正有效的欄位就在同一列上。它的讀音欄放的是「キャッスルヴァニア ロード オブ シャドウ」，拿它去搜會回來五筆，其中四筆是這款遊戲在兩台主機上的版本。第4回在Game Boy Advance上記錄過這種失敗，當時拉丁字母的名字回來的是四筆現行合輯；第3回在<code>LEGEND OF CORNELL</code>上記錄過，當時回來的是零筆。這裡回來的是一筆看起來像樣的商品，而那是最難察覺的一種。</p>
+        <p>問題不在拉丁字母本身。兩列<em>Lords of Shadow 2</em>存的是「悪魔城ドラキュラ Lords of Shadow 2」——漢字與拉丁字母混在同一個字串裡——而它回來兩筆，都是對的遊戲，一筆PlayStation 3、一筆Xbox 360。壞掉的是那個一個日文字都沒有的字串，因為店家把這款遊戲的名字索引成片假名。★也因為這一回的重點就是字串本身，本文所有要貼進商店的字串都保持日文原樣：請不要把「闇の呪印」改寫成「闇之咒印」、把「宿命の魔鏡」改寫成「宿命之魔鏡」再去搜，駿河屋的索引裡沒有那些寫法。</p>
+
+        <h2>為什麼五筆商品共用同一個日文名字？</h2>
+        <p>搜尋「キャッスルヴァニア ロード オブ シャドウ」會回來五筆，而它們分屬三台不同的主機。加上主機名就會分開：「キャッスルヴァニア ロード オブ シャドウ プレイステーション3」回來兩筆，[通常版]與[限定版]，都是PlayStation 3；「キャッスルヴァニア ロード オブ シャドウ Xbox360」回來兩筆，是同樣兩種版本的Xbox 360版。這四筆商品頁上寫的發售日期都是2010/12/16。</p>
+        <p>第五筆是一張Nintendo 3DS卡帶。駿河屋把它列成「キャッスルヴァニア ロード・オブ・シャドウ」，日期2013/03/20——店家的商品名把「宿命の魔鏡」整段丟掉了，而那正是說明它是另一款遊戲的部分。那款遊戲是<em>Mirror of Fate</em>，2013年3月20日在日本於Nintendo 3DS推出。拿「宿命の魔鏡」去駿河屋搜，回來的是HTTP 404與零筆：能把兩款遊戲分開的字不在店家的商品名裡，所以唯一找得到那張3DS卡帶的搜尋語，也同時會回來PlayStation 3的光碟。</p>
+        <p>目錄把那款3DS遊戲收了兩次，一次是卡帶列、一次是線上配信列；而它的PlayStation 3 <em>HD Edition</em>則收成一列年份2013的線上配信。HD版是2013年12月4日在PlayStation 3與Xbox 360上以下載形式配信的。所以想在光碟上找「宿命の魔鏡」的PlayStation 3玩家，找的是一件從來沒有壓片過的東西。</p>
+        <p>店家對中點也不一致。一筆PlayStation 3商品寫的是帶空格的「キャッスルヴァニア ～ロード オブ シャドウ～[通常版]」，另外三筆寫的是帶「・」的「ロード・オブ・シャドウ」。用空格去搜兩種寫法都會回來，所以這一點不會讓你付出代價——但這就是同一款遊戲會在同一頁結果裡以兩種字串出現的原因。</p>
+
+        <h2>PlayStation 2上的「闇の呪印」呢？</h2>
+        <p>「悪魔城ドラキュラ 闇の呪印」在PlayStation 2上，北美2005年11月5日、日本2005年11月24日、歐洲2006年2月17日發售。由Konami Digital Entertainment開發並發行，製作人為五十嵐孝司，人物設定為小島文美，音樂為山根美智留。<em>《Fami通遊戲白皮書2006》</em>記載其在日本售出42,926份。</p>
+        <p>目錄把它收成兩列，而兩列把識別碼分著拿。<code>M759621</code>這一列帶年份2005與JAN <code>4988602124637</code>，沒有商品編號。<code>M720782</code>這一列帶年份2007與商品編號<code>SLPM66668;VW295-J2</code>，沒有JAN。</p>
+        <p>兩個識別碼各自回來剛好一筆，而且是不同的一筆。JAN <code>4988602124637</code>回來的是「悪魔城ドラキュラ 闇の呪印」，店家標的日期是2005/11/24。編號<code>SLPM66668</code>回來的是「悪魔城ドラキュラ ～闇の呪印～ [ベスト版]」，店家標的日期是2007/02/15。搜尋日文名字「悪魔城ドラキュラ 闇の呪印」兩筆都會回來；再加上「プレイステーション2」也還是這兩筆，因為沒有別的主機掛著這個名字。</p>
+        <p>這與第4回在同一列之內發現的分裂是同一件事，只是排得更整齊：目錄把JAN放在年份對應原版的那一列，把編號放在年份對應再發行版的那一列，而各自搆到的正好是自己那一版。這個編號是不是只印在再發行版的側標上，本文無法告訴你——而再發行版也正是資料來源斷掉的地方。本文沒有找到這款遊戲任何一次日本廉價版發行的日期出處。日文維基百科的條目列出了原聲帶CD、攻略本與漫畫，沒有列出任何再發行版。目錄的年份2007與店家的2007/02/15彼此對得起來；但對得起來與有一份出處並不是同一件事，本文也不打算把前者當成後者。</p>
+        <p>下單前要讀的標示是「ベスト版」。它標記的是後來的廉價再發行，而那正是編號回來的那一筆，也是編號唯一回來的那一筆。</p>
+
+        <h2>那到底該用哪個搜尋語？</h2>
+        <p>以下是實測結果。駿河屋是用原始搜尋網址測的，件數取自頁面本身的「該当件数」；Buyee則是在真實瀏覽器裡對原始搜尋網址測的，因為Buyee對命令列送出的請求只會回HTTP 202與空白內容。</p>
+        <p>兩家店對這兩個編號的態度剛好相反。在駿河屋兩個都有效。在Buyee，<code>SLPM66668</code>回來一筆，而且正是對的那一筆——「中古PS2ソフト 悪魔城ドラキュラ ～闇の呪印～ [ベスト版]」——而<code>BLJM60284</code>完全沒有件數也沒有結果清單。本系列記錄過的規律在這裡成立：Buyee的編號搜尋能不能中，取決於賣家有沒有剛好把編號打進自己的商品說明裡，除了實際去試以外沒有辦法知道。</p>
+        <p>Buyee穩定會回應的是日文原名後面接上主機名。「キャッスルヴァニア ロード オブ シャドウ プレイステーション3」回來53筆，排在最前面的是一份未開封的PlayStation 3 [通常版]。把主機名拿掉會回來113筆，而第三筆就已經是Xbox 360版了。「悪魔城ドラキュラ 闇の呪印 プレイステーション2」回來23筆；把主機名拿掉會回來42筆，最前面兩筆是原聲帶CD與漫畫第2集——兩件都是真實存在的商品，分別於2005年11月30日與2006年4月22日發行，而且都不是遊戲。</p>
+        <p>兩家店之間有一個差別，決定了這些數字能撐多久。駿河屋是庫存資料庫，所以在庫存變動之前，它的件數是可以重現的。Buyee是拍賣出品，所以它的件數只在量測的那一刻為真，之後就不是了。</p>
+        <p>PlayStation 3上的<em>Lords of Shadow</em>：在駿河屋用<code>BLJM60284</code>找[通常版]，或者用「キャッスルヴァニア ロード オブ シャドウ プレイステーション3」連[限定版]一起看到。不要貼<code>BLJM60284;VT033-J1</code>，也不要貼<code>Castlevania Lords of Shadow</code>。以2026年9月9日實測為準，駿河屋自家的[通常版]庫存是「品切れ」——已售完——同一頁上還掛著其他賣家的二手品。</p>
+        <p>PlayStation 2上的「闇の呪印」：用「悪魔城ドラキュラ 闇の呪印」可以看到兩種版本，用<code>SLPM66668</code>只會看到[ベスト版]，用JAN <code>4988602124637</code>只會看到2005年的原版。</p>
+        <p>光碟世代替這個系列添上的通則是兩個編輯動作，不是一個。商品編號欄裡有分號時，只搜前面那個值。而編號真的回來商品時，在把它當成唯一的搜尋語之前，先確認它是不是回來了<em>全部</em>——在這個世代的每一列上，能用的編號都只搆到一個版本。</p>
+
+        <p><strong>Castlevania: Lords of Shadow</strong> · <span class="jp">キャッスルヴァニア ロード オブ シャドウ</span> · PlayStation 3 · 2010 · Konami Digital Entertainment · 商品編號 <code>BLJM60284</code></p>
+        <p><strong>購買方式：</strong>
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3DBLJM60284%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp（依商品編號）</a> ·
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3D%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B9%25E3%2583%25AB%25E3%2583%25B4%25E3%2582%25A1%25E3%2583%258B%25E3%2582%25A2%2520%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%2520%25E3%2582%25AA%25E3%2583%2596%2520%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%2589%25E3%2582%25A6%2520%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B33%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp（依日文商品名）</a> ·
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://i0c.xyz/6a6994d1e0b3f?url=https%3A%2F%2Fbuyee.jp%2Fitem%2Fsearch%2Fquery%2F%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B9%25E3%2583%25AB%25E3%2583%25B4%25E3%2582%25A1%25E3%2583%258B%25E3%2582%25A2%2520%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%2520%25E3%2582%25AA%25E3%2583%2596%2520%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%2589%25E3%2582%25A6%2520%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B33%3Flang%3Den">Buyee</a></p>
+
+        <div class="kataban-search-cta">
+          <p><a href="/?q=悪魔城ドラキュラ">在Kataban目錄中瀏覽日版惡魔城全系列 →</a></p>
+        </div>
+
+        <div class="official-sources">
+          <p><strong>資料來源</strong></p>
+          <ul>
+            <li>維基百科（日文版），<a href="https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B9%E3%83%AB%E3%83%B4%E3%82%A1%E3%83%8B%E3%82%A2_%E3%83%AD%E3%83%BC%E3%83%89_%E3%82%AA%E3%83%96_%E3%82%B7%E3%83%A3%E3%83%89%E3%82%A6">「キャッスルヴァニア ロード オブ シャドウ」</a>——PlayStation 3、Xbox 360與PC（Steam）；MercurySteam開發，Konami Digital Entertainment發行，第一作的日文在地化由小島製作所監修；美國與加拿大2010年10月5日、歐洲2010年10月7日、澳洲2010年10月19日、日本2010年12月16日；初回限定版附畫冊與原聲帶CD，另附一組下載序號，PlayStation 3版為Game Archives的「悪魔城ドラキュラX 月下の夜想曲」，Xbox 360版為「悪魔城ドラキュラ ハーモニー オブ ディスペアー」</li>
+            <li>維基百科（日文版），<a href="https://ja.wikipedia.org/wiki/%E6%82%AA%E9%AD%94%E5%9F%8E%E3%83%89%E3%83%A9%E3%82%AD%E3%83%A5%E3%83%A9_%E9%97%87%E3%81%AE%E5%91%AA%E5%8D%B0">「悪魔城ドラキュラ 闇の呪印」</a>——PlayStation 2；北美2005年11月5日、日本2005年11月24日、歐洲2006年2月17日；Konami Digital Entertainment開發並發行，製作人五十嵐孝司，人物設定小島文美，音樂山根美智留；依《Fami通遊戲白皮書2006》在日本售出42,926份；條目列出的相關商品為原聲帶（2005年11月30日）、完全攻略本（2006年1月3日）與漫畫版（第1集2005年11月11日、第2集2006年4月22日）。★該條目沒有列出任何廉價版或再發行版</li>
+            <li>維基百科（日文版），<a href="https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B9%E3%83%AB%E3%83%B4%E3%82%A1%E3%83%8B%E3%82%A2_%E3%83%AD%E3%83%BC%E3%83%89_%E3%82%AA%E3%83%96_%E3%82%B7%E3%83%A3%E3%83%89%E3%82%A6_%E5%AE%BF%E5%91%BD%E3%81%AE%E9%AD%94%E9%8F%A1">「キャッスルヴァニア ロード オブ シャドウ 宿命の魔鏡」</a>——Nintendo 3DS，日本2013年3月20日，MercurySteam開發、Konami Digital Entertainment發行；HD Edition於2013年12月4日在日本於PlayStation 3與Xbox 360配信</li>
+            <li>★TODO——PlayStation 2版「闇の呪印」[ベスト版]的發行日期出處。未取得。日文維基百科的條目沒有列出任何再發行版。本文只寫出目錄那一列的年份是2007，以及店家自己的[ベスト版]商品頁標的是2007/02/15</li>
+            <li>★TODO——商品編號欄裡用分號串著的第二個值是什麼（<code>VT033-J1</code>、<code>VW295-J2</code>、<code>VW148-J1</code>）。未取得任何第一手文件。本文對這套格式不作任何主張，只寫出駿河屋對這三個值都回來HTTP 404與零筆</li>
+            <li>Kataban目錄（<code>data/master_final.csv</code>）——PlayStation 2與PlayStation 3上共有12列掛著惡魔城的名字，各6列；3列帶商品編號（<code>SLPM65444;VW148-J1</code>、<code>SLPM66668;VW295-J2</code>、<code>BLJM60284;VT033-J1</code>），9列沒有；3列標記為線上配信（「キャッスルヴァニア Lords of Shadow 宿命の魔鏡 HD EDITION」2013、「悪魔城ドラキュラ Harmony of Despair」2012、兩列「悪魔城ドラキュラ Lords of Shadow 2」中的一列2014）；<em>Lords of Shadow</em>收在<code>M720598</code>（拉丁字母名、無年份、有編號、JAN <code>4988602154269</code>）與<code>M737910</code>（2010、無編號無JAN、發行商欄為著作權標示）；「闇の呪印」收在<code>M759621</code>（2005、有JAN無編號）與<code>M720782</code>（2007、有編號無JAN）；目錄的144列Xbox 360作品中沒有任何一列惡魔城；線上配信標記對應的是文化廳Media Arts Database中的載體類型「オンライン資料」</li>
+            <li>駿河屋搜尋實測，2026年9月9日，<code>category=2</code>，原始網址，件數取自頁面本身的「該当件数」——<code>BLJM60284</code>與<code>BLJM-60284</code>：HTTP 200、1筆，PlayStation 3 [通常版]，店家庫存為「品切れ」；<code>SLPM66668</code>與<code>SLPM-66668</code>：200、1筆，[ベスト版]；<code>SLPM65444</code>：200、3筆；<code>VT033-J1</code>、<code>VW295-J2</code>、<code>VW148-J1</code>：HTTP 404、0筆；<code>Castlevania Lords of Shadow</code>：200、1筆，亞洲版Xbox 360光碟；<code>Castlevania -Lords of Shadow-</code>：200、27筆；キャッスルヴァニア ロード オブ シャドウ：5筆（3DS 1筆、PlayStation 3 2筆、Xbox 360 2筆）；加上プレイステーション3：2筆；加上Xbox360：2筆；宿命の魔鏡：HTTP 404、0筆；悪魔城ドラキュラ Lords of Shadow 2：2筆，都是對的遊戲；JAN <code>4988602154269</code>：1筆，PlayStation 3 [通常版]；悪魔城ドラキュラ 闇の呪印與再加上プレイステーション2：各2筆；JAN <code>4988602124637</code>：1筆，2005年的原版</li>
+            <li>Buyee搜尋實測，2026年9月9日，在真實瀏覽器中對原始<code>buyee.jp/item/search/query/</code>網址測得（Buyee對命令列請求只回HTTP 202與空白內容），件數取自頁面本身的「N hits」，並與商品節點數交叉核對——キャッスルヴァニア ロード オブ シャドウ プレイステーション3：53 hits；同樣搜尋語改用PS3：53；不加主機名：113；悪魔城ドラキュラ 闇の呪印 プレイステーション2：23；不加主機名：42，最前面兩筆為原聲帶CD與漫畫單行本；<code>SLPM66668</code>與<code>SLPM-66668</code>：各1筆，即[ベスト版]；<code>BLJM60284</code>：搜尋頁面會開啟，但沒有件數也沒有結果清單</li>
+          </ul>
+        </div>
+
+        <p><em>本文為系列「惡魔城開發史」五部曲的第5回，也是最後一回，於新作發售當日刊出。<a href="/blog/zh/2026-09-09-castlevania-development-history-1.html">第1回</a>、<a href="/blog/zh/2026-09-24-castlevania-development-history-2.html">第2回</a>、<a href="/blog/zh/2026-10-01-castlevania-development-history-3.html">第3回</a>與<a href="/blog/zh/2026-10-08-castlevania-development-history-4.html">第4回</a>分別談了紅白機與Game Boy世代、PC Engine與Super Famicom、PlayStation與Nintendo 64，以及掌機世代。系列到此完結。</em></p>
+      </div>
+    </article>
+
+    <div class="cta">
+      <h2>知道編號，找到遊戲</h2>
+      <p>輸入英文標題，就能得到日文名稱、印在卡帶側邊的編號，以及有貨的商店連結。</p>
+      <p class="ctascan">也可以掃描盒子或外殼背面的條碼：<a href="/?scan=1">開啟掃描器</a></p>
+      <a class="ctabtn" href="/">搜尋遊戲</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Kataban &middot; 資料來自文化廳 Media Arts Database。英文標題比對自 Wikidata (CC0)。
+    <br>本站部分連結為聯盟行銷連結，Kataban 可能因此獲得佣金，包括作為 eBay Partner Network 聯盟會員（廣告）。
+    <br><a href="/blog/zh/">全部文章</a> &middot; <a href="/">回到搜尋工具</a> &middot; <a href="/privacy.html">隱私政策</a>
+    <div class="foot-brand">
+      <p class="foot-stars" aria-hidden="true">★★★</p>
+      <p class="foot-tagline">讓實體媒介長存。</p>
+      <span class="kb-word" aria-hidden="true">
+        <span class="kb-ghost"><span class="kb-grid" data-kb="kb-on-cyan"></span></span>
+        <span class="kb-grid kb-top" data-kb="kb-on-pink"></span>
+      </span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="/kataban.js"></script>
+</body>
+</html>

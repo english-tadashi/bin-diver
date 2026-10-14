@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>為海外收藏家打造的日本復古遊戲部落格——商店指南、進口教學，以及遊戲背後的故事。</description>
     <language>zh-tw</language>
-    <lastBuildDate>Wed, 14 Oct 2026 07:01:12 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 14 Oct 2026 07:12:18 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-zh.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>惡魔城開發史 第5回：一列上兩個編號，而唯一搜到的那一筆是另一台主機</title>
+      <link>https://gamekataban.com/blog/zh/2026-10-15-castlevania-development-history-5.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-10-15-castlevania-development-history-5.html</guid>
+      <description>在PlayStation 2與PlayStation 3上，Kataban目錄把兩個商品編號用分號串在同一欄：BLJM60284;VT033-J1。前半照原樣搜就有效，後半回來HTTP 404。能用的編號每一個都只搆得到一個版本；而那一列自己的日文原名搜出來的唯一一筆，是另一個地區、另一台主機的光碟。系列開發史五部曲第5回（完結）。</description>
+      <pubDate>Thu, 15 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>星之卡比開發史 第1回：Twinkle Popo如何成為《星之卡比》，以及它的商品編號DMG-KYJ</title>
       <link>https://gamekataban.com/blog/zh/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html</link>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entwicklungsgeschichte von Castlevania, Teil 5: zwei Codes in einer Zeile, und der einzige Treffer ist die falsche Konsole &mdash; Kataban</title>
+<meta name="description" content="Auf PlayStation 2 und PlayStation 3 speichert der Kataban-Katalog zwei Produktcodes durch ein Semikolon verbunden: BLJM60284;VT033-J1. Der erste funktioniert genau so, wie er dasteht, der zweite liefert HTTP 404. Jeder funktionierende Code erreicht genau eine Ausgabe, und der japanische Titel derselben Zeile liefert einen einzigen Treffer aus einer anderen Region und für eine andere Konsole.">
+<meta property="og:title" content="Entwicklungsgeschichte von Castlevania, Teil 5: zwei Codes in einer Zeile, und der einzige Treffer ist die falsche Konsole">
+<meta property="og:description" content="Auf PlayStation 2 und PlayStation 3 speichert der Kataban-Katalog zwei Produktcodes durch ein Semikolon verbunden: BLJM60284;VT033-J1. Der erste funktioniert genau so, wie er dasteht, der zweite liefert HTTP 404. Jeder funktionierende Code erreicht genau eine Ausgabe, und der japanische Titel derselben Zeile liefert einen einzigen Treffer aus einer anderen Region und für eine andere Konsole.">
+<meta property="og:url" content="https://gamekataban.com/blog/de/2026-10-15-castlevania-development-history-5.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="de_DE">
+<meta property="og:image" content="https://gamekataban.com/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://gamekataban.com/blog/de/2026-10-15-castlevania-development-history-5.html">
+<link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-10-15-castlevania-development-history-5.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-10-15-castlevania-development-history-5.html">
+<link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-10-15-castlevania-development-history-5.html">
+<link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-10-15-castlevania-development-history-5.html">
+<link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-10-15-castlevania-development-history-5.html">
+<link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-10-15-castlevania-development-history-5.html">
+<link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-10-15-castlevania-development-history-5.html">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=IBM+Plex+Sans+JP:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/kataban.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+
+  <header class="sitehead">
+    <a class="sitehead-brand" href="/" aria-label="Kataban — zurück zum Suchwerkzeug">
+      <span class="kb-word">
+        <span class="kb-ghost" aria-hidden="true"><span class="kb-grid" id="kbGridCyan"></span></span>
+        <span class="kb-grid kb-top" id="kbGridPink" aria-hidden="true"></span>
+      </span>
+      <span class="sitehead-badge">&#22411;&#30058;</span>
+    </a>
+    <a class="backlink" href="/blog/de/"><span class="arrow" aria-hidden="true">&#8592;</span> Alle Beiträge</a>
+    <div class="langswitch">
+      <button class="langswitch-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langswitch-menu">
+        <span class="langswitch-current">DE &mdash; Deutsch</span>
+        <span class="langswitch-caret" aria-hidden="true">&#9662;</span>
+      </button>
+      <ul class="langswitch-menu" id="langswitch-menu" role="menu" hidden>
+      <li role="none"><a role="menuitem" href="/blog/2026-10-15-castlevania-development-history-5.html" hreflang="en" lang="en" data-lang="en">English</a></li>
+      <li role="none"><a role="menuitem" href="/blog/zh/2026-10-15-castlevania-development-history-5.html" hreflang="zh-Hant" lang="zh-Hant" data-lang="zh">&#20013;&#25991;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/ko/2026-10-15-castlevania-development-history-5.html" hreflang="ko" lang="ko" data-lang="ko">&#54620;&#44397;&#50612;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/es/2026-10-15-castlevania-development-history-5.html" hreflang="es" lang="es" data-lang="es">Espa&ntilde;ol</a></li>
+      <li role="none"><a role="menuitem" href="/blog/de/2026-10-15-castlevania-development-history-5.html" hreflang="de" lang="de" data-lang="de" aria-current="page">Deutsch</a></li>
+      <li role="none"><a role="menuitem" href="/blog/fr/2026-10-15-castlevania-development-history-5.html" hreflang="fr" lang="fr" data-lang="fr">Français</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <article>
+      <div class="pagehead">
+        <p class="kicker">Kataban Blog</p>
+        <h1>Entwicklungsgeschichte von Castlevania, Teil 5: zwei Codes in einer Zeile, und der einzige Treffer ist die falsche Konsole</h1>
+        <p class="postmeta">2026-10-15</p>
+        <ul class="posttags" aria-label="Schlagwörter">
+          <li><a href="/blog/de/tag/platform/ps3/">PlayStation 3</a></li>
+          <li><a href="/blog/de/tag/platform/ps2/">PlayStation 2</a></li>
+          <li><a href="/blog/de/tag/genre/action/">Action</a></li>
+          <li><a href="/blog/de/tag/decade/2010s/">2010er</a></li>
+          <li><a href="/blog/de/tag/publisher/konami/">Konami</a></li>
+          <li><a href="/blog/de/tag/series/castlevania/">Castlevania</a></li>
+        </ul>
+      </div>
+
+      <div class="prose">
+        <p>In <a href="/blog/de/2026-10-08-castlevania-development-history-4.html">Teil 4</a> musste jeder Game-Boy-Advance- und Nintendo-DS-Code aus dem Katalog gekürzt werden, bevor ein Shop überhaupt antwortete. Die Disc-Ära hat dieses Problem nicht. Alle drei Produktcodes, die der Kataban-Katalog für Castlevania auf PlayStation 2 und PlayStation 3 führt, liefern HTTP 200 und echte Angebote, genau so, wie sie dastehen. Was hier schiefgeht, ist anders und leiser: Jeder Code erreicht eine einzige Ausgabe und hört dort auf, das Feld enthält zwei Codes, von denen nur der erste funktioniert, und der japanische Titel in der PlayStation-3-Zeile liefert genau einen Treffer — eine Disc aus einer anderen Region, für eine andere Konsole.</p>
+
+        <ul>
+          <li>Der Katalog führt 12 Castlevania-Zeilen auf PlayStation 2 und PlayStation 3; 3 tragen einen Produktcode, und alle 3 funktionieren bei Suruga-ya genau so, wie sie gespeichert sind — zum ersten Mal in dieser Reihe</li>
+          <li>Diese drei Zeilen speichern jeweils zwei durch ein Semikolon verbundene Codes, <code>BLJM60284;VT033-J1</code>; die erste Hälfte liefert Angebote, die zweite HTTP 404 und null</li>
+          <li><code>BLJM60284</code> liefert genau ein Angebot, die [通常版] für PlayStation 3; die [限定版] steht im selben Shop, und der Code erreicht sie nicht</li>
+          <li>Die Suche nach dem japanischen Titel derselben Zeile, <code>Castlevania Lords of Shadow</code>, liefert genau ein Angebot: eine Xbox-360-Disc der asiatischen Ausgabe</li>
+          <li>Die Katakana-Form liefert fünf Angebote auf drei Konsolen — zwei PlayStation 3, zwei Xbox 360, eine Nintendo 3DS — alle mit irgendeiner Schreibweise derselben Wörter</li>
+          <li>Yami no Juin steht in zwei Zeilen: Der Code der 2007er Zeile liefert nur die [ベスト版], der JAN der 2005er Zeile nur das Original, und die beiden Ergebnisse überschneiden sich nicht</li>
+        </ul>
+
+        <h2>Was enthält der Katalog für die PlayStation-2- und PlayStation-3-Ära?</h2>
+        <p>Zwölf Zeilen tragen einen Castlevania-Titel auf PlayStation 2 oder PlayStation 3, sechs je Konsole. Drei tragen einen Produktcode: <code>SLPM65444;VW148-J1</code> (キャッスルヴァニア, das PlayStation-2-Spiel von 2003, im Westen als <em>Lament of Innocence</em> erschienen), <code>SLPM66668;VW295-J2</code> (悪魔城ドラキュラ 闇の呪印, in der auf 2007 datierten Zeile) und <code>BLJM60284;VT033-J1</code> (Castlevania Lords of Shadow). Bei den übrigen neun ist das Codefeld leer.</p>
+        <p>Drei der zwölf sind überhaupt keine Discs. Die Media Arts Database der Agency for Cultural Affairs führt sie mit dem Trägertyp オンライン資料 — digitale Distribution —, und der Katalog übernimmt diese Markierung: キャッスルヴァニア Lords of Shadow 宿命の魔鏡 HD EDITION (2013), 悪魔城ドラキュラ Harmony of Despair (2012) und eine der beiden Zeilen von 悪魔城ドラキュラ Lords of Shadow 2 (2014). Davon gibt es kein physisches Exemplar zu suchen, egal was ein Shop zurückgibt.</p>
+        <p>Der Katalog führt keine einzige Castlevania-Zeile auf der Xbox 360, obwohl er insgesamt 144 Xbox-360-Zeilen enthält. Bei Suruga-ya stehen gerade zwei Xbox-360-Exemplare von <em>Lords of Shadow</em> im Regal, unter demselben japanischen Namen wie die PlayStation-3-Exemplare und mit demselben Erscheinungsdatum. Diese Lücke zwischen Katalog und Regal ist das Thema der nächsten beiden Abschnitte.</p>
+        <p>Die beiden <em>Lords-of-Shadow</em>-Zeilen teilen ihre Felder so auf wie die Handheld-Zeilen aus Teil 4 — und gehen noch einen Schritt weiter. Zeile <code>M720598</code> trägt den Produktcode, den JAN <code>4988602154269</code> und den Publisher コナミデジタルエンタテインメント — und überhaupt kein Jahr. Zeile <code>M737910</code> trägt das Jahr 2010, keinen Code, keinen JAN und im Publisher-Feld eine Copyright-Zeile statt eines Firmennamens: <code>&copy;2010 Konami Digital Entertainment Developed by Mercury Steam Entertainment</code>. Die 2005er Zeile von 闇の呪印 macht dasselbe, mit <code>&copy;1986 2005 KONAMI</code> dort, wo ein Publisher stehen sollte.</p>
+
+        <h2>Funktionieren die Produktcodes der Disc-Ära tatsächlich?</h2>
+        <p>Alle drei tun es, so wie sie dastehen, ohne ein Zeichen zu ändern. <code>BLJM60284</code> liefert HTTP 200 und ein Angebot. <code>SLPM66668</code> liefert 200 und eines. <code>SLPM65444</code> liefert 200 und drei. Die Regel aus Teil 4 — vor dem Bindestrich vor <code>JPN</code> abschneiden — hat hier nichts zu tun, denn diese Codes tragen kein solches Suffix.</p>
+        <p>Zu bearbeiten ist stattdessen das Semikolon. Alle drei Zeilen speichern zwei Werte im Produktcodefeld, und nur der erste ist eine Shop-Suche. <code>VT033-J1</code>, <code>VW295-J2</code> und <code>VW148-J1</code> liefern bei Suruga-ya jeweils HTTP 404 und null Angebote. Dieser Artikel behauptet nichts darüber, was diese zweiten Werte sind; gemessen ist nur, dass der Shop sie nicht beantwortet. Das Feld samt Semikolon einzufügen ist der Fehler, den es in dieser Folge zu vermeiden gilt, und diese Seite hat dasselbe schon einmal bei einer Saturn-Zeile festgehalten (<code>670-7238;GS-9041</code>, wo nur <code>GS-9041</code> als Suche funktioniert).</p>
+        <p>Ob man den Code mit Bindestrich schreibt, ändert in diesem Shop nichts. <code>BLJM-60284</code> liefert dasselbe eine Angebot wie <code>BLJM60284</code>, und <code>SLPM-66668</code> dasselbe wie <code>SLPM66668</code>. Der Bindestrich ist optional; das Semikolon nicht.</p>
+        <p>Ein Code, der 200 liefert, ist aber noch kein Code, der alles liefert. <code>BLJM60284</code> liefert die [通常版] für PlayStation 3 und sonst nichts, und die [限定版] für PlayStation 3 steht im selben Shop unter derselben Suchfamilie. Die Limited Edition unterscheidet sich nicht nur äußerlich: Sie enthielt ein Artbook, eine Soundtrack-CD und einen Download-Code — auf PlayStation 3 für 悪魔城ドラキュラX 月下の夜想曲 in den Game Archives, auf Xbox 360 für 悪魔城ドラキュラ ハーモニー オブ ディスペアー. Wer mit dem gespeicherten Code sucht, bekommt sie nie zu sehen.</p>
+
+        <h2>Was passiert, wenn man den japanischen Titel direkt aus der Zeile einfügt?</h2>
+        <p>Zeile <code>M720598</code> schreibt den japanischen Titel in lateinischen Buchstaben: <code>Castlevania Lords of Shadow</code>. Genau danach bei Suruga-ya zu suchen liefert HTTP 200 und genau ein Angebot: アジア版 CASTLEVANIA： Lords of Shadow(国内版本体動作可), einsortiert unter XBOX360ソフト. Es ist eine asiatische Ausgabe, für eine Konsole, zu der der Katalog keine einzige Castlevania-Zeile führt, und das Angebot vermerkt, dass sie auf japanischen Konsolen läuft. Ein Treffer, keine Fehlermeldung, und nichts auf der Ergebnisseite sagt, dass die Suche danebenging.</p>
+        <p>Die andere <em>Lords-of-Shadow</em>-Zeile schreibt den Titel als <code>Castlevania -Lords of Shadow-</code>. Diese Zeichenkette liefert 27 Angebote, überwiegend nordamerikanische Ausgaben anderer Castlevania-Spiele und eine Reihe von <em>Dead Cells: Return to Castlevania</em>. Keines der beiden Titelfelder, die der Katalog für dieses Spiel führt, findet die japanische PlayStation-3-Disc.</p>
+        <p>Das Feld, das funktioniert, steht in derselben Zeile. Sein Lesungsfeld enthält キャッスルヴァニア ロード オブ シャドウ, und das liefert fünf Angebote, von denen vier das Spiel auf zwei Konsolen sind. Teil 4 hat diesen Fehler auf dem Game Boy Advance festgehalten, wo der Titel in lateinischen Buchstaben vier Angebote einer aktuellen Sammlung lieferte; Teil 3 hat ihn bei <code>LEGEND OF CORNELL</code> festgehalten, wo er nichts lieferte. Hier liefert er einen plausibel aussehenden Artikel, und das ist die Variante, die am schwersten zu bemerken ist.</p>
+        <p>Lateinische Buchstaben sind nicht das Problem an sich. Die beiden <em>Lords-of-Shadow-2</em>-Zeilen speichern 悪魔城ドラキュラ Lords of Shadow 2 — Kanji und lateinische Schrift in einer Zeichenkette — und das liefert zwei Angebote, beide das richtige Spiel, eines für PlayStation 3 und eines für Xbox 360. Was scheitert, ist die Zeichenkette ganz ohne japanische Zeichen, denn der Shop indexiert den Namen dieses Spiels in Katakana. ★Weil es in dieser Folge um die Zeichenketten selbst geht, bleiben alle, die man in den Shop einfügt, hier im japanischen Original: bitte vor der Suche nicht umschreiben.</p>
+
+        <h2>Warum teilen sich fünf Angebote einen japanischen Namen?</h2>
+        <p>Die Suche nach キャッスルヴァニア ロード オブ シャドウ liefert fünf Angebote, und es sind drei verschiedene Maschinen. Der Konsolenname trennt sie: キャッスルヴァニア ロード オブ シャドウ プレイステーション3 liefert zwei, die [通常版] und die [限定版], beide PlayStation 3; キャッスルヴァニア ロード オブ シャドウ Xbox360 liefert zwei, dieselben beiden Ausgaben für Xbox 360. Alle vier tragen im Angebot das Datum 2010/12/16.</p>
+        <p>Das fünfte ist ein Nintendo-3DS-Modul. Suruga-ya führt es als キャッスルヴァニア ロード・オブ・シャドウ mit dem Datum 2013/03/20 — der Produktname des Shops lässt 宿命の魔鏡 weg, also genau den Teil des Titels, der sagt, dass es ein anderes Spiel ist. Dieses Spiel ist <em>Mirror of Fate</em>, in Japan am 20. März 2013 für Nintendo 3DS erschienen. Die Suche nach 宿命の魔鏡 bei Suruga-ya liefert HTTP 404 und null Angebote: Die Wörter, die die beiden Spiele unterscheiden würden, stehen nicht im Produktnamen des Shops, und so ist die einzige Suche, die das 3DS-Modul findet, dieselbe, die auch die PlayStation-3-Disc liefert.</p>
+        <p>Der Katalog führt dieses 3DS-Spiel zweimal, einmal als Modulzeile und einmal als Digitalzeile, und er führt dessen PlayStation-3-<em>HD Edition</em> als Digitalzeile mit dem Jahr 2013. Die HD-Fassung wurde am 4. Dezember 2013 für PlayStation 3 und Xbox 360 als Download vertrieben. Wer also 宿命の魔鏡 als Disc für PlayStation 3 sucht, sucht etwas, das nie gepresst wurde.</p>
+        <p>Auch bei den Mittelpunkten ist der Shop nicht konsequent. Ein PlayStation-3-Angebot lautet キャッスルヴァニア ～ロード オブ シャドウ～[通常版] mit Leerzeichen, die anderen drei lauten ロード・オブ・シャドウ mit ・. Die Suche mit Leerzeichen liefert beide Schreibweisen, das kostet also nichts — aber es ist der Grund, warum dasselbe Spiel auf einer Ergebnisseite unter zwei Zeichenketten auftaucht.</p>
+
+        <h2>Und Yami no Juin auf der PlayStation 2?</h2>
+        <p>悪魔城ドラキュラ 闇の呪印 erschien für die PlayStation 2 in Nordamerika am 5. November 2005, in Japan am 24. November 2005 und in Europa am 17. Februar 2006. Entwickelt und veröffentlicht wurde es von Konami Digital Entertainment, produziert von Koji Igarashi, mit Charakterdesigns von Ayami Kojima und Musik von Michiru Yamane. Das <em>Famitsu Game White Paper 2006</em> verzeichnet 42.926 in Japan verkaufte Exemplare.</p>
+        <p>Der Katalog führt es in zwei Zeilen, die sich die Kennungen teilen. Zeile <code>M759621</code> trägt das Jahr 2005 und den JAN <code>4988602124637</code>, ohne Produktcode. Zeile <code>M720782</code> trägt das Jahr 2007 und den Produktcode <code>SLPM66668;VW295-J2</code>, ohne JAN.</p>
+        <p>Jede Kennung liefert genau ein Angebot, und es sind verschiedene. Der JAN <code>4988602124637</code> liefert 悪魔城ドラキュラ 闇の呪印, vom Shop auf 2005/11/24 datiert. Der Code <code>SLPM66668</code> liefert 悪魔城ドラキュラ ～闇の呪印～ [ベスト版], vom Shop auf 2007/02/15 datiert. Die Suche nach dem japanischen Titel 悪魔城ドラキュラ 闇の呪印 liefert beide, und mit プレイステーション2 sind es immer noch beide, denn keine andere Konsole trägt diesen Titel.</p>
+        <p>Das ist dieselbe Aufspaltung, die Teil 4 innerhalb einer einzigen Zeile fand, hier nur ordentlicher sortiert: Der Katalog legt den JAN in die Zeile mit dem Jahr des Originals und den Code in die Zeile mit dem Jahr der Neuauflage, und jede Kennung erreicht ihre eigene Ausgabe. Ob der Code je nur auf dem Rücken der Neuauflage gedruckt war, kann dieser Artikel nicht sagen — und bei der Neuauflage hören die Quellen auf. Für eine japanische Budget-Ausgabe dieses Spiels wurde keine datierte Quelle gefunden. Der japanische Wikipedia-Artikel führt die Soundtrack-CD, das Guidebook und den Manga auf, aber keine Neuauflage. Das Jahr 2007 im Katalog und das Datum 2007/02/15 des Shops stimmen miteinander überein; Übereinstimmung ist keine Quellenangabe, und dieser Artikel macht daraus keine.</p>
+        <p>[ベスト版] ist die Kennzeichnung, die man vor dem Kauf lesen sollte. Sie steht für eine spätere günstige Neuauflage, und genau die liefert der Code — und nur die.</p>
+
+        <h2>Welchen Suchbegriff sollte man also nehmen?</h2>
+        <p>Das sind gemessene Ergebnisse. Suruga-ya wurde mit rohen Such-URLs gemessen, die Zahlen stammen aus der 該当件数-Angabe der Seite selbst; Buyee wurde in einem echten Browser gegen rohe Such-URLs gemessen, denn Buyee beantwortet eine Anfrage von der Kommandozeile mit HTTP 202 und leerem Body.</p>
+        <p>Die beiden Shops sind bei den zwei Codes gegenläufig. Bei Suruga-ya funktionieren beide. Bei Buyee liefert <code>SLPM66668</code> einen Artikel, und es ist der richtige — 中古PS2ソフト 悪魔城ドラキュラ ～闇の呪印～ [ベスト版] —, während <code>BLJM60284</code> weder eine Trefferzahl noch eine Ergebnisliste liefert. Das Muster, das diese Reihe festhält, gilt weiterhin: Ob eine Code-Suche bei Buyee trifft, hängt davon ab, ob Verkäufer den Code zufällig in ihren eigenen Angebotstext geschrieben haben, und das lässt sich nur durch Ausprobieren feststellen.</p>
+        <p>Was Buyee zuverlässig beantwortet, ist der japanische Titel mit angehängtem Konsolennamen. キャッスルヴァニア ロード オブ シャドウ プレイステーション3 liefert 53 Treffer, ganz oben eine originalverpackte [通常版] für PlayStation 3. Ohne Konsolennamen sind es 113, und das dritte Angebot ist bereits ein Xbox-360-Exemplar. 悪魔城ドラキュラ 闇の呪印 プレイステーション2 liefert 23; ohne Konsolennamen sind es 42, und die beiden obersten sind eine Soundtrack-CD und Band 2 des Manga — beides reale Produkte, erschienen am 30. November 2005 und am 22. April 2006, und beides kein Spiel.</p>
+        <p>Ein Unterschied zwischen den Shops entscheidet darüber, wie lange diese Zahlen halten. Suruga-ya ist eine Bestandsdatenbank, ihre Zahlen sind also reproduzierbar, solange sich der Bestand nicht ändert. Buyee sind Auktionsangebote, ihre Zahlen gelten also im Moment der Messung und danach nicht mehr.</p>
+        <p>Für <em>Lords of Shadow</em> auf PlayStation 3: <code>BLJM60284</code> bei Suruga-ya für die [通常版], oder キャッスルヴァニア ロード オブ シャドウ プレイステーション3, um auch die [限定版] zu sehen. Fügen Sie nicht <code>BLJM60284;VT033-J1</code> ein und auch nicht <code>Castlevania Lords of Shadow</code>. Zum Messzeitpunkt am 9. September 2026 ist der eigene Bestand von Suruga-ya an der [通常版] 品切れ — ausverkauft —, mit gebrauchten Exemplaren anderer Verkäufer auf derselben Seite.</p>
+        <p>Für 闇の呪印 auf PlayStation 2: 悪魔城ドラキュラ 闇の呪印, um beide Ausgaben zu sehen, <code>SLPM66668</code> allein für die [ベスト版] oder der JAN <code>4988602124637</code> allein für das Original von 2005.</p>
+        <p>Die Regel, die die Disc-Ära dieser Reihe hinzufügt, besteht aus zwei Eingriffen, nicht aus einem. Steht im Produktcodefeld ein Semikolon, suchen Sie nur nach dem ersten Wert. Und wenn ein Code tatsächlich Angebote liefert, prüfen Sie, ob er <em>alle</em> liefert, bevor Sie ihn zu Ihrer einzigen Suche machen — in den Zeilen dieser Ära erreichte ein funktionierender Code jedes Mal genau eine Ausgabe.</p>
+
+        <p><strong>Castlevania: Lords of Shadow</strong> · <span class="jp">キャッスルヴァニア ロード オブ シャドウ</span> · PlayStation 3 · 2010 · Konami Digital Entertainment · Produktcode <code>BLJM60284</code></p>
+        <p><strong>Wo man es kaufen kann:</strong>
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3DBLJM60284%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp (nach Produktcode)</a> ·
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3D%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B9%25E3%2583%25AB%25E3%2583%25B4%25E3%2582%25A1%25E3%2583%258B%25E3%2582%25A2%2520%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%2520%25E3%2582%25AA%25E3%2583%2596%2520%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%2589%25E3%2582%25A6%2520%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B33%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp (nach japanischem Titel)</a> ·
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://i0c.xyz/6a6994d1e0b3f?url=https%3A%2F%2Fbuyee.jp%2Fitem%2Fsearch%2Fquery%2F%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B9%25E3%2583%25AB%25E3%2583%25B4%25E3%2582%25A1%25E3%2583%258B%25E3%2582%25A2%2520%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%2520%25E3%2582%25AA%25E3%2583%2596%2520%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%2589%25E3%2582%25A6%2520%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B33%3Flang%3Den">Buyee</a></p>
+
+        <div class="kataban-search-cta">
+          <p><a href="/?q=悪魔城ドラキュラ">Alle japanischen Castlevania-Veröffentlichungen im Kataban-Katalog durchstöbern →</a></p>
+        </div>
+
+        <div class="official-sources">
+          <p><strong>Quellen</strong></p>
+          <ul>
+            <li>Wikipedia (ja), <a href="https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B9%E3%83%AB%E3%83%B4%E3%82%A1%E3%83%8B%E3%82%A2_%E3%83%AD%E3%83%BC%E3%83%89_%E3%82%AA%E3%83%96_%E3%82%B7%E3%83%A3%E3%83%89%E3%82%A6">キャッスルヴァニア ロード オブ シャドウ</a> — PlayStation 3, Xbox 360 und PC (Steam); entwickelt von MercurySteam, veröffentlicht von Konami Digital Entertainment, wobei Kojima Productions die japanische Lokalisierung nur dieses ersten Teils betreute; USA und Kanada am 5. Oktober 2010, Europa am 7. Oktober 2010, Australien am 19. Oktober 2010, Japan am 16. Dezember 2010; die Erstauflage als Limited Edition enthielt ein Artbook, eine Soundtrack-CD und einen Download-Code: 悪魔城ドラキュラX 月下の夜想曲 in den Game Archives für die PlayStation-3-Fassung und 悪魔城ドラキュラ ハーモニー オブ ディスペアー für die Xbox-360-Fassung</li>
+            <li>Wikipedia (ja), <a href="https://ja.wikipedia.org/wiki/%E6%82%AA%E9%AD%94%E5%9F%8E%E3%83%89%E3%83%A9%E3%82%AD%E3%83%A5%E3%83%A9_%E9%97%87%E3%81%AE%E5%91%AA%E5%8D%B0">悪魔城ドラキュラ 闇の呪印</a> — PlayStation 2; Nordamerika am 5. November 2005, Japan am 24. November 2005, Europa am 17. Februar 2006; entwickelt und veröffentlicht von Konami Digital Entertainment, produziert von Koji Igarashi, Charakterdesigns von Ayami Kojima, Musik von Michiru Yamane; 42.926 in Japan verkaufte Exemplare laut dem Famitsu Game White Paper 2006; als verwandte Produkte sind der Original-Soundtrack (30. November 2005), das komplette Guidebook (3. Januar 2006) und der Manga (Band 1 am 11. November 2005, Band 2 am 22. April 2006) aufgeführt. ★Eine Budget- oder Neuauflage ist dort nicht aufgeführt</li>
+            <li>Wikipedia (ja), <a href="https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B9%E3%83%AB%E3%83%B4%E3%82%A1%E3%83%8B%E3%82%A2_%E3%83%AD%E3%83%BC%E3%83%89_%E3%82%AA%E3%83%96_%E3%82%B7%E3%83%A3%E3%83%89%E3%82%A6_%E5%AE%BF%E5%91%BD%E3%81%AE%E9%AD%94%E9%8F%A1">キャッスルヴァニア ロード オブ シャドウ 宿命の魔鏡</a> — Nintendo 3DS, Japan am 20. März 2013, entwickelt von MercurySteam und veröffentlicht von Konami Digital Entertainment; die HD Edition wurde in Japan am 4. Dezember 2013 für PlayStation 3 und Xbox 360 vertrieben</li>
+            <li>★TODO — eine datierte Quelle für die [ベスト版] von 闇の呪印 auf PlayStation 2. Nicht gefunden. Der japanische Wikipedia-Artikel führt keine Neuauflage auf. Der Artikel stellt nur fest, dass das Jahr der Katalogzeile 2007 ist und dass das Shop-Angebot für die [ベスト版] selbst 2007/02/15 nennt</li>
+            <li>★TODO — was der zweite, per Semikolon angehängte Wert im Produktcodefeld ist (<code>VT033-J1</code>, <code>VW295-J2</code>, <code>VW148-J1</code>). Keine Primärdokumentation gefunden. Der Artikel behauptet nichts über das Format, sondern nur, dass Suruga-ya für alle drei HTTP 404 und null Angebote liefert</li>
+            <li>Kataban-Katalog (<code>data/master_final.csv</code>) — 12 Zeilen tragen einen Castlevania-Titel auf PlayStation 2 oder PlayStation 3, sechs je Konsole; 3 tragen einen Produktcode (<code>SLPM65444;VW148-J1</code>, <code>SLPM66668;VW295-J2</code>, <code>BLJM60284;VT033-J1</code>) und 9 keinen; 3 sind als digitale Distribution markiert (キャッスルヴァニア Lords of Shadow 宿命の魔鏡 HD EDITION 2013, 悪魔城ドラキュラ Harmony of Despair 2012, eine Zeile von 悪魔城ドラキュラ Lords of Shadow 2 von 2014); <em>Lords of Shadow</em> steht in <code>M720598</code> (Titel in lateinischer Schrift, kein Jahr, mit Code, JAN <code>4988602154269</code>) und <code>M737910</code> (2010, ohne Code und JAN, Copyright-Zeile im Publisher-Feld); 闇の呪印 steht in <code>M759621</code> (2005, mit JAN, ohne Code) und <code>M720782</code> (2007, mit Code, ohne JAN); keine der 144 Xbox-360-Zeilen des Katalogs ist ein Castlevania; die Digital-Markierung entspricht dem Trägertyp オンライン資料 in der Media Arts Database der Agency for Cultural Affairs</li>
+            <li>Suruga-ya-Suchmessungen, 9. September 2026, <code>category=2</code>, rohe URLs, Zahlen aus der 該当件数-Angabe der Seite selbst — <code>BLJM60284</code> und <code>BLJM-60284</code>: HTTP 200, 1 Angebot, [通常版] für PlayStation 3, Shop-Bestand 品切れ; <code>SLPM66668</code> und <code>SLPM-66668</code>: 200, 1 Angebot, [ベスト版]; <code>SLPM65444</code>: 200, 3; <code>VT033-J1</code>, <code>VW295-J2</code>, <code>VW148-J1</code>: HTTP 404, 0; <code>Castlevania Lords of Shadow</code>: 200, 1, die asiatische Xbox-360-Disc; <code>Castlevania -Lords of Shadow-</code>: 200, 27; キャッスルヴァニア ロード オブ シャドウ: 5 (3DS 1, PlayStation 3 2, Xbox 360 2); mit プレイステーション3: 2; mit Xbox360: 2; 宿命の魔鏡: HTTP 404, 0; 悪魔城ドラキュラ Lords of Shadow 2: 2, beide das richtige Spiel; JAN <code>4988602154269</code>: 1, die [通常版] für PlayStation 3; 悪魔城ドラキュラ 闇の呪印 und dasselbe mit プレイステーション2: je 2; JAN <code>4988602124637</code>: 1, das Original von 2005</li>
+            <li>Buyee-Suchmessungen, 9. September 2026, rohe <code>buyee.jp/item/search/query/</code>-URLs in einem echten Browser (Buyee beantwortet eine Anfrage von der Kommandozeile mit HTTP 202 und leerem Body), Trefferzahlen aus der „N hits“-Angabe der Seite selbst und gegen die Zahl der Angebotsknoten geprüft — キャッスルヴァニア ロード オブ シャドウ プレイステーション3: 53 Treffer; dasselbe mit PS3: 53; ohne Konsolennamen: 113; 悪魔城ドラキュラ 闇の呪印 プレイステーション2: 23; ohne Konsolennamen: 42, an der Spitze eine Soundtrack-CD und ein Manga-Band; <code>SLPM66668</code> und <code>SLPM-66668</code>: je 1 Treffer, die [ベスト版]-Disc; <code>BLJM60284</code>: die Suchseite lädt ohne Trefferzahl und ohne Ergebnisliste</li>
+          </ul>
+        </div>
+
+        <p><em>Dies ist Teil 5 und der letzte Teil einer fünfteiligen Reihe zur Entwicklungsgeschichte von Castlevania, veröffentlicht an dem Tag, an dem das neue Spiel erscheint. <a href="/blog/de/2026-09-09-castlevania-development-history-1.html">Teil 1</a>, <a href="/blog/de/2026-09-24-castlevania-development-history-2.html">Teil 2</a>, <a href="/blog/de/2026-10-01-castlevania-development-history-3.html">Teil 3</a> und <a href="/blog/de/2026-10-08-castlevania-development-history-4.html">Teil 4</a> behandeln die Famicom- und Game-Boy-Ära, PC Engine und Super Famicom, PlayStation und Nintendo 64 sowie die Handhelds. Die Reihe endet hier.</em></p>
+      </div>
+    </article>
+
+    <div class="cta">
+      <h2>Kenne den Code, finde das Spiel</h2>
+      <p>Gib einen westlichen Titel ein. Erhalte den japanischen Namen, den auf dem Modulrücken gedruckten Produktcode und Links zu Shops, die das Spiel führen.</p>
+      <p class="ctascan">Oder scanne den Barcode auf der Rückseite der Verpackung oder Hülle: <a href="/?scan=1">Scanner öffnen</a></p>
+      <a class="ctabtn" href="/">Spiel suchen</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Kataban &middot; Daten aus der Media Arts Database der japanischen Kulturbehörde. Englische Titel abgeglichen mit Wikidata (CC0).
+    <br>Einige Links auf dieser Seite sind Affiliate-Links; Kataban kann dadurch eine Provision verdienen, unter anderem als eBay-Partner-Network-Affiliate (Werbung).
+    <br><a href="/blog/de/">Alle Beiträge</a> &middot; <a href="/">Zurück zum Suchwerkzeug</a> &middot; <a href="/privacy.html">Datenschutz</a>
+    <div class="foot-brand">
+      <p class="foot-stars" aria-hidden="true">★★★</p>
+      <p class="foot-tagline">Es lebe der physische Datenträger.</p>
+      <span class="kb-word" aria-hidden="true">
+        <span class="kb-ghost"><span class="kb-grid" data-kb="kb-on-cyan"></span></span>
+        <span class="kb-grid kb-top" data-kb="kb-on-pink"></span>
+      </span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="/kataban.js"></script>
+</body>
+</html>
