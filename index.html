@@ -3772,14 +3772,18 @@ let platFallback = null;   // 予備の検索で出したときだけ {label}。
 // ① バーコード: 検索欄に数字だけ（8桁・13桁）を打ったとき、DATA の JAN（row[10]）に完全一致する行を出す。
 //   ★カメラ読み取り（showByJan）と、JAN が DATA に無いときの楽天の補い（jan-fallback）には触れない。検索欄からは楽天を引かない。
 // ② 型番: 末尾の地域記号（-JPN・-USA・-EUR など）と、箱の型番の途中の -P-（RVL-P-RFEJ ↔ ディスクの RVL-RFEJ）を外して照合し直す。
+// ②' 型番の O と 0・I と 1（2026-10-14）: ②でも0件のとき、検索語と DATA の型番の両方で O→0・I→1 にそろえて照合し直す（DMG-0NJ → DMG-ONJ、DMG-AO5J → DMG-A05J）。
+//   照合は型番の頭から（startsWith）。★DATA の全型番（O・0・I・1 を含む 8,244 種）で、型番を丸ごと打ち間違えたときに別の作品が混ざる組み合わせは0（2026-10-14）。
+//   途中で切った打ち間違い（TPO1・SHVC-0 など4〜6字）では、O と 0 だけ違う型番の系統が両方出る（34通り）。0件の代わりなので許す。
 // ③ ひらがな・カタカナ: 両方をカタカナにそろえた索引で照合し直す（バクバクアニマル → ばくばくアニマル）。索引は初めて要るときに作る。
 // ④ 機種名（案B2）は上の stripPlatform。①〜④の順に試し、最初に1件以上出たものを使う。
 const KANA = s => s.replace(/[ぁ-ゖ]/g, c => String.fromCharCode(c.charCodeAt(0) + 0x60));
-var HAYK = null, HAY4K = null, CODEKEYS_NOP = null, JANIDX = null;   // applyBlogAliases が HAY を伸ばしたら HAYK・HAY4K は作り直す
+var HAYK = null, HAY4K = null, CODEKEYS_NOP = null, CODEKEYS_OI = null, JANIDX = null;   // applyBlogAliases が HAY を伸ばしたら HAYK・HAY4K は作り直す
 const kanaHay  = () => HAYK  || (HAYK  = HAY.map(KANA));
 const kanaHay4 = () => HAY4K || (HAY4K = HAY4.map(KANA));
 const REGION_SUFFIX = /[-\s](JPN|USA|EUR|NOE|FRA|ESP|ITA|UKV|AUS|KOR|CHN|HKG|ASI|EUU|FAH|SCN)$/i;
 const HAS_KANA = /[ぁ-ゖァ-ヶ]/;
+const OI = k => k.replace(/O/g, '0').replace(/I/g, '1');   // ②' 型番の O・0 と I・1 をそろえる（codeKey 済みの大文字に掛ける）
 function passFilters(i, pf, pv, yv){ const r=DATA[i]; return (pf==='All'||r[2]===pf) && (yv==='All'||r[4]===yv) && (pv==='All'||PUBS[i].includes(pv)); }
 function idxResult(idx, s, lane){ return {res: idx.map(i=>DATA[i]), resIdx: idx, resLane: idx.map(()=>lane), lo: fold(accent(s)), qk: codeKey(s.trim()), sq: squash(s), r5: romaFold(s)}; }
 function fallbackOne(s, pf, pv, yv, onlyPlat, folded){   // ①〜③（onlyPlat は ④ で機種を外したあとに絞るとき。folded は外したあとの語＝fold 済み）
@@ -3792,7 +3796,8 @@ function fallbackOne(s, pf, pv, yv, onlyPlat, folded){   // ①〜③（onlyPlat
     return idx.length ? {m: idxResult(idx, digits, 3), label: 'barcode'} : null;
   }
   const codeLike = /[A-Za-z]/.test(t) && (/^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)+$/.test(t) || (/\d/.test(t) && /^[A-Za-z0-9]+(?:\s[A-Za-z0-9]+)+$/.test(t))
-                   || (folded && /^[a-z0-9]+(?: [a-z0-9]+)*$/.test(t)));   // 機種を外したあとはハイフンが空白になっているので、英数字の並びなら型番として試す
+                   || (folded && /^[a-z0-9]+(?: [a-z0-9]+)*$/.test(t))   // 機種を外したあとはハイフンが空白になっているので、英数字の並びなら型番として試す
+                   || /^(?=.*\d)[A-Za-z0-9]+$/.test(t));   // ハイフンなしの1語（BGO1003）も ②' のために型番として試す（2026-10-14）
   if(codeLike){   // ② 型番
     const base = t.replace(REGION_SUFFIX, ''), key = codeKey(base);
     if(key.length >= 4){
@@ -3800,6 +3805,12 @@ function fallbackOne(s, pf, pv, yv, onlyPlat, folded){   // ①〜③（onlyPlat
       const idx = [];
       for(let i=0;i<DATA.length;i++) if(keep(i) && (CODEKEYS[i].some(c=>c.includes(key)) || CODEKEYS_NOP[i].some(c=>c.includes(key)))) idx.push(i);
       if(idx.length) return {m: idxResult(idx, base, 3), label: base!==t ? 'code without region suffix' : 'code without -P-'};
+      if(/[0O1I]/.test(key)){   // ②' O と 0・I と 1（どれかの字が入っているときだけ。-P- を外した形も含める）
+        const ko = OI(key);
+        if(!CODEKEYS_OI) CODEKEYS_OI = CODEKEYS.map((cs, i) => [...new Set([...cs, ...CODEKEYS_NOP[i]].map(OI))]);
+        for(let i=0;i<DATA.length;i++) if(keep(i) && CODEKEYS_OI[i].some(c=>c.startsWith(ko))) idx.push(i);   // 頭から（途中に当てると GOI-00 の打ち間違いが BG01003 にも当たる）
+        if(idx.length) return {m: idxResult(idx, base, 3), label: 'code with O = 0, I = 1'};
+      }
     }
   }
   if(HAS_KANA.test(t)){   // ③ ひらがな・カタカナ
