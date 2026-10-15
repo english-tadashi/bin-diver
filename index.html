@@ -4541,11 +4541,35 @@ const STAFF_CARDS = [
     ja:'動作の確認はできますか？',
     en:'Can I check that it works?',
     answers:[['はい、できます','Yes, you can'],['いいえ、できません','No, sorry'],['動作確認済みです','Already tested']] },
+  // ★免税は日本時間 2026-11-01 00:00 から国の制度がリファンド方式に変わる（観光庁「2026年11月1日購入分から」・国税庁「令和８年11月１日から実施」）。
+  //   それより前は上の文、以後は refund の文を出す（staffCardNow()。開くたび・描くたびに端末の時刻で判定＝11/1 に手作業は要らない）。
+  //   文案は 0f23fdd（_experiments/staff-cards/tax-free-refund-draft.json）。答えは必須4つ＋追加案5（空港の税関・手荷物を預ける前）。
+  //   追加案6（返金の方法の案内）は「Refund how?」カードと重なるので入れない（2026-10-15 こはさん決定）。
+  //   下限 5,000円（税抜）は制度の条件で新制度でも変わらない（比較表「変更無」）ので、新しい答えにだけ書いた。手数料・返金額は書かない。
   { id:'tax', label:'Tax-free?', item:false,
     ja:'免税の手続きはできますか？',
     en:'Can I buy this tax-free?',
     answers:[['はい、できます','Yes'],['パスポートを見せてください','Please show your passport'],
-             ['免税の対象金額に達していません','Below the tax-free minimum'],['当店では対応していません','Not available at this store']] },
+             ['免税の対象金額に達していません','Below the tax-free minimum'],['当店では対応していません','Not available at this store']],
+    refund:{ from: Date.UTC(2026,9,31,15),
+      ja:'免税で購入できますか？<br>（出国時に消費税の返金を受けたいです）',
+      en:"Can I buy this tax-free? (I'd like the tax refunded when I leave Japan.)",
+      hint:'Tax-free since 1 November 2026: you pay the tax in the shop, then get it back after a customs check at the airport — before you check in your bags, within 90 days of buying.',
+      answers:[['対応しています（お支払いは税込で、出国時に返金されます）','Yes — you pay the tax now and get it back when you leave Japan'],
+               ['パスポートを見せてください','Please show your passport'],
+               ['免税の対象金額（同じ店で1日に税抜5,000円以上）に達していません','Below the tax-free minimum (¥5,000 before tax, same shop, same day)'],
+               ['当店では対応していません','Not available at this store'],
+               ['出国時、手荷物を預ける前に空港の税関で確認を受けてください','When you leave, get it checked at airport customs before you check in your bags']] } },
+  // ★返金の方法（2026-10-15 追加・こはさん指示）。2026-11-01 購入分からのリファンド方式では、返金は免税店か委託先の
+  //   返金事業者が行い、方法は店ごとに違う（観光庁「旅行者向け よくある質問（リファンド方式）」が挙げる例＝銀行振込・
+  //   クレジットカード送金・アプリ送金・出国時の空海港での現金）。案内は購入時に店がする＝レジで聞く質問。item:false。
+  //   免税ブログ記事（2026-99-99-japan-tax-free-refund-method-guide）の「返金はどの方法で受け取れますか？」と同じ文。
+  //   ★タブを出すのは日本時間 2026-11-01 00:00 から（showFrom。免税カードの refund.from と同じ時刻・同じ判定）。それより前は旧制度で、返金の質問は要らない。
+  { id:'refund', label:'Refund how?', item:false, showFrom: Date.UTC(2026,9,31,15),
+    ja:'返金はどの方法で<br>受け取れますか？',
+    en:'How will I receive my refund?',
+    answers:[['銀行振込','Bank transfer'],['クレジットカード','Back to your credit card'],['アプリ','Through an app'],
+             ['出国時に空港で現金','Cash at the airport when you leave'],['こちらの案内をご覧ください','Please read this guide']] },
   { id:'other', label:'Other stores?', item:true, codeFirst:true,
     ja:'ほかの店舗に在庫はありますか？',
     en:'Is it in stock at another store?',
@@ -4589,14 +4613,29 @@ function staffItemHtml(r, codeFirst){
   return `<div class="staff-item ${codeFirst?'code-first':'title-first'}">${codeFirst ? code+title : title+code}${plat}</div>`;
 }
 
+// その時点で出すカード。refund を持つカード（免税）は、端末の時刻が refund.from 以後なら新しい文に差し替える。
+// ★毎回 Date.now() を見る（sw.js がページをキャッシュしていても、11/1 を過ぎた端末では開き直すだけで新しい文になる）。
+function staffCardNow(i){
+  const c = STAFF_CARDS[i];
+  return (c.refund && Date.now() >= c.refund.from) ? { ...c, ...c.refund, refund: undefined } : c;
+}
+
+// その時点でタブを出すか。showFrom を持つカード（返金）は、端末の時刻が showFrom 以後のときだけ出す（staffCardNow と同じく毎回 Date.now() を見る）。
+function staffVisible(i){
+  const c = STAFF_CARDS[i];
+  return !c.showFrom || Date.now() >= c.showFrom;
+}
+
 function staffRender(){
-  const c = STAFF_CARDS[staffCard];
-  const tabs = STAFF_CARDS.map((x,i)=>`<button type="button" class="staff-tab" data-scard="${i}" aria-pressed="${i===staffCard?'true':'false'}">${esc(x.label)}</button>`).join('');
+  if(!staffVisible(staffCard)) staffCard = 0;   // 出していないカードを選んだままにしない
+  const c = staffCardNow(staffCard);
+  const tabs = STAFF_CARDS.map((x,i)=>staffVisible(i) ? `<button type="button" class="staff-tab" data-scard="${i}" aria-pressed="${i===staffCard?'true':'false'}">${esc(x.label)}</button>` : '').join('');
   const answers = c.answers.map(([ja,en],i)=>`<button type="button" class="staff-ans" data-sans="${i}">
       <span class="staff-ans-ja" lang="ja">${esc(ja)}</span><span class="staff-ans-en">${esc(en)}</span></button>`).join('');
   clerkBody.innerHTML = `
     <p class="staff-hint">Pick a question, then show the screen. The staff can tap an answer.</p>
     <div class="staff-tabs" role="group" aria-label="Questions">${tabs}</div>
+    ${c.hint ? `<p class="staff-hint">${esc(c.hint)}</p>` : ''}
     <div class="staff-q">
       <p class="clerk-ask staff-q-ja" lang="ja">${c.ja}</p>
       <p class="staff-q-en">${esc(c.en)}</p>
@@ -4609,7 +4648,7 @@ function staffRender(){
 
 // 答えを大きく出す。持ち主が読む英語も大きくする。
 function staffAnswer(i){
-  const [ja,en] = STAFF_CARDS[staffCard].answers[i];
+  const [ja,en] = staffCardNow(staffCard).answers[i];
   clerkBody.innerHTML = `
     <div class="staff-big" role="status">
       <p class="staff-big-ja" lang="ja">${esc(ja)}</p>
