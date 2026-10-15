@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 14 Oct 2026 07:12:17 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 15 Oct 2026 07:10:17 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Holy Diver on Famicom: Irem’s 1989 Japan-Only Action Game, Its Code IF-12, and How to Tell It From the 2018 Reissues</title>
+      <link>https://gamekataban.com/blog/2026-10-16-holy-diver-famicom-if-12.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-10-16-holy-diver-famicom-if-12.html</guid>
+      <description>Irem’s Famicom action game Holy Diver came out only in Japan in 1989 and never got a second part. The cartridge code is IF-12, and since 2018 two licensed reissues have shared its name. Here is how to spot them in Japanese listings, and which search finds the 1989 original at each shop.</description>
+      <pubDate>Fri, 16 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Castlevania Development History, Part 5: Two Codes on One Row, and the One Hit That Is the Wrong Machine</title>

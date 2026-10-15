@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Wed, 14 Oct 2026 07:12:18 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 15 Oct 2026 07:10:17 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Holy Diver en Famicom: el juego de acción de Irem de 1989 que solo salió en Japón, su código IF-12</title>
+      <link>https://gamekataban.com/blog/es/2026-10-16-holy-diver-famicom-if-12.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-10-16-holy-diver-famicom-if-12.html</guid>
+      <description>Holy Diver, el juego de acción de Irem para Famicom, salió solo en Japón en 1989 y nunca tuvo segunda parte. El código del cartucho es IF-12, y desde 2018 dos reediciones con licencia llevan su nombre. Cómo reconocerlas en anuncios japoneses y qué búsqueda da con el original de 1989 en cada tienda.</description>
+      <pubDate>Fri, 16 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Historia del desarrollo de Castlevania, parte 5: dos códigos en una fila y el único resultado es otra consola</title>
       <link>https://gamekataban.com/blog/es/2026-10-15-castlevania-development-history-5.html</link>
