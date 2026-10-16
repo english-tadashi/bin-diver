@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Thu, 15 Oct 2026 07:10:17 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 16 Oct 2026 07:43:46 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Radia Senki en Famicom: el RPG de Tecmo de 1991 del “capítulo del amanecer”, su código TCF-8R</title>
+      <link>https://gamekataban.com/blog/es/2026-10-17-radia-senki-famicom-tcf-8r.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-10-17-radia-senki-famicom-tcf-8r.html</guid>
+      <description>Radia Senki: Reimeihen, RPG de Tecmo para Famicom, salió solo en Japón en 1991, y su “capítulo del amanecer” nunca tuvo un segundo. El código del cartucho es TCF-8R. Qué le dio a Klonoa según su director, qué es solo cosa de wikis y cómo distinguir el original de 1991 de las reproducciones de NES en inglés.</description>
+      <pubDate>Sat, 17 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Holy Diver en Famicom: el juego de acción de Irem de 1989 que solo salió en Japón, su código IF-12</title>
       <link>https://gamekataban.com/blog/es/2026-10-16-holy-diver-famicom-if-12.html</link>

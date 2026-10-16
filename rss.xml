@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Thu, 15 Oct 2026 07:10:17 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 16 Oct 2026 07:43:46 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Radia Senki on Famicom: Tecmo’s 1991 “Dawn Chapter” RPG, Its Code TCF-8R, and What It Left to Klonoa</title>
+      <link>https://gamekataban.com/blog/2026-10-17-radia-senki-famicom-tcf-8r.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-10-17-radia-senki-famicom-tcf-8r.html</guid>
+      <description>Tecmo’s Famicom RPG Radia Senki: Reimeihen came out only in Japan in 1991, and its “dawn chapter” never got a second. The cartridge code is TCF-8R. What its director says the game gave Klonoa, what is only wiki talk, and how to tell the 1991 original from English NES reproductions.</description>
+      <pubDate>Sat, 17 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Holy Diver on Famicom: Irem’s 1989 Japan-Only Action Game, Its Code IF-12, and How to Tell It From the 2018 Reissues</title>

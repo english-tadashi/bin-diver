@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radia Senki en Famicom: el RPG de Tecmo de 1991 del &#8220;cap&iacute;tulo del amanecer&#8221;, su c&oacute;digo TCF-8R &mdash; Kataban</title>
+<meta name="description" content="Radia Senki: Reimeihen, RPG de Tecmo para Famicom, sali&oacute; solo en Jap&oacute;n en 1991, y su &#8220;cap&iacute;tulo del amanecer&#8221; nunca tuvo un segundo. El c&oacute;digo del cartucho es TCF-8R. Qu&eacute; le dio a Klonoa seg&uacute;n su director, qu&eacute; es solo cosa de wikis y c&oacute;mo distinguir el original de 1991 de las reproducciones de NES en ingl&eacute;s.">
+<meta property="og:title" content="Radia Senki en Famicom: el RPG de Tecmo de 1991 del &#8220;cap&iacute;tulo del amanecer&#8221;, su c&oacute;digo TCF-8R">
+<meta property="og:description" content="Radia Senki: Reimeihen, RPG de Tecmo para Famicom, sali&oacute; solo en Jap&oacute;n en 1991, y su &#8220;cap&iacute;tulo del amanecer&#8221; nunca tuvo un segundo. El c&oacute;digo del cartucho es TCF-8R. Qu&eacute; le dio a Klonoa seg&uacute;n su director, qu&eacute; es solo cosa de wikis y c&oacute;mo distinguir el original de 1991 de las reproducciones de NES en ingl&eacute;s.">
+<meta property="og:url" content="https://gamekataban.com/blog/es/2026-10-17-radia-senki-famicom-tcf-8r.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es_ES">
+<meta property="og:image" content="https://gamekataban.com/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://gamekataban.com/blog/es/2026-10-17-radia-senki-famicom-tcf-8r.html">
+<link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-10-17-radia-senki-famicom-tcf-8r.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-10-17-radia-senki-famicom-tcf-8r.html">
+<link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-10-17-radia-senki-famicom-tcf-8r.html">
+<link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-10-17-radia-senki-famicom-tcf-8r.html">
+<link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-10-17-radia-senki-famicom-tcf-8r.html">
+<link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-10-17-radia-senki-famicom-tcf-8r.html">
+<link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-10-17-radia-senki-famicom-tcf-8r.html">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=IBM+Plex+Sans+JP:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/kataban.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+
+  <header class="sitehead">
+    <a class="sitehead-brand" href="/" aria-label="Kataban — back to the search tool">
+      <span class="kb-word">
+        <span class="kb-ghost" aria-hidden="true"><span class="kb-grid" id="kbGridCyan"></span></span>
+        <span class="kb-grid kb-top" id="kbGridPink" aria-hidden="true"></span>
+      </span>
+      <span class="sitehead-badge">&#22411;&#30058;</span>
+    </a>
+    <a class="backlink" href="/blog/es/"><span class="arrow" aria-hidden="true">&#8592;</span> Todas las entradas</a>
+    <div class="langswitch">
+      <button class="langswitch-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langswitch-menu">
+        <span class="langswitch-current">ES &mdash; Espa&ntilde;ol</span>
+        <span class="langswitch-caret" aria-hidden="true">&#9662;</span>
+      </button>
+      <ul class="langswitch-menu" id="langswitch-menu" role="menu" hidden>
+      <li role="none"><a role="menuitem" href="/blog/2026-10-17-radia-senki-famicom-tcf-8r.html" hreflang="en" lang="en" data-lang="en">English</a></li>
+      <li role="none"><a role="menuitem" href="/blog/zh/2026-10-17-radia-senki-famicom-tcf-8r.html" hreflang="zh-Hant" lang="zh-Hant" data-lang="zh">&#20013;&#25991;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/ko/2026-10-17-radia-senki-famicom-tcf-8r.html" hreflang="ko" lang="ko" data-lang="ko">&#54620;&#44397;&#50612;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/es/2026-10-17-radia-senki-famicom-tcf-8r.html" hreflang="es" lang="es" data-lang="es" aria-current="page">Espa&ntilde;ol</a></li>
+      <li role="none"><a role="menuitem" href="/blog/de/2026-10-17-radia-senki-famicom-tcf-8r.html" hreflang="de" lang="de" data-lang="de">Deutsch</a></li>
+      <li role="none"><a role="menuitem" href="/blog/fr/2026-10-17-radia-senki-famicom-tcf-8r.html" hreflang="fr" lang="fr" data-lang="fr">Français</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <article>
+      <div class="pagehead">
+        <p class="kicker">Blog de Kataban</p>
+        <h1>Radia Senki en Famicom: el RPG de Tecmo de 1991 del &#8220;capítulo del amanecer&#8221;, su código TCF-8R, y lo que le dejó a Klonoa</h1>
+        <p class="postmeta">2026-10-17</p>
+        <ul class="posttags" aria-label="Etiquetas">
+          <li><a href="/blog/es/tag/platform/famicom/">Famicom (NES)</a></li>
+          <li><a href="/blog/es/tag/genre/rpg/">RPG</a></li>
+          <li><a href="/blog/es/tag/decade/1990s/">Años 90</a></li>
+          <li><a href="/blog/es/tag/publisher/tecmo/">Tecmo</a></li>
+          <li><a href="/blog/es/tag/release/japan-only/">Solo en Japón</a></li>
+        </ul>
+      </div>
+
+      <div class="prose">
+        <p><em>Radia Senki: Reimeihen</em> salió a la venta en Japón el 15 de noviembre de 1991 como cartucho de Famicom de Tecmo, a <span class="jp">6,900円</span> sin impuestos y con <span class="jp">ラディア戦記 黎明篇</span> en la etiqueta. Es un juego de rol de acción sobre un espadachín que despierta en un bosque sin memoria, y su subtítulo, <span class="jp">黎明篇</span>, significa &#8220;el capítulo del amanecer&#8221;.</p>
+
+        <p>Esta es una entrega de una serie sobre juegos que nunca tuvieron una segunda parte. El capítulo del amanecer fue el único capítulo. No encontramos ninguna secuela, historia paralela ni conversión de Tecmo &mdash; pero el hombre que lo hizo se llevó piezas del juego a otra compañía, y acabaron en <em>Klonoa</em>.</p>
+
+        <ul>
+          <li><strong>Título japonés:</strong> <span class="jp">ラディア戦記 黎明篇</span>, publicado por Tecmo, con el nombre en inglés de la propia Tecmo impreso en la caja: <em>Record of Radia war.</em></li>
+          <li><strong>Cartucho de Famicom:</strong> 15 de noviembre de 1991 &middot; <span class="jp">6,900円</span> sin impuestos &middot; &#8220;TECMO THEATER VOL.7&#8221;</li>
+          <li><strong>Código de producto:</strong> <code>TCF-8R</code>, impreso en la etiqueta del cartucho &mdash; la Base de Datos de Artes Mediáticas no recoge ninguno</li>
+          <li><strong>Solo en Japón:</strong> &#8220;FOR SALE and USE IN JAPAN ONLY&#8221; aparece impreso en la caja y en el manual</li>
+          <li><strong>Sin segunda parte:</strong> ni secuela, ni historia paralela, ni conversión. Por qué se llamó capítulo del amanecer, y si se planeó una secuela, no está documentado</li>
+          <li><strong>Klonoa:</strong> su director dice que la historia de <em>Klonoa</em> nació de lo que dejó sin terminar aquí, y que reutilizó sus nombres. No lo llama secuela</li>
+          <li><strong>Comprarlo:</strong> busca <code>TCF-8R</code> en Suruga-ya. Un cartucho en inglés, o con la forma de los de NES, es una reproducción hecha por aficionados</li>
+        </ul>
+
+        <h2>¿Qué es Radia Senki y cómo se juega?</h2>
+
+        <p>La contraportada de la caja lo plantea en pocas líneas. Un espadachín vuelve en sí en un bosque oscuro y no recuerda quién es. El héroe forma un grupo de hasta cinco personajes y recorre una tierra de fantasía en busca de su memoria perdida, con un sistema de combate que, según la caja, usa IA y una &#8220;presentación cinematográfica&#8221; pensada para aumentar el dramatismo. El titular de la caja es <span class="jp">すべてはこの時、この場所から始まった</span> &mdash; &#8220;todo empezó en este momento, en este lugar&#8221;.</p>
+
+        <p>La pérdida de memoria no es solo un punto de partida. Hideo Yoshizawa, que hizo el juego, escribió en 2017 que la pantalla para introducir el nombre te dice que &#8220;te vino a la mente un nombre&#8221;, así que el jugador escribe el nombre que se le ocurra, y la historia hace algo con ese nombre cerca del final. El resto lo dejamos para que lo descubras tú.</p>
+
+        <p>El cartucho lleva dos rótulos más que conviene conocer. El lomo y el manual lo llaman <strong>TECMO THEATER VOL.7</strong>, y la caja y el manual dan el nombre en inglés que Tecmo le puso al juego: <strong><em>Record of Radia war.</em></strong> &mdash; con &#8220;war&#8221; en minúscula y el punto final incluido.</p>
+
+        <h2>¿Salió Radia Senki alguna vez fuera de Japón?</h2>
+
+        <p>No. La contraportada de la caja y el manual llevan impresa la línea <strong>&#8220;FOR SALE and USE IN JAPAN ONLY&#8221;</strong>, junto a <span class="jp">本品の輸出、使用営業及び賃貸を禁じます</span> (&#8220;se prohíbe la exportación, el uso comercial y el alquiler de este producto&#8221;).</p>
+
+        <p>Parece que una versión en inglés estuvo cerca. Hardcore Gaming 101 escribe que se publicitó un lanzamiento en inglés con el nombre <em>The Tower of Radia</em>, pero que nunca llegó a salir. No hemos visto ese anuncio publicitario, y Hardcore Gaming 101 es la única fuente que encontramos para él; la Wikipedia en inglés lo repite citando ese artículo. Lo que los coleccionistas sí saben es que existe un cartucho prototipo llamado <em>The Tower of Radia</em>, y que su contenido ya se había volcado y circulaba en 2008, según foros de coleccionistas y el archivo de aficionados Hidden Palace.</p>
+
+        <h2>¿Cuál es el cartucho japonés y cuál es su código?</h2>
+
+        <p>La Base de Datos de Artes Mediáticas tiene el cartucho en la fila <code>M878441</code>: <span class="jp">ラディア戦記 黎明篇</span>, Famicom, publicado el <span class="jp">1991-11-15</span> por <span class="jp">テクモ</span>, <span class="jp">6900円 (税抜)</span>. Lo que no tiene es código de producto.</p>
+
+        <p>Otros dos sitios sí lo tienen. La NES Cart Database recoge el cartucho con el identificador de catálogo <code>TCF-8R</code>, y Suruga-ya, que indexa los códigos de producto como campo, devuelve este juego y nada más al buscar <code>TCF-8R</code>. <strong>El código del cartucho japonés es <code>TCF-8R</code>.</strong> En el propio cartucho está impreso en la esquina superior derecha de la etiqueta frontal, junto al logotipo de TECMO, y otra vez en la esquina inferior derecha de la portada del manual. Lo comprobamos tanto en los escaneos de la NES Cart Database como en las fotos de un vendedor.</p>
+
+        <p>El precio de salida es de <span class="jp">6,900円</span> sin impuestos. Es la cifra de la Base de Datos de Artes Mediáticas, y Suruga-ya muestra <span class="jp">定価：￥7,590</span>, que es ese precio con el 10% de impuesto al consumo de hoy: 6.900 &times; 1,1 = 7.590.</p>
+
+        <h2>¿Por qué se llamó &#8220;Reimeihen&#8221; y se planeó una secuela?</h2>
+
+        <p>No lo sabemos, y lo hemos buscado. No encontramos ninguna declaración de Hideo Yoshizawa ni de Tecmo que explique el subtítulo o diga que se planeaba un segundo capítulo. El manual, que es texto de la propia Tecmo, llama al juego solo &#8220;un capítulo&#8221; &mdash; <span class="jp">一篇</span> &mdash; de la aventura del jugador en un mundo de sueños olvidado.</p>
+
+        <p>A menudo leerás que se planeó una secuela y que se canceló porque el juego no vendió. Eso viene de dos wikis japoneses, la enciclopedia de pixiv y ゲームカタログ@Wiki, y ninguno de los dos cita una fuente. Tómalo como una suposición sacada del subtítulo.</p>
+
+        <p>Lo que Yoshizawa sí ha contado es cómo se vendió. En 2017 recordaba que, cuando salió, la Super Famicom ya estaba tomando el relevo, y que aunque Tecmo lo presentó como el último gran título de la Famicom, <strong>solo se pidieron 30.000 copias</strong>. Fue el último juego que hizo en Tecmo; lo llama un hijo pobre pero querido. También explica el título principal: primero se anunció en <em>Famitsu</em> como <span class="jp">シャトー・ドゥ・ファントーム</span> (&#8220;Château de Fantôme&#8221;), hasta que el presidente de Tecmo ordenó un título que llevara kanji. No dice de dónde salió el subtítulo.</p>
+
+        <p>Tampoco ha vuelto de ninguna forma. No encontramos ninguna conversión, recopilación ni descarga: no está entre los títulos de Famicom de Project EGG, y no aparece en las listas de la Wikipedia de juegos de Virtual Console, Nintendo Switch Online o Classic Mini, que sí incluyen otros títulos de Tecmo. Tómalo como &#8220;no encontramos ninguna&#8221;, no como una prueba.</p>
+
+        <h2>¿Qué tiene que ver Radia Senki con Klonoa?</h2>
+
+        <p>Esta es la parte de la historia del juego que sí continuó &mdash; aunque no como secuela. Yoshizawa pasó de Tecmo a Namco en 1992, según la Wikipedia en japonés, y dirigió <em>Klonoa: Door to Phantomile</em>, un juego de plataformas que Namco lanzó en PlayStation en 1997. En una serie de mensajes sobre la creación de <em>Klonoa</em>, escritos en X en 2017 y recopilados en Togetter, explica lo que <em>Radia Senki</em> le aportó:</p>
+
+        <ul>
+          <li><strong>La idea de la historia:</strong> la historia de <em>Klonoa</em>, escribe, nació de algo que había dejado sin terminar en <em>Radia Senki</em>, &#8220;que hice en Tecmo&#8221;</li>
+          <li><strong>Los nombres:</strong> en la fase del guion usó muchos nombres de personajes de <em>Radia Senki</em> como nombres provisionales, y varios sobrevivieron hasta el juego terminado. Huepow, el compañero de Klonoa, se llama así por un espíritu del bosque de <em>Radia Senki</em>; la cantante Lephise, por una princesa que, en los dos juegos, huye en aeronave y se estrella; Balue, por un jefe de bandidos; el villano Ghadius, por Gadiss de <em>Radia Senki</em>. Leorina, de <em>Klonoa 2</em>, toma el nombre de la sacerdotisa del agua de <em>Radia Senki</em></li>
+          <li><strong>El lugar:</strong> &#8220;Phantomile&#8221;, el mundo de <em>Klonoa</em>, viene del título provisional original de <em>Radia Senki</em>, <span class="jp">シャトー・ドゥ・ファントーム</span></li>
+        </ul>
+
+        <p>Lo que no hace es llamar secuela a <em>Klonoa</em>, y no lo es. Lo hizo otra compañía, en otro género y en otra consola. Lo que pasó de un juego al otro, según su propio relato, fue la idea inacabada de una persona y un conjunto de nombres &mdash; no el mundo de <em>Radia Senki</em> ni su héroe. Algunos aficionados sí lo llaman la secuela; esa es una lectura de aficionados, no lo que dijo su director. <em>Radia Senki</em> en sí se quedó en un solo capítulo.</p>
+
+        <p>Si también quieres el <em>Klonoa</em> japonés, Kataban lo tiene con su título japonés, <span class="jp">風のクロノア door to phantomile</span>: el original de PlayStation de 1997, una reedición de PlayStation de 1999 y la versión de Wii de 2008. <a href="/?q=%E9%A2%A8%E3%81%AE%E3%82%AF%E3%83%AD%E3%83%8E%E3%82%A2%20door%20to%20phantomile">Busca <span class="jp">風のクロノア door to phantomile</span> en Kataban &rarr;</a></p>
+
+        <h2>¿Quién hizo Radia Senki?</h2>
+
+        <p>Yoshizawa dice en sus propios mensajes que lo hizo él, y que fue su último juego en Tecmo. Los créditos del manual no usan su nombre: el crédito de dirección y guion dice <strong>SYUICHI SAKURAZAKI</strong>. Que se trate de Yoshizawa con otro nombre se apoya en MobyGames, que transcribe los créditos como &#8220;Hideo Yoshizawa (S Sakurazaki)&#8221;, y en el artículo de la Wikipedia en inglés sobre Yoshizawa, que dice que en Tecmo trabajó con el nombre &#8220;Sakurazaki&#8221;. No encontramos que lo diga él mismo. Sí nombra a otro colaborador: las ilustraciones del manual, escribe, son de Makoto Karibe, entonces en el departamento de diseño de Tecmo.</p>
+
+        <h2>¿Cómo se distingue un cartucho original de una reproducción?</h2>
+
+        <p>El juego tiene una traducción al inglés hecha por aficionados, y esa traducción se vende en cartuchos. Romhacking.net, una base de datos mantenida por aficionados, recoge dos: una &#8220;Beta One&#8221; inacabada de Dayeight del 1 de septiembre de 1997, y una versión 1.00 completa de dreamless, Jair y [cx], publicada el 11 de septiembre de 1999 con el título <em>Chronicle of the Radia War</em>. Tiendas de aficionados ofrecen cartuchos de reproducción con ella &mdash; OCD Reproductions tiene <em>Chronicle of the Radia War</em> para NES a 39,99 dólares, y Retro Shopping Cart un cartucho con la traducción del japonés al inglés a 40 dólares &mdash;, y un hilo de 2008 de un foro de coleccionistas describe uno que se tomó por un prototipo. Son anuncios de tiendas y fuentes de aficionados.</p>
+
+        <p><strong>Hasta donde recogen las fuentes que encontramos, Tecmo lanzó Radia Senki solo como cartucho japonés de Famicom.</strong> Cualquier cartucho de Radia Senki cuyo texto de juego esté en inglés, o que tenga la forma de los de NES, es una reproducción. No te guíes por las letras latinas de la etiqueta: la etiqueta frontal del original también lleva TECMO y <code>TCF-8R</code> en letras latinas.</p>
+
+        <ul>
+          <li><strong>El texto del juego:</strong> los mensajes y diálogos del original están en japonés. Si los diálogos están en inglés, es la traducción de aficionados</li>
+          <li><strong>La forma:</strong> un cartucho de Famicom tiene 60 pines y no encaja en una NES norteamericana o europea sin adaptador. Un cartucho que entra directamente en una NES no es el lanzamiento de 1991</li>
+          <li><strong>El título de la etiqueta:</strong> <em>Chronicle of the Radia War</em> es el título de la traducción de aficionados. <em>The Tower of Radia</em> es el nombre del prototipo que nunca salió, y que nunca se vendió en tiendas</li>
+          <li><strong>Las palabras del anuncio:</strong> quienes venden reproducciones suelen decirlo &mdash; &#8220;repro&#8221;, &#8220;reproduction&#8221;, &#8220;English translation&#8221;. El 25 de septiembre de 2026 nuestras búsquedas en eBay no encontraron ninguna, pero las tiendas de arriba demuestran que existen</li>
+        </ul>
+
+        <p>Para encontrar el código en un original, mira la etiqueta frontal: <code>TCF-8R</code> está impreso en su esquina superior derecha, junto al logotipo rojo de TECMO.</p>
+
+        <p>Si compras en persona en Japón, puedes enseñar esta frase al personal: <span class="jp">これは1991年のオリジナル版ですか？</span> &mdash; &#8220;¿Es esta la versión original de 1991?&#8221;</p>
+
+        <h2>¿Cómo se busca en cada tienda?</h2>
+
+        <p><strong>Suruga-ya: el código, en la categoría de juegos.</strong> <code>TCF-8R</code> mostró resultados: 2 en la vista por defecto y 6 mostrando los agotados, todos ellos este cartucho; <code>TCF8R</code> sin guion mostró 2 y 6. Mostrando los agotados, el título japonés mostró 8 con <span class="jp">黎明篇</span> y 8 sin él, también todos de este juego &mdash; las búsquedas por título incluyen además la caja y el manual vendidos por separado. En toda la tienda, el título también saca revistas de videojuegos de 1991 y un CD de música hecho por aficionados, así que deja puesta la categoría de juegos. <code>Radia Senki</code> en letras latinas no devuelve nada.</p>
+
+        <p><strong>Buyee: el título completo.</strong> <span class="jp">ラディア戦記 黎明篇</span> mostró resultados: 11 (cartuchos: 10; manual suelto: 1), todos ellos de este juego. Son pocos porque los vendedores a menudo omiten el subtítulo o lo escriben <span class="jp">黎明編</span>; si quieres más anuncios, busca solo <span class="jp">ラディア戦記</span>, que mostró resultados: 26 (cartuchos: 22; manual suelto: 1; revistas de 1991: 3). El código no es fiable en Buyee: <code>TCF-8R</code> mostró resultados: 4, todos ellos de este juego, pero <code>TCF8R</code> mostró 140, y lo que pudimos leer de ellos eran sobre todo accesorios de inodoro, piezas de motor y de moto y palos de golf (véanse las fuentes).</p>
+
+        <p><strong>eBay: el título romanizado.</strong> <code>Radia Senki</code> mostró coincidencias exactas: 5 (este cartucho: 4; una regla de Tecmo: 1). Añadir <code>famicom</code> lo empeora en vez de mejorarlo &mdash; coincidencias exactas: 7 (este cartucho: 4; otros juegos con &#8220;Senki&#8221; en el nombre, como <em>Mōryō Senki Madara</em>: 3). El título japonés no devuelve nada útil, porque eBay lo convierte en &#8220;war chronicles&#8221;, y el <code>Record of Radia War</code> de Tecmo no devuelve absolutamente nada.</p>
+
+        <h2>¿Por qué buscar este en Kataban?</h2>
+
+        <p>Porque el juego no tiene un título oficial en inglés, y cada tienda pide algo distinto. Kataban pone el código y el título japonés uno al lado del otro. Busca <code>TCF-8R</code>, <code>Record of Radia War</code> o <code>Radia Senki</code> y te sale este cartucho. En las tiendas de videojuegos de segunda mano de Japón, como Book-Off, los juegos de Famicom suelen estar ordenados en las estanterías según el silabario japonés, así que la sección en la que mirar es <span class="jp">ラ</span>.</p>
+
+        <p><strong>Radia Senki: Reimeihen</strong> &middot; <span class="jp">ラディア戦記 黎明篇</span> &middot; Famicom, 15 de noviembre de 1991 (<code>TCF-8R</code>) &middot; Tecmo</p>
+        <p><strong>Dónde comprar:</strong>
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&amp;goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3DTCF-8R%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp &mdash; el código (<code>TCF-8R</code>)</a> &middot;
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://i0c.xyz/6a6994d1e0b3f?url=https%3A%2F%2Fbuyee.jp%2Fitem%2Fsearch%2Fquery%2F%25E3%2583%25A9%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25A2%25E6%2588%25A6%25E8%25A8%2598%2520%25E9%25BB%258E%25E6%2598%258E%25E7%25AF%2587%3Flang%3Den">Buyee &mdash; el título completo (<span class="jp">ラディア戦記 黎明篇</span>)</a> &middot;
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://www.ebay.com/sch/i.html?_nkw=Radia%20Senki&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0&amp;campid=5339175838&amp;customid=&amp;toolid=10001&amp;mkevt=1">eBay &mdash; Radia Senki</a><br>
+          <a href="/?q=%E3%83%A9%E3%83%87%E3%82%A3%E3%82%A2%E6%88%A6%E8%A8%98">Verlo en Kataban &rarr;</a></p>
+
+        <p>El 25 de septiembre de 2026 la entrada principal del cartucho en Suruga-ya tenía precios desde <span class="jp">￥5,300</span> hasta <span class="jp">￥14,400</span> según el estado, con una oferta de un día que los rebajaba un poco, y había en existencias una copia de solo cartucho a <span class="jp">￥9,980</span>. El precio más barato de un rango no es necesariamente la mejor copia; lee el estado de cada una.</p>
+
+        <p>Un capítulo del amanecer sin un día después. <em>Radia Senki</em> reunió 30.000 pedidos, no salió en el extranjero y Tecmo nunca lo continuó. Su creador se llevó consigo la parte inacabada, y esta se convirtió en otra cosa. Si quieres el de 1991, busca <code>TCF-8R</code> en la esquina superior derecha de la etiqueta, y deja los cartuchos de NES en inglés por lo que son.</p>
+
+        <div class="kataban-search-cta">
+          <p><a href="/?q=%E3%83%A9%E3%83%87%E3%82%A3%E3%82%A2%E6%88%A6%E8%A8%98">Busca <span class="jp">ラディア戦記</span> en el catálogo de Kataban &rarr;</a></p>
+        </div>
+        <div class="official-sources">
+          <p><strong>Fuentes</strong></p>
+          <ul>
+            <li>Base de Datos de Artes Mediáticas de la Agencia de Asuntos Culturales &mdash; fila <code>M878441</code>: <span class="jp">ラディア戦記 黎明篇</span> (romanizado <code>Radia Senki Reimeihen</code>), <span class="jp">カセット (ファミリーコンピュータ)</span>, publicado el <span class="jp">1991-11-15</span>, editor <span class="jp">テクモ</span>, línea de copyright <code>(c)TECMO,LTD.1991</code>, precio de salida <span class="jp">6900円 (税抜)</span>. La fila no tiene <code>schema:productID</code> ni <code>schema:gtin</code>, y es la única fila de este juego (consultado el 25 de septiembre de 2026)</li>
+            <li>NES Cart Database, <a target="_blank" rel="noopener" href="https://nescartdb.com/profile/view/4303/radia-senki-reimei-hen">ficha 4303, <em>Radia Senki: Reimei-hen</em></a> &mdash; identificador de catálogo <code>TCF-8R</code>, Japón, fecha de lanzamiento 15 de noviembre de 1991, editor y desarrollador Tecmo, <code>Front Label ID: TCF-8R</code>. Sus escaneos muestran <code>TCF-8R</code> en la esquina superior derecha de la etiqueta frontal del cartucho y en la esquina inferior derecha de la portada del manual; la contraportada de la caja muestra <span class="jp">すべてはこの時、この場所から始まった</span>, el texto del argumento, &#8220;Record of Radia war.&#8221;, &#8220;FOR SALE and USE IN JAPAN ONLY&#8221;, <span class="jp">本品の輸出、使用営業及び賃貸を禁じます。</span>, y &#8220;Tecmo Theater Vol.7&#8221; en el lomo; la portada del manual dice &#8220;TECMO THEATER VOL.7&#8221; (consultado el 25 de septiembre de 2026)</li>
+            <li>eBay, fotos del vendedor del anuncio 358415208063 (&#8220;Radia Senki Chronicles W/Box Manual Famicom FC NES Retro Good Used Game NTSC-J&#8221;), vistas el 25 de septiembre de 2026 &mdash; <code>TCF-8R</code> en la esquina superior derecha de la etiqueta frontal del cartucho y en la esquina inferior derecha de la portada del manual</li>
+            <li>Tecmo, manual de instrucciones de <span class="jp">ラディア戦記 黎明篇</span> (<code>TCF-8R</code>), escaneado en el sitio de aficionados <a target="_blank" rel="noopener" href="https://gamemanual.midnightmeattrain.com/entry/%E3%83%A9%E3%83%87%E3%82%A3%E3%82%A2%E6%88%A6%E8%A8%98_%E9%BB%8E%E6%98%8E%E7%B7%A8">レトロゲームの説明書保管庫</a> (1 de mayo de 2024) &mdash; p. 3: <span class="jp">「これは忘れられた夢の世界「レムリアル」でのあなたの冒険の一篇なのです。」</span>; la página de créditos nombra a <code>SYUICHI SAKURAZAKI</code> en dirección y guion y lleva &#8220;FOR SALE and USE IN JAPAN ONLY&#8221; (fuente primaria: texto de la propia Tecmo, leído a través de un escaneo de aficionados)</li>
+            <li>Hideo Yoshizawa (@yoshi_clonoa), mensajes en X de su serie <span class="jp">「クロノアクロニクル」</span>, del 21 de octubre al 16 de diciembre de 2017, recopilados en <a target="_blank" rel="noopener" href="https://togetter.com/li/1137516">Togetter</a> (páginas 3&ndash;6; no abrimos los mensajes originales en x.com) &mdash; <em>Radia Senki</em> fue el juego <span class="jp">「テクモで最後に創った」</span>; <span class="jp">「ファミコン最後の大作と銘打って発売したものの、３万本しか注文が集まらなかったのです。」</span>; la pantalla para introducir el nombre muestra <span class="jp">「ひとつのなまえが浮かんできた」</span>; <span class="jp">「かつてテクモで創った『ラディア戦記』の心残りから、クロノアのストーリーのアイデアが生まれました。」</span>; en la fase del guion de <em>Klonoa</em> se usaron muchos nombres de personajes de <em>Radia Senki</em> (Huepow, del espíritu del bosque ヒューポー; Lephise, de la princesa que huye en aeronave; Balue, del jefe de bandidos; Ghadius, de Gadiss; Leorina, de <em>Klonoa 2</em>, de la sacerdotisa del agua); el primer título anunciado en <em>Famitsu</em> fue <span class="jp">「シャトー・ドゥ・ファントーム」</span>, cambiado por orden del presidente de Tecmo por un título con kanji, y &#8220;Phantomile&#8221; deriva de él; las ilustraciones del manual son de Makoto Karibe, del departamento de diseño de Tecmo. No explica <span class="jp">黎明篇</span> y no llama secuela a <em>Klonoa</em> (fuente primaria: los propios mensajes del desarrollador)</li>
+            <li>Wikipedia (en inglés), <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Klonoa:_Door_to_Phantomile">&#8220;Klonoa: Door to Phantomile&#8221;</a> &mdash; desarrollado y publicado por Namco para PlayStation, lanzado en Japón el 11 de diciembre de 1997, dirigido por Hideo Yoshizawa. Wikipedia (en japonés), <a target="_blank" rel="noopener" href="https://ja.wikipedia.org/wiki/%E5%90%89%E6%B2%A2%E7%A7%80%E9%9B%84">&#8220;<span class="jp">吉沢秀雄</span>&#8221;</a> &mdash; entró en Tecmo en 1984 y en Namco en 1992 (consultado el 25 de septiembre de 2026)</li>
+            <li>MobyGames, <a target="_blank" rel="noopener" href="https://web.archive.org/web/2019/https://www.mobygames.com/game/nes/radia-senki-reimeihen/credits">créditos de <em>Radia Senki: Reimeihen</em></a> (captura del Internet Archive, 2019; transcritos por la comunidad) &mdash; &#8220;Scenario Unit Hideo Yoshizawa (S Sakurazaki)&#8221;. Wikipedia (en inglés), <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Hideo_Yoshizawa">&#8220;Hideo Yoshizawa&#8221;</a> &mdash; en Tecmo trabajó &#8220;con el nombre &#8216;Sakurazaki&#8217;&#8221;, y recoge <em>Radia Senki: Reimeihen</em> (1991). ★Estas dos son las únicas fuentes que encontramos que identifican a Sakurazaki con Yoshizawa</li>
+            <li>Hardcore Gaming 101, <a target="_blank" rel="noopener" href="https://www.hardcoregaming101.net/radia-senki/">&#8220;Radia Senki&#8221;</a> &mdash; se publicitó un lanzamiento en inglés con el nombre <em>The Tower of Radia</em>, que nunca llegó a salir; sin embargo, se encontró un prototipo y se hizo público. ★La única fuente que encontramos para el anuncio publicitario, que no hemos visto. Wikipedia (en inglés), <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Radia_Senki:_Reimeihen">&#8220;Radia Senki: Reimeihen&#8221;</a>, lo repite citando Hardcore Gaming 101</li>
+            <li>Fuentes de coleccionistas sobre el prototipo: foro NintendoAge, &#8220;Tower of Radia PROTO up for sale!!&#8221;, mayo de 2008 (captura del Internet Archive); Hidden Palace, <a target="_blank" rel="noopener" href="https://hiddenpalace.org/The_Tower_of_Radia_(US_prototype)">&#8220;The Tower of Radia (US prototype)&#8221;</a> &mdash; estado del volcado &#8220;Released&#8221; (fuentes de aficionados)</li>
+            <li>Afirmaciones sobre una secuela y una reedición en wikis japoneses: enciclopedia de pixiv, &#8220;<span class="jp">ラディア戦記</span>&#8221;, y ゲームカタログ@Wiki, <a target="_blank" rel="noopener" href="https://web.archive.org/web/2020/https://w.atwiki.jp/gcmatome/pages/7903.html">página 7903</a> (capturas del Internet Archive) &mdash; los dos dicen que se planeaba una secuela o más capítulos y que se abandonaron porque el juego no vendió; ninguno cita una fuente (solo wiki). El blog de aficionados ファミコンのネタ!!, <a target="_blank" rel="noopener" href="https://famicoms.net/blog-entry-593.html">entrada 593</a>, recoge que algunos aficionados llaman a <em>Klonoa</em> la verdadera secuela de <em>Radia Senki</em> (fuente de aficionados)</li>
+            <li>Comprobación de reediciones: Project EGG, <a target="_blank" rel="noopener" href="https://www.amusement-center.com/project/egg/landing/hard.php?h=FC">página de títulos de Famicom</a> (tres títulos, no este); las listas de la Wikipedia de la Virtual Console japonesa para Wii, Nintendo 3DS y Wii U, su lista de Nintendo Switch Online / Nintendo Classics y su lista de Nintendo Classic Mini Famicom no contienen <span class="jp">ラディア</span>, aunque sí recogen otros títulos de Tecmo (consultado el 25 de septiembre de 2026)</li>
+            <li>Romhacking.net (base de datos mantenida por aficionados), entradas de traducción <a target="_blank" rel="noopener" href="https://web.archive.org/web/2020/https://www.romhacking.net/translations/102/">102</a> &mdash; &#8220;Chronicle of the Radia War&#8221;, publicada por dreamless, Jair, [cx], estado Fully Playable, versión 1.00, fecha de publicación 11 de septiembre de 1999 &mdash; y <a target="_blank" rel="noopener" href="https://web.archive.org/web/2020/https://www.romhacking.net/translations/707/">707</a> &mdash; Dayeight, Beta One, 1 de septiembre de 1997, inacabada (capturas del Internet Archive)</li>
+            <li>Cartuchos de reproducción a la venta (anuncios de tiendas): OCD Reproductions, <a target="_blank" rel="noopener" href="https://www.ocdreproductions.com/details/p1560736_7373169.aspx">&#8220;Chronicle of the Radia War&#8221;</a>, NES-RADIA, 39,99 dólares (consultado el 25 de septiembre de 2026); Retro Shopping Cart, &#8220;Chronicles of Radia War translation&#8221;, 40,00 dólares, publicado el 17 de octubre de 2022. Un hilo de marzo de 2008 del foro de coleccionistas KLOV, &#8220;Swapmeet find NES Prototype: the tower of Radia&#8221;, concluye que el cartucho encontrado &#8220;es una reproducción de una traducción de aficionados&#8221; (fuente de aficionados)</li>
+            <li>Suruga-ya, medido el 25 de septiembre de 2026 con URLs de búsqueda directas, tanto en la vista por defecto como con <code>inStock=On</code> para mostrar los artículos agotados. Categoría de juegos (<code>category=2</code>): <code>TCF-8R</code>, 2 y 6, <code>TCF8R</code>, 2 y 6, todos este juego; <span class="jp">ラディア戦記 黎明篇</span>, 2 y 8, <span class="jp">ラディア戦記</span>, 2 y 8, todos este juego, incluidos <span class="jp">[説明書のみ]</span> y <span class="jp">[外箱のみ]</span>; <code>Radia Senki</code>, 0. Sin categoría (consultado el 25 de septiembre de 2026): <span class="jp">ラディア戦記</span>, 3 y 14, incluidas revistas de videojuegos de 1991 y un CD de música doujin. Todas las entradas muestran <span class="jp">[発売日：1991/11/15] [テクモ]</span> y <span class="jp">定価：￥7,590</span>. Precios a 25 de septiembre de 2026: la entrada principal tenía un precio de <span class="jp">￥5,300 ～ ￥14,400</span> (una oferta de un día mostraba <span class="jp">￥5,030 ～ ￥13,800</span>); había en existencias una copia de solo cartucho a <span class="jp">￥9,980</span></li>
+            <li>Buyee, medido el 25 de septiembre de 2026 en un navegador de escritorio con URLs de búsqueda directas. <span class="jp">ラディア戦記 黎明篇</span>: 11, todos este juego (cartuchos: 10; manual: 1). <span class="jp">ラディア戦記</span>: 26 (cartuchos: 22; manual: 1; revistas: 3). <span class="jp">ラディア戦記 ファミコン</span>: 25 (cartuchos: 21; manual: 1; revistas: 3). <code>TCF-8R</code>: 4, todos este juego. <code>TCF8R</code>: 140 (desglose a 25 de septiembre de 2026: de los 17 que pudimos leer, 2 eran los mismos anuncios y el resto accesorios de inodoro, piezas de motor y de moto, palos de golf y CD). <code>Radia Senki</code>: ningún resultado</li>
+            <li>eBay, medido el 25 de septiembre de 2026 en un navegador de escritorio con URLs de búsqueda directas. <code>Radia Senki</code>: coincidencias exactas 5 (este cartucho: 4; una regla de Tecmo: 1). <code>Radia Senki famicom</code>: 7 (este cartucho: 4; otros juegos, como <em>Mōryō Senki Madara</em> y <em>Venus Senki</em>: 3). <code>Radia Senki NES</code>: 3, todos ellos cartuchos japoneses; ese día no apareció ninguna reproducción en inglés en ninguna búsqueda. <span class="jp">ラディア戦記</span>: ninguna coincidencia (buscado como &#8220;war chronicles&#8221;). <code>TCF-8R</code>: 2 (este juego: 1). <code>TCF8R</code>: 2 (este juego: 1). <code>Record of Radia War</code>: 0</li>
+            <li>Fila <code>M878441</code> del catálogo de Kataban &mdash; lleva el título en inglés <code>Record of Radia War</code> (el nombre en inglés impreso por Tecmo) y el código de producto <code>TCF-8R</code> (añadidos el 25 de septiembre de 2026); fila de kana <span class="jp">ラ</span>. <span class="jp">風のクロノア door to phantomile</span> devuelve tres filas, todas de ese juego: PlayStation 1997 (título en inglés <code>Klonoa: Door to Phantomile</code>), PlayStation 1999 y Wii 2008, ninguna con código de producto (consultado el 25 de septiembre de 2026)</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <div class="cta">
+      <h2>Conoce el código, encuentra el juego</h2>
+      <p>Escribe un título occidental. Obtén el nombre en japonés, el código impreso en el lomo del cartucho y enlaces a las tiendas que lo tienen.</p>
+      <p class="ctascan">O escanea el código de barras de la parte trasera de la caja o el estuche: <a href="/?scan=1">abrir el escáner</a></p>
+      <a class="ctabtn" href="/">Buscar un juego</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Kataban &middot; Datos de la Agencia de Asuntos Culturales, Media Arts Database. Títulos en inglés obtenidos de Wikidata (CC0).
+    <br>Algunos enlaces de este sitio son enlaces de afiliado, y Kataban puede recibir una comisión, incluso como afiliado de eBay Partner Network (publicidad).
+    <br><a href="/blog/es/">Todas las entradas</a> &middot; <a href="/">Volver a la herramienta de búsqueda</a> &middot; <a href="/privacy.html">Privacidad</a>
+    <div class="foot-brand">
+      <p class="foot-stars" aria-hidden="true">★★★</p>
+      <p class="foot-tagline">Larga vida a los medios físicos.</p>
+      <span class="kb-word" aria-hidden="true">
+        <span class="kb-ghost"><span class="kb-grid" data-kb="kb-on-cyan"></span></span>
+        <span class="kb-grid kb-top" data-kb="kb-on-pink"></span>
+      </span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="/kataban.js"></script>
+</body>
+</html>
