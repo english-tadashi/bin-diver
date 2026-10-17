@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>해외 컬렉터를 위한 일본 레트로 게임 블로그 — 매장 가이드, 수입 방법, 그리고 타이틀 뒤에 숨은 이야기.</description>
     <language>ko-kr</language>
-    <lastBuildDate>Fri, 16 Oct 2026 07:43:46 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 17 Oct 2026 09:11:37 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-ko.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>패미컴의 《Lagrange Point》: Konami가 1991년에 낸 FM 음원 RPG, 상품 코드 RC851</title>
+      <link>https://gamekataban.com/blog/ko/2026-10-18-lagrange-point-famicom-rc851.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-10-18-lagrange-point-famicom-rc851.html</guid>
+      <description>Konami의 패미컴 RPG 《Lagrange Point》는 1991년 일본에서만 발매되었고 속편은 없었습니다. 카트리지 코드는 RC851입니다. VRC7 칩의 FM 음원을 울린 유일한 게임이 된 사정, 끊긴 속편에 대해 추측에 불과한 것, 그리고 원판을 영어 NES 복제품과 구별하는 법을 정리했습니다.</description>
+      <pubDate>Sun, 18 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>패미컴의 《Radia Senki》: Tecmo가 1991년에 낸 「여명편」 RPG, 상품 코드 TCF-8R</title>
       <link>https://gamekataban.com/blog/ko/2026-10-17-radia-senki-famicom-tcf-8r.html</link>

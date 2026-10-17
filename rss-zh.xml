@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>為海外收藏家打造的日本復古遊戲部落格——商店指南、進口教學，以及遊戲背後的故事。</description>
     <language>zh-tw</language>
-    <lastBuildDate>Fri, 16 Oct 2026 07:43:46 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 17 Oct 2026 09:11:37 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-zh.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>《拉格朗日點》登上紅白機：Konami 1991年的 FM 音源 RPG，與它的編號 RC851</title>
+      <link>https://gamekataban.com/blog/zh/2026-10-18-lagrange-point-famicom-rc851.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-10-18-lagrange-point-famicom-rc851.html</guid>
+      <description>《拉格朗日點》是 Konami 1991年只在日本發售的紅白機 RPG，從未有續作。卡帶編號 RC851。本文說明它為何是唯一奏響 VRC7 晶片 FM 音源的遊戲、續作消失的原因哪些只是猜測，以及如何分辨原版與英文 NES 仿製卡帶。</description>
+      <pubDate>Sun, 18 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>《Radia Senki》登上紅白機：Tecmo 1991年的「黎明篇」RPG，與它的編號 TCF-8R</title>
       <link>https://gamekataban.com/blog/zh/2026-10-17-radia-senki-famicom-tcf-8r.html</link>

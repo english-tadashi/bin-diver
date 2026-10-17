@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 16 Oct 2026 07:43:46 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 17 Oct 2026 09:11:37 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Lagrange Point on Famicom: Konami’s 1991 FM-Sound RPG, Its Code RC851, and How to Tell It From English NES Reproductions</title>
+      <link>https://gamekataban.com/blog/2026-10-18-lagrange-point-famicom-rc851.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-10-18-lagrange-point-famicom-rc851.html</guid>
+      <description>Konami’s Famicom RPG Lagrange Point came out only in Japan in 1991 and never got a sequel. The cartridge code is RC851. Why it is the one game that played the VRC7 chip’s FM sound, what is only guesswork about the missing sequel, and how to tell the original from English NES reproductions.</description>
+      <pubDate>Sun, 18 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Radia Senki on Famicom: Tecmo’s 1991 “Dawn Chapter” RPG, Its Code TCF-8R, and What It Left to Klonoa</title>
