@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog pour les collectionneurs à l'étranger en quête de jeux rétro japonais — guides boutiques, tutoriels d'importation, et les histoires derrière les titres.</description>
     <language>fr-fr</language>
-    <lastBuildDate>Sat, 17 Oct 2026 09:11:38 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 18 Oct 2026 07:07:17 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-fr.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Magician Lord sur Neo Geo AES : le jeu qui a lancé la Neo Geo, et la suite morte avec son développeur</title>
+      <link>https://gamekataban.com/blog/fr/2026-10-19-magician-lord-neo-geo-aes-ngh-005.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-10-19-magician-lord-neo-geo-aes-ngh-005.html</guid>
+      <description>Alpha Denshi a conçu Magician Lord pour le lancement de la Neo Geo en 1990 ; la cartouche a suivi le 1er juillet 1991 sous le code NGH-005. Ce que font les six transformations, pourquoi elle est plus clémente que l'arcade, pourquoi la suite Neo Geo Pocket a disparu avec ADK, et ce qu'elle coûte aujourd'hui.</description>
+      <pubDate>Mon, 19 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Lagrange Point sur Famicom : le RPG à son FM de Konami sorti en 1991, son code RC851</title>
       <link>https://gamekataban.com/blog/fr/2026-10-18-lagrange-point-famicom-rc851.html</link>
