@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Sun, 18 Oct 2026 07:07:17 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 19 Oct 2026 07:42:49 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>After Burner en Famicom: el cartucho exclusivo de Japón de Sunsoft para quien vuelve a la cabina</title>
+      <link>https://gamekataban.com/blog/es/2026-10-20-after-burner-famicom-ss13-6200.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-10-20-after-burner-famicom-ss13-6200.html</guid>
+      <description>El juego de aviones de Sega de 1987 llegó a muchos sistemas japoneses, y la versión doméstica más interesante es el cartucho de Famicom de Sunsoft de 1989, SS13-6200: en realidad After Burner II, vendido solo en Japón. Con las versiones de Mark III y Mega Drive, y cómo encontrar cada una.</description>
+      <pubDate>Tue, 20 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Magician Lord en Neo Geo AES: el juego que estrenó la Neo Geo y la secuela que murió con su desarrolladora</title>
       <link>https://gamekataban.com/blog/es/2026-10-19-magician-lord-neo-geo-aes-ngh-005.html</link>

@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Ein Blog für Sammler außerhalb Japans, die japanische Retro-Spiele suchen — Shop-Guides, Import-Anleitungen und die Geschichten hinter den Titeln.</description>
     <language>de-de</language>
-    <lastBuildDate>Sun, 18 Oct 2026 07:07:17 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 19 Oct 2026 07:42:49 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-de.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>After Burner auf dem Famicom: Sunsofts Japan-exklusives Modul für alle, die wieder im Cockpit sitzen</title>
+      <link>https://gamekataban.com/blog/de/2026-10-20-after-burner-famicom-ss13-6200.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-10-20-after-burner-famicom-ss13-6200.html</guid>
+      <description>Segas Jet-Spiel von 1987 kam in Japan auf viele Systeme, und die interessanteste Heimfassung ist Sunsofts Famicom-Modul von 1989, SS13-6200: eigentlich After Burner II, nur in Japan verkauft. Dazu die Fassungen für Mark III und Mega Drive und wie du jede davon findest.</description>
+      <pubDate>Tue, 20 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Magician Lord auf Neo Geo AES: das Spiel, mit dem die Neo Geo startete, und der Nachfolger, der mit seinem Entwickler starb</title>
       <link>https://gamekataban.com/blog/de/2026-10-19-magician-lord-neo-geo-aes-ngh-005.html</link>

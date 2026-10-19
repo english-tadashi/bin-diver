@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Sun, 18 Oct 2026 07:07:17 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 19 Oct 2026 07:42:49 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>After Burner on Famicom: Sunsoft’s Japan-Only Cartridge for Anyone Back in the Cockpit</title>
+      <link>https://gamekataban.com/blog/2026-10-20-after-burner-famicom-ss13-6200.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-10-20-after-burner-famicom-ss13-6200.html</guid>
+      <description>Sega’s 1987 jet game went to many Japanese systems, and the most interesting home version is Sunsoft’s 1989 Famicom cartridge, SS13-6200: really After Burner II, sold only in Japan. With the Mark III and Mega Drive versions, and how to find each one.</description>
+      <pubDate>Tue, 20 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Magician Lord on Neo Geo AES: the Game That Launched the Neo Geo, and the Sequel That Died with Its Developer</title>
