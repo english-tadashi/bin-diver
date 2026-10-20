@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Mon, 19 Oct 2026 07:42:49 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 20 Oct 2026 07:06:18 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Virtua Fighter, Virtua Fighter 2 y NINKU: tres juegos de lucha japoneses de Saturn y sus códigos</title>
+      <link>https://gamekataban.com/blog/es/2026-10-21-virtua-fighter-ninku-sega-saturn-import-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-10-21-virtua-fighter-ninku-sega-saturn-import-guide.html</guid>
+      <description>Los dos primeros Virtua Fighter de Sega y NINKU, un juego de lucha de anime que solo salió en Japón, son importaciones japonesas baratas para Saturn. Sus códigos son GS-9001, GS-9079 y GS-9036, y en las subastas japonesas los códigos de Virtua Fighter encuentran el juego mejor que el título.</description>
+      <pubDate>Wed, 21 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>After Burner en Famicom: el cartucho exclusivo de Japón de Sunsoft para quien vuelve a la cabina</title>
       <link>https://gamekataban.com/blog/es/2026-10-20-after-burner-famicom-ss13-6200.html</link>
