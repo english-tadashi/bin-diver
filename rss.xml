@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 20 Oct 2026 07:06:17 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 21 Oct 2026 08:03:45 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Tiger-Heli on Famicom: Toaplan’s First Shooter, Its PNF-TH Cartridge, and the Sequel Called Kyukyoku Tiger</title>
+      <link>https://gamekataban.com/blog/2026-10-22-tiger-heli-famicom-pnf-th.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-10-22-tiger-heli-famicom-pnf-th.html</guid>
+      <description>Toaplan’s first shooter, the 1985 arcade game Tiger-Heli, came home on Famicom in 1986 as PNF-TH. Its sequel, Kyukyoku Tiger (Twin Cobra), went to the PC Engine, Famicom, Mega Drive and Saturn. Codes, barcodes and how to find each one.</description>
+      <pubDate>Thu, 22 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Virtua Fighter, Virtua Fighter 2 and NINKU: Three Japanese Saturn Fighters and Their Codes</title>

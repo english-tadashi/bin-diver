@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>해외 컬렉터를 위한 일본 레트로 게임 블로그 — 매장 가이드, 수입 방법, 그리고 타이틀 뒤에 숨은 이야기.</description>
     <language>ko-kr</language>
-    <lastBuildDate>Tue, 20 Oct 2026 07:06:18 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 21 Oct 2026 08:03:45 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-ko.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>패미컴판 《타이거 헬리》: 토아플랜의 첫 슈팅 게임, 카트리지 PNF-TH, 그리고 속편 《트윈 코브라》</title>
+      <link>https://gamekataban.com/blog/ko/2026-10-22-tiger-heli-famicom-pnf-th.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-10-22-tiger-heli-famicom-pnf-th.html</guid>
+      <description>토아플랜의 첫 슈팅 게임인 1985년 아케이드 《타이거 헬리》는 1986년 패미컴 카트리지 PNF-TH로 나왔습니다. 속편 《트윈 코브라》(究極タイガー)는 PC 엔진, 패미컴, 메가 드라이브, 세가 새턴으로 이어졌습니다. 각 버전의 코드와 바코드, 찾는 방법을 정리합니다.</description>
+      <pubDate>Thu, 22 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>《버추어 파이터》, 《버추어 파이터 2》, NINKU: 일본판 세가 새턴 격투 게임 세 편과 상품 코드</title>
       <link>https://gamekataban.com/blog/ko/2026-10-21-virtua-fighter-ninku-sega-saturn-import-guide.html</link>
