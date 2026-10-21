@@ -12,6 +12,7 @@
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preload" href="/blog/links.json" as="fetch" crossorigin><!-- 2026-10-21: 別名（links.json）を本体と並行して先に取る。/?q= の最初の検索がこれを待つ -->
 <script>
 /* 読み取りの先行起動・その1（2026-10-19・scan-early-camera）。/?scan=1 で、iPhone 以外のときだけ、ページの読み込みより先にカメラを頼む。
    DATA と本体の準備が始まると約30秒（4倍遅い CPU）手が空かないので、その前の HTML・CSS の読み込みのあいだにカメラを開かせておく。
@@ -3343,9 +3344,24 @@ function blogUrl(path){ const l=blogLang(); return '/blog/'+(l==='en'?'':l+'/')+
 /* ★別名（links.json の s）: 記事で扱う作品の行に、検索用の別名を足す（DATA は変えない）。
    HAY / HAY4 の末尾に1行として足すので、完全一致の段（HAY を \n で割って比べる）にも効く。 */
 function applyBlogAliases(s){
-  const idx={}; DATA.forEach((r,i)=>{ const k=r[2]+'\t'+r[1]; (idx[k]||(idx[k]=[])).push(i); });
-  for(const k in s) for(const i of (idx[k]||[])) for(const a of s[k]){ HAY[i]+='\n'+fold(accent(a)); HAY4[i]+='\n'+squash(a); }
+  // ★2026-10-21: 全行の「機種\t和題」を作らない（4倍遅い CPU で十数秒かかり、/?q= の最初の検索がそのぶん待たされた）。
+  //   和題が別名の表にある行だけ見る。足す行・足す中身は以前と同じ。
+  const titles=new Set(); for(const k in s) titles.add(k.slice(k.indexOf('\t')+1));
+  for(let i=0;i<DATA.length;i++){ const r=DATA[i]; if(!titles.has(r[1])) continue;
+    const al=s[r[2]+'\t'+r[1]]; if(al) for(const a of al){ HAY[i]+='\n'+fold(accent(a)); HAY4[i]+='\n'+squash(a); } }
   HAYK = HAY4K = null;   // ひらがな・カタカナの索引（予備の検索③）は別名込みで作り直す
+}
+/* ★2026-10-21: /?q= 付きで開いたときの最初の検索は、links.json（別名）を読み終えるまで待つ（最長 LINKS_WAIT_MS）。
+   以前は別名なしで先に検索して件数を出し、約1秒後に別名込みで検索し直していた（/?q=タイガーヘリ が 3件 → 7件）。
+   店頭で途中の件数を見て諦めないよう、待つあいだは件数の代わりに「Searching…」を出し、結果は1回で出す。
+   読み終わり（成功・失敗とも）に <html data-links="ready|none"> を付ける（道具はこれを待つ）。
+   links.json は <head> の preload で先に取りに行っている（同じ URL・同じ credentials なので、この fetch はそれを使う）。 */
+const LINKS_WAIT_MS=2000;
+let linksSettled=false, linksWaitTimer=null;
+function linksDone(state){
+  linksSettled=true; document.documentElement.setAttribute('data-links', state);
+  if(linksWaitTimer){ clearTimeout(linksWaitTimer); linksWaitTimer=null; run({deep: true}); return true; }   // 待っていた最初の検索を、ここで1回だけ
+  return false;
 }
 fetch('/blog/links.json').then(r=>r.ok?r.json():null).then(j=>{
   if(j && j.a && j.p){
@@ -3353,9 +3369,10 @@ fetch('/blog/links.json').then(r=>r.ok?r.json():null).then(j=>{
     if(Array.isArray(j.j)) JAPAN_ONLY=new Set(j.j);
     if(j.d && typeof j.d==='object') SHARED_CODES=j.d;
     if(j.s) applyBlogAliases(j.s);
+    if(linksDone('ready')) return;   // 最初の検索を待たせていた＝いま別名込みで1回だけ検索した
     if(q.value.trim()) run({deep: lastDeep}); else if(current.length) paint();   // 先に検索していたら、別名込みで検索し直す（deep はそのまま）
-  }
-}).catch(()=>{});
+  } else linksDone('none');
+}).catch(()=>{ linksDone('none'); });
 
 /* ★2026-09-28: 行ごとの eBay 検索語の差し替え（card() の kwEn）。英題＋機種名で実測した純度が低かった行だけ。
    キーは DATA の機種(row[2]) + タブ + 和題(row[1])。値はそのまま _nkw に入れる（ebayOp も機種名も足さない）。
@@ -5043,7 +5060,13 @@ plat.addEventListener('change',run);
 year.addEventListener('change',run);
 // pub は hidden input（タイプアヘッドが pubSelect→run() を直接呼ぶ）ので change 監視は不要。
 setLoc(locRead(), true);   // 起動時の状態復元（URL>localStorage>out）。skipSave=保存を書き戻さない
-run({deep: !!q.value.trim()});   // /?q= 付きで開いたときは待たずに探し直しと案内まで
+// 2026-10-21: 型番・バーコードの形（queryKind が code / barcode）は待たずにすぐ探す（店頭でいちばん速く出したい語・待ちが延びた）。
+//   題名の語だけ別名を待つ。★別名に型番の形のもの（DMG-O2J 等）があり、その語では従来どおり別名が後から足される。
+const urlQKind = q.value.trim() ? queryKind(q.value) : '';
+if(q.value.trim() && !linksSettled && urlQKind!=='code' && urlQKind!=='barcode'){   // /?q= 付きの題名: 別名（links.json）を待ってから1回で出す（上の LINKS_WAIT_MS）
+  count.textContent='Searching…';
+  linksWaitTimer=setTimeout(()=>{ linksWaitTimer=null; run({deep: true}); }, LINKS_WAIT_MS);   // 届かなければ別名なしで出す（届いたら上で検索し直す）
+} else run({deep: !!q.value.trim()});   // /?q= 付きで開いたときは待たずに探し直しと案内まで
 
 // ============================================================
 // Barcode scanner (camera). JAN(バーコード) -> showByJan.
