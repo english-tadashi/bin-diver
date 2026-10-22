@@ -2087,6 +2087,10 @@ const DATA = [["","真・三國無双8 ω-Force 20周年記念一騎当千box ω
 const $ = s => document.querySelector(s);
 function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function enc(s){return encodeURIComponent(s||'');}
+// Buyee のアフィリエイト（Indoleads のラッパ）。2026-10-23: offer 21236 が一時停止（ラッパが TVCMall に着地）なので空＝buyee.jp に直接。
+// ★再開したらここだけ戻す（値は tools/buyee_links.py の AFF）。記事側は tools/buyee_links.py --affiliate。
+const BUYEE_AFF='';
+function buyeeLink(u){return BUYEE_AFF?BUYEE_AFF+enc(u):u;}
 // SLPS-00533 / SLPS 00533 / slps00533 → すべて SLPS00533。表示用ではなく照合用の内部正規化。
 function codeKey(s){ return (s||'').normalize('NFKC').toUpperCase().replace(/[^A-Z0-9]/g,''); }
 
@@ -3677,7 +3681,7 @@ function card(r,idx){
   const kwCodeSg = enc(sgJan || sgFam || sgParen(sgPdash));   // sgPdash = sgBase から -P- を落とした値(上の定義。二重ハイフン行は素通り)
   // Buyee検索キー専用の日本語タイトル。「/」を半角スペースに置換する(2026-08-04)。
   // 理由: Buyee の検索はキーを URL の「パスの一部」に載せる形式(下の buyeeWrapped)。
-  //   enc() で / は %2F になり、さらに i0c ラッパの二重エンコードで %252F として出る。
+  //   enc() で / は %2F になり、さらにアフィリエイトのラッパ(BUYEE_AFF)の二重エンコードで %252F として出る。
   //   区切り文字がパス位置に入るため、ラッパのデコード後にパスとして解釈されうる。
   // 実測(2026-08-04・DATAに載る37,855行の全数集計): title_ja に / を持ち、配信専売(row[12])
   //   でもない＝実際にこのURLを吐く行は 189行(うち row[7] あり179 / なし10)。
@@ -3692,7 +3696,7 @@ function card(r,idx){
   const jpBuyee = jp.replace(/\//g, ' ').replace(/\s+/g, ' ').trim();   // 「/」を空白へ→連続空白を1個に畳む
   const kwBuyee = r[7] ? enc(jpBuyee + ' ' + r[7]) : '';   // 日本語タイトル(row[1]) + Buyeeキーワード(row[7])。空なら出さない
   const kwBuyeeFallback = r[7] ? '' : enc(jpBuyee);
-  const buyeeWrapped = (k=>k?("https://i0c.xyz/6a6994d1e0b3f?url="+enc("https://buyee.jp/item/search/query/"+k+"?lang=en")):'')(kwBuyee||kwBuyeeFallback);
+  const buyeeWrapped = (k=>k?buyeeLink("https://buyee.jp/item/search/query/"+k+"?lang=en"):'')(kwBuyee||kwBuyeeFallback);
   // 括弧内が「目録用語」に完全一致するときだけ除去。実測（2026-07-25・末尾括弧139行の全数測定）に基づく。
   // ★完全一致(Set.has)にする。部分一致の正規表現だと (ゲームボーイ) が「ゲーム」を含んで漏れ除去され、
   //   機種名を削ってしまうのを実測（[9610]TMNT・[32971]新SDガンダム外伝の2行）。だから Set 完全一致。
@@ -4067,7 +4071,7 @@ function zeroHelp(s, pf, pv, yv){
     h = P('We can\u2019t find this code.')
       + P('Check the product code on the spine or the back of the box, or search by the title.')
       + `<div class="zero-acts"><a class="zero-btn" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(w)}">Search Suruga-ya for this code</a>`
-      + `<a class="zero-btn" target="_blank" rel="sponsored nofollow noopener" href="${'https://i0c.xyz/6a6994d1e0b3f?url='+enc('https://buyee.jp/item/search/query/'+w+'?lang=en')}">Search Buyee for this code</a></div>`;
+      + `<a class="zero-btn" target="_blank" rel="sponsored nofollow noopener" href="${buyeeLink('https://buyee.jp/item/search/query/'+w+'?lang=en')}">Search Buyee for this code</a></div>`;
   } else if(k==='latin'){
     h = P('We list Japanese titles and official English titles.')
       + P('Try a shorter part of the name, or the Japanese title.')
