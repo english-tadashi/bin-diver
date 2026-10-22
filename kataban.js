@@ -222,3 +222,44 @@
     location.replace(PATHS[detected]);
   }
 })();
+
+/* ============================================================
+   ★Buyee メンテナンスのお知らせ（2026-10-23 追加・一時的）
+   Buyee が緊急メンテナンス中（脆弱性対応・再開時期未定）。記事の購入欄で、Buyee へのリンクを含む
+   段落の直後に1行だけお知らせを足す（記事の <html lang> に合わせて6言語）。
+   ★メンテ明けは BUYEE_MAINT を false にする（ここ1か所）。あわせて sw.js の VERSION を上げる:
+     kataban.js は Service Worker が cache-first（再検証なし）で持つので、上げないと再訪者に古い版
+     （お知らせが出る版）が残る。検索ツール本体（index.html）は別に BUYEE_MAINT を持つ。
+   ★記事の HTML には何も書かない。このスクリプトが読めない・古い版がキャッシュにある・エラーで止まる、の
+     どれでもリンクはそのまま（足すのは <p> 1つだけで、<a> には触らない）。
+   ============================================================ */
+(function () {
+  var BUYEE_MAINT = true;
+  if (!BUYEE_MAINT) return;
+  try {
+    var MSG = {
+      en: "Buyee is currently down for maintenance. Please try eBay or the other links.",
+      zh: "Buyee 目前正在維護中。也請試試 eBay 等其他連結。",
+      ko: "Buyee는 현재 점검 중입니다. eBay 등 다른 링크도 이용해 보세요.",
+      es: "Buyee está en mantenimiento en este momento. Prueba también eBay u otros enlaces.",
+      de: "Buyee wird derzeit gewartet. Bitte versuchen Sie es auch über eBay oder die anderen Links.",
+      fr: "Buyee est actuellement en maintenance. Essayez aussi eBay ou les autres liens."
+    };
+    var lang = (document.documentElement.getAttribute("lang") || "en").toLowerCase().slice(0, 2);
+    var msg = MSG[lang] || MSG.en;
+    // 直接リンク（buyee.jp）と、提携を戻したときのラッパ（url= に buyee.jp を包む）の両方を拾う
+    var as = document.querySelectorAll('a[href^="https://buyee.jp/"], a[href*="buyee.jp%2F"]');
+    var done = [];
+    for (var i = 0; i < as.length; i++) {
+      var block = as[i].closest("p, li, td, div");
+      if (!block || done.indexOf(block) !== -1) continue;
+      done.push(block);
+      var note = document.createElement("p");
+      note.className = "buyee-maint";
+      note.setAttribute("role", "note");
+      note.textContent = "⚠ " + msg;
+      note.style.cssText = "margin:.4em 0 1em;padding:.35em .7em;border-left:3px solid var(--rare,#dcdc00);color:var(--ink,inherit);font-size:.92em;";
+      block.parentNode.insertBefore(note, block.nextSibling);
+    }
+  } catch (e) { /* お知らせが出ないだけ。リンクには触れていない */ }
+})();

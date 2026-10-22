@@ -2091,6 +2091,12 @@ function enc(s){return encodeURIComponent(s||'');}
 // ★再開したらここだけ戻す（値は tools/buyee_links.py の AFF）。記事側は tools/buyee_links.py --affiliate。
 const BUYEE_AFF='';
 function buyeeLink(u){return BUYEE_AFF?BUYEE_AFF+enc(u):u;}
+// ★2026-10-23 Buyee の緊急メンテナンス（脆弱性対応・再開時期未定）のお知らせ。メンテ明けは false にする（ここ1か所。記事側は kataban.js の BUYEE_MAINT）。
+//   出るのは Buyee のボタンの下の1行だけ。リンクの生成（buyeeLink）には関わらない。言語は blogLang()（読めなければ英語）。
+const BUYEE_MAINT=true;
+const BUYEE_MAINT_MSG={en:'Buyee is currently down for maintenance. Please try eBay or the other links.',zh:'Buyee 目前正在維護中。也請試試 eBay 等其他連結。',ko:'Buyee는 현재 점검 중입니다. eBay 등 다른 링크도 이용해 보세요.',es:'Buyee está en mantenimiento en este momento. Prueba también eBay u otros enlaces.',de:'Buyee wird derzeit gewartet. Bitte versuchen Sie es auch über eBay oder die anderen Links.',fr:'Buyee est actuellement en maintenance. Essayez aussi eBay ou les autres liens.'};
+function buyeeMaintNote(){ if(!BUYEE_MAINT) return ''; let l='en'; try{ l=blogLang(); }catch(e){}
+  return `<div class="buyee-note buyee-maint" role="note" style="color:var(--rare)">&#9888; ${esc(BUYEE_MAINT_MSG[l]||BUYEE_MAINT_MSG.en)}</div>`; }
 // SLPS-00533 / SLPS 00533 / slps00533 → すべて SLPS00533。表示用ではなく照合用の内部正規化。
 function codeKey(s){ return (s||'').normalize('NFKC').toUpperCase().replace(/[^A-Z0-9]/g,''); }
 
@@ -3216,7 +3222,7 @@ function buyBlock(k){
         <div class="stores">
           ${k.buyeeWrapped?`<a class="${clsBuyee}" target="_blank" rel="sponsored nofollow noopener" href="${k.buyeeWrapped}">Buyee <span class="en">EN</span></a>`:''}
           ${k.kwEn?`<a class="store" target="_blank" rel="sponsored nofollow noopener" href="https://www.ebay.com/sch/i.html?_nkw=${k.kwEn}${k.ebayRegion||''}&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0&amp;campid=5339175838&amp;customid=&amp;toolid=10001&amp;mkevt=1">eBay <span class="en">EN</span></a>`:''}
-        </div>
+        </div>${k.buyeeWrapped?buyeeMaintNote():''}
         ${buyeeNote}
       </div>`;
 
@@ -4071,7 +4077,8 @@ function zeroHelp(s, pf, pv, yv){
     h = P('We can\u2019t find this code.')
       + P('Check the product code on the spine or the back of the box, or search by the title.')
       + `<div class="zero-acts"><a class="zero-btn" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(w)}">Search Suruga-ya for this code</a>`
-      + `<a class="zero-btn" target="_blank" rel="sponsored nofollow noopener" href="${buyeeLink('https://buyee.jp/item/search/query/'+w+'?lang=en')}">Search Buyee for this code</a></div>`;
+      + `<a class="zero-btn" target="_blank" rel="sponsored nofollow noopener" href="${buyeeLink('https://buyee.jp/item/search/query/'+w+'?lang=en')}">Search Buyee for this code</a></div>`
+      + buyeeMaintNote();
   } else if(k==='latin'){
     h = P('We list Japanese titles and official English titles.')
       + P('Try a shorter part of the name, or the Japanese title.')
