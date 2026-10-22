@@ -2095,8 +2095,11 @@ function buyeeLink(u){return BUYEE_AFF?BUYEE_AFF+enc(u):u;}
 //   出るのは Buyee のボタンの下の1行だけ。リンクの生成（buyeeLink）には関わらない。言語は blogLang()（読めなければ英語）。
 const BUYEE_MAINT=true;
 const BUYEE_MAINT_MSG={en:'Buyee is currently down for maintenance. Please try eBay or the other links.',zh:'Buyee 目前正在維護中。也請試試 eBay 等其他連結。',ko:'Buyee는 현재 점검 중입니다. eBay 등 다른 링크도 이용해 보세요.',es:'Buyee está en mantenimiento en este momento. Prueba también eBay u otros enlaces.',de:'Buyee wird derzeit gewartet. Bitte versuchen Sie es auch über eBay oder die anderen Links.',fr:'Buyee est actuellement en maintenance. Essayez aussi eBay ou les autres liens.'};
-function buyeeMaintNote(){ if(!BUYEE_MAINT) return ''; let l='en'; try{ l=blogLang(); }catch(e){}
-  return `<div class="buyee-note buyee-maint" role="note" style="color:var(--rare)">&#9888; ${esc(BUYEE_MAINT_MSG[l]||BUYEE_MAINT_MSG.en)}</div>`; }
+//   kw・region: 文中の「eBay」を eBay 検索のリンクにする（card の kwEbayMaint・ebayRegionMaint。0件の画面は探した型番）。kw が空ならリンクなし。
+function buyeeMaintNote(kw,region){ if(!BUYEE_MAINT) return ''; let l='en'; try{ l=blogLang(); }catch(e){}
+  const t=esc(BUYEE_MAINT_MSG[l]||BUYEE_MAINT_MSG.en);
+  const h=kw?t.replace('eBay',`<a class="note-link" target="_blank" rel="sponsored nofollow noopener" href="https://www.ebay.com/sch/i.html?_nkw=${kw}${region||''}&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0&amp;campid=5339175838&amp;customid=&amp;toolid=10001&amp;mkevt=1">eBay</a>`):t;
+  return `<div class="buyee-note buyee-maint" role="note" style="color:var(--rare)">&#9888; ${h}</div>`; }
 // SLPS-00533 / SLPS 00533 / slps00533 → すべて SLPS00533。表示用ではなく照合用の内部正規化。
 function codeKey(s){ return (s||'').normalize('NFKC').toUpperCase().replace(/[^A-Z0-9]/g,''); }
 
@@ -3222,7 +3225,7 @@ function buyBlock(k){
         <div class="stores">
           ${k.buyeeWrapped?`<a class="${clsBuyee}" target="_blank" rel="sponsored nofollow noopener" href="${k.buyeeWrapped}">Buyee <span class="en">EN</span></a>`:''}
           ${k.kwEn?`<a class="store" target="_blank" rel="sponsored nofollow noopener" href="https://www.ebay.com/sch/i.html?_nkw=${k.kwEn}${k.ebayRegion||''}&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0&amp;campid=5339175838&amp;customid=&amp;toolid=10001&amp;mkevt=1">eBay <span class="en">EN</span></a>`:''}
-        </div>${k.buyeeWrapped?buyeeMaintNote():''}
+        </div>${k.buyeeWrapped?buyeeMaintNote(k.kwEbayMaint,k.ebayRegionMaint):''}
         ${buyeeNote}
       </div>`;
 
@@ -3536,6 +3539,11 @@ function card(r,idx){
        Sega Saturn（日本専売タイトルの損失が -33〜-39% と大きい）。 */
   const ebayRegion = ((pf === 'PlayStation' || pf === 'PlayStation 2' || pf === 'GameCube') && kwEn)
     ? EBAY_REGION_NTSCJ : '';
+  // ★2026-10-23 Buyee メンテのお知らせの「eBay」リンク（buyeeMaintNote）。英題があれば eBay ボタンと同じ検索（kwEn・ebayRegion）、
+  //   英題が無い行は和題で同じ作り（accent・ebayOp・機種名・PS1/PS2/GC は NTSC-J）。メンテ明けに BUYEE_MAINT を false にすれば使われない。
+  const kwEbayMaint = kwEn || (jp ? enc(pfTerm ? ebayOp(accent(jp)) + ' ' + pfTerm : ebayOp(accent(jp))) : '');
+  const ebayRegionMaint = kwEn ? ebayRegion
+    : (((pf === 'PlayStation' || pf === 'PlayStation 2' || pf === 'GameCube') && kwEbayMaint) ? EBAY_REGION_NTSCJ : '');
   const kwCode = enc(codes[0]||'');  // first product code only — Suruga-ya "by code" comparison link
   // 駿河屋.com(英語・海外発送)の検索URL。英題(en)が空の行は '' にする＝buyBlock 側でリンクごと出ない。
   // ここで en を見るのは、DATA の生の英題を持っているのが card だけだから(buyBlock には k しか渡らない)。
@@ -3823,7 +3831,7 @@ function card(r,idx){
 
     ${/^\d{13}$/.test(r[10]||'') ? `<div class="rak-slot" data-jan="${r[10]}"></div>` : ''}
 
-    ${r[12]?`<span class="nodisc">No disc &middot; download</span>`:buyBlock({kwBuyee,kwBuyeeFallback,buyeeWrapped,kwEn,ebayRegion,kwCode,kwCodeSg,kwKana,kwKanaBo,kwName,kwKanaHard,codes,sgNoCode,sgComUrl})}
+    ${r[12]?`<span class="nodisc">No disc &middot; download</span>`:buyBlock({kwBuyee,kwBuyeeFallback,buyeeWrapped,kwEn,ebayRegion,kwEbayMaint,ebayRegionMaint,kwCode,kwCodeSg,kwKana,kwKanaBo,kwName,kwKanaHard,codes,sgNoCode,sgComUrl})}
 
 
 
@@ -4078,7 +4086,7 @@ function zeroHelp(s, pf, pv, yv){
       + P('Check the product code on the spine or the back of the box, or search by the title.')
       + `<div class="zero-acts"><a class="zero-btn" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(w)}">Search Suruga-ya for this code</a>`
       + `<a class="zero-btn" target="_blank" rel="sponsored nofollow noopener" href="${buyeeLink('https://buyee.jp/item/search/query/'+w+'?lang=en')}">Search Buyee for this code</a></div>`
-      + buyeeMaintNote();
+      + buyeeMaintNote(w,'');
   } else if(k==='latin'){
     h = P('We list Japanese titles and official English titles.')
       + P('Try a shorter part of the name, or the Japanese title.')

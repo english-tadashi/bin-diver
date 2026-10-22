@@ -230,6 +230,11 @@
    ★メンテ明けは BUYEE_MAINT を false にする（ここ1か所）。あわせて sw.js の VERSION を上げる:
      kataban.js は Service Worker が cache-first（再検証なし）で持つので、上げないと再訪者に古い版
      （お知らせが出る版）が残る。検索ツール本体（index.html）は別に BUYEE_MAINT を持つ。
+   ★文中の「eBay」は eBay 検索のリンクにする（2026-10-23 追加）。行き先は、同じ段落に eBay のリンクがあればその href。
+     無ければ直前の題名の行（<p><strong>英題</strong> · <span class="jp">和題</span> · 機種, 日付…）から
+     検索ツール本体（index.html の card の kwEn・ebayRegion）と同じ作りで組む: 英題（無ければ和題）を accent・ebayOp で畳み、
+     機種名を PLATFORM_EBAY の写しで足し、PS1/PS2/GameCube は NTSC-J で絞る。題名の行が見つからなければリンクなしの文。
+     ★PLATFORM_EBAY は index.html の表の写し（2026-10-23 時点）。お知らせを消すときに一緒に要らなくなる。
    ★記事の HTML には何も書かない。このスクリプトが読めない・古い版がキャッシュにある・エラーで止まる、の
      どれでもリンクはそのまま（足すのは <p> 1つだけで、<a> には触らない）。
    ============================================================ */
@@ -245,6 +250,48 @@
       de: "Buyee wird derzeit gewartet. Bitte versuchen Sie es auch über eBay oder die anderen Links.",
       fr: "Buyee est actuellement en maintenance. Essayez aussi eBay ou les autres liens."
     };
+    var PLATFORM_EBAY = {"PlayStation 2":"ps2","PlayStation 3":"ps3","PlayStation 4":"playstation 4","Sega Saturn":"sega saturn","Game Boy Advance":"game boy advance","Nintendo Switch":"nintendo switch","Dreamcast":"dreamcast","GameCube":"gamecube","PlayStation 5":"playstation 5","WonderSwan":"wonderswan","3DO":"3do","Game Gear":"game gear","Xbox 360":"xbox 360","Neo Geo CD":"neo geo cd","Neo Geo Pocket":"neo geo pocket","PC-FX":"pc-fx","Xbox One":"xbox one","Wii U":"wii u","Virtual Boy":"virtual boy","64DD":"64dd","Super Famicom":"super famicom","Famicom":"famicom","PC Engine":"pc engine","Mega Drive":"mega drive","Sega Mark III":"sega mark iii","PSP":"psp","Nintendo DS":"nintendo ds","PlayStation Vita":"playstation vita","Nintendo 3DS":"nintendo 3ds","Nintendo 64":"nintendo 64","PlayStation":"ps1","Wii":"wii","Game Boy":"gb","Neo Geo":"neo geo aes","Xbox":"xbox"};
+    var NTSCJ = { "PlayStation": 1, "PlayStation 2": 1, "GameCube": 1 };
+    var REGION = "&Region%2520Code=NTSC%252DJ%2520%2528Japan%2529&_dcat=139973";
+    var EPN = "&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339175838&customid=&toolid=10001&mkevt=1";
+    var accent = function (s) { return s.normalize("NFD").replace(/[̀-ͯ]/g, "").normalize("NFC"); };
+    var ebayOp = function (s) { return s.replace(/(^|\s)-+(?=\S)/g, "$1").replace(/"/g, ""); };
+    // 記事の機種名（"Neo Geo AES, 17 July 1992" の先頭）を表のキーに当てる。長いキーから前方一致（"PlayStation 2" を "PlayStation" より先に）
+    var KEYS = Object.keys(PLATFORM_EBAY).sort(function (a, b) { return b.length - a.length; });
+    function platformKey(t) {
+      t = (t || "").trim().toLowerCase();
+      for (var i = 0; i < KEYS.length; i++) {
+        var k = KEYS[i].toLowerCase();
+        if (t === k || (t.indexOf(k) === 0 && !/[a-z0-9]/.test(t.charAt(k.length)))) return KEYS[i];
+      }
+      return "";
+    }
+    // Buyee の段落の直前（4つ前まで）にある題名の行: 先頭が <strong>・和題の span.jp・「·」区切り
+    function titleLine(block) {
+      var el = block.tagName === "P" ? block : null;
+      for (var n = 0; el && n < 4; n++) {
+        el = el.previousElementSibling;
+        if (!el || el.tagName !== "P") return null;
+        var st = el.firstElementChild;
+        if (st && st.tagName === "STRONG" && el.querySelector("span.jp") && el.textContent.indexOf("·") !== -1 && !/[:：]\s*$/.test(st.textContent)) return el;
+      }
+      return null;
+    }
+    function ebayHref(block) {
+      var own = block.querySelector('a[href*="ebay.com/sch"]');
+      if (own) return own.getAttribute("href");
+      var line = titleLine(block);
+      if (!line) return "";
+      var st = line.firstElementChild, jpEl = line.querySelector("span.jp");
+      var en = (!st.querySelector(".jp") && /[A-Za-z]/.test(st.textContent)) ? st.textContent.trim() : "";
+      var ja = jpEl ? jpEl.textContent.trim() : "";
+      var t = en || ja;
+      if (!t) return "";
+      var parts = line.textContent.split("·");
+      var pk = platformKey((parts[2] || "").split(/[,，(（]/)[0]);
+      var q = ebayOp(accent(t)) + (pk ? " " + PLATFORM_EBAY[pk] : "");
+      return "https://www.ebay.com/sch/i.html?_nkw=" + encodeURIComponent(q) + (NTSCJ[pk] ? REGION : "") + EPN;
+    }
     var lang = (document.documentElement.getAttribute("lang") || "en").toLowerCase().slice(0, 2);
     var msg = MSG[lang] || MSG.en;
     // 直接リンク（buyee.jp）と、提携を戻したときのラッパ（url= に buyee.jp を包む）の両方を拾う
@@ -257,8 +304,19 @@
       var note = document.createElement("p");
       note.className = "buyee-maint";
       note.setAttribute("role", "note");
-      note.textContent = "⚠ " + msg;
       note.style.cssText = "margin:.4em 0 1em;padding:.35em .7em;border-left:3px solid var(--rare,#dcdc00);color:var(--ink,inherit);font-size:.92em;";
+      var href = "";
+      try { href = ebayHref(block); } catch (e) { href = ""; }
+      var cut = msg.indexOf("eBay");
+      if (href && cut !== -1) {
+        var a = document.createElement("a");
+        a.href = href; a.target = "_blank"; a.rel = "sponsored nofollow noopener"; a.textContent = "eBay";
+        note.appendChild(document.createTextNode("⚠ " + msg.slice(0, cut)));
+        note.appendChild(a);
+        note.appendChild(document.createTextNode(msg.slice(cut + 4)));
+      } else {
+        note.textContent = "⚠ " + msg;
+      }
       block.parentNode.insertBefore(note, block.nextSibling);
     }
   } catch (e) { /* お知らせが出ないだけ。リンクには触れていない */ }
