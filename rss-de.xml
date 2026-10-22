@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Ein Blog für Sammler außerhalb Japans, die japanische Retro-Spiele suchen — Shop-Guides, Import-Anleitungen und die Geschichten hinter den Titeln.</description>
     <language>de-de</language>
-    <lastBuildDate>Wed, 21 Oct 2026 08:03:45 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 22 Oct 2026 07:41:08 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-de.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Andro Dunos auf Neo Geo AES: Viscos Shoot ’em up von 1992 und seine dreißig Jahre ohne Nachfolger</title>
+      <link>https://gamekataban.com/blog/de/2026-10-23-andro-dunos-neo-geo-aes-ngh-049.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-10-23-andro-dunos-neo-geo-aes-ngh-049.html</guid>
+      <description>Viscos erstes Neo-Geo-Spiel kam am 17. Juli 1992 als NGH-049 in japanische Wohnzimmer, als eines von nur zwei Visco-Modulen für das AES. Was sein System aus vier Waffen kann, warum der Nachfolger dreißig Jahre brauchte und wie man das Modul von 1992 von der Neuauflage von 2020 unterscheidet.</description>
+      <pubDate>Fri, 23 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Tiger-Heli auf dem Famicom: Toaplans erster Shooter, sein Modul PNF-TH und der Nachfolger Kyukyoku Tiger</title>
       <link>https://gamekataban.com/blog/de/2026-10-22-tiger-heli-famicom-pnf-th.html</link>
