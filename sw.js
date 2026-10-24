@@ -25,7 +25,8 @@
        取れたらキャッシュも上書きする。オフラインのときだけ前回の中身に落ちる。
        版の定数は「SW 自身の作りを変えたときに全部を捨てる」ためのレバーとして残す。
    ============================================================ */
-const VERSION = 'v4c'; /* v4b→v4c (2026-10-23) kataban.js のお知らせの「eBay」を eBay 検索のリンクに（記事 HTML は変えていない）。
+const VERSION = 'v4d'; /* v4c→v4d (2026-10-25) Buyee のメンテ明け。kataban.js・index.html の BUYEE_MAINT を false に（お知らせを消す）。
+    v4b→v4c (2026-10-23) kataban.js のお知らせの「eBay」を eBay 検索のリンクに（記事 HTML は変えていない）。
     v4→v4b (2026-10-23) kataban.js に Buyee メンテナンスのお知らせ（BUYEE_MAINT）を足した。
                           kataban.js は下の (2) で cache-first なので、上げないと再訪者の記事に出ない。
                           メンテ明けに BUYEE_MAINT を false にしたときも、もう一度上げる（でないとお知らせが残る）。

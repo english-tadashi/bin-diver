@@ -2093,7 +2093,7 @@ const BUYEE_AFF='';
 function buyeeLink(u){return BUYEE_AFF?BUYEE_AFF+enc(u):u;}
 // ★2026-10-23 Buyee の緊急メンテナンス（脆弱性対応・再開時期未定）のお知らせ。メンテ明けは false にする（ここ1か所。記事側は kataban.js の BUYEE_MAINT）。
 //   出るのは Buyee のボタンの下の1行だけ。リンクの生成（buyeeLink）には関わらない。言語は blogLang()（読めなければ英語）。
-const BUYEE_MAINT=true;
+const BUYEE_MAINT=false;  // 2026-10-25 メンテ明け（Buyee 公式 10/24 再開）
 const BUYEE_MAINT_MSG={en:'Buyee is currently down for maintenance. Please try eBay or the other links.',zh:'Buyee 目前正在維護中。也請試試 eBay 等其他連結。',ko:'Buyee는 현재 점검 중입니다. eBay 등 다른 링크도 이용해 보세요.',es:'Buyee está en mantenimiento en este momento. Prueba también eBay u otros enlaces.',de:'Buyee wird derzeit gewartet. Bitte versuchen Sie es auch über eBay oder die anderen Links.',fr:'Buyee est actuellement en maintenance. Essayez aussi eBay ou les autres liens.'};
 //   kw・region: 文中の「eBay」を eBay 検索のリンクにする（card の kwEbayMaint・ebayRegionMaint。0件の画面は探した型番）。kw が空ならリンクなし。
 function buyeeMaintNote(kw,region){ if(!BUYEE_MAINT) return ''; let l='en'; try{ l=blogLang(); }catch(e){}

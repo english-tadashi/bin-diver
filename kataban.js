@@ -239,7 +239,7 @@
      どれでもリンクはそのまま（足すのは <p> 1つだけで、<a> には触らない）。
    ============================================================ */
 (function () {
-  var BUYEE_MAINT = true;
+  var BUYEE_MAINT = false;  // 2026-10-25 メンテ明け（Buyee 公式 10/24 再開）
   if (!BUYEE_MAINT) return;
   try {
     var MSG = {
