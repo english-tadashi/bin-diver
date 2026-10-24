@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog pour les collectionneurs à l'étranger en quête de jeux rétro japonais — guides boutiques, tutoriels d'importation, et les histoires derrière les titres.</description>
     <language>fr-fr</language>
-    <lastBuildDate>Fri, 23 Oct 2026 09:19:13 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 24 Oct 2026 07:06:02 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-fr.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Waku Waku 7 sur Neo Geo AES : le chiffre du titre n'est pas une suite, et il n'y en a jamais eu</title>
+      <link>https://gamekataban.com/blog/fr/2026-10-25-waku-waku-7-neo-geo-aes-ngh-225.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-10-25-waku-waku-7-neo-geo-aes-ngh-225.html</guid>
+      <description>Le 7 du titre n'est pas un numéro de suite, c'est le nombre de personnages jouables. Le jeu de combat de Sunsoft est arrivé dans les foyers japonais le 27 décembre 1996 sous le code NGH-225, et il y est resté : pas de cartouche américaine, un portage Saturn réservé au Japon, une version Neo Geo CD annulée.</description>
+      <pubDate>Sun, 25 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Phantasy Star Gaiden sur Game Gear : le spin-off que Sega n'a jamais exporté</title>
       <link>https://gamekataban.com/blog/fr/2026-10-24-phantasy-star-gaiden-game-gear-g-3405.html</link>
