@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Sat, 24 Oct 2026 07:06:01 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2026 07:25:46 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>GG Aleste en Game Gear: el shooter de Compile, y la ficha de la base de datos que pertenece a otro juego</title>
+      <link>https://gamekataban.com/blog/es/2026-10-26-gg-aleste-game-gear-t-66017.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-10-26-gg-aleste-game-gear-t-66017.html</guid>
+      <description>La única ficha de GG Aleste en la base de datos oficial de videojuegos de Japón lleva el código de producto y el código de barras de un cartucho completamente distinto de 1988. Aquí está el código real de Game Gear, confirmado por tres vías, y cómo buscar más allá de las dos secuelas que comparten su nombre.</description>
+      <pubDate>Mon, 26 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Waku Waku 7 en Neo Geo AES: el número del título no es una secuela, y nunca hubo ninguna</title>
       <link>https://gamekataban.com/blog/es/2026-10-25-waku-waku-7-neo-geo-aes-ngh-225.html</link>

@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>해외 컬렉터를 위한 일본 레트로 게임 블로그 — 매장 가이드, 수입 방법, 그리고 타이틀 뒤에 숨은 이야기.</description>
     <language>ko-kr</language>
-    <lastBuildDate>Sat, 24 Oct 2026 07:06:01 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2026 07:25:46 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-ko.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>GG 알레스타(Game Gear): 컴파일의 슈팅 게임, 그리고 다른 게임의 데이터를 담은 항목</title>
+      <link>https://gamekataban.com/blog/ko/2026-10-26-gg-aleste-game-gear-t-66017.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-10-26-gg-aleste-game-gear-t-66017.html</guid>
+      <description>일본 공식 게임 데이터베이스에 실린 《GG 알레스타》 유일한 항목의 상품 코드와 바코드는 실은 전혀 다른 1988년작 카트리지의 것입니다. 세 출처로 확인한 진짜 Game Gear 코드와, 이름이 같은 두 속편 사이에서 정확한 검색법을 정리했습니다.</description>
+      <pubDate>Mon, 26 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>《와쿠와쿠 7》: 제목의 숫자는 속편 번호가 아니고, 속편도 없었다</title>
       <link>https://gamekataban.com/blog/ko/2026-10-25-waku-waku-7-neo-geo-aes-ngh-225.html</link>
