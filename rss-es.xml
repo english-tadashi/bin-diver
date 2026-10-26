@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Sun, 25 Oct 2026 07:25:46 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2026 20:21:19 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Enemy Zero en Sega Saturn: el terror de alienígenas invisibles de Kenji Eno en cuatro discos y cómo distinguir T-30001G del resto</title>
+      <link>https://gamekataban.com/blog/es/2026-10-27-enemy-zero-sega-saturn-t-30001g.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-10-27-enemy-zero-sega-saturn-t-30001g.html</guid>
+      <description>El juego de terror de Warp para Saturn de 1996 esconde a sus alienígenas y te obliga a cazarlos por el sonido. La edición japonesa en cuatro discos es T-30001G; la reedición económica es T-30004G, y las versiones occidentales de Sega y la de Windows comparten el nombre. Cómo distinguirlas.</description>
+      <pubDate>Tue, 27 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>GG Aleste en Game Gear: el shooter de Compile, y la ficha de la base de datos que pertenece a otro juego</title>
       <link>https://gamekataban.com/blog/es/2026-10-26-gg-aleste-game-gear-t-66017.html</link>
