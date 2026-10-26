@@ -25,11 +25,11 @@
        取れたらキャッシュも上書きする。オフラインのときだけ前回の中身に落ちる。
        版の定数は「SW 自身の作りを変えたときに全部を捨てる」ためのレバーとして残す。
    ============================================================ */
-const VERSION = 'v4d'; /* v4c→v4d (2026-10-25) Buyee のメンテ明け。kataban.js・index.html の BUYEE_MAINT を false に（お知らせを消す）。
-    v4b→v4c (2026-10-23) kataban.js のお知らせの「eBay」を eBay 検索のリンクに（記事 HTML は変えていない）。
-    v4→v4b (2026-10-23) kataban.js に Buyee メンテナンスのお知らせ（BUYEE_MAINT）を足した。
-                          kataban.js は下の (2) で cache-first なので、上げないと再訪者の記事に出ない。
-                          メンテ明けに BUYEE_MAINT を false にしたときも、もう一度上げる（でないとお知らせが残る）。
+const VERSION = 'v5';  /* v4→v5 (2026-10-19・data-split) DATA を index.html の外（catalog/）へ。manifest は network-first、
+                          catalog-<md5>.json・jan-<md5>.json は cache-first（名前に md5）で install のときに入れる。
+                          manifest が変わったら、そこに無い catalog・jan を消す。
+                          ★main では 10/23〜10/25 に v4b・v4c・v4d（Buyee メンテのお知らせとメンテ明け）を出した。v5 はそのどれとも違う名前なので、
+                          入れ替わりで全部捨てる（kataban.js も取り直す）。中身（BUYEE_MAINT=false）は data-split 側にも入っている。
     v3→v4 (2026-08-22) ★★★を白・16pxに変更（kataban.css のみの差分）。
                           kataban.css / kataban.js は cache-first（再検証なし）なので、
                           上げないと再訪者に「新しいHTML＋古いCSS/JS」が組み合わさり、
@@ -51,6 +51,21 @@ const PRECACHE_CRITICAL = [SHELL];
      落ちて困るもの（PRECACHE_CRITICAL）には入れない。1回目に取れたときに拾う。
    ★相対パス（SHELL と同じ理由）。 */
 const LINKS = './blog/links.json';
+
+/* 検索ツールのカタログ（2026-10-19・data-split）。manifest.json が今の catalog-<md5>.json・jan-<md5>.json・index-<md5>.json（検索の索引）の名前を持つ。
+   ★manifest は (1c) で network-first（LINKS と同じ）。catalog・jan は名前に md5 が入っているので (2) の cache-first でよい。
+   ★install で manifest → catalog・jan を入れる（1回目の訪問はまだこの SW の管理下に無く、ページが読んだ分はキャッシュに入らないため）。
+     落ちても install は失敗させない（オンラインなら次に開いたときにページが取りに行く）。
+   ★manifest を取り直して名前が変わっていたら、キャッシュの中の古い catalog-*.json・jan-*.json を消す（9MB を溜めない）。 */
+const CATALOG_DIR = './catalog/';
+const MANIFEST = CATALOG_DIR + 'manifest.json';
+async function cacheCatalog(cache, m, add){   // add=false: 古いものを消すだけ（ページが今まさに取りに行くので二重に落とさない）
+  const keep = new Set([m.catalog, m.jan, m.index].filter(Boolean).map(n => new URL(CATALOG_DIR + n, self.location).href));
+  for (const k of await cache.keys()) {
+    if (/\/catalog\/(catalog|jan|index)-[0-9a-f]+\.json$/.test(new URL(k.url).pathname) && !keep.has(k.url)) await cache.delete(k);
+  }
+  if (add) for (const u of keep) { if (!(await cache.match(u))) await cache.add(u).catch(() => {}); }
+}
 
 /* あると嬉しいが、無くてもページは出るもの（アイコン類）。
    ★individually に put して個別に catch する。addAll に混ぜると、1つ消えただけで
@@ -89,6 +104,10 @@ self.addEventListener('install', event => {
     await Promise.all(PRECACHE_OPTIONAL.map(u =>                 // ここは1件ずつ・失敗は握りつぶす
       cache.add(u).catch(() => {})
     ));
+    try {                                                        // カタログ（2026-10-19）。失敗しても install は通す
+      const r = await fetch(MANIFEST, { cache: 'no-cache' });
+      if (r.ok) { await cache.put(MANIFEST, r.clone()); await cacheCatalog(cache, await r.json(), true); }
+    } catch (e) {}
     // 待機せず次の版へ入れ替える。資産が index.html 1枚に閉じているので、
     // 「古いページが新しい部品を読む」という取り合わせが起こりえない。
     await self.skipWaiting();
@@ -160,6 +179,26 @@ self.addEventListener('fetch', event => {
     })());
     return;
   }
+  // (1c) /catalog/manifest.json = network-first（2026-10-19）。DATA を差し替えるたびに中身（ファイル名）が変わる。
+  //      取れたら保存し、名前が変わっていれば古い catalog・jan をキャッシュから消す（新しい方はページが取りに行き (2) で入る）。
+  if (url.origin === self.location.origin && url.pathname === new URL(MANIFEST, self.location).pathname) {
+    event.respondWith((async () => {
+      try {
+        const res = await fetch(req);
+        if (res && res.ok) {
+          const copy = res.clone(), body = res.clone();
+          event.waitUntil(caches.open(CACHE).then(async c => { await c.put(MANIFEST, copy); try { await cacheCatalog(c, await body.json(), false); } catch (e) {} }));
+        }
+        return res;
+      } catch (e) {
+        const hit = await caches.match(MANIFEST);
+        if (hit) return hit;
+        throw e;
+      }
+    })());
+    return;
+  }
+
   // (2) 同一オリジンのその他 = cache-first。アイコンなど、変わらないものだけが来る。
   if (url.origin === self.location.origin) {
     event.respondWith((async () => {
