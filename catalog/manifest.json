@@ -1,12 +1,16 @@
 {
- "catalog": "catalog-7d8134e8.json",
- "jan": "jan-064df4a9.json",
+ "catalog": "catalog-1879695a.json",
+ "jan": "jan-d59e2d3b.json",
  "rows": 37853,
  "cols": 14,
- "md5": "7d8134e86340baab024bf802a5dec796",
- "jan_md5": "064df4a97198530e57bdb84813a35fd7",
+ "md5": "1879695a396f8ec958a0972ce2d44b9b",
+ "jan_md5": "d59e2d3bd9b4ed0aad2df2775cbb536f",
  "jan_keys": 17421,
- "index": "index-5dc9bf6f.json",
- "index_md5": "5dc9bf6fc68a2cafe18309b58b6f853e",
- "fold_md5": "134c2f0f4130009eb01bebfc9dd42941"
+ "index": "index-c776aca7.json",
+ "index_md5": "c776aca74b3b00f3caa5eac7547fc038",
+ "fold_md5": "b704c1eb4db43c59e7177d0995e9290f",
+ "loan": "loan-5015a0d7.json",
+ "loan_rows": 8611,
+ "janx": "janx-4a97f151",
+ "janx_keys": 8635
 }

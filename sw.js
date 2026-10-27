@@ -60,9 +60,13 @@ const LINKS = './blog/links.json';
 const CATALOG_DIR = './catalog/';
 const MANIFEST = CATALOG_DIR + 'manifest.json';
 async function cacheCatalog(cache, m, add){   // add=false: 古いものを消すだけ（ページが今まさに取りに行くので二重に落とさない）
-  const keep = new Set([m.catalog, m.jan, m.index].filter(Boolean).map(n => new URL(CATALOG_DIR + n, self.location).href));
+  // 2026-10-27: loan-<md5>.json（外来語の英訳・約70KB）も同じ扱い（install で入れ、名前が変われば古いものを消す）。
+  const keep = new Set([m.catalog, m.jan, m.index, m.loan].filter(Boolean).map(n => new URL(CATALOG_DIR + n, self.location).href));
   for (const k of await cache.keys()) {
-    if (/\/catalog\/(catalog|jan|index)-[0-9a-f]+\.json$/.test(new URL(k.url).pathname) && !keep.has(k.url)) await cache.delete(k);
+    const pth = new URL(k.url).pathname;
+    if (/\/catalog\/(catalog|jan|index|loan)-[0-9a-f]+\.json$/.test(pth) && !keep.has(k.url)) await cache.delete(k);
+    // 2026-10-27: 簡易カード用の catalog/janx-<md5>/NN.json（読めた番号の1本だけ取る・install では入れない）。今の janx 以外は消す
+    else if (/\/catalog\/janx-[0-9a-f]+\//.test(pth) && !(m.janx && pth.indexOf('/catalog/' + m.janx + '/') >= 0)) await cache.delete(k);
   }
   if (add) for (const u of keep) { if (!(await cache.match(u))) await cache.add(u).catch(() => {}); }
 }

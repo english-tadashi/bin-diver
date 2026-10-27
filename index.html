@@ -55,8 +55,9 @@
 window.KB_SHOP=(function(){
   function enc(s){return encodeURIComponent(s||'');}
   // Buyee のアフィリエイト（Indoleads のラッパ）。2026-10-23: offer 21236 が一時停止（ラッパが TVCMall に着地）なので空＝buyee.jp に直接。
-  // ★再開したらここだけ戻す（値は tools/buyee_links.py の AFF）。記事側は tools/buyee_links.py --affiliate。
-  const BUYEE_AFF='';
+  // 2026-10-27: 再開の連絡を受け、i0c.xyz → io20.info → buyee.jp（検索語そのまま・rc=Aff-IL-01_Indoleads_affiliate）に着くのを確かめて戻した。
+  // ★また止まったらここを空にする（記事側は tools/buyee_links.py --direct）。値は tools/buyee_links.py の AFF と同じ。
+  const BUYEE_AFF='https://i0c.xyz/6a6994d1e0b3f?url=';
   const buyeeLink=u=>BUYEE_AFF?BUYEE_AFF+enc(u):u;
   // ★2026-10-23 Buyee の緊急メンテナンス（脆弱性対応・再開時期未定）のお知らせ。メンテ明けは false にする（ここ1か所。記事側は kataban.js の BUYEE_MAINT）。
   //   出るのは Buyee のボタンの下の1行だけ。リンクの生成（buyeeLink）には関わらない。言語は blogLang()（読めなければ英語）。
@@ -510,6 +511,18 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 /* ローマ字読み。黄(--rare)から白へ。直書きは .card .status / .card .spec .v と同じ慣習
    （カードに白系トークンは無く、--ink #c9c3e0 は白ではない）。カード面 #0f0a1c に 19.4:1。 */
 .card .romaji{font:400 17px/1.3 var(--f-mono); color:#ffffff; letter-spacing:.01em;}
+/* 英題が無いカードの見出し（2026-10-27 試作・案③）。英題の席に置くが、公式英題と取り違えないよう
+   1段小さく・ラベルで「非公式」と言う。分かち書きの無い長い語（gureetobokushingu 等・約1,050行）が
+   375px で横にはみ出さないよう、語の途中でも折る。 */
+.card .ro-title{font-size:22px; overflow-wrap:anywhere;}
+.card .micro .ro-note{color:var(--faint); opacity:.8;}
+/* 2026-10-27: 英題が無いカードの2つのラベル（Romanized… と Loanwords…）は 375px でも読める大きさ・濃さにする。
+   ほかの .micro.plain（10px・--faint）より大きく・濃く（--ink-2 #a9a2c6 はカード面 #0f0a1c に約8:1）。見出し・訳語よりは小さく保つ＝ラベルだと分かる。 */
+.card .micro.ro-k, .card .micro.ro-k .ro-note{font-size:12.5px; line-height:1.35; color:var(--ink-2); opacity:1;}
+/* 外来語の語ごとの英訳（2026-10-27）。題名と取り違えないよう、見出しより小さい等幅・小文字・中黒区切り・ラベル付き。 */
+.card .loan-gloss{display:flex; flex-direction:column; gap:3px; margin-top:4px;}
+.card .loan-gloss .lg-k{font:400 12.5px/1.35 var(--f-mono); color:var(--ink-2); letter-spacing:.01em;}
+.card .loan-gloss .lg-v{font:400 16px/1.35 var(--f-mono); color:var(--ink); overflow-wrap:anywhere;}
 .card .no-code-notice{font:400 17px/1.3 var(--f-mono); color:#ff8fd8; letter-spacing:.01em;}
 .card .part{font:500 12px/1.3 var(--f-mono); color:var(--signal-deep); letter-spacing:.01em;}
 
@@ -2203,6 +2216,7 @@ header .lede .lede-sub{ font-weight:400; }
 
   <footer>
     Kataban · 37,855 entries from the Agency for Cultural Affairs Media Arts Database. 10,296 carry official product codes; 13,487 have English titles. English titles matched from Wikidata (CC0).
+    <br>Loanword hints on cards without an English title use <a href="https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project" target="_blank" rel="noopener">JMdict</a> (JMdict_e, 2026-10-26) by the <a href="https://www.edrdg.org/" target="_blank" rel="noopener">Electronic Dictionary Research and Development Group</a>, under <a href="https://www.edrdg.org/edrdg/licence.html" target="_blank" rel="noopener">its licence</a> (<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>). Our katakana-to-English word list is shared under the same licence: <a href="/catalog/loanwords-jmdict.tsv">loanwords-jmdict.tsv</a>.
     <br>Some links and product images on this page are affiliate links, and Kataban may earn a commission, including as an eBay Partner Network affiliate (PR). &middot; <a href="https://webservice.rakuten.co.jp/" target="_blank" rel="noopener">Supported by Rakuten Developers</a>
     <br>"Typical used price (Rakuten)" is a median of used Rakuten listings only — a rough guide, not a live price. Other stores may differ.
     <br><a href="/privacy.html">Privacy</a>
@@ -2275,6 +2289,7 @@ header .lede .lede-sub{ font-weight:400; }
   // 読めた番号の案内。DATA が読み込み済みなら（別の <script> の const DATA は後から名前で見える）題名を先に出す。カードは本体が出す。
   E.say=function(){
     var j=String(E.code||'').replace(/\D/g,''); if(!j || E.adopted) return;
+    janx(j);
     // 2026-10-19（data-split）: 先に jan ファイル（JAN→[[題名, 機種]]）、無ければ読み込み済みの DATA を見る。
     var hit=null;
     if(E.jan){ var v=E.jan[j]; if(v && v.length){ quick(j, v); openGate(); return; } miss(j); openGate(); return; }
@@ -2294,13 +2309,28 @@ header .lede .lede-sub{ font-weight:400; }
     var f=document.getElementById('scanCode'); if(f){ try{ f.scrollIntoView({block:'nearest'}); }catch(e){} }
   }
   function esc(s){ return String(s||'').replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  // 簡易カードのローマ字見出しと英訳（2026-10-27）: jan ファイルには入れず（読み取りの最初の読み込みを重くしない）、
+  //   catalog/janx-<md5>/<JANの下2桁>.json（数KB）を、番号が読めた時点で取りに行く。届いたら簡易カードを描き直す（届かなければ出ないだけ）。
+  //   中身は {JAN: [[ローマ字見出し, 英訳] か 0, …]}（jan の行と同じ順）。表示の形は catalog_io が本体の romajiFor・romajiShow と同じ式で作ってある。
+  function janx(j){
+    if(E.xj===j) return; E.xj=j; E.x=null;
+    if(!(C0 && C0.manifest)) return;
+    C0.manifest.then(function(m){ return m.janx ? fetch('/catalog/'+m.janx+'/'+j.slice(-2)+'.json').then(function(r){ return r.ok ? r.json() : null; }) : null; })
+      .then(function(t){ var x=t && t[j]; if(!x || E.xj!==j) return; E.x=x; if(E.quick && !E.adopted && E.qj===j) paintQuick(j, E.qlist); }).catch(function(){});
+  }
   function quick(j, list){
     if(E.adopted || E.quick) return;
-    E.quick=true; E.stopped=true;
-    var res=document.getElementById('results'), cnt=document.getElementById('count');
+    E.quick=true; E.stopped=true; E.qj=j; E.qlist=list;
+    paintQuick(j, list);
+    if(E.stream) E.stream.getTracks().forEach(function(t){ t.stop(); });
+    vid.srcObject=null; ov.classList.add('quick');
+    msg.textContent='Barcode match — loading prices and shop details…';
+  }
+  function paintQuick(j, list){
+    var X=(E.xj===j && E.x) || [];
     var html=list.map(function(v, n){
       var r=[v[0]||'', v[1]||'', v[2]||'', v[3]||'', v[4]||'', '', '', v[5]||'', v[6]||'', '', j];
-      var k=KB_SHOP.keys(r), en=r[0], jp=r[1]||r[0];
+      var k=KB_SHOP.keys(r), en=r[0], jp=r[1]||r[0], x=(!en && X[n]) || null, xk=(en && X[n] && X[n][2]) || '';   // xk: 英題の欄の値の種類（本体の EN_KIND と同じ r・p・f）
       var code=k.codes.map(esc).join('<span class="sep">&nbsp;&middot;</span> ');
       var sg = (k.codes.length && !k.sgNoCode)
         ? '<a class="store" target="_blank" rel="sponsored nofollow noopener" href="'+KB_SHOP.sgAf(k.kwCodeSg)+'">Suruga-ya.jp (code)</a>'
@@ -2310,7 +2340,11 @@ header .lede .lede-sub{ font-weight:400; }
         +'<div class="status is-scan"><span class="dot"></span><span class="status-txt">Barcode match &middot; Japan / NTSC-J</span></div>'
         +'<div class="specs">'+(r[2]?'<div class="spec"><span class="micro">Console</span><span class="v jp">'+esc(r[2])+'</span></div>':'')
         +(r[4]?'<div class="spec"><span class="micro">Released</span><span class="v">'+esc(r[4])+'</span></div>':'')+'</div>'
-        +'<div class="identity">'+(en?'<div class="field"><span class="micro plain">English</span><div class="title-row"><div class="en-title">'+esc(en)+'</div></div></div>':'')
+        +'<div class="identity">'+(en?'<div class="field">'+(xk==='r'?'<span class="micro plain ro-k">Romanized <span class="ro-note">&middot; no official English title</span></span>'
+            :xk?'<span class="micro plain ro-k">Unofficial English name <span class="ro-note">&middot; '+(xk==='p'?'used later by the publisher; never released in English':'fan name')+'</span></span>'
+            :'<span class="micro plain">English</span>')+'<div class="title-row"><div class="en-title'+(xk==='r'?' ro-title" lang="ja-Latn':'')+'">'+esc(en)+'</div></div></div>':'')
+        +((x && (x[0]||x[1]))?'<div class="field">'+(x[0]?'<span class="micro plain ro-k">Romanized <span class="ro-note">&middot; no official English title</span></span><div class="title-row"><div class="en-title ro-title" lang="ja-Latn">'+esc(x[0])+'</div></div>':'')
+          +(x[1]?'<div class="loan-gloss"><span class="lg-k">Loanwords, word by word &middot; not a title</span><span class="lg-v">'+esc(x[1])+'</span></div>':'')+'</div>':'')
         +'<div class="field"><span class="micro plain">Japanese title</span><div class="title-row"><div class="ja-title">'+esc(jp)+'</div></div></div></div>'
         +(code?'<div class="field"><span class="micro plain">Product code &middot; exact match</span><div class="jp-copy-row"><div class="jp-chip"><span class="code">'+code+'</span></div></div></div>':'')
         +'<div class="group"><div class="group-label"><span class="n">Buy this game</span><span class="d">Some store links are affiliate links (PR).</span></div><div class="stores">'+by+sg+'</div></div>'
@@ -2321,10 +2355,7 @@ header .lede .lede-sub{ font-weight:400; }
     // 本体が動いたら showByJan() が #results にふつうのカードを描き、closeScan() が画面を閉じてページを出す。
     E.quickHtml=html; E.quickCount=list.length+' result'+(list.length>1?'s':'')+' · barcode';
     var q=document.getElementById('scanQuick'); if(q) q.innerHTML=html;
-    if(E.stream) E.stream.getTracks().forEach(function(t){ t.stop(); });
-    vid.srcObject=null; ov.classList.add('quick');
-    msg.textContent='Barcode match — loading prices and shop details…';
-  };
+  }
   function start(){
     if(E.started || E.adopted) return; E.started=true;
     startBtn.hidden=true; msg.textContent='Starting camera… (catalog loading)';
@@ -2639,6 +2670,28 @@ const rj5Row = r => romaFold(r[9]||'');
 // 型番を正規化して行ごとに保持（';'区切りは分けて全部）。現物どおり（ハイフン/スペース）打っても照合できるようにする。
 const CODEKEYS = [];   // buildSearchIndex()（式は codeKeysRow）
 const codeKeysRow = r => r[3].split(';').map(codeKey).filter(Boolean);
+// 第6レーン（2026-10-27）: 外来語のローマ字（taigaaheri）を英語の綴り（Tiger Heli）で引く。
+// 英題が無い行（全体の57%）は、英語で打つと row[9] のローマ字にしか当たらず、外来語はカナ読みの綴り（taigaa・suupaa）なので外れていた
+// （GA4 の書き出しの後の調査: Kyukyoku Tiger Heli が0件）。両方を「子音の骨格」に畳んで照合する:
+//   英語側（en）は非 r 音化（tiger→tige）・ph/gh/ck/th/c/x/q の読み替え・母音の y を消す。両側で l→r・v→b・f→h・z→s・j→g・dg→g、
+//   母音を消し、同じ字の重なりを1つに。Tiger Heli も taigaaheri も tghr。
+// ★クエリが英字だけで骨格が6字以上のときだけ。ほかの5レーンで外れた行にだけ試す（既存のヒットは減らない・並びは段5＝最後）。
+// ★照合は行のローマ字の語の始まりからだけ（語の途中から当たると乱射した: Shatterhand が kanshuu the unou に当たっていた）。
+// 試算（英題とローマ字の両方がある行から3,000件・英題で引く）: 自分の行が出るのが 788→1,100。新たに当たる語の件数は中央値3・90%で13。
+// 誤ヒットの例: Street Fighter→Stellar☆Theater、Guardian Heroes→戦国BASARA 英雄外伝（HEROES）、Blue Stinger→BLASTING AGENT。
+const skelWord = (w, en) => {
+  if(en){
+    w = w.replace(/ph/g,'f').replace(/gh/g,'').replace(/ck/g,'k').replace(/qu/g,'kw').replace(/th/g,'s').replace(/wh/g,'w');
+    w = w.replace(/c(?=[eiy])/g,'s').replace(/c/g,'k').replace(/x/g,'ks').replace(/q/g,'k');
+    w = w.replace(/(?<=[aeiouy])r(?![aeiou])/g,'');   // 非 r 音化: tiger→tige、fighters→fightes
+    w = w.replace(/y(?![aeiou])/g,'');                // 母音の y（story）
+  }
+  w = w.replace(/l/g,'r').replace(/v/g,'b').replace(/f/g,'h').replace(/z/g,'s').replace(/j/g,'g').replace(/dg/g,'g');
+  return w.replace(/[aeiou]/g,'').replace(/(.)\1+/g,'$1');
+};
+const skel = (s, en) => fold(accent(s)).split(' ').filter(w => /^[a-z0-9]+$/.test(w)).map(w => skelWord(w, en)).join('');
+const RJ6 = [];   // buildSearchIndex()（式は rj6Row）。語ごとの骨格を空白で区切った列
+const rj6Row = r => fold(r[9]||'').split(' ').filter(w => /^[a-z0-9]+$/.test(w)).map(w => skelWord(w, false)).join(' ');
 // @search-formula-end
 /* ============================================================
    検索の索引づくり（2026-10-19・data-split）。以前は読み込み時に全行で作っていて、4倍遅い CPU で13〜15秒ページが止まっていた。
@@ -2685,7 +2738,7 @@ function buildSearchIndex(){
   const fill=ix=>{
     const m=window.KB_CATALOG||{};
     if(!ix || ix.v!==1 || ix.catalog_md5!==m.md5 || ix.fold_md5!==m.fold_md5 || ix.rows!==n
-       || !Array.isArray(ix.hay) || ix.hay.length!==n || ix.hay4.length!==n || ix.rj.length!==n || ix.rj5.length!==n || ix.ck.length!==n) return false;
+       || !Array.isArray(ix.hay) || ix.hay.length!==n || !Array.isArray(ix.rj6) || ix.rj6.length!==n || ix.hay4.length!==n || ix.rj.length!==n || ix.rj5.length!==n || ix.ck.length!==n) return false;
     // 見本の照合（2026-10-19）: 索引は node の Unicode の表で作ってある。このブラウザ（特に iPhone の Safari）で同じ式を見本の行に掛け、
     //   一字でも違えば索引は使わず自分で作る（検索語はこのブラウザで畳むので、索引も同じブラウザの畳み方でないと当たらない）。
     //   見本 ＝ 等間隔 200 行＋ラテン・かな・漢字以外の字を含む行 200 行（tools/build_search_index.mjs の probe）と PLAT_TERMS の全語。
@@ -2694,13 +2747,13 @@ function buildSearchIndex(){
     for(let j=0;j<pr.rows.length;j++){
       const k=pr.rows[j], r=DATA[k];
       if(!r || hayRow(r)!==ix.hay[k] || hay4Row(r)!==ix.hay4[k] || rjRow(r)!==ix.rj[k] || rj5Row(r)!==ix.rj5[k]
-         || codeKeysRow(r).join('\n')!==ix.ck[k].join('\n') || strong(r[0]||'')!==pr.strong[j][0] || strong(r[1]||'')!==pr.strong[j][1]){
+         || codeKeysRow(r).join('\n')!==ix.ck[k].join('\n') || rj6Row(r)!==ix.rj6[k] || strong(r[0]||'')!==pr.strong[j][0] || strong(r[1]||'')!==pr.strong[j][1]){
         indexProbe='mismatch row '+k; return false;
       }
     }
     for(let j=0;j<ix.plat_terms.length;j++) if(fold(accent(pr.plat_src[j]||''))!==ix.plat_terms[j][0]){ indexProbe='mismatch plat '+j; return false; }
     indexProbe='ok '+pr.rows.length+' rows';
-    for(let k=0;k<n;k++){ HAY[k]=ix.hay[k]; HAY4[k]=ix.hay4[k]; RJ[k]=ix.rj[k]; RJ5[k]=ix.rj5[k]; CODEKEYS[k]=ix.ck[k]; }
+    for(let k=0;k<n;k++){ HAY[k]=ix.hay[k]; HAY4[k]=ix.hay4[k]; RJ[k]=ix.rj[k]; RJ5[k]=ix.rj5[k]; RJ6[k]=ix.rj6[k]; CODEKEYS[k]=ix.ck[k]; }
     for(const k of ix.ambig) AMBIG_EN.add(k);
     for(const p of ix.plat_terms) PLAT_TERMS.push(p);
     ambigMap.clear(); platTermsMap.clear();
@@ -2708,7 +2761,7 @@ function buildSearchIndex(){
   };
   const step=()=>{
     const end=Math.min(n,i+STEP);
-    for(;i<end;i++){ const r=DATA[i]; HAY[i]=hayRow(r); HAY4[i]=hay4Row(r); RJ[i]=rjRow(r); RJ5[i]=rj5Row(r); CODEKEYS[i]=codeKeysRow(r); ambigAdd(r); platTermsAdd(r); }
+    for(;i<end;i++){ const r=DATA[i]; HAY[i]=hayRow(r); HAY4[i]=hay4Row(r); RJ[i]=rjRow(r); RJ5[i]=rj5Row(r); RJ6[i]=rj6Row(r); CODEKEYS[i]=codeKeysRow(r); ambigAdd(r); platTermsAdd(r); }
     if(i<n){ setTimeout(step,0); return; }
     ambigFinish(); platTermsFinish();
     finish();
@@ -3036,6 +3089,15 @@ function romajiFor(r){
   const romaji = (r[9] && (jaLatin || /[぀-ヿ㐀-鿿]/.test(jpMain))
     && codeKey(r[9]) !== codeKey(jpMain) && codeKey(r[9]) !== codeKey(en)) ? r[9] : '';
   return romaji;
+}
+
+/* ローマ字読みの見せ方（2026-10-27 試作・案③）。row[9] は全部小文字の分かち書きなので、
+   海外の読み手が「題名」と読めるよう語頭だけ大文字にする。助詞は小文字のまま（Shin Sangoku Musou / Ao no Exorcist 型）。
+   ★大文字・記号・数字で始まる語（AO・GAME・DS・2016・×）には触れない。中身の綴り（長音の uu・aa 等）も変えない
+     ＝検索（fold で小文字化）にも、駿河屋・Buyee の検索語にも影響しない。 */
+const RO_PARTICLES = new Set(['no','to','wa','ga','ni','de','e','o','wo','ya','mo','ka','yo','ne','eno','kara','made']);
+function romajiShow(s){
+  return s.split(' ').map((w,i)=> (/^[a-z]/.test(w) && (i===0 || !RO_PARTICLES.has(w))) ? w[0].toUpperCase()+w.slice(1) : w).join(' ');
 }
 
 /* 位置トグルの状態。'out'=海外在住（初期） / 'jp'=日本の店頭。
@@ -3805,6 +3867,30 @@ function buyBlock(k){
    ★キーは DATA の機種(row[2]) + タブ + 和題(row[1])。DATA 自体には何も足さない（DATA 行の md5 は変わらない）。
    ★行き先の言語: ブログで選んだ言語(kataban_blog_lang) → ブラウザの言語 → 英語（kataban.js と同じ判定）。 */
 let BLOG_LINKS=null;
+/* ★2026-10-27: 英題が無いカードの外来語を、語ごとに英語へ（loanword hints・カードは「great · boxing …」）。
+   表は catalog/loan-<md5>.json（catalog_io.py が tools/loan_gloss.py で作る・約70KB）。検索の準備ができてから後で読む（最初の描画を待たせない）。
+   形: {"md5":カタログ,"w":[語],"r":"Δ:id.id~;…"}。Δ＝前の行からの行番号の差・id＝w の位置（どちらも36進）・~＝訳せない片仮名語が残る（末尾に …）。
+   ★カタログの md5 が manifest と違えば使わない（行番号がずれる）。読めなければ出ないだけ。
+   ★題名として見せない（小文字・中黒区切り・「not a title」）。検索の索引にも店の検索語にも使わない。
+   ★語の出どころ: 英題がある行の和題と英題の突き合わせ＋JMdict（EDRDG・CC BY-SA 4.0）。出典はフッター。 */
+let LOAN_GLOSS=null;   // DATA の行（配列そのもの）→ "great · boxing …"
+let EN_KIND=new Map();  // DATA の行 → 'r'（英題の欄の値はローマ字題）／'p'（発売元が後に使った英語名）／'f'（ファンの通称）。
+                        // 同じ loan ファイルの k（tools/en_kind.json）。英語版の無い作品の値を「English」と出さないため。読めなければ空＝今まで通り「English」
+whenSearchReady(()=>{
+  const C=window.__kbCat; if(!C || !C.manifest) return;
+  C.manifest.then(m=> (m.loan && m.md5) ? fetch('/catalog/'+m.loan).then(r=>r.ok?r.json():null).then(j=>{
+    if(!j || j.md5!==m.md5 || typeof j.r!=='string') return;
+    const map=new Map(); let i=0;
+    for(const e of j.r.split(';')){
+      const c=e.indexOf(':'); i+=parseInt(e.slice(0,c),36);
+      let v=e.slice(c+1); const part=v.endsWith('~'); if(part) v=v.slice(0,-1);
+      if(DATA[i]) map.set(DATA[i], v.split('.').map(x=>j.w[parseInt(x,36)]).join(' · ')+(part?' …':''));
+    }
+    const km=new Map(); i=0;
+    if(typeof j.k==='string' && j.k) for(const e of j.k.split(';')){ const c=e.indexOf(':'); i+=parseInt(e.slice(0,c),36); if(DATA[i]) km.set(DATA[i], e.slice(c+1)); }
+    LOAN_GLOSS=map; EN_KIND=km; if(current.length) paint();
+  }) : null).catch(()=>{});
+});
 let JAPAN_ONLY=new Set();
 let SHARED_CODES={};      // links.json の d（別の作品に同じ型番が付いている「機種\t型番」→ 和題の一覧）。読めなければ空＝注意書きが出ないだけ   // links.json の j（「Japan only」の印を出すキー）。読めなければ空のまま＝印が出ないだけ
 const BLOG_LANGS=['en','zh','ko','es','de','fr'];
@@ -4015,6 +4101,9 @@ function card(r,idx){
   const hideJa = jaLatin && !!en && codeKey(en) === codeKey(jp);
   // ローマ字読みの判定は romajiFor() に切り出した（2026-09-11・印刷シートと共用）。式は元のまま。
   const romaji = romajiFor(r);
+  // 英語版の無い作品の英語名（2026-10-27 試作）: links.json の u（blog/_parts/search_aliases.json の unofficial_en・出典2つ）。
+  //   英題（row[0]）が空の行だけ。公式英題の欄には出さず、ローマ字見出しの下に「Unofficial English name」として出す。検索は同じ名前が別名（s）で当たる。
+  const unoff = (!en && BLOG_LINKS && BLOG_LINKS.u && BLOG_LINKS.u[pf+'\t'+jp]) || null;
   // スラブ表示。区切りの前後は「折り返せる普通の空白」にする(&nbsp; だと型番の内側でしか折れない)
   // 中黒の前は &nbsp;(前の型番にくっつける)、後ろは普通の空白(ここで折る)。
   // → 折り返しても行頭が「・」で始まらず、型番は必ず1つ丸ごと1行に載る。
@@ -4040,6 +4129,7 @@ function card(r,idx){
   const blogArts = (BLOG_LINKS && BLOG_LINKS.a[pf+'\t'+jp]) || [];
   const platKey = BLOG_LINKS && BLOG_LINKS.p[pf];
   const jpOnly = !r[12] && JAPAN_ONLY.has(pf+'\t'+jp);
+  const enKind = en ? EN_KIND.get(r) : '';   // 英題の欄の値の種類（EN_KIND）。r・p・f のときは欄名を「English」にしない
   // 札: バーコードと完全一致なら「Barcode match」、楽天からの推測なら「Possible match」。
   // 完全一致のときは「英題が複数の日本版にまたがる」の注意を出さない（箱の JAN がこの1本を指している）。
   const byBarcode = cardMatch==='barcode' && !!r[10] && r[10]===cardMatchJan;
@@ -4057,15 +4147,23 @@ function card(r,idx){
     </div>`:''}
 
     <div class="identity">
+      ${(!en && romaji)?`<div class="field">
+        <span class="micro plain ro-k">Romanized <span class="ro-note">&middot; no official English title</span></span>
+        <div class="title-row">${listBtn}<div class="en-title ro-title" lang="ja-Latn">${esc(romajiShow(romaji))}</div></div>
+        ${(LOAN_GLOSS && LOAN_GLOSS.get(r))?`<div class="loan-gloss"><span class="lg-k">Loanwords, word by word &middot; not a title</span><span class="lg-v">${esc(LOAN_GLOSS.get(r))}</span></div>`:''}
+        ${unoff?`<div class="loan-gloss unoff"><span class="lg-k">Unofficial English name &middot; ${unoff[1]==='publisher_later'?'used later by the publisher; never released in English':'fan name'}</span><span class="lg-v">${esc(unoff[0])}</span></div>`:''}
+      </div>`:''}
       ${en?`<div class="field">
-        <span class="micro plain">English</span>
-        <div class="title-row">${listBtn}<div class="en-title">${esc(en)}</div></div>
+        ${enKind==='r'?`<span class="micro plain ro-k">Romanized <span class="ro-note">&middot; no official English title</span></span>`
+          :enKind?`<span class="micro plain ro-k">Unofficial English name <span class="ro-note">&middot; ${enKind==='p'?'used later by the publisher; never released in English':'fan name'}</span></span>`
+          :`<span class="micro plain">English</span>`}
+        <div class="title-row">${listBtn}<div class="en-title${enKind==='r'?' ro-title" lang="ja-Latn':''}">${esc(en)}</div></div>
         ${AMBIG_EN.has(strong(en)) && !byBarcode?`<div class="cap">This English name covers more than one Japanese release. Check the Japanese title and the code below.</div>`:''}
       </div>`:''}
       <div class="field">
         ${hideJa?'':`<span class="micro plain">Japanese reading</span>`}
-        ${hideJa?'':`<div class="title-row">${en?'':listBtn}<div class="ja-title">${esc(jpMain)}</div></div>`}
-        ${romaji?`<div class="romaji">${esc(romaji)}</div>`:''}
+        ${hideJa?'':`<div class="title-row">${(en||romaji)?'':listBtn}<div class="ja-title">${esc(jpMain)}</div></div>`}
+        ${(romaji && en && enKind!=='r')?`<div class="romaji" lang="ja-Latn">${esc(romajiShow(romaji))}</div>`:''}
         ${noCode?`<div class="no-code-notice">No product code on record</div>`:''}
       </div>
       ${blogArts.length?`<div class="articles">${blogArts.map(([s,dt,ttl])=>`<a class="read-article" href="${blogUrl(s)}" aria-label="Read article: ${esc(ttl)}">Read article${blogArts.length>1?` <span class="ra-date">${esc(dt)}</span>`:''}<span aria-hidden="true">&rarr;</span></a>`).join('')}</div>`:''}
@@ -4444,6 +4542,28 @@ function zeroHelp(s, pf, pv, yv){
   return '<div class="state"><b>No match.</b><div class="zero-help">'+h+'</div></div>';
 }
 
+// 第6レーンの照合（語の始まりからだけ）。RJ6 の「語ごとの骨格を空白で区切った列」から、空白を除いた列と語の始まりの位置を初回に作る。
+let RJ6J = null;
+const rj6J = () => RJ6J || (RJ6J = RJ6.map(S => { let J = ''; const st = new Set(); for(const w of S.split(' ')){ st.add(J.length); J += w; } return {J, st}; }));
+const rj6Hit = (e, k) => { for(let p = e.J.indexOf(k); p !== -1; p = e.J.indexOf(k, p + 1)) if(e.st.has(p)) return true; return false; };
+// ★2026-10-27: 英題がある行では、語の並びまで合うときだけ当てる（Blue Stinger が BLASTING AGENT〔英題あり・ローマ字 burasutingu〕に当たっていた。
+//   骨格はどちらも brstng で、骨格だけでは区別できない）。クエリの語の骨格が、行のローマ字の語の骨格と1語ずつ順に一致すること（最後の語だけ前方一致）。
+//   英題が無い行（このレーンの本来の相手）は今までどおり語をまたいで当てる（taigaaheri＝Tiger Heli のように外来語は1語に詰まる）。
+//   試算（英題811件＋記事・既知の19件をクエリに）: 英題がある行への第6レーンのヒット40件のうち外れるのは7件で、7件とも別作品
+//   （BLASTING AGENT・KILLING ZONE→カーレンジャー/黒ノ十三・Dragon's Earth→パズドラ×2・Battle Fantasy→Battle Fantasia・Taiko Risshiden II→初代 SFC）。
+//   Kyukyoku Tiger→MD/SS・RASTAN SAGA 2→Rastan Saga II などは残る。英題が無い行へのヒット195件は変わらない。
+const q6Words = s => fold(accent(s)).split(' ').filter(w => /^[a-z0-9]+$/.test(w)).map(w => skelWord(w, true)).filter(Boolean);
+const rj6Aligned = (i, qw) => {
+  const rw = RJ6[i].split(' ').filter(Boolean);
+  for(let a = 0; a + qw.length <= rw.length; a++){
+    let ok = true;
+    for(let j = 0; j < qw.length; j++){ const last = j === qw.length - 1; if(last ? !rw[a + j].startsWith(qw[j]) : rw[a + j] !== qw[j]){ ok = false; break; } }
+    if(ok) return true;
+  }
+  return false;
+};
+
+
 // 照合の本体（もとの run() の中身をそのまま関数にした。onlyPlat は予備の検索のときだけ機種で絞る）
 function matchAll(s, pf, pv, yv, onlyPlat, kana){
   let lo=fold(accent(s));   // HAY と同じ畳み方＋accent。é で打っても e で打っても r0 に当たる
@@ -4453,6 +4573,9 @@ function matchAll(s, pf, pv, yv, onlyPlat, kana){
   const r5=romaFold(s);         // 第5レーン用。スペースを消して長音を畳んだ形（ローマ字列 RJ5 と照合）
   // 床8: 短い針を潰すと乱射する（moon→mon 等）。8文字以上＝実質フルタイトル入力のときだけ第2レーンを使う。
   const lane2 = loc.length >= 8;
+  const k6 = /^[\x00-\x7f]+$/.test(s.trim()) ? skel(s, true) : '';   // 第6レーン用（英字だけのクエリ・骨格6字以上）
+  const R6 = k6.length >= 6 ? rj6J() : null;
+  const q6w = R6 ? q6Words(s) : null;
   if(kana){ lo=KANA(lo); sq=KANA(sq); }   // ③ ひらがな・カタカナをそろえるとき（索引も KANA を掛けたものを使う）
   const H = kana ? kanaHay() : HAY, H4 = kana ? kanaHay4() : HAY4;
   const res=[], resIdx=[], resLane=[];
@@ -4469,6 +4592,7 @@ function matchAll(s, pf, pv, yv, onlyPlat, kana){
       if(!hit && qk.length >= 4){ hit = CODEKEYS[i].some(c => c.includes(qk)); lane = 3; }  // 4文字未満はJPN等が数千件に当たるので床
       if(!hit && sq.length >= 5){ hit = H4[i].includes(sq); lane = 4; }  // 床5: halo5(5)を残す上限と star/gear(4)を弾く下限の唯一解
       if(!hit && r5.length >= 8){ hit = RJ5[i].includes(r5); lane = 5; }   // 第5レーン: 床8（5〜7文字は語の境目をまたいで乱射する）
+      if(!hit && R6){ hit = rj6Hit(R6[i], k6) && (!r[0] || rj6Aligned(i, q6w)); lane = 6; }   // 第6レーン: 外来語のローマ字を英語の綴りで（式は skelWord・rj6Row）
       if(!hit) continue;
     }
     res.push(r); resIdx.push(i); resLane.push(lane);
