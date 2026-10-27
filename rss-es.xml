@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Mon, 26 Oct 2026 20:21:19 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 27 Oct 2026 07:10:40 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Cuatro exclusivos de Neo Geo CD que nunca salieron del disco</title>
+      <link>https://gamekataban.com/blog/es/2026-10-28-neo-geo-cd-exclusives-never-ported.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-10-28-neo-geo-cd-exclusives-never-ported.html</guid>
+      <description>Neo Geo vuelve como consola de cartuchos, y estos cuatro juegos nunca fueron cartuchos: Crossed Swords II, ADK World, Oshidashi Zintrick y The King of Fighters '96 NEOGEO Collection. Qué es cada uno, por qué nunca salió del disco y con qué códigos se encuentra la edición japonesa.</description>
+      <pubDate>Wed, 28 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Enemy Zero en Sega Saturn: el terror de alienígenas invisibles de Kenji Eno en cuatro discos y cómo distinguir T-30001G del resto</title>
       <link>https://gamekataban.com/blog/es/2026-10-27-enemy-zero-sega-saturn-t-30001g.html</link>
