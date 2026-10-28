@@ -5,12 +5,22 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  // 2026-10-28: 準備完了（<html data-catalog> が ready か error）の後に動かす。GA と Service Worker の登録をここへ回す。
+  //   375px・CPU 4倍・Slow 4G の試験で、gtag.js（広告＋GA4）を最初から読むと初回の最初のカードが 20.2→68.7秒・本体の結果が 45.8→101.2秒
+  //   （メインスレッドを CPU 4倍で約35秒ふさぐ・ヘッドレスの試験の Chrome での値）。準備完了の後に読めば最初のカード・本体の結果を遅らせない。
+  //   ★準備完了より前にページを閉じた訪問は GA に数えられない（その間の gtag('event', …) は dataLayer に積まれ、読んだときに送られる）。
+  window.__afterReady = function(fn){ var r=document.documentElement, done=false;
+    function go(){ if(done) return; done=true; mo.disconnect(); setTimeout(fn, 0); }
+    var mo=new MutationObserver(function(){ var c=r.getAttribute('data-catalog'); if(c==='ready' || c==='error') go(); });
+    mo.observe(r,{attributes:true,attributeFilter:['data-catalog']}); };
   // 2026-10-28: GA4・Google 広告は本番のホストだけで読む（localhost・127.0.0.1・プレビュー等のテストの訪問を送らない）。
   //   ほかのホストでも gtag() はあるので、ページ内の gtag('event', …) は dataLayer に積まれるだけで送られない。
   if (location.hostname === 'gamekataban.com' || location.hostname === 'www.gamekataban.com') {
-    var gt = document.createElement('script'); gt.async = true;
-    gt.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18383204728';
-    document.head.appendChild(gt);
+    window.__afterReady(function(){
+      var gt = document.createElement('script'); gt.async = true;
+      gt.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18383204728';
+      document.head.appendChild(gt);
+    });
   }
   gtag('js', new Date());
   gtag('config', 'AW-18383204728');
@@ -6222,7 +6232,15 @@ buildSearchIndex();
     }
     // ★このスクリプトは本体（kbMain）の直後に置く＝本体はもう読み終わっている。DOMContentLoaded は待たない
     //   （待つと4倍遅い CPU で約4秒遅れた。前に置いたときは、先読みでカタログが早く届くと本体がまだ無かった・2026-10-19 に踏んだ）。
-    setTimeout(go, 0);                           // 進み具合の文を一度描かせてから
+    // 2026-10-28: 最初の答え（/?q= の仮のカード）を待つときは、それが描かれてから本体を動かす（本体の起動がメインスレッドをふさいで仮のカードが遅れていた）。
+    //   最初の答えが無い・当たりが無い・3秒たったときは今まで通りすぐ動かす。
+    var C2=window.__kbCat;
+    if(C2 && C2.qa){
+      var started=false, go2=function(){ if(started) return; started=true; setTimeout(go, 50); };
+      C2.qa.then(function(a){ if(!a || !a.idx.length) return go2(); var r=document.documentElement; if(r.getAttribute('data-qa')==='shown') return go2();
+        new MutationObserver(function(){ if(r.getAttribute('data-qa')==='shown') go2(); }).observe(r,{attributes:true,attributeFilter:['data-qa']}); }, go2);
+      setTimeout(go2, 3000);
+    } else setTimeout(go, 0);                    // 進み具合の文を一度描かせてから
   }).catch(fail);
 })();
 </script>
@@ -6438,7 +6456,7 @@ buildSearchIndex();
 (function(){
   if(!('serviceWorker' in navigator)) return;
   if(location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') return;
-  window.addEventListener('load', function(){
+  window.__afterReady(function(){   // 2026-10-28: load ではなく準備完了の後（初回は install がカタログ・jan・zxing を取りに行き、ページの取得と回線を取り合っていた）
     navigator.serviceWorker.register('./sw.js').then(function(reg){
       console.info('[sw] registered. scope: ' + reg.scope);
     }).catch(function(err){
