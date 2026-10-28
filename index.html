@@ -2,10 +2,16 @@
 <html lang="en">
 <head>
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18383204728"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  // 2026-10-28: GA4・Google 広告は本番のホストだけで読む（localhost・127.0.0.1・プレビュー等のテストの訪問を送らない）。
+  //   ほかのホストでも gtag() はあるので、ページ内の gtag('event', …) は dataLayer に積まれるだけで送られない。
+  if (location.hostname === 'gamekataban.com' || location.hostname === 'www.gamekataban.com') {
+    var gt = document.createElement('script'); gt.async = true;
+    gt.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18383204728';
+    document.head.appendChild(gt);
+  }
   gtag('js', new Date());
   gtag('config', 'AW-18383204728');
   gtag('config', 'G-SK6R4YH7VD');
@@ -42,7 +48,52 @@
     rows:man.then(function(m){ return fetchLater('/catalog/'+m.catalog); }),
     idx:man.then(function(m){ return m.index ? fetchLater('/catalog/'+m.index) : null; }).catch(function(){ return null; }) };   // 検索の索引（無ければ本体が作る）
   if(scan) C.jan=man.then(function(m){ return m.jan ? json('/catalog/'+m.jan) : null; });
-  man.catch(function(){}); C.rows.catch(function(){}); if(C.jan) C.jan.catch(function(){});
+  // 最初の答え（2026-10-28）。/?q= が JAN・型番・英字なら、catalog/qa-<md5>/ の小分けの表（語の表1〜3本＋行最大5件・数十KB）だけで当たりを引く。
+  //   全体（catalog・index 約4MB）と並べて取りに行き、本体の準備ができるまで #results に仮のカードを出す（tools/first_answer.py と同じ式）。
+  //   並び: 題名（t:）・型番（c:）の完全一致を発売年の順に先頭、残りは DATA の順（本体の rankHits の段0と同じ考え方を、表で分かる範囲で）。
+  var qs=new URLSearchParams(location.search).get('q');
+  C.qaLookup=function(q){ return man.then(function(m){ return m.qa ? qaLookup(m, q) : null; }); };   // 調べる人・テスト用
+  if(qs && !scan) C.qa=man.then(function(m){ return m.qa ? qaLookup(m, qs) : null; }).catch(function(){ return null; });
+  function qaFold(t){ return String(t||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase(); }
+  function qaTokens(t){ return qaFold(t).split(/[^a-z0-9]+/).filter(Boolean); }
+  function qaWords(t){ return qaTokens(t).filter(function(w){ return w.length>=2; }); }
+  function qaLookup(m, q){
+    var t=q.trim(), n=m.qa_n||128, base='/catalog/'+m.qa+'/', d=t.replace(/[\s-]/g,''), want=[], kind;
+    function get(u){ return fetch(base+u+'.json',{priority:'high'}).then(function(r){ return r.ok?r.json():{}; }); }
+    function hex(prefix){ var h=0x811c9dc5; for(var i=0;i<prefix.length;i++){ h^=prefix.charCodeAt(i); h=Math.imul(h,0x01000193)>>>0; } return (h%n).toString(16).padStart(2,'0'); }
+    // 型番の鍵（c:）と英字の語（w:）を両方引いて合わせる（「ULJS 00331」「SHVC-QO」「9-nine」のように、見た目で型番か題名か決まらない語があるため）
+    var c=t.normalize('NFKC').toUpperCase().replace(/[^A-Z0-9]/g,''), ws=qaWords(t), tk=qaTokens(t), ex=[];
+    if(/^[\d\s-]+$/.test(t) && /^\d{13}$/.test(d)){ kind='barcode'; want=[['j:'+d.slice(-3), function(k){ return k==='j:'+d; }, 'j']]; }
+    else if(/[\u3040-\u30ff\u4e00-\u9fff\uac00-\ud7af]/.test(t) || !/[A-Za-z]/.test(t)) return null;   // 和文・韓国語は本体を待つ
+    else {
+      kind='latin';
+      if(c.length>=5){ ex.push('c:'+c); want.push(['c:'+c.slice(0,5), function(k){ return k.indexOf('c:'+c)===0; }, 'c']); }
+      ws.forEach(function(w){ want.push(['w:'+w.slice(0,4), function(k){ return k.indexOf('w:'+w)===0; }, 'w']); });
+      if(tk.length){ ex.push('t:'+tk.join(' ')); if(!ws.some(function(w){ return w.slice(0,4)===tk[0].slice(0,4); })) want.push(['w:'+tk[0].slice(0,4), null, '']); }   // 題名の完全一致（t:）は最初の語のファイルにある
+      if(!want.some(function(x){ return x[1]; })) return null;
+    }
+    var files={}; want.forEach(function(x){ files[hex(x[0])]=1; });
+    var fl=Object.keys(files);
+    return Promise.all(fl.map(function(f){ return get('k/'+f); })).then(function(bs){
+      var B={}; fl.forEach(function(f,i){ B[f]=bs[i]; });
+      function hits(type){ var L=want.filter(function(x){ return x[2]===type; }); if(!L.length) return null;
+        var sets=L.map(function(x){ var bk=B[hex(x[0])], s=new Set(); for(var k in bk) if(x[1](k)) bk[k].forEach(function(i){ s.add(i); }); return s; });
+        return Array.from(sets[0]).filter(function(i){ return sets.every(function(s){ return s.has(i); }); }).sort(function(a,b){ return a-b; }); }
+      var hj=hits('j')||[], hc=hits('c')||[], hw=hits('w')||[];
+      var all=hj.concat(hc, hw.filter(function(i){ return hc.indexOf(i)<0; }));
+      var first=[];   // 完全一致: 型番（行）→ 題名（[行,年] を年の順）→ 題名がその語で始まる行
+      ex.forEach(function(key){ var e0=[]; fl.forEach(function(f){ var v=B[f][key]; if(v) v.forEach(function(e){ e0.push(Array.isArray(e)?e:[e,0]); }); });
+        e0.sort(function(a,b){ return a[1]-b[1] || a[0]-b[0]; }); e0.forEach(function(e){ if(all.indexOf(e[0])>=0 && first.indexOf(e[0])<0) first.push(e[0]); }); });
+      if(tk.length) fl.forEach(function(f){ var v=B[f]['f:'+tk[0]]; if(v) v.forEach(function(i){ if(all.indexOf(i)>=0 && first.indexOf(i)<0) first.push(i); }); });   // 題名がその語で始まる行（DATA の順）
+      var order=first.concat(all.filter(function(i){ return first.indexOf(i)<0; }));
+      var hit=order;
+      var top=order.slice(0,5), rf={}; top.forEach(function(i){ rf[(i%n).toString(16).padStart(2,'0')]=1; });
+      return Promise.all(Object.keys(rf).map(function(f){ return get('r/'+f); })).then(function(rs){
+        var rows={}; rs.forEach(function(o){ for(var k in o) rows[k]=o[k]; });
+        return {kind:kind, q:t, total:hit.length, idx:top, rows:rows, m:m};
+      });
+    });
+  }
 }catch(e){} })();
 </script>
 <script>
@@ -2097,6 +2148,43 @@ header .lede .lede-sub{ font-weight:400; }
   <div class="dupe-note" id="dupeNote" role="note" hidden></div>
   <div id="results"></div>
   <div id="more"></div>
+<script>
+/* 最初の答え（2026-10-28）: <head> の qaLookup の結果を、本体の準備ができるまで仮のカードで出す。
+   本体の run() が動いたら #results を描き直す（.qa が出ているあいだは「Preparing search…」で上書きしない）。
+   欄名は manifest の k（英題の欄の種類）で決める＝「English」と言い切らない行を間違えない。 */
+(function(){ try{
+  var C=window.__kbCat; if(!C || !C.qa) return;
+  C.qa.then(function(a){
+    if(!a || !a.idx.length || !window.KB_SHOP) return;
+    var root=document.documentElement; if(root.getAttribute('data-catalog')==='ready') return;
+    var res=document.getElementById('results'), cnt=document.getElementById('count'); if(!res || res.querySelector('.card:not(.qa)')) return;
+    var kind={}, k=a.m.k||'', i=0; k.split(';').forEach(function(e){ if(!e) return; var c=e.indexOf(':'); i+=parseInt(e.slice(0,c),36); kind[i]=e.slice(c+1); });
+    function esc(s){ return String(s||'').replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+    var html=a.idx.map(function(n){
+      var r=a.rows[n]; if(!r) return '';
+      var kk=KB_SHOP.keys(r), en=r[0], xk=kind[n]||'', code=kk.codes.map(esc).join('<span class="sep">&nbsp;&middot;</span> ');
+      var sg=(kk.codes.length && !kk.sgNoCode) ? '<a class="store" target="_blank" rel="sponsored nofollow noopener" href="'+KB_SHOP.sgAf(kk.kwCodeSg)+'">Suruga-ya.jp (code)</a>'
+        : '<a class="store" target="_blank" rel="sponsored nofollow noopener" href="'+KB_SHOP.sgAf(kk.kwKana)+'">Suruga-ya.jp (title)</a>';
+      var by=kk.buyeeWrapped ? '<a class="store primary" target="_blank" rel="sponsored nofollow noopener" href="'+kk.buyeeWrapped+'">Buyee <span class="en">EN</span></a>' : '';
+      return '<article class="card quick qa">'
+        +'<div class="status"><span class="dot"></span>'+(a.kind==='barcode'?'Barcode match':'Match')+' &middot; Japan / NTSC-J</div>'
+        +'<div class="specs">'+(r[2]?'<div class="spec"><span class="micro">Console</span><span class="v jp">'+esc(r[2])+'</span></div>':'')
+        +(r[4]?'<div class="spec"><span class="micro">Released</span><span class="v">'+esc(r[4])+'</span></div>':'')+'</div>'
+        +'<div class="identity">'+(en?'<div class="field">'+(xk==='r'?'<span class="micro plain ro-k">Romanized <span class="ro-note">&middot; no official English title</span></span>'
+            :xk?'<span class="micro plain ro-k">Unofficial English name <span class="ro-note">&middot; '+(xk==='p'?'used later by the publisher; never released in English':'fan name')+'</span></span>'
+            :(a.m.k!=null?'<span class="micro plain">English</span>':'<span class="micro plain">Title in Latin letters</span>'))
+          +'<div class="title-row"><div class="en-title'+(xk==='r'?' ro-title" lang="ja-Latn':'')+'">'+esc(en)+'</div></div></div>':'')
+        +'<div class="field"><span class="micro plain">Japanese title</span><div class="title-row"><div class="ja-title">'+esc(r[1]||r[0])+'</div></div></div></div>'
+        +(code?'<div class="field"><span class="micro plain">Product code</span><div class="jp-copy-row"><div class="jp-chip"><span class="code">'+code+'</span></div></div></div>':'')
+        +'<div class="group"><div class="group-label"><span class="n">Buy this game</span><span class="d">Some store links are affiliate links (PR).</span></div>'+(by?'<div class="stores">'+by+'</div>':'')+'<div class="stores">'+sg+'</div></div>'
+        +'</article>';
+    }).join('');
+    res.innerHTML='<p class="quick-more qa">First matches — the full search (prices, shelf guide, more results) is still loading…</p>'+html;
+    if(cnt) cnt.textContent=(a.total>a.idx.length?a.idx.length+' of '+a.total:a.total)+' first match'+(a.total>1?'es':'')+' · loading full search…';
+    root.setAttribute('data-qa', 'shown');
+  });
+}catch(e){} })();
+</script>
 
   <section class="howto" aria-label="What Kataban is and how to use it">
     <h2>What is Kataban?</h2>
@@ -2776,7 +2864,7 @@ function buildSearchIndex(){
     const qk = q.value.trim() ? queryKind(q.value) : '';
     // 2026-10-21: 題名の語で links.json がまだなら、別名を待ってから1回で出す（上の LINKS_WAIT_MS・2秒は索引ができた今から数える）
     if(o && qk && !linksState && qk!=='code' && qk!=='barcode'){
-      firstRunWaiting=o; count.textContent='Searching…';
+      firstRunWaiting=o; if(!results.querySelector('.qa')) count.textContent='Searching…';   // 最初の答えが出ていれば件数の文はそのまま
       linksWaitTimer=setTimeout(releaseFirstRun, LINKS_WAIT_MS);   // 届かなければ別名なしで出す（届いたら links.json の処理で検索し直す）
       return;   // 計測（pendingSearchLog）と data-catalog="ready" は releaseFirstRun で
     }
@@ -4330,6 +4418,7 @@ results.addEventListener('click', e=>{
 });
 function paint(){
   const len=current.length;
+  if(!len && !SEARCH_READY && results.querySelector('.qa')) return;   // 2026-10-28: 起動時の描き直し（setLoc 等）で最初の答え（.qa）を消さない
   paintDupeNote();
   results.innerHTML = current.slice(0,shown).map(card).join('');
   if((cardMatch==='barcode' || cardMatch==='guess') && current.length){ results.insertAdjacentHTML('afterbegin', shopPromptHtml()); fillInShop(results); }
@@ -4618,8 +4707,8 @@ function run(opts){
   if(!SEARCH_READY){   // 2026-10-19: 索引を作り終わるまで待つ（作り終わったら buildSearchIndex() が呼び直す）
     pendingRunOpts = opts || {};
     if(fold(accent(q.value)) || plat.value!=='All' || pub.value!=='All' || year.value!=='All'){
-      count.textContent=''; more.innerHTML='';
-      results.innerHTML='<div class="state"><b>Preparing search…</b>The catalog is still loading. Your search will run in a moment.</div>';
+      if(!results.querySelector('.qa')){ count.textContent=''; } more.innerHTML='';
+      if(!results.querySelector('.qa')) results.innerHTML='<div class="state"><b>Preparing search…</b>The catalog is still loading. Your search will run in a moment.</div>';   // 最初の答え（.qa）は消さない
     }
     return;
   }

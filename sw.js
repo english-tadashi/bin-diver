@@ -67,6 +67,8 @@ async function cacheCatalog(cache, m, add){   // add=false: 古いものを消�
     if (/\/catalog\/(catalog|jan|index|loan)-[0-9a-f]+\.json$/.test(pth) && !keep.has(k.url)) await cache.delete(k);
     // 2026-10-27: 簡易カード用の catalog/janx-<md5>/NN.json（読めた番号の1本だけ取る・install では入れない）。今の janx 以外は消す
     else if (/\/catalog\/janx-[0-9a-f]+\//.test(pth) && !(m.janx && pth.indexOf('/catalog/' + m.janx + '/') >= 0)) await cache.delete(k);
+    // 2026-10-28: 最初の答えの表 catalog/qa-<md5>/（ページが引いた分だけ (2) で入る）。今の qa 以外は消す
+    else if (/\/catalog\/qa-[0-9a-f]+\//.test(pth) && !(m.qa && pth.indexOf('/catalog/' + m.qa + '/') >= 0)) await cache.delete(k);
   }
   if (add) for (const u of keep) { if (!(await cache.match(u))) await cache.add(u).catch(() => {}); }
 }
