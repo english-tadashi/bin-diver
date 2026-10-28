@@ -2285,6 +2285,7 @@ header .lede .lede-sub{ font-weight:400; }
   //   （押したあとは「映ってから8秒」だけ。押した直後に開けると、本体の準備でカメラが映らなくなる）。
   setTimeout(function(){ if(!E.started) openGate(); }, 12000);
   // jan ファイルは <head> の先読みから直接受け取る（本文の終わりの読み込みを待つと、読めても簡易カードが遅れる）。
+  if(C0 && C0.manifest) C0.manifest.then(function(m){ E.m=m; }).catch(function(){});   // kj（簡易カードの欄名）用。jan より先に解決する
   if(C0 && C0.jan) C0.jan.then(function(j){ if(j && !E.jan){ E.jan=j; if(E.code) E.say(); } }).catch(function(){});
   // 読めた番号の案内。DATA が読み込み済みなら（別の <script> の const DATA は後から名前で見える）題名を先に出す。カードは本体が出す。
   E.say=function(){
@@ -2313,10 +2314,11 @@ header .lede .lede-sub{ font-weight:400; }
   //   catalog/janx-<md5>/<JANの下2桁>.json（数KB）を、番号が読めた時点で取りに行く。届いたら簡易カードを描き直す（届かなければ出ないだけ）。
   //   中身は {JAN: [[ローマ字見出し, 英訳] か 0, …]}（jan の行と同じ順）。表示の形は catalog_io が本体の romajiFor・romajiShow と同じ式で作ってある。
   function janx(j){
-    if(E.xj===j) return; E.xj=j; E.x=null;
-    if(!(C0 && C0.manifest)) return;
+    if(E.xj===j) return; E.xj=j; E.x=null; E.xd=null;   // xd: janx の答えが出た JAN（2026-10-28・出るまで簡易カードの欄名は中立）
+    function done(x){ if(E.xj!==j) return; E.xd=j; if(x) E.x=x; if(E.quick && !E.adopted && E.qj===j) paintQuick(j, E.qlist); }
+    if(!(C0 && C0.manifest)){ done(null); return; }
     C0.manifest.then(function(m){ return m.janx ? fetch('/catalog/'+m.janx+'/'+j.slice(-2)+'.json').then(function(r){ return r.ok ? r.json() : null; }) : null; })
-      .then(function(t){ var x=t && t[j]; if(!x || E.xj!==j) return; E.x=x; if(E.quick && !E.adopted && E.qj===j) paintQuick(j, E.qlist); }).catch(function(){});
+      .then(function(t){ done(t && t[j]); }).catch(function(){ done(null); });
   }
   function quick(j, list){
     if(E.adopted || E.quick) return;
@@ -2330,7 +2332,8 @@ header .lede .lede-sub{ font-weight:400; }
     var X=(E.xj===j && E.x) || [];
     var html=list.map(function(v, n){
       var r=[v[0]||'', v[1]||'', v[2]||'', v[3]||'', v[4]||'', '', '', v[5]||'', v[6]||'', '', j];
-      var k=KB_SHOP.keys(r), en=r[0], jp=r[1]||r[0], x=(!en && X[n]) || null, xk=(en && X[n] && X[n][2]) || '';   // xk: 英題の欄の値の種類（本体の EN_KIND と同じ r・p・f）
+      var KJ=(E.m && E.m.kj) || (window.KB_CATALOG && window.KB_CATALOG.kj) || null;   // 2026-10-28: manifest の kj（JAN → 行ごとの種類）があれば janx を待たずに欄名が決まる
+      var k=KB_SHOP.keys(r), en=r[0], jp=r[1]||r[0], x=(!en && X[n]) || null, xk=(en && (KJ ? (KJ[j] && KJ[j][n]) : (X[n] && X[n][2]))) || '';   // xk: 英題の欄の値の種類（本体の EN_KIND と同じ r・p・f）
       var code=k.codes.map(esc).join('<span class="sep">&nbsp;&middot;</span> ');
       var sg = (k.codes.length && !k.sgNoCode)
         ? '<a class="store" target="_blank" rel="sponsored nofollow noopener" href="'+KB_SHOP.sgAf(k.kwCodeSg)+'">Suruga-ya.jp (code)</a>'
@@ -2342,7 +2345,7 @@ header .lede .lede-sub{ font-weight:400; }
         +(r[4]?'<div class="spec"><span class="micro">Released</span><span class="v">'+esc(r[4])+'</span></div>':'')+'</div>'
         +'<div class="identity">'+(en?'<div class="field">'+(xk==='r'?'<span class="micro plain ro-k">Romanized <span class="ro-note">&middot; no official English title</span></span>'
             :xk?'<span class="micro plain ro-k">Unofficial English name <span class="ro-note">&middot; '+(xk==='p'?'used later by the publisher; never released in English':'fan name')+'</span></span>'
-            :'<span class="micro plain">English</span>')+'<div class="title-row"><div class="en-title'+(xk==='r'?' ro-title" lang="ja-Latn':'')+'">'+esc(en)+'</div></div></div>':'')
+            :((KJ || E.xd===j)?'<span class="micro plain">English</span>':'<span class="micro plain">Title in Latin letters</span>'))+'<div class="title-row"><div class="en-title'+(xk==='r'?' ro-title" lang="ja-Latn':'')+'">'+esc(en)+'</div></div></div>':'')
         +((x && (x[0]||x[1]))?'<div class="field">'+(x[0]?'<span class="micro plain ro-k">Romanized <span class="ro-note">&middot; no official English title</span></span><div class="title-row"><div class="en-title ro-title" lang="ja-Latn">'+esc(x[0])+'</div></div>':'')
           +(x[1]?'<div class="loan-gloss"><span class="lg-k">Loanwords, word by word &middot; not a title</span><span class="lg-v">'+esc(x[1])+'</span></div>':'')+'</div>':'')
         +'<div class="field"><span class="micro plain">Japanese title</span><div class="title-row"><div class="ja-title">'+esc(jp)+'</div></div></div></div>'
@@ -3876,20 +3879,26 @@ let BLOG_LINKS=null;
 let LOAN_GLOSS=null;   // DATA の行（配列そのもの）→ "great · boxing …"
 let EN_KIND=new Map();  // DATA の行 → 'r'（英題の欄の値はローマ字題）／'p'（発売元が後に使った英語名）／'f'（ファンの通称）。
                         // 同じ loan ファイルの k（tools/en_kind.json）。英語版の無い作品の値を「English」と出さないため。読めなければ空＝今まで通り「English」
+// ★2026-10-28: k は manifest にも入れた（約1KB）。本体が動く時点で manifest（KB_CATALOG）と DATA は揃っているので、最初のカードから欄名が決まる。
+//   manifest に k が無い（古い manifest）ときは loan が届くまで EN_KIND_READY=false＝欄名を「English」と言い切らない中立の表示（card() の enLabel）。
+//   loan も読めなければ ready にして今まで通り「English」。
+let EN_KIND_READY=false;
+function parseEnKind(k){ const km=new Map(); let i=0; for(const e of k.split(';')){ if(!e) continue; const c=e.indexOf(':'); i+=parseInt(e.slice(0,c),36); if(DATA[i]) km.set(DATA[i], e.slice(c+1)); } return km; }
+(function(){ const m=window.KB_CATALOG; if(m && typeof m.k==='string'){ EN_KIND=parseEnKind(m.k); EN_KIND_READY=true; } })();
+function enKindSettle(){ if(!EN_KIND_READY){ EN_KIND_READY=true; if(current.length) paint(); } }   // loan が読めなかった＝今まで通り「English」
 whenSearchReady(()=>{
-  const C=window.__kbCat; if(!C || !C.manifest) return;
+  const C=window.__kbCat; if(!C || !C.manifest){ enKindSettle(); return; }
   C.manifest.then(m=> (m.loan && m.md5) ? fetch('/catalog/'+m.loan).then(r=>r.ok?r.json():null).then(j=>{
-    if(!j || j.md5!==m.md5 || typeof j.r!=='string') return;
+    if(!j || j.md5!==m.md5 || typeof j.r!=='string'){ enKindSettle(); return; }
     const map=new Map(); let i=0;
     for(const e of j.r.split(';')){
       const c=e.indexOf(':'); i+=parseInt(e.slice(0,c),36);
       let v=e.slice(c+1); const part=v.endsWith('~'); if(part) v=v.slice(0,-1);
       if(DATA[i]) map.set(DATA[i], v.split('.').map(x=>j.w[parseInt(x,36)]).join(' · ')+(part?' …':''));
     }
-    const km=new Map(); i=0;
-    if(typeof j.k==='string' && j.k) for(const e of j.k.split(';')){ const c=e.indexOf(':'); i+=parseInt(e.slice(0,c),36); if(DATA[i]) km.set(DATA[i], e.slice(c+1)); }
-    LOAN_GLOSS=map; EN_KIND=km; if(current.length) paint();
-  }) : null).catch(()=>{});
+    if(!EN_KIND_READY && typeof j.k==='string') EN_KIND=parseEnKind(j.k);
+    EN_KIND_READY=true; LOAN_GLOSS=map; if(current.length) paint();
+  }) : enKindSettle()).catch(enKindSettle);
 });
 let JAPAN_ONLY=new Set();
 let SHARED_CODES={};      // links.json の d（別の作品に同じ型番が付いている「機種\t型番」→ 和題の一覧）。読めなければ空＝注意書きが出ないだけ   // links.json の j（「Japan only」の印を出すキー）。読めなければ空のまま＝印が出ないだけ
@@ -4156,7 +4165,7 @@ function card(r,idx){
       ${en?`<div class="field">
         ${enKind==='r'?`<span class="micro plain ro-k">Romanized <span class="ro-note">&middot; no official English title</span></span>`
           :enKind?`<span class="micro plain ro-k">Unofficial English name <span class="ro-note">&middot; ${enKind==='p'?'used later by the publisher; never released in English':'fan name'}</span></span>`
-          :`<span class="micro plain">English</span>`}
+          :EN_KIND_READY?`<span class="micro plain">English</span>`:`<span class="micro plain">Title in Latin letters</span>`}
         <div class="title-row">${listBtn}<div class="en-title${enKind==='r'?' ro-title" lang="ja-Latn':''}">${esc(en)}</div></div>
         ${AMBIG_EN.has(strong(en)) && !byBarcode?`<div class="cap">This English name covers more than one Japanese release. Check the Japanese title and the code below.</div>`:''}
       </div>`:''}
