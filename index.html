@@ -2161,10 +2161,13 @@ header .lede .lede-sub{ font-weight:400; }
 <script>
 /* 最初の答え（2026-10-28）: <head> の qaLookup の結果を、本体の準備ができるまで仮のカードで出す。
    本体の run() が動いたら #results を描き直す（.qa が出ているあいだは「Preparing search…」で上書きしない）。
-   欄名は manifest の k（英題の欄の種類）で決める＝「English」と言い切らない行を間違えない。 */
+   欄名は manifest の k（英題の欄の種類）で決める＝「English」と言い切らない行を間違えない。
+   2026-10-29: 描き方を window.__qaPaint(a) にし、検索欄に打った語（本体の準備前）からも使う（下の「打った語」）。 */
 (function(){ try{
-  var C=window.__kbCat; if(!C || !C.qa) return;
-  C.qa.then(function(a){
+  var C=window.__kbCat; if(!C) return;
+  window.__qaPaint=paintQa;
+  if(C.qa) C.qa.then(paintQa);
+  function paintQa(a){
     if(!a || !a.idx.length || !window.KB_SHOP) return;
     var root=document.documentElement; if(root.getAttribute('data-catalog')==='ready') return;
     var res=document.getElementById('results'), cnt=document.getElementById('count'); if(!res || res.querySelector('.card:not(.qa)')) return;
@@ -2191,8 +2194,50 @@ header .lede .lede-sub{ font-weight:400; }
     }).join('');
     res.innerHTML='<p class="quick-more qa">First matches — the full search (prices, shelf guide, more results) is still loading…</p>'+html;
     if(cnt) cnt.textContent=(a.total>a.idx.length?a.idx.length+' of '+a.total:a.total)+' first match'+(a.total>1?'es':'')+' · loading full search…';
+    res.setAttribute('data-qa-q', a.q);   // どの語の仮のカードか（打った語の受け手が、語が変わったら薄くする）
     root.setAttribute('data-qa', 'shown');
-  });
+  }
+}catch(e){} })();
+/* 打った語（2026-10-29）: 本体の input の受け手は本体の起動（カタログの読み込み）の後にしか付かないので、それまでに打った語は
+   約1分待たされていた。準備完了（data-catalog=ready）までのあいだだけ、打った語でも最初の答え（qaLookup）を引いて仮のカードを出す。
+   ・250ms まとめて引く。IME の変換中は引かない。返ってきたときに欄の語が変わっていれば捨てる（古い語のカードを出さない）。
+   ・当たりなし・引けない語（和文・1字・13桁未満の数字）は、出ている仮のカードを消して「Preparing search…」だけにする。
+   ・本体が動いた後も ready までは並んで動く（本体の paint()・run() は .qa が出ていれば消さない）。GA は送らない。 */
+(function(){ try{
+  var C=window.__kbCat, q=document.getElementById('q'); if(!C || !C.qaLookup || !q) return;
+  var root=document.documentElement, timer=null, seq=0, wait=null, settle=null;
+  function ready(){ return root.getAttribute('data-catalog')==='ready'; }
+  // 本体の起動（go）は約14秒メインスレッドを塞ぎ、その間は qa の返事（json の解析）も進まない。打った語の答えを引いているあいだは、
+  //   本体の起動を待たせる（/?q= の最初の答えと同じ考え・最長6秒は起動側で数える）。引き終わる（描いた・消した・捨てた）と解ける。
+  window.__qaTypedWait=function(){ return wait; };
+  function hold(){ if(!wait) wait=new Promise(function(r){ settle=r; }); }
+  function release(){ if(settle){ var s=settle; settle=null; wait=null; s(); } }
+  function clearQa(t){
+    var res=document.getElementById('results'), cnt=document.getElementById('count'); if(!res || res.querySelector('.card:not(.qa)')) return;
+    res.innerHTML = t ? '<div class="state"><b>Preparing search…</b>The catalog is still loading. Your search will run in a moment.</div>' : '';
+    if(cnt) cnt.textContent='';
+  }
+  function look(){
+    if(ready()) return release();
+    var t=q.value.trim(), my=++seq;
+    if(!t){ clearQa(''); return release(); }
+    C.qaLookup(t).then(function(a){
+      if(my!==seq) return;   // 新しい語を引いている（待ちはそちらが解く）
+      if(!ready() && q.value.trim()===t){ if(a && a.idx.length) window.__qaPaint(a); else clearQa(t); }
+      release();
+    }).catch(function(){ if(my!==seq) return; if(!ready() && q.value.trim()===t) clearQa(t); release(); });
+  }
+  // 語が変わったら、出ている仮のカードをその場で薄くする（引き直しの答えはメインスレッドが空くまで来ないことがあり、古い語のカードが
+  //   そのまま見えていた＝10/29 に「Chrono」の後「マリオ」で約10秒）。同じ語に戻れば元に戻す。答えが来たら描き直すか消す。
+  function stale(){
+    var res=document.getElementById('results'), cnt=document.getElementById('count'); if(!res || !res.querySelector('.qa') || res.querySelector('.card:not(.qa)')) return;
+    var same=res.getAttribute('data-qa-q')===q.value.trim();
+    res.querySelectorAll('.qa').forEach(function(el){ el.style.opacity = same ? '' : '.35'; });
+    if(cnt && !same) cnt.textContent='Searching…';
+  }
+  function later(){ hold(); stale(); clearTimeout(timer); timer=setTimeout(look, 250); }
+  q.addEventListener('input', function(e){ if(ready() || (e && e.isComposing)) return; later(); });
+  q.addEventListener('compositionend', function(){ if(!ready()) later(); });
 }catch(e){} })();
 </script>
 
@@ -6240,6 +6285,12 @@ buildSearchIndex();
       C2.qa.then(function(a){ if(!a || !a.idx.length) return go2(); var r=document.documentElement; if(r.getAttribute('data-qa')==='shown') return go2();
         new MutationObserver(function(){ if(r.getAttribute('data-qa')==='shown') go2(); }).observe(r,{attributes:true,attributeFilter:['data-qa']}); }, go2);
       setTimeout(go2, 3000);
+    } else if(window.__qaTypedWait && window.__qaTypedWait()){
+      // 2026-10-29: 検索欄に打った語の最初の答えを引いているときも同じく、描き終わる（か6秒たつ）まで本体を待たせる
+      //   （打った語は起動の直前に引き始めることが多く、qa の取得と解析も塞がったメインスレッドの隙間で進むので 3秒では間に合わなかった）
+      var startedT=false, goT=function(){ if(startedT) return; startedT=true; setTimeout(go, 50); };
+      window.__qaTypedWait().then(goT, goT);
+      setTimeout(goT, 6000);
     } else setTimeout(go, 0);                    // 進み具合の文を一度描かせてから
   }).catch(fail);
 })();
