@@ -52,9 +52,12 @@
   //   jan に無い番号・閉じた・カメラが使えない・時間切れ）。普通に開いたときは最初から開いている。
   var openGate, gate=new Promise(function(r){ openGate=r; });
   var scan=new URLSearchParams(location.search).get('scan')==='1';
-  if(!scan) openGate();
+  // 2026-10-29（boot-chunks・案②）: ふつうに開いたとき（?q= なし）は、検索欄が描かれた後に開ける（検索欄の直後の小さなスクリプトが開ける）。
+  //   /?q= は今までどおりすぐ開ける（最初の答えと本体を急ぐ）。
+  var later=!scan && !new URLSearchParams(location.search).get('q');
+  if(!scan && !later) openGate();
   function fetchLater(u){ return fetch(u).then(function(r){ if(!r.ok) throw new Error(u+' '+r.status); return gate.then(function(){ return r.json(); }); }); }
-  var C=window.__kbCat={ manifest:man, gate:gate, openGate:function(){ openGate(); },
+  var C=window.__kbCat={ manifest:man, gate:gate, openGate:function(){ openGate(); }, openGateAfterSearch:later,
     rows:man.then(function(m){ return fetchLater('/catalog/'+m.catalog); }),
     idx:man.then(function(m){ return m.index ? fetchLater('/catalog/'+m.index) : null; }).catch(function(){ return null; }) };   // 検索の索引（無ければ本体が作る）
   if(scan) C.jan=man.then(function(m){ return m.jan ? json('/catalog/'+m.jan) : null; });
@@ -393,6 +396,405 @@ html.scan-first #locbar, html.scan-first .wrap{display:none}
   l.media='print'; l.onload=function(){ l.media='all'; };
 }catch(e){} })();
 </script>
+<style id="kbCritical">
+/* 2026-10-29（boot-chunks・案①）: 最初の画面で検索欄まで描くための CSS の写し。下の本体の CSS（検索欄の直後に移した）から、
+   帯（#locbar）・ヘッダー・検索欄・html・body に当たる規則だけを、元の順のまま機械的に拾ったもの（69/473 規則・約14KB）。
+   ★元の CSS は1字も変えずに検索欄の直後に全部ある（同じ規則が後ろにもう一度来るので、最後の見た目は今までと同じ）。
+   ★ここは生成物。本体の CSS を直したら node tools/critical_css.mjs --write で作り直す（手で直さない。合っているかは引数なしで確かめる）。 */
+:root { color-scheme: dark; --paper: #07040f; --surface: #0b0714; --field: #140d24; --edge: #2a2247; --edge-input: #6f6790; --line: #221a3d; --ink: #c9c3e0; --muted: #8b84ab; --faint: #6f6790; --accent: #b337ff; --accent-ink: #07040f; --tag: #11eeff; --rare: #dcdc00; --danger: #dc0000; --danger-ink: #ffffff; --logo-pink: #e840a8; --logo-gold: #f8b820; --f-pixel: 'Press Start 2P','Space Mono',ui-monospace,monospace; --f-vt: 'VT323','Space Mono',ui-monospace,monospace; }
+* { box-sizing: border-box; }
+html, body { margin: 0px; }
+body { background-color: var(--paper); color: var(--ink); min-height: 100vh; font-family: "Space Grotesk", system-ui, sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.4; }
+body::before { content: ""; position: fixed; inset: 0px; z-index: -1; pointer-events: none; background: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='200'%20height='200'%20viewBox='0%200%20200%20200'%3E%3Cg%20fill='%23f8b820'%3E%3Ccircle%20cx='187.6'%20cy='132.2'%20r='1.4'%20opacity='.16'/%3E%3Ccircle%20cx='178.2'%20cy='171.2'%20r='.83'%20opacity='.24'/%3E%3Ccircle%20cx='85.2'%20cy='150.8'%20r='.9'%20opacity='.27'/%3E%3Ccircle%20cx='159.3'%20cy='56.1'%20r='1.4'%20opacity='.35'/%3E%3Ccircle%20cx='34.1'%20cy='168.3'%20r='.8'%20opacity='.29'/%3E%3Ccircle%20cx='59.9'%20cy='162.3'%20r='1.23'%20opacity='.24'/%3E%3Ccircle%20cx='24.5'%20cy='2.1'%20r='1.11'%20opacity='.24'/%3E%3Ccircle%20cx='124.9'%20cy='126.3'%20r='1.29'%20opacity='.27'/%3E%3Ccircle%20cx='169.8'%20cy='109.9'%20r='1.44'%20opacity='.16'/%3E%3Ccircle%20cx='55.5'%20cy='4.9'%20r='1.28'%20opacity='.24'/%3E%3Ccircle%20cx='70.8'%20cy='174.3'%20r='1.13'%20opacity='.16'/%3E%3Ccircle%20cx='154.7'%20cy='114.6'%20r='1.26'%20opacity='.39'/%3E%3Ccircle%20cx='47.3'%20cy='18.4'%20r='1.01'%20opacity='.19'/%3E%3Ccircle%20cx='54.7'%20cy='183.7'%20r='1.1'%20opacity='.33'/%3E%3Ccircle%20cx='130.4'%20cy='2.8'%20r='1.46'%20opacity='.19'/%3E%3C/g%3E%3Cg%20fill='%23e840a8'%3E%3Ccircle%20cx='102.6'%20cy='22'%20r='1.08'%20opacity='.16'/%3E%3Ccircle%20cx='173.8'%20cy='88'%20r='1.11'%20opacity='.35'/%3E%3Ccircle%20cx='142.5'%20cy='143.1'%20r='1.02'%20opacity='.22'/%3E%3Ccircle%20cx='51.1'%20cy='86.7'%20r='1.19'%20opacity='.16'/%3E%3Ccircle%20cx='138.8'%20cy='176.6'%20r='.77'%20opacity='.35'/%3E%3Ccircle%20cx='180.6'%20cy='151.7'%20r='.98'%20opacity='.21'/%3E%3Ccircle%20cx='51.1'%20cy='62.4'%20r='1.14'%20opacity='.33'/%3E%3Ccircle%20cx='59.2'%20cy='149.3'%20r='1.32'%20opacity='.37'/%3E%3Ccircle%20cx='189.5'%20cy='91.6'%20r='1.35'%20opacity='.21'/%3E%3Ccircle%20cx='33.7'%20cy='145.1'%20r='1.25'%20opacity='.3'/%3E%3Ccircle%20cx='63.8'%20cy='189.9'%20r='.96'%20opacity='.29'/%3E%3Ccircle%20cx='7.1'%20cy='169.3'%20r='1.01'%20opacity='.35'/%3E%3Ccircle%20cx='151.3'%20cy='132.8'%20r='.96'%20opacity='.24'/%3E%3Ccircle%20cx='197.6'%20cy='190.9'%20r='1.49'%20opacity='.29'/%3E%3Ccircle%20cx='56.5'%20cy='76.8'%20r='1.5'%20opacity='.39'/%3E%3Ccircle%20cx='101.9'%20cy='132.1'%20r='1.31'%20opacity='.26'/%3E%3Ccircle%20cx='126.9'%20cy='54.7'%20r='1.16'%20opacity='.29'/%3E%3Ccircle%20cx='106.3'%20cy='177.7'%20r='1.17'%20opacity='.19'/%3E%3Ccircle%20cx='28.9'%20cy='64.8'%20r='1.32'%20opacity='.31'/%3E%3Ccircle%20cx='119.6'%20cy='31.4'%20r='.83'%20opacity='.16'/%3E%3Ccircle%20cx='40.8'%20cy='107.6'%20r='1.01'%20opacity='.25'/%3E%3C/g%3E%3Cg%20fill='%23b337ff'%3E%3Ccircle%20cx='136.1'%20cy='159.4'%20r='1.17'%20opacity='.36'/%3E%3Ccircle%20cx='152.2'%20cy='178.8'%20r='.95'%20opacity='.3'/%3E%3Ccircle%20cx='15.9'%20cy='185.4'%20r='1.19'%20opacity='.32'/%3E%3Ccircle%20cx='196.6'%20cy='78.3'%20r='1.2'%20opacity='.32'/%3E%3Ccircle%20cx='69.2'%20cy='122.5'%20r='1.34'%20opacity='.18'/%3E%3Ccircle%20cx='163.3'%20cy='19'%20r='1.31'%20opacity='.18'/%3E%3Ccircle%20cx='150.7'%20cy='14.8'%20r='.78'%20opacity='.25'/%3E%3Ccircle%20cx='34'%20cy='189.1'%20r='1.4'%20opacity='.26'/%3E%3Ccircle%20cx='172.3'%20cy='196.3'%20r='1.23'%20opacity='.37'/%3E%3Ccircle%20cx='93.3'%20cy='63.5'%20r='.75'%20opacity='.4'/%3E%3Ccircle%20cx='7.9'%20cy='59.7'%20r='1.13'%20opacity='.16'/%3E%3Ccircle%20cx='6'%20cy='156.3'%20r='.78'%20opacity='.28'/%3E%3Ccircle%20cx='197.5'%20cy='64'%20r='1.2'%20opacity='.17'/%3E%3Ccircle%20cx='54.4'%20cy='137.9'%20r='1.04'%20opacity='.21'/%3E%3Ccircle%20cx='38.1'%20cy='55.9'%20r='1.08'%20opacity='.21'/%3E%3Ccircle%20cx='74.2'%20cy='79.9'%20r='1.11'%20opacity='.26'/%3E%3C/g%3E%3Cg%20fill='%23ffffff'%3E%3Ccircle%20cx='19.2'%20cy='149.4'%20r='.96'%20opacity='.17'/%3E%3Ccircle%20cx='184.4'%20cy='64.9'%20r='1.1'%20opacity='.23'/%3E%3Ccircle%20cx='95.6'%20cy='6.6'%20r='1.34'%20opacity='.33'/%3E%3Ccircle%20cx='86.1'%20cy='87.2'%20r='1.44'%20opacity='.39'/%3E%3Ccircle%20cx='107.5'%20cy='195.6'%20r='1.44'%20opacity='.23'/%3E%3Ccircle%20cx='184.8'%20cy='116.2'%20r='1.32'%20opacity='.28'/%3E%3Ccircle%20cx='86.3'%20cy='26.6'%20r='.96'%20opacity='.22'/%3E%3Ccircle%20cx='170.3'%20cy='59.7'%20r='1.01'%20opacity='.33'/%3E%3Ccircle%20cx='16.7'%20cy='40.1'%20r='.84'%20opacity='.39'/%3E%3Ccircle%20cx='83.6'%20cy='46.5'%20r='.8'%20opacity='.23'/%3E%3Ccircle%20cx='170'%20cy='47.5'%20r='.89'%20opacity='.16'/%3E%3Ccircle%20cx='79.3'%20cy='63'%20r='1.14'%20opacity='.25'/%3E%3Ccircle%20cx='158'%20cy='75.7'%20r='.99'%20opacity='.37'/%3E%3Ccircle%20cx='160.8'%20cy='40.4'%20r='1.35'%20opacity='.4'/%3E%3Ccircle%20cx='108.6'%20cy='67.5'%20r='1.38'%20opacity='.32'/%3E%3Ccircle%20cx='130.4'%20cy='92.6'%20r='.77'%20opacity='.37'/%3E%3Ccircle%20cx='186.8'%20cy='2'%20r='.89'%20opacity='.26'/%3E%3Ccircle%20cx='102.4'%20cy='98.2'%20r='1.16'%20opacity='.37'/%3E%3Ccircle%20cx='17.4'%20cy='25.1'%20r='.95'%20opacity='.31'/%3E%3Ccircle%20cx='174.5'%20cy='71.5'%20r='.86'%20opacity='.3'/%3E%3C/g%3E%3C/svg%3E") 0px 0px / 200px 200px repeat, radial-gradient(120% 90% at 50% -10%, rgb(30, 13, 56) 0%, rgb(10, 6, 25) 45%, rgb(7, 4, 15) 100%) 0px 0px / cover no-repeat; }
+.wrap { max-width: 760px; margin: 0px auto; padding: 0px 18px; }
+header { padding: 34px 0px 14px; }
+h1 { font-size: clamp(34px, 7vw, 52px); line-height: 0.98; font-weight: 700; letter-spacing: -0.02em; margin: 0px; }
+.lede { margin: 14px 0px 0px; max-width: 48ch; color: var(--muted); font-size: 15px; }
+.search { background: transparent; padding: 16px 0px 12px; margin-top: 14px; border-bottom: 2px solid var(--edge); }
+#q { flex: 1 1 240px; min-width: 0px; font-family: "Space Grotesk", sans-serif; font-size: 17px; font-weight: 500; padding: 13px 14px; border: 2px solid var(--edge-input); background: var(--field); color: var(--ink); border-radius: 0px; }
+#q:focus { outline: 3px solid var(--accent); outline-offset: 1px; }
+#q::placeholder { color: var(--muted); }
+#plat, #pub, #year { max-width: 220px; font-family: "Space Mono", monospace; font-size: 13px; padding: 13px 12px; border: 2px solid var(--edge-input); background: var(--field); color: var(--ink); border-radius: 0px; }
+#plat:focus, #year:focus { outline: 3px solid var(--accent); outline-offset: 1px; }
+#plat option, #year option { background: var(--field); color: var(--ink); }
+.pubwrap { position: relative; flex: 1 1 180px; max-width: 240px; min-width: 0px; }
+#pubInput { width: 100%; font-family: "Space Mono", monospace; font-size: 13px; padding: 13px 12px; border: 2px solid var(--edge-input); background: var(--field); color: var(--ink); border-radius: 0px; }
+#pubInput:focus { outline: 3px solid var(--accent); outline-offset: 1px; }
+#pubInput::placeholder { color: var(--muted); }
+#pubList { position: absolute; left: 0px; right: 0px; top: calc(100% + 2px); z-index: 40; background: var(--surface); border: 2px solid var(--edge); max-height: 300px; overflow-y: auto; }
+#pubList[hidden] { display: none; }
+.pu-icon { display: block; width: 20px; height: 20px; transition: transform 0.12s; }
+h1 { font-family: var(--f-pixel); }
+#locbar { position: sticky; top: 0px; z-index: 20; padding: 8px 18px; background: var(--paper); border-bottom: 1px solid var(--edge); }
+.locpair { display: flex; max-width: 420px; margin: 0px auto; border: 1px solid var(--edge-input); border-radius: 2px; overflow: hidden; }
+.locbtn { flex: 1 1 0%; min-height: 44px; padding: 10px 8px; background: transparent; border: 0px; color: var(--muted); font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; font-language-override: inherit; font-size: 13px; cursor: pointer; }
+.locbtn + .locbtn { border-left: 1px solid var(--edge-input); }
+.locbtn.is-on { background: var(--logo-pink); color: var(--accent-ink); font-weight: 700; }
+.locbtn.is-on::before { content: ""; display: inline-block; width: 8px; height: 8px; background: currentcolor; margin-right: 8px; vertical-align: middle; }
+@media (prefers-reduced-motion: reduce){
+* { transition: none !important; }
+}
+.scanbtn { font-family: var(--f-pixel); font-size: 13px; font-weight: 700; letter-spacing: 0.04em; padding: 13px 16px; border: 2px solid var(--danger); background: var(--danger); color: var(--danger-ink); cursor: pointer; text-transform: uppercase; border-radius: 0px; transition: background 0.12s, color 0.12s, border-color 0.12s; }
+.scanbtn:hover, .scanbtn:focus { background: var(--tag); border-color: var(--tag); color: var(--accent-ink); outline: none; }
+#q, #plat, #pub, #year, #pubInput, #scanJan, #scanCode, .scanbtn, #scanClose, #scanGo, #scanCodeGo, #clerkClose, .moreBtn, .card .slab-copy, .card .btn-copy, .card .btn-clerk, .card .store, .card .jp-chip, .card .shelf-kana { border-radius: 2px; }
+.kb-lockup { display: flex; flex-direction: column; align-items: center; gap: 20px; position: relative; padding: 6px 0px 2px; }
+.kb-lockup::after { content: ""; position: absolute; inset: -8px 0px; pointer-events: none; background: repeating-linear-gradient(rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0) 2px, rgba(0, 0, 0, 0.22) 3px, rgba(0, 0, 0, 0) 4px); }
+.kb-word { position: relative; display: inline-block; margin: 0px; line-height: 0; --kb-px: clamp(7px,1.9vw,13px); animation: 4s ease-in-out 0s infinite normal none running kb-breathe; }
+.kb-word .kb-ghost { position: absolute; inset: 0px; z-index: 0; transform: translate(4px, 3px); opacity: 0.85; }
+.kb-word .kb-top { position: relative; z-index: 1; }
+.kb-grid { display: grid; grid-template-columns: repeat(41,var(--kb-px)); grid-auto-rows: var(--kb-px); line-height: 0; }
+.kb-grid i { display: block; }
+.kb-on-pink { background: var(--logo-gold); box-shadow: 0 0 12px var(--logo-gold); }
+.kb-on-cyan { background: var(--logo-pink); box-shadow: 0 0 8px var(--logo-pink); }
+.kb-tagline { margin: 0px; display: flex; align-items: center; gap: 12px; font-family: var(--f-pixel); font-size: 12px; letter-spacing: 2px; color: rgb(255, 255, 255); text-shadow: rgba(255, 255, 255, 0.55) 0px 0px 8px; }
+.kb-tag-badge { font-family: "IBM Plex Sans JP", sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 1px; color: var(--accent-ink); background: rgb(255, 255, 255); padding: 2px 7px 3px; text-shadow: none; box-shadow: rgba(255, 255, 255, 0.45) 0px 0px 10px; white-space: nowrap; flex-shrink: 0; }
+header .lede { margin: 1.75rem auto 0.75rem; text-align: center; color: rgb(255, 255, 255); font-weight: 700; }
+header .lede .lede-sub { font-weight: 400; }
+@keyframes kb-breathe { 
+  0%, 100% { filter: brightness(0.97) drop-shadow(rgba(248, 184, 32, 0) 0px 0px 1px); }
+  50% { filter: brightness(1.14) drop-shadow(rgba(248, 184, 32, 0.5) 0px 0px 12px); }
+}
+@media (prefers-reduced-motion: reduce){
+.kb-word { animation: auto ease 0s 1 normal none running none; filter: brightness(1.06) drop-shadow(rgba(248, 184, 32, 0.4) 0px 0px 10px); }
+}
+.kb-panel { margin-top: 18px; padding: 26px 24px 20px; position: relative; }
+.kb-lab { display: flex; align-items: center; gap: 8px; margin: 0px 0px 10px; font-family: var(--f-pixel); font-size: 11px; letter-spacing: 1px; color: rgb(255, 255, 255); text-transform: uppercase; }
+.kb-lab .kb-lab-jp { font-family: "IBM Plex Sans JP", sans-serif; color: var(--muted); text-transform: none; letter-spacing: 1px; }
+.kb-fieldrow { margin: 0px 0px 18px; }
+.kb-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.kb-col { display: flex; flex-direction: column; min-width: 0px; }
+.kb-divider { height: 1px; background: var(--line); margin: 22px 0px 20px; }
+.kb-scanhint { margin: 14px 0px 0px; font-family: var(--f-vt); font-size: 18px; letter-spacing: 0.5px; color: var(--muted); }
+.kb-panel #q { width: 100%; font-size: 18px; }
+.kb-panel #plat, .kb-panel #year, .kb-panel #pubInput { width: 100%; max-width: none; }
+.kb-panel .pubwrap { width: 100%; max-width: none; flex: 0 0 auto; }
+.kb-panel .scanbtn { display: inline-flex; align-items: center; gap: 12px; padding: 15px 22px; box-shadow: rgba(220, 0, 0, 0.55) 0px 0px 18px -2px; }
+.kb-bars rect { shape-rendering: crispedges; }
+@media (max-width: 560px){
+.kb-cols { grid-template-columns: 1fr; }
+}
+:root { --locbar-h: 61px; --panel-h: 0px; }
+.locbar-in { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.locbar-in .locpair { margin: 0px; flex: 1 1 300px; }
+#myListBtn { flex-shrink: 0; min-height: 44px; padding: 10px 14px; cursor: pointer; border: 1px solid var(--edge-input); border-radius: 2px; background: transparent; color: var(--ink); font-style: inherit; font-variant: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; font-language-override: inherit; font-size: 13px; font-weight: 600; }
+#myListBtn:hover, #myListBtn:focus-visible { background: var(--field); outline: none; }
+#myListBtn .n { color: var(--muted); font-weight: 400; }
+#myListBtn .pu-icon { display: inline-block; width: 14px; height: 14px; vertical-align: -2px; margin-right: 6px; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     パワーアップアイコン（2026-08-21）。kataban-powerup-icon.svg /
+     kataban-powerup-icon-white.svg を外部ファイル参照ではなく <symbol> として
+     ここに埋め込んである。使う側は下の2か所（カードの [data-list] ボタン、
+     マイリスト画面の見出し）。
+     ★埋め込みの理由: このアイコンは検索結果の**行数ぶん**出る。<img src> だと
+       1行1リクエストになるうえ、リストへ追加した瞬間の白→色の差し替えで
+       読み込み待ちのちらつきが出る。<use> なら差し替えは href 属性1つで即時。
+     ★2つの symbol は矩形116個の座標がまったく同じで、fill の3色だけが違う
+       （#ffffff→#f2e768 / #d6dade→#c9b81f / #8b949c→#7d6f12）。
+       片方だけ描き直すと未追加/追加済みでドットがずれる。直すときは必ず両方。
+     ★shape-rendering="crispEdges" は symbol 側に付けてある。16x16 のドット絵を
+       20px（1.25倍）で出すので、これを外すとエッジがぼける。
+     ★この svg 自体は display:none。<use> は display:none の中の symbol も引ける。
+     ★使う側の書き方: <svg class="pu-icon"><use href="#icon-powerup-off"></use></svg>
+       外側の svg に viewBox は要らない（symbol 側が持っているものが効く）。
+     ============================================================ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+<symbol id="icon-powerup-off" viewBox="0 0 16 16" shape-rendering="crispEdges">
+  <rect x="6" y="0" width="4" height="1" fill="#0f1114"/>
+  <rect x="4" y="1" width="1" height="1" fill="#0f1114"/>
+  <rect x="5" y="1" width="6" height="1" fill="#e4e8ec"/>
+  <rect x="11" y="1" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="2" width="2" height="1" fill="#0f1114"/>
+  <rect x="4" y="2" width="5" height="1" fill="#e4e8ec"/>
+  <rect x="9" y="2" width="1" height="1" fill="#98a2ab"/>
+  <rect x="10" y="2" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="12" y="2" width="2" height="1" fill="#0f1114"/>
+  <rect x="2" y="3" width="1" height="1" fill="#0f1114"/>
+  <rect x="3" y="3" width="3" height="1" fill="#e4e8ec"/>
+  <rect x="6" y="3" width="4" height="1" fill="#0f1114"/>
+  <rect x="10" y="3" width="2" height="1" fill="#98a2ab"/>
+  <rect x="12" y="3" width="1" height="1" fill="#e4e8ec"/>
+  <rect x="13" y="3" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="4" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="4" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="4" y="4" width="2" height="1" fill="#0f1114"/>
+  <rect x="6" y="4" width="1" height="1" fill="#23262b"/>
+  <rect x="7" y="4" width="2" height="1" fill="#ffffff"/>
+  <rect x="9" y="4" width="1" height="1" fill="#23262b"/>
+  <rect x="10" y="4" width="2" height="1" fill="#0f1114"/>
+  <rect x="12" y="4" width="2" height="1" fill="#98a2ab"/>
+  <rect x="14" y="4" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="5" width="3" height="1" fill="#e4e8ec"/>
+  <rect x="4" y="5" width="1" height="1" fill="#0f1114"/>
+  <rect x="5" y="5" width="1" height="1" fill="#23262b"/>
+  <rect x="6" y="5" width="2" height="1" fill="#ffffff"/>
+  <rect x="8" y="5" width="2" height="1" fill="#d6dade"/>
+  <rect x="10" y="5" width="1" height="1" fill="#23262b"/>
+  <rect x="11" y="5" width="1" height="1" fill="#0f1114"/>
+  <rect x="12" y="5" width="1" height="1" fill="#5b646d"/>
+  <rect x="13" y="5" width="2" height="1" fill="#98a2ab"/>
+  <rect x="0" y="6" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="6" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="6" width="1" height="1" fill="#0f1114"/>
+  <rect x="4" y="6" width="1" height="1" fill="#23262b"/>
+  <rect x="5" y="6" width="2" height="1" fill="#ffffff"/>
+  <rect x="7" y="6" width="4" height="1" fill="#d6dade"/>
+  <rect x="11" y="6" width="1" height="1" fill="#23262b"/>
+  <rect x="12" y="6" width="1" height="1" fill="#0f1114"/>
+  <rect x="13" y="6" width="1" height="1" fill="#5b646d"/>
+  <rect x="14" y="6" width="1" height="1" fill="#98a2ab"/>
+  <rect x="15" y="6" width="1" height="1" fill="#0f1114"/>
+  <rect x="0" y="7" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="7" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="7" width="1" height="1" fill="#0f1114"/>
+  <rect x="4" y="7" width="1" height="1" fill="#23262b"/>
+  <rect x="5" y="7" width="1" height="1" fill="#ffffff"/>
+  <rect x="6" y="7" width="5" height="1" fill="#d6dade"/>
+  <rect x="11" y="7" width="1" height="1" fill="#23262b"/>
+  <rect x="12" y="7" width="1" height="1" fill="#0f1114"/>
+  <rect x="13" y="7" width="1" height="1" fill="#5b646d"/>
+  <rect x="14" y="7" width="1" height="1" fill="#98a2ab"/>
+  <rect x="15" y="7" width="1" height="1" fill="#0f1114"/>
+  <rect x="0" y="8" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="8" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="8" width="1" height="1" fill="#0f1114"/>
+  <rect x="4" y="8" width="1" height="1" fill="#23262b"/>
+  <rect x="5" y="8" width="5" height="1" fill="#d6dade"/>
+  <rect x="10" y="8" width="1" height="1" fill="#8b949c"/>
+  <rect x="11" y="8" width="1" height="1" fill="#23262b"/>
+  <rect x="12" y="8" width="1" height="1" fill="#0f1114"/>
+  <rect x="13" y="8" width="1" height="1" fill="#5b646d"/>
+  <rect x="14" y="8" width="1" height="1" fill="#98a2ab"/>
+  <rect x="15" y="8" width="1" height="1" fill="#0f1114"/>
+  <rect x="0" y="9" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="9" width="1" height="1" fill="#e4e8ec"/>
+  <rect x="2" y="9" width="1" height="1" fill="#98a2ab"/>
+  <rect x="3" y="9" width="1" height="1" fill="#0f1114"/>
+  <rect x="4" y="9" width="1" height="1" fill="#23262b"/>
+  <rect x="5" y="9" width="4" height="1" fill="#d6dade"/>
+  <rect x="9" y="9" width="2" height="1" fill="#8b949c"/>
+  <rect x="11" y="9" width="1" height="1" fill="#23262b"/>
+  <rect x="12" y="9" width="1" height="1" fill="#0f1114"/>
+  <rect x="13" y="9" width="1" height="1" fill="#5b646d"/>
+  <rect x="14" y="9" width="1" height="1" fill="#98a2ab"/>
+  <rect x="15" y="9" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="10" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="10" width="1" height="1" fill="#98a2ab"/>
+  <rect x="4" y="10" width="1" height="1" fill="#0f1114"/>
+  <rect x="5" y="10" width="1" height="1" fill="#23262b"/>
+  <rect x="6" y="10" width="2" height="1" fill="#d6dade"/>
+  <rect x="8" y="10" width="2" height="1" fill="#8b949c"/>
+  <rect x="10" y="10" width="1" height="1" fill="#23262b"/>
+  <rect x="11" y="10" width="1" height="1" fill="#0f1114"/>
+  <rect x="12" y="10" width="1" height="1" fill="#5b646d"/>
+  <rect x="13" y="10" width="2" height="1" fill="#98a2ab"/>
+  <rect x="1" y="11" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="11" width="1" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="11" width="1" height="1" fill="#98a2ab"/>
+  <rect x="4" y="11" width="2" height="1" fill="#0f1114"/>
+  <rect x="6" y="11" width="1" height="1" fill="#23262b"/>
+  <rect x="7" y="11" width="2" height="1" fill="#8b949c"/>
+  <rect x="9" y="11" width="1" height="1" fill="#23262b"/>
+  <rect x="10" y="11" width="2" height="1" fill="#0f1114"/>
+  <rect x="12" y="11" width="1" height="1" fill="#5b646d"/>
+  <rect x="13" y="11" width="1" height="1" fill="#98a2ab"/>
+  <rect x="14" y="11" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="12" width="1" height="1" fill="#0f1114"/>
+  <rect x="3" y="12" width="1" height="1" fill="#e4e8ec"/>
+  <rect x="4" y="12" width="1" height="1" fill="#98a2ab"/>
+  <rect x="5" y="12" width="1" height="1" fill="#5b646d"/>
+  <rect x="6" y="12" width="4" height="1" fill="#0f1114"/>
+  <rect x="10" y="12" width="2" height="1" fill="#5b646d"/>
+  <rect x="12" y="12" width="1" height="1" fill="#98a2ab"/>
+  <rect x="13" y="12" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="13" width="2" height="1" fill="#0f1114"/>
+  <rect x="4" y="13" width="2" height="1" fill="#98a2ab"/>
+  <rect x="6" y="13" width="4" height="1" fill="#5b646d"/>
+  <rect x="10" y="13" width="2" height="1" fill="#98a2ab"/>
+  <rect x="12" y="13" width="2" height="1" fill="#0f1114"/>
+  <rect x="4" y="14" width="1" height="1" fill="#0f1114"/>
+  <rect x="5" y="14" width="6" height="1" fill="#98a2ab"/>
+  <rect x="11" y="14" width="1" height="1" fill="#0f1114"/>
+  <rect x="6" y="15" width="4" height="1" fill="#0f1114"/>
+</symbol>
+<symbol id="icon-powerup-on" viewBox="0 0 16 16" shape-rendering="crispEdges">
+  <rect x="6" y="0" width="4" height="1" fill="#0f1114"/>
+  <rect x="4" y="1" width="1" height="1" fill="#0f1114"/>
+  <rect x="5" y="1" width="6" height="1" fill="#e4e8ec"/>
+  <rect x="11" y="1" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="2" width="2" height="1" fill="#0f1114"/>
+  <rect x="4" y="2" width="5" height="1" fill="#e4e8ec"/>
+  <rect x="9" y="2" width="1" height="1" fill="#98a2ab"/>
+  <rect x="10" y="2" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="12" y="2" width="2" height="1" fill="#0f1114"/>
+  <rect x="2" y="3" width="1" height="1" fill="#0f1114"/>
+  <rect x="3" y="3" width="3" height="1" fill="#e4e8ec"/>
+  <rect x="6" y="3" width="4" height="1" fill="#0f1114"/>
+  <rect x="10" y="3" width="2" height="1" fill="#98a2ab"/>
+  <rect x="12" y="3" width="1" height="1" fill="#e4e8ec"/>
+  <rect x="13" y="3" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="4" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="4" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="4" y="4" width="2" height="1" fill="#0f1114"/>
+  <rect x="6" y="4" width="1" height="1" fill="#23262b"/>
+  <rect x="7" y="4" width="2" height="1" fill="#f2e768"/>
+  <rect x="9" y="4" width="1" height="1" fill="#23262b"/>
+  <rect x="10" y="4" width="2" height="1" fill="#0f1114"/>
+  <rect x="12" y="4" width="2" height="1" fill="#98a2ab"/>
+  <rect x="14" y="4" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="5" width="3" height="1" fill="#e4e8ec"/>
+  <rect x="4" y="5" width="1" height="1" fill="#0f1114"/>
+  <rect x="5" y="5" width="1" height="1" fill="#23262b"/>
+  <rect x="6" y="5" width="2" height="1" fill="#f2e768"/>
+  <rect x="8" y="5" width="2" height="1" fill="#c9b81f"/>
+  <rect x="10" y="5" width="1" height="1" fill="#23262b"/>
+  <rect x="11" y="5" width="1" height="1" fill="#0f1114"/>
+  <rect x="12" y="5" width="1" height="1" fill="#5b646d"/>
+  <rect x="13" y="5" width="2" height="1" fill="#98a2ab"/>
+  <rect x="0" y="6" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="6" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="6" width="1" height="1" fill="#0f1114"/>
+  <rect x="4" y="6" width="1" height="1" fill="#23262b"/>
+  <rect x="5" y="6" width="2" height="1" fill="#f2e768"/>
+  <rect x="7" y="6" width="4" height="1" fill="#c9b81f"/>
+  <rect x="11" y="6" width="1" height="1" fill="#23262b"/>
+  <rect x="12" y="6" width="1" height="1" fill="#0f1114"/>
+  <rect x="13" y="6" width="1" height="1" fill="#5b646d"/>
+  <rect x="14" y="6" width="1" height="1" fill="#98a2ab"/>
+  <rect x="15" y="6" width="1" height="1" fill="#0f1114"/>
+  <rect x="0" y="7" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="7" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="7" width="1" height="1" fill="#0f1114"/>
+  <rect x="4" y="7" width="1" height="1" fill="#23262b"/>
+  <rect x="5" y="7" width="1" height="1" fill="#f2e768"/>
+  <rect x="6" y="7" width="5" height="1" fill="#c9b81f"/>
+  <rect x="11" y="7" width="1" height="1" fill="#23262b"/>
+  <rect x="12" y="7" width="1" height="1" fill="#0f1114"/>
+  <rect x="13" y="7" width="1" height="1" fill="#5b646d"/>
+  <rect x="14" y="7" width="1" height="1" fill="#98a2ab"/>
+  <rect x="15" y="7" width="1" height="1" fill="#0f1114"/>
+  <rect x="0" y="8" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="8" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="8" width="1" height="1" fill="#0f1114"/>
+  <rect x="4" y="8" width="1" height="1" fill="#23262b"/>
+  <rect x="5" y="8" width="5" height="1" fill="#c9b81f"/>
+  <rect x="10" y="8" width="1" height="1" fill="#7d6f12"/>
+  <rect x="11" y="8" width="1" height="1" fill="#23262b"/>
+  <rect x="12" y="8" width="1" height="1" fill="#0f1114"/>
+  <rect x="13" y="8" width="1" height="1" fill="#5b646d"/>
+  <rect x="14" y="8" width="1" height="1" fill="#98a2ab"/>
+  <rect x="15" y="8" width="1" height="1" fill="#0f1114"/>
+  <rect x="0" y="9" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="9" width="1" height="1" fill="#e4e8ec"/>
+  <rect x="2" y="9" width="1" height="1" fill="#98a2ab"/>
+  <rect x="3" y="9" width="1" height="1" fill="#0f1114"/>
+  <rect x="4" y="9" width="1" height="1" fill="#23262b"/>
+  <rect x="5" y="9" width="4" height="1" fill="#c9b81f"/>
+  <rect x="9" y="9" width="2" height="1" fill="#7d6f12"/>
+  <rect x="11" y="9" width="1" height="1" fill="#23262b"/>
+  <rect x="12" y="9" width="1" height="1" fill="#0f1114"/>
+  <rect x="13" y="9" width="1" height="1" fill="#5b646d"/>
+  <rect x="14" y="9" width="1" height="1" fill="#98a2ab"/>
+  <rect x="15" y="9" width="1" height="1" fill="#0f1114"/>
+  <rect x="1" y="10" width="2" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="10" width="1" height="1" fill="#98a2ab"/>
+  <rect x="4" y="10" width="1" height="1" fill="#0f1114"/>
+  <rect x="5" y="10" width="1" height="1" fill="#23262b"/>
+  <rect x="6" y="10" width="2" height="1" fill="#c9b81f"/>
+  <rect x="8" y="10" width="2" height="1" fill="#7d6f12"/>
+  <rect x="10" y="10" width="1" height="1" fill="#23262b"/>
+  <rect x="11" y="10" width="1" height="1" fill="#0f1114"/>
+  <rect x="12" y="10" width="1" height="1" fill="#5b646d"/>
+  <rect x="13" y="10" width="2" height="1" fill="#98a2ab"/>
+  <rect x="1" y="11" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="11" width="1" height="1" fill="#e4e8ec"/>
+  <rect x="3" y="11" width="1" height="1" fill="#98a2ab"/>
+  <rect x="4" y="11" width="2" height="1" fill="#0f1114"/>
+  <rect x="6" y="11" width="1" height="1" fill="#23262b"/>
+  <rect x="7" y="11" width="2" height="1" fill="#7d6f12"/>
+  <rect x="9" y="11" width="1" height="1" fill="#23262b"/>
+  <rect x="10" y="11" width="2" height="1" fill="#0f1114"/>
+  <rect x="12" y="11" width="1" height="1" fill="#5b646d"/>
+  <rect x="13" y="11" width="1" height="1" fill="#98a2ab"/>
+  <rect x="14" y="11" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="12" width="1" height="1" fill="#0f1114"/>
+  <rect x="3" y="12" width="1" height="1" fill="#e4e8ec"/>
+  <rect x="4" y="12" width="1" height="1" fill="#98a2ab"/>
+  <rect x="5" y="12" width="1" height="1" fill="#5b646d"/>
+  <rect x="6" y="12" width="4" height="1" fill="#0f1114"/>
+  <rect x="10" y="12" width="2" height="1" fill="#5b646d"/>
+  <rect x="12" y="12" width="1" height="1" fill="#98a2ab"/>
+  <rect x="13" y="12" width="1" height="1" fill="#0f1114"/>
+  <rect x="2" y="13" width="2" height="1" fill="#0f1114"/>
+  <rect x="4" y="13" width="2" height="1" fill="#98a2ab"/>
+  <rect x="6" y="13" width="4" height="1" fill="#5b646d"/>
+  <rect x="10" y="13" width="2" height="1" fill="#98a2ab"/>
+  <rect x="12" y="13" width="2" height="1" fill="#0f1114"/>
+  <rect x="4" y="14" width="1" height="1" fill="#0f1114"/>
+  <rect x="5" y="14" width="6" height="1" fill="#98a2ab"/>
+  <rect x="11" y="14" width="1" height="1" fill="#0f1114"/>
+  <rect x="6" y="15" width="4" height="1" fill="#0f1114"/>
+</symbol>
+</svg>
+<div id="locbar">
+  <div class="locbar-in">
+    <div class="locpair" role="group" aria-label="Where are you buying from?">
+      <button type="button" class="locbtn is-on" data-loc="out" aria-pressed="true" onclick="setLoc('out')">I'm outside Japan</button>
+      <button type="button" class="locbtn" data-loc="jp" aria-pressed="false" onclick="setLoc('jp')">I'm in Japan</button>
+    </div>
+    <button type="button" id="myListBtn" aria-haspopup="dialog" aria-expanded="false"><svg class="pu-icon" aria-hidden="true" focusable="false"><use href="#icon-powerup-on"></use></svg>My List <span class="n" id="myListCount">(0)</span></button>
+  </div>
+</div>
+
+<div class="wrap">
+  <header>
+    <div class="kb-lockup">
+      <h1 class="kb-word" aria-label="Kataban">
+        <span class="kb-ghost" aria-hidden="true"><span class="kb-grid" id="kbGridCyan"></span></span>
+        <span class="kb-grid kb-top" id="kbGridPink" aria-hidden="true"></span>
+      </h1>
+      <p class="kb-tagline"><span class="kb-tag-badge">&#22411;&#30058;</span> Decode Japanese Game Shelves</p>
+    </div>
+    <p class="lede">Type a game you want.<br><span class="lede-sub">Get its Japanese title, the cartridge code to hunt for on the shelf, and links to buy it.</span></p>
+  </header>
+
+  <div class="search kb-panel">
+    <div class="kb-fieldrow">
+      <label class="kb-lab" for="q">Title <span class="kb-lab-jp">&#12479;&#12452;&#12488;&#12523;</span></label>
+      <input id="q" type="search" autocomplete="off" placeholder="Title or 13-digit barcode…" aria-label="Search a Western game title, product code or 13-digit barcode">
+    </div>
+    <div class="kb-cols">
+      <div class="kb-col">
+        <label class="kb-lab" for="plat">Platform</label>
+        <select id="plat" aria-label="Filter by platform"></select>
+      </div>
+      <div class="kb-col">
+        <label class="kb-lab" for="pubInput">Publisher</label>
+        <div class="pubwrap">
+          <input type="hidden" id="pub" value="All">
+          <input id="pubInput" type="text" autocomplete="off" spellcheck="false" placeholder="Publisher — e.g. namco, sce" aria-label="Filter by publisher" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="pubList">
+          <div id="pubList" role="listbox" hidden></div>
+        </div>
+      </div>
+      <div class="kb-col">
+        <label class="kb-lab" for="year">Year</label>
+        <select id="year" aria-label="Filter by release year"></select>
+      </div>
+    </div>
+    <div class="kb-divider"></div>
+    <button type="button" id="scanBtn" class="scanbtn" aria-label="Scan a barcode"><svg class="kb-bars" width="22" height="16" viewBox="0 0 22 16" aria-hidden="true"><g fill="currentColor"><rect x="0" width="2" height="16"/><rect x="3" width="1" height="16"/><rect x="6" width="3" height="16"/><rect x="10" width="1" height="16"/><rect x="12" width="2" height="16"/><rect x="16" width="1" height="16"/><rect x="18" width="3" height="16"/></g></svg> SCAN BARCODE</button>
+    <p class="kb-scanhint">Point your camera at the JAN barcode on a disc case or a cartridge box.</p>
+  </div>
+<script>
+/* 2026-10-29（boot-chunks・案②）: ふつうに開いたとき（/?q= と /?scan=1 以外）は、カタログと索引の解析（門）を検索欄が描かれた後に始める。
+   先に解析すると、本文の HTML の解析と取り合って検索欄が出るのが遅れた。描かれる前のフレームの後（裏のタブではフレームが来ないので最長1秒）に開ける。 */
+(function(){ try{ var C=window.__kbCat; if(!C || !C.openGateAfterSearch) return; var done=false, o=function(){ if(done) return; done=true; C.openGate(); };
+  requestAnimationFrame(function(){ setTimeout(o, 0); }); setTimeout(o, 1000); }catch(e){} })();
+</script>
+<!-- 2026-10-29（boot-chunks・案①）: 本体の CSS。最初の画面に検索欄を間に合わせるため、<head> から検索欄の直後へ移した（中身は1字も変えていない）。-->
 <style>
 /* ============================================================
    ページの地 = レトロアーケード配色 (v2)
@@ -1841,313 +2243,6 @@ header .lede .lede-sub{ font-weight:400; }
   font:500 14px/1.2 var(--f-display); transition:background .12s,border-color .12s;}
 .mycard .btn-clerk-mini:hover,.mycard .btn-clerk-mini:focus-visible{background:#241c40; border-color:#bf57ff; outline:none;}
 </style>
-</head>
-<body>
-
-<!-- ============================================================
-     パワーアップアイコン（2026-08-21）。kataban-powerup-icon.svg /
-     kataban-powerup-icon-white.svg を外部ファイル参照ではなく <symbol> として
-     ここに埋め込んである。使う側は下の2か所（カードの [data-list] ボタン、
-     マイリスト画面の見出し）。
-     ★埋め込みの理由: このアイコンは検索結果の**行数ぶん**出る。<img src> だと
-       1行1リクエストになるうえ、リストへ追加した瞬間の白→色の差し替えで
-       読み込み待ちのちらつきが出る。<use> なら差し替えは href 属性1つで即時。
-     ★2つの symbol は矩形116個の座標がまったく同じで、fill の3色だけが違う
-       （#ffffff→#f2e768 / #d6dade→#c9b81f / #8b949c→#7d6f12）。
-       片方だけ描き直すと未追加/追加済みでドットがずれる。直すときは必ず両方。
-     ★shape-rendering="crispEdges" は symbol 側に付けてある。16x16 のドット絵を
-       20px（1.25倍）で出すので、これを外すとエッジがぼける。
-     ★この svg 自体は display:none。<use> は display:none の中の symbol も引ける。
-     ★使う側の書き方: <svg class="pu-icon"><use href="#icon-powerup-off"></use></svg>
-       外側の svg に viewBox は要らない（symbol 側が持っているものが効く）。
-     ============================================================ -->
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
-<symbol id="icon-powerup-off" viewBox="0 0 16 16" shape-rendering="crispEdges">
-  <rect x="6" y="0" width="4" height="1" fill="#0f1114"/>
-  <rect x="4" y="1" width="1" height="1" fill="#0f1114"/>
-  <rect x="5" y="1" width="6" height="1" fill="#e4e8ec"/>
-  <rect x="11" y="1" width="1" height="1" fill="#0f1114"/>
-  <rect x="2" y="2" width="2" height="1" fill="#0f1114"/>
-  <rect x="4" y="2" width="5" height="1" fill="#e4e8ec"/>
-  <rect x="9" y="2" width="1" height="1" fill="#98a2ab"/>
-  <rect x="10" y="2" width="2" height="1" fill="#e4e8ec"/>
-  <rect x="12" y="2" width="2" height="1" fill="#0f1114"/>
-  <rect x="2" y="3" width="1" height="1" fill="#0f1114"/>
-  <rect x="3" y="3" width="3" height="1" fill="#e4e8ec"/>
-  <rect x="6" y="3" width="4" height="1" fill="#0f1114"/>
-  <rect x="10" y="3" width="2" height="1" fill="#98a2ab"/>
-  <rect x="12" y="3" width="1" height="1" fill="#e4e8ec"/>
-  <rect x="13" y="3" width="1" height="1" fill="#0f1114"/>
-  <rect x="1" y="4" width="1" height="1" fill="#0f1114"/>
-  <rect x="2" y="4" width="2" height="1" fill="#e4e8ec"/>
-  <rect x="4" y="4" width="2" height="1" fill="#0f1114"/>
-  <rect x="6" y="4" width="1" height="1" fill="#23262b"/>
-  <rect x="7" y="4" width="2" height="1" fill="#ffffff"/>
-  <rect x="9" y="4" width="1" height="1" fill="#23262b"/>
-  <rect x="10" y="4" width="2" height="1" fill="#0f1114"/>
-  <rect x="12" y="4" width="2" height="1" fill="#98a2ab"/>
-  <rect x="14" y="4" width="1" height="1" fill="#0f1114"/>
-  <rect x="1" y="5" width="3" height="1" fill="#e4e8ec"/>
-  <rect x="4" y="5" width="1" height="1" fill="#0f1114"/>
-  <rect x="5" y="5" width="1" height="1" fill="#23262b"/>
-  <rect x="6" y="5" width="2" height="1" fill="#ffffff"/>
-  <rect x="8" y="5" width="2" height="1" fill="#d6dade"/>
-  <rect x="10" y="5" width="1" height="1" fill="#23262b"/>
-  <rect x="11" y="5" width="1" height="1" fill="#0f1114"/>
-  <rect x="12" y="5" width="1" height="1" fill="#5b646d"/>
-  <rect x="13" y="5" width="2" height="1" fill="#98a2ab"/>
-  <rect x="0" y="6" width="1" height="1" fill="#0f1114"/>
-  <rect x="1" y="6" width="2" height="1" fill="#e4e8ec"/>
-  <rect x="3" y="6" width="1" height="1" fill="#0f1114"/>
-  <rect x="4" y="6" width="1" height="1" fill="#23262b"/>
-  <rect x="5" y="6" width="2" height="1" fill="#ffffff"/>
-  <rect x="7" y="6" width="4" height="1" fill="#d6dade"/>
-  <rect x="11" y="6" width="1" height="1" fill="#23262b"/>
-  <rect x="12" y="6" width="1" height="1" fill="#0f1114"/>
-  <rect x="13" y="6" width="1" height="1" fill="#5b646d"/>
-  <rect x="14" y="6" width="1" height="1" fill="#98a2ab"/>
-  <rect x="15" y="6" width="1" height="1" fill="#0f1114"/>
-  <rect x="0" y="7" width="1" height="1" fill="#0f1114"/>
-  <rect x="1" y="7" width="2" height="1" fill="#e4e8ec"/>
-  <rect x="3" y="7" width="1" height="1" fill="#0f1114"/>
-  <rect x="4" y="7" width="1" height="1" fill="#23262b"/>
-  <rect x="5" y="7" width="1" height="1" fill="#ffffff"/>
-  <rect x="6" y="7" width="5" height="1" fill="#d6dade"/>
-  <rect x="11" y="7" width="1" height="1" fill="#23262b"/>
-  <rect x="12" y="7" width="1" height="1" fill="#0f1114"/>
-  <rect x="13" y="7" width="1" height="1" fill="#5b646d"/>
-  <rect x="14" y="7" width="1" height="1" fill="#98a2ab"/>
-  <rect x="15" y="7" width="1" height="1" fill="#0f1114"/>
-  <rect x="0" y="8" width="1" height="1" fill="#0f1114"/>
-  <rect x="1" y="8" width="2" height="1" fill="#e4e8ec"/>
-  <rect x="3" y="8" width="1" height="1" fill="#0f1114"/>
-  <rect x="4" y="8" width="1" height="1" fill="#23262b"/>
-  <rect x="5" y="8" width="5" height="1" fill="#d6dade"/>
-  <rect x="10" y="8" width="1" height="1" fill="#8b949c"/>
-  <rect x="11" y="8" width="1" height="1" fill="#23262b"/>
-  <rect x="12" y="8" width="1" height="1" fill="#0f1114"/>
-  <rect x="13" y="8" width="1" height="1" fill="#5b646d"/>
-  <rect x="14" y="8" width="1" height="1" fill="#98a2ab"/>
-  <rect x="15" y="8" width="1" height="1" fill="#0f1114"/>
-  <rect x="0" y="9" width="1" height="1" fill="#0f1114"/>
-  <rect x="1" y="9" width="1" height="1" fill="#e4e8ec"/>
-  <rect x="2" y="9" width="1" height="1" fill="#98a2ab"/>
-  <rect x="3" y="9" width="1" height="1" fill="#0f1114"/>
-  <rect x="4" y="9" width="1" height="1" fill="#23262b"/>
-  <rect x="5" y="9" width="4" height="1" fill="#d6dade"/>
-  <rect x="9" y="9" width="2" height="1" fill="#8b949c"/>
-  <rect x="11" y="9" width="1" height="1" fill="#23262b"/>
-  <rect x="12" y="9" width="1" height="1" fill="#0f1114"/>
-  <rect x="13" y="9" width="1" height="1" fill="#5b646d"/>
-  <rect x="14" y="9" width="1" height="1" fill="#98a2ab"/>
-  <rect x="15" y="9" width="1" height="1" fill="#0f1114"/>
-  <rect x="1" y="10" width="2" height="1" fill="#e4e8ec"/>
-  <rect x="3" y="10" width="1" height="1" fill="#98a2ab"/>
-  <rect x="4" y="10" width="1" height="1" fill="#0f1114"/>
-  <rect x="5" y="10" width="1" height="1" fill="#23262b"/>
-  <rect x="6" y="10" width="2" height="1" fill="#d6dade"/>
-  <rect x="8" y="10" width="2" height="1" fill="#8b949c"/>
-  <rect x="10" y="10" width="1" height="1" fill="#23262b"/>
-  <rect x="11" y="10" width="1" height="1" fill="#0f1114"/>
-  <rect x="12" y="10" width="1" height="1" fill="#5b646d"/>
-  <rect x="13" y="10" width="2" height="1" fill="#98a2ab"/>
-  <rect x="1" y="11" width="1" height="1" fill="#0f1114"/>
-  <rect x="2" y="11" width="1" height="1" fill="#e4e8ec"/>
-  <rect x="3" y="11" width="1" height="1" fill="#98a2ab"/>
-  <rect x="4" y="11" width="2" height="1" fill="#0f1114"/>
-  <rect x="6" y="11" width="1" height="1" fill="#23262b"/>
-  <rect x="7" y="11" width="2" height="1" fill="#8b949c"/>
-  <rect x="9" y="11" width="1" height="1" fill="#23262b"/>
-  <rect x="10" y="11" width="2" height="1" fill="#0f1114"/>
-  <rect x="12" y="11" width="1" height="1" fill="#5b646d"/>
-  <rect x="13" y="11" width="1" height="1" fill="#98a2ab"/>
-  <rect x="14" y="11" width="1" height="1" fill="#0f1114"/>
-  <rect x="2" y="12" width="1" height="1" fill="#0f1114"/>
-  <rect x="3" y="12" width="1" height="1" fill="#e4e8ec"/>
-  <rect x="4" y="12" width="1" height="1" fill="#98a2ab"/>
-  <rect x="5" y="12" width="1" height="1" fill="#5b646d"/>
-  <rect x="6" y="12" width="4" height="1" fill="#0f1114"/>
-  <rect x="10" y="12" width="2" height="1" fill="#5b646d"/>
-  <rect x="12" y="12" width="1" height="1" fill="#98a2ab"/>
-  <rect x="13" y="12" width="1" height="1" fill="#0f1114"/>
-  <rect x="2" y="13" width="2" height="1" fill="#0f1114"/>
-  <rect x="4" y="13" width="2" height="1" fill="#98a2ab"/>
-  <rect x="6" y="13" width="4" height="1" fill="#5b646d"/>
-  <rect x="10" y="13" width="2" height="1" fill="#98a2ab"/>
-  <rect x="12" y="13" width="2" height="1" fill="#0f1114"/>
-  <rect x="4" y="14" width="1" height="1" fill="#0f1114"/>
-  <rect x="5" y="14" width="6" height="1" fill="#98a2ab"/>
-  <rect x="11" y="14" width="1" height="1" fill="#0f1114"/>
-  <rect x="6" y="15" width="4" height="1" fill="#0f1114"/>
-</symbol>
-<symbol id="icon-powerup-on" viewBox="0 0 16 16" shape-rendering="crispEdges">
-  <rect x="6" y="0" width="4" height="1" fill="#0f1114"/>
-  <rect x="4" y="1" width="1" height="1" fill="#0f1114"/>
-  <rect x="5" y="1" width="6" height="1" fill="#e4e8ec"/>
-  <rect x="11" y="1" width="1" height="1" fill="#0f1114"/>
-  <rect x="2" y="2" width="2" height="1" fill="#0f1114"/>
-  <rect x="4" y="2" width="5" height="1" fill="#e4e8ec"/>
-  <rect x="9" y="2" width="1" height="1" fill="#98a2ab"/>
-  <rect x="10" y="2" width="2" height="1" fill="#e4e8ec"/>
-  <rect x="12" y="2" width="2" height="1" fill="#0f1114"/>
-  <rect x="2" y="3" width="1" height="1" fill="#0f1114"/>
-  <rect x="3" y="3" width="3" height="1" fill="#e4e8ec"/>
-  <rect x="6" y="3" width="4" height="1" fill="#0f1114"/>
-  <rect x="10" y="3" width="2" height="1" fill="#98a2ab"/>
-  <rect x="12" y="3" width="1" height="1" fill="#e4e8ec"/>
-  <rect x="13" y="3" width="1" height="1" fill="#0f1114"/>
-  <rect x="1" y="4" width="1" height="1" fill="#0f1114"/>
-  <rect x="2" y="4" width="2" height="1" fill="#e4e8ec"/>
-  <rect x="4" y="4" width="2" height="1" fill="#0f1114"/>
-  <rect x="6" y="4" width="1" height="1" fill="#23262b"/>
-  <rect x="7" y="4" width="2" height="1" fill="#f2e768"/>
-  <rect x="9" y="4" width="1" height="1" fill="#23262b"/>
-  <rect x="10" y="4" width="2" height="1" fill="#0f1114"/>
-  <rect x="12" y="4" width="2" height="1" fill="#98a2ab"/>
-  <rect x="14" y="4" width="1" height="1" fill="#0f1114"/>
-  <rect x="1" y="5" width="3" height="1" fill="#e4e8ec"/>
-  <rect x="4" y="5" width="1" height="1" fill="#0f1114"/>
-  <rect x="5" y="5" width="1" height="1" fill="#23262b"/>
-  <rect x="6" y="5" width="2" height="1" fill="#f2e768"/>
-  <rect x="8" y="5" width="2" height="1" fill="#c9b81f"/>
-  <rect x="10" y="5" width="1" height="1" fill="#23262b"/>
-  <rect x="11" y="5" width="1" height="1" fill="#0f1114"/>
-  <rect x="12" y="5" width="1" height="1" fill="#5b646d"/>
-  <rect x="13" y="5" width="2" height="1" fill="#98a2ab"/>
-  <rect x="0" y="6" width="1" height="1" fill="#0f1114"/>
-  <rect x="1" y="6" width="2" height="1" fill="#e4e8ec"/>
-  <rect x="3" y="6" width="1" height="1" fill="#0f1114"/>
-  <rect x="4" y="6" width="1" height="1" fill="#23262b"/>
-  <rect x="5" y="6" width="2" height="1" fill="#f2e768"/>
-  <rect x="7" y="6" width="4" height="1" fill="#c9b81f"/>
-  <rect x="11" y="6" width="1" height="1" fill="#23262b"/>
-  <rect x="12" y="6" width="1" height="1" fill="#0f1114"/>
-  <rect x="13" y="6" width="1" height="1" fill="#5b646d"/>
-  <rect x="14" y="6" width="1" height="1" fill="#98a2ab"/>
-  <rect x="15" y="6" width="1" height="1" fill="#0f1114"/>
-  <rect x="0" y="7" width="1" height="1" fill="#0f1114"/>
-  <rect x="1" y="7" width="2" height="1" fill="#e4e8ec"/>
-  <rect x="3" y="7" width="1" height="1" fill="#0f1114"/>
-  <rect x="4" y="7" width="1" height="1" fill="#23262b"/>
-  <rect x="5" y="7" width="1" height="1" fill="#f2e768"/>
-  <rect x="6" y="7" width="5" height="1" fill="#c9b81f"/>
-  <rect x="11" y="7" width="1" height="1" fill="#23262b"/>
-  <rect x="12" y="7" width="1" height="1" fill="#0f1114"/>
-  <rect x="13" y="7" width="1" height="1" fill="#5b646d"/>
-  <rect x="14" y="7" width="1" height="1" fill="#98a2ab"/>
-  <rect x="15" y="7" width="1" height="1" fill="#0f1114"/>
-  <rect x="0" y="8" width="1" height="1" fill="#0f1114"/>
-  <rect x="1" y="8" width="2" height="1" fill="#e4e8ec"/>
-  <rect x="3" y="8" width="1" height="1" fill="#0f1114"/>
-  <rect x="4" y="8" width="1" height="1" fill="#23262b"/>
-  <rect x="5" y="8" width="5" height="1" fill="#c9b81f"/>
-  <rect x="10" y="8" width="1" height="1" fill="#7d6f12"/>
-  <rect x="11" y="8" width="1" height="1" fill="#23262b"/>
-  <rect x="12" y="8" width="1" height="1" fill="#0f1114"/>
-  <rect x="13" y="8" width="1" height="1" fill="#5b646d"/>
-  <rect x="14" y="8" width="1" height="1" fill="#98a2ab"/>
-  <rect x="15" y="8" width="1" height="1" fill="#0f1114"/>
-  <rect x="0" y="9" width="1" height="1" fill="#0f1114"/>
-  <rect x="1" y="9" width="1" height="1" fill="#e4e8ec"/>
-  <rect x="2" y="9" width="1" height="1" fill="#98a2ab"/>
-  <rect x="3" y="9" width="1" height="1" fill="#0f1114"/>
-  <rect x="4" y="9" width="1" height="1" fill="#23262b"/>
-  <rect x="5" y="9" width="4" height="1" fill="#c9b81f"/>
-  <rect x="9" y="9" width="2" height="1" fill="#7d6f12"/>
-  <rect x="11" y="9" width="1" height="1" fill="#23262b"/>
-  <rect x="12" y="9" width="1" height="1" fill="#0f1114"/>
-  <rect x="13" y="9" width="1" height="1" fill="#5b646d"/>
-  <rect x="14" y="9" width="1" height="1" fill="#98a2ab"/>
-  <rect x="15" y="9" width="1" height="1" fill="#0f1114"/>
-  <rect x="1" y="10" width="2" height="1" fill="#e4e8ec"/>
-  <rect x="3" y="10" width="1" height="1" fill="#98a2ab"/>
-  <rect x="4" y="10" width="1" height="1" fill="#0f1114"/>
-  <rect x="5" y="10" width="1" height="1" fill="#23262b"/>
-  <rect x="6" y="10" width="2" height="1" fill="#c9b81f"/>
-  <rect x="8" y="10" width="2" height="1" fill="#7d6f12"/>
-  <rect x="10" y="10" width="1" height="1" fill="#23262b"/>
-  <rect x="11" y="10" width="1" height="1" fill="#0f1114"/>
-  <rect x="12" y="10" width="1" height="1" fill="#5b646d"/>
-  <rect x="13" y="10" width="2" height="1" fill="#98a2ab"/>
-  <rect x="1" y="11" width="1" height="1" fill="#0f1114"/>
-  <rect x="2" y="11" width="1" height="1" fill="#e4e8ec"/>
-  <rect x="3" y="11" width="1" height="1" fill="#98a2ab"/>
-  <rect x="4" y="11" width="2" height="1" fill="#0f1114"/>
-  <rect x="6" y="11" width="1" height="1" fill="#23262b"/>
-  <rect x="7" y="11" width="2" height="1" fill="#7d6f12"/>
-  <rect x="9" y="11" width="1" height="1" fill="#23262b"/>
-  <rect x="10" y="11" width="2" height="1" fill="#0f1114"/>
-  <rect x="12" y="11" width="1" height="1" fill="#5b646d"/>
-  <rect x="13" y="11" width="1" height="1" fill="#98a2ab"/>
-  <rect x="14" y="11" width="1" height="1" fill="#0f1114"/>
-  <rect x="2" y="12" width="1" height="1" fill="#0f1114"/>
-  <rect x="3" y="12" width="1" height="1" fill="#e4e8ec"/>
-  <rect x="4" y="12" width="1" height="1" fill="#98a2ab"/>
-  <rect x="5" y="12" width="1" height="1" fill="#5b646d"/>
-  <rect x="6" y="12" width="4" height="1" fill="#0f1114"/>
-  <rect x="10" y="12" width="2" height="1" fill="#5b646d"/>
-  <rect x="12" y="12" width="1" height="1" fill="#98a2ab"/>
-  <rect x="13" y="12" width="1" height="1" fill="#0f1114"/>
-  <rect x="2" y="13" width="2" height="1" fill="#0f1114"/>
-  <rect x="4" y="13" width="2" height="1" fill="#98a2ab"/>
-  <rect x="6" y="13" width="4" height="1" fill="#5b646d"/>
-  <rect x="10" y="13" width="2" height="1" fill="#98a2ab"/>
-  <rect x="12" y="13" width="2" height="1" fill="#0f1114"/>
-  <rect x="4" y="14" width="1" height="1" fill="#0f1114"/>
-  <rect x="5" y="14" width="6" height="1" fill="#98a2ab"/>
-  <rect x="11" y="14" width="1" height="1" fill="#0f1114"/>
-  <rect x="6" y="15" width="4" height="1" fill="#0f1114"/>
-</symbol>
-</svg>
-<div id="locbar">
-  <div class="locbar-in">
-    <div class="locpair" role="group" aria-label="Where are you buying from?">
-      <button type="button" class="locbtn is-on" data-loc="out" aria-pressed="true" onclick="setLoc('out')">I'm outside Japan</button>
-      <button type="button" class="locbtn" data-loc="jp" aria-pressed="false" onclick="setLoc('jp')">I'm in Japan</button>
-    </div>
-    <button type="button" id="myListBtn" aria-haspopup="dialog" aria-expanded="false"><svg class="pu-icon" aria-hidden="true" focusable="false"><use href="#icon-powerup-on"></use></svg>My List <span class="n" id="myListCount">(0)</span></button>
-  </div>
-</div>
-
-<div class="wrap">
-  <header>
-    <div class="kb-lockup">
-      <h1 class="kb-word" aria-label="Kataban">
-        <span class="kb-ghost" aria-hidden="true"><span class="kb-grid" id="kbGridCyan"></span></span>
-        <span class="kb-grid kb-top" id="kbGridPink" aria-hidden="true"></span>
-      </h1>
-      <p class="kb-tagline"><span class="kb-tag-badge">&#22411;&#30058;</span> Decode Japanese Game Shelves</p>
-    </div>
-    <p class="lede">Type a game you want.<br><span class="lede-sub">Get its Japanese title, the cartridge code to hunt for on the shelf, and links to buy it.</span></p>
-  </header>
-
-  <div class="search kb-panel">
-    <div class="kb-fieldrow">
-      <label class="kb-lab" for="q">Title <span class="kb-lab-jp">&#12479;&#12452;&#12488;&#12523;</span></label>
-      <input id="q" type="search" autocomplete="off" placeholder="Title or 13-digit barcode…" aria-label="Search a Western game title, product code or 13-digit barcode">
-    </div>
-    <div class="kb-cols">
-      <div class="kb-col">
-        <label class="kb-lab" for="plat">Platform</label>
-        <select id="plat" aria-label="Filter by platform"></select>
-      </div>
-      <div class="kb-col">
-        <label class="kb-lab" for="pubInput">Publisher</label>
-        <div class="pubwrap">
-          <input type="hidden" id="pub" value="All">
-          <input id="pubInput" type="text" autocomplete="off" spellcheck="false" placeholder="Publisher — e.g. namco, sce" aria-label="Filter by publisher" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="pubList">
-          <div id="pubList" role="listbox" hidden></div>
-        </div>
-      </div>
-      <div class="kb-col">
-        <label class="kb-lab" for="year">Year</label>
-        <select id="year" aria-label="Filter by release year"></select>
-      </div>
-    </div>
-    <div class="kb-divider"></div>
-    <button type="button" id="scanBtn" class="scanbtn" aria-label="Scan a barcode"><svg class="kb-bars" width="22" height="16" viewBox="0 0 22 16" aria-hidden="true"><g fill="currentColor"><rect x="0" width="2" height="16"/><rect x="3" width="1" height="16"/><rect x="6" width="3" height="16"/><rect x="10" width="1" height="16"/><rect x="12" width="2" height="16"/><rect x="16" width="1" height="16"/><rect x="18" width="3" height="16"/></g></svg> SCAN BARCODE</button>
-    <p class="kb-scanhint">Point your camera at the JAN barcode on a disc case or a cartridge box.</p>
-  </div>
 
   <!-- 呼び戻しトグル。position:fixed なので DOM 上の位置は見た目に効かないが、
        開く相手（.kb-panel）の直後に置いて対応を読み取れるようにしている。
@@ -2238,6 +2333,8 @@ header .lede .lede-sub{ font-weight:400; }
   function later(){ hold(); stale(); clearTimeout(timer); timer=setTimeout(look, 250); }
   q.addEventListener('input', function(e){ if(ready() || (e && e.isComposing)) return; later(); });
   q.addEventListener('compositionend', function(){ if(!ready()) later(); });
+  // 2026-10-29（boot-chunks・案①）: 検索欄が先に出るので、この受け手が付く前に打たれた語がありうる。付いた時点で語があれば引く。
+  if(!ready() && q.value.trim()) later();
 }catch(e){} })();
 </script>
 
@@ -2884,26 +2981,42 @@ function buildSearchIndex(){
   const fill=ix=>{
     const m=window.KB_CATALOG||{};
     if(!ix || ix.v!==1 || ix.catalog_md5!==m.md5 || ix.fold_md5!==m.fold_md5 || ix.rows!==n
-       || !Array.isArray(ix.hay) || ix.hay.length!==n || !Array.isArray(ix.rj6) || ix.rj6.length!==n || ix.hay4.length!==n || ix.rj.length!==n || ix.rj5.length!==n || ix.ck.length!==n) return false;
+       || !Array.isArray(ix.hay) || ix.hay.length!==n || !Array.isArray(ix.rj6) || ix.rj6.length!==n || ix.hay4.length!==n || ix.rj.length!==n || ix.rj5.length!==n || ix.ck.length!==n) return Promise.resolve(false);
     // 見本の照合（2026-10-19）: 索引は node の Unicode の表で作ってある。このブラウザ（特に iPhone の Safari）で同じ式を見本の行に掛け、
     //   一字でも違えば索引は使わず自分で作る（検索語はこのブラウザで畳むので、索引も同じブラウザの畳み方でないと当たらない）。
     //   見本 ＝ 等間隔 200 行＋ラテン・かな・漢字以外の字を含む行 200 行（tools/build_search_index.mjs の probe）と PLAT_TERMS の全語。
     const pr=ix.probe;
-    if(!pr || !Array.isArray(pr.rows) || pr.rows.length<100 || !Array.isArray(pr.plat_src) || pr.plat_src.length!==ix.plat_terms.length){ indexProbe='no-probe'; return false; }
-    for(let j=0;j<pr.rows.length;j++){
+    if(!pr || !Array.isArray(pr.rows) || pr.rows.length<100 || !Array.isArray(pr.plat_src) || pr.plat_src.length!==ix.plat_terms.length){ indexProbe='no-probe'; return Promise.resolve(false); }
+    // 2026-10-29: 照合と写しと第6レーンの表を小分けにして（合間にキー入力・描画を通す）、Promise で真偽を返す（fillChunked）。
+    const yn=window.__kbYield || (()=>Promise.resolve());
+    let j=0;
+    const probe=()=>{ const end=Math.min(pr.rows.length, j+100);
+    for(;j<end;j++){
       const k=pr.rows[j], r=DATA[k];
       if(!r || hayRow(r)!==ix.hay[k] || hay4Row(r)!==ix.hay4[k] || rjRow(r)!==ix.rj[k] || rj5Row(r)!==ix.rj5[k]
          || codeKeysRow(r).join('\n')!==ix.ck[k].join('\n') || rj6Row(r)!==ix.rj6[k] || strong(r[0]||'')!==pr.strong[j][0] || strong(r[1]||'')!==pr.strong[j][1]){
         indexProbe='mismatch row '+k; return false;
       }
     }
-    for(let j=0;j<ix.plat_terms.length;j++) if(fold(accent(pr.plat_src[j]||''))!==ix.plat_terms[j][0]){ indexProbe='mismatch plat '+j; return false; }
-    indexProbe='ok '+pr.rows.length+' rows';
-    for(let k=0;k<n;k++){ HAY[k]=ix.hay[k]; HAY4[k]=ix.hay4[k]; RJ[k]=ix.rj[k]; RJ5[k]=ix.rj5[k]; RJ6[k]=ix.rj6[k]; CODEKEYS[k]=ix.ck[k]; }
-    for(const k of ix.ambig) AMBIG_EN.add(k);
-    for(const p of ix.plat_terms) PLAT_TERMS.push(p);
-    ambigMap.clear(); platTermsMap.clear();
-    return true;
+    return j<pr.rows.length ? yn().then(probe) : true; };
+    return Promise.resolve().then(probe).then(ok=>{
+      if(!ok) return false;
+      for(let j=0;j<ix.plat_terms.length;j++) if(fold(accent(pr.plat_src[j]||''))!==ix.plat_terms[j][0]){ indexProbe='mismatch plat '+j; return false; }
+      indexProbe='ok '+pr.rows.length+' rows';
+      let k=0;
+      const copy=()=>{ const end=Math.min(n, k+10000);
+        for(;k<end;k++){ HAY[k]=ix.hay[k]; HAY4[k]=ix.hay4[k]; RJ[k]=ix.rj[k]; RJ5[k]=ix.rj5[k]; RJ6[k]=ix.rj6[k]; CODEKEYS[k]=ix.ck[k]; }
+        return k<n ? yn().then(copy) : true; };
+      return copy().then(()=>{
+        for(const k of ix.ambig) AMBIG_EN.add(k);
+        for(const p of ix.plat_terms) PLAT_TERMS.push(p);
+        ambigMap.clear(); platTermsMap.clear();
+        // 第6レーンの表（rj6J）: 準備完了を遅らせないよう、準備完了の後に裏で小分けに作る（それより先に英字で探したら残りをその場で作る＝以前と同じ）。
+        //   ★準備完了の前に作る形も試したが、索引の取り込みが約6秒延び、最初の検索も速くならなかった（10/29・4倍遅い CPU）。
+        whenSearchReady(()=>rj6Build(()=>new Promise(r=>setTimeout(r,0))));
+        return true;
+      });
+    });
   };
   const step=()=>{
     const end=Math.min(n,i+STEP);
@@ -2933,13 +3046,14 @@ function buildSearchIndex(){
   const root=document.documentElement;
   const self=why=>{ root.setAttribute('data-index', why); if(why==='computed-probe') try{ console.warn('search index: '+indexProbe+' — building in the browser'); }catch(e){} setTimeout(step,0); };
   const ixp = window.__kbCat && window.__kbCat.idx;
-  if(ixp) ixp.then(ix=>{ if(fill(ix)){ root.setAttribute('data-index','prebuilt'); finish(); } else self(ix && indexProbe!=='' ? 'computed-probe' : 'computed'); }, ()=>self('computed'));
+  if(ixp) ixp.then(ix=>fill(ix).then(ok=>{ if(ok){ root.setAttribute('data-index','prebuilt'); finish(); } else self(ix && indexProbe!=='' ? 'computed-probe' : 'computed'); }), ()=>self('computed'));
   else self('computed');
 }
 // Publisher list per row = ENGLISH names (index 6), split & trimmed — used by the filter.
 // Filtering by the English name is what merges 任天堂 + Nintendo into one working option
 // (keying by the Japanese value would leave them split and miss those rows).
-const PUBS = DATA.map(r => r[6].split(';').map(s=>s.trim()).filter(Boolean));
+const KB_PRE = window.__kbPre || null;   // 2026-10-29: 起動の前に小分けで作った表（下の「カタログの読み込み」の prep）。無ければここで作る（以前と同じ式）
+const PUBS = KB_PRE ? KB_PRE.PUBS : DATA.map(r => r[6].split(';').map(s=>s.trim()).filter(Boolean));
 
 // ============================================================
 // 検索結果の並び順（案F・2026-09-26）。当たり外れは run() の5経路のまま変えず、当たった行の順番だけを決める。
@@ -2999,9 +3113,9 @@ function ambigAdd(r){
 function ambigFinish(){ for(const [k, s] of ambigMap){ if(s.size >= 2) AMBIG_EN.add(k); } ambigMap.clear(); }  // 2種類以上の日本語名に付く英題だけ
 
 // Platform dropdown — the value is used as-is (already English from the pipeline).
-const PLATFORM_COUNTS = DATA.reduce((m,r)=>(m[r[2]]=(m[r[2]]||0)+1,m),{});
+const PLATFORM_COUNTS = KB_PRE ? KB_PRE.PLATFORM_COUNTS : DATA.reduce((m,r)=>(m[r[2]]=(m[r[2]]||0)+1,m),{});
 const PLATFORMS = Object.keys(PLATFORM_COUNTS).filter(Boolean)
-  .sort((a,b)=>a.localeCompare(b, undefined, {numeric:true, sensitivity:'base'}));
+  .sort((window.__kbColl ? window.__kbColl.base : new Intl.Collator(undefined, {numeric:true, sensitivity:'base'})).compare);   // 2026-10-29: localeCompare に options を渡すと比べるたびに照合器を作り直す（4倍遅い CPU で約1.8秒）。同じ並び
 plat.innerHTML = '<option value="All">All platforms</option>' +
   PLATFORMS.map(p=>`<option value="${esc(p)}">${esc(p)}</option>`).join('');
 
@@ -3009,14 +3123,14 @@ plat.innerHTML = '<option value="All">All platforms</option>' +
 // Value AND display are the English name; sorted by English name so prefixed
 // relatives sit together (Bandai / Bandai Namco Entertainment / Bandai Namco Games).
 // Companies without an English name carry the Japanese name in index 6, so no branch needed.
-const PUB_COUNTS = {};
-for(const list of PUBS) for(const p of list) PUB_COUNTS[p]=(PUB_COUNTS[p]||0)+1;
+const PUB_COUNTS = KB_PRE ? KB_PRE.PUB_COUNTS : {};
+if(!KB_PRE) for(const list of PUBS) for(const p of list) PUB_COUNTS[p]=(PUB_COUNTS[p]||0)+1;
 // プルダウンは名寄せ後(row[6])の件数が 50 本以上の社だけを出す（短く・有名どころに絞る）。
 // A→Z は維持。All publishers はしきい値・ソート対象外で先頭固定（下の innerHTML 先頭に連結）。
 const PUB_MIN = 50;
 const PUBLISHERS = Object.keys(PUB_COUNTS)
   .filter(p => PUB_COUNTS[p] >= PUB_MIN)
-  .sort((a,b)=>a.localeCompare(b,'ja'));
+  .sort((window.__kbColl ? window.__kbColl.ja : new Intl.Collator('ja')).compare);   // 2026-10-29: localeCompare(b,'ja') と同じ並び（照合器は1つ）
 // ---- パブリッシャー手入力（タイプアヘッド）------------------------------------
 // #pub は hidden。確定した publisher_en(正規名) を保持し、run() は従来どおり pub.value を読む。
 // 可視の #pubInput に打つと候補を出す。照合は大小無視・部分一致 ＋ 下の ALIAS（最小限）。
@@ -3090,10 +3204,11 @@ pubList.addEventListener('mousedown', e=>{
 document.addEventListener('click', e=>{ if(!e.target.closest('.pubwrap')) pubClose(); });
 
 // Year dropdown — unique release years, descending.
-const YEARS = [...new Set(DATA.map(r=>r[4]).filter(Boolean))].sort((a,b)=>b.localeCompare(a));
+const YEARS = [...(KB_PRE ? KB_PRE.YEARS : new Set(DATA.map(r=>r[4]).filter(Boolean)))].sort((c=>(a,b)=>c(b,a))((window.__kbColl ? window.__kbColl.def : new Intl.Collator()).compare));   // 2026-10-29: b.localeCompare(a) と同じ並び（照合器は1つ）
 year.innerHTML = '<option value="All">All years</option>' +
   YEARS.map(y=>`<option value="${esc(y)}">${esc(y)}</option>`).join('');
 
+//@@KB-SPLIT@@ ── 2026-10-29（boot-chunks）: 本体はここで区切って別々の <script> として順に動かす（間にキー入力・描画を通す）。区切りの前の文は後ろの関数を起動の時点では呼ばないこと
 // ============================================================
 // リージョン注記 — 機種 → 英文の対応表。
 // 以前は全行に "runs only on a Japanese {機種}" を出していたが、これは機種の3割で嘘だった
@@ -4695,9 +4810,23 @@ function zeroHelp(s, pf, pv, yv){
   return '<div class="state"><b>No match.</b><div class="zero-help">'+h+'</div></div>';
 }
 
+//@@KB-SPLIT@@ ── 2026-10-29（boot-chunks）: 本体はここで区切って別々の <script> として順に動かす（間にキー入力・描画を通す）。区切りの前の文は後ろの関数を起動の時点では呼ばないこと
 // 第6レーンの照合（語の始まりからだけ）。RJ6 の「語ごとの骨格を空白で区切った列」から、空白を除いた列と語の始まりの位置を初回に作る。
 let RJ6J = null;
-const rj6J = () => RJ6J || (RJ6J = RJ6.map(S => { let J = ''; const st = new Set(); for(const w of S.split(' ')){ st.add(J.length); J += w; } return {J, st}; }));
+function rj6JRow(S){ let J = ''; const st = new Set(); for(const w of S.split(' ')){ st.add(J.length); J += w; } return {J, st}; }
+// 2026-10-29（boot-chunks）: 小分けに作る途中の表（RJ6J_TMP・次の行 RJ6J_I）。rj6Build が 2,000行ずつ足し、終わったら RJ6J に入れる。
+//   作り終わる前に英字で探したら、rj6J() が残りをその場で作る（作る式は同じ）。
+let RJ6J_TMP = null, RJ6J_I = 0;
+function rj6Build(pause){
+  if(RJ6J) return Promise.resolve();
+  if(!RJ6J_TMP){ RJ6J_TMP = new Array(RJ6.length); RJ6J_I = 0; }
+  const step = () => { if(RJ6J) return; const end = Math.min(RJ6.length, RJ6J_I + 2000); for(; RJ6J_I < end; RJ6J_I++) RJ6J_TMP[RJ6J_I] = rj6JRow(RJ6[RJ6J_I]);
+    if(RJ6J_I < RJ6.length) return pause().then(step); RJ6J = RJ6J_TMP; };
+  return Promise.resolve().then(step);
+}
+const rj6J = () => { if(RJ6J) return RJ6J;
+  if(RJ6J_TMP){ for(; RJ6J_I < RJ6.length; RJ6J_I++) RJ6J_TMP[RJ6J_I] = rj6JRow(RJ6[RJ6J_I]); RJ6J = RJ6J_TMP; return RJ6J; }
+  return (RJ6J = RJ6.map(rj6JRow)); };
 const rj6Hit = (e, k) => { for(let p = e.J.indexOf(k); p !== -1; p = e.J.indexOf(k, p + 1)) if(e.st.has(p)) return true; return false; };
 // ★2026-10-27: 英題がある行では、語の並びまで合うときだけ当てる（Blue Stinger が BLASTING AGENT〔英題あり・ローマ字 burasutingu〕に当たっていた。
 //   骨格はどちらも brstng で、骨格だけでは区別できない）。クエリの語の骨格が、行のローマ字の語の骨格と1語ずつ順に一致すること（最後の語だけ前方一致）。
@@ -5656,6 +5785,9 @@ const guideRow = g=>`<div class="genre-row">
     </div>
   </div>`;
 
+// 2026-10-29（boot-chunks）: 本体の起動で作らず、開いたとき（か、起動の後の空き時間）に作る。中身は同じ。
+let genreBuilt=false;
+function genreBuild(){ if(genreBuilt) return; genreBuilt=true;
 $('#genre-modal-body').innerHTML =
   `<p class="genre-intro">Find your genre in English, then look for the Japanese shelf tag <b>&rarr;</b>.
    Disc-era shelves are usually split by genre, not by kana.</p>` +
@@ -5668,7 +5800,10 @@ $('#genre-modal-body').innerHTML =
   //   ＝ゲームソフト専用のラベルではない。ゲームソフト節が定める表記が5項目のうちランクＢだけ、というのが正確。
   `<p class="genre-intro">These are Suruga-ya listing labels used across all item types, not a grading scale for games&nbsp;&mdash; of the five, only <b>Rank B</b> has a game-specific definition (worn, but complete and plays fine).</p>` +
   CONDITION_GUIDE.map(guideRow).join('');
+}
+(window.requestIdleCallback || (f=>setTimeout(f, 3000)))(genreBuild);
 function genreShow(){
+  genreBuild();
   genreEl.classList.add('on');
   document.body.style.overflow='hidden';   // 背後が動くと、閉じた後どこにいたか分からなくなる
   genreClose.focus();
@@ -5721,8 +5856,8 @@ run({deep: !!q.value.trim()});   // /?q= 付きで開いたときは待たずに
 //                  ※このフォールバック経路は実機(iPhone)での検証がまだ。要・通しテスト。
 // どちらの経路も最後は onDetected(text) に集約。手入力欄も同じ入口に落ちる(PC/検証用)。
 // ============================================================
-const JANMAP = {};
-for(const r of DATA){ const j=r[10]; if(j){ (JANMAP[j]||(JANMAP[j]=[])).push(r); } }
+const JANMAP = KB_PRE ? KB_PRE.JANMAP : {};
+if(!KB_PRE) for(const r of DATA){ const j=r[10]; if(j){ (JANMAP[j]||(JANMAP[j]=[])).push(r); } }
 
 // JANでヒット行を引いて既存の描画に流す。見つからなければ正直に「無い」と出す(嘘の行に飛ばさない)。
 function showByJan(raw){
@@ -6259,6 +6394,61 @@ buildSearchIndex();
     try{ console.warn('catalog', e); }catch(_){}
   }
   function json(u, o){ return fetch(u, o).then(function(r){ if(!r.ok) throw new Error(u+' '+r.status); return r.json(); }); }
+  // 2026-10-29（boot-chunks）: 長い処理を小分けにする合間。キー入力・描画を先に通してから続ける（MessageChannel＝新しいタスク）。
+  //   ★scheduler.yield() は試したが、本体の評価の後の microtask の中から呼ぶと区切りにならなかった（トレースで1つのタスクのまま）。
+  //   止まるのは、キー入力などが待っているとき（navigator.scheduling.isInputPending）か、前に止まってから 0.5秒たったときだけ。
+  //   毎回止まると、合間に HTML の解析の続きと描画が入り込んで準備完了が十数秒遅れた（4倍遅い CPU）。isInputPending の無い端末は 0.3秒ごと。
+  var lastYield=performance.now(), ip=navigator.scheduling && navigator.scheduling.isInputPending ? navigator.scheduling : null;
+  var typedWaited=0, qaWaited=false;
+  // 仮のカードを書いたあと、それが画面に描かれるまで（1フレーム）待ってから続ける（続きは優先度が高く、描画より先に走るため）。
+  //   ★裏のタブ（見えていないページ）ではフレームが来ないので、0.1秒たったら描けなくても続ける（来ないと準備が「loading」のまま止まった・10/29）。
+  function afterPaint(){ return new Promise(function(r){ requestAnimationFrame(function(){ setTimeout(r, 0); }); setTimeout(r, 100); }); }
+  var yieldNow=window.__kbYield=function(){
+    // 検索欄に打った語の最初の答え（qa）を引いているあいだは、続きを止めて待つ（1回最長6秒・合計8秒まで）。
+    //   続きは優先度の高いタスクなので、止めないと qa の取得と解析（ふつうの優先度）が準備完了まで後回しになった。
+    var tw=window.__qaTypedWait && window.__qaTypedWait();
+    // /?q= の最初の答え（仮のカード）も同じ。描かれるまで（か3秒）待つ（本体の起動の順は今までと同じ＝描いてから）。
+    if(!tw && window.__kbCat && window.__kbCat.qa && document.documentElement.getAttribute('data-qa')!=='shown' && !qaWaited){ qaWaited=true;
+      tw=new Promise(function(r){ window.__kbCat.qa.then(function(a){ if(!a || !a.idx.length) return r();
+        var root=document.documentElement; if(root.getAttribute('data-qa')==='shown') return r();
+        new MutationObserver(function(){ if(root.getAttribute('data-qa')==='shown') r(); }).observe(root,{attributes:true,attributeFilter:['data-qa']}); }, r); }); }
+    if(tw && typedWaited<8000){ var t0=performance.now();
+      return Promise.race([tw, new Promise(function(r){ setTimeout(r, Math.min(6000, 8000-typedWaited)); })])
+        .then(afterPaint).then(function(){ var now=performance.now(); typedWaited+=now-t0; lastYield=now; }); }
+    var now=performance.now();
+    if(ip ? (!ip.isInputPending() && now-lastYield<500) : (now-lastYield<300)) return Promise.resolve();
+    // 読み取り画面（/?scan=1）のあいだは、ふつうの優先度で区切る（高い優先度だと、簡易カードの描画が後回しになった）。
+    var E0=window.__earlyScan;
+    if(E0 && !E0.closed) return new Promise(function(r){ var c=new MessageChannel(); c.port1.onmessage=function(){ c.port1.close(); lastYield=performance.now(); r(); }; c.port2.postMessage(0); });
+    // 続きは優先度の高いタスクで（scheduler.postTask の user-blocking）。キー入力はそれより先に通り、HTML の解析の続きは後に回る（今までと同じ順）。
+    //   postTask の無い端末（Safari 等）は MessageChannel。
+    if(window.scheduler && typeof scheduler.postTask==='function')
+      return scheduler.postTask(function(){ lastYield=performance.now(); }, {priority:'user-blocking'});
+    return new Promise(function(r){ var c=new MessageChannel(); c.port1.onmessage=function(){ c.port1.close(); lastYield=performance.now(); r(); }; c.port2.postMessage(0); });
+  };
+  // 本体のトップレベルで全行を回していた表（PUBS・PUB_COUNTS・PLATFORM_COUNTS・YEARS・JANMAP）を、1回のループにまとめて 2,000行ずつ作る。
+  //   式と並びは本体の元の式と同じ（行の順に足す＝キーの並びも同じ）。本体は window.__kbPre があればそれを使う。
+  function prep(D){
+    var n=D.length, i=0, P={ PUBS:new Array(n), PUB_COUNTS:{}, PLATFORM_COUNTS:{}, YEARS:new Set(), JANMAP:{} };
+    function step(){
+      var end=Math.min(n, i+2000);
+      for(;i<end;i++){
+        var r=D[i], l=r[6].split(';').map(function(s){ return s.trim(); }).filter(Boolean);
+        P.PUBS[i]=l; for(var k=0;k<l.length;k++) P.PUB_COUNTS[l[k]]=(P.PUB_COUNTS[l[k]]||0)+1;
+        P.PLATFORM_COUNTS[r[2]]=(P.PLATFORM_COUNTS[r[2]]||0)+1;
+        if(r[4]) P.YEARS.add(r[4]);
+        var j=r[10]; if(j){ (P.JANMAP[j]||(P.JANMAP[j]=[])).push(r); }
+      }
+      if(i<n) return yieldNow().then(step);
+      window.__kbPre=P; return P;
+    }
+    // 照合器（Intl.Collator）は最初の1つを作るときに ICU の表を読む（4倍遅い CPU で 0.5〜1.1秒）。本体の起動の中で作ると長い1つのタスクになるので、
+    //   ここで単独のタスクとして先に作っておく（本体は window.__kbColl があれば使う。並びは localeCompare と同じ）。
+    return yieldNow().then(function(){
+      window.__kbColl={ base:new Intl.Collator(undefined, {numeric:true, sensitivity:'base'}), ja:new Intl.Collator('ja'), def:new Intl.Collator() };
+      return yieldNow();
+    }).then(step);
+  }
   var C=window.__kbCat;                       // <head> の先読み。無ければここで取りに行く
   var man=C ? C.manifest : json('/catalog/manifest.json',{cache:'no-cache'});
   man.then(function(m){
@@ -6271,9 +6461,19 @@ buildSearchIndex();
     if(!Array.isArray(rows) || !rows.length) throw new Error('catalog empty');
     window.DATA=rows;
     if(E && E.code && E.say) E.say(); else say('Preparing search… you can aim at the barcode now.');
-    function go(){                               // 本体を動かす
-      var src=document.getElementById('kbMain'); if(!src) throw new Error('kbMain missing');
-      var s=document.createElement('script'); s.textContent=src.textContent; document.body.appendChild(s);
+    var pre=prep(rows);
+    function go(){                               // 本体を動かす（2026-10-29: 表の前処理 prep が済んでから）
+      pre.then(function(){
+        var src=document.getElementById('kbMain'); if(!src) throw new Error('kbMain missing');
+        // 2026-10-29（boot-chunks）: 本体を //@@KB-SPLIT@@ の行で3つに分け、別々の <script> として順に動かす（コンパイルと実行が3つのタスクに分かれる）。
+        //   トップレベルの const・let・function は同じグローバルに入るので、後の部分から前の部分の名前がそのまま見える。
+        var parts=src.textContent.split(/\n\/\/@@KB-SPLIT@@[^\n]*\n/), k=0;
+        function next(){
+          var s=document.createElement('script'); s.textContent=parts[k++]; document.body.appendChild(s);
+          if(k<parts.length) return yieldNow().then(next);
+        }
+        return next();
+      }).catch(fail);
     }
     // ★このスクリプトは本体（kbMain）の直後に置く＝本体はもう読み終わっている。DOMContentLoaded は待たない
     //   （待つと4倍遅い CPU で約4秒遅れた。前に置いたときは、先読みでカタログが早く届くと本体がまだ無かった・2026-10-19 に踏んだ）。
