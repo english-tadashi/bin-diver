@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Wed, 28 Oct 2026 08:17:12 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 29 Oct 2026 06:42:19 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Sweet Home en Famicom: el juego de terror de Capcom de 1989 detrás de Resident Evil, y su código CAP-EH</title>
+      <link>https://gamekataban.com/blog/es/2026-10-30-sweet-home-resident-evil-origin-cap-eh.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-10-30-sweet-home-resident-evil-origin-cap-eh.html</guid>
+      <description>Sweet Home (Famicom, 1989, código CAP-EH) es el RPG de terror de Capcom sobre cuyo sistema se construyó Resident Evil, en palabras de Shinji Mikami. Qué dijeron sus autores, qué es solo un atajo de la prensa, por qué nunca se reeditó y cómo distinguir el original de las reproducciones en inglés de NES.</description>
+      <pubDate>Fri, 30 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Deep Fear en Sega Saturn: el terror submarino de Sega que nunca llegó a Norteamérica y cómo encontrar GS-9189</title>
       <link>https://gamekataban.com/blog/es/2026-10-29-deep-fear-sega-saturn-gs-9189.html</link>
