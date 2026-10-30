@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog pour les collectionneurs à l'étranger en quête de jeux rétro japonais — guides boutiques, tutoriels d'importation, et les histoires derrière les titres.</description>
     <language>fr-fr</language>
-    <lastBuildDate>Thu, 29 Oct 2026 06:42:20 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 30 Oct 2026 06:55:33 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-fr.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Vampire Master of Darkness sur Game Gear : le Castlevania que Sega n'a jamais fait</title>
+      <link>https://gamekataban.com/blog/fr/2026-10-31-in-the-wake-of-vampire-game-gear-t-44047.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-10-31-in-the-wake-of-vampire-game-gear-t-44047.html</guid>
+      <description>SIMS a bâti le Castlevania que les machines 8 bits de Sega n'ont jamais eu, et l'a publié lui-même : la liste Sega habituelle n'a donc pas son code. La cartouche est T-44047, et les deux boutiques japonaises veulent son titre dans des écritures opposées. L'Europe lui a donné 79 %. Famitsu : 22 sur 40.</description>
+      <pubDate>Sat, 31 Oct 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Sweet Home sur Famicom : le jeu d'horreur Capcom de 1989 derrière Resident Evil, et son code CAP-EH</title>
       <link>https://gamekataban.com/blog/fr/2026-10-30-sweet-home-resident-evil-origin-cap-eh.html</link>
