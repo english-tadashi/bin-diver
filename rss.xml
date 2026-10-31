@@ -5,7 +5,7 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 31 Oct 2026 14:04:16 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2026 14:23:25 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
 
     <item>
@@ -177,10 +177,10 @@
     </item>
 
     <item>
-      <title>Kirby Development History, Part 1: How Twinkle Popo Became Kirby’s Dream Land, and Its Product Code DMG-KYJ</title>
+      <title>Twinkle Popo: How HAL's Game Became Kirby's Dream Land</title>
       <link>https://gamekataban.com/blog/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html</guid>
-      <description>Kirby's debut came out on Game Boy in Japan on 27 April 1992 as Hoshi no Kirby (DMG-KYJ). It began as Twinkle Popo, which HAL meant to publish itself. Why Kirby was white in America, and why the code finds the Japanese cartridge before the title.</description>
+      <description>Twinkle Popo was the game HAL meant to publish itself before it became Kirby's debut, Hoshi no Kirby (DMG-KYJ), out on Game Boy in Japan on 27 April 1992. Why Kirby was white in America, and why the code finds the Japanese cartridge first.</description>
       <pubDate>Wed, 14 Oct 2026 00:00:00 +0900</pubDate>
     </item>
 
@@ -449,10 +449,10 @@
     </item>
 
     <item>
-      <title>Mandarake in Nakano Broadway: Nineteen Storefronts, Floor by Floor</title>
+      <title>Mandarake in Nakano: Which Shop to Visit, Floor by Floor</title>
       <link>https://gamekataban.com/blog/2026-09-13-mandarake-nakano-shop-guide.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-13-mandarake-nakano-shop-guide.html</guid>
-      <description>Mandarake does not run one shop in Nakano Broadway. It runs more than thirty, one subject per shutter. A photo tour of nineteen of them across three floors: which door sells games, which sells doujinshi, and which is built as a shrine gate.</description>
+      <description>Which Mandarake shop in Nakano Broadway should you visit? A photo tour of nineteen of its 30-plus shops on three floors: which door sells games, which sells doujinshi, and which is built as a shrine gate. New to Mandarake? See our basic guide.</description>
       <pubDate>Sun, 13 Sep 2026 00:00:00 +0900</pubDate>
     </item>
 
@@ -481,15 +481,15 @@
     </item>
 
     <item>
-      <title>Castlevania Development History, Part 1: The Disk That Vanished and the Cartridge That Replaced It</title>
+      <title>Castlevania on Famicom: Disk vs Cartridge, and Code RV003</title>
       <link>https://gamekataban.com/blog/2026-09-09-castlevania-development-history-1.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-09-castlevania-development-history-1.html</guid>
-      <description>Shops overwrote Famicom Disk System disks for 500 yen, so the first Castlevania that actually circulates today is Konami's 1993 ROM cartridge, RV003. The Japanese Castlevania III cartridge also carries a VRC6 sound chip the NES could not use.</description>
+      <description>The first Castlevania was a Famicom Disk System game, but shops overwrote disks for 500 yen, so the copy that circulates today is Konami's 1993 ROM cartridge, RV003. The Japanese Castlevania III cartridge also has a VRC6 sound chip the NES could not use.</description>
       <pubDate>Wed, 09 Sep 2026 00:00:00 +0900</pubDate>
     </item>
 
     <item>
-      <title>Street Fighter Development History, Part 2: The Fire and the Hack Behind the 1991 Boom</title>
+      <title>How Street Fighter II Took Off: Failed Tests, a Hack, a Fire</title>
       <link>https://gamekataban.com/blog/2026-09-08-street-fighter-development-history-2.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-08-street-fighter-development-history-2.html</guid>
       <description>Street Fighter II barely cleared 100 yen a day in early tests. A hacked arcade cabinet, an unbeatable player, and a sound-room fire shaped the biggest fighting game boom of the 1990s.</description>
@@ -681,10 +681,10 @@
     </item>
 
     <item>
-      <title>Golden Axe Is Getting an Anime. Here's What the Original Japanese Releases Actually Look Like</title>
+      <title>Golden Axe in Japan: Original Releases and Product Codes</title>
       <link>https://gamekataban.com/blog/2026-08-21-golden-axe-anime-jp-data.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/2026-08-21-golden-axe-anime-jp-data.html</guid>
-      <description>Paramount+ drops the Golden Axe anime on September 16. Here is what the five original Japanese releases actually are, which versions never left Japan, and the product codes to search them by.</description>
+      <description>What the five original Japanese Golden Axe releases actually are, which versions never left Japan, and the product codes to search them by. A guide for anyone who found the series through the Paramount+ anime.</description>
       <pubDate>Fri, 21 Aug 2026 00:00:00 +0900</pubDate>
     </item>
 

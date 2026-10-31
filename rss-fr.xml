@@ -5,7 +5,7 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog pour les collectionneurs à l'étranger en quête de jeux rétro japonais — guides boutiques, tutoriels d'importation, et les histoires derrière les titres.</description>
     <language>fr-fr</language>
-    <lastBuildDate>Sat, 31 Oct 2026 14:04:16 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2026 14:23:26 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-fr.xml" rel="self" type="application/rss+xml"/>
 
     <item>
@@ -156,10 +156,10 @@
       <pubDate>Thu, 15 Oct 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>Histoire du développement de Kirby, partie 1 : comment Twinkle Popo est devenu Kirby's Dream Land, et son code produit DMG-KYJ</title>
+      <title>Twinkle Popo : le jeu de HAL devenu Kirby's Dream Land</title>
       <link>https://gamekataban.com/blog/fr/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html</guid>
-      <description>Le premier Kirby est sorti sur Game Boy au Japon le 27 avril 1992 (Hoshi no Kirby, code DMG-KYJ). Né sous le nom de Twinkle Popo, que HAL Laboratory comptait éditer seul. Pourquoi Kirby était blanc en Amérique, et pourquoi le code trouve la cartouche japonaise avant le titre.</description>
+      <description>Twinkle Popo est le jeu que HAL Laboratory comptait éditer seul avant qu'il ne devienne le premier Kirby : Hoshi no Kirby (DMG-KYJ), sur Game Boy au Japon le 27 avril 1992. Pourquoi Kirby était blanc en Amérique, et pourquoi le code trouve la cartouche japonaise avant le titre.</description>
       <pubDate>Wed, 14 Oct 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
@@ -394,10 +394,10 @@
       <pubDate>Mon, 14 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>Mandarake à Nakano Broadway : dix-neuf boutiques, étage par étage</title>
+      <title>Mandarake à Nakano : quelle boutique visiter, étage par étage</title>
       <link>https://gamekataban.com/blog/fr/2026-09-13-mandarake-nakano-shop-guide.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-09-13-mandarake-nakano-shop-guide.html</guid>
-      <description>Mandarake ne tient pas une boutique à Nakano Broadway. Il en tient plus de trente, un sujet par rideau de fer. Visite en photos de dix-neuf d'entre elles sur trois étages : quelle porte vend des jeux, laquelle vend du doujinshi, et laquelle est bâtie comme un torii.</description>
+      <description>Quelle boutique Mandarake visiter à Nakano Broadway ? Visite en photos de 19 de ses plus de 30 boutiques sur trois étages : quelle porte vend des jeux, laquelle vend du doujinshi, et laquelle est bâtie comme un torii. Vous découvrez Mandarake ? Lisez notre guide de base.</description>
       <pubDate>Sun, 13 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
@@ -422,14 +422,14 @@
       <pubDate>Thu, 10 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>Histoire du développement de Castlevania, partie 1 : la disquette disparue et la cartouche qui l'a remplacée</title>
+      <title>Castlevania sur Famicom : disquette, cartouche et code RV003</title>
       <link>https://gamekataban.com/blog/fr/2026-09-09-castlevania-development-history-1.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-09-09-castlevania-development-history-1.html</guid>
-      <description>Les boutiques réécrivaient les disquettes du Famicom Disk System pour 500 yens : l'exemplaire du premier Castlevania qui circule vraiment est donc la cartouche ROM de Konami de 1993, RV003. La cartouche japonaise de Castlevania III embarque une puce VRC6 inutilisable sur NES.</description>
+      <description>Le premier Castlevania était un jeu Famicom Disk System, mais les boutiques réécrivaient les disquettes pour 500 yens : ce qui circule aujourd'hui est donc la cartouche ROM de Konami de 1993, RV003. La cartouche japonaise de Castlevania III embarque une puce VRC6 inutilisable sur NES.</description>
       <pubDate>Wed, 09 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>Histoire du développement de Street Fighter, partie 2 : le bricolage et l'incendie derrière le boom de 1991</title>
+      <title>Comment Street Fighter II a décollé : bricolage et incendie</title>
       <link>https://gamekataban.com/blog/fr/2026-09-08-street-fighter-development-history-2.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-09-08-street-fighter-development-history-2.html</guid>
       <description>Street Fighter II dépassait à peine 100 yens par jour lors des premiers tests. Une borne modifiée sans autorisation, un joueur imbattable et un incendie dans la salle de son ont façonné le plus grand boom du jeu de combat des années 1990. Partie 2 d'une série en cinq volets.</description>
@@ -597,10 +597,10 @@
       <pubDate>Sat, 22 Aug 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>Golden Axe va avoir un anime. Voici à quoi ressemblent vraiment les sorties japonaises originales</title>
+      <title>Golden Axe au Japon : sorties originales et codes produit</title>
       <link>https://gamekataban.com/blog/fr/2026-08-21-golden-axe-anime-jp-data.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/fr/2026-08-21-golden-axe-anime-jp-data.html</guid>
-      <description>Paramount+ lance l'anime Golden Axe le 16 septembre. Voici ce que sont réellement les cinq sorties japonaises originales, quelles versions n'ont jamais quitté le Japon et les codes produit pour les rechercher.</description>
+      <description>Ce que sont réellement les cinq sorties japonaises originales de Golden Axe, quelles versions n'ont jamais quitté le Japon et les codes produit pour les rechercher. Pour ceux qui ont découvert la série par l'anime Paramount+.</description>
       <pubDate>Fri, 21 Aug 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
