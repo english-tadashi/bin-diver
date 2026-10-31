@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 31 Oct 2026 12:41:47 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2026 13:27:01 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Sega Game Gear Buying Guide: Models, Region, Faults, Power</title>
+      <link>https://gamekataban.com/blog/2026-11-01-sega-game-gear-buying-guide-japan.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-11-01-sega-game-gear-buying-guide-japan.html</guid>
+      <description>The Sega Game Gear has no region lock, so Japanese cartridges run on any model. The real risk is age: failing capacitors dim the screen and kill the sound. How to tell the models apart, what to check, which adapter is safe, and how to find games.</description>
+      <pubDate>Sun, 01 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Tax-Free Shopping in Japan Now Works by Refund: What Changed on 1 November 2026, at the Shop and at the Airport</title>

@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Sat, 31 Oct 2026 12:41:47 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2026 13:27:01 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Guía de Sega Game Gear: modelos, región, averías y alimentación</title>
+      <link>https://gamekataban.com/blog/es/2026-11-01-sega-game-gear-buying-guide-japan.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-11-01-sega-game-gear-buying-guide-japan.html</guid>
+      <description>La Sega Game Gear no tiene bloqueo regional: los cartuchos japoneses funcionan en cualquier modelo. El riesgo real es la edad: los condensadores que fallan oscurecen la pantalla y apagan el sonido. Cómo distinguir modelos, qué comprobar, qué adaptador es seguro y cómo buscar juegos.</description>
+      <pubDate>Sun, 01 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Las compras libres de impuestos en Japón ahora funcionan por devolución: qué cambió el 1 de noviembre de 2026, en la tienda y en el aeropuerto</title>
       <link>https://gamekataban.com/blog/es/2026-11-01-japan-tax-free-refund-method-guide.html</link>
