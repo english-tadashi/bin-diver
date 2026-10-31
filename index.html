@@ -25,6 +25,18 @@
   gtag('js', new Date());
   gtag('config', 'AW-18383204728');
   gtag('config', 'G-SK6R4YH7VD');
+  // 2026-10-31: 店のリンクのタップをページ自身で受けて store_click を送る。GA4 の自動の click は gtag.js を読み終えた後しか数えない
+  //   （CPU 4倍・Slow 4G で店ボタンが出てから約48秒の穴）。ここなら読み込み前のタップも dataLayer に積まれ、読んだときに送られる。
+  (function(){
+    var STORES=[[/(^|\.)i0c\.xyz$|(^|\.)buyee\.jp$/,'Buyee'],[/(^|\.)ebay\.com$/,'eBay'],[/(^|\.)suruga-ya\.com$/,'Suruga-ya.com'],[/(^|\.)suruga-ya\.jp$/,'Suruga-ya.jp'],
+      [/(^|\.)rakuten\.co\.jp$/,'Rakuten'],[/(^|\.)bookoff\.co\.jp$/,'Book-Off'],[/(^|\.)hardoff\.co\.jp$/,'Hard-Off']];
+    function onClick(e){ try{
+      var a=e.target && e.target.closest && e.target.closest('a[href]'); if(!a) return;
+      for(var i=0;i<STORES.length;i++) if(STORES[i][0].test(a.hostname)){ gtag('event','store_click',{store:STORES[i][1],link_url:a.href}); return; }
+    }catch(x){} }
+    document.addEventListener('click',onClick,true);
+    document.addEventListener('auxclick',onClick,true);
+  })();
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -331,7 +343,218 @@ window.KB_SHOP=(function(){
   const kwKanaHard = enc(dropCatalogParen(r[8] || jp || en).replace(/・/g, ' '));
   return {kwCode, sgComUrl, sgNoCode, kwCodeSg, kwBuyee, kwBuyeeFallback, buyeeWrapped, kwKana, kwKanaBo, kwKanaHard, codes};
   }
-  return {keys, enc, sgAf, sgCom, SG_AF, SG_UTM, SG_COM, buyeeLink, maintNote};
+  // 2026-10-31: 店のボタンと発送の説明の文言（6言語）。言語はブログと同じ判定（ブログで選んだ言語→ブラウザ→英語）。
+  const LANGS=['en','zh','ko','es','de','fr'];
+  function lang(){
+    try{ const s=localStorage.getItem('kataban_blog_lang'); if(s && LANGS.includes(s)) return s; }catch(e){}
+    const ls=navigator.languages||[navigator.language||'en'];
+    for(const c0 of ls){ const c=(c0||'').toLowerCase(); for(const l of ['zh','ko','es','de','fr','en']) if(c.indexOf(l)===0) return l; }
+    return 'en';
+  }
+  const TEXT={
+    en:{buyee:'Search on Buyee (English site)',ebay:'Search eBay',sgcom:'Search Suruga-ya.com',sgtitle:'Search Suruga-ya.jp by title',sgcode:'Search Suruga-ya.jp by code',bo:'Search Book-Off',ho:'Search Hard-Off',
+      jpNote:'Japanese site, ships within Japan &mdash; use {b} to receive it overseas',pairNote:'Japanese sites, ship within Japan &mdash; needs a proxy service to receive it overseas',rakShip:'Ships within Japan only'},
+    zh:{buyee:'在 Buyee 搜尋（英文網站）',ebay:'在 eBay 搜尋',sgcom:'在 Suruga-ya.com 搜尋',sgtitle:'在 Suruga-ya.jp 依片名搜尋',sgcode:'在 Suruga-ya.jp 依型號搜尋',bo:'在 Book-Off 搜尋',ho:'在 Hard-Off 搜尋',
+      jpNote:'日本網站，僅限日本國內配送 &mdash; 寄到海外請用 {b}',pairNote:'日本網站，僅限日本國內配送 &mdash; 寄到海外需要代購服務',rakShip:'僅限日本國內配送'},
+    ko:{buyee:'Buyee에서 검색 (영어 사이트)',ebay:'eBay에서 검색',sgcom:'Suruga-ya.com에서 검색',sgtitle:'Suruga-ya.jp에서 제목으로 검색',sgcode:'Suruga-ya.jp에서 품번으로 검색',bo:'Book-Off에서 검색',ho:'Hard-Off에서 검색',
+      jpNote:'일본 사이트, 일본 내 배송만 가능 &mdash; 해외에서 받으려면 {b} 이용',pairNote:'일본 사이트, 일본 내 배송만 가능 &mdash; 해외에서 받으려면 대행 서비스 필요',rakShip:'일본 내 배송만 가능'},
+    es:{buyee:'Buscar en Buyee (sitio en inglés)',ebay:'Buscar en eBay',sgcom:'Buscar en Suruga-ya.com',sgtitle:'Buscar en Suruga-ya.jp por título',sgcode:'Buscar en Suruga-ya.jp por código',bo:'Buscar en Book-Off',ho:'Buscar en Hard-Off',
+      jpNote:'Sitio japonés, envía solo dentro de Japón &mdash; usa {b} para recibirlo en el extranjero',pairNote:'Sitios japoneses, envían solo dentro de Japón &mdash; necesitas un servicio proxy para recibirlo en el extranjero',rakShip:'Envío solo dentro de Japón'},
+    de:{buyee:'Bei Buyee suchen (englische Seite)',ebay:'Bei eBay suchen',sgcom:'Bei Suruga-ya.com suchen',sgtitle:'Bei Suruga-ya.jp nach Titel suchen',sgcode:'Bei Suruga-ya.jp nach Code suchen',bo:'Bei Book-Off suchen',ho:'Bei Hard-Off suchen',
+      jpNote:'Japanische Seite, Versand nur innerhalb Japans &mdash; für den Empfang im Ausland {b} nutzen',pairNote:'Japanische Seiten, Versand nur innerhalb Japans &mdash; für den Empfang im Ausland ist ein Proxy-Dienst nötig',rakShip:'Versand nur innerhalb Japans'},
+    fr:{buyee:'Chercher sur Buyee (site en anglais)',ebay:'Chercher sur eBay',sgcom:'Chercher sur Suruga-ya.com',sgtitle:'Chercher sur Suruga-ya.jp par titre',sgcode:'Chercher sur Suruga-ya.jp par code',bo:'Chercher sur Book-Off',ho:'Chercher sur Hard-Off',
+      jpNote:'Site japonais, livraison au Japon uniquement &mdash; utilisez {b} pour le recevoir à l\u2019étranger',pairNote:'Sites japonais, livraison au Japon uniquement &mdash; il faut un service proxy pour le recevoir à l\u2019étranger',rakShip:'Livraison au Japon uniquement'}
+  };
+  const T=()=>TEXT[lang()]||TEXT.en;
+  function locRead(){
+    try{ const u=new URLSearchParams(location.search).get('loc'); if(u==='jp'||u==='out') return u; }catch(e){}
+    try{ const s=localStorage.getItem('kataban_loc'); if(s==='jp'||s==='out') return s; }catch(e){}
+    return 'out';
+  }
+  /* 購入ブロック（2026-10-31: 本体の下の方から移した）。k.kwEn が undefined（仮のカード＝eBay の語を作る本体がまだ無い）なら、
+     eBay は押せない同じ高さの札にする。本体に替わっても下のボタンの位置が変わらない。 */
+  function buyBlock(k, jp){
+    const L = T();
+
+    /* ★塗り(primary)の方針【2026-08-02 に変更】＝「押しやすい入口を複数示す」。
+       それまでは「塗りは常に1つだけ。蛍光灯下で最初に押す店を1つ示すのが塗りの役目」
+       という方針だったが、日本語タイトルでの駿河屋検索はどちらのモードでも主経路なので、
+       位置に応じた入口(Buyee / 型番)と並べて常に塗る形に変えた。塗りは最大2つになる。
+       IN JAPAN: Suruga-ya (code) ＋ Suruga-ya (title) の2つ。
+                 型番が無い行(または sgNoCode)は gCode 自体が出ないので Suruga-ya (title) の1つ。
+       OUTSIDE : Buyee ＋ Suruga-ya.com の2つ（2026-10-31・こはさん指示）。塗りは海外へ届く店だけにする。
+                 Suruga-ya.jp は国内発送のみなので枠線。.com が無い行（英題なし）は Buyee の1つ。
+       ★3つ以上は塗らない。Book-Off / Hard-Off / eBay は常に枠線のまま。
+         全部塗ると「まずどれを押すか」が伝わらない、という元の理由はここでは生きている。
+       ★eBayへのフォールバックは意図して却下した（2026-07-25）。
+         row[7] が空なのは「検索キーを持っていない」だけで、Buyeeで買えない証拠ではない。
+         それを根拠に転売価格のeBayを主役にすると、中間業者の上乗せ回避という
+         この道具の目的に反する。誤った塗りより塗りなしのほうがまし（罠#27の形）。
+         枠線(--edge-input)があるので塗りゼロでも壊れて見えない。
+       ★2026-07-26: PS3/Vita/3DS を追加して 5,099→1,389行（物理30,746の4.52%）。
+       「ほぼ消える」は外れた。残ったのは Switch / PS5 / Xbox系 / Wii U / 64DD で、
+       型番は 1,389行すべてが保持（100%）＝同定は効いている。 */
+    const noProxy  = !k.kwBuyee;   // row[7] 空でも kwBuyeeFallback(和名) で Buyee は出る。primary だけ型番へ移す(2026-07-26)＝1,389行
+    const clsBuyee = jp ? 'store wide' : 'store wide primary';
+    const clsCode  = (jp && k.codes.length) ? 'store wide primary' : 'store wide';
+    /* ★2026-08-02: Suruga-ya (title) は条件分岐を持たず常に塗る（同日の2段階で現在の形になった）。
+       旧1: ((jp || noProxy) && k.codes.length===0) ＝「型番が無い行だけ塗る」で clsCode と排他。
+       旧2: (jp || noProxy) ＝ 海外モードではシアンのまま。
+       現: 無条件。jp では Suruga-ya (code) と、out では Buyee と、塗りが2つ並ぶ
+       ＝上の方針コメント（この関数の先頭）に書いた「最大2つ」の形。clsCode / clsBuyee は不変。 */
+    const clsTitle = jp ? 'store wide primary' : 'store wide';
+
+    /* ★2026-07-26: 海外モードで row[7] が空のとき、強調を Buyee から
+       駿河屋の型番リンクへ移す（型番も無ければ題名リンクへ落とす）。
+       理由: eBay を英題で引くと主に北米版が返る（7/25実測）。日本専売タイトルを
+       探している人に別物を最短距離で指すのは、誤った値を出すのと同じ害（罠#27）。
+       型番は exact match で日本版に届き、1,389行すべてが型番を持っている。
+       ★963行の並び（届く可能性の順）は変えていない。変えたのは強調の基準だけで、
+       「届く可能性」から「正しい物である可能性」に寄せた。この2つは別の指標である。
+       ★型番なし行(物理20,450)は clsTitle が primary。jpモードで実際に使う主経路(罠#116を2026-07-30に解消) */
+
+    /* ★C: row[7] が空のときの説明文。「代理購入が使えない」とは書かない——
+       空なのは Kataban が検索キーを持っていないだけで、Buyee に品が無い証拠ではない
+       （上のコメント参照）。Kataban 側の限界として書く。 */
+    const worldDesc = jp
+      ? (noProxy ? 'for buyers abroad — Buyee search by Japanese title'
+                 : 'for buyers abroad — adds proxy fees')
+      : (noProxy ? 'Buyee search uses the Japanese title here — may show other console versions. Use the product code link for the exact match.'
+                 : 'proxy &amp; international');
+
+    /* 代理購入の費用内訳。jp モードでは出さない——国内の買い手は Buyee を経由しないので
+       手数料の話が要らないため。.stores の中ではなく .group 直下に置く: .stores は
+       auto-fit グリッド(312行)なので、中に入れるとボタンと横並びのセルを1つ占める。 */
+    const buyeeNote = !jp
+      ? `<div class="buyee-note">Buyee adds a flat ¥500 service fee, plus Japan domestic shipping (¥150&ndash;1,500) and international shipping &mdash; the international cost is shown once your item reaches their warehouse.</div>`
+      : '';
+
+    const gWorld = `<div class="group">
+          <div class="group-label"><span class="n">Ships worldwide</span><span class="d">${worldDesc}</span></div>
+          <div class="stores stack">
+            ${k.buyeeWrapped?`<a class="${clsBuyee}" target="_blank" rel="sponsored nofollow noopener" href="${k.buyeeWrapped}">${L.buyee}</a>`:''}
+            ${k.kwEn===undefined?`<span class="store wide store-wait" aria-hidden="true">${L.ebay}</span>`:k.kwEn?`<a class="store wide" target="_blank" rel="sponsored nofollow noopener" href="https://www.ebay.com/sch/i.html?_nkw=${k.kwEn}${k.ebayRegion||''}&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0&amp;campid=5339175838&amp;customid=&amp;toolid=10001&amp;mkevt=1">${L.ebay}</a>`:''}
+          </div>${k.buyeeWrapped?KB_SHOP.maintNote(k.kwEbayMaint,k.ebayRegionMaint):''}
+          ${buyeeNote}
+        </div>`;
+
+    /* ★駿河屋.jp が国内発送のみであることの注記(2026-08-04)。海外モードでだけ出す。
+       .jp のリンクは押せば商品は見つかるが、そこから直接は届かない ―― この非対称は
+       押す前に伝えないと「見つかった＝買える」と読まれる。
+       ★code / title の両方に付ける。片方だけだと「型番のほうなら送れる」と読める余地が残る
+       （両リンクとも同じ .jp で、制約はリンクの種類によらない）。
+       ★"Buyee" は既存の代理購入リンクへ繋ぐ。buyeeWrapped は row[7] も row[1] も
+         空の行では作れないので、その場合はプレーンテキストに落とす＝リンク切れを作らない。
+       ★埋め込みは </div> と同じ行に置く（下の gCode / gTitle）。改行して ${...} を独立行に
+         すると、jp モード(空文字)のときに空白だけの行が残り、IN JAPAN の出力が
+         変更前とバイト単位で一致しなくなる。同じ行なら jp モードは完全に無変化。 */
+    const jpOnlyNote = !jp
+      ? `<div class="buyee-note">${L.jpNote.replace('{b}',k.buyeeWrapped?`<a class="note-link" target="_blank" rel="sponsored nofollow noopener" href="${k.buyeeWrapped}">Buyee</a>`:'Buyee')}</div>`
+      : '';
+
+    /* ★駿河屋.com(英語・海外発送)の入口(2026-08-04)。海外モードかつ英題がある行だけ。
+       英題が空の行(DATA の r[0] が空)では検索語が「機種名だけ」になり、その機種の商品を
+       無差別に並べる＝探している物と無関係な結果を主導線として見せることになるので出さない
+       （空振りより誤誘導のほうが害が大きい・罠#27）。sgComUrl は card 側で英題が
+       空なら '' にしてある。
+       ★独立したグループにする。既存の .jp 2群に混ぜると "By product code" / "By Japanese title"
+         という見出しの意味が壊れる（これは英題での検索で、どちらでもない）。
+       ★塗り(primary)にしない。海外モードの塗りは Buyee ＋ Suruga-ya (title) の2つで、
+         関数先頭の方針コメントにあるとおり3つ以上は塗らない。加えて的中 56.7% は
+         「蛍光灯の下で最初に押す1本」として出せる数字ではない。枠線でも導線は死なない。
+       ★.jp 群より上・Ships worldwide より下に置く。海外の買い手にとって
+         「直接届く」ものが上、「代理が要る」ものが下、という既存の並びの理屈に合わせる。 */
+    const gEnTitle = (!jp && k.sgComUrl)?`<div class="group">
+          <div class="group-label"><span class="n">By English title</span><span class="d">Suruga-ya's English site &mdash; ships overseas, no proxy needed</span></div>
+          <div class="stores">
+            <a class="store wide primary" target="_blank" rel="noopener" href="${k.sgComUrl}">${L.sgcom}</a>
+          </div>
+        </div>`:'';
+
+    // k.sgNoCode: コード検索リンクを出さない行。実測で確定した2種類が入る(SG_DEAD・1540行付近)。
+    //   (a) DL-DOL- 族の2行 = 型番も JAN も駿河屋に無く、どの形でも 0件（空振り）。
+    //   (b) RVL-006 / RVL-006(USA) の2行 = ハード規格品番で無関係な商品に着地（誤着地）。
+    // 空振りも誤着地も出さない。他の導線(Buyee/eBay/タイトル検索)は下のブロックでそのまま出る。
+    const gCode = (k.codes.length && !k.sgNoCode)?`<div class="group">
+          <div class="group-label"><span class="n">By product code</span><span class="d">${jp?'exact match — buy direct, Japanese site':'exact match — Japanese site, needs a proxy'}</span></div>
+          <div class="stores">
+            <a class="${clsCode}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwCodeSg)}">${L.sgcode}</a>
+          </div>${jpOnlyNote}
+        </div>`:'';
+
+    // Mercari 導線は 2026-08-02 に非表示化（この1本がファイル内で唯一の mercari.com リンクだった）。
+    // 生成をやめただけで DATA・他店の導線・並び順には触れていない。復活は下の Suruga-ya の次行に
+    // jp.mercari.com/search?keyword=(kwName)&category_id=76 を張る .store の a 要素を戻すだけ。
+    // kwName の生成(card内)は他店と共用なので残してある。
+
+    /* ★Book-Off / Hard-Off も国内発送のみであることの注記(2026-08-14)。海外モードでだけ出す。
+       上の jpOnlyNote(1656行) と同じ理由 ―― 押せば商品は見つかるが、そこから直接は届かない。
+       駿河屋.jp にだけ注記が付いた状態だと「注記が無い店は送れる」と読める余地が残るので、
+       同じ .stores の並びで扱いを揃える。
+       ★2店まとめて1本にする。両方とも同じ制約で、ボタン1つずつに付けると
+         .stores.pair の2列の下に同じ文が2度並ぶ＝カード内の反復が増えるだけ。
+       ★jpOnlyNote と違いリンクを含まない（プレーンテキスト）。海外モードのカードには
+         すでに Buyee への導線が3本ある（gWorld のボタン＋ jpOnlyNote 内のリンク2本）。
+         4本目を足しても行き先は同じで、増えるのは押せる青字の数だけ。
+         ここは「この2店では受け取れない」ことだけを伝えれば足りる。
+       ★店名を出さず "a proxy service" と書く(2026-08-14・実画面を見て変更)。
+         リンク無しで "Buyee" と書くと、同じカード内で押せる Buyee と押せない Buyee が
+         近接して並ぶ＝同じ単語の見え方だけが違う状態になる。押す先を1つに絞る役目は
+         上の3本が持っているので、ここは制約の説明だけを担う。
+       ★buyeeWrapped を参照しない＝row[7] も row[1] も空の行でも文面が変わらない。
+       ★埋め込みは </div> と同じ行に置く（下の .stores pair）。改行して ${...} を独立行に
+         すると、jp モード(空文字)のときに空白だけの行が残り、IN JAPAN の出力が
+         変更前とバイト単位で一致しなくなる。同じ行なら jp モードは完全に無変化。 */
+    const pairJpOnlyNote = !jp
+      ? `<div class="buyee-note">${L.pairNote}</div>`
+      : '';
+
+    const gTitle = `<div class="group">
+          <div class="group-label"><span class="n">By Japanese title</span><span class="d">${jp?'domestic listings — buy direct, Japanese site':'domestic listings — usually needs a proxy'}</span></div>
+          <div class="stores">
+            <a class="${clsTitle}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwKana)}">${L.sgtitle}</a>
+          </div>${jpOnlyNote}
+          <div class="stores pair">
+            <a class="store wide" target="_blank" rel="noopener" href="https://shopping.bookoff.co.jp/search/genre/51/keyword/${k.kwKanaBo}">${L.bo}</a>
+            <a class="store wide" target="_blank" rel="noopener" href="https://netmall.hardoff.co.jp/cate/00010012/?q=${k.kwKanaHard}&amp;s=7">${L.ho}</a>
+          </div>${pairJpOnlyNote}
+        </div>`;
+
+    /* gEnTitle は jp モードでは '' なので、IN JAPAN の並びは 3群のまま＝変更なし。
+       ★海外モードの gCode / gTitle の順は noProxy で分ける（2026-08-04）。
+       通常行: gTitle を先に出す。Buyee で受け取れる行では和名検索のほうが実際に使う主経路で、
+               型番の exact match は「念のため」の位置づけになる。
+       noProxy行(row[7]空・1,389行): gCode を先に出す＝**元の順序を維持する**。
+               この行では clsCode が primary になる(2026-07-26の判断＝「届く可能性」ではなく
+               「正しい物である可能性」で塗りを決めた)。その塗りボタンを Book-Off / Hard-Off より
+               下へ動かすと、塗りで示した主経路が最後に来て、塗りの意味が消える。
+       ★塗りの数はどちらも2つで、関数先頭の方針「最大2つ・3つ以上は塗らない」は不変。 */
+    const order = jp
+      ? [gCode, gTitle, gWorld]
+      : noProxy
+        ? [gWorld, gEnTitle, gCode, gTitle]
+        : [gWorld, gEnTitle, gTitle, gCode];
+
+    // 2026-10-31: 海外モードは店ボタンを上へ（見出しと PR の注記を1行に）。
+    return jp ? `<div>
+        <div class="buy-head">
+          <h3>Buy this game</h3>
+          <p>Ordered by what you can buy directly in Japan.</p>
+        </div>
+
+        <p class="cap">Some store links are affiliate links (PR).</p>
+
+        ${order.filter(Boolean).join('\n\n      ')}
+      </div>` : `<div class="buy-out">
+        <div class="buy-head">
+          <h3>Buy this game</h3>
+          <p class="cap">Some links are affiliate (PR).</p>
+        </div>
+
+        ${order.filter(Boolean).join('\n\n      ')}
+      </div>`;
+  }
+  return {keys, enc, sgAf, sgCom, SG_AF, SG_UTM, SG_COM, buyeeLink, maintNote, buyBlock, lang, T, locRead};
 })();
 </script>
 <meta name='impact-site-verification' value='41e22ad5-defe-4001-9f0f-6b527369763a'>
@@ -1212,6 +1435,8 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card .buy-head{display:flex; flex-direction:column; gap:3px;}
 .card .buy-head h3{margin:0; font:600 15px/1.1 var(--f-display); color:var(--ink);}
 .card .buy-head p{margin:0; font:400 12px/1.4 var(--f-display); color:var(--muted);}
+.card .buy-out .buy-head{flex-direction:row; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:3px 8px;}
+.card .buy-out .buy-head + .group{margin-top:14px;}
 .card .group{display:flex; flex-direction:column; gap:8px; margin-top:32px;}
 .card .group-label{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;}
 /* ★見出し(.n)と説明文(.d)をどちらも 700 にする（2026-08-04・.n は 500→700・.d は 400→700）。
@@ -1245,6 +1470,9 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
    .stores の grid 定義(320行)には触らない＝他店ボタンの寸法は不変。 */
 .card .store.wide{height:auto; min-height:44px; padding:10px 14px; line-height:1.35;
   text-align:center; white-space:normal;}
+/* 2026-10-31: 文言が長くなったので、海外へ届く店は1列に積む。仮のカードの eBay は押せない札。 */
+.card .stores.stack{grid-template-columns:1fr;}
+.card .store.store-wait{opacity:.4; cursor:default;}
 /* .buyee-note の中に置く Buyee へのリンク。.card a{color:inherit}(165行)で文字色を継ぐため、
    下線とシアンを足さないとリンクだと分からない。見え方はフッターのリンク(433行)に揃える。 */
 .card .note-link{color:var(--tag); text-decoration:underline;}
@@ -1454,8 +1682,10 @@ footer a:hover,footer a:focus{color:var(--accent)}
 #scanGo:hover,#scanGo:focus,#scanCodeGo:hover,#scanCodeGo:focus{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);outline:none}
 
 /* 楽天 商品画像レイヤー(任意層)。切り抜かない・上に文字を乗せない = 規約側の要求。 */
-.rak-slot{min-height:0}                    /* 空の間は場所を取らない(出品が無い行で余白を作らない) */
-.rak-slot:has(.rak-img){min-height:0}      /* 固定値は入れない。実測で高さが187〜300に割れるため(2026-07-23・罠#57) */
+/* 2026-10-31: 店の下で、最初から高さを取る（実測で枠は 192〜343＋相場の行）。答えが来たら中身の高さに戻す＝店の下だけが動く。出品が無い行も同じ（rak-done）。 */
+.rak-slot{min-height:400px;margin-top:16px}
+.rak-slot.rak-done{min-height:0}
+.rak-slot.rak-done:empty{margin-top:0}
 .rak-img{display:block;margin-bottom:.75rem;text-decoration:none;color:inherit;cursor:pointer}
 /* max-height は付けない(縦長の箱絵が潰れる)。object-fit も使わない = 規約の切り抜き禁止。 */
 .rak-img img{max-width:300px;height:auto;display:block;border-radius:4px;cursor:pointer}
@@ -1598,7 +1828,7 @@ footer a:hover,footer a:focus{color:var(--accent)}
    （jp: code→title→world / out: world→code→title＝1351行の order）。
    さらに Suruga-ya (title) を別の .stores に分けた結果、out モードでは単独ボタンの
    .stores にもこの2カラムが当たって半分幅になっていた。当てる先を class で名指しする。 */
-.card .stores.pair{ grid-template-columns:1fr 1fr; }
+.card .stores.pair{ grid-template-columns:1fr; }   /* 2026-10-31: 文言が長くなったので1列（fr の 320px で2列だとはみ出した） */
 
 /* 3. 番号バッジ（CSS counter・HTML/JS 不変）。シアン地・暗い文字の小さなタブを枠上端に重ねる */
 #results{ counter-reset:cardnum; }
@@ -2268,30 +2498,53 @@ header .lede .lede-sub{ font-weight:400; }
     var res=document.getElementById('results'), cnt=document.getElementById('count'); if(!res || res.querySelector('.card:not(.qa)')) return;
     var kind={}, k=a.m.k||'', i=0; k.split(';').forEach(function(e){ if(!e) return; var c=e.indexOf(':'); i+=parseInt(e.slice(0,c),36); kind[i]=e.slice(c+1); });
     function esc(s){ return String(s||'').replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+    var loc=KB_SHOP.locRead();
     var html=a.idx.map(function(n){
       var r=a.rows[n]; if(!r) return '';
-      var kk=KB_SHOP.keys(r), en=r[0], xk=kind[n]||'', code=kk.codes.map(esc).join('<span class="sep">&nbsp;&middot;</span> ');
-      var sg=(kk.codes.length && !kk.sgNoCode) ? '<a class="store" target="_blank" rel="sponsored nofollow noopener" href="'+KB_SHOP.sgAf(kk.kwCodeSg)+'">Suruga-ya.jp (code)</a>'
-        : '<a class="store" target="_blank" rel="sponsored nofollow noopener" href="'+KB_SHOP.sgAf(kk.kwKana)+'">Suruga-ya.jp (title)</a>';
-      var by=kk.buyeeWrapped ? '<a class="store primary" target="_blank" rel="sponsored nofollow noopener" href="'+kk.buyeeWrapped+'">Buyee <span class="en">EN</span></a>' : '';
+      var kk=KB_SHOP.keys(r), en=r[0], xk=kind[n]||''; if(!en) kk.kwEn='';   // 英題が無い行は本体でも eBay が出ない
+      var code=kk.codes.map(esc).join('<span class="sep">&nbsp;&middot;</span> ');
+      var pub=(r[6]||r[5]||'').split(';').map(function(s){ return s.trim(); }).filter(Boolean).join(' · ');   // 本体の Publisher と同じ高さにする（替わるとき店ボタンを動かさない）
       return '<article class="card quick qa">'
-        +'<div class="status"><span class="dot"></span>'+(a.kind==='barcode'?'Barcode match':'Match')+' &middot; Japan / NTSC-J</div>'
+        +'<div class="status"><span class="dot"></span>'+'Match &middot; Japan / NTSC-J</div>'
         +'<div class="specs">'+(r[2]?'<div class="spec"><span class="micro">Console</span><span class="v jp">'+esc(r[2])+'</span></div>':'')
+        +(pub?'<div class="spec"><span class="micro">Publisher</span><span class="v">'+esc(pub)+'</span></div>':'')
         +(r[4]?'<div class="spec"><span class="micro">Released</span><span class="v">'+esc(r[4])+'</span></div>':'')+'</div>'
         +'<div class="identity">'+(en?'<div class="field">'+(xk==='r'?'<span class="micro plain ro-k">Romanized <span class="ro-note">&middot; no official English title</span></span>'
             :xk?'<span class="micro plain ro-k">Unofficial English name <span class="ro-note">&middot; '+(xk==='p'?'used later by the publisher; never released in English':'fan name')+'</span></span>'
             :(a.m.k!=null?'<span class="micro plain">English</span>':'<span class="micro plain">Title in Latin letters</span>'))
           +'<div class="title-row"><div class="en-title'+(xk==='r'?' ro-title" lang="ja-Latn':'')+'">'+esc(en)+'</div></div></div>':'')
-        +'<div class="field"><span class="micro plain">Japanese title</span><div class="title-row"><div class="ja-title">'+esc(r[1]||r[0])+'</div></div></div></div>'
+        +'<div class="field"><span class="micro plain">Japanese title</span><div class="title-row"><div class="ja-title">'+esc(r[1]||r[0])+'</div></div>'+((en && xk!=='r')?'<div class="romaji">&nbsp;</div>':'')+'</div></div>'
+        +(loc==='jp'?'':KB_SHOP.buyBlock(kk,false))
         +(code?'<div class="field"><span class="micro plain">Product code</span><div class="jp-copy-row"><div class="jp-chip"><span class="code">'+code+'</span></div></div></div>':'')
-        +'<div class="group"><div class="group-label"><span class="n">Buy this game</span><span class="d">Some store links are affiliate links (PR).</span></div>'+(by?'<div class="stores">'+by+'</div>':'')+'<div class="stores">'+sg+'</div></div>'
+        +(loc==='jp'?KB_SHOP.buyBlock(kk,true):'')
         +'</article>';
     }).join('');
-    res.innerHTML='<p class="quick-more qa">First matches — the full search (prices, shelf guide, more results) is still loading…</p>'+html;
-    if(cnt) cnt.textContent=(a.total>a.idx.length?a.idx.length+' of '+a.total:a.total)+' first match'+(a.total>1?'es':'')+' · loading full search…';
+    res.innerHTML=html+'<p class="quick-more qa">First matches — the full search (prices, shelf guide, more results) is still loading…</p>';   // 2026-10-31: カードの下へ。上にあると本体に替わるとき店ボタンがずれる
+    if(cnt) cnt.textContent=(a.total>a.idx.length?a.idx.length+' of '+a.total:a.total)+' match'+(a.total>1?'es':'')+' · loading…';   // 2026-10-31: 1行に収める（2行だと本体に替わるとき結果の先頭が動く）
     res.setAttribute('data-qa-q', a.q);   // どの語の仮のカードか（打った語の受け手が、語が変わったら薄くする）
     root.setAttribute('data-qa', 'shown');
   }
+}catch(e){} })();
+/* 結果の先頭へ送る（2026-10-31）: /?q= で開いたときと、Enter のとき。結果が画面の外だと、検索が終わったことも店も見えない。
+   /?q=: 仮のカードが出たときと準備完了のとき（CSS・帯の高さが揃う）に送る。人が先に画面を動かした・打ち直したら送らない。
+   Enter: 本体の前でも効くようにここで受ける。キーボードを閉じる（閉じると画面の高さが変わるので 0.35秒後にもう一度）。 */
+(function(){ try{
+  var q=document.getElementById('q'), root=document.documentElement, res=document.getElementById('results'); if(!q || !res) return;
+  var moved=false, sent=false;
+  function go(){ if(moved) return; sent=true; q.blur();
+    // 本体の measureLocbar より先に動くことがある（--locbar-h が既定の 61px のままだと、2段の帯の下に結果の先頭がもぐる）
+    var lb=document.getElementById('locbar'); if(lb) root.style.setProperty('--locbar-h', Math.round(lb.getBoundingClientRect().height)+'px');
+    res.scrollIntoView({block:'start'}); }
+  function mark(){ moved=true; }
+  ['wheel','touchmove','input'].forEach(function(n){ window.addEventListener(n,mark,{passive:true,capture:true}); });
+  if(new URLSearchParams(location.search).get('q')){
+    if(window.__kbCat && window.__kbCat.qa) window.__kbCat.qa.then(function(a){ if(a && a.idx.length) go(); });
+    window.__afterReady(function(){ if(!sent) go(); });   // 仮のカードで送った後は動かさない（店ボタンの位置を変えない）
+  }
+  q.addEventListener('keydown',function(e){
+    if(e.key!=='Enter' || e.isComposing || !q.value.trim()) return;
+    moved=false; go(); setTimeout(go,350);
+  });
 }catch(e){} })();
 /* 打った語（2026-10-29）: 本体の input の受け手は本体の起動（カタログの読み込み）の後にしか付かないので、それまでに打った語は
    約1分待たされていた。準備完了（data-catalog=ready）までのあいだだけ、打った語でも最初の答え（qaLookup）を引いて仮のカードを出す。
@@ -2569,16 +2822,13 @@ header .lede .lede-sub{ font-weight:400; }
     msg.textContent='Barcode match — loading prices and shop details…';
   }
   function paintQuick(j, list){
-    var X=(E.xj===j && E.x) || [];
+    var X=(E.xj===j && E.x) || [], jpm=KB_SHOP.locRead()==='jp';
     var html=list.map(function(v, n){
       var r=[v[0]||'', v[1]||'', v[2]||'', v[3]||'', v[4]||'', '', '', v[5]||'', v[6]||'', '', j];
       var KJ=(E.m && E.m.kj) || (window.KB_CATALOG && window.KB_CATALOG.kj) || null;   // 2026-10-28: manifest の kj（JAN → 行ごとの種類）があれば janx を待たずに欄名が決まる
-      var k=KB_SHOP.keys(r), en=r[0], jp=r[1]||r[0], x=(!en && X[n]) || null, xk=(en && (KJ ? (KJ[j] && KJ[j][n]) : (X[n] && X[n][2]))) || '';   // xk: 英題の欄の値の種類（本体の EN_KIND と同じ r・p・f）
+      var k=KB_SHOP.keys(r), en=r[0]; if(!en) k.kwEn='';   // 英題が無い行は本体でも eBay が出ない
+      var jp=r[1]||r[0], x=(!en && X[n]) || null, xk=(en && (KJ ? (KJ[j] && KJ[j][n]) : (X[n] && X[n][2]))) || '';   // xk: 英題の欄の値の種類（本体の EN_KIND と同じ r・p・f）
       var code=k.codes.map(esc).join('<span class="sep">&nbsp;&middot;</span> ');
-      var sg = (k.codes.length && !k.sgNoCode)
-        ? '<a class="store" target="_blank" rel="sponsored nofollow noopener" href="'+KB_SHOP.sgAf(k.kwCodeSg)+'">Suruga-ya.jp (code)</a>'
-        : '<a class="store" target="_blank" rel="sponsored nofollow noopener" href="'+KB_SHOP.sgAf(k.kwKana)+'">Suruga-ya.jp (title)</a>';
-      var by = k.buyeeWrapped ? '<a class="store primary" target="_blank" rel="sponsored nofollow noopener" href="'+k.buyeeWrapped+'">Buyee <span class="en">EN</span></a>' : '';
       return '<article class="card quick" data-quick="'+esc(j)+'">'
         +'<div class="status is-scan"><span class="dot"></span><span class="status-txt">Barcode match &middot; Japan / NTSC-J</span></div>'
         +'<div class="specs">'+(r[2]?'<div class="spec"><span class="micro">Console</span><span class="v jp">'+esc(r[2])+'</span></div>':'')
@@ -2589,8 +2839,9 @@ header .lede .lede-sub{ font-weight:400; }
         +((x && (x[0]||x[1]))?'<div class="field">'+(x[0]?'<span class="micro plain ro-k">Romanized <span class="ro-note">&middot; no official English title</span></span><div class="title-row"><div class="en-title ro-title" lang="ja-Latn">'+esc(x[0])+'</div></div>':'')
           +(x[1]?'<div class="loan-gloss"><span class="lg-k">Loanwords, word by word &middot; not a title</span><span class="lg-v">'+esc(x[1])+'</span></div>':'')+'</div>':'')
         +'<div class="field"><span class="micro plain">Japanese title</span><div class="title-row"><div class="ja-title">'+esc(jp)+'</div></div></div></div>'
+        +(jpm?'':KB_SHOP.buyBlock(k,false))
         +(code?'<div class="field"><span class="micro plain">Product code &middot; exact match</span><div class="jp-copy-row"><div class="jp-chip"><span class="code">'+code+'</span></div></div></div>':'')
-        +'<div class="group"><div class="group-label"><span class="n">Buy this game</span><span class="d">Some store links are affiliate links (PR).</span></div><div class="stores">'+by+sg+'</div></div>'
+        +(jpm?KB_SHOP.buyBlock(k,true):'')
         +'<p class="quick-more">Loading prices and shop details…</p>'
         +'</article>';
     }).join('');
@@ -3377,17 +3628,7 @@ let LOC='out';
    ★保存値は 'out'/'jp' 以外を捨てる。localStorage は人が書き換えられる。
    ★期限は設けていない。帰国後も 'jp' を覚えたままになるが、日数の根拠が無い。
      トグルは常設なので間違いにすぐ気づいて押し直せる。未解決として記録した。 */
-function locRead(){
-  try{
-    const u = new URLSearchParams(location.search).get('loc');
-    if(u==='jp'||u==='out') return u;
-  }catch(e){}
-  try{
-    const s = localStorage.getItem('kataban_loc');
-    if(s==='jp'||s==='out') return s;
-  }catch(e){}
-  return 'out';
-}
+const locRead = KB_SHOP.locRead;
 
 function setLoc(v,skipSave){
   if(v!=='jp'&&v!=='out') return;
@@ -3947,180 +4188,7 @@ const SG_COM=KB_SHOP.SG_COM;   // 2026-10-19: KB_SHOP（<head>）と同じもの
      ＝測定時(Python の quote_plus)と同じ形。差が残るのは ' の1文字だけで、
      quote_plus は %27・こちらは素の ' を送る(該当は英題にアポストロフィを含む行)。 */
 const sgCom = KB_SHOP.sgCom;   // 2026-10-19: KB_SHOP（<head>）と同じもの
-function buyBlock(k){
-  const jp = LOC==='jp';
-
-  /* ★塗り(primary)の方針【2026-08-02 に変更】＝「押しやすい入口を複数示す」。
-     それまでは「塗りは常に1つだけ。蛍光灯下で最初に押す店を1つ示すのが塗りの役目」
-     という方針だったが、日本語タイトルでの駿河屋検索はどちらのモードでも主経路なので、
-     位置に応じた入口(Buyee / 型番)と並べて常に塗る形に変えた。塗りは最大2つになる。
-     IN JAPAN: Suruga-ya (code) ＋ Suruga-ya (title) の2つ。
-               型番が無い行(または sgNoCode)は gCode 自体が出ないので Suruga-ya (title) の1つ。
-     OUTSIDE : Buyee ＋ Suruga-ya (title) の2つ。
-               row[7] が空(noProxy)の行だけは Buyee を塗らず、駿河屋の型番リンクへ移す
-               （2026-07-26）ので Suruga-ya (code) ＋ (title) の2つ。型番も無ければ (title) の1つ。
-     ★3つ以上は塗らない。Book-Off / Hard-Off / eBay は常に枠線のまま。
-       全部塗ると「まずどれを押すか」が伝わらない、という元の理由はここでは生きている。
-     ★eBayへのフォールバックは意図して却下した（2026-07-25）。
-       row[7] が空なのは「検索キーを持っていない」だけで、Buyeeで買えない証拠ではない。
-       それを根拠に転売価格のeBayを主役にすると、中間業者の上乗せ回避という
-       この道具の目的に反する。誤った塗りより塗りなしのほうがまし（罠#27の形）。
-       枠線(--edge-input)があるので塗りゼロでも壊れて見えない。
-     ★2026-07-26: PS3/Vita/3DS を追加して 5,099→1,389行（物理30,746の4.52%）。
-     「ほぼ消える」は外れた。残ったのは Switch / PS5 / Xbox系 / Wii U / 64DD で、
-     型番は 1,389行すべてが保持（100%）＝同定は効いている。 */
-  const noProxy  = !k.kwBuyee;   // row[7] 空でも kwBuyeeFallback(和名) で Buyee は出る。primary だけ型番へ移す(2026-07-26)＝1,389行
-  const clsBuyee = (jp || noProxy) ? 'store' : 'store primary';
-  const clsCode  = ((jp || noProxy) && k.codes.length)     ? 'store primary' : 'store';
-  /* ★2026-08-02: Suruga-ya (title) は条件分岐を持たず常に塗る（同日の2段階で現在の形になった）。
-     旧1: ((jp || noProxy) && k.codes.length===0) ＝「型番が無い行だけ塗る」で clsCode と排他。
-     旧2: (jp || noProxy) ＝ 海外モードではシアンのまま。
-     現: 無条件。jp では Suruga-ya (code) と、out では Buyee と、塗りが2つ並ぶ
-     ＝上の方針コメント（この関数の先頭）に書いた「最大2つ」の形。clsCode / clsBuyee は不変。 */
-  const clsTitle = 'store primary';
-
-  /* ★2026-07-26: 海外モードで row[7] が空のとき、強調を Buyee から
-     駿河屋の型番リンクへ移す（型番も無ければ題名リンクへ落とす）。
-     理由: eBay を英題で引くと主に北米版が返る（7/25実測）。日本専売タイトルを
-     探している人に別物を最短距離で指すのは、誤った値を出すのと同じ害（罠#27）。
-     型番は exact match で日本版に届き、1,389行すべてが型番を持っている。
-     ★963行の並び（届く可能性の順）は変えていない。変えたのは強調の基準だけで、
-     「届く可能性」から「正しい物である可能性」に寄せた。この2つは別の指標である。
-     ★型番なし行(物理20,450)は clsTitle が primary。jpモードで実際に使う主経路(罠#116を2026-07-30に解消) */
-
-  /* ★C: row[7] が空のときの説明文。「代理購入が使えない」とは書かない——
-     空なのは Kataban が検索キーを持っていないだけで、Buyee に品が無い証拠ではない
-     （上のコメント参照）。Kataban 側の限界として書く。 */
-  const worldDesc = jp
-    ? (noProxy ? 'for buyers abroad — Buyee search by Japanese title'
-               : 'for buyers abroad — adds proxy fees')
-    : (noProxy ? 'Buyee search uses the Japanese title here — may show other console versions. Use the highlighted store link for the exact match.'
-               : 'proxy &amp; international — English, they handle Japanese');
-
-  /* 代理購入の費用内訳。jp モードでは出さない——国内の買い手は Buyee を経由しないので
-     手数料の話が要らないため。.stores の中ではなく .group 直下に置く: .stores は
-     auto-fit グリッド(312行)なので、中に入れるとボタンと横並びのセルを1つ占める。 */
-  const buyeeNote = !jp
-    ? `<div class="buyee-note">Buyee adds a flat ¥500 service fee, plus Japan domestic shipping (¥150&ndash;1,500) and international shipping &mdash; the international cost is shown once your item reaches their warehouse.</div>`
-    : '';
-
-  const gWorld = `<div class="group">
-        <div class="group-label"><span class="n">Ships worldwide</span><span class="d">${worldDesc}</span></div>
-        <div class="stores">
-          ${k.buyeeWrapped?`<a class="${clsBuyee}" target="_blank" rel="sponsored nofollow noopener" href="${k.buyeeWrapped}">Buyee <span class="en">EN</span></a>`:''}
-          ${k.kwEn?`<a class="store" target="_blank" rel="sponsored nofollow noopener" href="https://www.ebay.com/sch/i.html?_nkw=${k.kwEn}${k.ebayRegion||''}&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0&amp;campid=5339175838&amp;customid=&amp;toolid=10001&amp;mkevt=1">eBay <span class="en">EN</span></a>`:''}
-        </div>${k.buyeeWrapped?KB_SHOP.maintNote(k.kwEbayMaint,k.ebayRegionMaint):''}
-        ${buyeeNote}
-      </div>`;
-
-  /* ★駿河屋.jp が国内発送のみであることの注記(2026-08-04)。海外モードでだけ出す。
-     .jp のリンクは押せば商品は見つかるが、そこから直接は届かない ―― この非対称は
-     押す前に伝えないと「見つかった＝買える」と読まれる。
-     ★code / title の両方に付ける。片方だけだと「型番のほうなら送れる」と読める余地が残る
-     （両リンクとも同じ .jp で、制約はリンクの種類によらない）。
-     ★"Buyee" は既存の代理購入リンクへ繋ぐ。buyeeWrapped は row[7] も row[1] も
-       空の行では作れないので、その場合はプレーンテキストに落とす＝リンク切れを作らない。
-     ★埋め込みは </div> と同じ行に置く（下の gCode / gTitle）。改行して ${...} を独立行に
-       すると、jp モード(空文字)のときに空白だけの行が残り、IN JAPAN の出力が
-       変更前とバイト単位で一致しなくなる。同じ行なら jp モードは完全に無変化。 */
-  const jpOnlyNote = !jp
-    ? `<div class="buyee-note">Suruga-ya.jp (Japan domestic shipping only) &mdash; Can't ship to you directly, use ${k.buyeeWrapped?`<a class="note-link" target="_blank" rel="sponsored nofollow noopener" href="${k.buyeeWrapped}">Buyee</a>`:'Buyee'} to receive it overseas</div>`
-    : '';
-
-  /* ★駿河屋.com(英語・海外発送)の入口(2026-08-04)。海外モードかつ英題がある行だけ。
-     英題が空の行(DATA の r[0] が空)では検索語が「機種名だけ」になり、その機種の商品を
-     無差別に並べる＝探している物と無関係な結果を主導線として見せることになるので出さない
-     （空振りより誤誘導のほうが害が大きい・罠#27）。sgComUrl は card 側で英題が
-     空なら '' にしてある。
-     ★独立したグループにする。既存の .jp 2群に混ぜると "By product code" / "By Japanese title"
-       という見出しの意味が壊れる（これは英題での検索で、どちらでもない）。
-     ★塗り(primary)にしない。海外モードの塗りは Buyee ＋ Suruga-ya (title) の2つで、
-       関数先頭の方針コメントにあるとおり3つ以上は塗らない。加えて的中 56.7% は
-       「蛍光灯の下で最初に押す1本」として出せる数字ではない。枠線でも導線は死なない。
-     ★.jp 群より上・Ships worldwide より下に置く。海外の買い手にとって
-       「直接届く」ものが上、「代理が要る」ものが下、という既存の並びの理屈に合わせる。 */
-  const gEnTitle = (!jp && k.sgComUrl)?`<div class="group">
-        <div class="group-label"><span class="n">By English title</span><span class="d">Suruga-ya's English site &mdash; ships overseas, no proxy needed</span></div>
-        <div class="stores">
-          <a class="store wide" target="_blank" rel="noopener" href="${k.sgComUrl}">Suruga-ya.com (English &middot; ships overseas)</a>
-        </div>
-      </div>`:'';
-
-  // k.sgNoCode: コード検索リンクを出さない行。実測で確定した2種類が入る(SG_DEAD・1540行付近)。
-  //   (a) DL-DOL- 族の2行 = 型番も JAN も駿河屋に無く、どの形でも 0件（空振り）。
-  //   (b) RVL-006 / RVL-006(USA) の2行 = ハード規格品番で無関係な商品に着地（誤着地）。
-  // 空振りも誤着地も出さない。他の導線(Buyee/eBay/タイトル検索)は下のブロックでそのまま出る。
-  const gCode = (k.codes.length && !k.sgNoCode)?`<div class="group">
-        <div class="group-label"><span class="n">By product code</span><span class="d">${jp?'exact match — buy direct, Japanese site':'exact match — Japanese site, needs a proxy'}</span></div>
-        <div class="stores">
-          <a class="${clsCode}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwCodeSg)}">Suruga-ya.jp (code)</a>
-        </div>${jpOnlyNote}
-      </div>`:'';
-
-  // Mercari 導線は 2026-08-02 に非表示化（この1本がファイル内で唯一の mercari.com リンクだった）。
-  // 生成をやめただけで DATA・他店の導線・並び順には触れていない。復活は下の Suruga-ya の次行に
-  // jp.mercari.com/search?keyword=(kwName)&category_id=76 を張る .store の a 要素を戻すだけ。
-  // kwName の生成(card内)は他店と共用なので残してある。
-
-  /* ★Book-Off / Hard-Off も国内発送のみであることの注記(2026-08-14)。海外モードでだけ出す。
-     上の jpOnlyNote(1656行) と同じ理由 ―― 押せば商品は見つかるが、そこから直接は届かない。
-     駿河屋.jp にだけ注記が付いた状態だと「注記が無い店は送れる」と読める余地が残るので、
-     同じ .stores の並びで扱いを揃える。
-     ★2店まとめて1本にする。両方とも同じ制約で、ボタン1つずつに付けると
-       .stores.pair の2列の下に同じ文が2度並ぶ＝カード内の反復が増えるだけ。
-     ★jpOnlyNote と違いリンクを含まない（プレーンテキスト）。海外モードのカードには
-       すでに Buyee への導線が3本ある（gWorld のボタン＋ jpOnlyNote 内のリンク2本）。
-       4本目を足しても行き先は同じで、増えるのは押せる青字の数だけ。
-       ここは「この2店では受け取れない」ことだけを伝えれば足りる。
-     ★店名を出さず "a proxy service" と書く(2026-08-14・実画面を見て変更)。
-       リンク無しで "Buyee" と書くと、同じカード内で押せる Buyee と押せない Buyee が
-       近接して並ぶ＝同じ単語の見え方だけが違う状態になる。押す先を1つに絞る役目は
-       上の3本が持っているので、ここは制約の説明だけを担う。
-     ★buyeeWrapped を参照しない＝row[7] も row[1] も空の行でも文面が変わらない。
-     ★埋め込みは </div> と同じ行に置く（下の .stores pair）。改行して ${...} を独立行に
-       すると、jp モード(空文字)のときに空白だけの行が残り、IN JAPAN の出力が
-       変更前とバイト単位で一致しなくなる。同じ行なら jp モードは完全に無変化。 */
-  const pairJpOnlyNote = !jp
-    ? `<div class="buyee-note">Japan domestic shipping only &mdash; needs a proxy service to receive it overseas</div>`
-    : '';
-
-  const gTitle = `<div class="group">
-        <div class="group-label"><span class="n">By Japanese title</span><span class="d">${jp?'domestic listings — buy direct, Japanese site':'domestic listings — usually needs a proxy'}</span></div>
-        <div class="stores">
-          <a class="${clsTitle}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwKana)}">Suruga-ya.jp (title)</a>
-        </div>${jpOnlyNote}
-        <div class="stores pair">
-          <a class="store" target="_blank" rel="noopener" href="https://shopping.bookoff.co.jp/search/genre/51/keyword/${k.kwKanaBo}">Book-Off</a>
-          <a class="store" target="_blank" rel="noopener" href="https://netmall.hardoff.co.jp/cate/00010012/?q=${k.kwKanaHard}&amp;s=7">Hard-Off</a>
-        </div>${pairJpOnlyNote}
-      </div>`;
-
-  /* gEnTitle は jp モードでは '' なので、IN JAPAN の並びは 3群のまま＝変更なし。
-     ★海外モードの gCode / gTitle の順は noProxy で分ける（2026-08-04）。
-     通常行: gTitle を先に出す。Buyee で受け取れる行では和名検索のほうが実際に使う主経路で、
-             型番の exact match は「念のため」の位置づけになる。
-     noProxy行(row[7]空・1,389行): gCode を先に出す＝**元の順序を維持する**。
-             この行では clsCode が primary になる(2026-07-26の判断＝「届く可能性」ではなく
-             「正しい物である可能性」で塗りを決めた)。その塗りボタンを Book-Off / Hard-Off より
-             下へ動かすと、塗りで示した主経路が最後に来て、塗りの意味が消える。
-     ★塗りの数はどちらも2つで、関数先頭の方針「最大2つ・3つ以上は塗らない」は不変。 */
-  const order = jp
-    ? [gCode, gTitle, gWorld]
-    : noProxy
-      ? [gWorld, gEnTitle, gCode, gTitle]
-      : [gWorld, gEnTitle, gTitle, gCode];
-
-  return `<div>
-      <div class="buy-head">
-        <h3>Buy this game</h3>
-        <p>${jp?'Ordered by what you can buy directly in Japan.':'Ordered by how likely you are to receive it abroad.'}</p>
-      </div>
-
-      <p class="cap">Some store links are affiliate links (PR).</p>
-
-      ${order.filter(Boolean).join('\n\n      ')}
-    </div>`;
-}
+const buyBlock = k => KB_SHOP.buyBlock(k, LOC==='jp');   // 2026-10-31: 本体は KB_SHOP（<head>）へ移した。仮のカードと同じ形＝本体に替わっても店ボタンがずれない
 
 /* ★2026-09-28 試作: ブログ記事・機種タグへのリンク。
    /blog/links.json（build_feeds.py の生成物・公開済みの記事だけ）を後から読む。
@@ -4161,12 +4229,7 @@ whenSearchReady(()=>{
 let JAPAN_ONLY=new Set();
 let SHARED_CODES={};      // links.json の d（別の作品に同じ型番が付いている「機種\t型番」→ 和題の一覧）。読めなければ空＝注意書きが出ないだけ   // links.json の j（「Japan only」の印を出すキー）。読めなければ空のまま＝印が出ないだけ
 const BLOG_LANGS=['en','zh','ko','es','de','fr'];
-function blogLang(){
-  try{ const s=localStorage.getItem('kataban_blog_lang'); if(s && BLOG_LANGS.includes(s)) return s; }catch(e){}
-  const ls=navigator.languages||[navigator.language||'en'];
-  for(const c0 of ls){ const c=(c0||'').toLowerCase(); for(const l of ['zh','ko','es','de','fr','en']) if(c.indexOf(l)===0) return l; }
-  return 'en';
-}
+function blogLang(){ return KB_SHOP.lang(); }
 function blogUrl(path){ const l=blogLang(); return '/blog/'+(l==='en'?'':l+'/')+path; }
 /* ★別名（links.json の s）: 記事で扱う作品の行に、検索用の別名を足す（DATA は変えない）。
    HAY / HAY4 の末尾に1行として足すので、完全一致の段（HAY を \n で割って比べる）にも効く。 */
@@ -4402,6 +4465,8 @@ function card(r,idx){
   const byBarcode = cardMatch==='barcode' && !!r[10] && r[10]===cardMatchJan;
   const byGuess = cardMatch==='guess';
   const matchLabel = byBarcode ? 'Barcode match' : byGuess ? 'Possible match' : 'Match';
+  const buyKeys = {kwBuyee,kwBuyeeFallback,buyeeWrapped,kwEn,ebayRegion,kwEbayMaint,ebayRegionMaint,kwCode,kwCodeSg,kwKana,kwKanaBo,kwName,kwKanaHard,codes,sgNoCode,sgComUrl};
+  const rakSlot = /^\d{13}$/.test(r[10]||'') ? `<div class="rak-slot" data-jan="${r[10]}"></div>` : '';
   return `<article class="card">
 
     <div class="status${(byBarcode||byGuess)?' is-scan':''}${byGuess?' is-guess':''}"><span class="dot"></span>${(byBarcode||byGuess)?`<span class="status-txt">${matchLabel} &middot; Japan / NTSC-J</span>`:`${matchLabel} &middot; Japan / NTSC-J`}${jpOnly?`<a class="jp-only" href="${blogUrl('tag/release/japan-only/')}" title="Home version sold only in Japan" aria-label="Japan only: home version sold only in Japan">Japan only</a>`:''}</div>
@@ -4436,6 +4501,9 @@ function card(r,idx){
       ${blogArts.length?`<div class="articles">${blogArts.map(([s,dt,ttl])=>`<a class="read-article" href="${blogUrl(s)}" aria-label="Read article: ${esc(ttl)}">Read article${blogArts.length>1?` <span class="ra-date">${esc(dt)}</span>`:''}<span aria-hidden="true">&rarr;</span></a>`).join('')}</div>`:''}
     </div>
 
+    <!-- 店（2026-10-31: 海外モードは和題の直下。楽天の枠は店の下。国内モードと配信専用の行は下の hr の後のまま） -->
+    ${(!r[12] && LOC!=='jp') ? buyBlock(buyKeys)+rakSlot : ''}
+
     <!-- 型番（2026-10-19: 購入ブロックの下から見出しのすぐ下へ移した。「これで合っているか」を箱と見比べる一番の手がかり）。 -->
     ${codes.length?`<div class="field">
       <span class="micro plain">Product code &middot; exact match</span>
@@ -4467,9 +4535,7 @@ function card(r,idx){
 
     <hr class="div">
 
-    ${/^\d{13}$/.test(r[10]||'') ? `<div class="rak-slot" data-jan="${r[10]}"></div>` : ''}
-
-    ${r[12]?`<span class="nodisc">No disc &middot; download</span>`:buyBlock({kwBuyee,kwBuyeeFallback,buyeeWrapped,kwEn,ebayRegion,kwEbayMaint,ebayRegionMaint,kwCode,kwCodeSg,kwKana,kwKanaBo,kwName,kwKanaHard,codes,sgNoCode,sgComUrl})}
+    ${(r[12] || LOC==='jp') ? (r[12]?`<span class="nodisc">No disc &middot; download</span>`:buyBlock(buyKeys))+rakSlot : ''}
 
 
 
@@ -4590,7 +4656,9 @@ function paint(){
   const len=current.length;
   if(!len && !SEARCH_READY && results.querySelector('.qa')) return;   // 2026-10-28: 起動時の描き直し（setLoc 等）で最初の答え（.qa）を消さない
   paintDupeNote();
+  const qaStore=results.querySelector('.qa a.store'), qaY=qaStore ? qaStore.getBoundingClientRect().top : null;   // 2026-10-31: 仮のカード→本体で店ボタンの画面上の位置を保つ（本体は発売元・読みの行のぶん高い）
   results.innerHTML = current.slice(0,shown).map(card).join('');
+  if(qaY!==null) requestAnimationFrame(()=>{ const a=results.querySelector('.card a.store'); if(a) window.scrollBy(0, a.getBoundingClientRect().top-qaY); });   // 描き終えた後に測る（直後は高さが定まっていない）
   if((cardMatch==='barcode' || cardMatch==='guess') && current.length){ results.insertAdjacentHTML('afterbegin', shopPromptHtml()); fillInShop(results); }
   // 任意層: 楽天画像。card() は文字列を返すので、DOM に入った後にスロットを拾って結線する。
   // この行を消せばレイヤーごと死ぬ(本体は無傷)。
@@ -6321,6 +6389,7 @@ function attachRakutenImage(slotEl, jan) {
       if (!e.isIntersecting) return;
       obs.disconnect();                        // 1カード1回だけ = 見えたカードしか叩かない
       const hit = await rakutenLookup(jan);
+      slotEl.classList.add('rak-done');        // 取っていた高さを返す
       if (!hit) return;                        // 生きた出品が無ければ何も出さない
       if (!slotEl.isConnected) return;         // 待っている間に paint() で捨てられたカードには書かない
       // API 由来の文字列は innerHTML に流さない(URL 内の引用符で属性を割られる)。DOM で組む。
@@ -6355,6 +6424,12 @@ function attachRakutenImage(slotEl, jan) {
         slotEl.appendChild(mk);                // <a> の外 = .rak-slot 直下
       }
       slotEl.appendChild(a);
+      if (LOC !== 'jp') {                      // 2026-10-31: 店と同じく、海外モードでだけ発送の説明を添える
+        const ship = document.createElement('div');
+        ship.className = 'buyee-note rak-ship';
+        ship.textContent = KB_SHOP.T().rakShip;
+        slotEl.appendChild(ship);
+      }
     });
   }, { rootMargin: '200px' });
   io.observe(slotEl);
