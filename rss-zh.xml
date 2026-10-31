@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>為海外收藏家打造的日本復古遊戲部落格——商店指南、進口教學，以及遊戲背後的故事。</description>
     <language>zh-tw</language>
-    <lastBuildDate>Fri, 30 Oct 2026 06:55:33 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2026 12:41:47 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-zh.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>日本免稅購物已改為先付後退：2026年11月1日起，在商店與機場改變了什麼</title>
+      <link>https://gamekataban.com/blog/zh/2026-11-01-japan-tax-free-refund-method-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-11-01-japan-tax-free-refund-method-guide.html</guid>
+      <description>自2026年11月1日起，訪日旅客在結帳時先付含稅價格，出境時經海關查核後才退稅。哪些規定不變（未稅¥5,000、護照）、在機場託運行李前要做什麼，以及該向商店問什麼。</description>
+      <pubDate>Sun, 01 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>《Vampire: Master of Darkness》：SEGA 沒做的那款《惡魔城》</title>
       <link>https://gamekataban.com/blog/zh/2026-10-31-in-the-wake-of-vampire-game-gear-t-44047.html</link>
@@ -331,17 +338,17 @@
       <pubDate>Thu, 17 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>Fire Emblem 的特里烏斯雙部曲：兩台主機、一個故事，還有區域鎖</title>
+      <title>聖火降魔錄 特里烏斯雙部曲：兩台主機、一個故事與區域鎖</title>
       <link>https://gamekataban.com/blog/zh/2026-09-17-fire-emblem-gamecube-wii-tellius-import-guide.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-17-fire-emblem-gamecube-wii-tellius-import-guide.html</guid>
-      <description>《Fire Emblem: Fortune’s Weave（萬縷千絲）》今天發售。《蒼炎之軌跡》與《曉之女神》用 GameCube 和 Wii 兩台主機說完同一個故事：兩者怎麼銜接、日版《曉之女神》有什麼不同，以及為什麼這兩張光碟需要日版主機。</description>
+      <description>想接著《萬縷千絲》（Fortune’s Weave）回頭玩？聖火降魔錄的《蒼炎之軌跡》與《曉之女神》用 GameCube 和 Wii 兩台主機說完同一個故事：兩者怎麼銜接、日版《曉之女神》有什麼不同，以及為什麼這兩張光碟需要日版主機。</description>
       <pubDate>Thu, 17 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>「ランクB」「未開封品」「美品」是什麼意思？購買日本二手遊戲前你該知道的用語</title>
+      <title>美品是什麼意思？ランクB、未開封品一次看懂</title>
       <link>https://gamekataban.com/blog/zh/2026-09-16-glossary-condition-rank.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-16-glossary-condition-rank.html</guid>
-      <description>駿河屋的「ランクB」「未開封品」「美品」三種標示，各自只保證一件特定的事。這篇文章說明B級、未拆封、近全新分別保證什麼，以及它們在商品名稱中的寫法。</description>
+      <description>美品是已拆封但如同新品，ランクB是有磨損但東西齊全，未開封品是保持密封。這篇文章說明駿河屋三種標示各自保證什麼，以及它們在商品名稱中的寫法。</description>
       <pubDate>Wed, 16 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
@@ -373,10 +380,10 @@
       <pubDate>Sun, 13 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>中野百老匯路線：沒有秋葉原人潮的復古遊戲之路</title>
+      <title>中野百老匯 Mandarake 與復古遊戲店：逐層路線</title>
       <link>https://gamekataban.com/blog/zh/2026-09-12-nakano-broadway-route.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-12-nakano-broadway-route.html</guid>
-      <description>Mandarake Galaxy、Lashinbang影音館和Janpara都在同一棟五層樓商場裡，離中野車站5分鐘——路線怎麼走、各店賣什麼，還有樓上那兩家值得繞路的Mandarake。</description>
+      <description>中野百老匯的復古遊戲店逐層看：Mandarake Galaxy、Lashinbang影音館和Janpara都在同一棟五層樓商場裡，離中野車站5分鐘——路線怎麼走、各店賣什麼，還有樓上那兩家值得繞路的Mandarake。</description>
       <pubDate>Sat, 12 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
@@ -450,24 +457,24 @@
       <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>快打旋風開發史 第1回：一場無聊會議如何催生一個類型（1987）</title>
+      <title>快打旋風是誰做的？1987年初代開發史（第1回）</title>
       <link>https://gamekataban.com/blog/zh/2026-09-02-street-fighter-development-history-1.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-02-street-fighter-development-history-1.html</guid>
-      <description>在《快打旋風II》之前，有一張無聊會議上隨手畫的草稿，一個讓波動拳幾乎打不出來的程式漏洞，以及一倉庫賣不出去的機台。系列開發史五部曲第1回：1987年原始街機版的誕生。</description>
+      <description>《快打旋風》1987年誕生於卡普空，由西山隆志執導：無聊會議上隨手畫的草稿、讓波動拳幾乎打不出來的程式漏洞，以及一倉庫賣不出去的機台。系列開發史五部曲第1回。</description>
       <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>在《快打旋風II》之前：1987年初代街機版的粗糙與美麗</title>
+      <title>初代《快打旋風》街機（1987）：感壓按鍵、六鍵與隆的由來</title>
       <link>https://gamekataban.com/blog/zh/2026-09-02-street-fighter-arcade-origins.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-02-street-fighter-arcade-origins.html</guid>
-      <description>1987年初代《快打旋風》街機使用感壓式打擊墊，玩家因此弄傷手。取而代之的六鍵佈局，以及隆這個名字的由來，至今仍影響著整個系列。</description>
+      <description>初代《快打旋風》街機（1987）使用感壓式打擊墊，玩家因此弄傷手。取而代之的六鍵佈局，以及隆這個名字的由來，至今仍影響著整個系列。</description>
       <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>Fire Emblem 的 GBA 三部曲：西方玩家真正認識這個系列的地方</title>
+      <title>GBA 有幾款聖火降魔錄？三款作品與日版編號</title>
       <link>https://gamekataban.com/blog/zh/2026-09-02-fire-emblem-gba-trilogy.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-02-fire-emblem-gba-trilogy.html</guid>
-      <description>《封印之劍》《烈火之劍》《聖魔之光石》——GBA 上的三款 Fire Emblem，為什麼西方拿到的是中間那一款，以及今天要用哪些商品編號找到日版卡帶。</description>
+      <description>GBA 上有三款聖火降魔錄：《封印之劍》《烈火之劍》《聖魔之光石》。為什麼西方拿到的是中間那一款，以及要用哪些商品編號找到日版卡帶。</description>
       <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
@@ -527,10 +534,10 @@
       <pubDate>Wed, 26 Aug 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>「CIB」是什麼意思？購買日本二手遊戲前你該知道的用語</title>
+      <title>CIB 是什麼意思？盒、說明書、遊戲片齊全</title>
       <link>https://gamekataban.com/blog/zh/2026-08-26-glossary-cib.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-08-26-glossary-cib.html</guid>
-      <description>CIB（Complete In Box，盒說書全）代表遊戲片、外盒與說明書一應俱全。這篇文章說明購買前該確認什麼，以及對應的日文標示用語。</description>
+      <description>CIB 是 Complete In Box 的縮寫，意思是遊戲片、外盒與說明書都齊全。這篇文章說明購買前該確認什麼，以及對應的日文標示用語。</description>
       <pubDate>Wed, 26 Aug 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
@@ -562,10 +569,10 @@
       <pubDate>Sat, 22 Aug 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>買日本二手遊戲時，「ジャンク」到底是什麼意思？</title>
+      <title>ジャンク是什麼意思？日本二手 Junk 品：現況出售、不保證能用</title>
       <link>https://gamekataban.com/blog/zh/2026-08-22-glossary-junk.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-08-22-glossary-junk.html</guid>
-      <description>在日本的二手遊戲店裡，「ジャンク」（junk）不代表壞掉——它代表「現況出售，不保證能用」。買之前，先搞懂這個詞真正的意思。</description>
+      <description>ジャンク（junk）在日本二手遊戲店不代表壞掉，而是「現況出售，不保證能用」。買之前，先搞懂這個詞真正的意思。</description>
       <pubDate>Sat, 22 Aug 2026 00:00:00 +0900</pubDate>
     </item>
     <item>

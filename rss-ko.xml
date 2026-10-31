@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>해외 컬렉터를 위한 일본 레트로 게임 블로그 — 매장 가이드, 수입 방법, 그리고 타이틀 뒤에 숨은 이야기.</description>
     <language>ko-kr</language>
-    <lastBuildDate>Fri, 30 Oct 2026 06:55:33 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2026 12:41:47 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-ko.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>일본 면세 쇼핑은 이제 리펀드 방식: 2026년 11월 1일에 달라진 점, 상점에서 그리고 공항에서</title>
+      <link>https://gamekataban.com/blog/ko/2026-11-01-japan-tax-free-refund-method-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-11-01-japan-tax-free-refund-method-guide.html</guid>
+      <description>2026년 11월 1일부터 일본을 찾는 여행자는 계산대에서 세금을 내고, 출국할 때 세관 확인을 받은 뒤 돌려받습니다. 그대로인 것(세금 제외 ¥5,000, 여권), 수하물 위탁 전에 공항에서 할 일, 상점에 물어볼 것을 정리합니다.</description>
+      <pubDate>Sun, 01 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>《Vampire: Master of Darkness》: 세가가 끝내 만들지 않은 캐슬바니아</title>
       <link>https://gamekataban.com/blog/ko/2026-10-31-in-the-wake-of-vampire-game-gear-t-44047.html</link>
@@ -331,17 +338,17 @@
       <pubDate>Thu, 17 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>Fire Emblem의 텔리우스 2부작: 두 대의 콘솔, 하나의 이야기, 그리고 지역 제한</title>
+      <title>파이어 엠블렘 창염의 궤적·새벽의 여신: 일본판 가이드</title>
       <link>https://gamekataban.com/blog/ko/2026-09-17-fire-emblem-gamecube-wii-tellius-import-guide.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-09-17-fire-emblem-gamecube-wii-tellius-import-guide.html</guid>
-      <description>《파이어 엠블렘 만자천홍》이 오늘 발매됩니다. 《창염의 궤적》과 《새벽의 여신》은 게임큐브와 Wii 두 대에 걸쳐 하나의 이야기를 들려줍니다. 두 작품이 어떻게 이어지는지, 일본판 《새벽의 여신》은 무엇이 다른지, 그리고 왜 이 디스크들에 일본판 본체가 필요한지.</description>
+      <description>《창염의 궤적》과 《새벽의 여신》은 게임큐브와 Wii 두 대에 걸쳐 하나의 이야기를 들려줍니다. 두 작품이 어떻게 이어지는지, 일본판 《새벽의 여신》은 무엇이 다른지, 그리고 왜 이 디스크들에 일본판 본체가 필요한지.</description>
       <pubDate>Thu, 17 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>「ランクB」「未開封品」「美品」은 무슨 뜻일까? 일본 중고 게임을 사기 전에 알아둘 세 가지 표기</title>
+      <title>스루가야 랭크 B 뜻: 未開封品·美品까지 세 표기</title>
       <link>https://gamekataban.com/blog/ko/2026-09-16-glossary-condition-rank.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-09-16-glossary-condition-rank.html</guid>
-      <description>스루가야의 「ランクB」「未開封品」「美品」 세 표기는 각각 딱 한 가지만 보증합니다. B랭크·미개봉품·새것에 가까운 상태가 실제로 무엇을 보증하는지, 상품명에는 어떻게 적히는지 정리했습니다.</description>
+      <description>스루가야 랭크 B(ランクB)는 마모는 있지만 빠진 것이 없는 상태, 未開封品은 밀봉 상태, 美品은 개봉했지만 새것에 가까운 상태입니다. 각 표기가 무엇을 보증하고 상품명에 어떻게 적히는지 정리했습니다.</description>
       <pubDate>Wed, 16 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
@@ -373,10 +380,10 @@
       <pubDate>Sun, 13 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>나카노 브로드웨이 루트: 아키하바라 인파 없는 레트로 게임 코스</title>
+      <title>나카노 브로드웨이 레트로 게임샵: Mandarake·Lashinbang</title>
       <link>https://gamekataban.com/blog/ko/2026-09-12-nakano-broadway-route.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-09-12-nakano-broadway-route.html</guid>
-      <description>Mandarake Galaxy, Lashinbang AV관, Janpara가 나카노역에서 5분 거리의 5층짜리 아케이드 한 건물에 모여 있습니다. 동선과 각 매장이 실제로 파는 것, 그리고 위층의 Mandarake 두 곳까지.</description>
+      <description>나카노 브로드웨이의 레트로 게임 매장을 층별로: Mandarake Galaxy, Lashinbang AV관, Janpara가 나카노역에서 5분 거리의 5층짜리 아케이드 한 건물에 모여 있습니다. 동선과 각 매장이 실제로 파는 것, 그리고 위층의 Mandarake 두 곳까지.</description>
       <pubDate>Sat, 12 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
@@ -450,24 +457,24 @@
       <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>스트리트 파이터 개발사 제1화: 지루한 회의가 하나의 장르를 낳기까지 (1987)</title>
+      <title>스트리트 파이터는 누가 만들었나? 1987년 개발사 제1화</title>
       <link>https://gamekataban.com/blog/ko/2026-09-02-street-fighter-development-history-1.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-09-02-street-fighter-development-history-1.html</guid>
-      <description>스트리트 파이터 II 이전, 지루한 회의 중에 그린 낙서 한 장, 파동권을 거의 쓸 수 없게 만든 버그, 그리고 팔리지 않은 재고로 가득했던 창고가 있었습니다. 개발사 5부작 제1화, 1987년 오리지널 아케이드판 탄생기.</description>
+      <description>스트리트 파이터는 1987년 캡콤에서 니시야마 다카시의 지휘로 탄생했습니다. 지루한 회의 중에 그린 낙서 한 장, 파동권을 거의 쓸 수 없게 만든 버그, 팔리지 않은 재고로 가득했던 창고까지. 개발사 5부작 제1화.</description>
       <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>스트리트 파이터 II 이전 이야기: 1987년 오리지널 아케이드판의 거칠고도 아름다운 시작</title>
+      <title>스트리트 파이터 1987 아케이드판: 압력 패드, 6버튼, 류</title>
       <link>https://gamekataban.com/blog/ko/2026-09-02-street-fighter-arcade-origins.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-09-02-street-fighter-arcade-origins.html</guid>
       <description>1987년 오리지널 스트리트 파이터 아케이드는 압력 감지식 펀치 패드 때문에 플레이어가 손을 다쳤습니다. 그 대신 도입된 6버튼 배치와 류라는 이름의 유래는 지금도 시리즈를 규정합니다.</description>
       <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>Fire Emblem GBA 3부작: 서양이 실제로 시리즈를 만난 지점</title>
+      <title>GBA 파이어 엠블렘은 몇 편? 3부작과 일본판 코드</title>
       <link>https://gamekataban.com/blog/ko/2026-09-02-fire-emblem-gba-trilogy.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-09-02-fire-emblem-gba-trilogy.html</guid>
-      <description>봉인의 검, 열화의 검, 성마의 광석 — GBA의 Fire Emblem 세 작품, 서양이 왜 가운데 작품을 먼저 받았는지, 그리고 일본판 카트리지를 찾는 데 쓸 상품 코드를 정리했다.</description>
+      <description>GBA의 파이어 엠블렘은 봉인의 검, 열화의 검, 성마의 광석 세 작품입니다. 서양이 왜 가운데 작품을 먼저 받았는지, 그리고 일본판 카트리지를 찾는 데 쓸 상품 코드를 정리했다.</description>
       <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
@@ -527,10 +534,10 @@
       <pubDate>Wed, 26 Aug 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>중고 게임 구매 시 "CIB"란 무슨 뜻일까?</title>
+      <title>CIB 뜻: 게임, 케이스, 설명서가 모두 있는 상태</title>
       <link>https://gamekataban.com/blog/ko/2026-08-26-glossary-cib.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-08-26-glossary-cib.html</guid>
-      <description>CIB(Complete In Box)는 게임 본체, 케이스, 설명서가 모두 갖춰진 상태를 의미합니다. 구매 전 확인해야 할 사항과 일본어 표기와의 대응 관계를 정리했습니다.</description>
+      <description>CIB 뜻은 Complete In Box로, 게임 본체, 케이스, 설명서가 모두 갖춰진 상태입니다. 구매 전 확인해야 할 사항과 일본어 표기와의 대응 관계를 정리했습니다.</description>
       <pubDate>Wed, 26 Aug 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
@@ -562,10 +569,10 @@
       <pubDate>Sat, 22 Aug 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>일본 중고 게임을 살 때 "정크(ジャンク)"는 무슨 뜻일까?</title>
+      <title>정크 뜻: ジャンク는 고장이 아니라 보증 없는 판매</title>
       <link>https://gamekataban.com/blog/ko/2026-08-22-glossary-junk.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-08-22-glossary-junk.html</guid>
-      <description>일본 중고 게임 매장에서 "ジャンク"(정크)는 고장났다는 뜻이 아닙니다 — "현 상태 그대로, 작동 보증 없음"이라는 뜻입니다. 사기 전에 정확히 알아두세요.</description>
+      <description>정크(ジャンク) 뜻은 고장이 아니라 "현 상태 그대로, 작동 보증 없음"입니다. 일본 중고 게임 매장에서 사기 전에 정확히 알아두세요.</description>
       <pubDate>Sat, 22 Aug 2026 00:00:00 +0900</pubDate>
     </item>
     <item>

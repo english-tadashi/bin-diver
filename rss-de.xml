@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Ein Blog für Sammler außerhalb Japans, die japanische Retro-Spiele suchen — Shop-Guides, Import-Anleitungen und die Geschichten hinter den Titeln.</description>
     <language>de-de</language>
-    <lastBuildDate>Fri, 30 Oct 2026 06:55:33 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2026 12:41:47 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-de.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Steuerfrei einkaufen in Japan jetzt per Erstattung: Was sich am 1. November 2026 geändert hat, im Geschäft und am Flughafen</title>
+      <link>https://gamekataban.com/blog/de/2026-11-01-japan-tax-free-refund-method-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-11-01-japan-tax-free-refund-method-guide.html</guid>
+      <description>Seit dem 1. November 2026 zahlen Besucher in Japan die Steuer an der Kasse und erhalten sie nach einer Zollprüfung bei der Ausreise zurück. Was weiter gilt (¥5.000 ohne Steuer, dein Reisepass), was du am Flughafen vor der Gepäckaufgabe tust und was du im Geschäft fragst.</description>
+      <pubDate>Sun, 01 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Vampire: Master of Darkness auf dem Game Gear: das Castlevania, das Sega nie machte</title>
       <link>https://gamekataban.com/blog/de/2026-10-31-in-the-wake-of-vampire-game-gear-t-44047.html</link>
@@ -331,17 +338,17 @@
       <pubDate>Thu, 17 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>Fire Emblems Tellius-Duologie: zwei Konsolen, eine Geschichte und eine Regionalsperre</title>
+      <title>Fire Emblem Path of Radiance &amp; Radiant Dawn: Import-Guide</title>
       <link>https://gamekataban.com/blog/de/2026-09-17-fire-emblem-gamecube-wii-tellius-import-guide.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-09-17-fire-emblem-gamecube-wii-tellius-import-guide.html</guid>
-      <description>Fire Emblem: Fortune’s Weave erscheint heute. Path of Radiance und Radiant Dawn erzählen eine Geschichte über GameCube und Wii: wie sie zusammenhängen, was die japanische Fassung ändert und warum du japanische Hardware brauchst.</description>
+      <description>Path of Radiance und Radiant Dawn erzählen eine Geschichte über GameCube und Wii: wie sie zusammenhängen, was die japanische Fassung ändert und warum du japanische Hardware brauchst.</description>
       <pubDate>Thu, 17 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>Was bedeuten "ランクB", "未開封品" und "美品" beim Kauf gebrauchter Spiele in Japan?</title>
+      <title>Was bedeuten ランクB, 未開封品 und 美品 bei Suruga-ya?</title>
       <link>https://gamekataban.com/blog/de/2026-09-16-glossary-condition-rank.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-09-16-glossary-condition-rank.html</guid>
-      <description>Die Kennzeichnungen ランクB, 未開封品 und 美品 bei Suruga-ya sichern jeweils genau eine Sache zu. Was Klasse B, originalverpackt und neuwertig wirklich versprechen, und wie sie im Angebot aussehen.</description>
+      <description>ランクB heißt abgenutzt, aber vollständig, 未開封品 originalverpackt und 美品 geöffnet, aber wie neu. Was jede Kennzeichnung bei Suruga-ya wirklich verspricht und wie sie im Angebot aussieht.</description>
       <pubDate>Wed, 16 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
@@ -373,10 +380,10 @@
       <pubDate>Sun, 13 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>Die Nakano-Broadway-Route: Retro-Spiele ohne den Andrang von Akihabara</title>
+      <title>Retro-Spieleläden am Nakano Broadway: Mandarake &amp; Lashinbang</title>
       <link>https://gamekataban.com/blog/de/2026-09-12-nakano-broadway-route.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-09-12-nakano-broadway-route.html</guid>
-      <description>Mandarake Galaxy, Lashinbangs Audio-Visual Hall und Janpara liegen in einer einzigen fünfstöckigen Passage, fünf Minuten vom Bahnhof Nakano. Die Route, was jeder Laden wirklich führt, und die zwei Mandarake-Etagen oben, die den Umweg lohnen.</description>
+      <description>Die Retro-Spieleläden am Nakano Broadway, Stock für Stock: Mandarake Galaxy, Lashinbangs Audio-Visual Hall und Janpara liegen in einer einzigen fünfstöckigen Passage, fünf Minuten vom Bahnhof Nakano. Die Route, was jeder Laden wirklich führt, und die zwei Mandarake-Etagen oben, die den Umweg lohnen.</description>
       <pubDate>Sat, 12 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
@@ -450,24 +457,24 @@
       <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>Street-Fighter-Entwicklungsgeschichte, Teil 1: Das langweilige Meeting, aus dem ein Genre wurde (1987)</title>
+      <title>Wer erfand Street Fighter? Die Geschichte von 1987 (Teil 1)</title>
       <link>https://gamekataban.com/blog/de/2026-09-02-street-fighter-development-history-1.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-09-02-street-fighter-development-history-1.html</guid>
-      <description>Vor Street Fighter II gab es eine Skizze aus einem langweiligen Meeting, einen Bug, der Feuerbälle fast unmöglich machte, und ein Lager voller unverkaufter Automaten. Teil 1 einer fünfteiligen Serie darüber, wie das Arcade-Original von 1987 entstand.</description>
+      <description>Street Fighter entstand 1987 bei Capcom unter der Leitung von Takashi Nishiyama: eine Skizze aus einem langweiligen Meeting, ein Bug, der Feuerbälle fast unmöglich machte, und ein Lager voller unverkaufter Automaten. Teil 1 einer fünfteiligen Serie.</description>
       <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>Vor Street Fighter II: Das brutale, wunderbare Chaos des Original-Arcade-Spiels von 1987</title>
+      <title>Street-Fighter-Automat (1987): Schlagpolster, sechs Tasten, Ryu</title>
       <link>https://gamekataban.com/blog/de/2026-09-02-street-fighter-arcade-origins.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-09-02-street-fighter-arcade-origins.html</guid>
       <description>Der originale Street-Fighter-Automat von 1987 hatte druckempfindliche Schlagpolster, an denen sich Spieler die Hände verletzten. Das Sechs-Tasten-Layout, das sie ersetzte, und Ryus Name prägen die Serie bis heute.</description>
       <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>Die GBA-Trilogie von Fire Emblem: Wo der Westen die Serie wirklich kennenlernte</title>
+      <title>Wie viele Fire Emblem gibt es für GBA? Alle 3 mit Codes</title>
       <link>https://gamekataban.com/blog/de/2026-09-02-fire-emblem-gba-trilogy.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-09-02-fire-emblem-gba-trilogy.html</guid>
-      <description>The Binding Blade, The Blazing Blade und The Sacred Stones — die drei Fire-Emblem-Spiele für Game Boy Advance, warum der Westen das mittlere zuerst bekam, und die Produktcodes, mit denen du die japanischen Module findest.</description>
+      <description>Für den Game Boy Advance gibt es drei Fire-Emblem-Spiele: The Binding Blade, The Blazing Blade und The Sacred Stones. Warum der Westen das mittlere zuerst bekam, und die Produktcodes, mit denen du die japanischen Module findest.</description>
       <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
@@ -527,10 +534,10 @@
       <pubDate>Wed, 26 Aug 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>Was bedeutet "CIB" beim Kauf gebrauchter Spiele in Japan?</title>
+      <title>Was bedeutet CIB? Spiel, Hülle und Handbuch komplett</title>
       <link>https://gamekataban.com/blog/de/2026-08-26-glossary-cib.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-08-26-glossary-cib.html</guid>
-      <description>CIB (Complete In Box) bedeutet, dass Spiel, Hülle und Handbuch alle vorhanden sind. Das solltest du vor dem Kauf prüfen, und so hängt es mit den japanischen Begriffen in Angeboten zusammen.</description>
+      <description>CIB (Complete In Box) bedeutet: Spiel, Hülle und Handbuch sind alle vorhanden. Das solltest du vor dem Kauf prüfen, und so hängt es mit den japanischen Begriffen in Angeboten zusammen.</description>
       <pubDate>Wed, 26 Aug 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
@@ -562,10 +569,10 @@
       <pubDate>Sat, 22 Aug 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
-      <title>Was bedeutet "Junk" beim Kauf gebrauchter Spiele in Japan?</title>
+      <title>Was bedeutet Junk in Japan? Verkauf wie gesehen, ohne Garantie</title>
       <link>https://gamekataban.com/blog/de/2026-08-22-glossary-junk.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/de/2026-08-22-glossary-junk.html</guid>
-      <description>In japanischen Gebrauchtspiele-Läden bedeutet "Junk" (ジャンク) nicht kaputt — es bedeutet "wird so verkauft, wie er ist, ohne Funktionsgarantie". Das steckt wirklich dahinter, bevor du kaufst.</description>
+      <description>"Junk" (ジャンク) bedeutet in japanischen Gebrauchtspiele-Läden nicht kaputt, sondern "wird so verkauft, wie er ist, ohne Funktionsgarantie". Das steckt wirklich dahinter, bevor du kaufst.</description>
       <pubDate>Sat, 22 Aug 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
