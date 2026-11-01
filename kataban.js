@@ -321,3 +321,29 @@
     }
   } catch (e) { /* お知らせが出ないだけ。リンクには触れていない */ }
 })();
+
+// --- GA4（2026-11-01・ブログの計測）---------------------------
+// ブログ（記事・一覧・タグ）・privacy・404 は GA4 が入っていなかった。Google 検索から記事に来た人の参照元が残らず、
+// 記事から /?q= へ移るとそこが自サイトの referrer の新しいセッションになって Direct に数えられていた。
+// 同じ G-SK6R4YH7VD を読むので、_ga の Cookie を通して /?q= でもセッションと参照元が続く（本体の index.html は別に読む）。
+// load の後のアイドル時に読み、表示を遅らせない。広告（AW-）は読まない。本番のホストだけ（index.html と同じ判定）。
+(function () {
+  var host = location.hostname;
+  if (host !== "gamekataban.com" && host !== "www.gamekataban.com") return;
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag("js", new Date());
+  gtag("config", "G-SK6R4YH7VD");
+  function load() {
+    var gt = document.createElement("script");
+    gt.async = true;
+    gt.src = "https://www.googletagmanager.com/gtag/js?id=G-SK6R4YH7VD";
+    document.head.appendChild(gt);
+  }
+  function idle() {
+    if (window.requestIdleCallback) requestIdleCallback(load, { timeout: 3000 });
+    else setTimeout(load, 0);
+  }
+  if (document.readyState === "complete") idle();
+  else window.addEventListener("load", idle);
+})();
