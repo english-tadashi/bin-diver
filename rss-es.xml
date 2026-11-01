@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Sat, 31 Oct 2026 14:23:26 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 01 Nov 2026 08:20:50 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Historia del desarrollo de Kirby, parte 2: Special Tee Shot en 1992, «Kirby's Tee Shot» en 1994 — Kirby's Dream Course y su código de producto SHVC-CG</title>
+      <link>https://gamekataban.com/blog/es/2026-11-02-kirby-bowl-super-famicom-shvc-cg.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-11-02-kirby-bowl-super-famicom-shvc-cg.html</guid>
+      <description>El primer Kirby de Super Famicom salió en Japón el 21 de septiembre de 1994 como Kirby Bowl (SHVC-CG). Antes, HAL tenía un juego de golf, Special Tee Shot. Qué cambia en el Kirby's Dream Course estadounidense (febrero de 1995) y cómo el código encuentra el cartucho japonés.</description>
+      <pubDate>Mon, 02 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>¿Qué es Mandarake? Tiendas en Tokio, sin impuestos y envíos</title>
       <link>https://gamekataban.com/blog/es/2026-11-01-what-is-mandarake-stores-tax-free-overseas.html</link>

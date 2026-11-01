@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Histoire du développement de Kirby, partie 2 : Special Tee Shot en 1992, &#171;&nbsp;Kirby&#39;s Tee Shot&nbsp;&#187; en 1994 &mdash; Kirby&#39;s Dream Course et son code produit SHVC-CG &mdash; Kataban</title>
+<meta name="description" content="Le premier Kirby sur Super Famicom est sorti au Japon le 21 septembre 1994 (Kirby Bowl, code SHVC-CG). Avant lui, HAL avait un jeu de golf, Special Tee Shot. Ce qui change dans le Kirby&#39;s Dream Course américain (février 1995), et comment le code trouve la cartouche japonaise.">
+<meta property="og:title" content="Histoire du développement de Kirby, partie 2 : Special Tee Shot en 1992, &#171;&nbsp;Kirby&#39;s Tee Shot&nbsp;&#187; en 1994 &mdash; Kirby&#39;s Dream Course et son code produit SHVC-CG">
+<meta property="og:description" content="Le premier Kirby sur Super Famicom est sorti au Japon le 21 septembre 1994 (Kirby Bowl, code SHVC-CG). Avant lui, HAL avait un jeu de golf, Special Tee Shot. Ce qui change dans le Kirby&#39;s Dream Course américain (février 1995), et comment le code trouve la cartouche japonaise.">
+<meta property="og:url" content="https://gamekataban.com/blog/fr/2026-11-02-kirby-bowl-super-famicom-shvc-cg.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:image" content="https://gamekataban.com/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kataban — find &amp; buy Japanese retro games">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://gamekataban.com/blog/fr/2026-11-02-kirby-bowl-super-famicom-shvc-cg.html">
+<link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-11-02-kirby-bowl-super-famicom-shvc-cg.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-11-02-kirby-bowl-super-famicom-shvc-cg.html">
+<link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-11-02-kirby-bowl-super-famicom-shvc-cg.html">
+<link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-11-02-kirby-bowl-super-famicom-shvc-cg.html">
+<link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-11-02-kirby-bowl-super-famicom-shvc-cg.html">
+<link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-11-02-kirby-bowl-super-famicom-shvc-cg.html">
+<link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-11-02-kirby-bowl-super-famicom-shvc-cg.html">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=IBM+Plex+Sans+JP:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/kataban.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+
+  <header class="sitehead">
+    <a class="sitehead-brand" href="/" aria-label="Kataban — retour à l'outil de recherche">
+      <span class="kb-word">
+        <span class="kb-ghost" aria-hidden="true"><span class="kb-grid" id="kbGridCyan"></span></span>
+        <span class="kb-grid kb-top" id="kbGridPink" aria-hidden="true"></span>
+      </span>
+      <span class="sitehead-badge">&#22411;&#30058;</span>
+    </a>
+    <a class="backlink" href="/blog/fr/"><span class="arrow" aria-hidden="true">&#8592;</span> Tous les articles</a>
+    <div class="langswitch">
+      <button class="langswitch-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langswitch-menu">
+        <span class="langswitch-current">FR &mdash; Français</span>
+        <span class="langswitch-caret" aria-hidden="true">&#9662;</span>
+      </button>
+      <ul class="langswitch-menu" id="langswitch-menu" role="menu" hidden>
+      <li role="none"><a role="menuitem" href="/blog/2026-11-02-kirby-bowl-super-famicom-shvc-cg.html" hreflang="en" lang="en" data-lang="en">English</a></li>
+      <li role="none"><a role="menuitem" href="/blog/zh/2026-11-02-kirby-bowl-super-famicom-shvc-cg.html" hreflang="zh-Hant" lang="zh-Hant" data-lang="zh">&#20013;&#25991;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/ko/2026-11-02-kirby-bowl-super-famicom-shvc-cg.html" hreflang="ko" lang="ko" data-lang="ko">&#54620;&#44397;&#50612;</a></li>
+      <li role="none"><a role="menuitem" href="/blog/es/2026-11-02-kirby-bowl-super-famicom-shvc-cg.html" hreflang="es" lang="es" data-lang="es">Espa&ntilde;ol</a></li>
+      <li role="none"><a role="menuitem" href="/blog/de/2026-11-02-kirby-bowl-super-famicom-shvc-cg.html" hreflang="de" lang="de" data-lang="de">Deutsch</a></li>
+      <li role="none"><a role="menuitem" href="/blog/fr/2026-11-02-kirby-bowl-super-famicom-shvc-cg.html" hreflang="fr" lang="fr" data-lang="fr" aria-current="page">Français</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <article>
+      <div class="pagehead">
+        <p class="kicker">Blog Kataban</p>
+        <h1>Histoire du développement de Kirby, partie 2 : Special Tee Shot en 1992, &#171;&nbsp;Kirby&#39;s Tee Shot&nbsp;&#187; en 1994 &mdash; Kirby&#39;s Dream Course et son code produit SHVC-CG</h1>
+        <p class="postmeta">2026-11-02</p>
+        <ul class="posttags" aria-label="Étiquettes">
+          <li><a href="/blog/fr/tag/platform/sfc/">Super Famicom (SNES)</a></li>
+          <li><a href="/blog/fr/tag/genre/sports/">Sport et course</a></li>
+          <li><a href="/blog/fr/tag/decade/1990s/">Années 1990</a></li>
+          <li><a href="/blog/fr/tag/publisher/nintendo/">Nintendo</a></li>
+          <li><a href="/blog/fr/tag/series/kirby/">Kirby</a></li>
+        </ul>
+      </div>
+
+      <div class="prose">
+        <p>Le premier jeu de Kirby sur Super Famicom n'était pas un jeu de plateforme. <span class="jp">カービィボウル</span> (<em>Kirby Bowl</em>) est sorti au Japon le 21 septembre 1994, édité par Nintendo, puis en Amérique du Nord en février 1995 sous le nom de <em>Kirby's Dream Course</em>. Kirby est la balle : on le frappe sur le parcours, les ennemis qu'il touche se changent en étoiles, et on finit par l'envoyer dans le trou. Dans <a href="/blog/fr/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html">la partie 1</a>, il s'agissait d'un jeu qui a failli sortir sous un autre nom. Celui-ci aurait commencé comme un autre jeu. Ce guide raconte quel jeu de golf existait avant lui, ce qui distingue les cartouches japonaise et américaine, et comment trouver la japonaise grâce à son code.</p>
+
+        <ul>
+          <li>Sortie japonaise : 21 septembre 1994 sur Super Famicom, code produit <code>SHVC-CG</code> &mdash; édité par Nintendo, développé par HAL Laboratory avec Nintendo</li>
+          <li>En 1992, HAL avait un jeu de golf sans Kirby, <em>Special Tee Shot</em> (une version de cette année-là a été conservée) ; en décembre 1994, un magazine américain appelait encore ce jeu <em>Kirby's Tee Shot</em></li>
+          <li>Huit parcours de huit trous, et sur chaque trou, le dernier ennemi restant devient le trou</li>
+          <li>Kirby peut copier les pouvoirs des ennemis sur le parcours, et c'est le premier jeu Kirby doté d'un mode affrontement à deux joueurs</li>
+          <li>Le 14 septembre 2026, les exemplaires d'occasion vendus par Suruga-ya elle-même allaient de 540 à 2&nbsp;250 yens, et sur les 24 annonces qu'une recherche de <code>SHVC-CG</code> renvoyait sur Buyee, 23 concernaient ce jeu seul</li>
+        </ul>
+
+        <h2>Special Tee Shot et Kirby's Dream Course : que disent les sources ?</h2>
+        <p>En 1992, HAL avait un jeu de golf pour la Super Nintendo appelé <em>Special Tee Shot</em> (<span class="jp">スペシャルティーショット</span>). SNES Central, un site qui documente les prototypes Super Nintendo et qui s'est procuré une version de 1992, le décrit comme une sortie prévue très tôt par HAL, finalement refaite pour devenir <em>Kirby's Dream Course</em>. Le site d'actualité japonais Inside Games racontait la même chose en 2012 : le système de jeu est celui de <span class="jp">カービィボウル</span>, mais sans la copie des pouvoirs de Kirby ni le bouton <span class="jp">がんばれ</span>, et le jeu a ensuite été refait autour de l'univers de Kirby.</p>
+        <p>La raison du changement est moins certaine. Inside Games l'attribue à la volonté de rendre le jeu plus amusant et d'en vendre davantage ; SNES Central suggère que la popularité croissante de Kirby était une occasion trop belle, et présente cela comme une hypothèse. Nous n'avons trouvé ni Nintendo ni HAL racontant cette histoire eux-mêmes : les raisons restent donc non confirmées.</p>
+        <p>Le nom a changé par étapes. Le numéro de décembre 1994 d'Electronic Gaming Monthly présentait le jeu sous le nom de <em>Kirby's Tee Shot</em>, et SNES Central relève le même titre de travail. <em>Special Tee Shot</em> a lui aussi fini par atteindre les joueurs : selon SNES Central comme selon Inside Games, il a été diffusé sur Satellaview, le service par satellite de la Super Famicom. Les sources divergent sur la date de sa première diffusion, nous ne la donnons donc pas.</p>
+
+        <h2>Comment joue-t-on à Kirby's Dream Course ?</h2>
+        <p>Kirby est la balle. Les ennemis qu'il touche se changent en étoiles, et le dernier ennemi restant sur le trou devient le trou ; il suffit d'y envoyer Kirby pour terminer le trou, et le nombre de coups donne le score. Chaque coup coûte un point de vitalité. Le mode un joueur enchaîne huit parcours de huit trous, 64 en tout, avant un affrontement avec le roi Dadidou, selon les notices des versions console virtuelle de Nintendo.</p>
+        <p>Deux choses en font un jeu Kirby plutôt qu'un jeu de golf avec Kirby sur la boîte. En éliminant un ennemi qui brille, Kirby obtient son pouvoir, qu'il peut utiliser tant qu'il roule ; la page produit d'origine de Nintendo en compte dix. Et en appuyant sur le bouton A au bon moment pendant que la balle bouge, le bouton <span class="jp">がんばれ</span> (&#171;&nbsp;tiens bon&nbsp;&#187;), on la fait rebondir davantage et aller un peu plus loin. La même page de Nintendo présente le mode deux joueurs comme le premier mode affrontement de la série Kirby ; selon les notices de la console virtuelle, deux joueurs y jouent à tour de rôle avec un Kirby rose et un Kirby jaune et se disputent les étoiles.</p>
+
+        <h2>Qu'est-ce qui distingue Kirby Bowl de Kirby's Dream Course ?</h2>
+        <p>D'abord le nom : <span class="jp">カービィボウル</span> au Japon, <em>Kirby's Dream Course</em> en Amérique du Nord, où la liste des jeux Super NES de Nintendo of America le date de février 1995. Les cartouches diffèrent aussi. La ROM japonaise fait 10 mégabits et l'américaine 8, selon la base de données de ROM superfamicom.org comme selon l'encyclopédie de fans WiKirby. The Cutting Room Floor, un site qui documente les contenus inutilisés et les différences régionales des jeux, signale une différence visible : la version japonaise s'ouvre sur une scène d'histoire, que les versions internationales ont reportée dans la notice.</p>
+
+        <h2>Qu'est-ce que SHVC-CG et comment le rechercher ?</h2>
+        <p><code>SHVC-CG</code> est imprimé sur la couverture de la notice japonaise, à côté des mots <span class="jp">取扱説明書</span> (mode d'emploi). C'est aussi le code que la Media Arts Database du gouvernement japonais enregistre pour le jeu, relevé sur l'étiquette de la cartouche.</p>
+        <p>Sur Suruga-ya, cherchez la forme courte. Le 14 septembre 2026, <code>SHVC-CG</code> renvoyait trois annonces, toutes <span class="jp">カービィボウル</span>, alors que <code>SHVC-CG-JPN</code> ne renvoyait rien. Les exemplaires d'occasion vendus par Suruga-ya elle-même coûtaient de 540 à 2&nbsp;250 yens. Cette fois, la recherche par code trouvait aussi une cartouche seule, sans boîte ni notice, à 1&nbsp;180 yens ; dans la partie 1, une annonce de ce genre n'apparaissait qu'en cherchant par le titre japonais. Ce que la recherche par code a manqué ce jour-là, c'est une notice vendue seule, à 260 yens, que seules les recherches par titre et par code-barres trouvaient.</p>
+        <p>Sur Buyee aussi, le code fonctionne. Le même jour, <code>SHVC-CG</code> renvoyait 24 annonces ; 23 concernaient ce jeu seul, et l'autre un lot de trois jeux Kirby. La recherche <span class="jp">カービィボウル スーパーファミコン</span> renvoyait quant à elle 181 annonces, et environ sept sur dix parmi les 100 premières concernaient ce jeu seul ; le reste était surtout des lots. Les enchères changent tous les jours : ces chiffres valent pour ce jour-là.</p>
+
+        <h2>Où peut-on y jouer autrement ?</h2>
+        <p>Au Japon, le jeu est arrivé sur la console virtuelle de la Wii le 24 avril 2007, sur celle de la Wii U le 8 mai 2013 et sur celle de la New Nintendo 3DS le 7 juin 2016, et il faisait partie de la première sélection de jeux Super Famicom de Nintendo Switch Online en septembre 2019. En Europe, il est sorti sur la console virtuelle de la Wii le 29 mai 2007, sur celle de la Wii U le 23 mai 2013 et sur celle de la New Nintendo 3DS le 9 juin 2016, chaque fois en anglais ; selon Nintendo, les versions Wii U et New Nintendo 3DS sont la version américaine du jeu. Le catalogue Kataban répertorie les versions Wii et 3DS comme des entrées distinctes, sans code produit.</p>
+        <p>C'est aussi l'un des 21 jeux de la Nintendo Classic Mini : Super Nintendo Entertainment System, sortie en Europe le 29 septembre 2017 (et de la Super NES Classic Edition nord-américaine), et il figure dans le catalogue Super Nintendo Entertainment System &ndash; Nintendo Classics de Nintendo Switch Online. La <span class="jp">ニンテンドークラシックミニ スーパーファミコン</span> japonaise, en revanche, ne l'inclut pas. Comme le premier jeu, il a aussi été vendu par le service de réinscription Nintendo Power (<span class="jp">ニンテンドウパワー</span>), et une cartouche mémoire réinscrite n'est pas <code>SHVC-CG</code>. Chacune des versions numériques est le moyen facile d'y jouer. Si c'est la cartouche de 1994 que vous voulez, cherchez <code>SHVC-CG</code>.</p>
+
+        <p><strong>Kirby&#8217;s Dream Course</strong> &middot; <span class="jp">カービィボウル</span> &middot; Super Famicom &middot; 1994 &middot; Nintendo (developed by HAL Laboratory with Nintendo) &middot; code produit <code>SHVC-CG</code></p>
+        <p><strong>Où l'acheter :</strong>
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&amp;goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3DSHVC-CG%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp (par code produit)</a> &middot;
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=5357&amp;goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fsearch%3Fcategory%3D2%26search_word%3D%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25A3%25E3%2583%259C%25E3%2582%25A6%25E3%2583%25AB%2520%25E3%2582%25B9%25E3%2583%25BC%25E3%2583%2591%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A1%25E3%2583%259F%25E3%2582%25B3%25E3%2583%25B3%26utm_medium%3Daffiliate%26utm_source%3Dgamekataban.com%26utm_content%3D%252F%26utm_campaign%3Dafid5357">Suruga-ya.jp (par titre japonais)</a> &middot;
+          <a target="_blank" rel="sponsored nofollow noopener" href="https://i0c.xyz/6a6994d1e0b3f?url=https%3A%2F%2Fbuyee.jp%2Fitem%2Fsearch%2Fquery%2FSHVC-CG%3Flang%3Den">Buyee (par code produit)</a></p>
+
+        <div class="kataban-search-cta">
+          <p><a href="/?q=SHVC-CG">Rechercher SHVC-CG dans le catalogue Kataban &rarr;</a></p>
+        </div>
+
+        <div class="official-sources">
+          <p><strong>Sources</strong></p>
+          <ul>
+            <li>Nintendo, <a target="_blank" rel="noopener" href="https://www.nintendo.co.jp/n02/shvc/cg/index.html">「カービィボウル」</a> &mdash; date de sortie japonaise, 21 septembre 1994 ; les ennemis se changent en étoiles et le trou se termine quand Kirby y entre ; le bouton <span class="jp">がんばれ</span> (A) ; dix pouvoirs à copier ; le premier mode affrontement de la série Kirby</li>
+            <li>Site officiel de Kirby, <a target="_blank" rel="noopener" href="https://www.kirby.jp/history/">historique</a> &mdash; <span class="jp">カービィボウル</span> sorti le 21 septembre 1994, après trois jeux Kirby sur Game Boy et Famicom</li>
+            <li>Nintendo, pages de la version console virtuelle Wii de <span class="jp">カービィボウル</span> : <a target="_blank" rel="noopener" href="https://www.nintendo.co.jp/wii/vc/vc_kb/vc_kb_01.html">histoire et modes</a>, <a target="_blank" rel="noopener" href="https://www.nintendo.co.jp/wii/vc/vc_kb/vc_kb_02.html">règles</a>, <a target="_blank" rel="noopener" href="https://www.nintendo.co.jp/wii/vc/vc_kb/vc_kb_03.html">commandes</a> et <a target="_blank" rel="noopener" href="https://www.nintendo.co.jp/wii/vc/vc_kb/vc_kb_05.html">parcours</a> &mdash; le dernier ennemi devient le trou ; chaque coup coûte un point de vitalité ; 64 trous pour un joueur, en huit parcours de huit, puis le roi ; les ennemis qui brillent donnent des pouvoirs ; l'état <span class="jp">がんばれ</span> ; deux joueurs jouent à tour de rôle avec un Kirby jaune et un Kirby rose</li>
+            <li>Nintendo, <a target="_blank" rel="noopener" href="https://www.nintendo.co.jp/data/software/manual/manual_KTRNUAWJ.pdf">notice de la version console virtuelle New Nintendo 3DS (PDF)</a> &mdash; les mêmes règles, les huit parcours de huit trous, le roi et le jeu à deux à tour de rôle ; &copy;1994 HAL Laboratory, Inc. / Nintendo</li>
+            <li>SNES Central, <a target="_blank" rel="noopener" href="https://snescentral.com/article.php?id=0037"><em>Special Tee Shot</em> (mis à jour le 13 juin 2019)</a> &mdash; une sortie Super Nintendo prévue très tôt par HAL, refaite ensuite pour devenir <em>Kirby's Dream Course</em> ; sorti plus tard sur Satellaview ; le titre de travail <em>Kirby's Tee Shot</em> ; la popularité de Kirby &#171;&nbsp;may have been&nbsp;&#187; la raison</li>
+            <li>Inside Games, <a target="_blank" rel="noopener" href="https://www.inside-games.jp/article/2012/04/27/56253.html">article du 27 avril 2012</a> &mdash; d'abord conçu comme un autre jeu, <span class="jp">スペシャルティーショット</span>, avec le même système mais sans copie des pouvoirs ni bouton <span class="jp">がんばれ</span> ; refait autour de l'univers de Kirby ; diffusé ensuite gratuitement sur Satellaview</li>
+            <li>Electronic Gaming Monthly, <a target="_blank" rel="noopener" href="https://archive.org/details/Electronic_Gaming_Monthly_65">numéro 65, décembre 1994 (Internet Archive)</a> &mdash; le jeu présenté sous le nom de <em>Kirby's Tee Shot</em></li>
+            <li>Nintendo of America, <a target="_blank" rel="noopener" href="https://web.archive.org/web/20120915140050/http://www.nintendo.com/consumer/downloads/snes_games.pdf">liste des jeux Super NES (PDF archivé)</a> &mdash; <em>Kirby's Dream Course</em>, février 1995</li>
+            <li>superfamicom.org, <a target="_blank" rel="noopener" href="https://superfamicom.org/info/kirby-bowl"><em>Kirby Bowl</em></a> &mdash; <code>SHVC-CG</code> ; ROM de 10 Mb pour la version japonaise et de 8 Mb pour la version américaine ; version Nintendo Power</li>
+            <li>WiKirby, <a target="_blank" rel="noopener" href="https://wikirby.com/wiki/Kirby%27s_Dream_Course"><em>Kirby's Dream Course</em></a> &mdash; hors du Japon, une cartouche de 8 mégabits au lieu de 10</li>
+            <li>The Cutting Room Floor, <a target="_blank" rel="noopener" href="https://web.archive.org/web/20221105232141/https://tcrf.net/Kirby%27s_Dream_Course"><em>Kirby's Dream Course</em> (archivé le 5 novembre 2022)</a> &mdash; une histoire d'introduction seulement dans la version japonaise, reportée dans la notice des versions internationales</li>
+            <li>Wikipédia (japonais), <a target="_blank" rel="noopener" href="https://ja.wikipedia.org/wiki/%E3%82%AB%E3%83%BC%E3%83%93%E3%82%A3%E3%83%9C%E3%82%A6%E3%83%AB">&#171;&nbsp;<span class="jp">カービィボウル</span>&nbsp;&#187;</a> &mdash; développé par HAL Laboratory et Nintendo ; version Nintendo Power</li>
+            <li>Nintendo, <a target="_blank" rel="noopener" href="https://web.archive.org/web/2018/https://www.nintendo.co.jp/wii/vc/software/03.html">liste de la console virtuelle Wii (archivée)</a> &mdash; téléchargement depuis le 24 avril 2007 ; <a target="_blank" rel="noopener" href="https://web.archive.org/web/20140817002756/http://www.nintendo.co.jp/wiiu/software/vc/jasj/">page de la version console virtuelle Wii U (archivée)</a> &mdash; depuis le 8 mai 2013 ; <a target="_blank" rel="noopener" href="https://www.nintendo.com/jp/titles/50010000040557.html">fiche de la version console virtuelle Nintendo 3DS (Japon)</a> &mdash; depuis le 7 juin 2016</li>
+            <li>GAME Watch, <a target="_blank" rel="noopener" href="https://game.watch.impress.co.jp/docs/news/1205419.html">article du 5 septembre 2019</a> &mdash; <span class="jp">カービィボウル</span> dans la première sélection de jeux Super Famicom de Nintendo Switch Online, à partir du 6 septembre</li>
+            <li>Nintendo France, <a target="_blank" rel="noopener" href="https://www.nintendo.com/fr-fr/Jeux/Super-Nintendo/Kirby-s-Dream-Course-758013.html">fiche de <em>Kirby's Dream Course</em></a> &mdash; console virtuelle en Europe : Wii 29/05/2007, Wii U 23/05/2013, New Nintendo 3DS 09/06/2016 ; langue : anglais ; les versions Wii U et New Nintendo 3DS sont la version américaine ; l'un des 21 titres de la Nintendo Classic Mini</li>
+            <li>Nintendo France, <a target="_blank" rel="noopener" href="https://www.nintendo.com/fr-fr/News/2017/Juin/Nintendo-annonce-la-console-Nintendo-Classic-Mini-Super-Nintendo-Entertainment-System-1238678.html">annonce de la Nintendo Classic Mini : Super Nintendo Entertainment System (26 juin 2017)</a> &mdash; sortie le 29 septembre ; <em>Kirby&#8217;s Dream Course</em> dans la liste des jeux ; <a target="_blank" rel="noopener" href="https://www.nintendo.com/fr-fr/Jeux/Jeux-a-telecharger-sur-Nintendo-Switch/Super-Nintendo-Entertainment-System-Nintendo-Classics-1632515.html">fiche de Super Nintendo Entertainment System &ndash; Nintendo Classics</a> &mdash; <em>Kirby's Dream Course</em> au catalogue</li>
+            <li>Nintendo of America, <a target="_blank" rel="noopener" href="https://web.archive.org/web/20170626161358/http://www.nintendo.com/super-nes-classic">page de la Super NES Classic Edition (archivée en juin 2017)</a> &mdash; <em>Kirby's Dream Course</em> parmi les 21 jeux ; Nintendo, <a target="_blank" rel="noopener" href="https://www.nintendo.co.jp/clvs/soft/index.html">liste des jeux de la <span class="jp">ニンテンドークラシックミニ スーパーファミコン</span></a> &mdash; 21 jeux, sans <span class="jp">カービィボウル</span></li>
+            <li>Media Arts Database (Agence pour les affaires culturelles du Japon), <a target="_blank" rel="noopener" href="https://mediaarts-db.artmuseums.go.jp/id/M726157">&#171;&nbsp;<span class="jp">カービィボウル</span>&nbsp;&#187;</a> &mdash; <code>SHVC-CG</code>, titre relevé sur l'étiquette de la cartouche ; 21 septembre 1994 ; HAL Laboratory et Nintendo</li>
+            <li>Internet Archive, <a target="_blank" rel="noopener" href="https://archive.org/details/kirby-bowl-shvc-cg-sfc-jp-manual-600-dpi">numérisation de la notice</a> &mdash; <code>SHVC-CG</code> sur la couverture</li>
+            <li>Wikipédia (français), <a target="_blank" rel="noopener" href="https://fr.wikipedia.org/wiki/Kirby%27s_Dream_Course">&#171;&nbsp;Kirby's Dream Course&nbsp;&#187;</a> &mdash; nom utilisé dans cet article (article propre au jeu)</li>
+            <li>Nintendo France, <a target="_blank" rel="noopener" href="https://www.nintendo.com/fr-fr/Jeux/Game-Boy/Kirby-s-Dream-Land-275682.html">fiche de <em>Kirby's Dream Land</em></a> &mdash; &#171;&nbsp;roi Dadidou&nbsp;&#187; ; <a target="_blank" rel="noopener" href="https://www.nintendo.com/fr-fr/Jeux/Jeux-Nintendo-Switch/Kirby-et-le-monde-oublie-2045110.html">fiche de <em>Kirby et le monde oublié</em></a> &mdash; la formulation &#171;&nbsp;copier leurs pouvoirs&nbsp;&#187;</li>
+            <li>Suruga-ya, résultats de recherche, 14 septembre 2026 &mdash; <code>SHVC-CG</code> renvoie trois annonces, toutes <span class="jp">カービィボウル</span>, avec les exemplaires d'occasion de Suruga-ya elle-même à 540&ndash;2&nbsp;250 yens et <span class="jp">カービィボウル (箱説なし)</span> à 1&nbsp;180 yens ; <code>SHVC-CG-JPN</code> n'en renvoie aucune ; <span class="jp">[説明書のみ] カービィボウル</span>, à 260 yens, apparaît en cherchant par le titre et par le code-barres, pas par le code</li>
+            <li>Résultats de recherche Buyee, mesurés le 14 septembre 2026 dans un navigateur de bureau : <code>SHVC-CG</code>, 24 annonces, dont 23 pour ce jeu seul (l'autre un lot de trois jeux) ; <span class="jp">カービィボウル スーパーファミコン</span>, 181 annonces, dont environ sept sur dix parmi les 100 premières pour ce jeu seul</li>
+          </ul>
+        </div>
+
+        <p><em>Ceci est la partie 2 d'une série en cinq volets revenant sur l'histoire du développement de Kirby. Si vous l'avez manquée, <a href="/blog/fr/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html">rattrapez la partie 1</a>.</em></p>
+      </div>
+    </article>
+
+    <div class="cta">
+      <h2>Trouvez le code, trouvez le jeu</h2>
+      <p>Saisissez un titre occidental. Obtenez le nom japonais, le code produit imprimé sur la tranche de la cartouche, et des liens vers les boutiques qui l'ont en stock.</p>
+      <p class="ctascan">Ou scannez le code-barres au dos de la boîte ou du boîtier : <a href="/?scan=1">ouvrir le scanner</a></p>
+      <a class="ctabtn" href="/">Rechercher un jeu</a>
+    </div>
+
+  </main>
+
+  <footer>
+    Kataban &middot; Données issues de la Media Arts Database de l'Agence japonaise pour les affaires culturelles. Titres anglais recoupés avec Wikidata (CC0).
+    <br>Certains liens sur ce site sont des liens d'affiliation ; Kataban peut percevoir une commission, notamment en tant qu'affilié du eBay Partner Network (publicité).
+    <br><a href="/blog/fr/">Tous les articles</a> &middot; <a href="/">Retour à l'outil de recherche</a> &middot; <a href="/privacy.html">Confidentialité</a>
+    <div class="foot-brand">
+      <p class="foot-stars" aria-hidden="true">★★★</p>
+      <p class="foot-tagline">Longue vie aux jeux physiques.</p>
+      <span class="kb-word" aria-hidden="true">
+        <span class="kb-ghost"><span class="kb-grid" data-kb="kb-on-cyan"></span></span>
+        <span class="kb-grid kb-top" data-kb="kb-on-pink"></span>
+      </span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="/kataban.js"></script>
+</body>
+</html>
