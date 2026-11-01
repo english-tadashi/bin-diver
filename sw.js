@@ -205,6 +205,10 @@ self.addEventListener('fetch', event => {
     return;
   }
 
+  // (1z) kataban.js は SW を通さない（2026-11-01）。記事は ?v= なしで読むので、(2) だと一度来た人には古いまま出続ける（GA4 が届かない）。
+  //      VERSION を上げると catalog まで取り直しになるので、ここだけ外す。速さは max-age=600 のブラウザのキャッシュに任せる。
+  if (url.origin === self.location.origin && url.pathname === '/kataban.js') return;
+
   // (2) 同一オリジンのその他 = cache-first。アイコンなど、変わらないものだけが来る。
   if (url.origin === self.location.origin) {
     event.respondWith((async () => {
