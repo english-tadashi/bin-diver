@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Sun, 01 Nov 2026 08:20:50 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 02 Nov 2026 07:53:48 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Blazing Star on Neo Geo AES: Yumekobo’s First Game, Its Code NGH-2390, and Why There Was No Third Star</title>
+      <link>https://gamekataban.com/blog/2026-11-03-blazing-star-neo-geo-aes-ngh-2390.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-11-03-blazing-star-neo-geo-aes-ngh-2390.html</guid>
+      <description>SNK put Blazing Star in arcades in January 1998 and at home that February as Neo Geo AES cartridge NGH-2390, at 29,800 yen before tax. What Yumekobo built after Pulstar, why the studio was gone by 2001, what the cartridge is worth now, and why eBay is mostly arcade boards.</description>
+      <pubDate>Tue, 03 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Kirby Development History, Part 2: Special Tee Shot in 1992, “Kirby’s Tee Shot” in 1994 — Kirby’s Dream Course and Its Product Code SHVC-CG</title>
