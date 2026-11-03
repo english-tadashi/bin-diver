@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Mon, 02 Nov 2026 07:53:48 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 03 Nov 2026 07:32:36 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Viewpoint en Neo Geo AES: el matamarcianos isométrico dibujado a mano y la secuela que llegó 26 años tarde</title>
+      <link>https://gamekataban.com/blog/es/2026-11-04-viewpoint-neo-geo-aes-ngh-051.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-11-04-viewpoint-neo-geo-aes-ngh-051.html</guid>
+      <description>El único juego de Sammy en Neo Geo salió en recreativas en octubre de 1992 y en AES en diciembre como NGH-051, a 25.000 yenes sin impuestos. Cómo dibujó Aicom a mano su 3D isométrico, por qué el cartucho está agotado y el disco no, y cómo se pudo jugar en 2025 la secuela cancelada de N64.</description>
+      <pubDate>Wed, 04 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Blazing Star en Neo Geo AES: el primer juego de Yumekobo, su código NGH-2390 y por qué nunca hubo una tercera estrella</title>
       <link>https://gamekataban.com/blog/es/2026-11-03-blazing-star-neo-geo-aes-ngh-2390.html</link>

@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Mon, 02 Nov 2026 07:53:48 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 03 Nov 2026 07:32:36 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Viewpoint on Neo Geo AES: the Hand-Drawn Isometric Shooter, and the Sequel That Arrived 26 Years Late</title>
+      <link>https://gamekataban.com/blog/2026-11-04-viewpoint-neo-geo-aes-ngh-051.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-11-04-viewpoint-neo-geo-aes-ngh-051.html</guid>
+      <description>Sammy’s only Neo Geo game hit arcades in October 1992 and the AES that December as cartridge NGH-051, at 25,000 yen before tax. How Aicom hand-drew its isometric 3D, why the cartridge is sold out while the disc is not, and how the cancelled N64 sequel became playable in 2025.</description>
+      <pubDate>Wed, 04 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Blazing Star on Neo Geo AES: Yumekobo’s First Game, Its Code NGH-2390, and Why There Was No Third Star</title>

@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>해외 컬렉터를 위한 일본 레트로 게임 블로그 — 매장 가이드, 수입 방법, 그리고 타이틀 뒤에 숨은 이야기.</description>
     <language>ko-kr</language>
-    <lastBuildDate>Mon, 02 Nov 2026 07:53:48 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 03 Nov 2026 07:32:36 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-ko.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>네오지오 AES의 《Viewpoint》: 손으로 그린 아이소메트릭 슈팅 게임, 그리고 26년 늦게 도착한 속편</title>
+      <link>https://gamekataban.com/blog/ko/2026-11-04-viewpoint-neo-geo-aes-ngh-051.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-11-04-viewpoint-neo-geo-aes-ngh-051.html</guid>
+      <description>사미의 유일한 네오지오 게임은 1992년 10월 아케이드에, 같은 해 12월 AES 카트리지 NGH-051로 세금 별도 25,000엔에 나왔습니다. Aicom이 아이소메트릭 3D를 손으로 그린 방식, 카트리지는 동났는데 디스크는 남아 있는 이유, 그리고 취소된 N64 속편이 2025년에 플레이 가능해진 경위.</description>
+      <pubDate>Wed, 04 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>네오지오 AES의 《Blazing Star》: 유메코보의 첫 게임, 코드 NGH-2390, 그리고 세 번째 별이 없었던 이유</title>
       <link>https://gamekataban.com/blog/ko/2026-11-03-blazing-star-neo-geo-aes-ngh-2390.html</link>
