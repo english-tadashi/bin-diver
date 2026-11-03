@@ -592,6 +592,7 @@ html.scan-first #locbar, html.scan-first .wrap{display:none}
 #scanQuick{margin-top:10px}
 /* 店頭モード（2026-10-19）: 「Are you in a shop in Japan?」と、カードの一番上の相場・値札の比較 */
 .shopask{border:2px solid var(--accent);background:var(--surface);padding:12px 14px;margin:0 0 14px}
+.card{scroll-margin-top:calc(var(--locbar-h, 0px) + 24px)}   /* 番号の札の分まで下げる */
 .shopask, .card .inshop{scroll-margin-top:calc(var(--locbar-h, 0px) + 12px)}   /* 上の帯（#locbar）に隠れない */
 .shopask.is-set{border-width:1px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 12px}
 .shopask-q{margin:0;font-size:15px;line-height:1.45;color:var(--ink)}
@@ -601,6 +602,8 @@ html.scan-first #locbar, html.scan-first .wrap{display:none}
 .shopask-btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .shopask.is-set .shopask-btn{padding:8px 10px;font-size:12px}
 .card .inshop{border:2px solid var(--accent);padding:12px 14px;margin:12px 0 4px}
+.card .inshop-name{margin:0 0 10px;font:600 16px/1.3 var(--f-display);color:var(--ink);overflow-wrap:anywhere}
+.card .inshop-name span{display:block;margin-top:2px;font:400 13px/1.3 var(--f-display);color:var(--muted)}
 .card .inshop-yen{font:700 34px/1.15 var(--f-mono, monospace);color:var(--ink);margin:4px 0 10px}
 .card .inshop-cmp{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted)}
 .card .inshop-cmp input{font:600 20px/1 var(--f-mono, monospace);padding:10px 12px;border:2px solid var(--edge-input);background:var(--field);color:var(--ink);width:100%;box-sizing:border-box}
@@ -1406,6 +1409,11 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
    紫(--signal)は使わない = 「型番の一致」と「届く経路」の2意味を薄めない(BIN_DIVER_DESIGN.md)。
    ★本文は必ず <span class="t"> で1つに包む。flex は裸のテキストと <b> を別々の
      フレックスアイテムにするので、包まないと1文が3列に割れる（実測で踏んだ）。 */
+.card .region-more{margin:2px 0 0 15px; font:400 12.5px/1.45 var(--f-display); color:var(--ink-2);}
+.card .region-more summary{display:inline-flex; align-items:center; min-height:44px; padding:0 12px 0 0; color:var(--ink); cursor:pointer; text-decoration:underline;}
+.card .region-more b{font-weight:600; color:var(--ink);}
+.card .region-up{display:flex; flex-direction:column; gap:20px;}   /* 店モードの要点の包み（2026-11-04・丸ボタンの重なりを測る）。.card の gap と同じ＝包む前と同じ並び */
+.card .lang-need{margin:0 0 6px; font:600 15px/1.35 var(--f-display); color:var(--ink);}
 .card .region{display:flex; align-items:flex-start; gap:9px; font:400 12.5px/1.45 var(--f-display); color:var(--ink-2);}
 .card .region .tick{flex-shrink:0; width:6px; height:6px; margin-top:6px; background:var(--ink-2); border-radius:1px;}
 .card .region .t{min-width:0;}
@@ -2025,6 +2033,7 @@ header .lede .lede-sub{ font-weight:400; }
   transition:background .12s, border-color .12s, color .12s;
 }
 #recallBtn.on{ display:flex; }
+#recallBtn.on.is-shy{ display:none; }   /* 店モードの要点に重なる間だけ（2026-11-04・fabCovers） */
 #recallBtn:hover,#recallBtn:focus{ background:var(--tag); border-color:var(--tag); color:var(--accent-ink); outline:none; }
 /* アイコンの入れ替え。開いている間だけ × を出す。 */
 #recallBtn .rb-x{ display:none; }
@@ -3478,7 +3487,7 @@ year.innerHTML = '<option value="All">All years</option>' +
 //   lock : 日本の本体が要る(物理的に挿さらない / リージョンロック)
 //   free : どの本体でも動く。中身の言語は日本語のまま
 //   (表に無い機種) : neutral = 常に真の文だけ出す
-//   mixed : 同じ機種に媒体が2種類混ざる（DATA では見分けられない）。どちらの行に出ても正しい1文を e[2] にそのまま入れる。
+//   mixed : 同じ機種に媒体が2種類混ざる（DATA では見分けられない）。どちらの行に出ても正しい1文を e[2] にそのまま入れる（e[3] は店モードの短い形）。
 //           ★e[2] は手書きの HTML 定数（<b> を含む）なので esc() しない。外部の値を入れないこと。
 //           PC Engine＝HuCard と CD-ROM²（約 400 行）、Mega Drive＝カートリッジとメガCD（116 行）・32X（17 行）、
 //           Famicom＝カートリッジとディスクシステム（198 行）。行数は MADB の mediaFormat で 2026-09-28 に実測。
@@ -3490,7 +3499,7 @@ year.innerHTML = '<option value="All">All years</option>' +
 // ★機種を足したら、ここに1行足すか、足さずに neutral のまま出すか。放置しても嘘にはならない。
 // ============================================================
 const REGION = {
-  'Famicom':        ['mixed','','<b>carts need an adapter</b> on an NES; disk games need a Disk System, never sold in the West'],
+  'Famicom':        ['mixed','','<b>carts need an adapter</b> on an NES; disk games need a Disk System, never sold in the West','Carts need an NES adapter; disk games a Disk System'],
   'Super Famicom':  ['lock','a Japanese Super Famicom','Super Famicom cartridges are region-locked and shaped differently from a US SNES'],
   'Nintendo 64':    ['lock','a Japanese Nintendo 64','the cartridge slot is keyed differently and the console is region-locked'],
   '64DD':           ['lock','a Japanese Nintendo 64 with a 64DD','the 64DD was never released outside Japan'],
@@ -3498,9 +3507,9 @@ const REGION = {
   'Wii':            ['lock','a Japanese Wii','Wii discs are region-locked'],
   'Wii U':          ['lock','a Japanese Wii U','Wii U discs are region-locked'],
   'Nintendo 3DS':   ['lock','a Japanese 3DS','3DS cartridges are region-locked'],
-  'PC Engine':      ['mixed','','<b>HuCards need a converter</b> on a TurboGrafx-16; CDs are region-free (check the System Card)'],
+  'PC Engine':      ['mixed','','<b>HuCards need a converter</b> on a TurboGrafx-16; CDs are region-free (check the System Card)','HuCards need a converter; CDs are region-free'],
   'PC-FX':          ['lock','a Japanese PC-FX','the PC-FX was never released outside Japan'],
-  'Mega Drive':     ['mixed','','<b>carts need an adapter</b> on a US Genesis; Mega-CD and some 32X games are region-locked'],
+  'Mega Drive':     ['mixed','','<b>carts need an adapter</b> on a US Genesis; Mega-CD and some 32X games are region-locked','Carts need a Genesis adapter; Mega-CD is region-locked'],
   'Sega Mark III':  ['lock','a Japanese Mark III','Mark III cartridges do not fit a Master System'],
   'Sega Saturn':    ['lock','a Japanese Saturn','Saturn discs are region-locked'],
   'Dreamcast':      ['lock','a Japanese Dreamcast','Dreamcast discs are region-locked'],
@@ -3521,8 +3530,16 @@ const REGION = {
   'Nintendo Switch':   ['free','Switch','Switch cartridges are region-free'],
   'Xbox One':          ['free','Xbox One','Xbox One discs are region-free'],
 };
+// 日本語なしで遊べるか（R17・2026-11-03）。links.json の n にある行だけ。外部の2出典が揃った作品だけで、無い行は何も出さない。
+const LANG_NEED = { play:'No Japanese needed', menus:'Some menus to learn', text:'Text-heavy: needs Japanese' };
+function langNeedNote(r){
+  const t = !r[12] && BLOG_LINKS && BLOG_LINKS.n && LANG_NEED[BLOG_LINKS.n[r[2]+'\t'+r[1]]];
+  return t ? `<div class="lang-need">${esc(t)}</div>` : '';
+}
 // 1行のHTMLを返す。機種が空なら何も出さない(嘘をつくより、無いほうがまし)。
-function regionNote(r){
+// o.noText: 「日本語なしで遊べるか」の1行が出る行では、本文の言語の一文を出さない（1行のほうが具体的）。
+// o.short: 店モード。遊べる本体・必要なものだけを1文で出し、理由は More で開く（2026-11-03）。
+function regionNote(r, o={}){
   const pf = r[2];
   if(!pf) return '';
   // 配信専用(row[12]) は棚にも本体にも話が及ばない。要るのは日本のストアアカウント。
@@ -3530,18 +3547,25 @@ function regionNote(r){
     + `<b>Download-only Japanese release</b> — no disc or cartridge exists. `
     + `You need <b>a Japanese store account</b> (and, on region-locked consoles, Japanese hardware).</span></div>`;
   const e = REGION[pf];
-  let txt;
+  const lang = o.noText ? '' : ` The game's text is Japanese.`;
+  let txt, brief='';
   if(e && e[0]==='mixed'){
-    txt = `Japanese release — ${e[2]}. The game's text is Japanese.`;
+    txt = `Japanese release — ${e[2]}.`;
+    brief = `<b>${e[3]}</b>.`;
   } else if(e && e[0]==='lock'){
-    txt = `Japanese release — needs <b>${esc(e[1])}</b>: ${esc(e[2])}. The game's text is Japanese.`;
+    txt = `Japanese release — needs <b>${esc(e[1])}</b>: ${esc(e[2])}.`;
+    brief = `Needs <b>${esc(e[1])}</b>.`;
   } else if(e && e[0]==='free'){
-    txt = `Japanese release — plays on <b>any ${esc(e[1])}</b>: ${esc(e[2])}. The game's text is Japanese.`;
+    txt = `Japanese release — plays on <b>any ${esc(e[1])}</b>: ${esc(e[2])}.`;
+    brief = `Plays on <b>any ${esc(e[1])}</b>.`;
   } else {
     // 未収載。常に真のことだけ言う。
-    txt = `Japanese release — the game's text is Japanese. <b>Check region compatibility</b> for your ${esc(pf)} before buying.`;
+    return `<div class="region"><span class="tick" aria-hidden="true"></span><span class="t">`
+      + `Japanese release —${o.noText?'':` the game's text is Japanese.`} <b>Check region compatibility</b> for your ${esc(pf)} before buying.</span></div>`;
   }
-  return `<div class="region"><span class="tick" aria-hidden="true"></span><span class="t">${txt}</span></div>`;
+  const line = (o.short ? brief : txt) + lang;
+  return `<div class="region"><span class="tick" aria-hidden="true"></span><span class="t">${line}</span></div>`
+    + (o.short ? `<details class="region-more"><summary>More</summary><div class="t">${txt}</div></details>` : '');
 }
 
 // ============================================================
@@ -4473,12 +4497,15 @@ function card(r,idx){
   const byBarcode = cardMatch==='barcode' && !!r[10] && r[10]===cardMatchJan;
   const byGuess = cardMatch==='guess';
   const matchLabel = byBarcode ? 'Barcode match' : byGuess ? 'Possible match' : 'Match';
+  // 2026-11-03: 店モードでは「遊べる本体」を相場のすぐ下へ。値札を見ながら、値段と遊べるかを1画面で決められるように。
+  const regionUp = (byBarcode||byGuess) && inShopRead()==='yes';
   const buyKeys = {kwBuyee,kwBuyeeFallback,buyeeWrapped,kwEn,ebayRegion,kwEbayMaint,ebayRegionMaint,kwCode,kwCodeSg,kwKana,kwKanaBo,kwName,kwKanaHard,codes,sgNoCode,sgComUrl};
   const rakSlot = /^\d{13}$/.test(r[10]||'') ? `<div class="rak-slot" data-jan="${r[10]}"></div>` : '';
   return `<article class="card">
 
     <div class="status${(byBarcode||byGuess)?' is-scan':''}${byGuess?' is-guess':''}"><span class="dot"></span>${(byBarcode||byGuess)?`<span class="status-txt">${matchLabel} &middot; Japan / NTSC-J</span>`:`${matchLabel} &middot; Japan / NTSC-J`}${jpOnly?`<a class="jp-only" href="${blogUrl('tag/release/japan-only/')}" title="Home version sold only in Japan" aria-label="Japan only: home version sold only in Japan">Japan only</a>`:''}</div>
     ${(byBarcode||byGuess) ? inShopPanel(r) : ''}
+    ${regionUp ? `<div class="region-up">${langNeedNote(r)+regionNote(r,{noText:!!langNeedNote(r),short:true})}</div>` : ''}
 
     ${(pf||pubs.length||yr)?`<div class="specs">
       ${pf?`<div class="spec"><span class="micro">Console</span>${platKey?`<a class="v jp plat-link" href="${blogUrl('tag/platform/'+platKey+'/')}">${esc(pf)}</a>`:`<span class="v jp">${esc(pf)}</span>`}</div>`:''}
@@ -4535,11 +4562,11 @@ function card(r,idx){
       ${shelfNote(r)}
       <button class="genre-link" type="button">Find by genre &amp; condition guide</button>
       <a class="cond-link" href="${blogUrl('2026-09-16-glossary-condition-rank.html')}">What the condition words on a label mean (ランクB · 美品 · 未開封) &rarr;</a>
-      <span class="micro plain instore-head">Still can't find it?</span>
+      <span class="micro plain instore-head">Need help or paying?</span>
       <button class="btn-clerk" type="button" data-clerk="${idx}">Show to shop staff</button>
     </div>`}
 
-    ${regionNote(r)}
+    ${regionUp ? '' : langNeedNote(r)+regionNote(r,{noText:!!langNeedNote(r)})}
 
     <hr class="div">
 
@@ -4620,7 +4647,10 @@ function shopPromptHtml(){
 function inShopPanel(r){
   if(inShopRead()!=='yes') return '';
   const jan = /^\d{13}$/.test(r[10]||'') ? r[10] : '';
+  // 2026-11-03: 比較の結果と同じ画面で「どのゲームか」が分かるように、題名と機種を欄の先頭に置く。英題が無い行はローマ字、それも無ければ和題。
+  const romaji = romajiFor(r), name = r[0] || (romaji ? romajiShow(romaji) : r[1]);
   return `<div class="inshop"${jan?` data-jan="${jan}"`:''}>
+      <div class="inshop-name">${esc(name)}${r[2]?`<span>${esc(r[2])}</span>`:''}</div>
       <span class="micro">Typical used price (Rakuten)</span>
       <div class="inshop-yen">${jan?'checking&hellip;':'no price data for this item'}</div>
       ${jan?`<label class="inshop-cmp"><span>Price on the shop's tag (&yen;)</span><input type="text" inputmode="numeric" autocomplete="off" placeholder="e.g. 2,980" aria-label="Price on the shop's tag in yen"></label>
@@ -4631,14 +4661,22 @@ function inShopPanel(r){
 function fillInShop(root){
   root.querySelectorAll('.inshop[data-jan]').forEach(el=>{
     if(typeof rakutenLookup!=='function'){ el.querySelector('.inshop-yen').textContent='no price data right now'; return; }
-    rakutenLookup(el.dataset.jan).then(hit=>{
-      if(!el.isConnected) return;
-      const mid = hit && Number(hit.medianPrice);
-      const yen = el.querySelector('.inshop-yen');
-      if(Number.isFinite(mid) && mid>0){ el.dataset.mid=String(Math.round(mid)); yen.textContent='~\u00a5'+Math.round(mid).toLocaleString('en-US'); inShopCompare(el); }
-      else yen.textContent='no used listings found';
-    }).catch(()=>{ if(el.isConnected) el.querySelector('.inshop-yen').textContent='no price data right now'; });
+    fillInShopOne(el,0);
   });
+}
+// 2026-11-03: 通信の失敗は覚えない（_rakFetch）。店は電波が悪いので、この欄は数秒おきに決まった回数だけ引き直す。描き直されて el が消えたら止まる。
+const INSHOP_RETRY_MS=5000, INSHOP_RETRY_MAX=3;
+function fillInShopOne(el,tries){
+  const jan=el.dataset.jan;
+  rakutenLookup(jan).then(hit=>{
+    if(!el.isConnected) return;
+    const mid = hit && Number(hit.medianPrice);
+    const yen = el.querySelector('.inshop-yen');
+    if(Number.isFinite(mid) && mid>0){ el.dataset.mid=String(Math.round(mid)); yen.textContent='~\u00a5'+Math.round(mid).toLocaleString('en-US'); inShopCompare(el); return; }
+    if(!_rakFailed.has(jan)){ yen.textContent='no used listings found'; return; }
+    yen.textContent='no price data right now';
+    if(tries<INSHOP_RETRY_MAX) setTimeout(()=>{ if(el.isConnected) fillInShopOne(el,tries+1); },INSHOP_RETRY_MS);
+  }).catch(()=>{ if(el.isConnected) el.querySelector('.inshop-yen').textContent='no price data right now'; });
 }
 function inShopCompare(el){
   const out=el.querySelector('.inshop-verdict'), inp=el.querySelector('input'); if(!out||!inp) return;
@@ -4659,7 +4697,13 @@ results.addEventListener('click', e=>{
   inShopSave(v);
   if(v==='yes' && LOC!=='jp') setLoc('jp');   // 日本向けの並び（setLoc が描き直す）
   else paint();
+  if(v==='yes') scrollToResult();
 });
+// 2026-11-03: 店モードはカードの先頭へ移る＝値札の比較・地域ロックの要点が最初の画面に入る（件数と店モードの札は上へ送る）。
+function scrollToResult(){
+  const c = inShopRead()==='yes' && results.querySelector('.card .inshop');
+  (c ? c.closest('.card') : results).scrollIntoView({behavior:'smooth',block:'start'});
+}
 function paint(){
   const len=current.length;
   if(!len && !SEARCH_READY && results.querySelector('.qa')) return;   // 2026-10-28: 起動時の描き直し（setLoc 等）で最初の答え（.qa）を消さない
@@ -5943,7 +5987,7 @@ function showByJan(raw){
     q.value=''; plat.value='All'; pubReset(); year.value='All';
     cardMatch='barcode'; cardMatchJan=jan;   // 札「Barcode match」・複数版の注意は外す（card()）
     current=rows; shown=Math.min(MAX,rows.length); paint();
-    results.scrollIntoView({behavior:'smooth',block:'start'});
+    scrollToResult();
     lastScanHit=true;
     return true;
   }
@@ -6139,7 +6183,7 @@ async function janFallback(jan){
     </div>`);
   lastScanHit=true;                                    // 閉じたときに検索欄へフォーカスを移さない
   if(overlay.classList.contains('on')) closeScan();
-  results.scrollIntoView({behavior:'smooth',block:'start'});
+  scrollToResult();
   return m.verdict;
 }
 
@@ -6258,7 +6302,8 @@ function closeScan(){
   if(wasScanFirst){
     // 隠れていた間に測った帯（#locbar）の高さは 0。測り直させてから（resize で measureLocbar が走る）結果へ移る。
     try{ window.dispatchEvent(new Event('resize')); }catch(e){}
-    if(lastScanHit === true) results.scrollIntoView({behavior:'smooth',block:'start'});
+    // 隠れていた検索ページの高さが決まるのを待つ（2026-11-03: 測り直しの前に送ると 75px 手前で止まった）
+    if(lastScanHit === true) requestAnimationFrame(()=>requestAnimationFrame(scrollToResult));
   }
   if(lastScanHit === false){ q.focus(); }   // 外れたときだけ。当たり(true)/未スキャン(null)は何もしない
 }
@@ -6333,8 +6378,10 @@ const RAKUTEN = {
   affiliateId: '55f1e07e.c5731293.55f1e07f.25bfdaee',
   endpoint: 'https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260401',
 };
-const _rakCache = new Map();            // jan -> {img,url,name,price} | null(null も覚える=再取得しない)
+const _rakCache = new Map();            // jan -> {img,url,name,price} | null(出品なしの null も覚える=再取得しない。通信の失敗は覚えない)
 const _rakNames = new Map();            // jan -> 商品名の配列（最大10件）。JAN の補い（janFallback）が使う。取れなければ入れない
+const _rakFailed = new Set();           // 通信や API の失敗で引けなかった jan。「出品なし」と書き分ける（店は電波が悪い）。成功すれば外す
+const _rakInflight = new Map();         // jan -> 並んでいる・問い合わせ中の Promise。結果が出たら外す
 let   _rakChain = Promise.resolve();    // 直列化 = レート制限(約1.6秒/回)を守る
 
 // 中央値: 数値を昇順に並べ、奇数件なら真ん中の1つ、偶数件なら中央2つの平均。
@@ -6351,9 +6398,10 @@ async function _rakFetch(jan) {
     applicationId: RAKUTEN.appId, accessKey: RAKUTEN.accessKey, affiliateId: RAKUTEN.affiliateId,
     keyword: jan, availability: '0', imageFlag: '1', hits: '30', sort: '+itemPrice', format: 'json',
   });
-  let result = null;
+  let result = null, failed = false;
   try {
     const res = await fetch(`${RAKUTEN.endpoint}?${p}`);
+    if (!res.ok) failed = true;
     if (res.ok) {
       const items = (await res.json())?.Items ?? [];
       _rakNames.set(jan, items.slice(0, 10).map(x => x?.Item?.itemName).filter(Boolean));
@@ -6375,7 +6423,9 @@ async function _rakFetch(jan) {
       if (item && img && item.affiliateUrl)
         result = { img, url: item.affiliateUrl, name: item.itemName, price: item.itemPrice, medianPrice, minPrice };
     }
-  } catch (e) { console.warn('rakuten', jan, e); }   // 失敗は握らず記録(罠#47)
+  } catch (e) { failed = true; console.warn('rakuten', jan, e); }   // 失敗は握らず記録(罠#47)
+  if (failed) { _rakFailed.add(jan); return null; }    // 覚えない = 次に開いたとき引き直す
+  _rakFailed.delete(jan);
   _rakCache.set(jan, result);
   return result;
 }
@@ -6384,10 +6434,14 @@ function rakutenLookup(jan) {                 // 直列 + 間隔をあけて叩�
   // キャッシュ済みは列に並ばせない。paint() は Load more のたびに全カードを作り直すので、
   // ここで短絡しないと既読の JAN が毎回 1.6 秒ずつ列を伸ばす。
   if (_rakCache.has(jan)) return Promise.resolve(_rakCache.get(jan));
+  // 2026-11-03: 問い合わせの途中で paint() が描き直すと（索引の完成など）同じ JAN がもう1回並んでいた。途中のものに相乗りする。
+  if (_rakInflight.has(jan)) return _rakInflight.get(jan);
   const task = _rakChain.then(() => _rakFetch(jan));
   const spacer = () => new Promise(r => setTimeout(r, 1600));
   _rakChain = task.then(spacer, spacer);      // 次の呼び出しは1.6秒後(この呼び出しは待たせない)
-  return task;
+  const shared = task.finally(() => _rakInflight.delete(jan));   // 失敗でも外す = 再試行できる
+  _rakInflight.set(jan, shared);
+  return shared;
 }
 
 function attachRakutenImage(slotEl, jan) {
@@ -6672,8 +6726,23 @@ buildSearchIndex();
 
   // 丸ボタンは「貼り付いている間」ずっと同じ位置に出す。開いていても消さない
   // ＝同じボタンが閉じるボタンでもある。消えるのはページ最上部（flow 表示）だけ。
+  // 2026-11-04: 店モードの要点（.region-up＝日本語なしで遊べるかの1行・地域ロックの要点）に丸ボタンが重なる間は隠す。
+  //   375×667 でカードの先頭に移った直後、要点の行の右端（PCE「region-free」・FC「Disk」）が隠れていた。
+  //   少しスクロールして重ならなくなれば戻る。検索パネルを開いている間は閉じるボタンなので隠さない。
+  function fabCovers(){
+    if(!stuck || open) return false;
+    var vw = document.documentElement.clientWidth, vh = window.innerHeight;
+    var L = vw - 12 - 56 - 8, T = vh - 12 - 56 - 8;   // #recallBtn の位置＋8px（安全域は足さない＝少し狭めに見る）
+    var els = document.querySelectorAll('#results .card .region-up');
+    for(var i = 0; i < els.length; i++){
+      var r = els[i].getBoundingClientRect();
+      if(r.bottom > T && r.top < vh && r.right > L) return true;
+    }
+    return false;
+  }
   function syncFab(){
     fab.classList.toggle('on', stuck);
+    fab.classList.toggle('is-shy', fabCovers());
     fab.classList.toggle('is-open', open);
     fab.setAttribute('aria-expanded', open ? 'true' : 'false');
     fab.setAttribute('aria-label', open ? 'Close search panel' : 'Open search panel');
@@ -6737,6 +6806,7 @@ buildSearchIndex();
     var a = anchorY();
     if(!stuck){ if(y > a) stick(); }
     else if(y <= a){ unstick(); }
+    else syncFab();   // 店モードの要点との重なり（fabCovers）を測り直す
   }
 
   function onScroll(){
