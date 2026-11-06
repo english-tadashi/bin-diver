@@ -536,7 +536,7 @@ window.KB_SHOP=(function(){
         : [gWorld, gEnTitle, gTitle, gCode];
 
     // 2026-10-31: 海外モードは店ボタンを上へ（見出しと PR の注記を1行に）。
-    return jp ? `<div>
+    return jp ? `<div class="buy-jp">
         <div class="buy-head">
           <h3>Buy this game</h3>
           <p>Ordered by what you can buy directly in Japan.</p>
@@ -1865,6 +1865,95 @@ footer a:hover,footer a:focus{color:var(--accent)}
 .card .instore{ padding:14px 0 0; display:flex; flex-direction:column; gap:12px; }
 .card .instore > .field{margin:16px 0 14px;}
 .card .instore-head{ color:var(--tag); }
+
+/* ============================================================
+   スマホのカードの最初の部分（2026-11-06・card-compact）。
+   375px 幅でカード1枚が約2,300〜2,500px あり、1画面に1枚も入らなかった（NOTES 2026-09-26 続き10 の保留）。
+   480px 以下のときだけ、最初に要点（日本語題名・英題・機種・型番・相場・日本語なしで遊べるか・地域ロック・買うボタン・店員に見せる・My List）を出し、
+   残りは「More details」（.cm-toggle）で開く。開くと中身は今と同じ（要点の並びはそのまま、隠していたものが元の場所に戻る）。
+   ★並べ替えは order だけ（DOM の順はパソコン幅と同じ）。パソコン幅では .cm-toggle と .cm-rb は出ない＝見た目は前と同じ。
+   ★:has に対応しないブラウザでは「最初の店だけ」の規則が落ちて、店のボタンが全部出る（壊れはしない）。
+   ★(PR) の注記は店のボタンと一緒に必ず出す（ステマ規制）。
+   ============================================================ */
+.card .cm-toggle, .card .cm-rb, .card .cm-ambig{display:none;}
+@media (max-width:480px){
+  .card.cm{gap:12px;}
+  .card.cm > *{order:20;}
+  .card.cm > .status, .card.cm > .inshop, .card.cm > .region-up{order:0;}
+  .card.cm > .specs{order:1;}
+  .card.cm > .identity{order:2;}
+  .card.cm > .cm-code, .card.cm > .cm-slab{order:3;}
+  .card.cm > .rak-slot{order:4;}
+  .card.cm > .lang-need, .card.cm > .region, .card.cm > .cm-rb{order:5;}
+  .card.cm > .buy-out, .card.cm > .buy-jp, .card.cm > .nodisc{order:6;}
+  .card.cm > .instore, .card.cm > .cm-toggle{order:7;}
+  .card .cm-toggle{display:flex; align-items:center; justify-content:center; min-height:44px; padding:0 14px;
+    background:transparent; border:1px solid var(--edge-input); border-radius:2px; color:var(--ink);
+    font:600 14px/1.2 var(--f-display); cursor:pointer;}
+  .card .cm-toggle:hover, .card .cm-toggle:focus-visible{border-color:var(--ink-2); outline:none;}
+  .card.cm .rak-slot{margin-top:0;}
+  .card.cm .rak-slot > .rak-market:first-child{margin:0 0 .75rem;}
+  .card.cm .rak-slot.rak-done:empty{display:none;}
+
+  /* 閉じているとき */
+  .card.cm:not(.cm-open) > :not(.status.is-scan):not(.inshop):not(.region-up):not(.specs):not(.identity):not(.cm-code):not(.cm-slab):not(.rak-slot):not(.lang-need):not(.cm-rb):not(.buy-out):not(.buy-jp):not(.nodisc):not(.instore):not(.cm-toggle){display:none;}
+  .card.cm:not(.cm-open) .cm-rb{display:block;}
+  .card.cm:not(.cm-open) .cm-rb:empty{display:none;}
+  .card.cm:not(.cm-open) .lang-need{margin:0;}
+  .card.cm:not(.cm-open) .specs{display:block;}
+  .card.cm:not(.cm-open) .spec:not(.sp-con){display:none;}
+  .card.cm:not(.cm-open){gap:8px; padding-top:16px;}
+  .card.cm:not(.cm-open) .spec.sp-con{flex-direction:row; align-items:baseline; gap:12px; padding:4px 0;}
+  /* 型番の無い行の「日本語題名・検索の鍵」は枠を外して型番の欄と同じ形に（高さ 133→約60px） */
+  .card.cm:not(.cm-open) .cm-slab .slab{padding:0; background:none; border:none;}
+  .card.cm:not(.cm-open) .cm-slab .reg{display:none;}
+  .card.cm:not(.cm-open) .identity{gap:6px;}
+  .card.cm:not(.cm-open) .identity > .field + .field{margin-top:0;}
+  .card.cm:not(.cm-open) .identity .articles,
+  .card.cm:not(.cm-open) .identity .loan-gloss,
+  .card.cm:not(.cm-open) .identity .romaji,
+  .card.cm:not(.cm-open) .identity .cap,
+  .card.cm:not(.cm-open) .cm-code .cap{display:none;}
+  /* 英題が複数の日本版にまたがる行: 全文の注意書きの代わりに短い1行（色は注意書きより一段明るく） */
+  .card.cm:not(.cm-open) .identity .cm-ambig{display:block; font:500 12px/1.35 var(--f-display); color:#ff8fd8;}
+  .card.cm:not(.cm-open) .rak-slot:not(.rak-done){min-height:20px;}
+  .card.cm:not(.cm-open) .rak-slot > .rak-market:first-child{margin:0;}
+  .card.cm:not(.cm-open) .rak-slot > :not(.rak-market){display:none;}
+  /* 店: (PR) の注記と、店のボタンがある最初の群の最初の1つだけ */
+  .card.cm:not(.cm-open) .buy-jp > .buy-head{display:none;}
+  .card.cm:not(.cm-open) .buy-jp > p.cap{margin:0;}
+  .card.cm:not(.cm-open) :is(.buy-out, .buy-jp) > .group{margin-top:8px;}
+  .card.cm:not(.cm-open) :is(.buy-out, .buy-jp) > .group:not(:has(a.store)),
+  .card.cm:not(.cm-open) :is(.buy-out, .buy-jp) > .group:has(a.store) ~ .group{display:none;}
+  .card.cm:not(.cm-open) :is(.buy-out, .buy-jp) .group > :not(.stores){display:none;}
+  .card.cm:not(.cm-open) :is(.buy-out, .buy-jp) .stores > .store ~ .store,
+  .card.cm:not(.cm-open) :is(.buy-out, .buy-jp) .group > .stores ~ .stores{display:none;}
+  /* 店員に見せるボタンと More details を1行に */
+  .card.cm:not(.cm-open) .instore{flex-direction:row; align-items:stretch; gap:8px; padding-top:0;}
+  .card.cm:not(.cm-open) .instore > :not(.btn-clerk):not(.cm-toggle){display:none;}
+  .card.cm:not(.cm-open) .instore > .btn-clerk{flex:1 1 auto; width:auto; min-width:0; min-height:44px; padding:8px 12px;}
+  .card.cm:not(.cm-open) .instore > .cm-toggle{flex:0 0 auto;}
+  /* 国内モード（I'm in Japan）の閉じた形だけ（2026-11-06）: 店員に見せるを駿河屋と同じ大きい紫のボタンにして店の場所に置き、
+     駿河屋（最初の店・href は同じ要素のまま）は More details の横の枠ボタンへ。(PR) の注記は駿河屋の行のすぐ上。
+     ★リンクを複製しない（GA4 の store_click・href は同じ <a> のまま）。店頭の箱と購入ブロックを display:contents で開き、カードを2列の grid にして並べる。 */
+  body.in-jp .card.cm:not(.cm-open){display:grid; grid-template-columns:minmax(0,1fr) auto;}
+  body.in-jp .card.cm:not(.cm-open) > *{grid-column:1 / -1;}
+  body.in-jp .card.cm:not(.cm-open) > .instore,
+  body.in-jp .card.cm:not(.cm-open) > .buy-jp,
+  body.in-jp .card.cm:not(.cm-open) > .buy-jp > .group:has(a.store):not(.group:has(a.store) ~ .group),
+  body.in-jp .card.cm:not(.cm-open) > .buy-jp > .group:has(a.store):not(.group:has(a.store) ~ .group) > .stores:not(.stores ~ .stores){display:contents;}
+  body.in-jp .card.cm:not(.cm-open) .instore > .btn-clerk{order:6; grid-column:1 / -1; width:auto; min-height:44px; padding:10px 14px;
+    border:1px solid var(--signal); border-radius:2px; background:var(--signal); color:#07040f;
+    font:500 14px/1.35 var(--f-pixel); text-align:center; white-space:normal;}
+  body.in-jp .card.cm:not(.cm-open) .instore > .btn-clerk:hover{background:var(--signal); border-color:var(--signal); color:#07040f;}
+  body.in-jp .card.cm:not(.cm-open) .buy-jp > p.cap{order:7; grid-column:1 / -1;}
+  body.in-jp .card.cm:not(.cm-open) .buy-jp a.store{order:8; grid-column:1; border-color:var(--tag); background:transparent; color:var(--tag);
+    font:500 15px/1.2 var(--f-display); padding:8px 12px;}   /* 書体は入れ替える前の枠ボタン（店員に見せる）と同じ＝半分の幅でも2行で収まる */
+  body.in-jp .card.cm:not(.cm-open) .buy-jp a.store:hover{background:rgba(17,238,255,.12); color:var(--tag);}
+  body.in-jp .card.cm:not(.cm-open) .instore > .cm-toggle{order:9; grid-column:2;}   /* 駿河屋（order 8・1列目）の右。DOM では先に来るので order で後ろへ */
+  /* 画面外のカードの仮の高さ（content-visibility・1800px は開いた形の値）。閉じた形の実測に合わせる */
+  #results > article.card.cm:not(.cm-open){contain-intrinsic-size:auto 560px;}
+}
 /* ===== Logo migration: bitmap KATABAN + steady breathing (2026-07-29) =====
    Replaces the h1 text logo (.blk). All new classes are kb- prefixed to stay
    clear of existing selectors (.jp-chip, display:grid, etc.).
@@ -3539,6 +3628,7 @@ function langNeedNote(r){
 // 1行のHTMLを返す。機種が空なら何も出さない(嘘をつくより、無いほうがまし)。
 // o.noText: 「日本語なしで遊べるか」の1行が出る行では、本文の言語の一文を出さない（1行のほうが具体的）。
 // o.short: 店モード。遊べる本体・必要なものだけを1文で出し、理由は More で開く（2026-11-03）。
+// o.bare: short の1文だけ（More を付けない）。スマホのカードの最初の部分で使う（2026-11-06・card-compact）。理由の全文は More details を開くと出る本来の .region。
 function regionNote(r, o={}){
   const pf = r[2];
   if(!pf) return '';
@@ -3565,7 +3655,7 @@ function regionNote(r, o={}){
   }
   const line = (o.short ? brief : txt) + lang;
   return `<div class="region"><span class="tick" aria-hidden="true"></span><span class="t">${line}</span></div>`
-    + (o.short ? `<details class="region-more"><summary>More</summary><div class="t">${txt}</div></details>` : '');
+    + (o.short && !o.bare ? `<details class="region-more"><summary>More</summary><div class="t">${txt}</div></details>` : '');
 }
 
 // ============================================================
@@ -4321,6 +4411,48 @@ const EBAY_KW_OVERRIDE = {
 // 結果カードの札（2026-10-19）。'' = 検索・'barcode' = 読んだ JAN と完全一致（showByJan）・
 // 'guess' = DATA に無い JAN を楽天の商品名から当てた候補（janFallback）。run()（検索）で '' に戻す。
 let cardMatch='', cardMatchJan='';
+/* 2026-11-06（card-compact）: スマホのカードの「More details」。文言の言語は blogLang()（DUPE_NOTE と同じ）。
+   開いた行は WeakSet で覚える（DATA の行の配列そのもの＝検索し直しても同じ行なら開いたまま）。 */
+const CM_LABEL = {
+  en: ['More details', 'Fewer details'],
+  zh: ['更多詳情', '收起詳情'],
+  ko: ['자세히 보기', '간단히 보기'],
+  es: ['Más detalles', 'Menos detalles'],
+  de: ['Mehr Details', 'Weniger Details'],
+  fr: ['Plus de détails', 'Moins de détails']
+};
+// 閉じた形の英題のすぐ下に出す短い1行（2026-11-06）。英題が複数の日本版にまたがる行だけ（AMBIG_EN）。全文の注意書き（.cap）は開くと出る。
+const CM_AMBIG = {
+  en: 'Shared name — match the Japanese title & code',
+  zh: '多個日版同名——請核對日文標題與型號',
+  ko: '같은 이름의 일본판이 여럿 — 일본어 제목·품번 확인',
+  es: 'Nombre compartido: mira título japonés y código',
+  de: 'Name mehrfach vergeben: jap. Titel & Code prüfen',
+  fr: 'Nom partagé : vérifiez titre japonais et code'
+};
+const CM_OPEN = new WeakSet();
+function cmLabel(open){ const t = CM_LABEL[blogLang()] || CM_LABEL.en; return open ? t[1] : t[0]; }
+/* GA4 のイベント（2026-11-06・card-compact）: clerk_open（Show to shop staff）・card_expand（閉じた形で More details を開いた）。
+   パラメータは loc（out＝海外 / jp＝国内）と platform（DATA の row[2]＝機種の英語名）。
+   gtag は <head> の先頭で定義済み（GA のタグを読む前は dataLayer に積まれ、読んだときに送られる）。無い・失敗しても押した動作は止めない。 */
+function cmTrack(name, r){
+  try{ if(typeof gtag === 'function') gtag('event', name, { loc: LOC, platform: (r && r[2]) || '' }); }catch(e){}
+}
+function cmText(k){ const l = blogLang(); return k === 'ambig' ? (CM_AMBIG[l] || CM_AMBIG.en) : ''; }
+results.addEventListener('click', e=>{
+  const b = e.target.closest('.cm-toggle'); if(!b) return;
+  const c = b.closest('.card'); const r = current[[...results.querySelectorAll(':scope > article.card')].indexOf(c)];
+  const open = !c.classList.contains('cm-open');
+  c.classList.toggle('cm-open', open);
+  b.setAttribute('aria-expanded', open ? 'true' : 'false');
+  b.textContent = cmLabel(open);
+  if(r){ if(open) CM_OPEN.add(r); else CM_OPEN.delete(r); }
+  if(open) cmTrack('card_expand', r);
+  // 閉じたときにカードの頭が上の帯（#locbar）の下か画面の上へ消えていたら、カードの先頭へ戻す（ボタンの位置が大きく上がるため）
+  const lb = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--locbar-h')) || 0;
+  if(!open && c.getBoundingClientRect().top < lb) c.scrollIntoView({block:'start'});
+});
+
 function card(r,idx){
   const [en,jp,pf,code,yr,pubja,puben]=r;
   const hasEn=!!en;
@@ -4501,14 +4633,18 @@ function card(r,idx){
   const regionUp = (byBarcode||byGuess) && inShopRead()==='yes';
   const buyKeys = {kwBuyee,kwBuyeeFallback,buyeeWrapped,kwEn,ebayRegion,kwEbayMaint,ebayRegionMaint,kwCode,kwCodeSg,kwKana,kwKanaBo,kwName,kwKanaHard,codes,sgNoCode,sgComUrl};
   const rakSlot = /^\d{13}$/.test(r[10]||'') ? `<div class="rak-slot" data-jan="${r[10]}"></div>` : '';
-  return `<article class="card">
+  // 2026-11-06（card-compact）: スマホ（480px 以下）ではカードの最初に要点だけを出し、残りは More details で開く（CSS の「スマホのカードの最初の部分」）。
+  //   パソコン幅では .cm-toggle と .cm-rb は出ない＝見た目は前と同じ。開いた状態は行（r）ごとに覚える（Load more の描き直しで閉じない）。
+  const cmOpen = CM_OPEN.has(r);
+  const cmBtn = `<button class="cm-toggle" type="button" aria-expanded="${cmOpen?'true':'false'}">${cmLabel(cmOpen)}</button>`;
+  return `<article class="card cm${cmOpen?' cm-open':''}">
 
     <div class="status${(byBarcode||byGuess)?' is-scan':''}${byGuess?' is-guess':''}"><span class="dot"></span>${(byBarcode||byGuess)?`<span class="status-txt">${matchLabel} &middot; Japan / NTSC-J</span>`:`${matchLabel} &middot; Japan / NTSC-J`}${jpOnly?`<a class="jp-only" href="${blogUrl('tag/release/japan-only/')}" title="Home version sold only in Japan" aria-label="Japan only: home version sold only in Japan">Japan only</a>`:''}</div>
     ${(byBarcode||byGuess) ? inShopPanel(r) : ''}
     ${regionUp ? `<div class="region-up">${langNeedNote(r)+regionNote(r,{noText:!!langNeedNote(r),short:true})}</div>` : ''}
 
     ${(pf||pubs.length||yr)?`<div class="specs">
-      ${pf?`<div class="spec"><span class="micro">Console</span>${platKey?`<a class="v jp plat-link" href="${blogUrl('tag/platform/'+platKey+'/')}">${esc(pf)}</a>`:`<span class="v jp">${esc(pf)}</span>`}</div>`:''}
+      ${pf?`<div class="spec sp-con"><span class="micro">Console</span>${platKey?`<a class="v jp plat-link" href="${blogUrl('tag/platform/'+platKey+'/')}">${esc(pf)}</a>`:`<span class="v jp">${esc(pf)}</span>`}</div>`:''}
       ${pubs.length?`<div class="spec"><span class="micro">Publisher</span><span class="v">${esc(pubShow)}</span></div>`:''}
       ${yr?`<div class="spec"><span class="micro">Released</span><span class="v">${esc(yr)}</span></div>`:''}
     </div>`:''}
@@ -4525,7 +4661,7 @@ function card(r,idx){
           :enKind?`<span class="micro plain ro-k">Unofficial English name <span class="ro-note">&middot; ${enKind==='p'?'used later by the publisher; never released in English':'fan name'}</span></span>`
           :EN_KIND_READY?`<span class="micro plain">English</span>`:`<span class="micro plain">Title in Latin letters</span>`}
         <div class="title-row">${listBtn}<div class="en-title${enKind==='r'?' ro-title" lang="ja-Latn':''}">${esc(en)}</div></div>
-        ${AMBIG_EN.has(strong(en)) && !byBarcode?`<div class="cap">This English name covers more than one Japanese release. Check the Japanese title and the code below.</div>`:''}
+        ${AMBIG_EN.has(strong(en)) && !byBarcode?`<div class="cap">This English name covers more than one Japanese release. Check the Japanese title and the code below.</div><div class="cm-ambig">${esc(cmText('ambig'))}</div>`:''}
       </div>`:''}
       <div class="field">
         ${hideJa?'':`<span class="micro plain">Japanese reading</span>`}
@@ -4540,7 +4676,7 @@ function card(r,idx){
     ${(!r[12] && LOC!=='jp') ? buyBlock(buyKeys)+rakSlot : ''}
 
     <!-- 型番（2026-10-19: 購入ブロックの下から見出しのすぐ下へ移した。「これで合っているか」を箱と見比べる一番の手がかり）。 -->
-    ${codes.length?`<div class="field">
+    ${codes.length?`<div class="field cm-code">
       <span class="micro plain">Product code &middot; exact match</span>
       <div class="jp-copy-row">
         <div class="jp-chip"><span class="code">${codeShow}</span></div>
@@ -4563,10 +4699,11 @@ function card(r,idx){
       <button class="genre-link" type="button">Find by genre &amp; condition guide</button>
       <a class="cond-link" href="${blogUrl('2026-09-16-glossary-condition-rank.html')}">What the condition words on a label mean (ランクB · 美品 · 未開封) &rarr;</a>
       <span class="micro plain instore-head">Need help or paying?</span>
-      <button class="btn-clerk" type="button" data-clerk="${idx}">Show to shop staff</button>
+      <button class="btn-clerk" type="button" data-clerk="${idx}">Show to shop staff</button>${cmBtn}
     </div>`}
 
-    ${regionUp ? '' : langNeedNote(r)+regionNote(r,{noText:!!langNeedNote(r)})}
+    ${regionUp ? '' : langNeedNote(r)+regionNote(r,{noText:!!langNeedNote(r)})+`<div class="cm-rb">${regionNote(r,{noText:!!langNeedNote(r),short:true,bare:true})}</div>`}
+    ${r[12] ? cmBtn : ''}
 
     <hr class="div">
 
@@ -4574,7 +4711,7 @@ function card(r,idx){
 
 
 
-    ${noCode?`<div>
+    ${noCode?`<div class="cm-slab">
       <div class="slab">
         <span class="reg" aria-hidden="true"></span>
         <div class="slab-main">
@@ -5847,7 +5984,7 @@ results.addEventListener('click', e=>{
   const btn = e.target.closest('[data-clerk]');
   if(!btn) return;
   const row = current[+btn.dataset.clerk];
-  if(row) clerkOpen(row);
+  if(row){ cmTrack('clerk_open', row); clerkOpen(row); }
 });
 
 /* ジャンル早見表。
@@ -6733,7 +6870,8 @@ buildSearchIndex();
     if(!stuck || open) return false;
     var vw = document.documentElement.clientWidth, vh = window.innerHeight;
     var L = vw - 12 - 56 - 8, T = vh - 12 - 56 - 8;   // #recallBtn の位置＋8px（安全域は足さない＝少し狭めに見る）
-    var els = document.querySelectorAll('#results .card .region-up');
+    // 2026-11-06（card-compact）: スマホのカードの「More details」（右下に来やすい）も同じ扱いにする。パソコン幅では出ない（高さ0）＝当たらない。
+    var els = document.querySelectorAll('#results .card .region-up, #results .card .cm-toggle');
     for(var i = 0; i < els.length; i++){
       var r = els[i].getBoundingClientRect();
       if(r.bottom > T && r.top < vh && r.right > L) return true;
