@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Thu, 05 Nov 2026 06:24:32 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 05 Nov 2026 06:35:37 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Thor en Sega Saturn: el juego de 1996 que siguió a The Story of Thor, su código GS-9053</title>
+      <link>https://gamekataban.com/blog/es/2026-11-07-thor-legend-of-oasis-sega-saturn-gs-9053.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-11-07-thor-legend-of-oasis-sega-saturn-gs-9053.html</guid>
+      <description>Thor, el RPG de acción de 1996 para Saturn conocido fuera de Japón como The Legend of Oasis, siguió a The Story of Thor de Mega Drive — y luego nada lo siguió. El código es GS-9053. Cómo se relacionan los dos juegos, cómo distinguir el disco japonés de los occidentales y qué búsqueda lo halla en cada tienda.</description>
+      <pubDate>Sat, 07 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Magic Knight Rayearth en Sega Saturn: el RPG de anime de Sega de 1995, sus códigos GS-9058 y GS-9018</title>
       <link>https://gamekataban.com/blog/es/2026-11-06-magic-knight-rayearth-sega-saturn-gs-9058.html</link>
