@@ -140,7 +140,7 @@ window.KB_SHOP=(function(){
   const BUYEE_MAINT=false;  // 2026-10-25 メンテ明け（Buyee 公式 10/24 再開）
   const BUYEE_MAINT_MSG={en:'Buyee is currently down for maintenance. Please try eBay or the other links.',zh:'Buyee 目前正在維護中。也請試試 eBay 等其他連結。',ko:'Buyee는 현재 점검 중입니다. eBay 등 다른 링크도 이용해 보세요.',es:'Buyee está en mantenimiento en este momento. Prueba también eBay u otros enlaces.',de:'Buyee wird derzeit gewartet. Bitte versuchen Sie es auch über eBay oder die anderen Links.',fr:'Buyee est actuellement en maintenance. Essayez aussi eBay ou les autres liens.'};
   //   kw・region: 文中の「eBay」を eBay 検索のリンクにする（card の kwEbayMaint・ebayRegionMaint。0件の画面は探した型番）。kw が空ならリンクなし。
-  const maintNote=(kw,region)=>{ if(!BUYEE_MAINT) return ''; let l='en'; try{ l=blogLang(); }catch(e){}
+  const maintNote=(kw,region)=>{ if(!BUYEE_MAINT) return ''; const l='en';  // 2026-11-07: 店ボタンと同じく英語に固定
     const t=(BUYEE_MAINT_MSG[l]||BUYEE_MAINT_MSG.en).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
     const h=kw?t.replace('eBay',`<a class="note-link" target="_blank" rel="sponsored nofollow noopener" href="https://www.ebay.com/sch/i.html?_nkw=${kw}${region||''}&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0&amp;campid=5339175838&amp;customid=&amp;toolid=10001&amp;mkevt=1">eBay</a>`):t;
     return `<div class="buyee-note buyee-maint" role="note" style="color:var(--rare)">&#9888; ${h}</div>`; };
@@ -365,7 +365,9 @@ window.KB_SHOP=(function(){
     fr:{buyee:'Chercher sur Buyee (site en anglais)',ebay:'Chercher sur eBay',sgcom:'Chercher sur Suruga-ya.com',sgtitle:'Chercher sur Suruga-ya.jp par titre',sgcode:'Chercher sur Suruga-ya.jp par code',bo:'Chercher sur Book-Off',ho:'Chercher sur Hard-Off',
       jpNote:'Site japonais, livraison au Japon uniquement &mdash; utilisez {b} pour le recevoir à l\u2019étranger',pairNote:'Sites japonais, livraison au Japon uniquement &mdash; il faut un service proxy pour le recevoir à l\u2019étranger',rakShip:'Livraison au Japon uniquement'}
   };
-  const T=()=>TEXT[lang()]||TEXT.en;
+  // 2026-11-07（案A・こはさん決定）: 検索画面の店ボタンと発送の注記は英語に固定する（画面のほかの文言が英語のため）。
+  //   lang() はブログへの行き先・店員画面の訳などで使うので残す。ほかの言語の TEXT は記事側に揃える時のために残す。
+  const T=()=>TEXT.en;
   function locRead(){
     try{ const u=new URLSearchParams(location.search).get('loc'); if(u==='jp'||u==='out') return u; }catch(e){}
     try{ const s=localStorage.getItem('kataban_loc'); if(s==='jp'||s==='out') return s; }catch(e){}
@@ -4431,14 +4433,15 @@ const CM_AMBIG = {
   fr: 'Nom partagé : vérifiez titre japonais et code'
 };
 const CM_OPEN = new WeakSet();
-function cmLabel(open){ const t = CM_LABEL[blogLang()] || CM_LABEL.en; return open ? t[1] : t[0]; }
+// 2026-11-07（案A）: More details と閉じた形の注記は英語に固定（店ボタンと同じ）。
+function cmLabel(open){ const t = CM_LABEL.en; return open ? t[1] : t[0]; }
 /* GA4 のイベント（2026-11-06・card-compact）: clerk_open（Show to shop staff）・card_expand（閉じた形で More details を開いた）。
    パラメータは loc（out＝海外 / jp＝国内）と platform（DATA の row[2]＝機種の英語名）。
    gtag は <head> の先頭で定義済み（GA のタグを読む前は dataLayer に積まれ、読んだときに送られる）。無い・失敗しても押した動作は止めない。 */
 function cmTrack(name, r){
   try{ if(typeof gtag === 'function') gtag('event', name, { loc: LOC, platform: (r && r[2]) || '' }); }catch(e){}
 }
-function cmText(k){ const l = blogLang(); return k === 'ambig' ? (CM_AMBIG[l] || CM_AMBIG.en) : ''; }
+function cmText(k){ return k === 'ambig' ? CM_AMBIG.en : ''; }
 results.addEventListener('click', e=>{
   const b = e.target.closest('.cm-toggle'); if(!b) return;
   const c = b.closest('.card'); const r = current[[...results.querySelectorAll(':scope > article.card')].indexOf(c)];
