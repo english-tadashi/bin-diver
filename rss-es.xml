@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Thu, 05 Nov 2026 06:35:37 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 07 Nov 2026 08:14:28 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Fighters Megamix en Sega Saturn: el crossover de 1996 de AM2 entre Virtua Fighter 2 y Fighting Vipers, su código GS-9126</title>
+      <link>https://gamekataban.com/blog/es/2026-11-08-fighters-megamix-sega-saturn-gs-9126.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-11-08-fighters-megamix-sega-saturn-gs-9126.html</guid>
+      <description>Fighters Megamix, de Sega AM2, reunió en 1996 a los luchadores de Virtua Fighter 2 y Fighting Vipers en un juego de Saturn, y luego nada se hizo a partir de él. El código es GS-9126. Cómo lo describen las fuentes, cómo distinguir el disco japonés de los occidentales de 1997 y dónde buscarlo en cada tienda.</description>
+      <pubDate>Sun, 08 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Thor en Sega Saturn: el juego de 1996 que siguió a The Story of Thor, su código GS-9053</title>
       <link>https://gamekataban.com/blog/es/2026-11-07-thor-legend-of-oasis-sega-saturn-gs-9053.html</link>

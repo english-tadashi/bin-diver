@@ -5,8 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Thu, 05 Nov 2026 06:35:37 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 07 Nov 2026 08:14:28 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Fighters Megamix on Sega Saturn: AM2’s 1996 Crossover of Virtua Fighter 2 and Fighting Vipers, Its Code GS-9126, and Why There Was Never a Second Mix</title>
+      <link>https://gamekataban.com/blog/2026-11-08-fighters-megamix-sega-saturn-gs-9126.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-11-08-fighters-megamix-sega-saturn-gs-9126.html</guid>
+      <description>Sega AM2’s Fighters Megamix put the casts of Virtua Fighter 2 and Fighting Vipers in one Saturn game in 1996, and nothing was ever built from it in turn. The code is GS-9126. Here is how the sources describe the mix, how to tell the Japanese disc from the 1997 Western ones, and where to search.</description>
+      <pubDate>Sun, 08 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Thor on Sega Saturn: The 1996 Follow-up to The Story of Thor, Its Code GS-9053, and Why the Golden Armlet Stopped at Two Games</title>
