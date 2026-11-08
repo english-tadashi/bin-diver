@@ -334,6 +334,31 @@
   function gtag() { dataLayer.push(arguments); }
   gtag("js", new Date());
   gtag("config", "G-SK6R4YH7VD");
+  // 2026-11-08: 記事などの店のリンクのタップで store_click を送る（それまでは GA の自動の click だけで、どの店か分からなかった）。
+  //   店の名前は index.html の head の STORES と一字違わず同じにする（GA4 の「店の名前」で同じ行に集まるように）。
+  //   Mandarake・Yahoo Shopping はブログにだけある店（トップには無い）。index.html は kataban.js を読まないので2回は送らない。
+  //   link_type: rel に sponsored があれば 'buy'（購入リンク）、無ければ 'info'（ヘルプ・買取ページ・案内など）。
+  //   gtag は dataLayer に積むだけなので、gtag.js が読めない・オプトアウトでもエラーにならない。全体を try で包む。
+  (function () {
+    var STORES = [[/(^|\.)i0c\.xyz$|(^|\.)buyee\.jp$/, "Buyee"], [/(^|\.)ebay\.com$/, "eBay"], [/(^|\.)suruga-ya\.com$/, "Suruga-ya.com"], [/(^|\.)suruga-ya\.jp$/, "Suruga-ya.jp"],
+      [/(^|\.)rakuten\.co\.jp$/, "Rakuten"], [/(^|\.)bookoff\.co\.jp$/, "Book-Off"], [/(^|\.)hardoff\.co\.jp$/, "Hard-Off"],
+      [/(^|\.)mandarake\.co\.jp$/, "Mandarake"], [/(^|\.)shopping\.yahoo\.co\.jp$/, "Yahoo Shopping"]];
+    function onClick(e) {
+      try {
+        var a = e.target && e.target.closest && e.target.closest("a[href]");
+        if (!a) return;
+        for (var i = 0; i < STORES.length; i++) {
+          if (STORES[i][0].test(a.hostname)) {
+            var buy = /(^|\s)sponsored(\s|$)/i.test(a.getAttribute("rel") || "");
+            gtag("event", "store_click", { store: STORES[i][1], link_url: a.href, link_type: buy ? "buy" : "info", transport_type: "beacon" });
+            return;
+          }
+        }
+      } catch (x) { /* 送れないだけ。リンクの動作は止めない */ }
+    }
+    document.addEventListener("click", onClick, true);
+    document.addEventListener("auxclick", onClick, true);
+  })();
   function load() {
     var gt = document.createElement("script");
     gt.async = true;
