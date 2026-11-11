@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Tue, 10 Nov 2026 07:09:22 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 11 Nov 2026 07:27:11 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Burning Rangers en Sega Saturn: el juego de bomberos de 1998 de Sonic Team, su código GS-9174</title>
+      <link>https://gamekataban.com/blog/es/2026-11-12-burning-rangers-sega-saturn-gs-9174.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-11-12-burning-rangers-sega-saturn-gs-9174.html</guid>
+      <description>Burning Rangers, el juego de 1998 de Sonic Team para Saturn sobre bomberos del futuro, nunca tuvo secuela; su idea online pasó a Phantasy Star Online. El código es GS-9174 y la caja trae un CD con la canción principal. Aquí, cómo distinguirlo de la demo, dónde buscar y un repaso a los siete juegos.</description>
+      <pubDate>Thu, 12 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Machi en Sega Saturn: la novela sonora de 1998 de Chunsoft, su código T-34001G</title>
       <link>https://gamekataban.com/blog/es/2026-11-11-machi-sega-saturn-t-34001g.html</link>
