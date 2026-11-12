@@ -1419,6 +1419,21 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card .region{display:flex; align-items:flex-start; gap:9px; font:400 12.5px/1.45 var(--f-display); color:var(--ink-2);}
 .card .region .tick{flex-shrink:0; width:6px; height:6px; margin-top:6px; background:var(--ink-2); border-radius:1px;}
 .card .region .t{min-width:0;}
+/* 北米・欧州の札（2026-11-11・region-badge）。色だけに頼らず記号と文字を必ず出す。紫（--signal・--accent）は使わない。
+   ○ 緑／△ 黄（is-guess と同じ #e6b800）／✕ 赤み（--danger は SCAN 専用なので明るい別色）／~ グレー（Varies by game）。札の中では折らない。 */
+.card .region.rg{display:block;}
+.card .region.rg .region-more{margin:2px 0 0;}
+.card .rchips{display:flex; flex-wrap:wrap; gap:6px 8px;}
+.card .rchip{display:inline-flex; align-items:baseline; gap:6px; max-width:100%; padding:5px 10px; border:1px solid var(--edge-input); border-radius:999px;
+  font:400 12.5px/1.3 var(--f-display); color:var(--ink-2); white-space:nowrap;}
+.card .rchip .rs{font-weight:700;}
+.card .rchip .rv{font-weight:600; color:var(--ink);}
+.card .rchip.t-o .rs{color:#4ade80;}
+.card .rchip.t-a .rs{color:#e6b800;}
+.card .rchip.t-x .rs{color:#ff7a7a;}
+.card .rchip.t-v{border-style:dashed;}
+.card .rchip.t-v .rs, .card .rchip.t-v .rv{color:var(--muted);}
+
 .card .region b{font-weight:600; color:var(--ink);}
 /* 配信専用の注記だけ、地色で帯にする。棚にも本体にも話が及ばない＝他と種類が違う注記なので、
    読み飛ばされると「探しに行って無い」が起きる。
@@ -3585,14 +3600,17 @@ year.innerHTML = '<option value="All">All years</option>' +
 //           ★つなぎ（2026-09-28）。媒体の列を DATA に足したら（region-media ブランチ）媒体ごとの注記に分ける。
 //           出典: PCE CD はリージョンなし（nicole.express・Wikipedia TurboDuo）、メガCD はリージョンあり（SDA KB・ConsoleMods）、
 //           ディスクシステムは日本と香港だけ（Wikipedia・FamiWiki）、32X は本体側の判定で作品による（SDA KB〔Unconfirmed〕・AtariAge）。
-// Xbox 360 は「タイトルごとに発行元がロックを選ぶ」ので、表に入れないのが正しい。
-// Neo Geo(AES) / Neo Geo CD / 3DO / Virtual Boy は未確認なので入れない。
+// ★2026-11-11（region-badge・こはさん決定）: 北米・欧州の札（REGION_TIER）を足した。理由の文はこの表のまま More に入る。
+//   adapter : 北米・欧州の本体では変換アダプタ・コンバーターカートリッジが要る（12/5 早見表の Adapter needed）。e[2] が理由
+//   var     : タイトルごとに発売元が地域を選ぶ（Xbox・Xbox 360）。e[2] が理由
+//   Super Famicom・Nintendo 64・Sega Saturn は lock → adapter（早見表に合わせた）。Xbox は lock → var。
+//   Neo Geo(AES)・Neo Geo CD・3DO・Virtual Boy は出典が2つそろったので free で足した（出典は REGION_TIER の上）。
 // ★機種を足したら、ここに1行足すか、足さずに neutral のまま出すか。放置しても嘘にはならない。
 // ============================================================
 const REGION = {
   'Famicom':        ['mixed','','<b>carts need an adapter</b> on an NES; disk games need a Disk System, never sold in the West','Carts need an NES adapter; disk games a Disk System'],
-  'Super Famicom':  ['lock','a Japanese Super Famicom','Super Famicom cartridges are region-locked and shaped differently from a US SNES'],
-  'Nintendo 64':    ['lock','a Japanese Nintendo 64','the cartridge slot is keyed differently and the console is region-locked'],
+  'Super Famicom':  ['adapter','','two tabs in the North American slot block the cartridge, and a lockout chip blocks it on European consoles; a few games add their own check'],
+  'Nintendo 64':    ['adapter','','each region’s cartridges have different notches on the back, the same kind of lock as the Super NES'],
   '64DD':           ['lock','a Japanese Nintendo 64 with a 64DD','the 64DD was never released outside Japan'],
   'GameCube':       ['lock','a Japanese GameCube','GameCube discs are region-locked'],
   'Wii':            ['lock','a Japanese Wii','Wii discs are region-locked'],
@@ -3602,17 +3620,18 @@ const REGION = {
   'PC-FX':          ['lock','a Japanese PC-FX','the PC-FX was never released outside Japan'],
   'Mega Drive':     ['mixed','','<b>carts need an adapter</b> on a US Genesis; Mega-CD and some 32X games are region-locked','Carts need a Genesis adapter; Mega-CD is region-locked'],
   'Sega Mark III':  ['lock','a Japanese Mark III','Mark III cartridges do not fit a Master System'],
-  'Sega Saturn':    ['lock','a Japanese Saturn','Saturn discs are region-locked'],
+  'Sega Saturn':    ['adapter','','Saturn discs are region-locked; a converter cartridge gets around it, but the language does not change'],
   'Dreamcast':      ['lock','a Japanese Dreamcast','Dreamcast discs are region-locked'],
   'PlayStation':    ['lock','a Japanese PlayStation','PS1 discs are region-locked'],
   'PlayStation 2':  ['lock','a Japanese PlayStation 2','PS2 discs are region-locked'],
-  'Xbox':           ['lock','a Japanese Xbox','original Xbox discs are region-locked'],
+  'Xbox':           ['var','','each publisher chose the regions its original Xbox disc runs in'],
+  'Xbox 360':       ['var','','each publisher chose the regions its Xbox 360 disc runs in'],
   'Game Boy':          ['free','Game Boy','Game Boy cartridges are region-free'],
   'Game Boy Advance':  ['free','Game Boy Advance','GBA cartridges are region-free'],
   'Game Gear':         ['free','Game Gear','Game Gear cartridges are region-free'],
   'WonderSwan':        ['free','WonderSwan','the WonderSwan was Japan-only, so every unit plays it'],
   'Neo Geo Pocket':    ['free','Neo Geo Pocket','Neo Geo Pocket cartridges are region-free'],
-  'Nintendo DS':       ['free','Nintendo DS','DS cartridges are region-free'],
+  'Nintendo DS':       ['free','Nintendo DS','DS cartridges are region-free, except software made only for the DSi'],
   'PSP':               ['free','PSP','UMDs are region-free'],
   'PlayStation Vita':  ['free','PS Vita','Vita cards are region-free'],
   'PlayStation 3':     ['free','PlayStation 3','PS3 discs are region-free'],
@@ -3620,7 +3639,48 @@ const REGION = {
   'PlayStation 5':     ['free','PlayStation 5','PS5 discs are region-free'],
   'Nintendo Switch':   ['free','Switch','Switch cartridges are region-free'],
   'Xbox One':          ['free','Xbox One','Xbox One discs are region-free'],
+  'Neo Geo':           ['free','Neo Geo (AES)','Neo Geo cartridges are region-free and the same shape everywhere'],
+  'Neo Geo CD':        ['free','Neo Geo CD','Neo Geo CD discs are region-free; some games switch language with the console'],
+  '3DO':               ['free','3DO','3DO discs are region-free, though a few Japanese games need a kanji font only Japanese consoles have'],
+  'Virtual Boy':       ['free','Virtual Boy','Virtual Boy cartridges are region-free; the console was sold only in Japan and North America'],
 };
+// 北米・欧州の本体で動くかの札（2026-11-11・region-badge・こはさん決定）。値は「北米 欧州」の2文字。
+//   o＝そのまま動く／a＝変換アダプタが要る／x＝売っているままでは動かない（改造・起動ディスクが要る）／v＝タイトルによる（グレー）／-＝札を出さない。
+//   出典は 12/5 早見表（blog/2026-99-99-japanese-games-region-lock-chart.html・各行2出典・10/30 確認）＋ en Wikipedia「Region lock」revid 1384605268（11/11 確認）。
+//   早見表に無い機種の2つ目: Neo Geo CD・Virtual Boy・Xbox One は en の各機種ページ（Regionless 分類と本文）、3DO は en「3DO」、Xbox・Xbox 360 は ja「リージョンコード」（一部作品）。
+//   札を出さないもの（文は REGION のまま）: 出典が1つの組み合わせ（ファミコン・PCエンジンの欧州、Mark III）、その地域で本体が売られていない（64DD・PC-FX・ワンダースワン・Virtual Boy の欧州）、
+//   DATA で媒体が分からず段階が割れる（ファミコン＝カセット△とディスク不可、PCエンジン＝HuCard△と CD○）。
+//   配信版（row[12]）は札を出さない（要るのは日本のストアアカウント）。
+const REGION_TIER = {
+  'Super Famicom':'aa', 'Nintendo 64':'aa', 'Mega Drive':'aa', 'Sega Saturn':'aa',
+  'Nintendo 3DS':'xx', 'GameCube':'xx', 'Wii':'xx', 'Wii U':'xx', 'Dreamcast':'xx', 'PlayStation':'xx', 'PlayStation 2':'xx',
+  'Game Boy':'oo', 'Game Boy Advance':'oo', 'Nintendo DS':'oo', 'Nintendo Switch':'oo', 'Game Gear':'oo',
+  'Neo Geo':'oo', 'Neo Geo CD':'oo', 'Neo Geo Pocket':'oo', '3DO':'oo', 'Virtual Boy':'o-',
+  'PlayStation 3':'oo', 'PlayStation 4':'oo', 'PlayStation 5':'oo', 'PSP':'oo', 'PlayStation Vita':'oo', 'Xbox One':'oo',
+  'Xbox':'vv', 'Xbox 360':'vv',
+};
+// 札の文言（6言語）。o・a は 12/5 早見表の各言語版の段階名と同じ。x・v は新しい語（11/11）。言語は blogLang() と同じ判定（KB_SHOP.lang）。
+const REGION_L10N = {
+  en:{na:'North America', eu:'Europe', o:'Works as is', a:'Adapter needed', x:'Won\u2019t run as sold', v:'Varies by game'},
+  zh:{na:'北美', eu:'歐洲', o:'直接可用', a:'需要轉接器', x:'原廠主機無法執行', v:'依遊戲而異', lang:'zh-Hant'},
+  ko:{na:'북미', eu:'유럽', o:'그대로 작동', a:'어댑터 필요', x:'판매 상태로는 작동 안 함', v:'게임마다 다름', lang:'ko'},
+  es:{na:'Norteamérica', eu:'Europa', o:'Funciona tal cual', a:'Necesita adaptador', x:'No funciona de serie', v:'Depende del juego', lang:'es'},
+  de:{na:'Nordamerika', eu:'Europa', o:'Läuft so', a:'Adapter nötig', x:'Läuft ab Werk nicht', v:'Je nach Spiel', lang:'de'},
+  fr:{na:'Amérique du Nord', eu:'Europe', o:'Fonctionne tel quel', a:'Adaptateur nécessaire', x:'Ne fonctionne pas d\u2019origine', v:'Selon le jeu', lang:'fr'},
+};
+const REGION_SYM = { o:'\u25CB', a:'\u25B3', x:'\u2715', v:'~' };
+// 札の列の HTML。札が1枚も無い機種は ''（呼び出し側は今までの1文に戻る）。
+function regionChips(pf){
+  const tier = Object.hasOwn(REGION_TIER, pf) ? REGION_TIER[pf] : '';
+  if(!tier) return '';
+  const L = REGION_L10N[KB_SHOP.lang()] || REGION_L10N.en;
+  const la = L.lang ? ` lang="${L.lang}"` : '';
+  const chip = (k, c) => (c && c !== '-')
+    ? `<span class="rchip t-${c}"><span class="rs" aria-hidden="true">${REGION_SYM[c]}</span><span class="rk">${esc(L[k])}</span><span class="rv">${esc(L[c])}</span></span>`
+    : '';
+  const h = chip('na', tier[0]) + chip('eu', tier[1]);
+  return h ? `<div class="rchips"${la}>${h}</div>` : '';
+}
 // 日本語なしで遊べるか（R17・2026-11-03）。links.json の n にある行だけ。外部の2出典が揃った作品だけで、無い行は何も出さない。
 const LANG_NEED = { play:'No Japanese needed', menus:'Some menus to learn', text:'Text-heavy: needs Japanese' };
 function langNeedNote(r){
@@ -3650,10 +3710,23 @@ function regionNote(r, o={}){
   } else if(e && e[0]==='free'){
     txt = `Japanese release — plays on <b>any ${esc(e[1])}</b>: ${esc(e[2])}.`;
     brief = `Plays on <b>any ${esc(e[1])}</b>.`;
+  } else if(e && e[0]==='adapter'){
+    txt = `Japanese release — needs <b>an adapter</b> on a North American or European console: ${esc(e[2])}.`;
+    brief = `Needs <b>an adapter</b> outside Japan.`;
+  } else if(e && e[0]==='var'){
+    txt = `Japanese release — whether it runs outside Japan <b>varies by game</b>: ${esc(e[2])}.`;
+    brief = `Region lock <b>varies by game</b>.`;
   } else {
     // 未収載。常に真のことだけ言う。
     return `<div class="region"><span class="tick" aria-hidden="true"></span><span class="t">`
       + `Japanese release —${o.noText?'':` the game's text is Japanese.`} <b>Check region compatibility</b> for your ${esc(pf)} before buying.</span></div>`;
+  }
+  // 2026-11-11（region-badge・案A）: 札がある機種は、今までの1文を北米・欧州の札に置き換え、理由の文（txt）は More に入れる。
+  //   1つの要素に包む（スマホのカードは子要素ごとに order で並べ替えるので、札と More が離れないように）。bare は札だけ。
+  const chips = regionChips(pf);
+  if(chips){
+    if(o.bare) return chips;
+    return `<div class="region rg">${chips}<details class="region-more"><summary>More</summary><div class="t">${txt}${lang}</div></details></div>`;
   }
   const line = (o.short ? brief : txt) + lang;
   return `<div class="region"><span class="tick" aria-hidden="true"></span><span class="t">${line}</span></div>`
