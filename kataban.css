@@ -448,8 +448,16 @@ a.pagenav-item:focus-visible{ outline:3px solid var(--accent); outline-offset:2p
    （無いとページ全体が基準になり、横スワイプ欄の外へはみ出してページが横に伸びる。.tagchips a で実測）。 */
 .vh{ position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden;
   clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; border:0; }
-.tagfinder-all{ margin:4px 0 0; font-size:12px; }
-.tagfinder-all a{ color:var(--tag); }
+/* 全タグ一覧への導線。★2026-11-12: 小さな文字リンクで見落とされるので、シアン枠のボタンにして目立たせる（こはさん指示）。
+   タグボタン（灰色の枠）と区別するため、枠・文字ともシアン、太字、少し大きく。hover で塗りつぶす。 */
+.tagfinder-all{ margin:14px 0 4px; }
+.tagfinder-all a{ display:inline-flex; align-items:center; gap:8px; padding:9px 16px;
+  border:2px solid var(--tag); background:rgba(17,238,255,.08); color:var(--tag); text-decoration:none;
+  font-family:"Space Mono","IBM Plex Sans JP",ui-monospace,monospace; font-size:14px; font-weight:700; line-height:1.3;
+  transition:background-color .12s,color .12s; }
+.tagfinder-all a:hover,.tagfinder-all a:focus{ background:var(--tag); color:var(--paper); outline:none; }
+.tagfinder-all a:focus-visible{ outline:3px solid var(--accent); outline-offset:2px; }
+@media (max-width:640px){ .tagfinder-all a{ display:flex; justify-content:center; } }
 .tagindex{ margin:26px 0 0; }
 .tagindex .tagrow{ padding:14px 0; margin:0; border-top:1px solid var(--line); }
 .tagindex .tagrow:last-child{ border-bottom:1px solid var(--line); }
