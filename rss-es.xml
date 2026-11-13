@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Thu, 12 Nov 2026 07:15:04 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 13 Nov 2026 07:44:43 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Twinkle Tale en Mega Drive: el único juego de Wonder Amusement Studio, su código T-61013</title>
+      <link>https://gamekataban.com/blog/es/2026-11-14-twinkle-tale-mega-drive-t-61013.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-11-14-twinkle-tale-mega-drive-t-61013.html</guid>
+      <description>Twinkle Tale, un juego de disparos de Mega Drive de 1992 sobre una joven maga, fue el único juego que lanzó su editor y nunca tuvo segunda parte. Su código es T-61013 y nunca se vendió fuera de Japón. Cómo distinguirlo de las reproducciones traducidas por fans, y qué búsqueda lo encuentra en cada tienda.</description>
+      <pubDate>Sat, 14 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Alisia Dragoon en Mega Drive: el juego de acción con rayos de Game Arts de 1992, su código T-45033</title>
       <link>https://gamekataban.com/blog/es/2026-11-13-alisia-dragoon-mega-drive-t-45033.html</link>
