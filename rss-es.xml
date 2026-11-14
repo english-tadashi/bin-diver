@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Fri, 13 Nov 2026 07:44:43 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 14 Nov 2026 07:42:27 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Eliminate Down en Mega Drive: el único juego de Aprinet, su código T-73033</title>
+      <link>https://gamekataban.com/blog/es/2026-11-15-eliminate-down-mega-drive-t-73033.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-11-15-eliminate-down-mega-drive-t-73033.html</guid>
+      <description>Eliminate Down, un juego de disparos de Mega Drive de 1993 de Soft Vision, fue el único juego que hizo su desarrollador, Aprinet, y nunca tuvo segunda parte. El cartucho japonés es el T-73033. Cómo distinguirlo de la reedición de Retro-Bit y de la versión coreana, y qué búsqueda lo encuentra en cada tienda.</description>
+      <pubDate>Sun, 15 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Twinkle Tale en Mega Drive: el único juego de Wonder Amusement Studio, su código T-61013</title>
       <link>https://gamekataban.com/blog/es/2026-11-14-twinkle-tale-mega-drive-t-61013.html</link>
