@@ -105,6 +105,16 @@
 
       <div class="prose">
         <p>Book-Off나 Suruga-ya 같은 일본 레트로 게임 매장을 둘러본 적이 있다면, <span class="jp">ジャンク</span>("정크")라고 적힌 선반이나 상자를 본 적이 있을 겁니다. 그냥 지나치고 싶겠지만, 이 한 단어를 이해하면 돈을 아낄 수도 있고 잘못된 구매를 피할 수도 있습니다.</p>
+        <!-- 2026-11-14: 記事内の検索欄（読者が今見ているゲームをその場で検索）。src=glossary で GA4 の page_location から数える -->
+        <form class="cta" action="/" method="get" role="search" style="margin:0 0 18px;padding:18px 16px;text-align:left">
+          <p style="margin:0 0 12px">스루가야·Buyee·메루카리에서 보고 있는 게임이 있나요? 상품명에 있는 <b>일본어 게임 이름</b>이나 카트리지·디스크에 적힌 <b>코드</b>(예: <code style="white-space:nowrap">DMG-KYJ</code>)를 여기에 붙여 넣으면, Kataban이 정식 일본어 이름과 코드, 그리고 살 수 있는 가게 링크를 알려 줍니다.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:stretch">
+            <input type="search" name="q" required aria-label="게임 이름 또는 코드" placeholder="예: 星のカービィ" autocomplete="off" style="flex:1 1 200px;min-width:0;padding:12px 14px;font-size:16px;border:2px solid var(--edge);background:rgba(0,0,0,.35);color:#ffffff;border-radius:0">
+            <input type="hidden" name="src" value="glossary">
+            <button class="ctabtn" type="submit" style="cursor:pointer">검색</button>
+          </div>
+          <p style="margin:10px 0 0;font-size:13px">한국어 제목으로는 아직 검색되지 않습니다. 일본어나 영어 제목으로 검색해 주세요.</p>
+        </form>
 
         <h2>"고장났다"는 뜻이 아닙니다</h2>
         <p>영어에서 "junk"는 보통 쓰레기를 뜻합니다. 일본 중고 매장에서 <span class="jp">ジャンク</span>는 더 좁은 의미를 가집니다: 상품이 현 상태 그대로 판매되며, 작동을 보증하지 않는다는 뜻입니다. 완벽하게 작동할 수도 있습니다. 안 될 수도 있습니다. 매장은 그저 테스트를 하지 않고 어느 쪽으로도 보장을 하지 않는 것뿐이며, 가격에도 이 점이 반영됩니다.</p>

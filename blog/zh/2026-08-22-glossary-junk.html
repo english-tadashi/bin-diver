@@ -105,6 +105,16 @@
 
       <div class="prose">
         <p>如果你逛過 Book-Off 或 Suruga-ya 這類日本復古遊戲店，應該看過標著<span class="jp">ジャンク</span>（"Junk"）的架子或箱子。很容易就直接跳過——但搞懂這一個詞，可以幫你省錢，也能幫你避開一次失敗的購買。</p>
+        <!-- 2026-11-14: 記事内の検索欄（読者が今見ているゲームをその場で検索）。src=glossary で GA4 の page_location から数える -->
+        <form class="cta" action="/" method="get" role="search" style="margin:0 0 18px;padding:18px 16px;text-align:left">
+          <p style="margin:0 0 12px">正在駿河屋、Buyee 或 Mercari 看某款遊戲嗎？把商品名稱裡的<b>日文遊戲名稱</b>或卡帶、光碟上的<b>編號</b>（例如 <code style="white-space:nowrap">DMG-KYJ</code>）貼到這裡，Kataban 會告訴你正式的日文名稱、編號，以及可以購買的商店連結。</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:stretch">
+            <input type="search" name="q" required aria-label="遊戲名稱或編號" placeholder="例：星のカービィ" autocomplete="off" style="flex:1 1 200px;min-width:0;padding:12px 14px;font-size:16px;border:2px solid var(--edge);background:rgba(0,0,0,.35);color:#ffffff;border-radius:0">
+            <input type="hidden" name="src" value="glossary">
+            <button class="ctabtn" type="submit" style="cursor:pointer">搜尋</button>
+          </div>
+          <p style="margin:10px 0 0;font-size:13px">中文名稱目前還查不到，請用日文或英文名稱。</p>
+        </form>
 
         <h2>不代表「壞掉」</h2>
         <p>在英文裡，「junk」通常代表垃圾。在日本的二手店裡，<span class="jp">ジャンク</span>的意思比較窄：商品是按現況出售，不保證能用。它可能完全正常。也可能不行。店家單純不做測試，也不對任何一種結果做出保證——價格也因此反映這一點。</p>

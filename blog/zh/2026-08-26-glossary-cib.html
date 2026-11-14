@@ -114,6 +114,16 @@
       <div class="prose">
         <h2>不代表「全新品」</h2>
         <p>CIB 是 Complete In Box 的縮寫，代表卡帶或光碟、原廠外盒、說明書三者齊全。這不代表商品是全新或未拆封 —— CIB 商品的外盒可能有磨損，說明書可能有摺痕。CIB 保證的是「完整」，不是「狀態新舊」。</p>
+        <!-- 2026-11-14: 記事内の検索欄（読者が今見ているゲームをその場で検索）。src=glossary で GA4 の page_location から数える -->
+        <form class="cta" action="/" method="get" role="search" style="margin:0 0 18px;padding:18px 16px;text-align:left">
+          <p style="margin:0 0 12px">正在駿河屋、Buyee 或 Mercari 看某款遊戲嗎？把商品名稱裡的<b>日文遊戲名稱</b>或卡帶、光碟上的<b>編號</b>（例如 <code style="white-space:nowrap">DMG-KYJ</code>）貼到這裡，Kataban 會告訴你正式的日文名稱、編號，以及可以購買的商店連結。</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:stretch">
+            <input type="search" name="q" required aria-label="遊戲名稱或編號" placeholder="例：星のカービィ" autocomplete="off" style="flex:1 1 200px;min-width:0;padding:12px 14px;font-size:16px;border:2px solid var(--edge);background:rgba(0,0,0,.35);color:#ffffff;border-radius:0">
+            <input type="hidden" name="src" value="glossary">
+            <button class="ctabtn" type="submit" style="cursor:pointer">搜尋</button>
+          </div>
+          <p style="margin:10px 0 0;font-size:13px">中文名稱目前還查不到，請用日文或英文名稱。</p>
+        </form>
         <p>收藏家在意這個區別，是因為同一款遊戲，「只有片」（無盒無說明書）和 CIB 版本的價格可能差異很大，即使片子本身的狀態完全一樣。</p>
 
         <h2>為什麼日本特別重視完整性</h2>

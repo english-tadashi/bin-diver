@@ -114,6 +114,16 @@
       <div class="prose">
         <h2>&quot;새 제품&quot;이라는 뜻이 아닙니다</h2>
         <p>CIB는 Complete In Box의 약자로, 카트리지 또는 디스크, 정품 케이스, 설명서가 모두 갖춰진 상태를 뜻합니다. 새 제품이나 미개봉을 의미하지는 않습니다. CIB 상품이라도 케이스에 마모가 있거나 설명서에 접힌 자국이 있을 수 있습니다. CIB가 보증하는 것은 &quot;완전함&quot;이지 &quot;상태&quot;가 아닙니다.</p>
+        <!-- 2026-11-14: 記事内の検索欄（読者が今見ているゲームをその場で検索）。src=glossary で GA4 の page_location から数える -->
+        <form class="cta" action="/" method="get" role="search" style="margin:0 0 18px;padding:18px 16px;text-align:left">
+          <p style="margin:0 0 12px">스루가야·Buyee·메루카리에서 보고 있는 게임이 있나요? 상품명에 있는 <b>일본어 게임 이름</b>이나 카트리지·디스크에 적힌 <b>코드</b>(예: <code style="white-space:nowrap">DMG-KYJ</code>)를 여기에 붙여 넣으면, Kataban이 정식 일본어 이름과 코드, 그리고 살 수 있는 가게 링크를 알려 줍니다.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:stretch">
+            <input type="search" name="q" required aria-label="게임 이름 또는 코드" placeholder="예: 星のカービィ" autocomplete="off" style="flex:1 1 200px;min-width:0;padding:12px 14px;font-size:16px;border:2px solid var(--edge);background:rgba(0,0,0,.35);color:#ffffff;border-radius:0">
+            <input type="hidden" name="src" value="glossary">
+            <button class="ctabtn" type="submit" style="cursor:pointer">검색</button>
+          </div>
+          <p style="margin:10px 0 0;font-size:13px">한국어 제목으로는 아직 검색되지 않습니다. 일본어나 영어 제목으로 검색해 주세요.</p>
+        </form>
         <p>수집가들이 이 구분을 중요하게 여기는 이유는, 같은 게임이라도 &quot;낱개&quot;(케이스·설명서 없음)와 CIB 버전의 가격이 디스크 상태가 동일해도 크게 달라질 수 있기 때문입니다.</p>
 
         <h2>일본에서 완전함이 더 중요한 이유</h2>
