@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>為海外收藏家打造的日本復古遊戲部落格——商店指南、進口教學，以及遊戲背後的故事。</description>
     <language>zh-tw</language>
-    <lastBuildDate>Sun, 15 Nov 2026 06:45:46 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 16 Nov 2026 07:34:01 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-zh.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Mega Drive 版《Dynamite Headdy》：Treasure 1994年的人偶動作遊戲，與它的編號 G-4117</title>
+      <link>https://gamekataban.com/blog/zh/2026-11-17-dynamite-headdy-mega-drive-g-4117.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-11-17-dynamite-headdy-mega-drive-g-4117.html</guid>
+      <description>日版 Mega Drive 卡帶編號 G-4117，Game Gear 版 G-3355。駿河屋搜日文標題「ダイナマイトヘッディー」，Buyee 再加 メガドライブ；用編號會搜到別的商品。</description>
+      <pubDate>Tue, 17 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Mega Drive 版《Pulseman》：GAME FREAK 1994年的動作遊戲，與它的編號 G-4098</title>
       <link>https://gamekataban.com/blog/zh/2026-11-16-pulseman-mega-drive-g-4098.html</link>
@@ -278,7 +285,7 @@
       <title>《空想科學世界》PC Engine 版：雜誌做出來的 RPG、會播賽璐珞動畫的光碟，以及為什麼只有一款</title>
       <link>https://gamekataban.com/blog/zh/2026-10-13-gulliver-boy-pc-engine-hcd5076.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-10-13-gulliver-boy-pc-engine-hcd5076.html</guid>
-      <description>哈德森1995年的 Super CD-ROM² RPG，編號 HCD5076，出自一本雜誌的媒體混合企劃（廣井王子×蘆田豐雄）。HuVIDEO 做了什麼、為什麼靠貿易賺錢，以及為什麼用片假名標題搜尋只會埋在動畫周邊裡。</description>
+      <description>PC Engine 版編號 HCD5076：駿河屋用編號搜、別加連字號；Buyee 用日文標題加 PCエンジン。哈德森1995年的貿易 RPG，會播賽璐珞動畫。</description>
       <pubDate>Tue, 13 Oct 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
@@ -355,7 +362,7 @@
       <title>《永恆的阿卡迪亞》與《勇闖鬼界》：兩張日版 Dreamcast 光碟，兩種搜尋方法</title>
       <link>https://gamekataban.com/blog/zh/2026-10-02-eternal-arcadia-illbleed-dreamcast-import-guide.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-10-02-eternal-arcadia-illbleed-dreamcast-import-guide.html</guid>
-      <description>SEGA 的《永恆的阿卡迪亞》（即日版 Skies of Arcadia）與恐怖遊戲《勇闖鬼界》（ILLBLEED）都是日版 Dreamcast 光碟。在日本拍賣，用編號 HDR-0076 找《永恆的阿卡迪亞》比用標題更準；《勇闖鬼界》在 Kataban 的目錄裡沒有編號。</description>
+      <description>日版《永恆的阿卡迪亞》用編號 HDR-0076 找，避開中途上鎖的 @barai 版（HDR-0119）；《勇闖鬼界》目錄無編號，用標題搜。日版光碟需日版主機。</description>
       <pubDate>Fri, 02 Oct 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
@@ -474,7 +481,7 @@
       <title>聖火降魔錄 特里烏斯雙部曲：兩台主機、一個故事與區域鎖</title>
       <link>https://gamekataban.com/blog/zh/2026-09-17-fire-emblem-gamecube-wii-tellius-import-guide.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-17-fire-emblem-gamecube-wii-tellius-import-guide.html</guid>
-      <description>想接著《萬縷千絲》（Fortune’s Weave）回頭玩？聖火降魔錄的《蒼炎之軌跡》與《曉之女神》用 GameCube 和 Wii 兩台主機說完同一個故事：兩者怎麼銜接、日版《曉之女神》有什麼不同，以及為什麼這兩張光碟需要日版主機。</description>
+      <description>日版編號：《蒼炎之軌跡》DL-DOL-GFEJ-JPN、《曉之女神》RVL-P-RFEJ。兩款都有區域鎖，一台有 GameCube 埠的日版 Wii 就能涵蓋兩款。</description>
       <pubDate>Thu, 17 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
@@ -502,14 +509,14 @@
       <title>特救指令 Solbrain 就是 Shatterhand：日版差異與找法</title>
       <link>https://gamekataban.com/blog/zh/2026-09-14-shatterhand-solbrain-famicom-import-guide.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-14-shatterhand-solbrain-famicom-import-guide.html</guid>
-      <description>《特救指令ソルブレイン》（Solbrain）是Jaleco的紅白機動作遊戲，比NES版《Shatterhand》早兩個月在日本上市，是東映特攝劇的授權作。兩版差在哪、各出處怎麼說誰才是原版，以及怎麼找到日版卡帶。</description>
+      <description>日版紅白機卡帶沒有商品編號：駿河屋限定遊戲分類搜「特救指令ソルブレイン」，Buyee 加上 ファミリーコンピュータ。比 NES 版早兩個月上市。</description>
       <pubDate>Mon, 14 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
       <title>中野 Mandarake 去哪一家：逐層看懂各店面</title>
       <link>https://gamekataban.com/blog/zh/2026-09-13-mandarake-nakano-shop-guide.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-09-13-mandarake-nakano-shop-guide.html</guid>
-      <description>中野百老匯的 Mandarake 該去哪一家？這是三十家以上店面中十九家、橫跨三個樓層的照片巡禮：哪一扇門賣遊戲、哪一扇賣同人誌，還有哪一扇做成鳥居。第一次認識 Mandarake，請先看基本指南。</description>
+      <description>復古遊戲在二樓 Galaxy；網路商店限定「中野店」、用日文名稱搜尋，型號搜不到。中野百老匯 Mandarake 十九家店面逐層巡禮。</description>
       <pubDate>Sun, 13 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
@@ -677,7 +684,7 @@
       <title>《天地創造》重製版2027年1月14日發售：版本、平台與SFC原版購買指南</title>
       <link>https://gamekataban.com/blog/zh/2026-08-25-news-terranigma-remake.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-08-25-news-terranigma-remake.html</guid>
-      <description>1995年Enix與Quintet的名作《天地創造》（Terranigma）將於2027年1月14日在PS5、Switch 2、Xbox和PC推出。整理對應平台、一般版／SteelBook版／Gaia Edition、日本實體版價格，以及SFC原版的購買方法。</description>
+      <description>SFC原版商品編號 SHVC-AQTJ-JPN；駿河屋不收 -JPN 後綴，要用日文標題「天地創造」搜尋。重製版2027年1月14日推出，整理平台與版本。</description>
       <pubDate>Tue, 25 Aug 2026 00:00:00 +0900</pubDate>
     </item>
     <item>

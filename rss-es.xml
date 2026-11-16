@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Sun, 15 Nov 2026 06:45:46 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 16 Nov 2026 07:34:01 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Dynamite Headdy en Mega Drive: el juego de acción de marionetas de 1994 de Treasure, su código G-4117</title>
+      <link>https://gamekataban.com/blog/es/2026-11-17-dynamite-headdy-mega-drive-g-4117.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-11-17-dynamite-headdy-mega-drive-g-4117.html</guid>
+      <description>Cartucho japonés de Mega Drive: G-4117; Game Gear: G-3355. Busca ダイナマイトヘッディー en Suruga-ya y añade メガドライブ en Buyee; el código trae otros productos.</description>
+      <pubDate>Tue, 17 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Pulseman en Mega Drive: el juego de acción de 1994 de Game Freak, su código G-4098</title>
       <link>https://gamekataban.com/blog/es/2026-11-16-pulseman-mega-drive-g-4098.html</link>
@@ -593,7 +600,7 @@
       <title>¿Quién creó Street Fighter? Historia de 1987 (parte 1)</title>
       <link>https://gamekataban.com/blog/es/2026-09-02-street-fighter-development-history-1.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-09-02-street-fighter-development-history-1.html</guid>
-      <description>Street Fighter nació en 1987 en Capcom, dirigido por Takashi Nishiyama: un boceto dibujado en una reunión aburrida, un error que hacía casi imposible lanzar una bola de fuego y un almacén lleno de máquinas sin vender. Parte 1 de una serie en cinco entregas sobre cómo se hizo la saga.</description>
+      <description>Takashi Nishiyama dirigió Street Fighter en Capcom en 1987: un boceto de una reunión aburrida, una bola de fuego casi imposible y máquinas sin vender.</description>
       <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
