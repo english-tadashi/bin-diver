@@ -560,10 +560,10 @@ window.KB_SHOP=(function(){
 })();
 </script>
 <meta name='impact-site-verification' value='41e22ad5-defe-4001-9f0f-6b527369763a'>
-<title>Kataban（型番）— Japanese Game Code &amp; Title Search</title>
-<meta name="description" content="Kataban (型番) means product code. Search any Japanese retro game in English for its Japanese title and official code, then buy it from Japanese secondhand stores.">
-<meta property="og:title" content="Kataban（型番）— Japanese Game Code &amp; Title Search">
-<meta property="og:description" content="Kataban (型番) means product code. Search any Japanese retro game in English for its Japanese title and official code, then buy it from Japanese secondhand stores.">
+<title>Kataban — Find Japanese Retro Games in English, Buy from Japan</title>
+<meta name="description" content="Search Japanese retro games in English. See each game's Japanese title and product code (型番), then buy it from Japan via Buyee, Suruga-ya or eBay.">
+<meta property="og:title" content="Kataban — Find Japanese Retro Games in English, Buy from Japan">
+<meta property="og:description" content="Search Japanese retro games in English. See each game's Japanese title and product code (型番), then buy it from Japan via Buyee, Suruga-ya or eBay.">
 <meta property="og:url" content="https://gamekataban.com/">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://gamekataban.com/og.png">
@@ -1286,6 +1286,12 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card .shelf-txt{min-width:0; font:400 12.5px/1.45 var(--f-display); color:var(--ink-2);}
 .card .shelf-txt b{font-weight:600; color:var(--ink);}
 .card .shelf-txt .gyo{font-family:var(--f-jp);}
+/* 国内モードの「棚で探す」欄（2026-11-17・shopKanaBox）。読みは和題と同じ大きさ、棚の字はその横（狭いと下へ折り返す） */
+.card .shopkana .sk-row{display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; margin-top:2px;}
+.card .shopkana .sk-title{min-width:0; font:600 29px/1.2 var(--f-jp); color:#ffffff; overflow-wrap:anywhere;}
+.card .shopkana .sk-shelf{display:inline-flex; align-items:center; gap:8px; flex-shrink:0;}
+.card .shopkana .sk-txt{font:600 15px/1.3 var(--f-jp); color:var(--ink); white-space:nowrap;}
+.card .shopkana .sk-cap{margin-top:6px;}
 
 /* 店員に見せるボタン。ラベルは英語1本（"Show to shop staff"）。
    ★以前はここに日本語を重ねていたが、2人が読む役は clerkOpen() が開く店員画面へ移した。
@@ -1504,7 +1510,7 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card .note-link{color:var(--tag); text-decoration:underline;}
 .card .note-link:hover,.card .note-link:focus{color:var(--accent);}
 @media(max-width:420px){
-  .card{padding:18px;} .card .ja-title{font-size:25px;} .card .en-title{font-size:22px;}
+  .card{padding:18px;} .card .ja-title{font-size:25px;} .card .en-title{font-size:22px;} .card .shopkana .sk-title{font-size:25px;}
   .card .code{font-size:20px;}
   /* ★ラベルを display:none にしていたので、スマホでは黒い枠だけの無地ボタンになっていた。
      押せると分からないボタンは無いのと同じ（しかも「コピー」はこの道具の中心操作）。
@@ -1722,6 +1728,10 @@ footer a:hover,footer a:focus{color:var(--accent)}
 .rak-market{display:block;font-family:"Space Mono",monospace;font-size:14px;color:var(--muted);margin-top:2px;text-decoration:none}
 /* 2026-10-19: 相場の行を広告（画像＋「Buy this one」）より先に出し、間をあけて別物に見せる。 */
 .rak-slot > .rak-market:first-child{margin:0 0 .75rem}
+.rak-market-out .rm-line{display:block; color:var(--ink);}
+.mycost .my-cost-fx{margin-top:2px; font:400 15px/1.4 var(--f-display); color:var(--ink);}   /* My List の合計のドル・ユーロの目安（2026-11-17） */
+.mycost .my-cost-fx:empty{display:none;}   /* 海外モードの相場（2026-11-17・price-fx） */
+.rak-market-out .rm-note{display:block; margin-top:3px; font:400 12.5px/1.45 var(--f-display); color:var(--ink-2);}
 /* 状態の用語集へのリンク（2026-10-19）。店ブロックの中・ガイドのボタンの下。 */
 .card .cond-link{display:block;margin:8px 0 2px;font:500 13px/1.45 var(--f-mono);color:var(--tag)}
 /* 推測（楽天の商品名から当てた候補）の札。点を警告色にする。 */
@@ -1914,7 +1924,9 @@ footer a:hover,footer a:focus{color:var(--accent)}
   .card.cm .rak-slot.rak-done:empty{display:none;}
 
   /* 閉じているとき */
-  .card.cm:not(.cm-open) > :not(.status.is-scan):not(.inshop):not(.region-up):not(.specs):not(.identity):not(.cm-code):not(.cm-slab):not(.rak-slot):not(.lang-need):not(.cm-rb):not(.buy-out):not(.buy-jp):not(.nodisc):not(.instore):not(.cm-toggle){display:none;}
+  .card.cm:not(.cm-open) > :not(.status.is-scan):not(.inshop):not(.region-up):not(.specs):not(.identity):not(.cm-code):not(.cm-slab):not(.rak-slot):not(.lang-need):not(.cm-rb):not(.buy-out):not(.buy-jp):not(.nodisc):not(.instore):not(.cm-toggle):not(.shopkana){display:none;}
+  .card.cm > .shopkana{order:2;}   /* 国内モードの「棚で探す」欄（identity の直後・型番の上） */
+  .card.cm:not(.cm-open) .shopkana .sk-cap, .card.cm:not(.cm-open) > .shopkana.sk-none{display:none;}   /* 読みも棚の字も無い行は、閉じたカードでは欄ごと出さない */
   .card.cm:not(.cm-open) .cm-rb{display:block;}
   .card.cm:not(.cm-open) .cm-rb:empty{display:none;}
   .card.cm:not(.cm-open) .lang-need{margin:0;}
@@ -3446,11 +3458,12 @@ const PUBS = KB_PRE ? KB_PRE.PUBS : DATA.map(r => r[6].split(';').map(s=>s.trim(
 // ★試算は scratchpad/kataban_rank_sim.js（rank.G）。件数は変わらない（並べ替えるだけ）。
 const JP_SCRIPT = /[\u3040-\u30ff\u3400-\u9fff\uf900-\ufaff]/;
 const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-function rankTier(i, lane, lo, qk, sq, r5, wbRe, wwRe){
+function rankTier(i, lane, lo, qk, sq, r5, wbRe, wwRe, loT){
   const f = HAY[i].split('\n');
   const T = [f[0], f[1], f[6], f[7]].filter(Boolean);     // 英題・和題・読み・ローマ字（畳み済み）
   const codes = CODEKEYS[i];
-  if(T.includes(lo) || (qk.length >= 3 && codes.includes(qk))
+  // ★2026-11-17（en-rank）: 先頭の "the " は無くても完全一致（Legend of Zelda → The Legend of Zelda）。loT は rankHits が作る
+  if(T.includes(lo) || (loT && T.some(t => t.replace(/^the /, '') === loT)) || (qk.length >= 3 && codes.includes(qk))
      || (sq && HAY4[i].split('\n').includes(sq)) || (r5.length >= 5 && RJ5[i] === r5)) return 0;
   if(T.some(t => wbRe.test(t)) || (qk.length >= 4 && codes.some(c => c.startsWith(qk)))) return 1;
   if([f[1], f[6]].some(t => t && JP_SCRIPT.test(t) && t.startsWith(lo))) return 1;   // 日本語の題名は段1と段3を分けない
@@ -3480,14 +3493,18 @@ function naHit(i, lo, sq){   // 0 = 当たらない・1 = 北米名の日本版�
 function rankHits(idx, lanes, lo, qk, sq, r5){
   const wbRe = new RegExp('^' + reEsc(lo) + '(\\s|$)');
   const wwRe = new RegExp('(^|\\s)' + reEsc(lo) + '(\\s|$)');
+  const loT = lo.replace(/^the /, '');
+  // ★2026-11-17（en-rank）: 鍵は 段 → 配信専用か（row[12]・ソフトを先に）→ 発売年（段0〜2 と北米名だけ・古い順）→ DATA の順。
+  //   段1・2 は1つにまとめて古い順にした。完全一致の題名が無い語（Kirby・Mario Kart・Fire Emblem・Pokemon）で元祖を先に出すため。段3〜5 は DATA の順のまま。
   const keyed = idx.map((i, n) => {
-    const yr = parseInt(DATA[i][4], 10) || 9999;
+    const yr = parseInt(DATA[i][4], 10) || 9999;   // 年が無い行は同じ段の最後
+    const dl = DATA[i][12] ? 1 : 0;
     const na = naHit(i, lo, sq);
-    if(na) return { n, k: yr - (na === 2 ? 30000 : 20000) };      // 北米名の日本版（段0より上。rf はさらに上）
-    const t = rankTier(i, lanes[n], lo, qk, sq, r5, wbRe, wwRe);
-    return { n, k: t === 0 ? yr - 10000 : t };   // 段0だけ発売年（年が無い行は段0の最後）
+    if(na) return { n, g: na === 2 ? -2 : -1, dl, y: yr };      // 北米名の日本版（段0より上。rf はさらに上）
+    const t = rankTier(i, lanes[n], lo, qk, sq, r5, wbRe, wwRe, loT);
+    return { n, g: t === 2 ? 1 : t, dl, y: t <= 2 ? yr : 0 };   // 段1（前方一致）と段2（語として含む）は同じ扱い（Mario Kart → Super Mario Kart が元祖）
   });
-  keyed.sort((a, b) => a.k - b.k || a.n - b.n);            // 同じ鍵は元の順（DATA の順）を保つ
+  keyed.sort((a, b) => a.g - b.g || a.dl - b.dl || a.y - b.y || a.n - b.n);   // 最後は元の順（DATA の順）
   return keyed.map(x => x.n);
 }
 
@@ -3802,6 +3819,29 @@ function shelfNote(r){
         <span class="shelf-txt">Japanese shops file games by the <i>reading</i> of the title.
           Look under <b class="gyo">${esc(kana)}</b>${gyo?` — or the <b class="gyo">${esc(gyo)}</b> group where shelves are split by row`:''}.</span>
       </div>
+    </div>`;
+}
+
+// ★2026-11-17（shop-kana）: 国内モード（LOC==='jp'）のカードの「棚で探す」欄。閉じたカード（スマホ）でも出す。
+//   和題がラテン文字だけの行（CHRONO TRIGGER 等）は、日本語の読み（row[8]・Wikidata の日本語名）を大きく出す。棚の字（row[11]）と行（GYO）を横に。
+//   和題にかな・漢字がある行は和題がそのまま見えているので、読みは出さず棚の行だけ。国内モードでは .instore の shelfNote() の代わりになる。
+//   海外モードでは出さない（card() が LOC を見る）。
+function shopKanaBox(r, jaLatin){
+  if(r[12]) return '';
+  const kana = r[11] || '';
+  const gyo = GYO[kana] || '';
+  const read = jaLatin ? ((r[8] && JP_SCRIPT.test(r[8])) ? r[8] : (READ_FILL.get(r) || '')) : '';   // READ_FILL＝表示だけの読み（manifest の rd）
+  if(!kana && !read) return `<div class="field shopkana sk-none">
+      <span class="micro plain">On the shelf</span>
+      <div class="cap sk-cap">No shelf hint for this title — we don't have a reading for it, and a wrong shelf is worse than none.</div>
+    </div>`;
+  return `<div class="field shopkana">
+      <span class="micro plain">${read ? 'Japanese reading &middot; on the shelf' : 'On the shelf &middot; kana order'}</span>
+      <div class="sk-row">${read ? `
+        <div class="sk-title" lang="ja">${esc(read)}</div>` : ''}${kana ? `
+        <div class="sk-shelf" lang="ja"><span class="shelf-kana">${esc(kana)}</span><span class="sk-txt">「${esc(kana)}」の棚${gyo ? ` / ${esc(gyo)}` : ''}</span></div>` : ''}
+      </div>
+      <div class="cap sk-cap">Japanese shops file games by the <i>reading</i> of the title${kana ? `. Look under <b class="gyo">${esc(kana)}</b>${gyo ? ` — or the <b class="gyo">${esc(gyo)}</b> group where shelves are split by row` : ''}` : ''}.</div>
     </div>`;
 }
 
@@ -4438,6 +4478,10 @@ let EN_KIND=new Map();  // DATA の行 → 'r'（英題の欄の値はローマ�
 let EN_KIND_READY=false;
 function parseEnKind(k){ const km=new Map(); let i=0; for(const e of k.split(';')){ if(!e) continue; const c=e.indexOf(':'); i+=parseInt(e.slice(0,c),36); if(DATA[i]) km.set(DATA[i], e.slice(c+1)); } return km; }
 (function(){ const m=window.KB_CATALOG; if(m && typeof m.k==='string'){ EN_KIND=parseEnKind(m.k); EN_KIND_READY=true; } })();
+// ★2026-11-17（kana-fill）: 国内モードのカードに出す日本語の読み（manifest の rd・tools/kana_read.json・k と同じ "Δ:値;…" の形）。
+//   和題がラテン文字だけで row[8] に日本語が無い行のうち、出典2つで読みが一致した行だけ。画面に出すだけで、店の検索語（r[8] || 和題）と検索の索引には使わない。
+let READ_FILL=new Map();
+(function(){ const m=window.KB_CATALOG; if(m && typeof m.rd==='string') READ_FILL=parseEnKind(m.rd); })();
 function enKindSettle(){ if(!EN_KIND_READY){ EN_KIND_READY=true; if(current.length) paint(); } }   // loan が読めなかった＝今まで通り「English」
 whenSearchReady(()=>{
   const C=window.__kbCat; if(!C || !C.manifest){ enKindSettle(); return; }
@@ -4780,6 +4824,8 @@ function card(r,idx){
       ${blogArts.length?`<div class="articles">${blogArts.map(([s,dt,ttl])=>`<a class="read-article" href="${blogUrl(s)}" aria-label="Read article: ${esc(ttl)}">Read article${blogArts.length>1?` <span class="ra-date">${esc(dt)}</span>`:''}<span aria-hidden="true">&rarr;</span></a>`).join('')}</div>`:''}
     </div>
 
+    ${LOC==='jp' ? shopKanaBox(r, jaLatin) : ''}
+
     <!-- 店（2026-10-31: 海外モードは和題の直下。楽天の枠は店の下。国内モードと配信専用の行は下の hr の後のまま） -->
     ${(!r[12] && LOC!=='jp') ? buyBlock(buyKeys)+rakSlot : ''}
 
@@ -4803,7 +4849,7 @@ function card(r,idx){
            **この条件を外すなら、必ず clerkOpen() 側も直すこと。**
            外したまま渡すと、配信専用の行で「在庫はありますか？」と店員に聞かせることになる。 -->
     ${r[12]?'':`<div class="instore">
-      ${shelfNote(r)}
+      ${LOC==='jp' ? '' : shelfNote(r)}
       <button class="genre-link" type="button">Find by genre &amp; condition guide</button>
       <a class="cond-link" href="${blogUrl('2026-09-16-glossary-condition-rank.html')}">What the condition words on a label mean (ランクB · 美品 · 未開封) &rarr;</a>
       <span class="micro plain instore-head">Need help or paying?</span>
@@ -5545,6 +5591,17 @@ function mylistJan(code){
   return (r && /^\d{13}$/.test(r[10]||'')) ? r[10] : '';
 }
 
+// ★2026-11-17（price-fx）: 海外モードの円の横に出すドル・ユーロの目安。レートは公開のときに固定した値（外部 API は呼ばない＝表示を遅くしない）。
+//   出典: 欧州中央銀行（ECB）の参照レート（euro foreign exchange reference rates・eurofxref-daily.xml）。1 EUR = usd ドル = jpy 円。円→ドルは jpy/usd の割り算。
+//   変えるときは3つの数と date を一緒に直す（カードと My List の「rate as of」に date が出る）。
+const FX = { date: '2026-11-16', label: '16 Nov 2026', eurJpy: 175.78, eurUsd: 1.1014 };
+function fxApprox(yen){   // '(≈ $64 / €59)'。1未満は '<$1' のように出す
+  const n = Number(yen); if(!(Number.isFinite(n) && n > 0)) return '';
+  const eur = n / FX.eurJpy, usd = eur * FX.eurUsd;
+  const f = (v, c) => v < 1 ? '<' + c + '1' : c + Math.round(v).toLocaleString('en-US');
+  return `(\u2248 ${f(usd, '$')} / ${f(eur, '\u20ac')})`;
+}
+
 // 器だけ返す。数字は mylistCostFill() が後から書く（楽天は非同期）。
 // 外部リンクは広告ではないので sponsored は付けない。
 function mylistCostBlock(n){
@@ -5552,10 +5609,11 @@ function mylistCostBlock(n){
       <div class="field">
         <span class="micro plain" id="mylistCostHead">Estimated item total</span>
         <div class="my-cost-sum" data-cost-sum>\u2014</div>
+        <div class="my-cost-fx" data-cost-fx></div>
         <div class="my-cost-status" data-cost-status>calculating\u2026</div>
       </div>
       <p class="my-cost-note">Item prices only \u2014 international shipping and Buyee\u2019s fees are not included. <a href="https://bc.help.buyee.jp/en/shipping-fees" target="_blank" rel="noopener">Check Buyee\u2019s shipping fees</a></p>
-      <p class="my-cost-note">Prices are Rakuten reference prices (the \u201cTypical used price (Rakuten)\u201d median), a different source from where the store links go \u2014 Buyee mostly searches Yahoo! Auctions, so what you pay will differ.</p>
+      <p class="my-cost-note">Prices are Rakuten reference prices (the \u201cTypical used price (Rakuten)\u201d median), a different source from where the store links go \u2014 Buyee mostly searches Yahoo! Auctions, so what you pay will differ. $ and \u20ac are rough conversions at the ECB rate as of ${FX.label}.</p>
       ${n >= 2 ? `<p class="my-cost-note">Buying these together in one shipment can reduce your shipping cost. <a href="https://faq.buyee.jp/article/125?lang=en" target="_blank" rel="noopener">How Buyee combines packages</a></p>` : ''}
     </section>`;
 }
@@ -5580,6 +5638,7 @@ function mylistCostFill(jans){
     // ★hidden 属性ではなく remove()。.card{display:flex} が UA の [hidden]{display:none} に勝つので隠れない。
     if(!pending && !priced){ box.remove(); return; }
     sumEl.textContent = priced ? '~' + yen(sum) : '\u2014';
+    const fxEl = box.querySelector('[data-cost-fx]'); if(fxEl) fxEl.textContent = priced ? fxApprox(sum) : '';   // 2026-11-17: ドル・ユーロの目安（My List は海外モードだけ）
     const unknown = noJan + failed;
     const parts = [];
     if(priced) parts.push('for ' + items(priced));
@@ -6722,6 +6781,23 @@ function attachRakutenImage(slotEl, jan) {
       // minPrice は行2では使わない: 在庫切れ込みの最安は買えない値段で、
       // 行1(在庫あり最安)より安く並んで誤読を招くため(2026-07-31)。
       const mid = money(hit.medianPrice);      // 全件の中央値
+      // ★2026-11-17（price-fx）: 海外モードは相場（中央値）だけを「目安」として出す。楽天の画像・「Buy this one on Rakuten」・「Ships within Japan only」は出さない
+      //   （楽天は日本国内にしか送らず、海外の人には行き止まり。並んだ2つの値段のどちらを信じるか迷わせていた）。円の横にドル・ユーロの目安と、短い説明。
+      //   国内モード（店モード）は下の今までどおり。
+      if (LOC !== 'jp') {
+        if (!mid) return;
+        const mk = document.createElement('div');
+        mk.className = 'rak-market rak-market-out';
+        const line = document.createElement('span');
+        line.className = 'rm-line';
+        line.textContent = `Typical used price (Rakuten): ~${yen(mid)} ${fxApprox(mid)}`;
+        const note = document.createElement('span');
+        note.className = 'rm-note';
+        note.textContent = `Median of used listings on Rakuten Japan \u2014 a guide for buying through Buyee. Shipping and fees are extra. $ / \u20ac at the ECB rate as of ${FX.label}.`;
+        mk.append(line, note);
+        slotEl.appendChild(mk);
+        return;
+      }
       // 2026-10-19: 「Typical used price (Rakuten)」と書き、広告（画像＋Buy this one）より先に出して別物に見せる。
       const market = mid ? `Typical used price (Rakuten): ~${yen(mid)}` : null;
       if (market) {
@@ -6731,12 +6807,7 @@ function attachRakutenImage(slotEl, jan) {
         slotEl.appendChild(mk);                // <a> の外 = .rak-slot 直下
       }
       slotEl.appendChild(a);
-      if (LOC !== 'jp') {                      // 2026-10-31: 店と同じく、海外モードでだけ発送の説明を添える
-        const ship = document.createElement('div');
-        ship.className = 'buyee-note rak-ship';
-        ship.textContent = KB_SHOP.T().rakShip;
-        slotEl.appendChild(ship);
-      }
+      // 2026-11-17: 海外モードの「Ships within Japan only」（rak-ship）は、上で海外モードの楽天リンクごと出さなくなったので外した。
     });
   }, { rootMargin: '200px' });
   io.observe(slotEl);
