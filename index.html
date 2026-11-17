@@ -1416,6 +1416,7 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card .region-more b{font-weight:600; color:var(--ink);}
 .card .region-up{display:flex; flex-direction:column; gap:20px;}   /* 店モードの要点の包み（2026-11-04・丸ボタンの重なりを測る）。.card の gap と同じ＝包む前と同じ並び */
 .card .lang-need{margin:0 0 6px; font:600 15px/1.35 var(--f-display); color:var(--ink);}
+.card .na-note{font:500 13px/1.4 var(--f-display); color:var(--ink); overflow-wrap:anywhere;}   /* 北米名の1行（2026-11-17・links.json の x） */
 .card .region{display:flex; align-items:flex-start; gap:9px; font:400 12.5px/1.45 var(--f-display); color:var(--ink-2);}
 .card .region .tick{flex-shrink:0; width:6px; height:6px; margin-top:6px; background:var(--ink-2); border-radius:1px;}
 .card .region .t{min-width:0;}
@@ -3458,12 +3459,33 @@ function rankTier(i, lane, lo, qk, sq, r5, wbRe, wwRe){
   if(T.some(t => t.includes(lo)) || lane === 2 || lane === 4 || lane === 5) return 4;
   return 5;
 }
+// ★2026-11-17（na-aliases）: 北米名（links.json の r・blog/_parts/na_titles.json・出典2つ）。検索語が北米名と同じなら、
+//   その日本版を段0より上に置く（段「-1」。中は発売年の古い順）。例: Final Fantasy III → SFC FF6 が FC FF3 より上。
+//   比べるのは fold と squash の2通り（"Super Mario Bros 2" と "Super Mario Bros. 2"）。先頭の "The " は無くても同じ。
+let NA_Q = null;   // fold した北米名 → 「機種\t和題」の集合。links.json が届いたら setNaTitles() が作る
+let NA_FIRST = new Set();   // links.json の rf: 同じ北米名の日本版が2つ以上あるとき、発売年に関係なく先に出すキー（2026-11-18: SMB2 → スーパーマリオUSA を夢工場より上）
+function setNaTitles(r, rf){
+  NA_Q = new Map(); NA_FIRST = new Set(Array.isArray(rf) ? rf : []);
+  const add = (s, k) => { if(!s) return; if(!NA_Q.has(s)) NA_Q.set(s, new Set()); NA_Q.get(s).add(k); };
+  for(const k in r) for(const n of r[k]){
+    for(const v of [n, n.replace(/^the\s+/i, '')]){ add(fold(accent(v)), k); add('\u0000' + squash(accent(v)), k); }
+  }
+}
+function naHit(i, lo, sq){   // 0 = 当たらない・1 = 北米名の日本版・2 = そのうち先に出すもの（rf）
+  if(!NA_Q) return 0;
+  const k = DATA[i][2] + '\t' + DATA[i][1];
+  const a = NA_Q.get(lo), b = sq ? NA_Q.get('\u0000' + sq) : null;
+  return ((a && a.has(k)) || (b && b.has(k))) ? (NA_FIRST.has(k) ? 2 : 1) : 0;
+}
 function rankHits(idx, lanes, lo, qk, sq, r5){
   const wbRe = new RegExp('^' + reEsc(lo) + '(\\s|$)');
   const wwRe = new RegExp('(^|\\s)' + reEsc(lo) + '(\\s|$)');
   const keyed = idx.map((i, n) => {
+    const yr = parseInt(DATA[i][4], 10) || 9999;
+    const na = naHit(i, lo, sq);
+    if(na) return { n, k: yr - (na === 2 ? 30000 : 20000) };      // 北米名の日本版（段0より上。rf はさらに上）
     const t = rankTier(i, lanes[n], lo, qk, sq, r5, wbRe, wwRe);
-    return { n, k: t === 0 ? (parseInt(DATA[i][4], 10) || 9999) - 10000 : t };   // 段0だけ発売年（年が無い行は段0の最後）
+    return { n, k: t === 0 ? yr - 10000 : t };   // 段0だけ発売年（年が無い行は段0の最後）
   });
   keyed.sort((a, b) => a.k - b.k || a.n - b.n);            // 同じ鍵は元の順（DATA の順）を保つ
   return keyed.map(x => x.n);
@@ -3683,6 +3705,14 @@ function regionChips(pf){
 }
 // 日本語なしで遊べるか（R17・2026-11-03）。links.json の n にある行だけ。外部の2出典が揃った作品だけで、無い行は何も出さない。
 const LANG_NEED = { play:'No Japanese needed', menus:'Some menus to learn', text:'Text-heavy: needs Japanese' };
+// 北米名の1行（2026-11-17・links.json の x・blog/_parts/na_titles.json・出典2つ）。[文言, 比べる名前] の並び。
+//   比べる名前が英題（row[0]）と同じ行では出さない（「English」欄にもう同じ名前が出ている）。「別の作品です」の行は比べる名前が空＝いつも出す。
+function naNotes(r, en){
+  const x = !r[12] && BLOG_LINKS && BLOG_LINKS.x && BLOG_LINKS.x[r[2]+'\t'+r[1]];
+  if(!x) return '';
+  const h = x.filter(([t, n]) => !(n && en && strong(n) === strong(en))).map(([t]) => `<div class="na-note">${esc(t)}</div>`).join('');
+  return h;
+}
 function langNeedNote(r){
   const t = !r[12] && BLOG_LINKS && BLOG_LINKS.n && LANG_NEED[BLOG_LINKS.n[r[2]+'\t'+r[1]]];
   return t ? `<div class="lang-need">${esc(t)}</div>` : '';
@@ -4443,6 +4473,7 @@ fetch('/blog/links.json').then(r=>r.ok?r.json():null).then(j=>{
     BLOG_LINKS=j;
     if(Array.isArray(j.j)) JAPAN_ONLY=new Set(j.j);
     if(j.d && typeof j.d==='object') SHARED_CODES=j.d;
+    if(j.r && typeof j.r==='object') setNaTitles(j.r, j.rf);   // 北米名の並び順（2026-11-17）。検索し直しは下の linksArrived と同じとき
     linksArrived('ready', j.s);
     if(!q.value.trim() && current.length) paint();   // 先に検索していたら、別名込みで検索し直す（deep はそのまま）
   } else linksArrived('none');
@@ -4739,6 +4770,7 @@ function card(r,idx){
         <div class="title-row">${listBtn}<div class="en-title${enKind==='r'?' ro-title" lang="ja-Latn':''}">${esc(en)}</div></div>
         ${AMBIG_EN.has(strong(en)) && !byBarcode?`<div class="cap">This English name covers more than one Japanese release. Check the Japanese title and the code below.</div><div class="cm-ambig">${esc(cmText('ambig'))}</div>`:''}
       </div>`:''}
+      ${naNotes(r, en)}
       <div class="field">
         ${hideJa?'':`<span class="micro plain">Japanese reading</span>`}
         ${hideJa?'':`<div class="title-row">${(en||romaji)?'':listBtn}<div class="ja-title">${esc(jpMain)}</div></div>`}
