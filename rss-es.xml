@@ -5,9 +5,16 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Tue, 17 Nov 2026 08:10:16 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 18 Nov 2026 08:05:36 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Comix Zone en Mega Drive: el yo contra el barrio de cómic de 1995 de Sega Technical Institute, su código G-4132</title>
+      <link>https://gamekataban.com/blog/es/2026-11-19-comix-zone-mega-drive-g-4132.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-11-19-comix-zone-mega-drive-g-4132.html</guid>
+      <description>El escaso cartucho japonés de Mega Drive es el G-4132; GENESIS, 北米版 o 欧州版 indica una copia occidental. Busca コミックスゾーン en Suruga-ya y añade メガドライブ en Buyee.</description>
+      <pubDate>Thu, 19 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Ristar en Mega Drive: la estrella fugaz de 1995 de Sega, su código G-4126</title>
       <link>https://gamekataban.com/blog/es/2026-11-18-ristar-mega-drive-g-4126.html</link>
