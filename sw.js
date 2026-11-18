@@ -114,6 +114,16 @@ self.addEventListener('install', event => {
       const r = await fetch(MANIFEST, { cache: 'no-cache' });
       if (r.ok) { await cache.put(MANIFEST, r.clone()); await cacheCatalog(cache, await r.json(), true); }
     } catch (e) {}
+    try {                                                        // 本体のスクリプト（2026-11-18・fast-first (b)）。失敗しても install は通す
+      // index.html が ?v=（中身の md5）付きで指す app/kb-main.js。オフラインでもページが動くように入れ、ほかの ?v= は消す。
+      // ★1回目の訪問はまだこの SW の管理下に無く、ページが読んだ分はキャッシュに入らない（catalog と同じ）ので、ここで入れる。
+      const sh = await cache.match(SHELL), mm = sh && (await sh.text()).match(/window\.__kbMainSrc='([^']+)'/);
+      if (mm) {
+        const u = new URL(mm[1], self.location).href;
+        if (!(await cache.match(u))) await cache.add(u);
+        for (const k of await cache.keys()) if (/\/app\/kb-main\.js\?/.test(k.url) && k.url !== u) await cache.delete(k);
+      }
+    } catch (e) {}
     // 待機せず次の版へ入れ替える。資産が index.html 1枚に閉じているので、
     // 「古いページが新しい部品を読む」という取り合わせが起こりえない。
     await self.skipWaiting();
