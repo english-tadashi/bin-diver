@@ -153,7 +153,7 @@ header .lede .lede-sub { font-weight: 400; }
      ・/?q=（記事のリンク・検索から来た人）: ここ（<head>）ですぐ動かす＝最初の答えが早い（検索欄の後ろだと 4〜5秒遅れた）。
      ・それ以外（トップに直接・/?scan=1）: 検索欄の直後で動かす＝検索欄が早く出る（<head> で動かすと 1〜3秒遅れた）。
      中身は1か所（下の type="text/plain"・前のスクリプトと1字も違わない）。文字のまま置くだけなら解析の手間はほぼ無い。動かすのは window.__kbCatRun（1回だけ）。 -->
-<script>window.__kbMainSrc='/app/kb-main.js?v=3024a9258891';</script><!-- 2026-11-18（fast-first (b)）: 本体の場所。?v= は tools/kb_main_ver.py が書く -->
+<script>window.__kbMainSrc='/app/kb-main.js?v=1be37699d092';</script><!-- 2026-11-18（fast-first (b)）: 本体の場所。?v= は tools/kb_main_ver.py が書く -->
 <script type="text/plain" id="kbCatSrc">
 /* カタログの先読み（2026-10-19・data-split）。manifest → catalog・検索の索引（index）（と /?scan=1 のときは jan）を、ページの描画と並べて取りに行く。
    受け取るのは本文の終わりの「カタログの読み込み」（window.__kbCat の Promise を待つ）。ここでは何も描かない。 */

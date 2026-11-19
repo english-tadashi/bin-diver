@@ -609,6 +609,8 @@ function regionChips(pf){
 // 日本語なしで遊べるか（R17・2026-11-03）。links.json の n にある行は外部の2出典が揃った作品（目安の札なし）。
 // ★2026-11-18（lang-barrier）: n に無い行は、ジャンルからの目安（catalog/lb-<md5>.json・tools/genre_tier.json）を「Estimate from genre」付きで出す。
 //   n がジャンルより先（ジャンルと実際が違う作品の上書き）。どちらも無い行は何も出さない（地域の1文の「The game's text is Japanese.」のまま）。
+// ★2026-11-19（こはさん指示）: 目安の行が出るカード（出典2つ・ジャンルの目安のどちらでも）では、地域の1文から「The game's text is Japanese.」を外す（langNeedShown）。
+//   Play freely と並ぶと食い違って見えたため。目安の無いカードは今のまま一文を出す。地域の文は6言語とも英語なので、ここ1か所で全言語に効く。
 //   文言は検索画面の zh/ko 表示（UIX・KB_SHOP.u・2026-11-18 tools/i18n_zhko.py でまとめた）。es/de/fr は英語。言語は ?hl → ブログで選んだ言語 → ブラウザ。
 const LANG_NEED = { play:'p', menus:'m', text:'t' };
 const LB_EN = { p:'Play freely', pd:'little text to read', m:'Some Japanese', md:'menus and options', t:'Text-heavy', td:'the story needs Japanese', Est:'Estimate from genre' };
@@ -622,7 +624,7 @@ function naNotes(r, en){
   const h = x.filter(([t, n]) => !(n && en && strong(n) === strong(en))).map(([t]) => `<div class="na-note">${esc(t)}</div>`).join('');
   return h;
 }
-function langNeedSourced(r){ return !r[12] && !!(BLOG_LINKS && BLOG_LINKS.n && LANG_NEED[BLOG_LINKS.n[r[2]+'\t'+r[1]]]); }
+function langNeedShown(r){ return !r[12] && !!((BLOG_LINKS && BLOG_LINKS.n && LANG_NEED[BLOG_LINKS.n[r[2]+'\t'+r[1]]]) || (LB_GENRE && LB_GENRE.get(r))); }
 function langNeedNote(r){
   if(r[12]) return '';
   const src = BLOG_LINKS && BLOG_LINKS.n && LANG_NEED[BLOG_LINKS.n[r[2]+'\t'+r[1]]];
@@ -1716,7 +1718,7 @@ function card(r,idx){
 
     <div class="status${(byBarcode||byGuess)?' is-scan':''}${byGuess?' is-guess':''}"><span class="dot"></span>${(byBarcode||byGuess)?`<span class="status-txt">${matchLabel} &middot; Japan / NTSC-J</span>`:`${matchLabel} &middot; Japan / NTSC-J`}${jpOnly?`<a class="jp-only" href="${blogUrl('tag/release/japan-only/')}" title="Home version sold only in Japan" aria-label="Japan only: home version sold only in Japan">Japan only</a>`:''}</div>
     ${(byBarcode||byGuess) ? inShopPanel(r) : ''}
-    ${regionUp ? `<div class="region-up">${langNeedNote(r)+fanTlNote(r)+regionNote(r,{noText:langNeedSourced(r),short:true})}</div>` : ''}
+    ${regionUp ? `<div class="region-up">${langNeedNote(r)+fanTlNote(r)+regionNote(r,{noText:langNeedShown(r),short:true})}</div>` : ''}
 
     ${(pf||pubs.length||yr)?`<div class="specs">
       ${pf?`<div class="spec sp-con"><span class="micro">${KB_SHOP.u('console','Console')}</span>${platKey?`<a class="v jp plat-link" href="${blogUrl('tag/platform/'+platKey+'/')}">${esc(pf)}</a>`:`<span class="v jp">${esc(pf)}</span>`}</div>`:''}
@@ -1780,7 +1782,7 @@ function card(r,idx){
       <button class="btn-clerk" type="button" data-clerk="${idx}">${KB_SHOP.u('clerk','Show to shop staff')}</button>${cmBtn}
     </div>`}
 
-    ${regionUp ? '' : langNeedNote(r)+fanTlNote(r)+regionNote(r,{noText:langNeedSourced(r)})+`<div class="cm-rb">${regionNote(r,{noText:langNeedSourced(r),short:true,bare:true})}</div>`}
+    ${regionUp ? '' : langNeedNote(r)+fanTlNote(r)+regionNote(r,{noText:langNeedShown(r)})+`<div class="cm-rb">${regionNote(r,{noText:langNeedShown(r),short:true,bare:true})}</div>`}
     ${r[12] ? cmBtn : ''}
 
     <hr class="div">
