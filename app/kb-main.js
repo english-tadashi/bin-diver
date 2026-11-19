@@ -632,6 +632,20 @@ function langNeedNote(r){
   return `<div class="lang-need ln-${t}"${la}><span class="ln-k">${esc(lbText(t))}</span> <span class="ln-d">&mdash; ${esc(lbText(t+'d'))}</span>`
     + (src ? '' : `<span class="ln-est">${esc(lbText('Est'))}</span>`) + `</div>`;
 }
+// ★2026-11-18（fan-tl）: 英語のファン翻訳（パッチ）がある作品の1行。links.json の f（blog/_parts/fan_tl.json・出典2つで全訳が公開済みと確かめた行だけ）。
+//   キーは「機種\t和題\t型番（row[3] そのまま）」＝同じ題名の別の版（別の型番・別の機種）には出ない。配信専用（row[12]）には出さない。
+//   表示だけ。パッチやゲームのデータへのリンクは置かない。「非公式のパッチで、元のカセット・ディスクのままでは英語にならない」を添える。
+let FAN_TL=new Set();
+const FT_EN = { D:'an unofficial patch made by fans; the original disc itself stays in Japanese', C:'an unofficial patch made by fans; the original cartridge itself stays in Japanese', G:'an unofficial patch made by fans; the original game itself stays in Japanese' };
+const FT_CART = new Set(['Famicom','Super Famicom','Nintendo 64','Game Boy','Game Boy Advance','Nintendo DS','Nintendo 3DS','Virtual Boy','Mega Drive','Game Gear','Sega Mark III','WonderSwan','Neo Geo','Neo Geo Pocket']);
+const FT_DISC = new Set(['Sega Saturn','Dreamcast','PlayStation','PlayStation 2','PlayStation 3','PlayStation 4','PlayStation 5','PSP','Mega-CD','3DO','Neo Geo CD','GameCube','Wii','Wii U','Xbox','Xbox 360','PC-FX']);
+function fanTlNote(r){
+  if(r[12] || !FAN_TL.has(r[2]+'\t'+r[1]+'\t'+r[3])) return '';
+  // 媒体: ディスクの機種・カセットの機種・どちらもある機種（PC Engine の HuCARD と CD-ROM² など）は「元のゲーム」
+  const md = FT_DISC.has(r[2]) ? 'D' : FT_CART.has(r[2]) ? 'C' : 'G';
+  const zk = KB_ZK(), la = zk==='zh' ? ' lang="zh-Hant"' : zk==='ko' ? ' lang="ko"' : '';
+  return `<div class="fan-tl"${la}><span class="ft-k">${esc(KB_SHOP.u('ft','English fan translation exists'))}</span> <span class="ft-d">&mdash; ${esc(KB_SHOP.u('ftd'+md, FT_EN[md]))}</span></div>`;
+}
 // 1行のHTMLを返す。機種が空なら何も出さない(嘘をつくより、無いほうがまし)。
 // o.noText: 「日本語なしで遊べるか」の1行が出る行では、本文の言語の一文を出さない（1行のほうが具体的）。
 // o.short: 店モード。遊べる本体・必要なものだけを1文で出し、理由は More で開く（2026-11-03）。
@@ -1424,6 +1438,7 @@ fetch('/blog/links.json').then(r=>r.ok?r.json():null).then(j=>{
     BLOG_LINKS=j;
     if(Array.isArray(j.j)) JAPAN_ONLY=new Set(j.j);
     if(j.d && typeof j.d==='object') SHARED_CODES=j.d;
+    if(Array.isArray(j.f)) FAN_TL=new Set(j.f);   // 英語のファン翻訳がある行（2026-11-18・fan-tl）。読めなければ空＝出ないだけ
     if(j.r && typeof j.r==='object') setNaTitles(j.r, j.rf);   // 北米名の並び順（2026-11-17）。検索し直しは下の linksArrived と同じとき
     linksArrived('ready', j.s);
     if(!q.value.trim() && current.length) paint();   // 先に検索していたら、別名込みで検索し直す（deep はそのまま）
@@ -1701,7 +1716,7 @@ function card(r,idx){
 
     <div class="status${(byBarcode||byGuess)?' is-scan':''}${byGuess?' is-guess':''}"><span class="dot"></span>${(byBarcode||byGuess)?`<span class="status-txt">${matchLabel} &middot; Japan / NTSC-J</span>`:`${matchLabel} &middot; Japan / NTSC-J`}${jpOnly?`<a class="jp-only" href="${blogUrl('tag/release/japan-only/')}" title="Home version sold only in Japan" aria-label="Japan only: home version sold only in Japan">Japan only</a>`:''}</div>
     ${(byBarcode||byGuess) ? inShopPanel(r) : ''}
-    ${regionUp ? `<div class="region-up">${langNeedNote(r)+regionNote(r,{noText:langNeedSourced(r),short:true})}</div>` : ''}
+    ${regionUp ? `<div class="region-up">${langNeedNote(r)+fanTlNote(r)+regionNote(r,{noText:langNeedSourced(r),short:true})}</div>` : ''}
 
     ${(pf||pubs.length||yr)?`<div class="specs">
       ${pf?`<div class="spec sp-con"><span class="micro">${KB_SHOP.u('console','Console')}</span>${platKey?`<a class="v jp plat-link" href="${blogUrl('tag/platform/'+platKey+'/')}">${esc(pf)}</a>`:`<span class="v jp">${esc(pf)}</span>`}</div>`:''}
@@ -1765,7 +1780,7 @@ function card(r,idx){
       <button class="btn-clerk" type="button" data-clerk="${idx}">${KB_SHOP.u('clerk','Show to shop staff')}</button>${cmBtn}
     </div>`}
 
-    ${regionUp ? '' : langNeedNote(r)+regionNote(r,{noText:langNeedSourced(r)})+`<div class="cm-rb">${regionNote(r,{noText:langNeedSourced(r),short:true,bare:true})}</div>`}
+    ${regionUp ? '' : langNeedNote(r)+fanTlNote(r)+regionNote(r,{noText:langNeedSourced(r)})+`<div class="cm-rb">${regionNote(r,{noText:langNeedSourced(r),short:true,bare:true})}</div>`}
     ${r[12] ? cmBtn : ''}
 
     <hr class="div">

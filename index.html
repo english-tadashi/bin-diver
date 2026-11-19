@@ -153,7 +153,7 @@ header .lede .lede-sub { font-weight: 400; }
      ・/?q=（記事のリンク・検索から来た人）: ここ（<head>）ですぐ動かす＝最初の答えが早い（検索欄の後ろだと 4〜5秒遅れた）。
      ・それ以外（トップに直接・/?scan=1）: 検索欄の直後で動かす＝検索欄が早く出る（<head> で動かすと 1〜3秒遅れた）。
      中身は1か所（下の type="text/plain"・前のスクリプトと1字も違わない）。文字のまま置くだけなら解析の手間はほぼ無い。動かすのは window.__kbCatRun（1回だけ）。 -->
-<script>window.__kbMainSrc='/app/kb-main.js?v=93559138b73e';</script><!-- 2026-11-18（fast-first (b)）: 本体の場所。?v= は tools/kb_main_ver.py が書く -->
+<script>window.__kbMainSrc='/app/kb-main.js?v=3024a9258891';</script><!-- 2026-11-18（fast-first (b)）: 本体の場所。?v= は tools/kb_main_ver.py が書く -->
 <script type="text/plain" id="kbCatSrc">
 /* カタログの先読み（2026-10-19・data-split）。manifest → catalog・検索の索引（index）（と /?scan=1 のときは jan）を、ページの描画と並べて取りに行く。
    受け取るのは本文の終わりの「カタログの読み込み」（window.__kbCat の Promise を待つ）。ここでは何も描かない。 */
@@ -960,7 +960,7 @@ window.KB_SHOP=(function(){
       results:'{n} 筆結果・顯示 {s} 筆',result:'{n} 筆結果',more:'載入更多・還有 {n} 筆',
       shelf0:'貨架位置',shelf:'貨架位置・假名順序',shelfNone:'這款遊戲沒有貨架提示&mdash;&mdash;我們沒有它的讀音資料，給錯貨架比不給更糟。',
       shelfTxt:'日本的店家依遊戲名稱的<i>讀音</i>排列。請找 <b class="gyo">{k}</b>{g}。',shelfGyo:'；貨架按行分區時，請找 <b class="gyo">{g}</b>',
-      noCode:'沒有型號資料',qph:'遊戲名稱或13位條碼…',qAria:'用遊戲名稱、型號或13位條碼搜尋',noMatch:'找不到符合的結果。',zBar1:'這個條碼不在我們的清單中。我們只有部分遊戲的條碼。',zBar2:'請找盒子側邊或背面的型號（例如 SLPM-86023），或用遊戲名稱搜尋。',zBarBtn:'在樂天查詢這個條碼',zCode1:'找不到這個型號。',zCode2:'請確認盒子側邊或背面的型號，或用遊戲名稱搜尋。',zCodeSg:'在駿河屋搜尋這個型號',zCodeBy:'在 Buyee 搜尋這個型號',zLat1:'我們收錄日文名稱與官方英文名稱。',zLat2:'請試試名稱的一部分，或日文名稱。',zJa:'請試試名稱的一部分。副標題可以省略。',zKo:'我們沒有收錄韓文或中文名稱。請用日文或英文搜尋。',zElse:'請試試名稱的一部分、日文名稱、卡帶型號或發行商。',zTry:'試試「{c}」・{n} 筆結果',lnp:'可直接遊玩',lnpd:'幾乎沒有文字',lnm:'部分日文',lnmd:'選單等為日文',lnt:'文字量多',lntd:'需要看懂日文劇情',lnEst:'依遊戲類型推估',searchKey:'日文名稱・搜尋用關鍵字',locOut:'我在日本以外',locJp:'我在日本',myList:'我的清單',tag:'看懂日本遊戲貨架',lede:'輸入你想找的遊戲。',ledeSub:'取得日文名稱、可在貨架上找的卡帶型號，以及購買連結。日文或英文名稱都可以。'},
+      noCode:'沒有型號資料',qph:'遊戲名稱或13位條碼…',qAria:'用遊戲名稱、型號或13位條碼搜尋',noMatch:'找不到符合的結果。',zBar1:'這個條碼不在我們的清單中。我們只有部分遊戲的條碼。',zBar2:'請找盒子側邊或背面的型號（例如 SLPM-86023），或用遊戲名稱搜尋。',zBarBtn:'在樂天查詢這個條碼',zCode1:'找不到這個型號。',zCode2:'請確認盒子側邊或背面的型號，或用遊戲名稱搜尋。',zCodeSg:'在駿河屋搜尋這個型號',zCodeBy:'在 Buyee 搜尋這個型號',zLat1:'我們收錄日文名稱與官方英文名稱。',zLat2:'請試試名稱的一部分，或日文名稱。',zJa:'請試試名稱的一部分。副標題可以省略。',zKo:'我們沒有收錄韓文或中文名稱。請用日文或英文搜尋。',zElse:'請試試名稱的一部分、日文名稱、卡帶型號或發行商。',zTry:'試試「{c}」・{n} 筆結果',lnp:'可直接遊玩',lnpd:'幾乎沒有文字',lnm:'部分日文',lnmd:'選單等為日文',lnt:'文字量多',lntd:'需要看懂日文劇情',lnEst:'依遊戲類型推估',ft:'有英文玩家翻譯',ftdD:'玩家自製的非官方修正檔，原版光碟本身仍是日文',ftdC:'玩家自製的非官方修正檔，原版卡帶本身仍是日文',ftdG:'玩家自製的非官方修正檔，原版遊戲本身仍是日文',searchKey:'日文名稱・搜尋用關鍵字',locOut:'我在日本以外',locJp:'我在日本',myList:'我的清單',tag:'看懂日本遊戲貨架',lede:'輸入你想找的遊戲。',ledeSub:'取得日文名稱、可在貨架上找的卡帶型號，以及購買連結。日文或英文名稱都可以。'},
     ko:{buy:'이 게임 구매하기',pr:'일부 링크는 제휴 링크(PR)입니다.',order:'일본에서 직접 살 수 있는 순서로 정렬했습니다.',
       world:'해외 배송',wProxy:'구매 대행 · 해외 배송',wNoProxy:'여기서 Buyee 검색은 일본어 제목을 사용하므로 다른 기종 버전이 섞일 수 있습니다. 정확히 찾으려면 품번 링크를 쓰세요.',
       wJpNoProxy:'해외 구매자용 &mdash; 일본어 제목으로 Buyee 검색',wJp:'해외 구매자용 &mdash; 대행 수수료 추가',
@@ -975,7 +975,7 @@ window.KB_SHOP=(function(){
       results:'결과 {n}건 · {s}건 표시',result:'결과 {n}건',more:'더 보기 · {n}건 남음',
       shelf0:'진열대 위치',shelf:'진열대 위치 · 가나 순서',shelfNone:'이 게임은 진열대 안내가 없습니다. 읽는 법 데이터가 없고, 틀린 안내는 없느니만 못하기 때문입니다.',
       shelfTxt:'일본 가게는 제목의 <i>읽는 법</i> 순서로 게임을 진열합니다. <b class="gyo">{k}</b>{g} 쪽을 찾아보세요.',shelfGyo:'(행별로 나뉜 진열대라면 <b class="gyo">{g}</b>)',
-      noCode:'품번 정보 없음',qph:'게임 제목 또는 13자리 바코드…',qAria:'게임 제목, 품번, 13자리 바코드로 검색',noMatch:'일치하는 결과가 없습니다.',zBar1:'이 바코드는 목록에 없습니다. 일부 게임의 바코드만 있습니다.',zBar2:'상자 옆면이나 뒷면의 품번(예: SLPM-86023)을 찾거나, 제목으로 검색하세요.',zBarBtn:'라쿠텐에서 이 바코드 확인',zCode1:'이 품번을 찾을 수 없습니다.',zCode2:'상자 옆면이나 뒷면의 품번을 확인하거나, 제목으로 검색하세요.',zCodeSg:'스루가야에서 이 품번 검색',zCodeBy:'Buyee에서 이 품번 검색',zLat1:'일본어 제목과 공식 영어 제목을 수록하고 있습니다.',zLat2:'이름의 일부나 일본어 제목으로 검색해 보세요.',zJa:'제목의 일부로 검색해 보세요. 부제는 빼도 됩니다.',zKo:'한국어·중국어 이름은 수록하지 않습니다. 일본어나 영어로 검색해 주세요.',zElse:'제목의 일부, 일본어 이름, 카트리지 품번, 발매사로 검색해 보세요.',zTry:'「{c}」로 검색 · {n}건',lnp:'바로 플레이 가능',lnpd:'글자가 거의 없음',lnm:'일부 일본어',lnmd:'메뉴 등이 일본어',lnt:'텍스트 많음',lntd:'일본어를 읽어야 진행',lnEst:'장르로 추정',searchKey:'일본어 제목 · 검색 키워드',locOut:'일본 밖에 있어요',locJp:'일본에 있어요',myList:'내 목록',tag:'일본 게임 진열대 읽기',lede:'찾는 게임을 입력하세요.',ledeSub:'일본어 제목, 진열대에서 찾을 카트리지 품번, 그리고 구매 링크를 알려 드립니다. 일본어나 영어 제목으로 검색해 주세요.'}
+      noCode:'품번 정보 없음',qph:'게임 제목 또는 13자리 바코드…',qAria:'게임 제목, 품번, 13자리 바코드로 검색',noMatch:'일치하는 결과가 없습니다.',zBar1:'이 바코드는 목록에 없습니다. 일부 게임의 바코드만 있습니다.',zBar2:'상자 옆면이나 뒷면의 품번(예: SLPM-86023)을 찾거나, 제목으로 검색하세요.',zBarBtn:'라쿠텐에서 이 바코드 확인',zCode1:'이 품번을 찾을 수 없습니다.',zCode2:'상자 옆면이나 뒷면의 품번을 확인하거나, 제목으로 검색하세요.',zCodeSg:'스루가야에서 이 품번 검색',zCodeBy:'Buyee에서 이 품번 검색',zLat1:'일본어 제목과 공식 영어 제목을 수록하고 있습니다.',zLat2:'이름의 일부나 일본어 제목으로 검색해 보세요.',zJa:'제목의 일부로 검색해 보세요. 부제는 빼도 됩니다.',zKo:'한국어·중국어 이름은 수록하지 않습니다. 일본어나 영어로 검색해 주세요.',zElse:'제목의 일부, 일본어 이름, 카트리지 품번, 발매사로 검색해 보세요.',zTry:'「{c}」로 검색 · {n}건',lnp:'바로 플레이 가능',lnpd:'글자가 거의 없음',lnm:'일부 일본어',lnmd:'메뉴 등이 일본어',lnt:'텍스트 많음',lntd:'일본어를 읽어야 진행',lnEst:'장르로 추정',ft:'영어 팬 번역 있음',ftdD:'팬이 만든 비공식 패치이며, 원래 디스크 그대로는 일본어입니다',ftdC:'팬이 만든 비공식 패치이며, 원래 카트리지 그대로는 일본어입니다',ftdG:'팬이 만든 비공식 패치이며, 원래 게임 그대로는 일본어입니다',searchKey:'일본어 제목 · 검색 키워드',locOut:'일본 밖에 있어요',locJp:'일본에 있어요',myList:'내 목록',tag:'일본 게임 진열대 읽기',lede:'찾는 게임을 입력하세요.',ledeSub:'일본어 제목, 진열대에서 찾을 카트리지 품번, 그리고 구매 링크를 알려 드립니다. 일본어나 영어 제목으로 검색해 주세요.'}
   };
   // u(キー, 英語の元の文, 差し込み)。zh/ko に訳が無ければ英語の元の文をそのまま返す（英語の画面はバイト単位で変わらない）。
   function u(key,en,vars){ const l=lang(); let t=(UIX[l]&&UIX[l][key])||en; if(vars) for(const k in vars) t=t.split('{'+k+'}').join(vars[k]); return t; }
@@ -1579,6 +1579,8 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card .lang-need{margin:0 0 6px; font:600 15px/1.35 var(--f-display); color:var(--ink);}
 .card .lang-need .ln-d{font-weight:400; color:var(--muted);}   /* 2026-11-18（lang-barrier）: 段階の短い説明 */
 .card .lang-need .ln-est{display:inline-block; margin-left:8px; padding:0 5px; border:1px solid var(--line); border-radius:3px; font:500 11px/1.5 var(--f-display); color:var(--muted); letter-spacing:.02em; white-space:nowrap; vertical-align:2px;}   /* ジャンルからの目安の札（断定しない） */
+.card .fan-tl{margin:0 0 6px; font:600 14px/1.35 var(--f-display); color:var(--ink); overflow-wrap:anywhere;}   /* 2026-11-18（fan-tl）: 英語のファン翻訳がある作品の1行（表示だけ・リンクなし） */
+.card .fan-tl .ft-d{font-weight:400; color:var(--muted);}
 .card .na-note{font:500 13px/1.4 var(--f-display); color:var(--ink); overflow-wrap:anywhere;}   /* 北米名の1行（2026-11-17・links.json の x） */
 .card .region{display:flex; align-items:flex-start; gap:9px; font:400 12.5px/1.45 var(--f-display); color:var(--ink-2);}
 .card .region .tick{flex-shrink:0; width:6px; height:6px; margin-top:6px; background:var(--ink-2); border-radius:1px;}
@@ -2077,7 +2079,7 @@ footer a:hover,footer a:focus{color:var(--accent)}
   .card.cm > .identity{order:2;}
   .card.cm > .cm-code, .card.cm > .cm-slab{order:3;}
   .card.cm > .rak-slot{order:4;}
-  .card.cm > .lang-need, .card.cm > .region, .card.cm > .cm-rb{order:5;}
+  .card.cm > .lang-need, .card.cm > .fan-tl, .card.cm > .region, .card.cm > .cm-rb{order:5;}
   .card.cm > .buy-out, .card.cm > .buy-jp, .card.cm > .nodisc{order:6;}
   .card.cm > .instore, .card.cm > .cm-toggle{order:7;}
   .card .cm-toggle{display:flex; align-items:center; justify-content:center; min-height:44px; padding:0 14px;
@@ -2089,12 +2091,12 @@ footer a:hover,footer a:focus{color:var(--accent)}
   .card.cm .rak-slot.rak-done:empty{display:none;}
 
   /* 閉じているとき */
-  .card.cm:not(.cm-open) > :not(.status.is-scan):not(.inshop):not(.region-up):not(.specs):not(.identity):not(.cm-code):not(.cm-slab):not(.rak-slot):not(.lang-need):not(.cm-rb):not(.buy-out):not(.buy-jp):not(.nodisc):not(.instore):not(.cm-toggle):not(.shopkana){display:none;}
+  .card.cm:not(.cm-open) > :not(.status.is-scan):not(.inshop):not(.region-up):not(.specs):not(.identity):not(.cm-code):not(.cm-slab):not(.rak-slot):not(.lang-need):not(.fan-tl):not(.cm-rb):not(.buy-out):not(.buy-jp):not(.nodisc):not(.instore):not(.cm-toggle):not(.shopkana){display:none;}
   .card.cm > .shopkana{order:2;}   /* 国内モードの「棚で探す」欄（identity の直後・型番の上） */
   .card.cm:not(.cm-open) .shopkana .sk-cap, .card.cm:not(.cm-open) > .shopkana.sk-none{display:none;}   /* 読みも棚の字も無い行は、閉じたカードでは欄ごと出さない */
   .card.cm:not(.cm-open) .cm-rb{display:block;}
   .card.cm:not(.cm-open) .cm-rb:empty{display:none;}
-  .card.cm:not(.cm-open) .lang-need{margin:0;}
+  .card.cm:not(.cm-open) .lang-need, .card.cm:not(.cm-open) .fan-tl{margin:0;}
   .card.cm:not(.cm-open) .specs{display:block;}
   .card.cm:not(.cm-open) .spec:not(.sp-con){display:none;}
   .card.cm:not(.cm-open){gap:8px; padding-top:16px;}
