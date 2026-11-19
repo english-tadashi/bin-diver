@@ -606,8 +606,14 @@ function regionChips(pf){
   const h = chip('na', tier[0]) + chip('eu', tier[1]);
   return h ? `<div class="rchips"${la}>${h}</div>` : '';
 }
-// 日本語なしで遊べるか（R17・2026-11-03）。links.json の n にある行だけ。外部の2出典が揃った作品だけで、無い行は何も出さない。
-const LANG_NEED = { play:'No Japanese needed', menus:'Some menus to learn', text:'Text-heavy: needs Japanese' };
+// 日本語なしで遊べるか（R17・2026-11-03）。links.json の n にある行は外部の2出典が揃った作品（目安の札なし）。
+// ★2026-11-18（lang-barrier）: n に無い行は、ジャンルからの目安（catalog/lb-<md5>.json・tools/genre_tier.json）を「Estimate from genre」付きで出す。
+//   n がジャンルより先（ジャンルと実際が違う作品の上書き）。どちらも無い行は何も出さない（地域の1文の「The game's text is Japanese.」のまま）。
+//   文言は検索画面の zh/ko 表示（UIX・KB_SHOP.u・2026-11-18 tools/i18n_zhko.py でまとめた）。es/de/fr は英語。言語は ?hl → ブログで選んだ言語 → ブラウザ。
+const LANG_NEED = { play:'p', menus:'m', text:'t' };
+const LB_EN = { p:'Play freely', pd:'little text to read', m:'Some Japanese', md:'menus and options', t:'Text-heavy', td:'the story needs Japanese', Est:'Estimate from genre' };
+const lbText = k => KB_SHOP.u('ln'+k, LB_EN[k]);
+let LB_GENRE=null;   // DATA の行 → 'p'|'m'|'t'（ジャンルからの目安）。読めなければ null＝出ないだけ
 // 北米名の1行（2026-11-17・links.json の x・blog/_parts/na_titles.json・出典2つ）。[文言, 比べる名前] の並び。
 //   比べる名前が英題（row[0]）と同じ行では出さない（「English」欄にもう同じ名前が出ている）。「別の作品です」の行は比べる名前が空＝いつも出す。
 function naNotes(r, en){
@@ -616,9 +622,15 @@ function naNotes(r, en){
   const h = x.filter(([t, n]) => !(n && en && strong(n) === strong(en))).map(([t]) => `<div class="na-note">${esc(t)}</div>`).join('');
   return h;
 }
+function langNeedSourced(r){ return !r[12] && !!(BLOG_LINKS && BLOG_LINKS.n && LANG_NEED[BLOG_LINKS.n[r[2]+'\t'+r[1]]]); }
 function langNeedNote(r){
-  const t = !r[12] && BLOG_LINKS && BLOG_LINKS.n && LANG_NEED[BLOG_LINKS.n[r[2]+'\t'+r[1]]];
-  return t ? `<div class="lang-need">${esc(t)}</div>` : '';
+  if(r[12]) return '';
+  const src = BLOG_LINKS && BLOG_LINKS.n && LANG_NEED[BLOG_LINKS.n[r[2]+'\t'+r[1]]];
+  const t = src || (LB_GENRE && LB_GENRE.get(r)) || '';
+  if(!t) return '';
+  const zk = KB_ZK(), la = zk==='zh' ? ' lang="zh-Hant"' : zk==='ko' ? ' lang="ko"' : '';
+  return `<div class="lang-need ln-${t}"${la}><span class="ln-k">${esc(lbText(t))}</span> <span class="ln-d">&mdash; ${esc(lbText(t+'d'))}</span>`
+    + (src ? '' : `<span class="ln-est">${esc(lbText('Est'))}</span>`) + `</div>`;
 }
 // 1行のHTMLを返す。機種が空なら何も出さない(嘘をつくより、無いほうがまし)。
 // o.noText: 「日本語なしで遊べるか」の1行が出る行では、本文の言語の一文を出さない（1行のほうが具体的）。
@@ -692,18 +704,18 @@ function shelfNote(r){
   if(r[12]) return '';                       // 配信専用。棚そのものが無い
   const kana = r[11] || '';
   if(!kana) return `<div class="field">
-      <span class="micro plain">On the shelf</span>
-      <div class="cap">No shelf hint for this title — we don't have a reading for it, and a wrong shelf is worse than none.</div>
+      <span class="micro plain">${KB_SHOP.u('shelf0','On the shelf')}</span>
+      <div class="cap">${KB_SHOP.u('shelfNone',"No shelf hint for this title — we don't have a reading for it, and a wrong shelf is worse than none.")}</div>
     </div>`;
   const gyo = GYO[kana] || '';
   const gyoHead = gyo ? gyo.charAt(0) : '';   // 「は行」→「は」。行の頭1字だけを札に出す
   return `<div class="field">
-      <span class="micro plain">On the shelf &middot; kana order</span>
+      <span class="micro plain">${KB_SHOP.u('shelf','On the shelf &middot; kana order')}</span>
       <div class="shelf-row">
         <span class="shelf-kana">${esc(kana)}</span>${gyoHead?`
         <span class="shelf-kana shelf-kana-gyo">${esc(gyoHead)}</span>`:''}
-        <span class="shelf-txt">Japanese shops file games by the <i>reading</i> of the title.
-          Look under <b class="gyo">${esc(kana)}</b>${gyo?` — or the <b class="gyo">${esc(gyo)}</b> group where shelves are split by row`:''}.</span>
+        <span class="shelf-txt">${KB_SHOP.u('shelfTxt',`Japanese shops file games by the <i>reading</i> of the title.
+          Look under <b class="gyo">${esc(kana)}</b>${gyo?` — or the <b class="gyo">${esc(gyo)}</b> group where shelves are split by row`:''}.`,{k:esc(kana),g:gyo?KB_SHOP.u('shelfGyo','',{g:esc(gyo)}):''})}</span>
       </div>
     </div>`;
 }
@@ -1383,6 +1395,15 @@ whenSearchReady(()=>{
     EN_KIND_READY=true; LOAN_GLOSS=map; if(current.length) paint();
   }) : enKindSettle()).catch(enKindSettle);
 });
+// ★2026-11-18（lang-barrier）: ジャンルからの目安（manifest の lb）。loan と同じく検索の準備ができてから後で読み、カタログの md5 が違えば使わない。
+whenSearchReady(()=>{
+  const C=window.__kbCat; if(!C || !C.manifest) return;
+  C.manifest.then(m=> (m.lb && m.md5) ? fetch('/catalog/'+m.lb).then(r=>r.ok?r.json():null).then(j=>{
+    if(!j || j.md5!==m.md5 || typeof j.g!=='string' || j.g.length!==DATA.length) return;
+    const map=new Map(); for(let i=0;i<j.g.length;i++){ const c=j.g[i]; if(c!=='.') map.set(DATA[i], c); }
+    LB_GENRE=map; if(current.length) paint();
+  }) : null).catch(()=>{});
+});
 let JAPAN_ONLY=new Set();
 let SHARED_CODES={};      // links.json の d（別の作品に同じ型番が付いている「機種\t型番」→ 和題の一覧）。読めなければ空＝注意書きが出ないだけ   // links.json の j（「Japan only」の印を出すキー）。読めなければ空のまま＝印が出ないだけ
 const BLOG_LANGS=['en','zh','ko','es','de','fr'];
@@ -1468,14 +1489,16 @@ const CM_AMBIG = {
 };
 const CM_OPEN = new WeakSet();
 // 2026-11-07（案A）: More details と閉じた形の注記は英語に固定（店ボタンと同じ）。
-function cmLabel(open){ const t = CM_LABEL.en; return open ? t[1] : t[0]; }
+// 2026-11-14: zh/ko だけ訳を使う（検索画面の zh/ko 表示と揃える）。
+const KB_ZK = ()=>{ const l=KB_SHOP.lang(); return (l==='zh'||l==='ko')?l:'en'; };
+function cmLabel(open){ const t = CM_LABEL[KB_ZK()]; return open ? t[1] : t[0]; }
 /* GA4 のイベント（2026-11-06・card-compact）: clerk_open（Show to shop staff）・card_expand（閉じた形で More details を開いた）。
    パラメータは loc（out＝海外 / jp＝国内）と platform（DATA の row[2]＝機種の英語名）。
    gtag は <head> の先頭で定義済み（GA のタグを読む前は dataLayer に積まれ、読んだときに送られる）。無い・失敗しても押した動作は止めない。 */
 function cmTrack(name, r){
   try{ if(typeof gtag === 'function') gtag('event', name, { loc: LOC, platform: (r && r[2]) || '' }); }catch(e){}
 }
-function cmText(k){ return k === 'ambig' ? CM_AMBIG.en : ''; }
+function cmText(k){ return k === 'ambig' ? CM_AMBIG[KB_ZK()] : ''; }
 results.addEventListener('click', e=>{
   const b = e.target.closest('.cm-toggle'); if(!b) return;
   const c = b.closest('.card'); const r = current[[...results.querySelectorAll(':scope > article.card')].indexOf(c)];
@@ -1678,12 +1701,12 @@ function card(r,idx){
 
     <div class="status${(byBarcode||byGuess)?' is-scan':''}${byGuess?' is-guess':''}"><span class="dot"></span>${(byBarcode||byGuess)?`<span class="status-txt">${matchLabel} &middot; Japan / NTSC-J</span>`:`${matchLabel} &middot; Japan / NTSC-J`}${jpOnly?`<a class="jp-only" href="${blogUrl('tag/release/japan-only/')}" title="Home version sold only in Japan" aria-label="Japan only: home version sold only in Japan">Japan only</a>`:''}</div>
     ${(byBarcode||byGuess) ? inShopPanel(r) : ''}
-    ${regionUp ? `<div class="region-up">${langNeedNote(r)+regionNote(r,{noText:!!langNeedNote(r),short:true})}</div>` : ''}
+    ${regionUp ? `<div class="region-up">${langNeedNote(r)+regionNote(r,{noText:langNeedSourced(r),short:true})}</div>` : ''}
 
     ${(pf||pubs.length||yr)?`<div class="specs">
-      ${pf?`<div class="spec sp-con"><span class="micro">Console</span>${platKey?`<a class="v jp plat-link" href="${blogUrl('tag/platform/'+platKey+'/')}">${esc(pf)}</a>`:`<span class="v jp">${esc(pf)}</span>`}</div>`:''}
-      ${pubs.length?`<div class="spec"><span class="micro">Publisher</span><span class="v">${esc(pubShow)}</span></div>`:''}
-      ${yr?`<div class="spec"><span class="micro">Released</span><span class="v">${esc(yr)}</span></div>`:''}
+      ${pf?`<div class="spec sp-con"><span class="micro">${KB_SHOP.u('console','Console')}</span>${platKey?`<a class="v jp plat-link" href="${blogUrl('tag/platform/'+platKey+'/')}">${esc(pf)}</a>`:`<span class="v jp">${esc(pf)}</span>`}</div>`:''}
+      ${pubs.length?`<div class="spec"><span class="micro">${KB_SHOP.u('publisher','Publisher')}</span><span class="v">${esc(pubShow)}</span></div>`:''}
+      ${yr?`<div class="spec"><span class="micro">${KB_SHOP.u('released','Released')}</span><span class="v">${esc(yr)}</span></div>`:''}
     </div>`:''}
 
     <div class="identity">
@@ -1696,18 +1719,18 @@ function card(r,idx){
       ${en?`<div class="field">
         ${enKind==='r'?`<span class="micro plain ro-k">Romanized <span class="ro-note">&middot; no official English title</span></span>`
           :enKind?`<span class="micro plain ro-k">Unofficial English name <span class="ro-note">&middot; ${enKind==='p'?'used later by the publisher; never released in English':'fan name'}</span></span>`
-          :EN_KIND_READY?`<span class="micro plain">English</span>`:`<span class="micro plain">Title in Latin letters</span>`}
+          :EN_KIND_READY?`<span class="micro plain">${KB_SHOP.u('english','English')}</span>`:`<span class="micro plain">${KB_SHOP.u('latinT','Title in Latin letters')}</span>`}
         <div class="title-row">${listBtn}<div class="en-title${enKind==='r'?' ro-title" lang="ja-Latn':''}">${esc(en)}</div></div>
         ${AMBIG_EN.has(strong(en)) && !byBarcode?`<div class="cap">This English name covers more than one Japanese release. Check the Japanese title and the code below.</div><div class="cm-ambig">${esc(cmText('ambig'))}</div>`:''}
       </div>`:''}
       ${naNotes(r, en)}
       <div class="field">
-        ${hideJa?'':`<span class="micro plain">Japanese reading</span>`}
+        ${hideJa?'':`<span class="micro plain">${KB_SHOP.u('reading','Japanese reading')}</span>`}
         ${hideJa?'':`<div class="title-row">${(en||romaji)?'':listBtn}<div class="ja-title">${esc(jpMain)}</div></div>`}
         ${(romaji && en && enKind!=='r')?`<div class="romaji" lang="ja-Latn">${esc(romajiShow(romaji))}</div>`:''}
-        ${noCode?`<div class="no-code-notice">No product code on record</div>`:''}
+        ${noCode?`<div class="no-code-notice">${KB_SHOP.u('noCode','No product code on record')}</div>`:''}
       </div>
-      ${blogArts.length?`<div class="articles">${blogArts.map(([s,dt,ttl])=>`<a class="read-article" href="${blogUrl(s)}" aria-label="Read article: ${esc(ttl)}">Read article${blogArts.length>1?` <span class="ra-date">${esc(dt)}</span>`:''}<span aria-hidden="true">&rarr;</span></a>`).join('')}</div>`:''}
+      ${blogArts.length?`<div class="articles">${blogArts.map(([s,dt,ttl])=>`<a class="read-article" href="${blogUrl(s)}" aria-label="Read article: ${esc(ttl)}">${KB_SHOP.u('readArt','Read article')}${blogArts.length>1?` <span class="ra-date">${esc(dt)}</span>`:''}<span aria-hidden="true">&rarr;</span></a>`).join('')}</div>`:''}
     </div>
 
     ${LOC==='jp' ? shopKanaBox(r, jaLatin) : ''}
@@ -1717,12 +1740,12 @@ function card(r,idx){
 
     <!-- 型番（2026-10-19: 購入ブロックの下から見出しのすぐ下へ移した。「これで合っているか」を箱と見比べる一番の手がかり）。 -->
     ${codes.length?`<div class="field cm-code">
-      <span class="micro plain">Product code &middot; exact match</span>
+      <span class="micro plain">${KB_SHOP.u('codeExact','Product code &middot; exact match')}</span>
       <div class="jp-copy-row">
         <div class="jp-chip"><span class="code">${codeShow}</span></div>
         <button class="slab-copy" type="button" data-copy="${codeCopy}"><span class="txt">Copy</span></button>
       </div>
-      <div class="cap" style="margin-top:7px;">Latin letters — type it into any store yourself, or copy.</div>
+      <div class="cap" style="margin-top:7px;">${KB_SHOP.u('codeNote','Latin letters — type it into any store yourself, or copy.')}</div>
     </div>`:''}
 
     <!-- 配信専用(row[12])ではボタンごと出さない。店に行く行為が無いので見せる相手がいない。
@@ -1736,13 +1759,13 @@ function card(r,idx){
            外したまま渡すと、配信専用の行で「在庫はありますか？」と店員に聞かせることになる。 -->
     ${r[12]?'':`<div class="instore">
       ${LOC==='jp' ? '' : shelfNote(r)}
-      <button class="genre-link" type="button">Find by genre &amp; condition guide</button>
-      <a class="cond-link" href="${blogUrl('2026-09-16-glossary-condition-rank.html')}">What the condition words on a label mean (ランクB · 美品 · 未開封) &rarr;</a>
-      <span class="micro plain instore-head">Need help or paying?</span>
-      <button class="btn-clerk" type="button" data-clerk="${idx}">Show to shop staff</button>${cmBtn}
+      <button class="genre-link" type="button">${KB_SHOP.u('genre','Find by genre &amp; condition guide')}</button>
+      <a class="cond-link" href="${blogUrl('2026-09-16-glossary-condition-rank.html')}">${KB_SHOP.u('cond','What the condition words on a label mean (ランクB · 美品 · 未開封)')} &rarr;</a>
+      <span class="micro plain instore-head">${KB_SHOP.u('help','Need help or paying?')}</span>
+      <button class="btn-clerk" type="button" data-clerk="${idx}">${KB_SHOP.u('clerk','Show to shop staff')}</button>${cmBtn}
     </div>`}
 
-    ${regionUp ? '' : langNeedNote(r)+regionNote(r,{noText:!!langNeedNote(r)})+`<div class="cm-rb">${regionNote(r,{noText:!!langNeedNote(r),short:true,bare:true})}</div>`}
+    ${regionUp ? '' : langNeedNote(r)+regionNote(r,{noText:langNeedSourced(r)})+`<div class="cm-rb">${regionNote(r,{noText:langNeedSourced(r),short:true,bare:true})}</div>`}
     ${r[12] ? cmBtn : ''}
 
     <hr class="div">
@@ -1755,7 +1778,7 @@ function card(r,idx){
       <div class="slab">
         <span class="reg" aria-hidden="true"></span>
         <div class="slab-main">
-          <span class="slab-label">Japanese title &middot; your search key</span>
+          <span class="slab-label">${KB_SHOP.u('searchKey','Japanese title &middot; your search key')}</span>
           <div class="jp-copy-row">
             <div class="jp-chip">${esc(jpMain)}</div>
             <button class="btn-copy" type="button" data-copy="${esc(jpMain)}">Copy</button>
@@ -1767,12 +1790,12 @@ function card(r,idx){
            指示していた」として3か所とも消したが、実店舗を指すのは見出しの文言だけなので、
            2026-08-03 に見出しの row[12] 分岐へ置き換えた(配信専用=日本のストアで検索/物理=店に貼る)。
            ★.instore と購入ブロックの r[12] ゲートは別物。ここと一緒に外さないこと。 -->
-      <span class="micro plain">Japanese title${r[12]?' &middot; copy to search the Japanese store':' &middot; copy to paste into a store'}</span>
+      <span class="micro plain">${r[12]?KB_SHOP.u('jaCopyStore','Japanese title &middot; copy to search the Japanese store'):KB_SHOP.u('jaCopy','Japanese title &middot; copy to paste into a store')}</span>
       <div class="jp-copy-row">
         <div class="jp-chip">${esc(jpMain)}</div>
         <button class="btn-copy" type="button" data-copy="${esc(jpMain)}">Copy</button>
       </div>
-      <div class="cap" style="margin-top:7px;">${jaLatin?`Latin letters — you can type this yourself, or copy.`:`You can't type this — copy, then paste into the search box.`}</div>
+      <div class="cap" style="margin-top:7px;">${jaLatin?KB_SHOP.u('canType','Latin letters — you can type this yourself, or copy.'):KB_SHOP.u('cantType',"You can't type this — copy, then paste into the search box.")}</div>
     </div>`}
   </article>`;
 }
@@ -1893,10 +1916,10 @@ function paint(){
   // この行を消せばレイヤーごと死ぬ(本体は無傷)。
   attachRakutenSlots(results);
   if(shown<len){
-    count.textContent = `${len} results · showing ${shown}` + (platFallback ? ` · ${platFallback.label}` : '');
-    more.innerHTML = `<button type="button" class="moreBtn">Load more · ${len-shown} left</button>`;
+    count.textContent = KB_SHOP.u('results',`${len} results · showing ${shown}`,{n:len,s:shown}) + (platFallback ? ` · ${platFallback.label}` : '');
+    more.innerHTML = `<button type="button" class="moreBtn">${KB_SHOP.u('more',`Load more · ${len-shown} left`,{n:len-shown})}</button>`;
   } else {
-    count.textContent = len ? `${len} result${len>1?'s':''}` + (platFallback ? ` · ${platFallback.label}` : '') : '';
+    count.textContent = len ? KB_SHOP.u('result',`${len} result${len>1?'s':''}`,{n:len}) + (platFallback ? ` · ${platFallback.label}` : '') : '';
     more.innerHTML = '';
   }
 }
@@ -2076,35 +2099,35 @@ function zeroHelp(s, pf, pv, yv){
   const t = s.trim(), k = queryKind(t);
   const P = x => '<p>'+x+'</p>';
   const tryBtns = sug => sug.length ? '<div class="zero-acts">'+sug.map(([c,n]) =>
-    `<button type="button" class="zero-btn" data-try="${esc(c)}">Try \u201c${esc(c)}\u201d \u00b7 ${n} result${n>1?'s':''}</button>`).join('')+'</div>' : '';
+    `<button type="button" class="zero-btn" data-try="${esc(c)}">${KB_SHOP.u('zTry',`Try \u201c${esc(c)}\u201d \u00b7 ${n} result${n>1?'s':''}`,{c:esc(c),n})}</button>`).join('')+'</div>' : '';
   let h;
   if(k==='barcode'){
     const jan = t.replace(/[\s-]/g,'');
-    h = P('This barcode is not in our list. We have barcodes for only some games.')
-      + P('Look for the product code on the spine or the back of the box (for example SLPM-86023), or search by the title.')
-      + `<div class="zero-acts"><button type="button" class="zero-btn" data-janfb="${esc(jan)}">Check this barcode on Rakuten</button></div>`;
+    h = P(KB_SHOP.u('zBar1','This barcode is not in our list. We have barcodes for only some games.'))
+      + P(KB_SHOP.u('zBar2','Look for the product code on the spine or the back of the box (for example SLPM-86023), or search by the title.'))
+      + `<div class="zero-acts"><button type="button" class="zero-btn" data-janfb="${esc(jan)}">${KB_SHOP.u('zBarBtn','Check this barcode on Rakuten')}</button></div>`;
   } else if(k==='code'){
     const w = enc(t);
-    h = P('We can\u2019t find this code.')
-      + P('Check the product code on the spine or the back of the box, or search by the title.')
-      + `<div class="zero-acts"><a class="zero-btn" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(w)}">Search Suruga-ya for this code</a>`
-      + `<a class="zero-btn" target="_blank" rel="sponsored nofollow noopener" href="${KB_SHOP.buyeeLink('https://buyee.jp/item/search/query/'+w+'?lang=en')}">Search Buyee for this code</a></div>`
+    h = P(KB_SHOP.u('zCode1','We can\u2019t find this code.'))
+      + P(KB_SHOP.u('zCode2','Check the product code on the spine or the back of the box, or search by the title.'))
+      + `<div class="zero-acts"><a class="zero-btn" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(w)}">${KB_SHOP.u('zCodeSg','Search Suruga-ya for this code')}</a>`
+      + `<a class="zero-btn" target="_blank" rel="sponsored nofollow noopener" href="${KB_SHOP.buyeeLink('https://buyee.jp/item/search/query/'+w+'?lang=en')}">${KB_SHOP.u('zCodeBy','Search Buyee for this code')}</a></div>`
       + KB_SHOP.maintNote(w,'');
   } else if(k==='latin'){
-    h = P('We list Japanese titles and official English titles.')
-      + P('Try a shorter part of the name, or the Japanese title.')
+    h = P(KB_SHOP.u('zLat1','We list Japanese titles and official English titles.'))
+      + P(KB_SHOP.u('zLat2','Try a shorter part of the name, or the Japanese title.'))
       + tryBtns(suggestShorter(t, pf, pv, yv, false));
   } else if(k==='japanese'){
-    h = P('Try a shorter part of the title. You can leave out the subtitle.')
+    h = P(KB_SHOP.u('zJa','Try a shorter part of the title. You can leave out the subtitle.'))
       + (blogLang()==='zh' && !HAS_KANA.test(t) ? '<p lang="zh-Hant">\u6211\u5011\u6c92\u6709\u6536\u9304\u4e2d\u6587\u540d\u7a31\u3002\u8acb\u7528\u65e5\u6587\u6216\u82f1\u6587\u641c\u5c0b\u3002</p>' : '')
       + tryBtns(suggestShorter(t, pf, pv, yv, true));
   } else if(k==='korean'){
-    h = P('We don\u2019t list Korean or Chinese names. Please search in Japanese or English.')
-      + '<p lang="ko">\ud55c\uad6d\uc5b4 \uc774\ub984\uc740 \ubaa9\ub85d\uc5d0 \uc5c6\uc2b5\ub2c8\ub2e4. \uc77c\ubcf8\uc5b4\ub098 \uc601\uc5b4\ub85c \uac80\uc0c9\ud574 \uc8fc\uc138\uc694.</p>';
+    h = P(KB_SHOP.u('zKo','We don\u2019t list Korean or Chinese names. Please search in Japanese or English.'))
+      + (KB_ZK()==='ko' ? '' : '<p lang="ko">\ud55c\uad6d\uc5b4 \uc774\ub984\uc740 \ubaa9\ub85d\uc5d0 \uc5c6\uc2b5\ub2c8\ub2e4. \uc77c\ubcf8\uc5b4\ub098 \uc601\uc5b4\ub85c \uac80\uc0c9\ud574 \uc8fc\uc138\uc694.</p>');
   } else {
-    h = P('Try part of the title, the Japanese name, a cartridge code, or a publisher.');
+    h = P(KB_SHOP.u('zElse','Try part of the title, the Japanese name, a cartridge code, or a publisher.'));
   }
-  return '<div class="state"><b>No match.</b><div class="zero-help">'+h+'</div></div>';
+  return '<div class="state"><b>'+KB_SHOP.u('noMatch','No match.')+'</b><div class="zero-help">'+h+'</div></div>';
 }
 
 //@@KB-SPLIT@@ ── 2026-10-29（boot-chunks）: 本体はここで区切って別々の <script> として順に動かす（間にキー入力・描画を通す）。区切りの前の文は後ろの関数を起動の時点では呼ばないこと
@@ -2218,8 +2241,8 @@ function run(opts){
   const seenKey=new Set(), res2=[], idx2=[], lane2s=[];
   for(let j=0;j<res.length;j++){ const r=res[j]; const k=JSON.stringify(r.slice(0,13)); if(seenKey.has(k)) continue; seenKey.add(k); res2.push(r); idx2.push(resIdx[j]); lane2s.push(resLane[j]); }
   if(!res2.length){
-    current=[]; shown=0; more.innerHTML=''; count.textContent='0 results'; paintDupeNote();
-    results.innerHTML = pending ? '<div class="state"><b>No match.</b></div>'   // 打っている途中は見出しだけ（案内は打ち終わりに）
+    current=[]; shown=0; more.innerHTML=''; count.textContent=KB_SHOP.u('result','0 results',{n:0}); paintDupeNote();
+    results.innerHTML = pending ? '<div class="state"><b>'+KB_SHOP.u('noMatch','No match.')+'</b></div>'   // 打っている途中は見出しだけ（案内は打ち終わりに）
                                 : zeroHelp(q.value, pf, pv, yv);                  // 0件の案内（検索語の種類で出し分け）
     return;
   }

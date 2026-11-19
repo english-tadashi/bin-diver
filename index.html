@@ -153,7 +153,7 @@ header .lede .lede-sub { font-weight: 400; }
      ・/?q=（記事のリンク・検索から来た人）: ここ（<head>）ですぐ動かす＝最初の答えが早い（検索欄の後ろだと 4〜5秒遅れた）。
      ・それ以外（トップに直接・/?scan=1）: 検索欄の直後で動かす＝検索欄が早く出る（<head> で動かすと 1〜3秒遅れた）。
      中身は1か所（下の type="text/plain"・前のスクリプトと1字も違わない）。文字のまま置くだけなら解析の手間はほぼ無い。動かすのは window.__kbCatRun（1回だけ）。 -->
-<script>window.__kbMainSrc='/app/kb-main.js?v=a673674b3d1f';</script><!-- 2026-11-18（fast-first (b)）: 本体の場所。?v= は tools/kb_main_ver.py が書く -->
+<script>window.__kbMainSrc='/app/kb-main.js?v=93559138b73e';</script><!-- 2026-11-18（fast-first (b)）: 本体の場所。?v= は tools/kb_main_ver.py が書く -->
 <script type="text/plain" id="kbCatSrc">
 /* カタログの先読み（2026-10-19・data-split）。manifest → catalog・検索の索引（index）（と /?scan=1 のときは jan）を、ページの描画と並べて取りに行く。
    受け取るのは本文の終わりの「カタログの読み込み」（window.__kbCat の Promise を待つ）。ここでは何も描かない。 */
@@ -326,6 +326,12 @@ header .lede .lede-sub { font-weight: 400; }
     </div>
     <p class="lede">Type a game you want.<br><span class="lede-sub">Get its Japanese title, the cartridge code to hunt for on the shelf, and links to buy it.</span></p>
   </header>
+  <script>/* 2026-11-14: 見出しの zh/ko 表示（2026-11-18: KB_SHOP の後で呼ぶ） */window.__kbZkHead=function(){try{var l=KB_SHOP.lang();if(l!=='zh'&&l!=='ko')return;var u=KB_SHOP.u,t=document.querySelector('.kb-tagline'),p=document.querySelector('.lede');
+    if(t&&t.lastChild&&t.lastChild.nodeType===3)t.lastChild.nodeValue=' '+u('tag','');
+    if(p)p.innerHTML=u('lede','')+'<br><span class="lede-sub">'+u('ledeSub','')+'</span>';document.documentElement.lang=(l==='zh'?'zh-Hant':'ko');
+    document.addEventListener('DOMContentLoaded',function(){try{var o=document.querySelector('.locbtn[data-loc="out"]'),j=document.querySelector('.locbtn[data-loc="jp"]'),m=document.getElementById('myListBtn');
+      if(o)o.textContent=u('locOut','');if(j)j.textContent=u('locJp','');var q=document.getElementById('q');if(q){q.placeholder=u('qph',q.placeholder);q.setAttribute('aria-label',u('qAria',q.getAttribute('aria-label')));}
+      if(m)for(var i=0;i<m.childNodes.length;i++){var n=m.childNodes[i];if(n.nodeType===3&&/My List/.test(n.nodeValue)){n.nodeValue=u('myList','')+' ';break;}}}catch(e){}});}catch(e){}};</script>
 
   <div class="search kb-panel">
     <div class="kb-fieldrow">
@@ -913,6 +919,7 @@ window.KB_SHOP=(function(){
   // 2026-10-31: 店のボタンと発送の説明の文言（6言語）。言語はブログと同じ判定（ブログで選んだ言語→ブラウザ→英語）。
   const LANGS=['en','zh','ko','es','de','fr'];
   function lang(){
+    try{ const h=new URLSearchParams(location.search).get('hl'); if(h && LANGS.includes(h)) return h; }catch(e){}
     try{ const s=localStorage.getItem('kataban_blog_lang'); if(s && LANGS.includes(s)) return s; }catch(e){}
     const ls=navigator.languages||[navigator.language||'en'];
     for(const c0 of ls){ const c=(c0||'').toLowerCase(); for(const l of ['zh','ko','es','de','fr','en']) if(c.indexOf(l)===0) return l; }
@@ -933,8 +940,45 @@ window.KB_SHOP=(function(){
       jpNote:'Site japonais, livraison au Japon uniquement &mdash; utilisez {b} pour le recevoir à l\u2019étranger',pairNote:'Sites japonais, livraison au Japon uniquement &mdash; il faut un service proxy pour le recevoir à l\u2019étranger',rakShip:'Livraison au Japon uniquement'}
   };
   // 2026-11-07（案A・こはさん決定）: 検索画面の店ボタンと発送の注記は英語に固定する（画面のほかの文言が英語のため）。
+  // 2026-11-14（こはさん決定）: 画面の主な文言を zh/ko に訳したので、zh/ko だけ店ボタンも訳す。es/de/fr は英語固定のまま。
   //   lang() はブログへの行き先・店員画面の訳などで使うので残す。ほかの言語の TEXT は記事側に揃える時のために残す。
-  const T=()=>TEXT.en;
+  const T=()=>(lang()==='zh'||lang()==='ko')?TEXT[lang()]:TEXT.en;
+  // 2026-11-14: 検索画面の zh/ko 表示（こはさん決定・11/7 の英語固定を zh/ko だけ外す）。es/de/fr は英語のまま。
+  //   ?hl=zh|ko（記事の検索欄から来たとき）→ ブログで選んだ言語 → ブラウザ の順で lang() が決める。
+  const UIX={
+    zh:{buy:'購買這款遊戲',pr:'部分連結為聯盟行銷連結（PR）。',order:'依在日本可以直接購買的順序排列。',
+      world:'寄送全球',wProxy:'代購・國際配送',wNoProxy:'這裡的 Buyee 搜尋使用日文名稱，可能會出現其他主機的版本。要完全一致，請用型號連結。',
+      wJpNoProxy:'給海外買家——用日文名稱在 Buyee 搜尋',wJp:'給海外買家——需另付代購費',
+      buyeeNote:'Buyee 收取固定 ¥500 手續費，另加日本國內運費（¥150&ndash;1,500）與國際運費&mdash;&mdash;國際運費要等商品送到 Buyee 倉庫後才會顯示。',
+      enT:'用英文名稱',enTd:'駿河屋英文網站&mdash;&mdash;可直接寄到海外，不需代購',
+      code:'用型號',codeOut:'完全一致&mdash;&mdash;日本網站，需要代購',codeJp:'完全一致&mdash;&mdash;日本網站，可直接購買',
+      jaT:'用日文名稱',jaOut:'日本國內商品&mdash;&mdash;通常需要代購',jaJp:'日本國內商品&mdash;&mdash;日本網站，可直接購買',
+      console:'主機',publisher:'發行商',released:'發售年',english:'英文名稱',latinT:'拉丁字母標題',reading:'日文讀音',readArt:'閱讀文章',
+      codeExact:'型號・完全一致',codeNote:'拉丁字母&mdash;&mdash;可以自己輸入到任何商店，也可以複製。',
+      genre:'依類型尋找・狀態標示說明',cond:'標籤上的狀態用語是什麼意思（ランクB・美品・未開封）',help:'需要協助或結帳？',clerk:'給店員看',
+      jaCopy:'日文名稱・複製後貼到商店搜尋',jaCopyStore:'日文名稱・複製後在日本商店搜尋',canType:'拉丁字母&mdash;&mdash;可以自己輸入，也可以複製。',cantType:'這段文字不好輸入&mdash;&mdash;請複製後貼到搜尋框。',
+      results:'{n} 筆結果・顯示 {s} 筆',result:'{n} 筆結果',more:'載入更多・還有 {n} 筆',
+      shelf0:'貨架位置',shelf:'貨架位置・假名順序',shelfNone:'這款遊戲沒有貨架提示&mdash;&mdash;我們沒有它的讀音資料，給錯貨架比不給更糟。',
+      shelfTxt:'日本的店家依遊戲名稱的<i>讀音</i>排列。請找 <b class="gyo">{k}</b>{g}。',shelfGyo:'；貨架按行分區時，請找 <b class="gyo">{g}</b>',
+      noCode:'沒有型號資料',qph:'遊戲名稱或13位條碼…',qAria:'用遊戲名稱、型號或13位條碼搜尋',noMatch:'找不到符合的結果。',zBar1:'這個條碼不在我們的清單中。我們只有部分遊戲的條碼。',zBar2:'請找盒子側邊或背面的型號（例如 SLPM-86023），或用遊戲名稱搜尋。',zBarBtn:'在樂天查詢這個條碼',zCode1:'找不到這個型號。',zCode2:'請確認盒子側邊或背面的型號，或用遊戲名稱搜尋。',zCodeSg:'在駿河屋搜尋這個型號',zCodeBy:'在 Buyee 搜尋這個型號',zLat1:'我們收錄日文名稱與官方英文名稱。',zLat2:'請試試名稱的一部分，或日文名稱。',zJa:'請試試名稱的一部分。副標題可以省略。',zKo:'我們沒有收錄韓文或中文名稱。請用日文或英文搜尋。',zElse:'請試試名稱的一部分、日文名稱、卡帶型號或發行商。',zTry:'試試「{c}」・{n} 筆結果',lnp:'可直接遊玩',lnpd:'幾乎沒有文字',lnm:'部分日文',lnmd:'選單等為日文',lnt:'文字量多',lntd:'需要看懂日文劇情',lnEst:'依遊戲類型推估',searchKey:'日文名稱・搜尋用關鍵字',locOut:'我在日本以外',locJp:'我在日本',myList:'我的清單',tag:'看懂日本遊戲貨架',lede:'輸入你想找的遊戲。',ledeSub:'取得日文名稱、可在貨架上找的卡帶型號，以及購買連結。日文或英文名稱都可以。'},
+    ko:{buy:'이 게임 구매하기',pr:'일부 링크는 제휴 링크(PR)입니다.',order:'일본에서 직접 살 수 있는 순서로 정렬했습니다.',
+      world:'해외 배송',wProxy:'구매 대행 · 해외 배송',wNoProxy:'여기서 Buyee 검색은 일본어 제목을 사용하므로 다른 기종 버전이 섞일 수 있습니다. 정확히 찾으려면 품번 링크를 쓰세요.',
+      wJpNoProxy:'해외 구매자용 &mdash; 일본어 제목으로 Buyee 검색',wJp:'해외 구매자용 &mdash; 대행 수수료 추가',
+      buyeeNote:'Buyee는 고정 수수료 ¥500에 일본 국내 배송비(¥150&ndash;1,500)와 국제 배송비가 추가됩니다. 국제 배송비는 상품이 Buyee 창고에 도착한 뒤에 표시됩니다.',
+      enT:'영어 제목으로',enTd:'스루가야 영어 사이트 &mdash; 해외로 직접 배송, 대행 불필요',
+      code:'품번으로',codeOut:'정확히 일치 &mdash; 일본 사이트, 대행 필요',codeJp:'정확히 일치 &mdash; 일본 사이트에서 직접 구매',
+      jaT:'일본어 제목으로',jaOut:'일본 국내 상품 &mdash; 보통 대행 필요',jaJp:'일본 국내 상품 &mdash; 일본 사이트에서 직접 구매',
+      console:'기종',publisher:'발매사',released:'발매 연도',english:'영어 제목',latinT:'로마자 제목',reading:'일본어 읽기',readArt:'기사 읽기',
+      codeExact:'품번 · 정확히 일치',codeNote:'로마자입니다. 어느 가게에서든 직접 입력하거나 복사하세요.',
+      genre:'장르로 찾기 · 상태 표기 안내',cond:'라벨의 상태 표기는 무슨 뜻일까 (ランクB · 美品 · 未開封)',help:'도움이 필요하거나 계산할 때',clerk:'점원에게 보여 주기',
+      jaCopy:'일본어 제목 · 복사해서 가게 검색창에 붙여 넣기',jaCopyStore:'일본어 제목 · 복사해서 일본 스토어에서 검색',canType:'로마자입니다. 직접 입력하거나 복사하세요.',cantType:'직접 입력하기 어렵습니다. 복사해서 검색창에 붙여 넣으세요.',
+      results:'결과 {n}건 · {s}건 표시',result:'결과 {n}건',more:'더 보기 · {n}건 남음',
+      shelf0:'진열대 위치',shelf:'진열대 위치 · 가나 순서',shelfNone:'이 게임은 진열대 안내가 없습니다. 읽는 법 데이터가 없고, 틀린 안내는 없느니만 못하기 때문입니다.',
+      shelfTxt:'일본 가게는 제목의 <i>읽는 법</i> 순서로 게임을 진열합니다. <b class="gyo">{k}</b>{g} 쪽을 찾아보세요.',shelfGyo:'(행별로 나뉜 진열대라면 <b class="gyo">{g}</b>)',
+      noCode:'품번 정보 없음',qph:'게임 제목 또는 13자리 바코드…',qAria:'게임 제목, 품번, 13자리 바코드로 검색',noMatch:'일치하는 결과가 없습니다.',zBar1:'이 바코드는 목록에 없습니다. 일부 게임의 바코드만 있습니다.',zBar2:'상자 옆면이나 뒷면의 품번(예: SLPM-86023)을 찾거나, 제목으로 검색하세요.',zBarBtn:'라쿠텐에서 이 바코드 확인',zCode1:'이 품번을 찾을 수 없습니다.',zCode2:'상자 옆면이나 뒷면의 품번을 확인하거나, 제목으로 검색하세요.',zCodeSg:'스루가야에서 이 품번 검색',zCodeBy:'Buyee에서 이 품번 검색',zLat1:'일본어 제목과 공식 영어 제목을 수록하고 있습니다.',zLat2:'이름의 일부나 일본어 제목으로 검색해 보세요.',zJa:'제목의 일부로 검색해 보세요. 부제는 빼도 됩니다.',zKo:'한국어·중국어 이름은 수록하지 않습니다. 일본어나 영어로 검색해 주세요.',zElse:'제목의 일부, 일본어 이름, 카트리지 품번, 발매사로 검색해 보세요.',zTry:'「{c}」로 검색 · {n}건',lnp:'바로 플레이 가능',lnpd:'글자가 거의 없음',lnm:'일부 일본어',lnmd:'메뉴 등이 일본어',lnt:'텍스트 많음',lntd:'일본어를 읽어야 진행',lnEst:'장르로 추정',searchKey:'일본어 제목 · 검색 키워드',locOut:'일본 밖에 있어요',locJp:'일본에 있어요',myList:'내 목록',tag:'일본 게임 진열대 읽기',lede:'찾는 게임을 입력하세요.',ledeSub:'일본어 제목, 진열대에서 찾을 카트리지 품번, 그리고 구매 링크를 알려 드립니다. 일본어나 영어 제목으로 검색해 주세요.'}
+  };
+  // u(キー, 英語の元の文, 差し込み)。zh/ko に訳が無ければ英語の元の文をそのまま返す（英語の画面はバイト単位で変わらない）。
+  function u(key,en,vars){ const l=lang(); let t=(UIX[l]&&UIX[l][key])||en; if(vars) for(const k in vars) t=t.split('{'+k+'}').join(vars[k]); return t; }
   function locRead(){
     try{ const u=new URLSearchParams(location.search).get('loc'); if(u==='jp'||u==='out') return u; }catch(e){}
     try{ const s=localStorage.getItem('kataban_loc'); if(s==='jp'||s==='out') return s; }catch(e){}
@@ -986,20 +1030,20 @@ window.KB_SHOP=(function(){
        空なのは Kataban が検索キーを持っていないだけで、Buyee に品が無い証拠ではない
        （上のコメント参照）。Kataban 側の限界として書く。 */
     const worldDesc = jp
-      ? (noProxy ? 'for buyers abroad — Buyee search by Japanese title'
-                 : 'for buyers abroad — adds proxy fees')
-      : (noProxy ? 'Buyee search uses the Japanese title here — may show other console versions. Use the product code link for the exact match.'
-                 : 'proxy &amp; international');
+      ? (noProxy ? u('wJpNoProxy','for buyers abroad — Buyee search by Japanese title')
+                 : u('wJp','for buyers abroad — adds proxy fees'))
+      : (noProxy ? u('wNoProxy','Buyee search uses the Japanese title here — may show other console versions. Use the product code link for the exact match.')
+                 : u('wProxy','proxy &amp; international'));
 
     /* 代理購入の費用内訳。jp モードでは出さない——国内の買い手は Buyee を経由しないので
        手数料の話が要らないため。.stores の中ではなく .group 直下に置く: .stores は
        auto-fit グリッド(312行)なので、中に入れるとボタンと横並びのセルを1つ占める。 */
     const buyeeNote = !jp
-      ? `<div class="buyee-note">Buyee adds a flat ¥500 service fee, plus Japan domestic shipping (¥150&ndash;1,500) and international shipping &mdash; the international cost is shown once your item reaches their warehouse.</div>`
+      ? `<div class="buyee-note">${u('buyeeNote','Buyee adds a flat ¥500 service fee, plus Japan domestic shipping (¥150&ndash;1,500) and international shipping &mdash; the international cost is shown once your item reaches their warehouse.')}</div>`
       : '';
 
     const gWorld = `<div class="group">
-          <div class="group-label"><span class="n">Ships worldwide</span><span class="d">${worldDesc}</span></div>
+          <div class="group-label"><span class="n">${u('world','Ships worldwide')}</span><span class="d">${worldDesc}</span></div>
           <div class="stores stack">
             ${k.buyeeWrapped?`<a class="${clsBuyee}" target="_blank" rel="sponsored nofollow noopener" href="${k.buyeeWrapped}">${L.buyee}</a>`:''}
             ${k.kwEn===undefined?`<span class="store wide store-wait" aria-hidden="true">${L.ebay}</span>`:k.kwEn?`<a class="store wide" target="_blank" rel="sponsored nofollow noopener" href="https://www.ebay.com/sch/i.html?_nkw=${k.kwEn}${k.ebayRegion||''}&amp;mkcid=1&amp;mkrid=711-53200-19255-0&amp;siteid=0&amp;campid=5339175838&amp;customid=&amp;toolid=10001&amp;mkevt=1">${L.ebay}</a>`:''}
@@ -1034,7 +1078,7 @@ window.KB_SHOP=(function(){
        ★.jp 群より上・Ships worldwide より下に置く。海外の買い手にとって
          「直接届く」ものが上、「代理が要る」ものが下、という既存の並びの理屈に合わせる。 */
     const gEnTitle = (!jp && k.sgComUrl)?`<div class="group">
-          <div class="group-label"><span class="n">By English title</span><span class="d">Suruga-ya's English site &mdash; ships overseas, no proxy needed</span></div>
+          <div class="group-label"><span class="n">${u('enT','By English title')}</span><span class="d">${u('enTd',"Suruga-ya's English site &mdash; ships overseas, no proxy needed")}</span></div>
           <div class="stores">
             <a class="store wide primary" target="_blank" rel="noopener" href="${k.sgComUrl}">${L.sgcom}</a>
           </div>
@@ -1045,7 +1089,7 @@ window.KB_SHOP=(function(){
     //   (b) RVL-006 / RVL-006(USA) の2行 = ハード規格品番で無関係な商品に着地（誤着地）。
     // 空振りも誤着地も出さない。他の導線(Buyee/eBay/タイトル検索)は下のブロックでそのまま出る。
     const gCode = (k.codes.length && !k.sgNoCode)?`<div class="group">
-          <div class="group-label"><span class="n">By product code</span><span class="d">${jp?'exact match — buy direct, Japanese site':'exact match — Japanese site, needs a proxy'}</span></div>
+          <div class="group-label"><span class="n">${u('code','By product code')}</span><span class="d">${jp?u('codeJp','exact match — buy direct, Japanese site'):u('codeOut','exact match — Japanese site, needs a proxy')}</span></div>
           <div class="stores">
             <a class="${clsCode}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwCodeSg)}">${L.sgcode}</a>
           </div>${jpOnlyNote}
@@ -1079,7 +1123,7 @@ window.KB_SHOP=(function(){
       : '';
 
     const gTitle = `<div class="group">
-          <div class="group-label"><span class="n">By Japanese title</span><span class="d">${jp?'domestic listings — buy direct, Japanese site':'domestic listings — usually needs a proxy'}</span></div>
+          <div class="group-label"><span class="n">${u('jaT','By Japanese title')}</span><span class="d">${jp?u('jaJp','domestic listings — buy direct, Japanese site'):u('jaOut','domestic listings — usually needs a proxy')}</span></div>
           <div class="stores">
             <a class="${clsTitle}" target="_blank" rel="sponsored nofollow noopener" href="${sgAf(k.kwKana)}">${L.sgtitle}</a>
           </div>${jpOnlyNote}
@@ -1107,24 +1151,25 @@ window.KB_SHOP=(function(){
     // 2026-10-31: 海外モードは店ボタンを上へ（見出しと PR の注記を1行に）。
     return jp ? `<div class="buy-jp">
         <div class="buy-head">
-          <h3>Buy this game</h3>
-          <p>Ordered by what you can buy directly in Japan.</p>
+          <h3>${u('buy','Buy this game')}</h3>
+          <p>${u('order','Ordered by what you can buy directly in Japan.')}</p>
         </div>
 
-        <p class="cap">Some store links are affiliate links (PR).</p>
+        <p class="cap">${u('pr','Some store links are affiliate links (PR).')}</p>
 
         ${order.filter(Boolean).join('\n\n      ')}
       </div>` : `<div class="buy-out">
         <div class="buy-head">
-          <h3>Buy this game</h3>
-          <p class="cap">Some links are affiliate (PR).</p>
+          <h3>${u('buy','Buy this game')}</h3>
+          <p class="cap">${u('pr','Some links are affiliate (PR).')}</p>
         </div>
 
         ${order.filter(Boolean).join('\n\n      ')}
       </div>`;
   }
-  return {keys, enc, sgAf, sgCom, SG_AF, SG_UTM, SG_COM, buyeeLink, maintNote, buyBlock, lang, T, locRead};
+  return {keys, enc, sgAf, sgCom, SG_AF, SG_UTM, SG_COM, buyeeLink, maintNote, buyBlock, lang, T, locRead, u};
 })();
+window.__kbZkHead && window.__kbZkHead();   // 2026-11-18: 見出し・位置ボタン・My List・検索窓の zh/ko（ヘッダー直後の関数）
 </script>
 <!-- 2026-10-29（boot-chunks・案①）: 本体の CSS。最初の画面に検索欄を間に合わせるため、<head> から検索欄の直後へ移した（中身は1字も変えていない）。-->
 <style>
@@ -1532,6 +1577,8 @@ h1 .blk{display:inline-block;background:var(--accent);color:var(--accent-ink);pa
 .card .region-more b{font-weight:600; color:var(--ink);}
 .card .region-up{display:flex; flex-direction:column; gap:20px;}   /* 店モードの要点の包み（2026-11-04・丸ボタンの重なりを測る）。.card の gap と同じ＝包む前と同じ並び */
 .card .lang-need{margin:0 0 6px; font:600 15px/1.35 var(--f-display); color:var(--ink);}
+.card .lang-need .ln-d{font-weight:400; color:var(--muted);}   /* 2026-11-18（lang-barrier）: 段階の短い説明 */
+.card .lang-need .ln-est{display:inline-block; margin-left:8px; padding:0 5px; border:1px solid var(--line); border-radius:3px; font:500 11px/1.5 var(--f-display); color:var(--muted); letter-spacing:.02em; white-space:nowrap; vertical-align:2px;}   /* ジャンルからの目安の札（断定しない） */
 .card .na-note{font:500 13px/1.4 var(--f-display); color:var(--ink); overflow-wrap:anywhere;}   /* 北米名の1行（2026-11-17・links.json の x） */
 .card .region{display:flex; align-items:flex-start; gap:9px; font:400 12.5px/1.45 var(--f-display); color:var(--ink-2);}
 .card .region .tick{flex-shrink:0; width:6px; height:6px; margin-top:6px; background:var(--ink-2); border-radius:1px;}
