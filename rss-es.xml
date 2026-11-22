@@ -5,9 +5,23 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Sat, 21 Nov 2026 08:21:20 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 22 Nov 2026 08:10:29 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>Trader Akihabara: en qué planta están los juegos retro y cómo pagar</title>
+      <link>https://gamekataban.com/blog/es/2026-11-23-trader-akihabara-shop-guide.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-11-23-trader-akihabara-shop-guide.html</guid>
+      <description>La tienda principal de Trader está en 4-2-1 Sotokanda: Nintendo en la 1F; PlayStation, Xbox y retro en la 2F. Cómo encontrar tu juego y pagar.</description>
+      <pubDate>Mon, 23 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>Cosmic Smash en Dreamcast: el juego de squash y Breakout de Sega de 2001, su código HDR-0176</title>
+      <link>https://gamekataban.com/blog/es/2026-11-23-cosmic-smash-dreamcast-hdr-0176.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-11-23-cosmic-smash-dreamcast-hdr-0176.html</guid>
+      <description>El disco japonés es el HDR-0176, en estuche de tipo DVD. Busca el código en Suruga-ya y コズミックスマッシュ en Buyee; en eBay, el título entre comillas.</description>
+      <pubDate>Mon, 23 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Super Potato Akihabara: qué hay en cada planta y cómo encontrar tu juego rápido</title>
       <link>https://gamekataban.com/blog/es/2026-11-22-super-potato-akihabara-shop-guide.html</link>
@@ -684,7 +698,7 @@
       <title>¿Quién creó Street Fighter? Historia de 1987 (parte 1)</title>
       <link>https://gamekataban.com/blog/es/2026-09-02-street-fighter-development-history-1.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-09-02-street-fighter-development-history-1.html</guid>
-      <description>Takashi Nishiyama dirigió Street Fighter en Capcom en 1987: un boceto de una reunión aburrida, una bola de fuego casi imposible y máquinas sin vender.</description>
+      <description>Takashi Nishiyama creó Street Fighter en Capcom en 1987 y Ryu lleva su nombre. Nació de un boceto pasado entre compañeros en una aburrida reunión.</description>
       <pubDate>Wed, 02 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
