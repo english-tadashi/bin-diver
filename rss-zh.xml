@@ -5,9 +5,23 @@
     <link>https://gamekataban.com/blog/</link>
     <description>為海外收藏家打造的日本復古遊戲部落格——商店指南、進口教學，以及遊戲背後的故事。</description>
     <language>zh-tw</language>
-    <lastBuildDate>Sun, 22 Nov 2026 07:53:47 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 24 Nov 2026 07:28:19 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-zh.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>日本卡帶的清潔與維修：接點髒污、存檔電池，以及何時交給店家</title>
+      <link>https://gamekataban.com/blog/zh/2026-11-24-japanese-cartridge-cleaning-save-battery-replacement.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-11-24-japanese-cartridge-cleaning-save-battery-replacement.html</guid>
+      <description>日本卡帶開不了機時，別往裡面吹氣，改用酒精清潔接點。各主機用哪種存檔電池，以及為什麼換電池會清掉舊存檔。</description>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>Dreamcast 版《Rez》：SEGA 2001年的音樂射擊遊戲，與它的編號 HDR-0178</title>
+      <link>https://gamekataban.com/blog/zh/2026-11-24-rez-dreamcast-hdr-0178.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/zh/2026-11-24-rez-dreamcast-hdr-0178.html</guid>
+      <description>日版 Dreamcast 光碟是 HDR-0178，PS2 首版是 SLPM 62101。駿河屋搜編號，Buyee 搜「Rez ドリームキャスト」。</description>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>秋葉原 Trader（トレーダー）本店：復古遊戲在幾樓、可以用什麼付款</title>
       <link>https://gamekataban.com/blog/zh/2026-11-23-trader-akihabara-shop-guide.html</link>

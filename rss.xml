@@ -5,8 +5,24 @@
     <link>https://gamekataban.com/blog/</link>
     <description>A blog for overseas collectors hunting down Japanese retro games — shop guides, import how-tos, and the stories behind the titles.</description>
     <language>en</language>
-    <lastBuildDate>Sun, 22 Nov 2026 07:53:47 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 24 Nov 2026 07:28:19 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Cleaning and Repairing Japanese Cartridges: Dirty Contacts, Save Batteries, and When to Pay a Shop</title>
+      <link>https://gamekataban.com/blog/2026-11-24-japanese-cartridge-cleaning-save-battery-replacement.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-11-24-japanese-cartridge-cleaning-save-battery-replacement.html</guid>
+      <description>Japanese cartridge won’t start? Don’t blow into it; clean the contacts with alcohol. The save battery each system uses, and why a new one erases the save.</description>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>Rez on Dreamcast: Sega’s 2001 Music Shooter, Its Code HDR-0178, and Why It Never Got a Second Part</title>
+      <link>https://gamekataban.com/blog/2026-11-24-rez-dreamcast-hdr-0178.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/2026-11-24-rez-dreamcast-hdr-0178.html</guid>
+      <description>Rez’s Japanese Dreamcast disc is HDR-0178; the first PS2 edition is SLPM 62101. Search the code at Suruga-ya and Rez ドリームキャスト on Buyee.</description>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
 
     <item>
       <title>Trader Akihabara: Which Floor Has Retro Games, and How to Pay</title>
@@ -324,7 +340,7 @@
       <title>Enemy Zero on Sega Saturn: Kenji Eno’s Invisible-Alien Horror on Four Discs, and How to Tell T-30001G From the Rest</title>
       <link>https://gamekataban.com/blog/2026-10-27-enemy-zero-sega-saturn-t-30001g.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/2026-10-27-enemy-zero-sega-saturn-t-30001g.html</guid>
-      <description>Enemy Zero (エネミー・ゼロ) for Japanese Saturn: T-30001G is Warp’s 1996 four-disc original; T-30004G is the budget reissue. How to tell them from Western copies.</description>
+      <description>Enemy Zero Japanese version for Saturn: T-30001G is the 1996 four-disc original, T-30004G the Satakore reissue. How to tell them from US and EU copies.</description>
       <pubDate>Tue, 27 Oct 2026 00:00:00 +0900</pubDate>
     </item>
 
@@ -428,7 +444,7 @@
       <title>Twinkle Popo: How HAL's Game Became Kirby's Dream Land</title>
       <link>https://gamekataban.com/blog/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/2026-10-14-kirby-dream-land-game-boy-dmg-kyj.html</guid>
-      <description>Kirby's Dream Land's Japanese Game Boy cartridge has DMG-KYJ on its label; that code finds it at Suruga-ya and Buyee. Plus how Twinkle Popo became Kirby.</description>
+      <description>Twinkle Popo was the name HAL planned for Kirby's Dream Land, with 26,000 copies already on order, before it was reworked. Its Game Boy code is DMG-KYJ.</description>
       <pubDate>Wed, 14 Oct 2026 00:00:00 +0900</pubDate>
     </item>
 
@@ -708,7 +724,7 @@
       <title>Nakano Broadway Retro Game Shops: Mandarake &amp; Lashinbang</title>
       <link>https://gamekataban.com/blog/2026-09-12-nakano-broadway-route.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/2026-09-12-nakano-broadway-route.html</guid>
-      <description>From Nakano Station's North Exit, walk Sun Mall about 5 minutes to Nakano Broadway: Mandarake Galaxy and Lashinbang on 2F, Janpara on 1F by the exit.</description>
+      <description>Retro games at Nakano Broadway: Mandarake Galaxy and Lashinbang on 2F, Janpara on 1F, about 5 minutes from Nakano Station's North Exit along Sun Mall.</description>
       <pubDate>Sat, 12 Sep 2026 00:00:00 +0900</pubDate>
     </item>
 

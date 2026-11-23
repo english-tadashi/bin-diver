@@ -5,9 +5,23 @@
     <link>https://gamekataban.com/blog/</link>
     <description>해외 컬렉터를 위한 일본 레트로 게임 블로그 — 매장 가이드, 수입 방법, 그리고 타이틀 뒤에 숨은 이야기.</description>
     <language>ko-kr</language>
-    <lastBuildDate>Sun, 22 Nov 2026 07:53:47 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 24 Nov 2026 07:28:19 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-ko.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>일본 카트리지 청소와 수리: 더러운 단자, 세이브 전지, 가게에 맡길 때</title>
+      <link>https://gamekataban.com/blog/ko/2026-11-24-japanese-cartridge-cleaning-save-battery-replacement.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-11-24-japanese-cartridge-cleaning-save-battery-replacement.html</guid>
+      <description>켜지지 않는 일본 카트리지에 입김을 불지 말고 알코올로 단자를 닦으세요. 기종별 세이브 전지 종류와 전지를 바꾸면 세이브가 지워지는 이유.</description>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>드림캐스트판 《레즈》: 세가의 2001년 음악 슈팅 게임, 상품 코드 HDR-0178</title>
+      <link>https://gamekataban.com/blog/ko/2026-11-24-rez-dreamcast-hdr-0178.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-11-24-rez-dreamcast-hdr-0178.html</guid>
+      <description>일본판 드림캐스트 디스크는 HDR-0178, 플레이스테이션 2 첫 판은 SLPM 62101. 스루가야는 상품 코드, Buyee는 Rez ドリームキャスト로 검색하세요.</description>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>아키하바라 트레이더(Trader) 본점: 레트로 게임은 몇 층이고, 어떻게 결제하나</title>
       <link>https://gamekataban.com/blog/ko/2026-11-23-trader-akihabara-shop-guide.html</link>
@@ -586,7 +600,7 @@
       <title>스루가야 랭크 B 뜻: 未開封品·美品까지 세 표기</title>
       <link>https://gamekataban.com/blog/ko/2026-09-16-glossary-condition-rank.html</link>
       <guid isPermaLink="true">https://gamekataban.com/blog/ko/2026-09-16-glossary-condition-rank.html</guid>
-      <description>스루가야 랭크 B(ランクB)는 마모는 있지만 빠진 것이 없는 상태, 未開封品은 밀봉 상태, 美品은 개봉했지만 새것에 가까운 상태입니다. 각 표기가 무엇을 보증하고 상품명에 어떻게 적히는지 정리했습니다.</description>
+      <description>스루가야 랭크 B(ランクB)는 마모는 있지만 빠진 것이 없는 상태. 미개봉은 일본어로 未開封品, 美品은 개봉했지만 새것에 가까운 상태입니다.</description>
       <pubDate>Wed, 16 Sep 2026 00:00:00 +0900</pubDate>
     </item>
     <item>
