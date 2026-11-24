@@ -5,9 +5,23 @@
     <link>https://gamekataban.com/blog/</link>
     <description>Un blog para coleccionistas extranjeros que buscan videojuegos retro japoneses — guías de tiendas, cómo importar, y las historias detrás de los títulos.</description>
     <language>es-es</language>
-    <lastBuildDate>Tue, 24 Nov 2026 07:28:19 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 24 Nov 2026 08:19:34 +0900</lastBuildDate>
     <atom:link href="https://gamekataban.com/rss-es.xml" rel="self" type="application/rss+xml"/>
 
+    <item>
+      <title>¿Qué significa 帯付き? El obi o spine card de los juegos japoneses</title>
+      <link>https://gamekataban.com/blog/es/2026-11-25-glossary-obi-tsuki-spine-card.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-11-25-glossary-obi-tsuki-spine-card.html</guid>
+      <description>帯付き significa que incluye el obi: la tira de papel, o spine card, de la caja de un juego japonés. Por qué se paga más y por qué sin etiqueta no hay obi.</description>
+      <pubDate>Wed, 25 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>Flying Power Disc en Neo Geo: el juego de disco de Data East de 1994, sus dos ediciones japonesas y la secuela que llegó 28 años después</title>
+      <link>https://gamekataban.com/blog/es/2026-11-25-flying-power-disc-neo-geo-windjammers.html</link>
+      <guid isPermaLink="true">https://gamekataban.com/blog/es/2026-11-25-flying-power-disc-neo-geo-windjammers.html</guid>
+      <description>Windjammers en Japón es Flying Power Disc: el Neo Geo CD es DECD-002 y el cartucho figura como NGH-065 o DEH-002. Busca フライングパワーディスク en Suruga-ya y Buyee.</description>
+      <pubDate>Wed, 25 Nov 2026 00:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>Limpiar y reparar cartuchos japoneses: contactos sucios, pilas de guardado y cuándo pagar a una tienda</title>
       <link>https://gamekataban.com/blog/es/2026-11-24-japanese-cartridge-cleaning-save-battery-replacement.html</link>
