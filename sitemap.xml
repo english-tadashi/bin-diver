@@ -15,12 +15,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://gamekataban.com/</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://gamekataban.com/blog/</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/"/>
@@ -33,7 +33,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/zh/</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/"/>
@@ -46,7 +46,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/ko/</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/"/>
@@ -59,7 +59,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/es/</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/"/>
@@ -72,7 +72,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/de/</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/"/>
@@ -85,7 +85,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/fr/</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/"/>
@@ -9694,13 +9694,169 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-11-25-glossary-obi-tsuki-spine-card.html"/>
   </url>
 
+  <url>
+    <loc>https://gamekataban.com/blog/2026-11-26-super-arabian-famicom-import-guide.html</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-11-26-super-arabian-famicom-import-guide.html"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/zh/2026-11-26-super-arabian-famicom-import-guide.html</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-11-26-super-arabian-famicom-import-guide.html"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/ko/2026-11-26-super-arabian-famicom-import-guide.html</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-11-26-super-arabian-famicom-import-guide.html"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/es/2026-11-26-super-arabian-famicom-import-guide.html</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-11-26-super-arabian-famicom-import-guide.html"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/de/2026-11-26-super-arabian-famicom-import-guide.html</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-11-26-super-arabian-famicom-import-guide.html"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/fr/2026-11-26-super-arabian-famicom-import-guide.html</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-11-26-super-arabian-famicom-import-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-11-26-super-arabian-famicom-import-guide.html"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/2026-11-26-hard-off-retro-games-guide-for-visitors.html</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/zh/2026-11-26-hard-off-retro-games-guide-for-visitors.html</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/ko/2026-11-26-hard-off-retro-games-guide-for-visitors.html</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/es/2026-11-26-hard-off-retro-games-guide-for-visitors.html</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/de/2026-11-26-hard-off-retro-games-guide-for-visitors.html</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/fr/2026-11-26-hard-off-retro-games-guide-for-visitors.html</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/2026-11-26-hard-off-retro-games-guide-for-visitors.html"/>
+  </url>
+
   <!-- ===== 記事ここまで ===== -->
 
   <!-- ===== タグページ（build_feeds.py の生成物。記事 3 本以上のタグだけ） ===== -->
 
   <url>
     <loc>https://gamekataban.com/blog/tags/</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tags/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tags/"/>
@@ -9713,7 +9869,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/zh/tags/</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tags/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tags/"/>
@@ -9726,7 +9882,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/ko/tags/</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tags/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tags/"/>
@@ -9739,7 +9895,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/es/tags/</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tags/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tags/"/>
@@ -9752,7 +9908,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/de/tags/</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tags/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tags/"/>
@@ -9765,7 +9921,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/fr/tags/</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tags/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tags/"/>
@@ -9778,7 +9934,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/tag/platform/famicom/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/platform/famicom/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/platform/famicom/"/>
@@ -9791,7 +9947,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/zh/tag/platform/famicom/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/platform/famicom/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/platform/famicom/"/>
@@ -9804,7 +9960,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/ko/tag/platform/famicom/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/platform/famicom/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/platform/famicom/"/>
@@ -9817,7 +9973,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/es/tag/platform/famicom/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/platform/famicom/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/platform/famicom/"/>
@@ -9830,7 +9986,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/de/tag/platform/famicom/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/platform/famicom/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/platform/famicom/"/>
@@ -9843,7 +9999,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/fr/tag/platform/famicom/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/platform/famicom/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/platform/famicom/"/>
@@ -11026,7 +11182,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/tag/genre/platformer/</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/platformer/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/platformer/"/>
@@ -11039,7 +11195,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/zh/tag/genre/platformer/</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/platformer/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/platformer/"/>
@@ -11052,7 +11208,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/ko/tag/genre/platformer/</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/platformer/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/platformer/"/>
@@ -11065,7 +11221,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/es/tag/genre/platformer/</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/platformer/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/platformer/"/>
@@ -11078,7 +11234,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/de/tag/genre/platformer/</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/platformer/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/platformer/"/>
@@ -11091,7 +11247,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/fr/tag/genre/platformer/</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/genre/platformer/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/genre/platformer/"/>
@@ -11728,7 +11884,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/tag/decade/1980s/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/1980s/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/1980s/"/>
@@ -11741,7 +11897,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/zh/tag/decade/1980s/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/1980s/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/1980s/"/>
@@ -11754,7 +11910,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/ko/tag/decade/1980s/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/1980s/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/1980s/"/>
@@ -11767,7 +11923,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/es/tag/decade/1980s/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/1980s/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/1980s/"/>
@@ -11780,7 +11936,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/de/tag/decade/1980s/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/1980s/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/1980s/"/>
@@ -11793,7 +11949,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/fr/tag/decade/1980s/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/decade/1980s/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/decade/1980s/"/>
@@ -12585,6 +12741,84 @@
   </url>
 
   <url>
+    <loc>https://gamekataban.com/blog/tag/publisher/sunsoft/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/publisher/sunsoft/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/zh/tag/publisher/sunsoft/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/publisher/sunsoft/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/ko/tag/publisher/sunsoft/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/publisher/sunsoft/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/es/tag/publisher/sunsoft/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/publisher/sunsoft/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/de/tag/publisher/sunsoft/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/publisher/sunsoft/"/>
+  </url>
+
+  <url>
+    <loc>https://gamekataban.com/blog/fr/tag/publisher/sunsoft/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://gamekataban.com/blog/ko/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gamekataban.com/blog/es/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gamekataban.com/blog/de/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gamekataban.com/blog/fr/tag/publisher/sunsoft/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gamekataban.com/blog/tag/publisher/sunsoft/"/>
+  </url>
+
+  <url>
     <loc>https://gamekataban.com/blog/tag/series/street-fighter/</loc>
     <lastmod>2026-09-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -12898,7 +13132,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/tag/release/japan-only/</loc>
-    <lastmod>2026-11-03</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/release/japan-only/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/release/japan-only/"/>
@@ -12911,7 +13145,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/zh/tag/release/japan-only/</loc>
-    <lastmod>2026-11-03</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/release/japan-only/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/release/japan-only/"/>
@@ -12924,7 +13158,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/ko/tag/release/japan-only/</loc>
-    <lastmod>2026-11-03</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/release/japan-only/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/release/japan-only/"/>
@@ -12937,7 +13171,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/es/tag/release/japan-only/</loc>
-    <lastmod>2026-11-03</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/release/japan-only/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/release/japan-only/"/>
@@ -12950,7 +13184,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/de/tag/release/japan-only/</loc>
-    <lastmod>2026-11-03</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/release/japan-only/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/release/japan-only/"/>
@@ -12963,7 +13197,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/fr/tag/release/japan-only/</loc>
-    <lastmod>2026-11-03</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/release/japan-only/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/release/japan-only/"/>
@@ -12976,7 +13210,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/tag/topic/tax-free/</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/topic/tax-free/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/topic/tax-free/"/>
@@ -12989,7 +13223,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/zh/tag/topic/tax-free/</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/topic/tax-free/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/topic/tax-free/"/>
@@ -13002,7 +13236,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/ko/tag/topic/tax-free/</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/topic/tax-free/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/topic/tax-free/"/>
@@ -13015,7 +13249,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/es/tag/topic/tax-free/</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/topic/tax-free/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/topic/tax-free/"/>
@@ -13028,7 +13262,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/de/tag/topic/tax-free/</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/topic/tax-free/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/topic/tax-free/"/>
@@ -13041,7 +13275,7 @@
 
   <url>
     <loc>https://gamekataban.com/blog/fr/tag/topic/tax-free/</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://gamekataban.com/blog/tag/topic/tax-free/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://gamekataban.com/blog/zh/tag/topic/tax-free/"/>
